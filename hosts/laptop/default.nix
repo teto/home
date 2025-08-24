@@ -263,7 +263,7 @@ in
   # default is 60. Range is 0-200. Lower number says use RAM rather than swap.
   # I considered it, didn't try it out yet
   zramSwap = {
-    enable = true;
+    enable = false;
     priority = 10; # higher than HDD swap
   };
 

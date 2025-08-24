@@ -952,11 +952,11 @@ end, { buffer = false })
 
 vim.keymap.set('n', ',jl', function()
 	-- vim.diagnostic.goto_next({ wrap = true})
-	vim.cmd[[ RikaiLookup ]]
+	vim.cmd[[ Rikai lookup ]]
 end, { buffer = false, desc = "Japanese lookup" })
 
 vim.keymap.set('n', '<D-j>', function()
-	vim.cmd[[ RikaiLookup ]]
+	vim.cmd[[ Rikai lookup ]]
 end, { buffer = false, desc = "Japanese lookup" })
 
 -- Autocommand to highlight the word under the cursor when the cursor moves

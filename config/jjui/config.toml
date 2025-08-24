@@ -1,5 +1,6 @@
 [preview]
   # extra_args = []
+show_at_bottom = true
   show_at_start = true
   width_percentage = 50.0
   width_increment_percentage = 5.0
@@ -16,13 +17,18 @@
 
 [ui]
 auto_refresh_interval=4
-
+tracer.enabled = true
 [custom_commands]
 # duplicate 
-"duplicate" = { key = ["d"], args = ["duplicate", "-A", "@",  "$change_id"] }
+"duplicate" = { key = ["d"], args = ["duplicate", "-B", "@",  "$change_id"] }
 "show diff" = { key = ["U"], args = ["diff", "-r", "$change_id", "--color", "always"], show = "diff" }
 "show oplog diff" = { key = ["ctrl+o"], args = ["op", "show",  "$operation_id", "--color", "always"], show = "diff" }
 # "resolve vscode" = { key = ["R"], args = ["resolve", "--tool", "vscode"], show = "interactive" }
 "new main" = { args = ["new", "main"] }
 "revert" = { key = [ "R" ] , args = [ "revert", "-r", "$change_id" ] }
 "tug" = { key = ["ctrl+t"], args = ["bookmark", "move", "--from", "closest_bookmark($change_id)", "--to", "closest_pushable($change_id)"] }
+
+[revisions]
+# log_batching = false
+# template = 'builtin_log_compact' # overrides jj's templates.log
+# revset = ""  # overrides jj's revsets.log

@@ -1,5 +1,5 @@
 {
 
   # kanshi (wayland monitor placement)
-  enable = true;
+  # enable = false;
 }

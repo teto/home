@@ -11,7 +11,9 @@
     flakeSelf.inputs.nova-doctor.nixosModules.collections
     flakeSelf.inputs.nova-doctor.nixosModules.vpn
     flakeSelf.inputs.nova-doctor.nixosModules.nix-daemon
-    flakeSelf.inputs.nova-doctor.nixosModules.virt-manager
+
+    # TODO move to my own config ?
+    # flakeSelf.inputs.nova-doctor.nixosModules.virt-manager
 
     # we need both because nova consumes quite a bit of CPU
     # flakeSelf.inputs.nova-doctor.nixosModules.gnome

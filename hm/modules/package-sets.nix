@@ -106,6 +106,7 @@ in
           myImagemagick = pkgs.imagemagick.override ({ ghostscriptSupport = true; });
         in
         [
+          pkgs.phinger-cursors # attempt to draw a bigger cursor pointer in sway
 
           acpi # for acpi -V
           pkgs.ani-cli  # to watch anime 

@@ -38,11 +38,10 @@ sscwl:
   nix run .#simwork.core-webservice.local -- --bypass-manifest-check -vv
 
 repl-cw:
-  # TODO:
-  # autoload System.Environment
-  # setEnv "PORCUPINE_ARGS" "--bypass-manifest-check -vv"
+  # System.Environment.setEnv "PORCUPINE_ARGS" "--bypass-manifest-check -vv"
   # --ghci-args 
   # --ghci-script
+  # :set args "--bypass-manifest-check"
   nix run  .#simwork.core-webservice.platform._repl 
  
 repl:

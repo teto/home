@@ -5,29 +5,31 @@
 * home
 
 This folder contains my customizations for:
-- [[https://github.com/pazz/alot][alot]] (MUA: Mail User Agent, like mutt)
-- [[https://github.com/astroidmail/astroid][astroid]] (MUA with a GUI)
-- bash
 - [[https://dystroy.org/broot/][broot]] file explorer
 - [[https://github.com/jarun/Buku][buku]]: a cli bookmark manager
 - clerk (to control mpd via rofi)
-- [[font-manager][https://github.com/FontManager/font-manager]] the best font manager I could find
+- [[https://github.com/FontManager/font-manager][font-manager]] the best font manager I could find
 - [[https://fcitx-im.org/wiki/Fcitx_5][fcitx5]] (input method mechanims, e.g. to type japanese from your qwerty keyboard)
-- [[https://github.com/rycee/home-manager/][home-manager]]
+- [[https://github.com/rycee/home-manager/][home-manager]] to generate dotfiles from nix
 - htop / btop
-- kanshi: a monitor manager for wayland
+- [[https://gitlab.freedesktop.org/emersion/kanshi]][[kanshi]]: a monitor manager for wayland
+- [[way-displays]][[]] in the same vein
 - [[https://github.com/Alexays/Waybar][waybar]] sway bar
 - [[https://github.com/pimutils/khard][khard]] (a carddav CLI)
 - [[https://github.com/pimutils/khal][khal]] (a calendar CLI)
 - mpd (configuration files to run this music server as a user)
+  - [[rmpc][https://github.com/mierak/rmpc/]] A fantastic rust+tui player
+  - [[euphonica][https://github.com/htkhiem/euphonica]] a beautiful gtk gui
+  - ncmpcpp (mpd console player)
 - [[https://marlam.de/msmtp/news][msmtp]] (MSA: Mail Sending Agent)
-- [[https://neomutt.org][neomutt]] (Mail User Agent)
-- ncmpcpp (mpd console player)
 - [[https://mierak.github.io/rmpc/]][rmcp]] (mpd console player)
 - [[https://github.com/neovim/neovim][neovim]] (fork of vim)
 - [[https://newsboat.org/][newboat]] (RSS reader, fork of newsbeuter)
 - [[www.notmuch.org][notmuch]] (to tag mails)
-- [[https://github.com/purebred-mua/purebred][purebred]] (terminal MUA)
+   - [[https://github.com/purebred-mua/purebred][purebred]] (terminal MUA)
+   - [[https://github.com/pazz/alot][alot]] (MUA: Mail User Agent, like mutt)
+   - [[https://github.com/astroidmail/astroid][astroid]] (MUA with a GUI)
+   - [[https://neomutt.org][neomutt]] (Mail User Agent)
 - [[qutebrowser][www.qutebrowser.org]] (vim like browser)
 - [[https://github.com/DaveDavenport/rofi][rofi]] (a dmenu-like interactive prompt, works with clerk/i3 etc...)
 - [[https://starship.rs/][starship]] (prompt manager)

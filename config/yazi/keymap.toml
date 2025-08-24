@@ -1,3 +1,28 @@
+
+# # bookmarks mappings{{{
+# # If your yazi version is lower than v25.5.28, repleace "mgr" by "manager".
+# [[mgr.prepend_keymap]]
+# on = [ "m" ]
+# run = "plugin bookmarks save"
+# desc = "Save current position as a bookmark"
+#
+# [[mgr.prepend_keymap]]
+# on = [ "'" ]
+# run = "plugin bookmarks jump"
+# desc = "Jump to a bookmark"
+#
+# [[mgr.prepend_keymap]]
+# on = [ "b", "d" ]
+# run = "plugin bookmarks delete"
+# desc = "Delete a bookmark"
+#
+# [[mgr.prepend_keymap]]
+# on = [ "b", "D" ]
+# run = "plugin bookmarks delete_all"
+# desc = "Delete all bookmarks"
+# # }}}
+
+
 # you can see the mappings from yazi with ~
 # it even supports search !
 [mgr]
@@ -14,13 +39,19 @@ prepend_keymap = [
     # run  = "plugin rsync --args='user@server.com'",
     { on   = ["R"], run  = "plugin rsync", desc = "Copy files using rsync" },
     { on  = ["y"], run = [ 'shell -- for path in "$@"; do cat "$path"; done | wl-copy', "yank" ] },
-    { on  = ["d"], run = [ 'yank --cut' ], desc = "move files" }
+    { on  = ["d"], run = [ 'yank --cut' ], desc = "move files" },
+
+   # bookmarks.yazi
+   { on = [ "m" ], run = "plugin bookmarks save", desc = "Save current position as a bookmark" },
+
+   # ouch 
+   { on = ["C"], run = "plugin ouch" , desc = "Compress with ouch" }
+
    ]
 
 # on   = "R"
 # run  = "plugin rsync --args='user@server.com'"
 # desc = "Copy files using rsync to default location"
-
 [input]
 
 prepend_keymap = [

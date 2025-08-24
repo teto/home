@@ -11,7 +11,7 @@
     ./ssh-config.nix
     ./programs/firefox.nix
     # TODO improve that
-    flakeSelf.inputs.nova-doctor.homeModules.browsers
+    # flakeSelf.inputs.nova-doctor.homeModules.browsers
 
   ];
 
