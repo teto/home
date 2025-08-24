@@ -13,7 +13,7 @@
     enable = true;
 
     # $HOME is prepend hence the issues
-    dotDir = ".config/zsh";
+    dotDir = "${config.xdg.configHome}/zsh";
 
     sessionVariables = {
 

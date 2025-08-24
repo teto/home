@@ -125,7 +125,7 @@
           # config.services.xserver.displayManager.session.desktops
           builtins.trace
             "sessionPath: ${waylandSessionsPath}\nsessionData: ${sessionData}\nhome.path: ${hmSessionPath}"
-            "${lib.getExe pkgs.greetd.tuigreet} ${flags}";
+            "${lib.getExe pkgs.tuigreet} ${flags}";
 
         # user = "greeter"; # it's the default already
       };
@@ -143,8 +143,8 @@
   };
 
   environment.systemPackages = [
-    pkgs.greetd.tuigreet
-    pkgs.greetd.greetd # to allow for testing, setting GREETD_SOCK
+    pkgs.tuigreet
+    pkgs.greetd # to allow for testing, setting GREETD_SOCK
   ];
 
   # Edit gtkgreet list of login environments, which is by default read from /etc/greetd/environments

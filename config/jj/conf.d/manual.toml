@@ -51,7 +51,7 @@ rebase-all = ["rebase", "-s", "all:roots(trunk()..mutable())", "-d", "trunk()"]
 # "immutable_heads()" = "builtin_immutable_heads() | (trunk().. & ~mine())"
 # trunk() by default resolves to the latest 'main'/'master' remote bookmark. May
 # require customization for repos like nixpkgs.
-'trunk()' = 'latest((present(main) | present(master)) & remote_bookmarks())'
+# 'trunk()' = 'latest((present(main) | present(master)) & remote_bookmarks())'
 
 # Private and WIP commits that should never be pushed anywhere. Often part of
 # work-in-progress merge stacks.
@@ -95,7 +95,7 @@ narrow = "ancestors(reachable(@, trunk()..), 2) | trunk()"
 
 # $ jj log -r 'why_immutable(xyz)'
 # see https://github.com/jj-vcs/jj/discussions/5669 for more explanation
-'why_immutable(r)' = 'r | roots(r:: & immutable_heads())'
+# 'why_immutable(r)' = 'r | roots(r:: & immutable_heads())'
 
 # used in the tug alias 
 # https://github.com/jj-vcs/jj/discussions/5568#discussioncomment-12674748

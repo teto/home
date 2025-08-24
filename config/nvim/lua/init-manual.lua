@@ -169,7 +169,7 @@ vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/avante.nvim')
 -- doing jj tests
 vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/diffview.nvim')
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/rocks-dev.nvim')
--- vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks.nvim')
+vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks.nvim')
 
 -- require("vim.lsp._watchfiles")._watchfunc = require("vim._watch").watch
 -- local ffi = require 'ffi'
