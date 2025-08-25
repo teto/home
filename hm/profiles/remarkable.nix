@@ -8,7 +8,7 @@
 
   home.packages = [
 
-    pgs.rmapi
+    pkgs.rmapi
   ];
 
 }

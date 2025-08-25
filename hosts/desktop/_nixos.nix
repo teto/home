@@ -70,6 +70,7 @@ in
       flakeSelf.nixosModules.universal
       # ../../nixos/profiles/opensnitch.nix
       # ../../nixos/profiles/podman.nix
+      ../../nixos/profiles/rmfakecloud.nix
     ]
     ++ lib.optionals withSecrets [
       # TODO restore
@@ -77,6 +78,7 @@ in
 
       # TODO moved from their
       # ../../nixos/profiles/localai.nix
+
       ../../nixos/profiles/nextcloud.nix
       ../../nixos/profiles/postgresql.nix
       ../../nixos/profiles/redis.nix

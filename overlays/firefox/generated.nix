@@ -2,13 +2,13 @@
   {
     "10ten-ja-reader" = buildFirefoxXpiAddon {
       pname = "10ten-ja-reader";
-      version = "1.24.0";
+      version = "1.25.1";
       addonId = "{59812185-ea92-4cca-8ab7-cfcacee81281}";
-      url = "https://addons.mozilla.org/firefox/downloads/file/4467030/10ten_ja_reader-1.24.0.xpi";
-      sha256 = "5f35c945be8d96753da5cdcf03d0e9b4b759706f2dd30921f391849c2daa8ef4";
+      url = "https://addons.mozilla.org/firefox/downloads/file/4539398/10ten_ja_reader-1.25.1.xpi";
+      sha256 = "808ed4f1b5db774c6b2e3f0d68b6f8bb46293bc94a0d5450f0d877aa60407d63";
       meta = with lib;
       {
-        homepage = "https://github.com/birchill/10ten-ja-reader/";
+        homepage = "https://10ten.life";
         description = "Quickly translate Japanese by hovering over words. Formerly released as Rikaichamp.";
         license = licenses.gpl3;
         mozPermissions = [
@@ -27,14 +27,14 @@
     };
     "argent-x" = buildFirefoxXpiAddon {
       pname = "argent-x";
-      version = "5.25.1";
+      version = "5.26.0";
       addonId = "{51e0c76c-7dbc-41ba-a45d-c579be84301b}";
-      url = "https://addons.mozilla.org/firefox/downloads/file/4505313/argent_x-5.25.1.xpi";
-      sha256 = "99680a1e5ac0a54334569683ed95d88803a891fcd471d4ac9007f716a5cdb585";
+      url = "https://addons.mozilla.org/firefox/downloads/file/4520256/argent_x-5.26.0.xpi";
+      sha256 = "00fe7126aa93b96b9309e3b4542e76f42c93e7786ac63d8031e062f21aef2258";
       meta = with lib;
       {
-        homepage = "https://www.argent.xyz/argent-x/";
-        description = "7 out of 10 Starknet users choose Argent X as their Starknet wallet.";
+        homepage = "https://www.ready.co/ready-wallet";
+        description = "7 out of 10 users choose Ready Wallet as their Starknet wallet.";
         license = licenses.gpl3;
         mozPermissions = [
           "alarms"
@@ -57,10 +57,10 @@
     };
     "bitwarden" = buildFirefoxXpiAddon {
       pname = "bitwarden";
-      version = "2025.5.0";
+      version = "2025.7.1";
       addonId = "{446900e4-71c2-419f-a6a7-df9c091e268b}";
-      url = "https://addons.mozilla.org/firefox/downloads/file/4493940/bitwarden_password_manager-2025.5.0.xpi";
-      sha256 = "56e62622b7c322d2c2c4db04ad3eac2e7454bd7eebffebdcf5ca4b728ba09feb";
+      url = "https://addons.mozilla.org/firefox/downloads/file/4552124/bitwarden_password_manager-2025.7.1.xpi";
+      sha256 = "c7984a2748923ece0f72124c08c8277ce9f28d8a100f0f18c9bb977dcfae364f";
       meta = with lib;
       {
         homepage = "https://bitwarden.com";
@@ -80,6 +80,7 @@
           "webNavigation"
           "webRequest"
           "webRequestBlocking"
+          "notifications"
           "file:///*"
         ];
         platforms = platforms.all;
@@ -87,10 +88,10 @@
     };
     "browserpass" = buildFirefoxXpiAddon {
       pname = "browserpass";
-      version = "3.10.2";
+      version = "3.11.0";
       addonId = "browserpass@maximbaz.com";
-      url = "https://addons.mozilla.org/firefox/downloads/file/4468825/browserpass_ce-3.10.2.xpi";
-      sha256 = "63e9e11968ccd019d6ea271addf0ffe17ad78f2d98b8a87e244d609539b2ed0f";
+      url = "https://addons.mozilla.org/firefox/downloads/file/4542488/browserpass_ce-3.11.0.xpi";
+      sha256 = "11acffd3dbfe0be493c7855669dd24faf325dda8a2ee0ee67148969500f5d778";
       meta = with lib;
       {
         homepage = "https://github.com/browserpass/browserpass-extension";
@@ -114,10 +115,10 @@
     };
     "darkreader" = buildFirefoxXpiAddon {
       pname = "darkreader";
-      version = "4.9.106";
+      version = "4.9.110";
       addonId = "addon@darkreader.org";
-      url = "https://addons.mozilla.org/firefox/downloads/file/4488139/darkreader-4.9.106.xpi";
-      sha256 = "23c94085063aa6b57fae40ca9111ab049fffca5476c29e9990db3aa1a3fe1f10";
+      url = "https://addons.mozilla.org/firefox/downloads/file/4535824/darkreader-4.9.110.xpi";
+      sha256 = "846245826470cc1a08597480493b2076fcf03322a1228682b8a85b866fae30dc";
       meta = with lib;
       {
         homepage = "https://darkreader.org/";
@@ -252,10 +253,10 @@
     };
     "metamask" = buildFirefoxXpiAddon {
       pname = "metamask";
-      version = "12.17.3";
+      version = "13.1.0";
       addonId = "webextension@metamask.io";
-      url = "https://addons.mozilla.org/firefox/downloads/file/4494284/ether_metamask-12.17.3.xpi";
-      sha256 = "c9ac19197bd9e2811013e0afb69fb6445c28a929f0a3e479921c3a028f100ac4";
+      url = "https://addons.mozilla.org/firefox/downloads/file/4557699/ether_metamask-13.1.0.xpi";
+      sha256 = "55606c89d8f693305643e4800e43314d4d4acc7d122483b9fd9eb22f96ff6643";
       meta = with lib;
       {
         description = "The most secure wallet for crypto, NFTs, and DeFi, trusted by millions of users";
@@ -272,6 +273,7 @@
           "webRequestBlocking"
           "*://*.eth/"
           "notifications"
+          "identity"
           "file://*/*"
           "*://connect.trezor.io/*/popup.html*"
         ];
@@ -309,10 +311,10 @@
     };
     "refined-github" = buildFirefoxXpiAddon {
       pname = "refined-github";
-      version = "25.5.18";
+      version = "25.8.23";
       addonId = "{a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad}";
-      url = "https://addons.mozilla.org/firefox/downloads/file/4495758/refined_github-25.5.18.xpi";
-      sha256 = "36c23ff732d3cf221f2764c81883311dae5e23ed2ad352a68d52887d594dab91";
+      url = "https://addons.mozilla.org/firefox/downloads/file/4563040/refined_github-25.8.23.xpi";
+      sha256 = "3dce4c6f1be666406746a5121172731a0e208f9521baa59847ea561f3302fecf";
       meta = with lib;
       {
         homepage = "https://github.com/refined-github/refined-github";
@@ -397,10 +399,10 @@
     };
     "tree-style-tab" = buildFirefoxXpiAddon {
       pname = "tree-style-tab";
-      version = "4.2.0";
+      version = "4.2.5";
       addonId = "treestyletab@piro.sakura.ne.jp";
-      url = "https://addons.mozilla.org/firefox/downloads/file/4505103/tree_style_tab-4.2.0.xpi";
-      sha256 = "f1d51638eeb1531f0a222c26b2fb96ae2d3565a60bf990b3cd084ff2258c5917";
+      url = "https://addons.mozilla.org/firefox/downloads/file/4531347/tree_style_tab-4.2.5.xpi";
+      sha256 = "b40d2532289045f23c101eac0a22763d5827680eeacc2ecbbc6cdf4af9768e7f";
       meta = with lib;
       {
         homepage = "http://piro.sakura.ne.jp/xul/_treestyletab.html.en";
@@ -424,10 +426,10 @@
     };
     "ublock-origin" = buildFirefoxXpiAddon {
       pname = "ublock-origin";
-      version = "1.64.0";
+      version = "1.65.0";
       addonId = "uBlock0@raymondhill.net";
-      url = "https://addons.mozilla.org/firefox/downloads/file/4492375/ublock_origin-1.64.0.xpi";
-      sha256 = "b9e1c868bd1ac1defcabf2e01776d1a90effba34b07fe6a21350d45f022e0e9f";
+      url = "https://addons.mozilla.org/firefox/downloads/file/4531307/ublock_origin-1.65.0.xpi";
+      sha256 = "3e73c96a29a933866065f0756fe032984bf5b254af8dd1afd7a7f7e0668a33cf";
       meta = with lib;
       {
         homepage = "https://github.com/gorhill/uBlock#ublock-origin";

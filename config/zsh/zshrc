@@ -211,7 +211,7 @@ zlong_alert_func() {
 
 # replaced zbell for now with zlong_alert
 # move to home-manager
-. $ZDOTDIR/zlong_alert.zsh/zlong_alert.zsh
+# . $ZDOTDIR/zlong_alert.zsh/zlong_alert.zsh
 
 # zbell_ignore=($EDITOR $PAGER "man" "v" "ssh" "nvim" "gd" "gf" "sops" "tig")
 # zbell_duration=30
@@ -351,8 +351,8 @@ teatimer() {
 # export REVIEW_BASE=master
 
 
-# todo upstream to package 
-eval "$(_JITEN_COMPLETE=zsh_source jiten)"
+# seems like it was upstreamed
+# eval "$(_JITEN_COMPLETE=zsh_source jiten)"
 
 # source <(_HASS_CLI_COMPLETE=zsh_source hass-cli)
 function merge_hist() {
@@ -370,6 +370,8 @@ compdef _git gch
 compdef _pass pass-nova
 compdef _pass pass-pro
 compdef _pass pass-perso
+
+# devrait pas etre polutot dans bash ?
 source $XDG_CONFIG_HOME/bash/jj.sh
 
 # Merge that shell history with current one
