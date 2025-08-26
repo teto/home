@@ -44,8 +44,11 @@ repl-cw:
   # :set args "--bypass-manifest-check"
   nix run  .#simwork.core-webservice.platform._repl 
  
+# -ghci-script can be set several times
+# https://downloads.haskell.org/ghc/latest/docs/users_guide/ghci.html#ghc-flag-ghci-script
 repl:
   # setEnv "PORCUPINE_ARGS" "-vv -c2 --bypass-manifest-check --migrate-sql-tables"
-  nix run  .#repl -- -Wno-x-vpop-patient-table -Wno-x-pre-v2-routes 
+  nix run  .#repl -- -Wno-x-vpop-patient-table -Wno-x-pre-v2-routes  -ghci-script <(echo ':set args "--bypass-manifest-check"')  -ghci-script <(echo 'System.Environment.setEnv "PORCUPINE_ARGS" "-vv -c2 --bypass-manifest-check "')
+  # -ghci 'System.Environment.setEnv "PORCUPINE_ARGS" "-vv -c2 --bypass-manifest-check "'
   # cree un pb ?
   # -ghci-args ":l CoreWebserviceSpec"

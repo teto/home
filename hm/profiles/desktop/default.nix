@@ -52,7 +52,7 @@
 
     pkgs.trurl # used to parse url in the firefox-router executable
     viu # a console image viewer
-    mdcat # markdown viewer
+    (pkgs.tetoLib.ignoreBroken mdcat) # markdown viewer
 
   ];
 

@@ -244,7 +244,7 @@ in
         # newsboat #
         bmm # bookmark manager
         carl # not upstreamed yet. cargo cal
-        python3Packages.subliminal # to download subtitles
+        (ignoreBroken python3Packages.subliminal)  # to download subtitles
         immich-cli
         mujmap-unstable # to sync notmuch tags across jmap
         oculante # image viewer
@@ -298,6 +298,15 @@ in
     (mkIf cfg.developer {
       home.packages = with pkgs; let 
         mcp-servers = [ pkgs.github-mcp-server ] ;
+
+        zeal-custom = pkgs.zeal.overrideAttrs(oa: {
+
+          # export QMLSCENE_DEVICE=software
+          postInstall = ''
+            wrapProgram $out/bin/zeal --set-default QMLSCENE_DEVICE software
+          '';
+
+        });
       in
         mcp-servers 
         ++ [
@@ -401,7 +410,7 @@ in
         universal-ctags # there are many different ctags, be careful !
         uv # to install python packages
         whois
-        zeal # doc for developers
+        zeal-custom # doc for developers
         xan # CLI csv helper
         viddy # fileevent watcher
         watchman
@@ -505,15 +514,14 @@ in
 
         # https://github.com/NixOS/nixpkgs/pull/368909
         pkgs.kakasi # convert kanjis into kanas etc
-        pkgs.kanji-stroke-order-font  # font that shows strike order (!!) cool when learning
-        (pkgs.mokuro) # broken because of manga-ocr
-        (pkgs.python3Packages.manga-ocr)
+        pkgs.kanji-stroke-order-font  # for memento, font that shows strike order (!!) cool when learning
+        pkgs.mokuro # broken because of manga-ocr
+        pkgs.python3Packages.manga-ocr
         tagainijisho # japanse dict; like zkanji Qt based
         # flakeSelf.inputs.vocage.packages."x86_64-linux".vocage
         jiten # unfree, helpful for jap.nvim
         sudachi-rs # a japanese tokenizer (can have sudachidict builtins)
         sudachidict  # exists in small/medium/large
-        kanji-stroke-order-font # for memento
       ];
 
       # xdg.dataFile."jmdict".source = pkgs.jmdict;

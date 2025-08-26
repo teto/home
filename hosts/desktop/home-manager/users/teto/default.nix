@@ -67,23 +67,11 @@
   home.packages =
     with pkgs;
     let
-      # fonts = [
-      #   ubuntu_font_family
-      #   inconsolata # monospace
-      #   noto-fonts-cjk-sans # asiatic
-      #   nerd-fonts.fira-code # otherwise no characters
-      #   nerd-fonts.droid-sans-mono # otherwise no characters
-      #   # corefonts # microsoft fonts  UNFREE
-      #   font-awesome_5 # needed for waybar
-      #   source-code-pro
-      #   dejavu_fonts
-      #   # Adobe Source Han Sans
-      #   source-han-sans # sourceHanSansPackages.japanese
-      #   fira-code-symbols # for ligatures
-      #   iosevka
-      #   # noto-fonts
-      #
-      # ];
+      llmPkgs = [
+        koboldcpp
+        llama-cpp # for llama-server and benchmarks
+        sillytavern
+      ];
     in
     [
       # llm-ls # needed by the neovim plugin
@@ -117,10 +105,7 @@
 
       # bridge-utils# pour  brctl
     ]
-    ++ [
-      koboldcpp
-      llama-cpp # for llama-server and benchmarks
-    ]
+    ++ llmPkgs
     ;
 
   package-sets = {

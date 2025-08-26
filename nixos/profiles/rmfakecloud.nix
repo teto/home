@@ -9,8 +9,10 @@
   services.rmfakecloud = {
       enable = true;
 
-  environmentFile = "/etc/secrets/rmfakecloud.env";
-  storageUrl = "remarkable.${secrets.jakku.hostname}";
+  # values at LOGLEVEL
+  environmentFile = null; # "/etc/secrets/rmfakecloud.env";
+  # storageUrl = "remarkable.${secrets.jakku.hostname}";
+  storageUrl = "http://localhost";
   # extraSettings = {
   #
   # };

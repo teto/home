@@ -3,7 +3,10 @@
   # with /run/user/1000 size
   # size of tmpfs used by nix builds
   # usually
-  extraConfig = ''
-    RuntimeDirectorySize=5G
-  '';
+  settings.Login = {
+    RuntimeDirectorySize="5G";
+  };
+  # extraConfig = ''
+  #   RuntimeDirectorySize=5G
+  # '';
 }
