@@ -6,6 +6,10 @@
   secretsFolder,
   ...
 }:
+
+let 
+  inherit (pkgs.tetoLib) ignoreBroken;
+in
 {
   imports =
     [
@@ -38,7 +42,7 @@
   # '';
 
   home.packages = with pkgs; [
-    pkgs.aider-chat # breaks
+    (ignoreBroken pkgs.aider-chat) # breaks
     bluetuith # Bluetooth TUI
 
     isync # not used ?

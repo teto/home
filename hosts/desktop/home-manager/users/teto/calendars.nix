@@ -12,13 +12,6 @@
   imports = [
   ];
 
-  programs.vdirsyncer = {
-    enable = withSecrets;
-    # Provide package from stable channel ?
-    # package = pkgs.vdirsyncerStable;
-
-  };
-
   home.packages = with pkgs; [
     # need gnome-accounts to make it work
     gnome-calendar
