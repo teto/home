@@ -295,7 +295,15 @@ in
   #     List of packages to override without doing a full rebuild. The original derivation and replacement derivation must have the same name length, and ideally should have close-to-identical directory layout.
 
   # for moonloader keyboard
-  hardware.keyboard.zsa.enable = true;
+  hardware = {
+    keyboard.zsa.enable = true;
+    bluetooth = {
+      enable = true;
+      powerOnBoot = false;
+      # hsphfpd.enable = false; # conflicts with pipewire
+    };
+
+  };
 
   # try giving stable ids to our GPUs
   services.udev.packages = [

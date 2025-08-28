@@ -410,7 +410,7 @@ in
         universal-ctags # there are many different ctags, be careful !
         uv # to install python packages
         whois
-        zeal-custom # doc for developers
+        # zeal-custom # doc for developers
         xan # CLI csv helper
         viddy # fileevent watcher
         watchman
