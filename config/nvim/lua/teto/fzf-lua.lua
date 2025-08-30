@@ -11,6 +11,12 @@ function M.git_fre() end
 
 local fzf_jj = require('teto.fzf-lua.providers.jj')
 
+FzfLua.register_extension("jj_files", M.jj_files, vim.tbl_deep_extend("keep", {}, {
+}))
+
+-- FzfLua is a global from fzf_lua
+-- FzfLua.register_extension("jj_files", M.frecency, vim.tbl_deep_extend("keep", opts, {
+
 local git_files_opts = {
 
     entry_maker = function(entry)
@@ -63,32 +69,34 @@ function M.register_keymaps()
 
     vim.keymap.set('n', '<Leader>o', function()
         -- first check if we are
+		local files_picker_name = "files"
         if fzf_jj.is_jj_repo() then
-            fzf_jj.files({
-                -- fzf_lua.git_files({
-                --     -- entry_maker = entry_maker
-                fzf_opts = { ['--scheme'] = 'path' },
-            })
-        else
-		 -- TODO fix
-            -- fzf_lua.git_files({
-            --     -- entry_maker = entry_maker,
+		   files_picker_name = "jj_files"
+            -- fzf_jj.jj_files({
+            --     -- fzf_lua.git_files({
+            --     --     -- entry_maker = entry_maker
             --     fzf_opts = { ['--scheme'] = 'path' },
             -- })
-
-
-			-- TODO combine
-			fzf_lua.combine({
-
-			  -- can be a table as well
-			  -- order matters
-			  -- files can appear several times
-			  pickers = {
-			   "frecency,files"
-			  },
-			})
-
+        else
+		  -- TODO fix
+          -- fzf_lua.git_files({
+          --     -- entry_maker = entry_maker,
+          --     fzf_opts = { ['--scheme'] = 'path' },
+          -- })
         end
+
+		-- TODO combine or use global
+		fzf_lua.combine({
+
+		  -- can be a table as well
+		  -- order matters
+		  -- files can appear several times
+		  pickers = {
+		   "frecency",
+		   files_picker_name
+		   -- "files"
+		  },
+		})
     end)
 
     vim.keymap.set('n', '<Leader>F', function()

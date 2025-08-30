@@ -94,7 +94,7 @@ local jj_defaults = vim.tbl_extend('force', defaults.defaults.git, {
     -- winopts           = { preview = { winopts = { cursorline = false } } },
 })
 
-M.files = function(opts)
+M.jj_files = function(opts)
     -- fzf-lua uses "git.files" to reference the defaults
     opts = config.normalize_opts(opts, jj_defaults)
     if not opts then

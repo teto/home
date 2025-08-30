@@ -195,8 +195,6 @@ in
   #    options cfg80211 ieee80211_regdom="GB"
   #  '';
 
-  # programs.seahorse.enable = true; # UI to manage keyrings
-
   # List services that you want to enable:
   services = {
     gnome = {

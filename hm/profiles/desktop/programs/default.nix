@@ -1,4 +1,5 @@
 {
+  # TODO add config
   helix.enable = true;
 
   tig.enable = true;
@@ -7,5 +8,8 @@
     enable = true;
     enableAsFzfFile = true;
   };
+
+  # GUI to manage keyrings
+  seahorse.enable = true;
 
 }
