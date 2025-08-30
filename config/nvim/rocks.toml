@@ -67,9 +67,6 @@ tree-sitter-http = "0.0.37"
 # "smart-open.nvim"= "scm"
 
 vim-startuptime= "4.5.0"
-# removed during testing
-# installed via nix
-"typescript-tools.nvim" = "scm"
 menu= "scm"
 # "snacks.nvim" = "2.6.0"
 fzf-lua = "0.0.2097"
@@ -91,6 +88,12 @@ tree-sitter-norg = "0.2.6"
 # "rocks.nvim" = "2.45.0"
 tree-sitter-orgmode = "2.0.1"
 "gitsigns.nvim"= "1.0.2"
+
+# removed during testing
+# installed via nix
+[plugins."typescript-tools.nvim" ]
+git = "sazk07/typescript-tools.nvim"
+rev = "563eabbe355712320fe0926d34ee06e6118df29e"
 # tree-sitter-orgmode = "2.0.0"
 # nvim-treesitter-textobjects = "scm"
 # "rocks-treesitter.nvim" = "1.0.3"
