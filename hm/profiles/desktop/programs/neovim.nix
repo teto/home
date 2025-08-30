@@ -40,7 +40,6 @@ let
     pkgs.vimPlugins.nvim-treesitter-parsers.nix
     pkgs.vimPlugins.nvim-treesitter-parsers.hurl
     pkgs.vimPlugins.nvim-treesitter-parsers.python
-    # pkgs.vimPlugins.nvim-treesitter-parsers.orgmode
   ];
 
   filetypePlugins = with pkgs.vimPlugins; [

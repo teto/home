@@ -1,0 +1,106 @@
+#!/usr/bin/env python3
+# taken from https://github.com/jj-vcs/jj/discussions/5388
+
+import json
+import subprocess
+import argparse
+import shlex
+from dataclasses import dataclass
+
+
+@dataclass
+class PullRequest:
+    head_repository: str
+    head_ref_name: str
+    head_repository_owner: str
+
+    def remote_url(self) -> str:
+        return f"git@github.com:{self.head_repository_owner}/{self.head_repository}.git"
+
+
+def get_pull_request(pull_request: int) -> PullRequest:
+    output = subprocess.run(
+        [
+            "gh",
+            "pr",
+            "view",
+            "--json",
+            "headRepository,headRefName,headRepositoryOwner",
+            str(pull_request),
+        ],
+        text=True,
+        check=True,
+        stdout=subprocess.PIPE,
+    )
+    data = json.loads(output.stdout)
+    return PullRequest(
+        head_repository=data["headRepository"]["name"],
+        head_ref_name=data["headRefName"],
+        head_repository_owner=data["headRepositoryOwner"]["login"],
+    )
+
+
+def add_or_set_remote(remote_name: str, remote_url: str) -> None:
+    command = ["jj", "git", "remote", "add", remote_name, remote_url]
+    try:
+        subprocess.run(
+            command,
+            check=True,
+        )
+    except subprocess.CalledProcessError:
+        command = ["jj", "git", "remote", "set-url", remote_name, remote_url]
+        print("$ " + " ".join(map(shlex.quote, command)))
+        subprocess.run(
+            command,
+            check=True,
+        )
+
+
+def checkout_command(args: argparse.Namespace) -> None:
+    pr_number: int = args.pull_request
+    pull_request = get_pull_request(pr_number)
+    add_or_set_remote(pull_request.head_repository_owner, pull_request.remote_url())
+    command = [
+        "jj",
+        "git",
+        "fetch",
+        "--remote",
+        pull_request.head_repository_owner,
+        "--branch",
+        pull_request.head_ref_name,
+    ]
+    print("$ " + " ".join(map(shlex.quote, command)))
+    subprocess.run(
+        command,
+        check=True,
+    )
+    command = [
+        "jj",
+        "new",
+        f"{pull_request.head_ref_name}@{pull_request.head_repository_owner}",
+    ]
+    subprocess.run(
+        command,
+        check=True,
+    )
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Checkout the a pull request locally with jj."
+    )
+    subparsers = parser.add_subparsers(dest="subcommand")
+    subparsers.required = True
+    checkout = subparsers.add_parser("checkout", help="")
+    checkout.add_argument("pull_request", type=int, help="The pull request number")
+    checkout.set_defaults(func=checkout_command)
+    return parser.parse_args()
+
+
+def main() -> None:
+    parsed_args = parse_args()
+    parsed_args.func(parsed_args)
+
+
+if __name__ == "__main__":
+    main()

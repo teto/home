@@ -33,7 +33,12 @@ switch: (nixos-rebuild "switch" "")
 
 rollback: (nixos-rebuild "switch" "--rollback")
 
-repl: (nixos-rebuild "repl" "")
+repl:
+  nix repl ~/home \
+      --override-input nixpkgs {{ NIXPKGS_REPO }} \
+      --override-input hm {{ HM_REPO }} \
+      --override-input nova-doctor {{ NOVOS_REPO }} \
+      --override-input jinko-seeder {{ JK_SEEDER_REPO }}
 
 # --log-format internal-json 
 # --override-input nova /home/teto/nova/doctor \
@@ -58,7 +63,7 @@ nixos-rebuild command builders="--option builders \"$NOVA_OVH1\" -j0":
       --override-input nova-doctor {{ NOVOS_REPO }} \
       --override-input jinko-seeder {{ JK_SEEDER_REPO }} \
        {{ builders }} \
-      switch
+       {{ command }}
 
 build-nom hostname:
     nom build .#nixosConfigurations.{{ hostname }}.config.system.build.toplevel 

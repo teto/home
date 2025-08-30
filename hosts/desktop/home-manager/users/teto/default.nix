@@ -70,10 +70,12 @@
       llmPkgs = [
         koboldcpp
         llama-cpp # for llama-server and benchmarks
+        # open-webui # broken
         sillytavern
       ];
     in
-    [
+      llmPkgs
+    ++ [
       # llm-ls # needed by the neovim plugin
 
       cointop # bitcoin tracker
@@ -105,7 +107,6 @@
 
       # bridge-utils# pour  brctl
     ]
-    ++ llmPkgs
     ;
 
   package-sets = {

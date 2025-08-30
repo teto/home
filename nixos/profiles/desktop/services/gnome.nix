@@ -1,0 +1,3 @@
+{
+  gnome-keyring.enable = true;
+}

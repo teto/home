@@ -21,12 +21,6 @@ in
 
   };
 
-  # config = lib.mkMerge [
-  #   (mkIf cfg.orgmode.enable {
-  #     programs.neovim.plugins = cfg.orgmode.plugins;
-  #   })
-  # ];
-
   config = mkIf cfg.enableAudioKeys {
     # ❯ wpctl get-volume @DEFAULT_AUDIO_SINK@
     # Volume: 0.35

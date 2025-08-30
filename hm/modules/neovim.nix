@@ -293,7 +293,7 @@ in
         pkgs.vimPlugins.rocks-dev
       ];
     })
-    (mkIf cfg.orgmode.enable { programs.neovim.plugins = cfg.orgmode.plugins; })
+    # (mkIf cfg.orgmode.enable { programs.neovim.plugins = cfg.orgmode.plugins; })
 
     (mkIf cfg.neorg.enable { programs.neovim.plugins = cfg.neorg.plugins; })
 

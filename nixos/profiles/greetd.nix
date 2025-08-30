@@ -9,6 +9,10 @@
   # https://man.sr.ht/~kennylevinsen/greetd/
   services.greetd = {
     enable = true;
+
+    # avoid systemd boot messages interrupt TUI.
+    useTextGreeter = true; 
+
     # swayConfig = pkgs.writeText "greetd-sway-config" ''
     #   # `-l` activates layer-shell mode. Notice that `swaymsg exit` will run after gtkgreet.
     #   exec "${pkgs.greetd.gtkgreet}/bin/gtkgreet -l; swaymsg exit"
