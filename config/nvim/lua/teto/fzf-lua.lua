@@ -1,6 +1,6 @@
 -- wiki is pretty dope https://github.com/ibhagwan/fzf-lua/wiki/Advanced#fzf-exec-api
 local _, fzf_lua = pcall(require, 'fzf-lua')
-local _, fzf_lua_enchanted = pcall(require, "fzf-lua-enchanted-files")
+-- local _, fzf_lua_enchanted = pcall(require, "fzf-lua-enchanted-files")
 
 local M = {}
 
@@ -47,9 +47,8 @@ local git_files_opts = {
 function M.register_keymaps()
     -- autocomplete :FzfLua to see what's available
     vim.keymap.set('n', '<Leader>g', function()
-        fzf_lua.files()
-		-- vim.print(fzf_lua_enchanted)
-		-- fzf_lua_enchanted.files()
+	   -- global picker accepts various prefixes such as $ for buffers , @ for lsp
+        fzf_lua.global()
     end)
 	-- local file_dir = vim.fn.expand('%:p:h')
 
@@ -63,9 +62,6 @@ function M.register_keymaps()
 		--   end)
 
     vim.keymap.set('n', '<Leader>o', function()
-		-- TODO hopefully we can leverage:
-		--    fzf_lua_enchanted.files() at some point
-
         -- first check if we are
         if fzf_jj.is_jj_repo() then
             fzf_jj.files({
@@ -80,12 +76,16 @@ function M.register_keymaps()
             --     fzf_opts = { ['--scheme'] = 'path' },
             -- })
 
+
+			-- TODO combine
 			fzf_lua.combine({
 
 			  -- can be a table as well
 			  -- order matters
 			  -- files can appear several times
-			  pickers = "frecency,files"
+			  pickers = {
+			   "frecency,files"
+			  },
 			})
 
         end

@@ -108,6 +108,7 @@
         (
           { ... }:
           {
+            # why do i need that already ? for the nix-daemon ?
             programs.ssh.enable = true;
           }
         )
