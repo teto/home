@@ -150,7 +150,10 @@ let
     # TODO map it to a plugin instead
     # nodePackages.typescript-language-server
 
-    # pandoc # for markdown preview, should be in the package closure instead
+    # pandoc is used by a bunch of plugins, including feed.nvim 
+    # while I wish feed.nvim would be packaged with it 
+    # for markdown preview, should be in the package closure instead
+    pandoc 
     # pythonPackages.pdftotext  # should appear only in RC ? broken
     nil # a nix lsp, can be debugged with NIL_LOG_PATH and NIL_LOG=nil=debug
     nixd # another nix LSP

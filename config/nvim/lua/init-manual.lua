@@ -968,12 +968,3 @@ end, { buffer = false, desc = "Japanese lookup" })
 
 require'teto.lsp'.ignore_simwork_extended_warnings()
 
-function get_selection()
-   -- does not handle rectangular selection
-   local s_start = vim.fn.getpos "."
-   -- in visual mode returns the other end of the connections
-   local s_end = vim.fn.getpos "v"
-   local lines = vim.fn.getregion(s_start,s_end)
-   return lines
-end
-

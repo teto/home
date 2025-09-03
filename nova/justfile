@@ -48,6 +48,7 @@ repl-cw:
 # https://downloads.haskell.org/ghc/latest/docs/users_guide/ghci.html#ghc-flag-ghci-script
 repl:
   # setEnv "PORCUPINE_ARGS" "-vv -c2 --bypass-manifest-check --migrate-sql-tables"
+  # sydTestWith Test.Syd.OptParse.defaultSettings spec
   nix run  .#repl -- -Wno-x-vpop-patient-table -Wno-x-pre-v2-routes  -ghci-script <(echo ':set args "--bypass-manifest-check"')  -ghci-script <(echo 'System.Environment.setEnv "PORCUPINE_ARGS" "-vv -c2 --bypass-manifest-check "')
   # -ghci 'System.Environment.setEnv "PORCUPINE_ARGS" "-vv -c2 --bypass-manifest-check "'
   # cree un pb ?

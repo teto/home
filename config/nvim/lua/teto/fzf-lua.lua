@@ -1,34 +1,28 @@
 -- wiki is pretty dope https://github.com/ibhagwan/fzf-lua/wiki/Advanced#fzf-exec-api
 local _, fzf_lua = pcall(require, 'fzf-lua')
--- local _, fzf_lua_enchanted = pcall(require, "fzf-lua-enchanted-files")
 
 local M = {}
 
--- lua require'fzf-lua'.fzf_exec({ "line1", "line2" })
-
--- use fre to filter files by
-function M.git_fre() end
-
 local fzf_jj = require('teto.fzf-lua.providers.jj')
 
-FzfLua.register_extension("jj_files", M.jj_files, vim.tbl_deep_extend("keep", {}, {
+FzfLua.register_extension("jj_files", fzf_jj.jj_files, vim.tbl_deep_extend("keep", {}, {
 }))
 
 -- FzfLua is a global from fzf_lua
 -- FzfLua.register_extension("jj_files", M.frecency, vim.tbl_deep_extend("keep", opts, {
 
-local git_files_opts = {
-
-    entry_maker = function(entry)
-        -- Here you can add prioritized sorting or influence entries
-        return {
-            valid = true,
-            value = entry,
-            ordinal = entry, -- What's used for filtering/sorting matches
-            display = 'TOTO ' .. entry, -- How the display is rendered
-        }
-    end,
-}
+-- local git_files_opts = {
+--
+--     entry_maker = function(entry)
+--         -- Here you can add prioritized sorting or influence entries
+--         return {
+--             valid = true,
+--             value = entry,
+--             ordinal = entry, -- What's used for filtering/sorting matches
+--             display = 'TOTO ' .. entry, -- How the display is rendered
+--         }
+--     end,
+-- }
 
 -- https://github.com/ibhagwan/fzf-lua/issues/860
 -- _G.myfiles = function(opts)

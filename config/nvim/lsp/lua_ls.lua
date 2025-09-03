@@ -69,6 +69,9 @@ return {
                     'cx',
                     'Command',
                     'assert',
+
+					-- used by fzf-lua
+					'FzfLua',
                 },
                 -- Define variable names that will not be reported as an unused local by unused-local.
                 unusedLocalExclude = { '_*' },
