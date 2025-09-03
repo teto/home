@@ -30,7 +30,7 @@ path = "/home/teto/neovim"
 # "oil.nvim" = "2.14.0"
 # -- :DiffviewOpen
 # "diffview.nvim" = "scm"
-"haskell-tools.nvim" = "6.1.1"
+"haskell-tools.nvim" = "6.2.0"
 
 # needed the patch from https://github.com/nvimtools/none-ls.nvim/pull/277/
 # "none-ls.nvim" = "scm"
@@ -43,14 +43,14 @@ auto-session = "2.5.1"
 "lualine.nvim" = "scm"
 "rocks-lazy.nvim" = "scm"
 "nui.nvim" = "0.4.0"
-neotest = "5.9.1"
+neotest = "5.11.0"
 "rocks-dev.nvim" = "1.8.1"
 # nvim-lint = "scm"
 # "telescope.nvim" = "scm"
 "lsp_signature.nvim" = "0.3.1"
 friendly-snippets = "scm"
 # "haskell-snippets.nvim" = "1.4.4"
-"yazi.nvim" = "11.10.3"
+"yazi.nvim" = "11.10.4"
 # tree-sitter-haskell = "scm"
 # tree-sitter-org = "0.0.1"
 # "lspkind.nvim" = "scm"
@@ -69,8 +69,8 @@ tree-sitter-http = "0.0.37"
 vim-startuptime= "4.5.0"
 menu= "scm"
 # "snacks.nvim" = "2.6.0"
-fzf-lua = "0.0.2097"
-"lz.n" = "2.11.4"
+fzf-lua = "0.0.2165"
+# "lz.n" = "2.12.0"
 "indent-blankline.nvim" = "3.9.0"
 "llm.nvim"= "scm"
 # volt is a UI library
@@ -88,12 +88,9 @@ tree-sitter-norg = "0.2.6"
 # "rocks.nvim" = "2.45.0"
 tree-sitter-orgmode = "2.0.1"
 "gitsigns.nvim"= "1.0.2"
-
-# removed during testing
-# installed via nix
-[plugins."typescript-tools.nvim" ]
-git = "sazk07/typescript-tools.nvim"
-rev = "563eabbe355712320fe0926d34ee06e6118df29e"
+"feed.nvim" = "2.18.1"
+"typescript-tools.nvim" = "scm"
+tree-sitter-hurl = "0.0.30"
 # tree-sitter-orgmode = "2.0.0"
 # nvim-treesitter-textobjects = "scm"
 # "rocks-treesitter.nvim" = "1.0.3"
@@ -233,23 +230,9 @@ rev = "ad95f18cb85c24ddc0b48bf190bc313dfc58e2d6"
 git = "luukvbaal/statuscol.nvim"
 rev = "c399884e8f64019ec9bb581251f9710915b7f996"
 
-# [plugins."codecompanion.nvim"]
-# git = "olimorris/codecompanion.nvim"
-# rev = "v17.3.0"
-
-# [plugins.jj-diffconflicts]
-# git = "rafikdraoui/jj-diffconflicts"
-# rev = "20acec2eba0f1af6621880e59ae692ab34210416"
-
-# [plugins.diffconflicts]
-# git = "whiteinge/diffconflicts"
-# rev = "2.3.0"
-
 [plugins."lsp-progress.nvim"]
 git = "linrongbin16/lsp-progress.nvim"
-rev = "v1.0.13"
-# to call setup
-options = {}
+rev = "v1.0.14"
 
 [plugins."visual-whitespace.nvim"]
 git = "mcauley-penney/visual-whitespace.nvim"
@@ -283,9 +266,10 @@ rev = "v1.2.0"
 # :MCPHub
 dev = true 
 
-[plugins.fzf-lua-enchanted-files]
-git = "otavioschwanck/fzf-lua-enchanted-files"
-rev = "ecc3fa31b7ca65400a946ddef9152e97dab86cf2"
+# using fzf-lua-frecency.nvim instead
+# [plugins.fzf-lua-enchanted-files]
+# git = "otavioschwanck/fzf-lua-enchanted-files"
+# rev = "ecc3fa31b7ca65400a946ddef9152e97dab86cf2"
 
 [plugins."fzf-lua-frecency.nvim"]
 git = "elanmed/fzf-lua-frecency.nvim"

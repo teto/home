@@ -9,12 +9,6 @@ let
 
 in
 {
-  alot = prev.alot.overrideAttrs ({
-    doCheck = false;
-    doInstallCheck = false;
-
-  });
-
   protocol-local = prev.protocol.overrideAttrs (oldAttrs: {
     src = builtins.fetchGit { url = "https://github.com/teto/protocol"; };
   });

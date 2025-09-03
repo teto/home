@@ -10,6 +10,6 @@
   };
 
   # GUI to manage keyrings
-  seahorse.enable = true;
+  # seahorse.enable = true;
 
 }

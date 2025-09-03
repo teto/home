@@ -565,7 +565,6 @@
 
             # And add the home-manager module
             ./hm/modules/xdg.nix # does nothing
-            # ./hm/modules/firefox.nix
             self.homeProfiles.fzf # todo move to common.nix ?
 
             # TODO it should autoload those

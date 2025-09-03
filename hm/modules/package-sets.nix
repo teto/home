@@ -200,6 +200,7 @@ in
           # rofi-pass # rofi-pass it's enabled in the HM module ?
           rofi-teto
           rsync
+          seahorse  # GUI to interact with gnome keyring
           sd # rust cli for search & replace
           shared-mime-info # temporary fix for nautilus to find the correct files
           sublime3
