@@ -30,6 +30,14 @@
       value = "70000";
     }
   ];
+
+
+  # dictated by https://nixos.wiki/wiki/Yubikey
+  pam.services = {
+    login.u2fAuth = true;
+    sudo.u2fAuth = true;
+  };
+
   # users.motd =
   # security.pam.loginLimits = [
   #   {

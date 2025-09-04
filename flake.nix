@@ -459,8 +459,23 @@
             allowUnfree = true;
             # this list makes me wanna vomit (except steam maybe because they do good for linux),
             # and sublime because guy has to eat
-            allowUnfreePredicate =
-              pkg:
+            allowUnfreePredicate = pkg:
+              # let
+              #   ensureList = x: if builtins.isList x then x else [ x ];
+              # in
+              # package:
+#               builtins.all (
+#                 license:
+#                 license.free
+#                 || builtins.elem license.shortName [
+#                   "CUDA EULA"
+#                   "cuDNN EULA"
+#                   "cuSPARSELt EULA"
+#                   "cuTENSOR EULA"
+#                   "NVidia OptiX EULA"
+#                 ]
+#               ) (ensureList package.meta.license);
+# };
               let
                 legacyPkgs = nixpkgs.legacyPackages.${system};
                 pkgName = legacyPkgs.lib.getName pkg;

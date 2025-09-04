@@ -18,6 +18,7 @@ in
     package-sets = {
 
       desktop = mkEnableOption "desktop packages";
+      yubikey = mkEnableOption "yubikey packages";
       server = mkEnableOption "server packages";
 
       developer = mkEnableOption "Developer packages";
@@ -66,6 +67,14 @@ in
         pciutils # for lspci
         wget
         # zenith  # resources monitor
+      ];
+    })
+
+
+    (mkIf cfg.yubikey {
+      home.packages = with pkgs; [
+        yubioath-flutter  # not sure it's great yubikey-manager # 
+        yubikey-manager
       ];
     })
 

@@ -71,8 +71,8 @@ in
     developer = true;
     enableIMPackages = true;
     jujutsu = true;
+    yubikey = true;
     waylandPackages = true;
-
   };
 
   home.language = {
