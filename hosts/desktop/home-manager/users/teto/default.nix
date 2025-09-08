@@ -70,7 +70,7 @@
       llmPkgs = [
         koboldcpp
         llama-cpp # for llama-server and benchmarks
-        # open-webui # broken
+        open-webui # broken
         sillytavern
         # python3Packages.unsloth # broken
       ];

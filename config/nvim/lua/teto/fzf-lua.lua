@@ -71,12 +71,6 @@ function M.register_keymaps()
             --     --     -- entry_maker = entry_maker
             --     fzf_opts = { ['--scheme'] = 'path' },
             -- })
-        else
-		  -- TODO fix
-          -- fzf_lua.git_files({
-          --     -- entry_maker = entry_maker,
-          --     fzf_opts = { ['--scheme'] = 'path' },
-          -- })
         end
 
 		-- TODO combine or use global
@@ -85,6 +79,7 @@ function M.register_keymaps()
 		  -- can be a table as well
 		  -- order matters
 		  -- files can appear several times
+		  -- uses options from the first picker
 		  pickers = {
 		   "frecency",
 		   files_picker_name

@@ -91,7 +91,7 @@ in
         jjui
 
         # pkgs.gg-jj
-        pkgs.lazyjj
+        # pkgs.lazyjj
         # pkgs.jj-fzf
       ];
     })
@@ -420,7 +420,7 @@ in
         universal-ctags # there are many different ctags, be careful !
         uv # to install python packages
         whois
-        # zeal-custom # doc for developers
+        zeal-custom # doc for developers
         xan # CLI csv helper
         viddy # fileevent watcher
         watchman
@@ -454,11 +454,10 @@ in
 
     (mkIf cfg.waylandPackages {
       home.packages = with pkgs; [
-        cliphist
-        clipcat # rust broken
+        # cliphist
+        clipcat # rust
 
-        # TODO test https://github.com/sentriz/cliphist
-        foot # terminal
+        # foot # terminal
         # use it with $ grim -g "$(slurp)"
         grim # replace scrot/flameshot
         kanshi # autorandr-like

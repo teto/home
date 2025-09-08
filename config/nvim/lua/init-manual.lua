@@ -654,7 +654,13 @@ vim.g.spinner_frames = { '⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷' 
 if use_fzf_lua then
     require('plugins.fzf-lua')
 	-- else frecency doesnt appear
-	require('fzf-lua-frecency').setup()
+	require('fzf-lua-frecency').setup({
+	  cwd_only = true,
+      -- all_files = nil,
+      stat_file = true,
+      display_score = true,
+
+	})
 	require('teto.fzf-lua').register_keymaps()
 end
 
@@ -957,6 +963,10 @@ end, { buffer = false, desc = "Japanese lookup" })
 
 vim.keymap.set('n', '<D-j>', function()
 	vim.cmd[[ Rikai lookup ]]
+end, { buffer = false, desc = "Japanese lookup" })
+
+vim.keymap.set('n', '<leader>d', function()
+	vim.cmd[[ FzfLua diagnostics_document ]]
 end, { buffer = false, desc = "Japanese lookup" })
 
 -- Autocommand to highlight the word under the cursor when the cursor moves

@@ -590,7 +590,7 @@
             self.homeModules.zsh
 
             self.homeModules.fre
-            self.homeModules.mod-cliphist
+            # self.homeModules.mod-cliphist
             self.homeModules.fzf
 
             self.homeProfiles.common

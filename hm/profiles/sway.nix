@@ -203,16 +203,6 @@ in
         # TODO make it a command
         "${mod}+Ctrl+L" = "exec ${myLib.swaylockCmd} ";
 
-        # TODO notify/throw popup when clipman fails
-        # "${mod}+Ctrl+h" = ''exec ${pkgs.clipman}/bin/clipman pick -t rofi || ${sharedConfig.notify-send} 'Failed running clipman' '';
-        # cliphist list | rofi -dmenu
-        "${mod}+Ctrl+h" =
-          # | wl-copy
-          ''exec ${pkgs.clipcat}/bin/clipcat-menu -f rofi  | ${sharedConfig.notify-send} 'Failed running cliphist' '';
-
-          # clip hist version
-          # ''exec ${pkgs.cliphist}/bin/cliphist list | rofi -dmenu  -m -1 -p "Select item to copy" -lines 10 -width 35 | cliphist decode | wl-copy | ${sharedConfig.notify-send} 'Failed running cliphist' '';
-
         # kitty nvim -c ":Neorg workspace notes"
         # Notes is a custom command
         "${mod}+F1" =
@@ -234,11 +224,23 @@ in
         # for_window [con_mark="SCRATCHPAD_terminal"] border pixel 1
 
         # use sway-easyfocus
-        # "${mod}+g" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
-        # "${mad}+w" = "exec ${pkgs.i3-easyfocus}/bin/i3-easyfocus";
+        "${mod}+g" = "exec ${pkgs.sway-easyfocus}/bin/sway-easyfocus";
+        "${mad}+w" = "exec ${pkgs.sway-easyfocus}/bin/sway-easyfocus";
         # TODO bind
         # XF86Copy
-      };
+      } // lib.optionalAttrs config.services.clipcat.enable {
+        "${mod}+Ctrl+h" =
+          ''exec ${pkgs.clipcat}/bin/clipcat-menu -f rofi  | ${sharedConfig.notify-send} 'Failed running clipcat' '';
+      } // lib.optionalAttrs config.services.cliphist.enable {
+        "${mod}+Ctrl+h" =
+          ''exec ${pkgs.cliphist}/bin/cliphist list | rofi -dmenu  -m -1 -p "Select item to copy" -lines 10 -width 35 | cliphist decode | wl-copy | ${sharedConfig.notify-send} 'Failed running cliphist' '';
+
+      } // lib.optionalAttrs config.services.clipman.enable {
+        "${mod}+Ctrl+h" = ''exec ${pkgs.clipman}/bin/clipman pick -t rofi || ${sharedConfig.notify-send} 'Failed running clipman' '';
+      }
+
+
+      ; 
 
       startup =
         [
