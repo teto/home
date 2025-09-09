@@ -17,6 +17,7 @@
   tmp.tmpfsSize = "5Gb";
 
   kernelParams = [
+    "mem_sleep_default=deep"
     "plymouth.use-simpledrm" # kesako ?
 
     # "acpi_backlight=legacy"

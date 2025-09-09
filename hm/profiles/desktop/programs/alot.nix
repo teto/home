@@ -5,7 +5,7 @@
 {
   # TODO test http://alot.readthedocs.io/en/latest/configuration/key_bindings.html
   # w = pipeto urlscan 2> /dev/null
-  enable = true;
+  enable = false;
 
   # Hooks are python callables that live in a module specified by hooksfile in the config.
   # xdg.configFile."alot/hooks.py"

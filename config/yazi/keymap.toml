@@ -43,7 +43,7 @@ prepend_keymap = [
 
    # bookmarks.yazi
    { on = [ "m" ], run = "plugin bookmarks save", desc = "Save current position as a bookmark" },
-
+   { on = [ "'" ], run = "plugin bookmarks jump", desc = "Jump to a bookmark" },
    # ouch 
    { on = ["C"], run = "plugin ouch" , desc = "Compress with ouch" }
 

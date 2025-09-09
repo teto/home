@@ -1,9 +1,9 @@
-{ pkgs, ...}: 
+{ pkgs, rofi-unwrapped, ...}: 
 let 
-  rofi-unwrapped = pkgs.rofi-wayland-unwrapped;
+  # rofi-unwrapped = pkgs.rofi;
   myRofi = pkgs.rofi.override {
   # rofi-wayland-unwrapped;
-    inherit rofi-unwrapped;
+    # inherit rofi-unwrapped;
 
   plugins = with pkgs; [ 
     rofi-calc

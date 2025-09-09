@@ -799,6 +799,7 @@
           # self.inputs.nova-doctor.overlays.byNamePkgsOverlay
           modules = [
             self.nixosModules.nova
+            self.inputs.nixos-hardware.nixosModules.dell-xps-13-9310
           ];
 
           # TODO retain existing specialArgs and inject mine ?!
@@ -808,7 +809,11 @@
             inherit dotfilesPath;
 
             withSecrets = true;
-            userConfig = novaUserProfile;
+            userConfig = novaUserProfile // {
+              laptop = true;
+              # so it
+              configuration = "xps3910";
+            };
             doctor = self.inputs.nova-doctor;
           };
 

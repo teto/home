@@ -43,7 +43,6 @@
         #   # extraOptions = ["--device=/dev/bus/usb/xxx/xxx" "--rm=false"];
         #   # entryPoint = "/bin/bash";
         #     volumes =  [
-        #       "/home/teto/alot:/alot"
         #     ];
         #     # extraOptions = [ "--network=host" ]
         # };

@@ -276,6 +276,9 @@ in
     SystemMaxUse=2G
   '';
 
+  # powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+
+
   # to remove "TSC_DEADLINE disabled due to Errata;
   # please update microcode to version: 0x22"
   # hardware.cpu.intel.updateMicrocode = true;
