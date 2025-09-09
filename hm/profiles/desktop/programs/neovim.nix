@@ -277,8 +277,10 @@ in
   extraPackages =
     extraPackages
     ++ pkgs.vimPlugins.llm-nvim.runtimeDeps # temporary workaround
-    ++ pkgs.vimPlugins.typescript-tools-nvim.runtimeDeps
+    # provides typescript-language-server
+    ++ pkgs.vimPlugins.typescript-tools-nvim.runtimeDeps 
     ++ [
+      pkgs.typescript # for tsserver
       pkgs.stylua # for lua formatting
       pkgs.gitlab-ci-ls # gitlab lsp
       mcp-hub
