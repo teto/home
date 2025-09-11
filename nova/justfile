@@ -50,6 +50,6 @@ repl:
   # sydTestWith Test.Syd.OptParse.defaultSettings spec
   # ghci> import Test.Syd.OptParse 
   # ghci> s = settings { settingFilters = [ "monolix" ] }
-  nix run  .#repl -- -Wno-x-vpop-patient-table -Wno-x-pre-v2-routes  -ghci-script {{justfile_directory()}}/ghci-script-core-ws.txt
+  nix run  .#repl -- -Wno-x-vpop-patient-table -Wno-x-pre-v2-routes  -ghci-script {{parent_directory(canonicalize(source_file()))}}/ghci-script-core-ws.txt
   # cree un pb ?
   # -ghci-args ":l CoreWebserviceSpec"

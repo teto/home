@@ -1,4 +1,4 @@
 :set args "--bypass-manifest-check"
-System.Environment.setEnv "PORCUPINE_ARGS" "-vv -c2 --bypass-manifest-check "
-putStrLn "mySettings = Test.Syd.OptParse.defaultSettings { settingFilters = [ "monolix" ] }"
+System.Environment.setEnv "PORCUPINE_ARGS" "-vv -c2 "
+putStrLn "mySettings = Test.Syd.OptParse.defaultSettings { settingFilters = [ \"monolix\" ] }"
 putStrLn "sydTestWith mySettings spec"
