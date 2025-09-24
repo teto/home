@@ -967,7 +967,7 @@ end, { buffer = false, desc = "Japanese lookup" })
 
 vim.keymap.set('n', '<leader>d', function()
 	vim.cmd[[ FzfLua diagnostics_document ]]
-end, { buffer = false, desc = "Japanese lookup" })
+end, { buffer = false, desc = "Diagnostics" })
 
 -- Autocommand to highlight the word under the cursor when the cursor moves
 -- vim.api.nvim_create_autocmd({"CursorMoved", "CursorMovedI"}, {
