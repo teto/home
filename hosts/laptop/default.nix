@@ -222,7 +222,9 @@ in
     # central regulatory domain agent (CRDA) to allow exchange between kernel and userspace
     # to prevent the "failed to load regulatory.db" ?
     # see https://wireless.wiki.kernel.org/en/developers/regulatory
-    udev.packages = [ ];
+    udev.packages = [ 
+      pkgs.yubikey-personalization
+    ];
 
     # just locate
     locate.enable = true;
@@ -268,6 +270,10 @@ in
   programs.gnome-disks = {
     enable = true;
   };
+
+  # to use the smartcard of yubikey
+  services.pcscd.enable = true;
+  services.yubikey-agent.enable = true;
 
   system.stateVersion = "24.11";
 

@@ -269,5 +269,4 @@ dev = true
 [plugins."fzf-lua-frecency.nvim"]
 git = "elanmed/fzf-lua-frecency.nvim"
 rev = "a0c0f78e5db49580aa4aabc6dda1813bb9c789ee"
-# dir = "/home/teto/neovim/mcphub.nvim"
 

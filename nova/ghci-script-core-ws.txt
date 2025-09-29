@@ -1,7 +1,8 @@
 :set args "--bypass-manifest-check"
 System.Environment.setEnv "PORCUPINE_ARGS" "-vv -c2 "
 System.Environment.setEnv "TEST_MONOLIX_ZIPS_FOLDER" "/nix/store/q3yy9mx96yg4bxcr7850c625z09r73ix-monolix-zips"
-putStrLn "mySettings = Test.Syd.OptParse.defaultSettings { settingFilters = [
-\"weibullRTTE\" ] }"
+import Test.Syd.OptParse
+-- \"weibullRTTE\"
+putStrLn "mySettings = Test.Syd.OptParse.defaultSettings { settingFilters = [  ], settingGoldenStart = True, settingGoldenReset = True  }"
 putStrLn "sydTestWith mySettings spec"
 :l Monolix.Loader

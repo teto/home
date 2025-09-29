@@ -28,7 +28,7 @@ openapi-reset:
 golden-test:
   nix run  .#fastbuild.simwork.core-webservice.golden-test
 
-local:
+local-nix:
   nix run  .#fastbuild.simwork.core-webservice.local    -- --bypass-manifest-check --migrate-sql-tables
 
 platform:

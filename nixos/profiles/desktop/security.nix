@@ -33,9 +33,19 @@
 
 
   # dictated by https://nixos.wiki/wiki/Yubikey
-  pam.services = {
-    login.u2fAuth = true;
-    sudo.u2fAuth = true;
+  pam = {
+    u2f = {
+    enable = true;
+      settings = {
+        interactive = true; # Insert your U2F device, then press ENTER.
+        cue = true; # will print Please touch the device.
+      };
+    };
+
+    services = {
+      login.u2fAuth = true;
+      sudo.u2fAuth = true;
+    };
   };
 
   # users.motd =

@@ -347,6 +347,12 @@
           "nova/python"
           # "nova/virtualbox"
         ];
+
+
+        # TEMP
+        laptop = true;
+        # so it
+        configuration = "xps3910";
       };
 
       secrets = import ./nixpkgs/secrets.nix {
@@ -661,6 +667,7 @@
             # chntpw # broken to edit BCD (Boot configuration data) from windows
             efibootmgr
             smartmontools # for smartctl
+            pamtester # to test yubikey https://nixos.wiki/wiki/Yubikey
           ];
 
           # TODO set SOPS_A
