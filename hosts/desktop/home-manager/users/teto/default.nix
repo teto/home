@@ -113,7 +113,7 @@
     enableOfficePackages = true;
     kubernetes = true;
     developer = true;
-    llms = true;
+    llms = false;
     enableIMPackages = true;
     japanese = true;
   };

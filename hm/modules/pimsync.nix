@@ -12,7 +12,7 @@ with lib;
 
 let
 
-  cfg = config.programs.pimsync;
+  cfg = config.programs.pimsync-teto;
 
   vdirsyncerCalendarAccounts = filterAttrs (_: v: v.pimsync.enable) (
     mapAttrs' (n: v: nameValuePair ("calendar_" + n) v) config.accounts.calendar.accounts
@@ -205,7 +205,7 @@ in
   ];
 
   options = {
-    programs.pimsync = {
+    programs.pimsync-teto = {
       enable = mkEnableOption "vdirsyncer";
 
       package = mkOption {

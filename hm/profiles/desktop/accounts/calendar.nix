@@ -30,34 +30,35 @@ lib.optionalAttrs withSecrets {
       pimsync = {
         # enable = withSecrets;
         enable = true;
-        # null doesn't look too interesting :s
-        collections = [
-          "from a"
-          "from b"
-        ];
-        metadata = [
-          "color"
-          "displayname"
-        ];
 
+        # null doesn't look too interesting :s
+        # collections = [
+        #   "from a"
+        #   "from b"
+        # ];
+        # metadata = [
+        #   "color"
+        #   "displayname"
+        # ];
+        #
       };
 
       vdirsyncer = {
         enable = false; # withSecrets;
         # null doesn't look too interesting :s
-        collections = [
-          "from a"
-          "from b"
-        ];
-        metadata = [
-          "color"
-          "displayname"
-        ];
+        # collections = [
+        #   "from a"
+        #   "from b"
+        # ];
+        # metadata = [
+        #   "color"
+        #   "displayname"
+        # ];
       };
 
       local = {
         # type = "filesystem";
-        type = "vdir/icalendar";
+        # type = "vdir/icalendar";
         fileExt = "ics";
       };
 
@@ -95,7 +96,7 @@ lib.optionalAttrs withSecrets {
         # enable = withSecrets;
         enable = false;
         # null doesn't look too interesting :s
-        collections = "all";
+        # collections = "all";
         # [
         #   "from a"
         #   "from b"
@@ -109,18 +110,18 @@ lib.optionalAttrs withSecrets {
       vdirsyncer = {
         enable = false;
         # null doesn't look too interesting :s
-        collections = [
-          "from a"
-          "from b"
-        ];
-        metadata = [
-          "color"
-          "displayname"
-        ];
+        # collections = [
+        #   "from a"
+        #   "from b"
+        # ];
+        # metadata = [
+        #   "color"
+        #   "displayname"
+        # ];
       };
 
       local = {
-        type = "filesystem";
+        # type = "filesystem";
         fileExt = "ics"; # .ics for vdirsyncer
       };
 
