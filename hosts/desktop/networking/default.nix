@@ -7,12 +7,12 @@
   resolvconf.dnsExtensionMechanism = false;
   resolvconf.dnsSingleRequest = false;
 
-  firewall.allowedTCPPorts = lib.mkIf 
-    config.home-manager.users.teto.services.ollama.enable
-    # config.home-manage 
+  firewall.allowedTCPPorts =
+    lib.mkIf config.home-manager.users.teto.services.ollama.enable
+      # config.home-manage
       [ config.home-manager.users.teto.services.ollama.port ];
 
-  firewall.allowedUDPPorts = [];
+  firewall.allowedUDPPorts = [ ];
 
   # to allow wireshark to capture from netlink
   # networking.localCommands = ''
@@ -22,6 +22,5 @@
   #     ip link set dev nlmon0 up
   #   fi
   # '';
-
 
 }

@@ -15,7 +15,7 @@
   #           interval), ‘ask’ or a time interval (e.g. ‘1h’).
 
   # enableDefaultConfig = false;
- 
+
   addKeysToAgent = "yes";
 
   # can I have it per target ?

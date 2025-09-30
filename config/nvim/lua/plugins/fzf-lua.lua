@@ -28,10 +28,9 @@ fzf_lua.register_ui_select(function(_, items)
     }
 end)
 
-
 local fzf_history_dir = vim.fn.expand(vim.fn.stdpath('data') .. '/../fzf-history')
 fzf_lua.setup({
-	"default", -- chose one profile
+    'default', -- chose one profile
     defaults = {
         --  "path.dirname_first"
         -- formatter = 'path.filename_first',
@@ -101,11 +100,10 @@ fzf_lua.setup({
             scrollchars = { '█', '' }, -- scrollbar chars ({ <full>, <empty> }
         },
         layout = 'flex',
-		treesitter = {
-		 enable = true
-		},
-		-- on_create = function() end
-
+        treesitter = {
+            enable = true,
+        },
+        -- on_create = function() end
     },
     keymap = {
         fzf = {

@@ -57,33 +57,32 @@ let
 
 in
 {
-  imports =
-    [
-      autoloadedNixosModule # loaded by haumea
-      ./_boot.nix
-      ../../nixos/profiles/greetd.nix
-      ../../nixos/profiles/docker-daemon.nix
+  imports = [
+    autoloadedNixosModule # loaded by haumea
+    ./_boot.nix
+    ../../nixos/profiles/greetd.nix
+    ../../nixos/profiles/docker-daemon.nix
 
-      flakeSelf.nixosModules.desktop
-      flakeSelf.nixosModules.nix-daemon
-      flakeSelf.nixosModules.steam
-      flakeSelf.nixosModules.universal
-      # ../../nixos/profiles/opensnitch.nix
-      # ../../nixos/profiles/podman.nix
-      ../../nixos/profiles/rmfakecloud.nix
-    ]
-    ++ lib.optionals withSecrets [
-      # TODO restore
-      # ./teto/restic.nix
+    flakeSelf.nixosModules.desktop
+    flakeSelf.nixosModules.nix-daemon
+    flakeSelf.nixosModules.steam
+    flakeSelf.nixosModules.universal
+    # ../../nixos/profiles/opensnitch.nix
+    # ../../nixos/profiles/podman.nix
+    ../../nixos/profiles/rmfakecloud.nix
+  ]
+  ++ lib.optionals withSecrets [
+    # TODO restore
+    # ./teto/restic.nix
 
-      # TODO moved from their
-      # ../../nixos/profiles/localai.nix
+    # TODO moved from their
+    # ../../nixos/profiles/localai.nix
 
-      ../../nixos/profiles/nextcloud.nix
-      ../../nixos/profiles/postgresql.nix
-      ../../nixos/profiles/redis.nix
+    ../../nixos/profiles/nextcloud.nix
+    ../../nixos/profiles/postgresql.nix
+    ../../nixos/profiles/redis.nix
 
-    ]
+  ]
 
   ;
 
@@ -286,7 +285,7 @@ in
   #   Also, these variables are merged into environment.variables[
   environment.sessionVariables = {
     # WLR_NO_HARDWARE_CURSORS = "1";
-    # TODO move it 
+    # TODO move it
     LIBVA_DRIVER_NAME = "nvidia";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
   };
@@ -307,19 +306,18 @@ in
 
   # try giving stable ids to our GPUs
   services.udev.packages = [
-    (pkgs.writeTextDir "etc/udev/rules.d/42-static-gpu-naming.rules" 
-                # lib.concatLines (
-                #   ))
-                # pci-0000:0e:00.0
+    (pkgs.writeTextDir "etc/udev/rules.d/42-static-gpu-naming.rules"
+      # lib.concatLines (
+      #   ))
+      # pci-0000:0e:00.0
       # ID_PATH=pci-0000:0e:00.0
       # ID_PATH_TAG=pci-0000_0e_00_0
       ''
-      KERNEL=="card*", SUBSYSTEM=="drm", ATTRS{vendor}=="0x10de", ATTRS{device}=="0x13c0", SYMLINK+="dri/by-name/igpu"
-      KERNEL=="card*", SUBSYSTEM=="drm", ATTRS{vendor}=="0x1022", ATTRS{device}=="0x2504", SYMLINK+="dri/by-name/egpu"
+        KERNEL=="card*", SUBSYSTEM=="drm", ATTRS{vendor}=="0x10de", ATTRS{device}=="0x13c0", SYMLINK+="dri/by-name/igpu"
+        KERNEL=="card*", SUBSYSTEM=="drm", ATTRS{vendor}=="0x1022", ATTRS{device}=="0x2504", SYMLINK+="dri/by-name/egpu"
       ''
-      )
+    )
   ];
-
 
   environment.systemPackages = [
     pkgs.gpu-viewer

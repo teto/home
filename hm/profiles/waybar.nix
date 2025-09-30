@@ -30,32 +30,32 @@
       # - nvidia-smi
       Environment = [
         "PATH=$PATH:/etc/profiles/per-user/teto/bin:/run/current-system/sw/bin:${
-        lib.makeBinPath [
-          # notmuchChecker
-          pkgs.curl
-          pkgs.fuzzel
-          # for the github notifier
-          (pkgs.tetoLib.ignoreBroken pkgs.world-wall-clock) # python
-          pkgs.jq
-          pkgs.nvidia-system-monitor-qt
-          pkgs.swaynotificationcenter
-          pkgs.wlogout
-          pkgs.wofi
-          pkgs.wttrbar # for weather module
-          pkgs.xdg-utils # for xdg-open
+          lib.makeBinPath [
+            # notmuchChecker
+            pkgs.curl
+            pkgs.fuzzel
+            # for the github notifier
+            (pkgs.tetoLib.ignoreBroken pkgs.world-wall-clock) # python
+            pkgs.jq
+            pkgs.nvidia-system-monitor-qt
+            pkgs.swaynotificationcenter
+            pkgs.wlogout
+            pkgs.wofi
+            pkgs.wttrbar # for weather module
+            pkgs.xdg-utils # for xdg-open
 
-          pkgs.python3 # for khal
-        ]
-        # needs to find nvidia smi as well
-      }:${dotfilesPath}/bin"
-      "LC_ALL=ja_JP.utf8"
-    ];
+            pkgs.python3 # for khal
+          ]
+          # needs to find nvidia smi as well
+        }:${dotfilesPath}/bin"
+        "LC_ALL=ja_JP.utf8"
+      ];
     };
     Unit = {
       PartOf = [ "tray.target" ];
       # waybar might be slow to start but because of portals instead
       # StartLimitIntervalSec = 100;
-      # 
+      #
       # StartLimitIntervalUSec=10s;
 
     };

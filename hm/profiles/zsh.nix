@@ -38,7 +38,8 @@
       ".." = "cd ..";
       "..." = "cd ../..";
 
-    } // config.programs.bash.shellAliases;
+    }
+    // config.programs.bash.shellAliases;
 
     autocd = true;
 

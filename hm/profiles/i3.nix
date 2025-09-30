@@ -57,15 +57,13 @@ in
 
     # bindsym $mod+ctrl+v exec ~/vim-anywhere/bin/run"
     # defini ans le sharedExtraConfig as well
-    extraConfig =
-      builtins.readFile ../../config/i3/config.shared
-      + ''
+    extraConfig = builtins.readFile ../../config/i3/config.shared + ''
 
-        include ~/.config/i3/manual.i3
-        exec_always --no-startup-id setxkbmap -layout us
-        exec_always --no-startup-id setxkbmap -option ctrl:nocaps
-        new_float pixel 2
-      '';
+      include ~/.config/i3/manual.i3
+      exec_always --no-startup-id setxkbmap -layout us
+      exec_always --no-startup-id setxkbmap -option ctrl:nocaps
+      new_float pixel 2
+    '';
 
     # prefix with pango if you want to have fancy effects
     config = {

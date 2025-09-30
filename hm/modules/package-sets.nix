@@ -17,6 +17,7 @@ in
   options = {
     package-sets = {
 
+      fonts = mkEnableOption "extra fonts";
       desktop = mkEnableOption "desktop packages";
       yubikey = mkEnableOption "yubikey packages";
       server = mkEnableOption "server packages";
@@ -58,7 +59,7 @@ in
         btop
         curl
         just # to read justfiles, *replace* Makefile
-        jq 
+        jq
         gitAndTools.gitFull # to get send-email
         gnumake
         tree
@@ -70,30 +71,31 @@ in
       ];
     })
 
-
     (mkIf cfg.yubikey {
       home.packages = with pkgs; [
-        yubioath-flutter  # not sure it's great yubikey-manager # 
+        yubioath-flutter # not sure it's great yubikey-manager #
         yubikey-manager
       ];
     })
 
     (mkIf cfg.jujutsu {
-      home.packages = let 
-        jj = pkgs.jujutsu; # replaced with the one from flake
-        # jjui = flakeSelf.inputs.jjui.packages.${pkgs.system}.jjui;
-        jjui = pkgs.jjui;
-      in [
-        jj
+      home.packages =
+        let
+          jj = pkgs.jujutsu; # replaced with the one from flake
+          # jjui = flakeSelf.inputs.jjui.packages.${pkgs.system}.jjui;
+          jjui = pkgs.jjui;
+        in
+        [
+          jj
 
-        # pkgs.ollama # to test huggingface
-        # flakeSelf.inputs.jujutsu.packages.${pkgs.system}.jujutsu
-        jjui
+          # pkgs.ollama # to test huggingface
+          # flakeSelf.inputs.jujutsu.packages.${pkgs.system}.jujutsu
+          jjui
 
-        # pkgs.gg-jj
-        # pkgs.lazyjj
-        # pkgs.jj-fzf
-      ];
+          # pkgs.gg-jj
+          # pkgs.lazyjj
+          # pkgs.jj-fzf
+        ];
     })
 
     (mkIf cfg.llms {
@@ -118,18 +120,18 @@ in
           pkgs.phinger-cursors # attempt to draw a bigger cursor pointer in sway
 
           acpi # for acpi -V
-          pkgs.ani-cli  # to watch anime 
+          pkgs.ani-cli # to watch anime
 
           # anki          # spaced repetition system
           # hopefully we can remove this from the environment
           # it's just that I can't setup latex correctly
           # pkgs.rofi-rbw-wayland
-          pkgs.ddcutil # 
+          pkgs.ddcutil
           pkgs.timg # to display images in terminal, to compare with imgcat ?
           myImagemagick
 
           pkgs.kcc # to convert ebooks to remarkable format
-          pkgs.ncmpcpp  # outdated/ replaced by rmpc 
+          pkgs.ncmpcpp # outdated/ replaced by rmpc
           # pkgs.mpc_cli
           # pkgs.ymuse # GUI
 
@@ -194,7 +196,7 @@ in
 
           # ncpamixer # pulseaudio TUI mixer
           noti # send notifications when a command finishes
-          (ouch.override({ enableUnfree = true; })) # to (de)compress files
+          (ouch.override ({ enableUnfree = true; })) # to (de)compress files
           # papis # library manager
           (lib.hiPrio pass-teto) # pass with extensions, override nova's
           pavucontrol
@@ -209,13 +211,14 @@ in
           # rofi-pass # rofi-pass it's enabled in the HM module ?
           rofi-teto
           rsync
-          seahorse  # GUI to interact with gnome keyring
+          seahorse # GUI to interact with gnome keyring
           sd # rust cli for search & replace
           shared-mime-info # temporary fix for nautilus to find the correct files
           sublime3
           # sysz # fzf for systemd, see systemd-tui too
           translate-shell # call with `trans`
           unzip
+          viu # a console image viewer
           wireshark
           wiremix # pipewire handler
           wttrbar # for meteo
@@ -254,13 +257,12 @@ in
         # newsboat #
         bmm # bookmark manager
         carl # not upstreamed yet. cargo cal
-        (ignoreBroken python3Packages.subliminal)  # to download subtitles
+        (ignoreBroken python3Packages.subliminal) # to download subtitles
         immich-cli
         mujmap-unstable # to sync notmuch tags across jmap
         oculante # image viewer
         calcure
         # signal-desktop # installe a la main
-        # memento # broken capable to display 2 subtitles at same time
         # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail
         vimiv-qt
         w3m
@@ -292,6 +294,7 @@ in
         wirelesstools # to get iwconfig
         iw
         wavemon
+        bluetuith # Bluetooth TUI
 
         # aircrack-ng # TODO move to hacking package-set
       ];
@@ -306,128 +309,132 @@ in
     })
 
     (mkIf cfg.developer {
-      home.packages = with pkgs; let 
-        mcp-servers = [ pkgs.github-mcp-server ] ;
+      home.packages =
+        with pkgs;
+        let
+          mcp-servers = [ pkgs.github-mcp-server ];
 
-        zeal-custom = pkgs.zeal.overrideAttrs(oa: {
+          zeal-custom = pkgs.zeal.overrideAttrs (oa: {
 
-          # export QMLSCENE_DEVICE=software
-          postInstall = ''
-            wrapProgram $out/bin/zeal --set-default QMLSCENE_DEVICE software
-          '';
+            # export QMLSCENE_DEVICE=software
+            postInstall = ''
+              wrapProgram $out/bin/zeal --set-default QMLSCENE_DEVICE software
+            '';
 
-        });
-      in
-        mcp-servers 
+          });
+        in
+        mcp-servers
         ++ [
-        argbash # to generate bash parsers
-        automake
-        bcal # calculatrice 
-        # bmm # rust bookmark manager (not package yet)
-        bfs # https://github.com/tavianator/bfs
-        cargo
-        (backblaze-b2.override { execName = "b2"; })
-        dasht # ~ zeal but in terminal
-        difftastic # smart diffs
-        docker-credential-helpers
-        flakeSelf.inputs.starship-jj.packages.${pkgs.system}.default # custom.jj for starship
-        gettext # for envsubst (TO NOT CONFOUND with gettext's envsubst)
-        sad # live replace with fzf, use like `fd | sad toto tata`
-        sops # password 'manager'
-        glab # gitlab cli
-        hexyl # hexcode viewer
+          argbash # to generate bash parsers
+          automake
+          bcal # calculatrice
+          # bmm # rust bookmark manager (not package yet)
+          bfs # https://github.com/tavianator/bfs
+          cargo
+          (backblaze-b2.override { execName = "b2"; })
+          dasht # ~ zeal but in terminal
+          difftastic # smart diffs
+          docker-credential-helpers
+          flakeSelf.inputs.starship-jj.packages.${pkgs.system}.default # custom.jj for starship
+          gettext # for envsubst (TO NOT CONFOUND with gettext's envsubst)
+          sad # live replace with fzf, use like `fd | sad toto tata`
+          sops # password 'manager'
+          glab # gitlab cli
+          hexyl # hexcode viewer
+          pkgs.trurl # used to parse url in the firefox-router executable
 
-        libossp_uuid # for the 'libuuid' executable
+          libossp_uuid # for the 'libuuid' executable
 
-        # TODO pass to vim makeWrapperArgs
-        # nodePackages.bash-language-server
-        # just in my branch :'(
-        # luaPackages.lua-lsp
-        # gdb-debug = prev.enableDebgging prev.gdb ;
-        # gitAndTools.git-annex # fails on unstable
-        # gitAndTools.git-remote-hg
-        # nix-prefetch-scripts # broken
-        manix
-        nix-output-monitor # 'nom'
+          # TODO pass to vim makeWrapperArgs
+          # nodePackages.bash-language-server
+          # just in my branch :'(
+          # luaPackages.lua-lsp
+          # gdb-debug = prev.enableDebgging prev.gdb ;
+          # gitAndTools.git-annex # fails on unstable
+          # gitAndTools.git-remote-hg
+          # nix-prefetch-scripts # broken
+          manix
+          nix-output-monitor # 'nom'
 
-        nix-diff
-        nix-prefetch-git
-        nix-tree
-        nix-melt
-        netcat-gnu # plain 'netcat' is the bsd one
-        gitAndTools.diff-so-fancy
-        jq
+          nix-diff
+          nix-prefetch-git
+          nix-tree
+          nix-melt
+          netcat-gnu # plain 'netcat' is the bsd one
+          gitAndTools.diff-so-fancy
+          jq
 
-        # editorconfig-core-c
-        # for fuser, useful when can't umount a directory
-        # https://unix.stackexchange.com/questions/107885/busy-device-on-umount
-        lurk # a rust strace
-        fswatch # fileevent watcher
-        fx # json reader
-        gdb
-        gnupg
-        gnum4 # hum
-        # psmisc # ps -a for python ?
-        rbw
-        util-linux # for lsns (namespace listing)
-        just
-        gitAndTools.gitFull # to get send-email
-        gnumake
+          # editorconfig-core-c
+          # for fuser, useful when can't umount a directory
+          # https://unix.stackexchange.com/questions/107885/busy-device-on-umount
+          lurk # a rust strace
+          fswatch # fileevent watcher
+          fx # json reader
+          gdb
+          gnupg
+          gnum4 # hum
+          # psmisc # ps -a for python ?
+          rbw
+          util-linux # for lsns (namespace listing)
+          just
+          gitAndTools.gitFull # to get send-email
+          gnumake
 
-        # haxe # to test neovim developement
-        eza # to list files
-        gitAndTools.diff-so-fancy # todo install it via the git config instead
-        gitAndTools.gh # github client
-        gitAndTools.git-absorb
-        gitAndTools.git-crypt
-        # gitAndTools.git-extras
-        gitAndTools.git-recent # check recently touched branches
-        gitAndTools.gitbatch # to fetch form several repos at once
-        gitAndTools.lab # to interact with gitlab
-        gitu # like lazygit
+          # haxe # to test neovim developement
+          eza # to list files
+          gitAndTools.diff-so-fancy # todo install it via the git config instead
+          gitAndTools.gh # github client
+          gitAndTools.git-absorb
+          gitAndTools.git-crypt
+          # gitAndTools.git-extras
+          gitAndTools.git-recent # check recently touched branches
+          gitAndTools.gitbatch # to fetch form several repos at once
+          gitAndTools.lab # to interact with gitlab
+          gitu # like lazygit
 
-        haskellPackages.fast-tags # generate TAGS file for vim
-        hurl # http tester (broken)
-        httpie # for api testing
+          haskellPackages.fast-tags # generate TAGS file for vim
+          hurl # http tester (broken)
+          httpie # for api testing
 
-        fre # generate a frequency database
+          fre # generate a frequency database
 
-        # there is also https://github.com/TaKO8Ki/gobang
-        lazysql # SQL editor
-        # harlequin # SQL python editor (broken)
+          # there is also https://github.com/TaKO8Ki/gobang
+          lazysql # SQL editor
+          # harlequin # SQL python editor (broken)
 
-        inotify-info # to debug filewatching issues, very nice
-        inotify-tools # for inotify-wait notably
-        ncurses.dev # for infocmp
-        # neovide
-        # neovim-remote # broken for latex etc
-        # nix-doc # can generate tags for nix
-        nix-update # nix-update <ATTR> to update a software
-        # nix-top # (abandoned) to list current builds
-        nixfmt-rfc-style # the official one
-        nixpkgs-review # to help review nix packages
-        patchutils # for interdiff
-        perf-tools # to interpret
+          inotify-info # to debug filewatching issues, very nice
+          inotify-tools # for inotify-wait notably
+          ncurses.dev # for infocmp
+          # neovide
+          # neovim-remote # broken for latex etc
+          # nix-doc # can generate tags for nix
+          nix-update # nix-update <ATTR> to update a software
+          # nix-top # (abandoned) to list current builds
+          nixfmt-rfc-style # the official one
+          nixpkgs-review # to help review nix packages
+          patchutils # for interdiff
+          perf-tools # to interpret
 
-        rainfrog # database exploration
-        process-compose # docker-compose - like
-        # rpl # to replace strings across files
-        strace
-        shfmt # shell format
-        tio # serial console reader
-        tig
-        tmux # when connecting via ssh
-        universal-ctags # there are many different ctags, be careful !
-        uv # to install python packages
-        whois
-        zeal-custom # doc for developers
-        xan # CLI csv helper
-        viddy # fileevent watcher
-        watchman
+          rainfrog # database exploration
+          process-compose # docker-compose - like
+          # rpl # to replace strings across files
+          strace
+          shfmt # shell format
+          tio # serial console reader
+          tig
+          tmux # when connecting via ssh
+          universal-ctags # there are many different ctags, be careful !
+          uv # to install python packages
+          unar # used to view archives by yazi (now using ouch ?)
+          whois
+          zeal-custom # doc for developers
+          xan # CLI csv helper
+          viddy # fileevent watcher
+          watchman
 
-        flakeSelf.inputs.rippkgs.packages.${pkgs.system}.rippkgs
-        flakeSelf.inputs.rippkgs.packages.${pkgs.system}.rippkgs-index
-      ];
+          flakeSelf.inputs.rippkgs.packages.${pkgs.system}.rippkgs
+          flakeSelf.inputs.rippkgs.packages.${pkgs.system}.rippkgs-index
+        ];
 
     })
     (mkIf cfg.scientificSoftware {
@@ -510,6 +517,35 @@ in
       ];
     })
 
+    (mkIf cfg.fonts {
+      home.packages = with pkgs; [
+        # fonts
+        ubuntu_font_family
+        inconsolata # monospace
+
+        # gpt recommended:
+        # Cica	Japanese-focused monospaced font
+        pkgs.myrica # https://myrica.estable.jp/ Balanced monospace font with CJK support
+        pkgs.hackgen-nf-font # HackGen Console	Great for code + Japanese
+        pkgs.source-han-code-jp # Source Han Code JP	From Adobe; fixed-width variant of Source Han Sans
+
+        # cica
+        noto-fonts-cjk-sans # asiatic but double-width by default
+        nerd-fonts.fira-code # otherwise no characters
+        nerd-fonts.droid-sans-mono # otherwise no characters
+
+        # corefonts # microsoft fonts  UNFREE
+        font-awesome_5
+        source-code-pro
+        dejavu_fonts
+        # Adobe Source Han Sans
+        source-han-sans # sourceHanSansPackages.japanese
+        fira-code-symbols # for ligatures
+        iosevka
+
+      ];
+
+    })
     (mkIf cfg.energy {
       home.packages = [
         pkgs.powertop # superuseful
@@ -523,14 +559,14 @@ in
 
         # https://github.com/NixOS/nixpkgs/pull/368909
         pkgs.kakasi # convert kanjis into kanas etc
-        pkgs.kanji-stroke-order-font  # for memento, font that shows strike order (!!) cool when learning
+        pkgs.kanji-stroke-order-font # for memento, font that shows strike order (!!) cool when learning
         pkgs.mokuro # broken because of manga-ocr
         pkgs.python3Packages.manga-ocr
         tagainijisho # japanse dict; like zkanji Qt based
         # flakeSelf.inputs.vocage.packages."x86_64-linux".vocage
         jiten # unfree, helpful for jap.nvim
         sudachi-rs # a japanese tokenizer (can have sudachidict builtins)
-        sudachidict  # exists in small/medium/large
+        sudachidict # exists in small/medium/large
       ];
 
       # xdg.dataFile."jmdict".source = pkgs.jmdict;

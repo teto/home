@@ -19,11 +19,9 @@ in
 
   wireshark-master = (prev.wireshark.override ({ })).overrideAttrs (oa: {
     nativeBuildInputs = oa.nativeBuildInputs ++ [ prev.doxygen ];
-    shellHook =
-      oa.shellHook
-      + ''
-        export QT_PLUGIN_PATH=${prev.qt5.qtbase.bin}/${prev.qt5.qtbase.qtPluginPrefix}
-      '';
+    shellHook = oa.shellHook + ''
+      export QT_PLUGIN_PATH=${prev.qt5.qtbase.bin}/${prev.qt5.qtbase.qtPluginPrefix}
+    '';
   });
 
   # use as a devShell for wireshark ?
@@ -46,13 +44,11 @@ in
     # G_DEBUG=fatal_criticals
     # libtool --mode=execute gdb $HOME/wireshark/debug/run/$1
     # or break on proto_report_dissector_bug
-    shellHook =
-      (oa.shellHook or "")
-      + ''
-        export QT_PLUGIN_PATH=${prev.qt5.qtbase.bin}/${prev.qt5.qtbase.qtPluginPrefix}
-        echo "rm -rf build && cmakeConfigurePhase"
-        echo "ln -s build/compile_commands.json"
-      '';
+    shellHook = (oa.shellHook or "") + ''
+      export QT_PLUGIN_PATH=${prev.qt5.qtbase.bin}/${prev.qt5.qtbase.qtPluginPrefix}
+      echo "rm -rf build && cmakeConfigurePhase"
+      echo "ln -s build/compile_commands.json"
+    '';
 
     # inherit nvimrc;
   });

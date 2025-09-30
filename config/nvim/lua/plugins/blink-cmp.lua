@@ -56,7 +56,7 @@ b.setup({
             enabled = true,
             min_width = 15,
             max_height = 20,
-			-- what are possible values ?
+            -- what are possible values ?
             border = 'none',
             -- winblend = 0,
             -- winhighlight = 'Normal:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpMenuSelection,Search:None',
@@ -182,15 +182,15 @@ b.setup({
     -- ensure you have the `snippets` source (enabled by default)
     sources = {
         default = {
-		 -- 'digraphs',
-		  'lsp',
-		  'path',
-		  'snippets',
-		  'buffer',
-		  -- 'git',
+            -- 'digraphs',
+            'lsp',
+            'path',
+            'snippets',
+            'buffer',
+            -- 'git',
         },
         providers = {
-		 -- ve:
+            -- ve:
             -- git = {
             --     module = 'blink-cmp-git',
             --     name = 'Git',

@@ -1,6 +1,9 @@
-{ pkgs, lib
-, dotfilesPath
-, ... }:
+{
+  pkgs,
+  lib,
+  dotfilesPath,
+  ...
+}:
 let
   notify-send = "${pkgs.libnotify}/bin/notify-send";
 

@@ -9,42 +9,41 @@
 }:
 {
 
-  imports =
-    [
-      # flakeSelf.homeModules.bash
+  imports = [
+    # flakeSelf.homeModules.bash
 
-      flakeSelf.homeProfiles.qutebrowser
-      flakeSelf.inputs.nix-index-database.hmModules.nix-index
+    flakeSelf.homeProfiles.qutebrowser
+    flakeSelf.inputs.nix-index-database.hmModules.nix-index
 
-      flakeSelf.homeModules.teto-nogui
-      flakeSelf.homeModules.experimental
-      flakeSelf.homeProfiles.wezterm
-      flakeSelf.homeProfiles.nova
-      # flakeSelf.homeModules.gnome-shell
+    flakeSelf.homeModules.teto-nogui
+    flakeSelf.homeModules.experimental
+    flakeSelf.homeProfiles.wezterm
+    flakeSelf.homeProfiles.nova
+    # flakeSelf.homeModules.gnome-shell
 
-      ./calendars.nix
-      ./sway.nix
-      ./systemd.nix
+    ./calendars.nix
+    ./sway.nix
+    ./systemd.nix
 
-      ./programs/neovim.nix
-      ./programs/waybar.nix # TODO resotre ?
-      ./programs/zsh.nix
+    ./programs/neovim.nix
+    ./programs/waybar.nix # TODO resotre ?
+    ./programs/zsh.nix
 
-      ./services/local-ai.nix
-      ./services/ollama.nix
-      ./services/kanshi.nix
-      ./services/ssh-agent.nix
-      ./services/swaync.nix
-      ./services/mpd.nix
-      ./services/mpris.nix
-      ./services/nextcloud-client.nix
-      ./services/wpaperd.nix
-    ]
-    ++ lib.optionals withSecrets [
-      ./sops.nix
-      ./ia.nix
-      # ../../../../../hm/profiles/nushell.nix
-    ];
+    ./services/local-ai.nix
+    ./services/ollama.nix
+    ./services/kanshi.nix
+    ./services/ssh-agent.nix
+    ./services/swaync.nix
+    ./services/mpd.nix
+    ./services/mpris.nix
+    ./services/nextcloud-client.nix
+    ./services/wpaperd.nix
+  ]
+  ++ lib.optionals withSecrets [
+    ./sops.nix
+    ./ia.nix
+    # ../../../../../hm/profiles/nushell.nix
+  ];
 
   # services.opensnitch-ui.enable
 
@@ -75,7 +74,7 @@
         # python3Packages.unsloth # broken
       ];
     in
-      llmPkgs
+    llmPkgs
     ++ [
       # llm-ls # needed by the neovim plugin
 
@@ -107,8 +106,7 @@
       # anyrun
 
       # bridge-utils# pour  brctl
-    ]
-    ;
+    ];
 
   package-sets = {
 

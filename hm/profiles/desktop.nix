@@ -25,33 +25,6 @@ let
       ];
     };
 
-  fontsPkgs = with pkgs; [
-    # fonts
-    ubuntu_font_family
-    inconsolata # monospace
-
-    # gpt recommended:
-  # Cica	Japanese-focused monospaced font
-    pkgs.myrica	 # https://myrica.estable.jp/ Balanced monospace font with CJK support
-    pkgs.hackgen-nf-font  # HackGen Console	Great for code + Japanese
-    pkgs.source-han-code-jp # Source Han Code JP	From Adobe; fixed-width variant of Source Han Sans
-
-    # cica
-    noto-fonts-cjk-sans # asiatic but double-width by default
-    nerd-fonts.fira-code # otherwise no characters
-    nerd-fonts.droid-sans-mono # otherwise no characters
-
-    # corefonts # microsoft fonts  UNFREE
-    font-awesome_5
-    source-code-pro
-    dejavu_fonts
-    # Adobe Source Han Sans
-    source-han-sans # sourceHanSansPackages.japanese
-    fira-code-symbols # for ligatures
-    iosevka
-
-  ];
-
 in
 {
 
@@ -92,12 +65,13 @@ in
     desktop = true;
     energy = true;
     scientificSoftware = true;
+    fonts = true;
   };
 
   # rename to fn, accept a parameter for optional
-  home.packages =
-    fontsPkgs
-    ++ (with pkgs; [
+  home.packages = (
+    with pkgs;
+    [
       # pkgs.up # live preview of pipes
       # pkgs.peek # GIF recorder  BROKEN
       pkgs.alsa-utils # for alsamixer
@@ -110,7 +84,8 @@ in
       timg
       gh-dash
       wpaperd
-    ]);
+    ]
+  );
 
   # TODO remove ? dangerous
   home.sessionPath = lib.mkBefore [

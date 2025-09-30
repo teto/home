@@ -1,12 +1,11 @@
 {
-  enable  = true;
+  enable = true;
 
   socketActivated = true;
   # tcp port
-  # port = 
+  # port =
   settings = {
 
   };
-
 
 }

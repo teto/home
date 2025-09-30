@@ -37,7 +37,7 @@
     unset askcc # ask for CC:
 
     source test.rc
-    '';
+  '';
 
   macros = [
     {

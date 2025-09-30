@@ -11,16 +11,14 @@
 }:
 let
   # TODO make this generic/available to all users
-  prod-runners =  
-    builtins.fromJSON (
-      builtins.readFile "${flakeSelf.inputs.nova-doctor}/nix/hm/ci-runners/runners-generated.json"
-    );
+  prod-runners = builtins.fromJSON (
+    builtins.readFile "${flakeSelf.inputs.nova-doctor}/nix/hm/ci-runners/runners-generated.json"
+  );
 
-    generatedKnownHostsFile = pkgs.writeText "ssh_known_hosts" 
-      "${flakeSelf.inputs.nova-doctor}/nix/hm/ci-runners/ssh_known_hosts"
-    # (lib.concatMapStrings 
-    #     (runner: runner.publicHostKey) prod-runners)
-    ;
+  generatedKnownHostsFile = pkgs.writeText "ssh_known_hosts" "${flakeSelf.inputs.nova-doctor}/nix/hm/ci-runners/ssh_known_hosts"
+  # (lib.concatMapStrings
+  #     (runner: runner.publicHostKey) prod-runners)
+  ;
 
   mkSshMatchBlock = m: {
     user = secrets.nova.runners.nova-runner-1.sshUser;
@@ -47,7 +45,6 @@ let
     port = m.port;
     match = "host ${m.hostname},${m.runnerName}";
   };
-
 
 in
 

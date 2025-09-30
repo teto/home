@@ -18,7 +18,6 @@ let
   myNeovimUnwrapped = flakeSelf.inputs.neovim-nightly-overlay.packages."${pkgs.system}".neovim;
   # nvimLua = config.programs.neovim.finalPackage.passthru.unwrapped.lua;
 
-
   rawPlugins =
     # add grepper
     pluginsMap.basePlugins ++ pluginsMap.luaPlugins ++ pluginsMap.colorschemePlugins

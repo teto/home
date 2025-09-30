@@ -9,7 +9,7 @@
   enableZshIntegration = true;
   # package = flakeSelf.inputs.yazi.packages.${pkgs.system}.yazi;
 
-  # NOTE that these can be installed imperatively via 
+  # NOTE that these can be installed imperatively via
   # ya pack -a GianniBYoung/rsync for instance
   plugins = {
     # foo = ./foo;

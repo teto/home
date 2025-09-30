@@ -192,85 +192,84 @@ in
   };
   # }}}
 
-  sharedKeybindings =
-    {
-      # The side buttons move the window around
-      "button9" = "move left";
-      "button8" = "move right";
-      # start a terminal
-      "${mod}+Return" = "exec --no-startup-id ${term}";
-      # bindsym $mod+Shift+Return exec --no-startup-id ~/.i3/fork_term.sh
+  sharedKeybindings = {
+    # The side buttons move the window around
+    "button9" = "move left";
+    "button8" = "move right";
+    # start a terminal
+    "${mod}+Return" = "exec --no-startup-id ${term}";
+    # bindsym $mod+Shift+Return exec --no-startup-id ~/.i3/fork_term.sh
 
-      # change container layout (stacked, tabbed, default)
-      "$GroupFr+$mod+ampersand" = "layout toggle";
-      "$GroupUs+$mod+1" = "layout toggle";
-      # todo use i3lock-fancy instead
-      # alternative is "light"
-      # "${mod}+ctrl+v" = "exec ${pkgs.bash}/bin/bash ~/vim-anywhere/bin/run";
+    # change container layout (stacked, tabbed, default)
+    "$GroupFr+$mod+ampersand" = "layout toggle";
+    "$GroupUs+$mod+1" = "layout toggle";
+    # todo use i3lock-fancy instead
+    # alternative is "light"
+    # "${mod}+ctrl+v" = "exec ${pkgs.bash}/bin/bash ~/vim-anywhere/bin/run";
 
-      "${mod}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'drun,window,ssh' -show drun\"";
-      "${mod}+Ctrl+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'window' -show run\"";
-      # TODO dwindow exclusively with WIN
+    "${mod}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'drun,window,ssh' -show drun\"";
+    "${mod}+Ctrl+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'window' -show run\"";
+    # TODO dwindow exclusively with WIN
 
-      "${mad}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
-      "${mad}+a" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
+    "${mad}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
+    "${mad}+a" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
 
-      # "${mad}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
+    # "${mad}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
 
-      # locker
+    # locker
 
-      # broken
-      # "${mod}+b" = "exec ${pkgs.buku_run}/bin/buku_run";
-      "${mad}+c" = "exec ${pkgs.rofi-calc}/bin/rofi-calc";
+    # broken
+    # "${mod}+b" = "exec ${pkgs.buku_run}/bin/buku_run";
+    "${mad}+c" = "exec ${pkgs.rofi-calc}/bin/rofi-calc";
 
-      "${mod}+Shift+1" = "exec qutebrowser";
+    "${mod}+Shift+1" = "exec qutebrowser";
 
-      # "${mod}+Shift+Return" = "exec --no-startup-id ${pkgs.termite -d "$(xcwd)"
+    # "${mod}+Shift+Return" = "exec --no-startup-id ${pkgs.termite -d "$(xcwd)"
 
-      # test rofi-randr
-      # } // {
-      "$GroupFr+$mod+apostrophe" = "kill";
-      "$GroupUs+$mod+4" = "kill";
+    # test rofi-randr
+    # } // {
+    "$GroupFr+$mod+apostrophe" = "kill";
+    "$GroupUs+$mod+4" = "kill";
 
-      "$mod+t" = "floating toggle";
-      "$mod+y" = "sticky toggle; exec ${notify-send}";
+    "$mod+t" = "floating toggle";
+    "$mod+y" = "sticky toggle; exec ${notify-send}";
 
-      # split in vertical orientation
-      # needs i3next
-      "$mod+v" = "split toggle";
+    # split in vertical orientation
+    # needs i3next
+    "$mod+v" = "split toggle";
 
-      # different focus for windows
-      "$mod+$kleft" = "focus left";
-      "$mod+$kdown" = "focus down";
-      "$mod+$kup" = "focus up";
-      "$mod+$kright" = "focus right";
+    # different focus for windows
+    "$mod+$kleft" = "focus left";
+    "$mod+$kdown" = "focus down";
+    "$mod+$kup" = "focus up";
+    "$mod+$kright" = "focus right";
 
-      # toggle tiling / floating
-      "$mod+Shift+space" = "floating toggle";
-      # change focus between tiling / floating windows
-      "$mod+space" = "focus mode_toggle";
+    # toggle tiling / floating
+    "$mod+Shift+space" = "floating toggle";
+    # change focus between tiling / floating windows
+    "$mod+space" = "focus mode_toggle";
 
-      # alternatively, you can use the cursor keys:
-      "$mod+Shift+Left" = "move left";
-      "$mod+Shift+Down" = "move down";
-      "$mod+Shift+Up" = "move up";
-      "$mod+Shift+Right" = "move right";
+    # alternatively, you can use the cursor keys:
+    "$mod+Shift+Left" = "move left";
+    "$mod+Shift+Down" = "move down";
+    "$mod+Shift+Up" = "move up";
+    "$mod+Shift+Right" = "move right";
 
-      "$mod+f" = "fullscreen";
-      "$mod+Shift+f" = "fullscreen global";
-      "$mod+button3" = "floating toggle";
-      "$mod+m" = ''mode "monitors'';
-      "$mod+r" = ''mode "resize"'';
+    "$mod+f" = "fullscreen";
+    "$mod+Shift+f" = "fullscreen global";
+    "$mod+button3" = "floating toggle";
+    "$mod+m" = ''mode "monitors'';
+    "$mod+r" = ''mode "resize"'';
 
-    }
-    // (lib.concatMapAttrs (bind_ws "Fr") wsAzertyBindings)
-    // (lib.concatMapAttrs (bind_ws "Us") wsQwertyBindings)
-    // move_focused_wnd "left" "h" "h"
-    // move_focused_wnd "down" "j" "j"
-    // move_focused_wnd "up" "k" "k"
-    # semicolumn
-    // move_focused_wnd "right" "l" "l"
-    // audioKeybindings;
+  }
+  // (lib.concatMapAttrs (bind_ws "Fr") wsAzertyBindings)
+  // (lib.concatMapAttrs (bind_ws "Us") wsQwertyBindings)
+  // move_focused_wnd "left" "h" "h"
+  // move_focused_wnd "down" "j" "j"
+  // move_focused_wnd "up" "k" "k"
+  # semicolumn
+  // move_focused_wnd "right" "l" "l"
+  // audioKeybindings;
   # just trying to overwrite previous bindings with i3dispatch
   # // lib.optionalAttrs (pkgs ? i3dispatch ) {
   # "${mod}+Left" = "exec ${pkgs.i3dispatch}/bin/i3dispatch left";

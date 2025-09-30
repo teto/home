@@ -11,11 +11,11 @@
     };
 
     ollama = {
-# OLLAMA_CONTEXT_LENGTH: 32768
-# OLLAMA_FLASH_ATTENTION: true
-# OLLAMA_KV_CACHE_TYPE: q4_0
+      # OLLAMA_CONTEXT_LENGTH: 32768
+      # OLLAMA_FLASH_ATTENTION: true
+      # OLLAMA_KV_CACHE_TYPE: q4_0
       Service = {
-        # OLLAMA_KEEP_ALIVE The duration that models stay loaded in memory (default is "5m") 
+        # OLLAMA_KEEP_ALIVE The duration that models stay loaded in memory (default is "5m")
         Environment = [ "OLLAMA_MODELS=/home/teto/models" ];
       };
     };

@@ -6,7 +6,6 @@
 
     enableFzfGit = true;
 
-
     # we roll out our own via
     # enableZshIntegration
     enableZshIntegration = false;

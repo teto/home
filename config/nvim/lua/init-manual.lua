@@ -47,42 +47,39 @@ local map = vim.keymap.set
 
 local valid_file, nix_deps = pcall(require, 'generated-by-nix')
 if not valid_file then
-	error("Invalid generated-by-nix")
+    error('Invalid generated-by-nix')
 end
 vim.g.rikai = {
-	kanjidb = nix_deps.edict_kanjidb,
-	jmdictdb = nix_deps.edict_expressiondb,
-	log_level = vim.log.levels.DEBUG,
-	separator = "===>>>",
-	popup = {
-
-	}
+    kanjidb = nix_deps.edict_kanjidb,
+    jmdictdb = nix_deps.edict_expressiondb,
+    log_level = vim.log.levels.DEBUG,
+    separator = '===>>>',
+    popup = {},
 }
 
-
 -- new option
-vim.o.winborder = "rounded"
+vim.o.winborder = 'rounded'
 
 diagnostic_default_config = {
     -- disabled because too big in haskell
     virtual_lines = {
         current_line = true,
-		-- Function that can transform the diagnostic
-		-- format = if 
+        -- Function that can transform the diagnostic
+        -- format = if
     },
     virtual_text = {
-		source = "if_many",
-		      -- • {format}?             (`fun(diagnostic:vim.Diagnostic): string?`) If
-		      --                       not nil, the return value is the text used to
-		      --                       display the diagnostic. Example: >lua
-		      --                           function(diagnostic)
-		      --                             if diagnostic.severity == vim.diagnostic.severity.ERROR then
-		      --                               return string.format("E: %s", diagnostic.message)
-		      --                             end
-		      --                             return diagnostic.message
-		      --                           end
-		      --
-	},
+        source = 'if_many',
+        -- • {format}?             (`fun(diagnostic:vim.Diagnostic): string?`) If
+        --                       not nil, the return value is the text used to
+        --                       display the diagnostic. Example: >lua
+        --                           function(diagnostic)
+        --                             if diagnostic.severity == vim.diagnostic.severity.ERROR then
+        --                               return string.format("E: %s", diagnostic.message)
+        --                             end
+        --                             return diagnostic.message
+        --                           end
+        --
+    },
     {
         severity = { min = vim.diagnostic.severity.WARN },
     },
@@ -114,17 +111,16 @@ diagnostic_default_config = {
 
 vim.diagnostic.config(diagnostic_default_config)
 
-
 vim.g.rest_nvim = {
-	request = {
-		skip_ssl_verification = true,
-	},
-	env = {
-		enable = false;
-	},
-	ui = {
-		winbar = true
-	}
+    request = {
+        skip_ssl_verification = true,
+    },
+    env = {
+        enable = false,
+    },
+    ui = {
+        winbar = true,
+    },
 }
 
 -- 	-- Open request results in a horizontal split
@@ -550,14 +546,13 @@ vim.g.fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %
 vim.api.nvim_create_autocmd('ColorScheme', {
     desc = 'Set italic codelens on new colorschemes',
     callback = function()
-
-		local bgcol = vim.api.nvim_get_hl(0,{ name = "Normal"})
-		local c = require'colortils'
-		local utils = require'colortils.utils.colors'
-		local hl_normal = vim.api.nvim_get_hl(0,{ name = "Normal"})
-		-- local
-		-- TODO use teto.colors
-		-- utils.get_grey(hl_normal.bg)
+        local bgcol = vim.api.nvim_get_hl(0, { name = 'Normal' })
+        local c = require('colortils')
+        local utils = require('colortils.utils.colors')
+        local hl_normal = vim.api.nvim_get_hl(0, { name = 'Normal' })
+        -- local
+        -- TODO use teto.colors
+        -- utils.get_grey(hl_normal.bg)
 
         vim.api.nvim_set_hl(0, 'LspCodeLens', { italic = true, bg = 'blue' })
         vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextError', { fg = 'red' })
@@ -567,7 +562,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
         --       \ highlight Comment gui=italic
         --       \ | highlight Search gui=underline
         --       \ | highlight MatchParen guibg=NONE guifg=NONE gui=underline
-		vim.cmd.packadd("gitsigns.nvim")
+        vim.cmd.packadd('gitsigns.nvim')
     end,
 })
 
@@ -653,15 +648,14 @@ vim.g.spinner_frames = { '⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷' 
 
 if use_fzf_lua then
     require('plugins.fzf-lua')
-	-- else frecency doesnt appear
-	require('fzf-lua-frecency').setup({
-	  cwd_only = true,
-      -- all_files = nil,
-      stat_file = true,
-      display_score = true,
-
-	})
-	require('teto.fzf-lua').register_keymaps()
+    -- else frecency doesnt appear
+    require('fzf-lua-frecency').setup({
+        cwd_only = true,
+        -- all_files = nil,
+        stat_file = true,
+        display_score = true,
+    })
+    require('teto.fzf-lua').register_keymaps()
 end
 
 if use_telescope then
@@ -855,14 +849,14 @@ vim.lsp.enable('yamlls')
 
 -- testing packadd
 vim.pack.add({
-	"https://github.com/teto/vim-listchars",
-	"https://github.com/adlawson/vim-sorcerer",
-	"https://github.com/Matsuuu/pinkmare",
-	-- doesnt work ?
-	-- "https://github.com/otavioschwanck/fzf-lua-enchanted-files",
-	"https://github.com/PotatoesMaster/i3-vim-syntax",
-	"https://github.com/rose-pine/neovim",
-	"https://github.com/nvim-neorocks/rocks.nvim",
+    'https://github.com/teto/vim-listchars',
+    'https://github.com/adlawson/vim-sorcerer',
+    'https://github.com/Matsuuu/pinkmare',
+    -- doesnt work ?
+    -- "https://github.com/otavioschwanck/fzf-lua-enchanted-files",
+    'https://github.com/PotatoesMaster/i3-vim-syntax',
+    'https://github.com/rose-pine/neovim',
+    'https://github.com/nvim-neorocks/rocks.nvim',
 })
 
 -- Autoload from everything lsp/ in rtp
@@ -894,80 +888,73 @@ require('plugins.avante')
 -- HACK around sway-scratchpad limitation where one can't esapce quotes so alleviate the need for that via a proxy command
 vim.api.nvim_create_user_command('LlmChat', function()
     -- vim.cmd([[GpChatToggle tab]])
-	require("avante.api").ask({ without_selection = true; })
+    require('avante.api').ask({ without_selection = true })
 end, { desc = 'Ask without selecting anything' })
-
-
-
 
 require('plugins.diffview')
 require('lsp-progress').setup()
 require('teto.cursorline')
 
-local mclipboard = require'teto.clipboard'
+local mclipboard = require('teto.clipboard')
 
-vim.keymap.set('n', '<F7>', function () 
-		mclipboard.copy_filename() end,
-			   { desc = 'Copy buffer filename' })
+vim.keymap.set('n', '<F7>', function()
+    mclipboard.copy_filename()
+end, { desc = 'Copy buffer filename' })
 
 -- Set highlight for GitSignsAdd with green background
 -- setting those in gitsigns.lua, they got erased
 vim.api.nvim_set_hl(0, 'GitSignsAdd', {
-    bg = '#00FF00',  -- Green background
+    bg = '#00FF00', -- Green background
 })
 vim.api.nvim_set_hl(0, 'GitSignsChangeLn', {
-    bg = '#00FF00',  -- Green background
+    bg = '#00FF00', -- Green background
 })
 
 vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/mcphub.nvim')
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/hurl.nvim')
 -- useless, I need to tweak the lua path ?
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/lual')
-vim.g.mcphub =
-	{
-		config = vim.fn.expand("~/.config/mcphub/servers.json"), -- Absolute path to MCP Servers config file (will create if not exists)
-		port = 37373, -- The port `mcp-hub` server listens to
-	-- looks odd ?
-	-- use_bundled_binary = true,  -- Use local `mcp-hub` binary
+vim.g.mcphub = {
+    config = vim.fn.expand('~/.config/mcphub/servers.json'), -- Absolute path to MCP Servers config file (will create if not exists)
+    port = 37373, -- The port `mcp-hub` server listens to
+    -- looks odd ?
+    -- use_bundled_binary = true,  -- Use local `mcp-hub` binary
 
-	-- we could point at the nix executable with:
-	-- cmd = "node",
-	-- cmdArgs = {"/path/to/mcp-hub/src/utils/cli.js"},
-	log = {
+    -- we could point at the nix executable with:
+    -- cmd = "node",
+    -- cmdArgs = {"/path/to/mcp-hub/src/utils/cli.js"},
+    log = {
         to_file = true,
-        file_path = vim.fn.expand("~/mcphub.log"),
+        file_path = vim.fn.expand('~/mcphub.log'),
         level = vim.log.levels.DEBUG,
-		prefix = "MCPHub",
-	},
-
+        prefix = 'MCPHub',
+    },
 }
 
 vim.keymap.set('n', '[[', function()
-	vim.diagnostic.jump(
-		{
-			count = -1,
-			wrap = true
-			-- severity
-			-- on_jump 
-		}
-	)
+    vim.diagnostic.jump({
+        count = -1,
+        wrap = true,
+        -- severity
+        -- on_jump
+    })
 end, { buffer = false })
 vim.keymap.set('n', ']]', function()
-	vim.diagnostic.jump({ count = 1, wrap = true})
+    vim.diagnostic.jump({ count = 1, wrap = true })
 end, { buffer = false })
 
 vim.keymap.set('n', ',jl', function()
-	-- vim.diagnostic.goto_next({ wrap = true})
-	vim.cmd[[ Rikai lookup ]]
-end, { buffer = false, desc = "Japanese lookup" })
+    -- vim.diagnostic.goto_next({ wrap = true})
+    vim.cmd([[ Rikai lookup ]])
+end, { buffer = false, desc = 'Japanese lookup' })
 
 vim.keymap.set('n', '<D-j>', function()
-	vim.cmd[[ Rikai lookup ]]
-end, { buffer = false, desc = "Japanese lookup" })
+    vim.cmd([[ Rikai lookup ]])
+end, { buffer = false, desc = 'Japanese lookup' })
 
 vim.keymap.set('n', '<leader>d', function()
-	vim.cmd[[ FzfLua diagnostics_document ]]
-end, { buffer = false, desc = "Diagnostics" })
+    vim.cmd([[ FzfLua diagnostics_document ]])
+end, { buffer = false, desc = 'Diagnostics' })
 
 -- Autocommand to highlight the word under the cursor when the cursor moves
 -- vim.api.nvim_create_autocmd({"CursorMoved", "CursorMovedI"}, {
@@ -976,5 +963,4 @@ end, { buffer = false, desc = "Diagnostics" })
 --     callback = highlight_current_word,
 -- })
 
-require'teto.lsp'.ignore_simwork_extended_warnings()
-
+require('teto.lsp').ignore_simwork_extended_warnings()

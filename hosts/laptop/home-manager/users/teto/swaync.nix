@@ -7,9 +7,9 @@
 }:
 {
 
-  imports = [ 
+  imports = [
     # flakeSelf.swaync
-    ../../../hm/profiles/swaync.nix 
+    ../../../hm/profiles/swaync.nix
   ];
 
   # TODO

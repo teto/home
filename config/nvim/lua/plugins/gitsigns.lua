@@ -6,7 +6,7 @@ M.setup = function()
         signs = {},
         signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
         signs_staged_enable = false,
-		-- it doesn't work properly, sometimes it takes only
+        -- it doesn't work properly, sometimes it takes only
         numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
         linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
         word_diff = true, -- Toggle with `:Gitsigns toggle_word_diff`
@@ -82,11 +82,10 @@ M.setup = function()
     -- vim.api.nvim_set_hl(0, 'GitSignsDeleteLn', { link = 'GitSignsDeleteLn' })
     vim.api.nvim_set_hl(0, 'GitSignsChangedeleteLn', { link = 'GitSignsChangeLn' })
     vim.api.nvim_set_hl(0, 'GitSignsChangedelete', { link = 'GitSignsChange' })
-	-- GitSignsChangeLn links DiffChange by default
+    -- GitSignsChangeLn links DiffChange by default
     -- vim.api.nvim_set_hl(0, 'GitSignsChangeLn', { link = 'GitSignsChangeLn' })
     -- vim.api.nvim_set_hl(0, 'GitSignsAddNr', { link = 'GitSignsAddNr' })
 end
-
 
 M.setup()
 return M

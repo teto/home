@@ -31,11 +31,10 @@
     }
   ];
 
-
   # dictated by https://nixos.wiki/wiki/Yubikey
   pam = {
     u2f = {
-    enable = true;
+      enable = true;
       settings = {
         interactive = true; # Insert your U2F device, then press ENTER.
         cue = true; # will print Please touch the device.

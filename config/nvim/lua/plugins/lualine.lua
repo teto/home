@@ -74,25 +74,25 @@ local branch_name = ''
 
 require('lualine').setup({
     options = {
-	   icons_enabled = false,
-	   -- theme = 'gruvbox',
-	   component_separators = { left = '', right = '' },
-	   section_separators = { left = '', right = '' },
-	   separators = { left = '', right = '' },
-	   globalstatus = true,
-	   -- Disable winbar for these filetypes
-	   disabled_filetypes = {
-		winbar = {
-		 'help',
-		 'markdown',
-		 'qf',
-		 'AvanteInput',
-		 'AvanteSelectedFiles',
-		 -- 'AvanteConfirm',
-		 'Avante'
-		}
-	  },
-	  -- disabled_filetypes = {}
+        icons_enabled = false,
+        -- theme = 'gruvbox',
+        component_separators = { left = '', right = '' },
+        section_separators = { left = '', right = '' },
+        separators = { left = '', right = '' },
+        globalstatus = true,
+        -- Disable winbar for these filetypes
+        disabled_filetypes = {
+            winbar = {
+                'help',
+                'markdown',
+                'qf',
+                'AvanteInput',
+                'AvanteSelectedFiles',
+                -- 'AvanteConfirm',
+                'Avante',
+            },
+        },
+        -- disabled_filetypes = {}
     },
     sections = {
         lualine_a = {

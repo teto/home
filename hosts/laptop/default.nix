@@ -28,15 +28,14 @@ let
 
         ];
 
-        exclude =
-          [
-            # "boot.nix"
-            "generated.nix"
-          ]
-          ++ lib.optionals (!withSecrets) [
-            "sops/secrets.nix"
-            "services/openssh.nix"
-          ];
+        exclude = [
+          # "boot.nix"
+          "generated.nix"
+        ]
+        ++ lib.optionals (!withSecrets) [
+          "sops/secrets.nix"
+          "services/openssh.nix"
+        ];
       };
 
       inputs = args // {
@@ -50,28 +49,28 @@ let
 
   # desktopAutoloaded =
   #   { pkgs, ... }@args:
-    # flakeSelf.inputs.haumea.lib.load {
-    #   src = flakeSelf.inputs.nix-filter {
-    #     root = ../desktop;
-    #     include = [
-    #       # TODO just include directly
-    #       # "sops.nix"
-    #       "sops/secrets.nix"
-    #     ];
-    #     # exclude = [
-    #     #   "teto"
-    #     #   "root"
-    #     # ];
-    #   };
-    #
-    #   inputs = args // {
-    #     inputs = flakeSelf.inputs;
-    #   };
-    #   transformer = [
-    #     haumea.lib.transformers.liftDefault
-    #     (haumea.lib.transformers.hoistAttrs "_import" "import")
-    #   ];
-    # };
+  # flakeSelf.inputs.haumea.lib.load {
+  #   src = flakeSelf.inputs.nix-filter {
+  #     root = ../desktop;
+  #     include = [
+  #       # TODO just include directly
+  #       # "sops.nix"
+  #       "sops/secrets.nix"
+  #     ];
+  #     # exclude = [
+  #     #   "teto"
+  #     #   "root"
+  #     # ];
+  #   };
+  #
+  #   inputs = args // {
+  #     inputs = flakeSelf.inputs;
+  #   };
+  #   transformer = [
+  #     haumea.lib.transformers.liftDefault
+  #     (haumea.lib.transformers.hoistAttrs "_import" "import")
+  #   ];
+  # };
 in
 {
   imports = [
@@ -107,7 +106,6 @@ in
     flakeSelf.inputs.nova-doctor.overlays.autoCalledPackages
 
   ];
-
 
   boot.blacklistedKernelModules = [ "nouveau" ];
 
@@ -174,7 +172,7 @@ in
   networking.hostName = "tatooine"; # Define your hostname.
 
   hardware = {
-    enableAllFirmware =true;
+    enableAllFirmware = true;
     enableRedistributableFirmware = true;
     sane.enable = true;
     # High quality BT calls
@@ -222,7 +220,7 @@ in
     # central regulatory domain agent (CRDA) to allow exchange between kernel and userspace
     # to prevent the "failed to load regulatory.db" ?
     # see https://wireless.wiki.kernel.org/en/developers/regulatory
-    udev.packages = [ 
+    udev.packages = [
       pkgs.yubikey-personalization
     ];
 
@@ -271,8 +269,10 @@ in
     enable = true;
   };
 
-  # to use the smartcard of yubikey
+  # smartcard service for yubikey
+  # can conflict with gpg-agent depending on config
   services.pcscd.enable = true;
+
   services.yubikey-agent.enable = true;
 
   system.stateVersion = "24.11";
@@ -283,7 +283,6 @@ in
   '';
 
   # powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-
 
   # to remove "TSC_DEADLINE disabled due to Errata;
   # please update microcode to version: 0x22"

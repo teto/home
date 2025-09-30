@@ -1,7 +1,13 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
-   cfg = config.programs.nvimpager;
-in {
+  cfg = config.programs.nvimpager;
+in
+{
   options = {
     programs.nvimpager = {
       enable = lib.mkEnableOption "nvimpager";

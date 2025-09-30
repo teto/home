@@ -1,7 +1,13 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
-   cfg = config.hibernation;
-in {
+  cfg = config.hibernation;
+in
+{
   options = {
     programs.hibernation = {
       enable = lib.mkEnableOption "hibernation";

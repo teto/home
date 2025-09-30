@@ -50,7 +50,6 @@
     # group = config.users.users.nobody.group;
   };
 
-
   # lab_config_file
   # https://github.com/zaquestion/lab
   secrets."lab/lab.toml" = {

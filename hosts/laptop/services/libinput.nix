@@ -1,4 +1,3 @@
-{ 
+{
   touchpad.tappingButtonMap = "lrm";
 }
-

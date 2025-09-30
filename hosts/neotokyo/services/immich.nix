@@ -35,7 +35,6 @@
     UMask = "0027";
   };
 
-
   services.nginx.virtualHosts."immich.${secrets.jakku.hostname}" = {
     forceSSL = true;
     enableACME = true;

@@ -33,7 +33,7 @@ none_ls.setup({
         -- none_ls.builtins.diagnostics.editorconfig_checker, -- too noisy
         -- none_ls.builtins.diagnostics.tsc,
         -- doc at https://yamllint.readthedocs.io/en/stable/configuration.html#default-configuration
-		-- yamllint creates errors about "warning" vs "error"
+        -- yamllint creates errors about "warning" vs "error"
         -- none_ls.builtins.diagnostics.yamllint,
         -- .with({
         --  extra_args = { }

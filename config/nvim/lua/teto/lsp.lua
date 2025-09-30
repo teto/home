@@ -1,44 +1,37 @@
 local M = {}
 
-
-
-
 -- Override diagnostics in HLS
 local haskell_diagnostic_severity = {
-      -- No type signature at top level
-      ["GHC-38417"] = vim.diagnostic.severity.HINT,
-      -- Defined but not used
-      ["GHC-40910"] = vim.diagnostic.severity.HINT,
-      -- Defaulting
-      ["GHC-18042"] = vim.diagnostic.severity.HINT,
-      -- Warnings and deprecated
-      ["GHC-63394"] = vim.diagnostic.severity.INFO,
-      -- Deprecated
-      ["GHC-68441"] = vim.diagnostic.severity.INFO,
-     }
+    -- No type signature at top level
+    ['GHC-38417'] = vim.diagnostic.severity.HINT,
+    -- Defined but not used
+    ['GHC-40910'] = vim.diagnostic.severity.HINT,
+    -- Defaulting
+    ['GHC-18042'] = vim.diagnostic.severity.HINT,
+    -- Warnings and deprecated
+    ['GHC-63394'] = vim.diagnostic.severity.INFO,
+    -- Deprecated
+    ['GHC-68441'] = vim.diagnostic.severity.INFO,
+}
 
-
-
--- overrides vim.lsp.handlers["textDocument/publishDiagnostics"] 
+-- overrides vim.lsp.handlers["textDocument/publishDiagnostics"]
 -- should do so only when
 function M.ignore_simwork_extended_warnings()
- -- Save the original handler
- local orig_handler = vim.lsp.handlers["textDocument/publishDiagnostics"]
- vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
-   if result and result.diagnostics then
-	 for _, diag in ipairs(result.diagnostics) do
-	   new_severity = haskell_diagnostic_severity[diag.code]
-	   if new_severity ~= nil
-	   then
-		 diag.severity = new_severity
-	   end
-	 end
-   end
-   -- Pass to original handler
-   orig_handler(err, result, ctx, config)
- end
+    -- Save the original handler
+    local orig_handler = vim.lsp.handlers['textDocument/publishDiagnostics']
+    vim.lsp.handlers['textDocument/publishDiagnostics'] = function(err, result, ctx, config)
+        if result and result.diagnostics then
+            for _, diag in ipairs(result.diagnostics) do
+                new_severity = haskell_diagnostic_severity[diag.code]
+                if new_severity ~= nil then
+                    diag.severity = new_severity
+                end
+            end
+        end
+        -- Pass to original handler
+        orig_handler(err, result, ctx, config)
+    end
 end
-
 
 --
 -- lua vim.diagnostic.setqflist({open = tru, severity = { min = vim.diagnostic.severity.WARN } })
@@ -111,7 +104,7 @@ M.set_level = function(severity)
     -- print("Setting bufnr", bufnr)
     -- • optional: (optional) boolean, if true, `nil` is valid
 
-    print('setting severity ', severity, ' for buffer ', bufnr )
+    print('setting severity ', severity, ' for buffer ', bufnr)
     -- lua vim.print(vim.diagnostic.get(0, { severity = { min = vim.diagnostic.severity.HINT }})
     vim.diagnostic.show(31, bufnr, diags, { signs = { severity = severity } })
 end

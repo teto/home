@@ -105,7 +105,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-
     lux = {
       url = "github:nvim-neorocks/lux";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -348,7 +347,6 @@
           # "nova/virtualbox"
         ];
 
-
         # TEMP
         laptop = true;
         # so it
@@ -365,16 +363,17 @@
       # TODO check out packagesFromDirectoryRecursive  as well ?
       byNamePkgsOverlay = import "${nixpkgs}/pkgs/top-level/by-name-overlay.nix" ./by-name;
 
-      # 
-      autoloadedPkgsOverlay = final: _prev: nixpkgs.legacyPackages.${system}.lib.packagesFromDirectoryRecursive  {
-        # inherit (self) callPackage;
-        # callPackage = callPackage
-        # TODO could be renamed to self ?
-        # nixpkgs.legacyPackages.${system}
-        callPackage = final.newScope { flakeSelf = self; };
-        directory = ./pkgs;
-      };
-
+      #
+      autoloadedPkgsOverlay =
+        final: _prev:
+        nixpkgs.legacyPackages.${system}.lib.packagesFromDirectoryRecursive {
+          # inherit (self) callPackage;
+          # callPackage = callPackage
+          # TODO could be renamed to self ?
+          # nixpkgs.legacyPackages.${system}
+          callPackage = final.newScope { flakeSelf = self; };
+          directory = ./pkgs;
+        };
 
       /**
         default system
@@ -393,7 +392,8 @@
           modules = [
             self.inputs.sops-nix.nixosModules.sops
             hm.nixosModules.home-manager
-          ] ++ modules;
+          ]
+          ++ modules;
 
           specialArgs = {
             inherit hostname;
@@ -413,14 +413,13 @@
         src:
         import src {
           inherit system;
-          overlays =  [
+          overlays = [
             (final: prev: {
               # expose it for byNamePkgsOverlay
               inherit treefmt-nix;
 
               # # TODO get lua interpreter to select the good lua packages
               # nvimLua = config.programs.neovim.finalPackage.passthru.unwrapped.lua;
-
 
               # luajit = prev.luajit.override {
               #   packageOverrides = self.inputs.rikai-nvim.overlays.luaOverlay;
@@ -430,13 +429,13 @@
               #   packageOverrides = self.inputs.rikai-nvim.overlays.luaOverlay;
               # };
 
-            }) 
+            })
 
             byNamePkgsOverlay
             autoloadedPkgsOverlay
             # self.inputs.rofi-hoogle.overlay
-        # mptcp = self.inputs.mptcp-flake.overlays.default;
-        # nur = self.inputs.nur.overlay;
+            # mptcp = self.inputs.mptcp-flake.overlays.default;
+            # nur = self.inputs.nur.overlay;
 
             # the nova overlay just brings ztp-creds and gitlab-ssh-keys
             # removing the overlay means we dont need it during evaluation
@@ -447,8 +446,7 @@
             # self.inputs.nixpkgs-wayland.overlay
             # self.inputs.nix.overlays.default
           ]
-          ++ (src.lib.attrValues self.overlays)
-          ;
+          ++ (src.lib.attrValues self.overlays);
           config = {
             # on desktop
             cudaSupport = true;
@@ -465,23 +463,24 @@
             allowUnfree = true;
             # this list makes me wanna vomit (except steam maybe because they do good for linux),
             # and sublime because guy has to eat
-            allowUnfreePredicate = pkg:
+            allowUnfreePredicate =
+              pkg:
               # let
               #   ensureList = x: if builtins.isList x then x else [ x ];
               # in
               # package:
-#               builtins.all (
-#                 license:
-#                 license.free
-#                 || builtins.elem license.shortName [
-#                   "CUDA EULA"
-#                   "cuDNN EULA"
-#                   "cuSPARSELt EULA"
-#                   "cuTENSOR EULA"
-#                   "NVidia OptiX EULA"
-#                 ]
-#               ) (ensureList package.meta.license);
-# };
+              #               builtins.all (
+              #                 license:
+              #                 license.free
+              #                 || builtins.elem license.shortName [
+              #                   "CUDA EULA"
+              #                   "cuDNN EULA"
+              #                   "cuSPARSELt EULA"
+              #                   "cuTENSOR EULA"
+              #                   "NVidia OptiX EULA"
+              #                 ]
+              #               ) (ensureList package.meta.license);
+              # };
               let
                 legacyPkgs = nixpkgs.legacyPackages.${system};
                 pkgName = legacyPkgs.lib.getName pkg;
@@ -668,6 +667,7 @@
             efibootmgr
             smartmontools # for smartctl
             pamtester # to test yubikey https://nixos.wiki/wiki/Yubikey
+            pam_u2f # pamu2fcfg > ~/.config/Yubico/u2f_keys
           ];
 
           # TODO set SOPS_A
@@ -730,8 +730,6 @@
 
           # generates a infinite trace right now
           nvim = self.nixosConfigurations.desktop.config.home-manager.users.teto.programs.neovim.finalPackage;
-
-
 
           inherit (myPkgs)
             jmdict
@@ -999,7 +997,6 @@
               })
             );
 
-
             local-ai-teto = (
               prev.local-ai.override ({
                 # with_cublas = true;
@@ -1038,19 +1035,18 @@
               inherit dotfilesPath;
             };
 
-
             rsync-yazi = myPkgs.yaziPlugins.mkYaziPlugin {
-                pname = "rsync.yazi";
-                version = "g${self.inputs.rsync-yazi-plugin.shortRev}";
+              pname = "rsync.yazi";
+              version = "g${self.inputs.rsync-yazi-plugin.shortRev}";
 
-                src = self.inputs.rsync-yazi-plugin;
+              src = self.inputs.rsync-yazi-plugin;
 
-                # meta = {
-                #   description = "Yazi plugin to preview archives";
-                #   homepage = "https://github.com/ndtoan96/ouch.yazi";
-                #   license = myPkgs.lib.licenses.mit;
-                #   maintainers = with myPkgs.lib.maintainers; [ ];
-                # };
+              # meta = {
+              #   description = "Yazi plugin to preview archives";
+              #   homepage = "https://github.com/ndtoan96/ouch.yazi";
+              #   license = myPkgs.lib.licenses.mit;
+              #   maintainers = with myPkgs.lib.maintainers; [ ];
+              # };
             };
 
           };

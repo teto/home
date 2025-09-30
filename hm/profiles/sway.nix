@@ -42,7 +42,6 @@ in
       #   ];
     };
 
-
     config = {
       terminal = term;
       workspaceAutoBackAndForth = true;
@@ -54,7 +53,7 @@ in
 
       fonts = {
         # Source Code Pro
-        # TODO use the japanese font 
+        # TODO use the japanese font
         names = [ "Inconsolata Normal" ];
         size = 12.0;
       };
@@ -175,84 +174,88 @@ in
       # from https://www.reddit.com/r/swaywm/comments/uwdboi/how_to_make_chrome_popup_windows_floating/
       # mkBefore
       # ;config.xsession.windowManager.i3.config.keybindings
-      keybindings = sharedConfig.sharedKeybindings // {
-        # triggers even when there is a window
-        # "--whole-window BTN_RIGHT" = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
+      keybindings =
+        sharedConfig.sharedKeybindings
+        // {
+          # triggers even when there is a window
+          # "--whole-window BTN_RIGHT" = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
 
-        "${mod}+grave" = "${pkgs.swaynotificationcenter}/bin/swaync-client -swb";
-        "${mod}+p" = "exec ${pkgs.tessen}/bin/tessen --dmenu=rofi";
+          "${mod}+grave" = "${pkgs.swaynotificationcenter}/bin/swaync-client -swb";
+          "${mod}+p" = "exec ${pkgs.tessen}/bin/tessen --dmenu=rofi";
 
-        "$GroupFr+$mod+ampersand" = "layout toggle all";
-        "$GroupUs+$mod+1" = "layout toggle all";
+          "$GroupFr+$mod+ampersand" = "layout toggle all";
+          "$GroupUs+$mod+1" = "layout toggle all";
 
-        # start a terminal
-        "${mod}+Return" = "exec --no-startup-id ${term}";
-        "${mod}+Shift+Return" =
-          ''exec --no-startup-id ${term} -d "$(${toString ../../bin/kitty-get-cwd.sh})"'';
+          # start a terminal
+          "${mod}+Return" = "exec --no-startup-id ${term}";
+          "${mod}+Shift+Return" =
+            ''exec --no-startup-id ${term} -d "$(${toString ../../bin/kitty-get-cwd.sh})"'';
 
-        Menu = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
-        "${mod}+Tab" = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
-        # TODO dwindow exclusively with WIN
-        "${mad}+Tab" = "exec ${pkgs.swayr}/bin/swayr switch-window";
-        "${mad}+p" = "exec ${lib.getExe pkgs.wofi-pass} ";
-        "${mad}+a" = "exec \"${rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
+          Menu = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
+          "${mod}+Tab" = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
+          # TODO dwindow exclusively with WIN
+          "${mad}+Tab" = "exec ${pkgs.swayr}/bin/swayr switch-window";
+          "${mad}+p" = "exec ${lib.getExe pkgs.wofi-pass} ";
+          "${mad}+a" = "exec \"${rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
 
-        # locker
-        # "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
+          # locker
+          # "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
 
-        # TODO make it a command
-        "${mod}+Ctrl+L" = "exec ${myLib.swaylockCmd} ";
+          # TODO make it a command
+          "${mod}+Ctrl+L" = "exec ${myLib.swaylockCmd} ";
 
-        # kitty nvim -c ":Neorg workspace notes"
-        # Notes is a custom command
-        "${mod}+F1" =
-          ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command 'kitty nvim +Notes'  '';
-        "${mod}+F2" =
-          ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty ${config.programs.ncmpcpp.package}/bin/ncmpcpp' '';
-        "${mod}+F3" =
-          ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 60 --height 50 --mark gp_nvim --command "kitty nvim -cLlmChat" '';
+          # kitty nvim -c ":Neorg workspace notes"
+          # Notes is a custom command
+          "${mod}+F1" =
+            ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command 'kitty nvim +Notes'  '';
+          "${mod}+F2" =
+            ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty ${config.programs.ncmpcpp.package}/bin/ncmpcpp' '';
+          "${mod}+F3" =
+            ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 60 --height 50 --mark gp_nvim --command "kitty nvim -cLlmChat" '';
 
-        # TODO implement Travis/Pasting Voice recognized text
-        # "${mod}+F4" =
-        #   ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 60 --height 50 --mark gp_nvim --command "kitty nvim -c 'GpChat' " '';
-        #
+          # TODO implement Travis/Pasting Voice recognized text
+          # "${mod}+F4" =
+          #   ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 60 --height 50 --mark gp_nvim --command "kitty nvim -c 'GpChat' " '';
+          #
 
-        # TODO try with flameshot again ?
-        # "--release Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy area";
-        "--release Print" = "exec ${pkgs.flameshot}/bin/flameshot gui";
+          # TODO try with flameshot again ?
+          # "--release Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy area";
+          "--release Print" = "exec ${pkgs.flameshot}/bin/flameshot gui";
 
-        # for_window [con_mark="SCRATCHPAD_terminal"] border pixel 1
+          # for_window [con_mark="SCRATCHPAD_terminal"] border pixel 1
 
-        # use sway-easyfocus
-        "${mod}+g" = "exec ${pkgs.sway-easyfocus}/bin/sway-easyfocus";
-        "${mad}+w" = "exec ${pkgs.sway-easyfocus}/bin/sway-easyfocus";
-        # TODO bind
-        # XF86Copy
-      } // lib.optionalAttrs config.services.clipcat.enable {
-        "${mod}+Ctrl+h" =
-          ''exec ${pkgs.clipcat}/bin/clipcat-menu -f rofi  | ${sharedConfig.notify-send} 'Failed running clipcat' '';
-      } // lib.optionalAttrs config.services.cliphist.enable {
-        "${mod}+Ctrl+h" =
-          ''exec ${pkgs.cliphist}/bin/cliphist list | rofi -dmenu  -m -1 -p "Select item to copy" -lines 10 -width 35 | cliphist decode | wl-copy | ${sharedConfig.notify-send} 'Failed running cliphist' '';
+          # use sway-easyfocus
+          "${mod}+g" = "exec ${pkgs.sway-easyfocus}/bin/sway-easyfocus";
+          "${mad}+w" = "exec ${pkgs.sway-easyfocus}/bin/sway-easyfocus";
+          # TODO bind
+          # XF86Copy
+        }
+        // lib.optionalAttrs config.services.clipcat.enable {
+          "${mod}+Ctrl+h" =
+            ''exec ${pkgs.clipcat}/bin/clipcat-menu -f rofi  | ${sharedConfig.notify-send} 'Failed running clipcat' '';
+        }
+        // lib.optionalAttrs config.services.cliphist.enable {
+          "${mod}+Ctrl+h" =
+            ''exec ${pkgs.cliphist}/bin/cliphist list | rofi -dmenu  -m -1 -p "Select item to copy" -lines 10 -width 35 | cliphist decode | wl-copy | ${sharedConfig.notify-send} 'Failed running cliphist' '';
 
-      } // lib.optionalAttrs config.services.clipman.enable {
-        "${mod}+Ctrl+h" = ''exec ${pkgs.clipman}/bin/clipman pick -t rofi || ${sharedConfig.notify-send} 'Failed running clipman' '';
-      }
+        }
+        // lib.optionalAttrs config.services.clipman.enable {
+          "${mod}+Ctrl+h" =
+            ''exec ${pkgs.clipman}/bin/clipman pick -t rofi || ${sharedConfig.notify-send} 'Failed running clipman' '';
+        }
 
+      ;
 
-      ; 
+      startup = [
+        # { command = "env RUST_BACKTRACE=1 RUST_LOG=swayr=debug swayrd > /tmp/swayrd.log 2>&1"; }
+        { command = "env RUST_BACKTRACE=1 swaycons"; }
 
-      startup =
-        [
-          # { command = "env RUST_BACKTRACE=1 RUST_LOG=swayr=debug swayrd > /tmp/swayrd.log 2>&1"; }
-          { command = "env RUST_BACKTRACE=1 swaycons"; }
+      ]
+      ++ lib.optional config.services.cliphist.enable (
 
-        ]
-        ++ lib.optional config.services.cliphist.enable (
+        { command = "wl-paste --watch cliphist store"; }
 
-          { command = "wl-paste --watch cliphist store"; }
-
-        );
+      );
     };
 
     extraConfigEarly = sharedConfig.sharedExtraConfig;
@@ -265,7 +268,7 @@ in
     # timeout in ms
     extraConfig = ''
       include ~/.config/sway/manual.config
-      '';
+    '';
     # include ~/.config/sway/swayfx.txt
 
     extraOptions = [
@@ -280,7 +283,6 @@ in
     # TODO put it in the wrapper started by the .desktop file !
     # # according to https://www.reddit.com/r/swaywm/comments/11d89w2/some_workarounds_to_use_sway_with_nvidia/
     # export XWAYLAND_NO_GLAMOR=1
-    
 
     # to list cards
     # ls -l /sys/class/drm/renderD*/device/driver
@@ -300,7 +302,7 @@ in
       export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
       # select first igpu then nvidia
     '';
-    # see https://github.com/swaywm/sway/wiki#i-have-a-multi-gpu-setup-like-intelnvidia-or-intelamd-and-sway-does-not-start--some-video-cards-cannot-display--full-screen-images-etc-will-be-corrupted 
+    # see https://github.com/swaywm/sway/wiki#i-have-a-multi-gpu-setup-like-intelnvidia-or-intelamd-and-sway-does-not-start--some-video-cards-cannot-display--full-screen-images-etc-will-be-corrupted
     # for multigpu setups
     # The first card is used for actual rendering, and display buffers are copied to the secondary cards for any displays connected to them.
     # export WLR_DRM_DEVICES=/dev/dri/card0:/dev/dri/card1
@@ -314,7 +316,6 @@ in
   xdg.configFile."sway/config".text = lib.mkBefore "
      include ~/.config/sway/config.shared
      ";
-
 
   # env RUST_BACKTRACE=1 RUST_LOG=swayr=debug swayrd > /tmp/swayrd.log 2>&1
   # https://git.sr.ht/~tsdh/swayr/tree/main/item/swayr/etc/swayrd.service

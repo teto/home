@@ -10,7 +10,6 @@
     DisplayMenuBar = "default-off";
   };
 
-
   searchEngines = {
     "Jisho" = {
       urls = [
@@ -31,7 +30,7 @@
     "youtube" = {
       urls = [
         {
-          # 
+          #
           template = "https://www.youtube.com/results?search_query={searchTerms}";
           params = [
             {

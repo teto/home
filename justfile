@@ -7,9 +7,10 @@ BLOG_FOLDER := "${HOME}/blog"
 NOVOS_REPO := "/home/teto/nova/doctor"
 HM_REPO := "/home/teto/hm"
 JK_SEEDER_REPO := "/home/teto/nova/jinko-seeder"
-# not versioned, where we store secrets
-SECRETS_FOLDER := justfile_directory() / "secrets"
 
+# not versioned, where we store secrets
+
+SECRETS_FOLDER := justfile_directory() / "secrets"
 
 import? 'justfile.generated'
 
@@ -34,15 +35,16 @@ switch: (nixos-rebuild "switch" "")
 rollback: (nixos-rebuild "switch" "--rollback")
 
 repl:
-  nix repl ~/home \
-      --override-input nixpkgs {{ NIXPKGS_REPO }} \
-      --override-input hm {{ HM_REPO }} \
-      --override-input nova-doctor {{ NOVOS_REPO }} \
-      --override-input jinko-seeder {{ JK_SEEDER_REPO }}
+    nix repl ~/home \
+        --override-input nixpkgs {{ NIXPKGS_REPO }} \
+        --override-input hm {{ HM_REPO }} \
+        --override-input nova-doctor {{ NOVOS_REPO }} \
+        --override-input jinko-seeder {{ JK_SEEDER_REPO }}
 
-# --log-format internal-json 
+# --log-format internal-json
 # --override-input nova /home/teto/nova/doctor \
 # nom can hide when there is a lock
+
 # |& nom
 [private]
 nixos-rebuild command builders="--option builders \"$NOVA_OVH1\" -j0":
@@ -151,7 +153,6 @@ stow-secrets:
     ln -s {{ SECRETS_FOLDER }}/password-store  {{ home_directory() }}/.password-store
     # ln -s {{ justfile_directory() }}/ 
 
-
 # symlink to XDG_DATA_HOME
 stow-local:
     echo "Local: {{ data_local_directory() }}"
@@ -247,11 +248,11 @@ panvimdoc:
     panvimdoc --project-name gp.nvim --vim-version "neovim" --input-file README.md --demojify true --treesitter true --doc-mapping true --doc-mapping-project-name true --dedup-subheadings true
 
 monitor-list:
-   ddcutil detect
+    ddcutil detect
 
 monitor-increase-brightness:
-  ddcutil setvcp 10 + 10
-  # ddcutil setvcp 10 - 10
+    ddcutil setvcp 10 + 10
+    # ddcutil setvcp 10 - 10
 
 # speed up notmuch operations by pruning database
 notmuch-speedup:
@@ -265,7 +266,7 @@ nix-diff-booted:
 xwayland: satellite
     xwayland-satellite
 
-satellite: 
+satellite:
     echo "Run export DISPLAY=:0 program"
     # You can silence all messages from Xwayland by setting the env var RUST_LOG=xwayland_process=off
     #  https://github.com/Supreeeme/xwayland-satellite/issues/154
@@ -273,15 +274,15 @@ satellite:
     xwayland-satellite
 
 udev-restart:
-  sudo udevadm control --reload-rules
-  sudo udevadm trigger
+    sudo udevadm control --reload-rules
+    sudo udevadm trigger
 
 # rsync-send:
 
 test-msmtp-send-mail:
-  # TODO generate the mail headers
-  cat contrib/2025-05-04-21.38.53.mail | msmtp --read-envelope-from --read-recipients 
+    # TODO generate the mail headers
+    cat contrib/2025-05-04-21.38.53.mail | msmtp --read-envelope-from --read-recipients 
 
-dbus-list-sessions: 
-  # org.freedesktop.DBus.ListNames
-  dbus-send --session --dest=org.freedesktop.DBus --type=method_call --print-reply /org/freedesktop/DBus org.freedesktop.DBus.ListNames
+dbus-list-sessions:
+    # org.freedesktop.DBus.ListNames
+    dbus-send --session --dest=org.freedesktop.DBus --type=method_call --print-reply /org/freedesktop/DBus org.freedesktop.DBus.ListNames

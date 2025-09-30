@@ -73,7 +73,7 @@ let
     { plugin = nvim-colorizer-lua; }
     pkgs.vimPlugins.typescript-tools-nvim
 
-    # pkgs.vimPlugins.gitlab-vim  # not 
+    # pkgs.vimPlugins.gitlab-vim  # not
 
     # not upstreamed yet
     # (luaPlugin { plugin = nvim-lua-gf; })
@@ -150,10 +150,10 @@ let
     # TODO map it to a plugin instead
     # nodePackages.typescript-language-server
 
-    # pandoc is used by a bunch of plugins, including feed.nvim 
-    # while I wish feed.nvim would be packaged with it 
+    # pandoc is used by a bunch of plugins, including feed.nvim
+    # while I wish feed.nvim would be packaged with it
     # for markdown preview, should be in the package closure instead
-    pandoc 
+    pandoc
     # pythonPackages.pdftotext  # should appear only in RC ? broken
     nil # a nix lsp, can be debugged with NIL_LOG_PATH and NIL_LOG=nil=debug
     nixd # another nix LSP
@@ -181,7 +181,6 @@ let
   # TODO get lua interpreter to select the good lua packages
   nvimLua = config.programs.neovim.finalPackage.passthru.unwrapped.lua;
 
-
   finalLua = nvimLua.override {
     packageOverrides = flakeSelf.inputs.rikai-nvim.overlays.luaOverlay;
   };
@@ -208,38 +207,37 @@ in
   #   flakeSelf.homeProfiles.neovim
   # ];
   #
-  plugins =
-    [
-      # TODO hacking on this
+  plugins = [
+    # TODO hacking on this
 
-      # TODO replaced with https://github.com/yutkat/git-rebase-auto-diff.nvim
-      # {
-      #   # display git diff while rebasing, pretty dope
-      #   # my complaints: has issues with sync mode
-      #   plugin = pkgs.vimPlugins.auto-git-diff;
-      #   # config = ''
-      #   # let g:auto_git_diff_disable_auto_update=1
-      #   # '';
-      # }
+    # TODO replaced with https://github.com/yutkat/git-rebase-auto-diff.nvim
+    # {
+    #   # display git diff while rebasing, pretty dope
+    #   # my complaints: has issues with sync mode
+    #   plugin = pkgs.vimPlugins.auto-git-diff;
+    #   # config = ''
+    #   # let g:auto_git_diff_disable_auto_update=1
+    #   # '';
+    # }
 
-      (luaPlugin {
-        plugin = pkgs.vimPlugins.unicode-vim;
-        # ${pkgs.vimPlugins.unicode-vim.passthru.initLua}
-        config = ''
-          -- since the autoadd was disabled/doesn't seem to work
-          ${pkgs.vimPlugins.unicode-vim.passthru.initLua}
-          -- overrides ga
-          vim.keymap.set ( "n", "ga",  "<Plug>(UnicodeGA)", { remap = true, } )
-          '';
-      })
+    (luaPlugin {
+      plugin = pkgs.vimPlugins.unicode-vim;
+      # ${pkgs.vimPlugins.unicode-vim.passthru.initLua}
+      config = ''
+        -- since the autoadd was disabled/doesn't seem to work
+        ${pkgs.vimPlugins.unicode-vim.passthru.initLua}
+        -- overrides ga
+        vim.keymap.set ( "n", "ga",  "<Plug>(UnicodeGA)", { remap = true, } )
+      '';
+    })
 
-    ]
-    ++ luaPlugins
-    ++ blinkPlugins
-    ++ filetypePlugins
-    ++ treesitterPlugins
-    # ++ telescopePlugins
-    ++ neotestPlugins;
+  ]
+  ++ luaPlugins
+  ++ blinkPlugins
+  ++ filetypePlugins
+  ++ treesitterPlugins
+  # ++ telescopePlugins
+  ++ neotestPlugins;
 
   # plugins = with pkgs.vimPlugins; [
   #  tint-nvim
@@ -278,7 +276,7 @@ in
     extraPackages
     ++ pkgs.vimPlugins.llm-nvim.runtimeDeps # temporary workaround
     # provides typescript-language-server
-    ++ pkgs.vimPlugins.typescript-tools-nvim.runtimeDeps 
+    ++ pkgs.vimPlugins.typescript-tools-nvim.runtimeDeps
     ++ [
       pkgs.typescript # for tsserver
       pkgs.stylua # for lua formatting

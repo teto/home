@@ -335,7 +335,7 @@ in
 
     (mkIf cfg.useAsManViewer {
       home.sessionVariables = {
-        MANPAGER="nvim +Man!";
+        MANPAGER = "nvim +Man!";
       };
     })
 
@@ -346,7 +346,7 @@ in
         "${flakeSelf.inputs.luals-busted-addon}",
         "${flakeSelf.inputs.luals-luassert-addon}"
         }
-        '';
+      '';
     })
 
     (mkIf cfg.treesitter.enable {

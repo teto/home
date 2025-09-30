@@ -13,12 +13,10 @@
 
     # source /home/teto/.config/nvim/init.vim
     configure = pkgs.neovimConfigure // {
-      customRC =
-        (pkgs.neovimConfigure.customRC or "")
-        + ''
-          let g:fzf_command_prefix = 'Fzf' " prefix commands :Files become :FzfFiles, etc.
-          let g:fzf_nvim_statusline = 0 " disable statusline overwriting
-        '';
+      customRC = (pkgs.neovimConfigure.customRC or "") + ''
+        let g:fzf_command_prefix = 'Fzf' " prefix commands :Files become :FzfFiles, etc.
+        let g:fzf_nvim_statusline = 0 " disable statusline overwriting
+      '';
 
     };
 

@@ -39,7 +39,8 @@ let
     "tap-bridge"
     "mobility"
     "flow-monitor"
-  ] ++ lib.optionals withQuagga [ "internet-apps" ];
+  ]
+  ++ lib.optionals withQuagga [ "internet-apps" ];
 
   # TODO this is not possible anymore
   ns3forDce = ns-3.override ({ inherit modules python; });
@@ -62,23 +63,22 @@ let
     outputs = [ "out" ] ++ lib.optional pythonSupport "py";
 
     # with other modules
-    srcs =
-      [
-        (fetchFromGitHub {
-          owner = "direct-code-execution";
-          repo = "ns-3-dce";
-          rev = "dce-${version}";
-          sha256 = "0f2g47mql8jjzn2q6lm0cbb5fv62sdqafdvx5g8s3lqri1sca14n";
-          name = "dce";
-        })
-      ]
-      ++ lib.optional withQuagga (fetchFromGitHub {
+    srcs = [
+      (fetchFromGitHub {
         owner = "direct-code-execution";
-        repo = "ns-3-dce-quagga";
-        rev = "dce-${dce-version}";
-        sha256 = "1bbb1v33mv1p8isiggg9qg3a8hs0yq5s1dqz22lbdx55jrdxm7rb";
-        name = "dce-quagga";
-      });
+        repo = "ns-3-dce";
+        rev = "dce-${version}";
+        sha256 = "0f2g47mql8jjzn2q6lm0cbb5fv62sdqafdvx5g8s3lqri1sca14n";
+        name = "dce";
+      })
+    ]
+    ++ lib.optional withQuagga (fetchFromGitHub {
+      owner = "direct-code-execution";
+      repo = "ns-3-dce-quagga";
+      rev = "dce-${dce-version}";
+      sha256 = "1bbb1v33mv1p8isiggg9qg3a8hs0yq5s1dqz22lbdx55jrdxm7rb";
+      name = "dce-quagga";
+    });
 
     postUnpack = lib.optionalString withQuagga ''
       # mv won't work :'(
@@ -87,17 +87,16 @@ let
 
     sourceRoot = "dce";
 
-    buildInputs =
-      [
-        ns3forDce
-        gcc
-        pythonEnv
-      ]
-      ++ lib.optionals pythonSupport [
-        castxml
-        ncurses
-      ]
-      ++ lib.optionals withExamples [ openssl ];
+    buildInputs = [
+      ns3forDce
+      gcc
+      pythonEnv
+    ]
+    ++ lib.optionals pythonSupport [
+      castxml
+      ncurses
+    ]
+    ++ lib.optionals withExamples [ openssl ];
 
     nativeBuildInputs = [ pkgconfig ];
 

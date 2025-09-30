@@ -1,5 +1,5 @@
 -- https://luals.github.io/wiki/settings
-local addons_folder = vim.fn.expand("$HOME").."/lua-ls-addons"
+local addons_folder = vim.fn.expand('$HOME') .. '/lua-ls-addons'
 return {
     cmd = {
         'lua-language-server',
@@ -28,7 +28,7 @@ return {
     -- end,
 
     settings = {
-     -- copied from luassert luals addon ?
+        -- copied from luassert luals addon ?
         -- "words" : [ "require[%s%(\"']+luassert[%)\"']" ]
 
         Lua = {
@@ -37,8 +37,8 @@ return {
                 -- path = vim.split(package.path, ';')
             },
             completion = {
-              keywordSnippet = 'Disable'
-             },
+                keywordSnippet = 'Disable',
+            },
             diagnostics = {
                 enable = true,
                 workspaceRate = 50, -- spare CPU
@@ -70,8 +70,8 @@ return {
                     'Command',
                     'assert',
 
-					-- used by fzf-lua
-					'FzfLua',
+                    -- used by fzf-lua
+                    'FzfLua',
                 },
                 -- Define variable names that will not be reported as an unused local by unused-local.
                 unusedLocalExclude = { '_*' },
@@ -100,9 +100,9 @@ return {
                 },
 
                 library = {
-                  addons_folder .. "/busted/library",
-                  -- "${3rd}/luassert/library",
-                  addons_folder .. "/luassert/library",
+                    addons_folder .. '/busted/library',
+                    -- "${3rd}/luassert/library",
+                    addons_folder .. '/luassert/library',
                     -- [vim.fn.expand('$VIMRUNTIME/lua')] = true,
                     -- [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
                     -- ['/home/teto/neovim/neovim/runtime/lua'] = true,

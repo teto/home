@@ -132,19 +132,22 @@ let
             };
             error = {
               fg = red;
-            } // attrs.bold;
+            }
+            // attrs.bold;
             string = {
               fg = green;
             };
             highlight = {
               fg = red;
-            } // attrs.bold;
+            }
+            // attrs.bold;
             suggestion = {
               fg = base1;
             };
             selectedSuggestion = {
               fg = base0;
-            } // attrs.bold;
+            }
+            // attrs.bold;
           }
           // palettes.solarized;
 
@@ -173,19 +176,23 @@ let
             };
             error = {
               fg = red;
-            } // attrs.bold;
+            }
+            // attrs.bold;
             string = {
               fg = cyan;
-            } // attrs.italic;
+            }
+            // attrs.italic;
             highlight = {
               fg = yellow;
-            } // attrs.bold;
+            }
+            // attrs.bold;
             suggestion = {
               fg = base5;
             };
             selectedSuggestion = {
               fg = base6;
-            } // attrs.bold;
+            }
+            // attrs.bold;
           }
           // palettes.gotham;
       };

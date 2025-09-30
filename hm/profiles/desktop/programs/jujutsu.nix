@@ -20,7 +20,7 @@
     # # this generates what looks like an ok config but jj doesn't seem to care for it
     "--scope" = [
       {
-        "--when"."repositories" = ["~/nova"];
+        "--when"."repositories" = [ "~/nova" ];
         "user" = {
           email = secrets.accounts.mail.nova.email;
           name = secrets.accounts.mail.nova.displayName;
@@ -37,13 +37,13 @@
     #     email = secrets.accounts.mail.nova.email;
     # };
 
-            # "--scope" = [
-            #   {
-            #     "--when"."repositories" = [ "~/work/" ];
-            #     user.email = "foo@bar";
-            #     gpg.key = "/some/apth";
-            #   }
-            # ];
+    # "--scope" = [
+    #   {
+    #     "--when"."repositories" = [ "~/work/" ];
+    #     user.email = "foo@bar";
+    #     gpg.key = "/some/apth";
+    #   }
+    # ];
   };
 
   # my fork only

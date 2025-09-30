@@ -1,4 +1,8 @@
-{ lib, fetchFromGitHub, buildGoModule }:
+{
+  lib,
+  fetchFromGitHub,
+  buildGoModule,
+}:
 
 buildGoModule {
   pname = "kagome";
@@ -20,4 +24,3 @@ buildGoModule {
     maintainers = [ ];
   };
 }
-

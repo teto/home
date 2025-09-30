@@ -7,33 +7,33 @@
   ...
 }:
 
-let 
+let
   inherit (pkgs.tetoLib) ignoreBroken;
 in
 {
-  imports =
-    [
+  imports = [
 
-      flakeSelf.homeProfiles.common
-      flakeSelf.homeProfiles.neovim
-      flakeSelf.homeProfiles.sway
-      flakeSelf.homeProfiles.sway-notification-center
-      flakeSelf.homeProfiles.developer
-      flakeSelf.homeProfiles.mpv
-      flakeSelf.homeProfiles.vscode
-      # flakeSelf.homeProfiles.waybar # breaks eval ?!
+    flakeSelf.homeProfiles.common
+    flakeSelf.homeProfiles.neovim
+    flakeSelf.homeProfiles.sway
+    flakeSelf.homeProfiles.sway-notification-center
+    flakeSelf.homeProfiles.developer
+    flakeSelf.homeProfiles.mpv
+    flakeSelf.homeProfiles.vscode
+    # flakeSelf.homeProfiles.waybar # breaks eval ?!
 
-      flakeSelf.homeModules.fzf
-      flakeSelf.homeModules.teto-zsh
-      flakeSelf.homeModules.yazi
-      flakeSelf.homeModules.services-mujmap
-      flakeSelf.homeModules.pimsync
-      flakeSelf.homeModules.package-sets
-    ]
-    ++ lib.optionals (lib.debug.traceVal withSecrets) [
-      flakeSelf.homeProfiles.nova
-    ];
-
+    flakeSelf.homeModules.fzf
+    flakeSelf.homeModules.teto-zsh
+    flakeSelf.homeModules.yazi
+    flakeSelf.homeModules.services-mujmap
+    flakeSelf.homeModules.pimsync
+    flakeSelf.homeModules.package-sets
+    # ./programs/gpg.nix
+  ]
+  # lib.debug.traceVal
+  ++ lib.optionals (withSecrets) [
+    flakeSelf.homeProfiles.nova
+  ];
 
   # doing so enables support for it in greetd
   # services.gnome.gnome-keyring.enable = true;
@@ -47,19 +47,12 @@ in
 
   home.packages = with pkgs; [
     (ignoreBroken pkgs.aider-chat) # breaks
-    bluetuith # Bluetooth TUI
-
-    isync # not used ?
+    # isync # not used ?
     mujmap-unstable
     notmuch # needed for waybar-custom-notmuch.sh
-
     panvimdoc # to generate vim doc from README, for instance in gp.nvim
-    unar # used to view archives by yazi
     # poppler for pdf preview
-    memento # capable to display 2 subtitles at same time
 
-    pkgs.trurl # used to parse url in the firefox-router executable
-    viu # a console image viewer
     (pkgs.tetoLib.ignoreBroken mdcat) # markdown viewer
 
   ];

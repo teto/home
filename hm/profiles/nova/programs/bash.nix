@@ -21,12 +21,11 @@ in
 
     sessionVariables =
       let
-        prod-runners = 
-            builtins.fromJSON (
-            # TODO fetch it from doctor ?
-            # builtins.readFile "${flakeSelf.inputs.nova-ci}/configs/prod/runners-generated.json"
-            builtins.readFile "${flakeSelf.inputs.nova-doctor}/nix/hm/ci-runners/runners-generated.json"
-          );
+        prod-runners = builtins.fromJSON (
+          # TODO fetch it from doctor ?
+          # builtins.readFile "${flakeSelf.inputs.nova-ci}/configs/prod/runners-generated.json"
+          builtins.readFile "${flakeSelf.inputs.nova-doctor}/nix/hm/ci-runners/runners-generated.json"
+        );
 
         mkKey =
           name:

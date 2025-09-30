@@ -83,7 +83,7 @@
     # autosuggestions.async
     interactiveShellInit = ''
       stty -ixon
-      '';
+    '';
   };
 
   security.sudo = {

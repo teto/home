@@ -1,12 +1,14 @@
 # created as per https://joinemm.dev/blog/yubikey-nixos-guide
 {
+  # useless ? nixos
+  enable = true;
 
   # https://support.yubico.com/hc/en-us/articles/4819584884124-Resolving-GPG-s-CCID-conflicts
   scdaemonSettings = {
     disable-ccid = true;
   };
 
- # https://github.com/drduh/config/blob/master/gpg.conf
+  # https://github.com/drduh/config/blob/master/gpg.conf
   settings = {
     personal-cipher-preferences = "AES256 AES192 AES";
     personal-digest-preferences = "SHA512 SHA384 SHA256";

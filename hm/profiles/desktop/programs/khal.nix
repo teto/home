@@ -2,12 +2,11 @@
 {
   enable = true;
 
-
-  package = pkgs.khal.overrideAttrs(oa: {
+  package = pkgs.khal.overrideAttrs (oa: {
 
     postInstall = ''
       wrapProgram $out/bin/ikhal --set LC_ALL ja_JP.utf8
-      '';
+    '';
 
   });
 

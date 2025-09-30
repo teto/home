@@ -32,7 +32,7 @@
       # todo use ${home.
       # TODO use {config.accounts.email.maildirBasePath}
       # "/home/teto/maildir"; # where .notmuch/ directory is located
-      root_mailbox = config.accounts.email.maildirBasePath; 
+      root_mailbox = config.accounts.email.maildirBasePath;
       send_mail = "msmtp --read-recipients --read-envelope-from";
       # where to find notmuch
       # /nix/store/lw4hjgnypk3lbvlflc2v4lygxpw7pq9n-notmuch-0.38.3/lib

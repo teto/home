@@ -14,5 +14,5 @@
             type            "pipewire"
             name            "PipeWire Sound Server"
     }
-    '';
+  '';
 }

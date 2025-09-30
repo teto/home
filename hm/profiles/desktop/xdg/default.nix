@@ -1,4 +1,9 @@
-{ pkgs, secretsFolder, secrets, ...}:
+{
+  pkgs,
+  secretsFolder,
+  secrets,
+  ...
+}:
 {
 
   desktopEntries = {
@@ -22,10 +27,10 @@
       ];
       startupNotify = false;
 
+    };
   };
-};
 
-portal = {
+  portal = {
     enable = true;
     extraPortals = [
       pkgs.xdg-desktop-portal-wlr
@@ -46,6 +51,5 @@ portal = {
     TETO_SECRETS_FOLDER=${secretsFolder}
     TETO_PERSONAL_EMAIL=${secrets.accounts.mail.fastmail_perso.login}
   '';
-
 
 }

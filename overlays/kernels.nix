@@ -31,12 +31,10 @@ let
         prev.python
       ];
       # buildInputs = (o.buildInputs or []) ++ [prev.python];
-      shellHook =
-        (o.shellHook or "")
-        + ''
-          echo "make menuconfig KCONFIG_CONFIG=$PWD/build/.config"
-          echo "make menuconfig KCONFIG_CONFIG=$PWD/build/.config"
-        '';
+      shellHook = (o.shellHook or "") + ''
+        echo "make menuconfig KCONFIG_CONFIG=$PWD/build/.config"
+        echo "make menuconfig KCONFIG_CONFIG=$PWD/build/.config"
+      '';
     }));
 
   # soundConfig

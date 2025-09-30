@@ -5,8 +5,7 @@ local M = {}
 
 local fzf_jj = require('teto.fzf-lua.providers.jj')
 
-FzfLua.register_extension("jj_files", fzf_jj.jj_files, vim.tbl_deep_extend("keep", {}, {
-}))
+FzfLua.register_extension('jj_files', fzf_jj.jj_files, vim.tbl_deep_extend('keep', {}, {}))
 
 -- FzfLua is a global from fzf_lua
 -- FzfLua.register_extension("jj_files", M.frecency, vim.tbl_deep_extend("keep", opts, {
@@ -47,25 +46,25 @@ FzfLua.register_extension("jj_files", fzf_jj.jj_files, vim.tbl_deep_extend("keep
 function M.register_keymaps()
     -- autocomplete :FzfLua to see what's available
     vim.keymap.set('n', '<Leader>g', function()
-	   -- global picker accepts various prefixes such as $ for buffers , @ for lsp
+        -- global picker accepts various prefixes such as $ for buffers , @ for lsp
         fzf_lua.global()
     end)
-	-- local file_dir = vim.fn.expand('%:p:h')
+    -- local file_dir = vim.fn.expand('%:p:h')
 
-		--   vim.keymap.set('n', '<Leader>G', function()
-		--       -- fzf_lua.files()
-		-- fzf_lua_enchanted.files({
-		--  -- cwd =false ,
-		--  -- prompt = "LOL > "
-		-- }
-		-- )
-		--   end)
+    --   vim.keymap.set('n', '<Leader>G', function()
+    --       -- fzf_lua.files()
+    -- fzf_lua_enchanted.files({
+    --  -- cwd =false ,
+    --  -- prompt = "LOL > "
+    -- }
+    -- )
+    --   end)
 
     vim.keymap.set('n', '<Leader>o', function()
         -- first check if we are
-		local files_picker_name = "files"
+        local files_picker_name = 'files'
         if fzf_jj.is_jj_repo() then
-		   files_picker_name = "jj_files"
+            files_picker_name = 'jj_files'
             -- fzf_jj.jj_files({
             --     -- fzf_lua.git_files({
             --     --     -- entry_maker = entry_maker
@@ -73,19 +72,19 @@ function M.register_keymaps()
             -- })
         end
 
-		-- TODO combine or use global
-		fzf_lua.combine({
+        -- TODO combine or use global
+        fzf_lua.combine({
 
-		  -- can be a table as well
-		  -- order matters
-		  -- files can appear several times
-		  -- uses options from the first picker
-		  pickers = {
-		   "frecency",
-		   files_picker_name
-		   -- "files"
-		  },
-		})
+            -- can be a table as well
+            -- order matters
+            -- files can appear several times
+            -- uses options from the first picker
+            pickers = {
+                'frecency',
+                files_picker_name,
+                -- "files"
+            },
+        })
     end)
 
     vim.keymap.set('n', '<Leader>F', function()

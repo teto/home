@@ -11,7 +11,7 @@
     enable = true;
 
     # avoid systemd boot messages interrupt TUI.
-    useTextGreeter = true; 
+    useTextGreeter = true;
 
     # swayConfig = pkgs.writeText "greetd-sway-config" ''
     #   # `-l` activates layer-shell mode. Notice that `swaymsg exit` will run after gtkgreet.
@@ -92,7 +92,9 @@
               config.home-manager.users.teto.home.path
               sessionData
             ];
-            waylandSessionsPath = lib.concatMapStringsSep ":" (pkg: "${pkg}/share/wayland-sessions") waylandSessionsPackages;
+            waylandSessionsPath = lib.concatMapStringsSep ":" (
+              pkg: "${pkg}/share/wayland-sessions"
+            ) waylandSessionsPackages;
 
             # WLR_NO_HARDWARE_CURSORS = 1;
             # waylandWrapper = pkgs.writeShellScript "wayland-wrapper" ''

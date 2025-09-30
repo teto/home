@@ -4,7 +4,7 @@
   # size of tmpfs used by nix builds
   # usually
   settings.Login = {
-    RuntimeDirectorySize="5G";
+    RuntimeDirectorySize = "5G";
   };
   # extraConfig = ''
   #   RuntimeDirectorySize=5G
