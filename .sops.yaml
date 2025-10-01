@@ -4,21 +4,24 @@
 # for a more complex example.
 # age-keygen -y ~/.config/sops/age/keys.txt to regenerate public key
 keys:
-  - &teto age18etpu3xwwsv87ysarwndzaxdv3dw7a7zzytxrhdc2gtls0cr0elsa79uc5
-  # generated via ssh-to-age
-  - &neotokyo age15uagn9lkcdwxuk8ecmzuv24pf9paqtxxufsn0pj4a5ykga2e55xs2632zn
+ - &teto-pgp 64BB678705EF85ABF7345F69BD024BD9C261596D
+ - &teto-age age18etpu3xwwsv87ysarwndzaxdv3dw7a7zzytxrhdc2gtls0cr0elsa79uc5
+ # generated via ssh-to-age
+ - &neotokyo age15uagn9lkcdwxuk8ecmzuv24pf9paqtxxufsn0pj4a5ykga2e55xs2632zn
 creation_rules:
   - path_regex: secrets/neotokyo-secrets.yaml
     key_groups:
     - age:
       - *neotokyo
-      - *teto
+      - *teto-age
   - path_regex: secrets/desktop-secrets.yaml
     key_groups:
     - age:
-      - *teto
+      - *teto-age
   - path_regex: nixos/profiles/desktop/secrets.yml
     key_groups:
     - age:
-      - *teto
+      - *teto-age
+    - pgp:
+      - *teto-pgp
       
