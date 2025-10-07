@@ -18,7 +18,6 @@
     flakeSelf.homeModules.teto-nogui
     flakeSelf.homeModules.experimental
     flakeSelf.homeProfiles.wezterm
-    flakeSelf.homeProfiles.nova
     # flakeSelf.homeModules.gnome-shell
 
     ./calendars.nix

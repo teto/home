@@ -22,6 +22,13 @@ in
     flakeSelf.homeProfiles.vscode
     # flakeSelf.homeProfiles.waybar # breaks eval ?!
 
+      flakeSelf.homeModules.fzf
+      flakeSelf.homeModules.teto-zsh
+      flakeSelf.homeModules.yazi
+      flakeSelf.homeModules.services-mujmap
+      flakeSelf.homeModules.pimsync
+      flakeSelf.homeModules.package-sets
+
     flakeSelf.homeModules.fzf
     flakeSelf.homeModules.teto-zsh
     flakeSelf.homeModules.yazi
@@ -30,7 +37,6 @@ in
     flakeSelf.homeModules.package-sets
     # ./programs/gpg.nix
   ]
-  # lib.debug.traceVal
   ++ lib.optionals (withSecrets) [
     flakeSelf.homeProfiles.nova
   ];
@@ -47,7 +53,6 @@ in
 
   home.packages = with pkgs; [
     (ignoreBroken pkgs.aider-chat) # breaks
-    # isync # not used ?
     mujmap-unstable
     notmuch # needed for waybar-custom-notmuch.sh
     panvimdoc # to generate vim doc from README, for instance in gp.nvim

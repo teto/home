@@ -4,9 +4,8 @@
 
 NIXPKGS_REPO := env_var('HOME') / 'nixpkgs'
 BLOG_FOLDER := "${HOME}/blog"
-NOVOS_REPO := "/home/teto/nova/doctor"
 HM_REPO := "/home/teto/hm"
-JK_SEEDER_REPO := "/home/teto/nova/jinko-seeder"
+SECRETS_FOLDER := justfile_directory() / "secrets"
 
 # not versioned, where we store secrets
 
@@ -35,14 +34,11 @@ switch: (nixos-rebuild "switch" "")
 rollback: (nixos-rebuild "switch" "--rollback")
 
 repl:
-    nix repl ~/home \
-        --override-input nixpkgs {{ NIXPKGS_REPO }} \
-        --override-input hm {{ HM_REPO }} \
-        --override-input nova-doctor {{ NOVOS_REPO }} \
-        --override-input jinko-seeder {{ JK_SEEDER_REPO }}
+  nix repl ~/home \
+      --override-input nixpkgs {{ NIXPKGS_REPO }} \
+      --override-input hm {{ HM_REPO }}
 
 # --log-format internal-json
-# --override-input nova /home/teto/nova/doctor \
 # nom can hide when there is a lock
 
 # |& nom
@@ -52,8 +48,6 @@ nixos-rebuild command builders="--option builders \"$NOVA_OVH1\" -j0":
       .#nixosConfigurations.jedha.config.system.build.toplevel \
       --override-input nixpkgs {{ NIXPKGS_REPO }} \
       --override-input hm {{ HM_REPO }} \
-      --override-input nova-doctor {{ NOVOS_REPO }} \
-      --override-input jinko-seeder {{ JK_SEEDER_REPO }} \
        {{ builders }} \
        --no-write-lock-file --show-trace
 
@@ -62,8 +56,6 @@ nixos-rebuild command builders="--option builders \"$NOVA_OVH1\" -j0":
       --use-remote-sudo \
       --override-input nixpkgs {{ NIXPKGS_REPO }} \
       --override-input hm {{ HM_REPO }} \
-      --override-input nova-doctor {{ NOVOS_REPO }} \
-      --override-input jinko-seeder {{ JK_SEEDER_REPO }} \
        {{ builders }} \
        {{ command }}
 

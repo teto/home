@@ -204,27 +204,6 @@
 
     # nvd.url = "git+ssh://git@gitlab.com/mattator/nvd?ref=add-module";
 
-    # TODO this should not be necessary anymore ? just look at doctor ?
-    nova-doctor = {
-      # url = "git+ssh://git@git.novadiscovery.net/sys/doctor?ref=dev";
-      url = "git+ssh://git@git.novadiscovery.net/sys/doctor?ref=matt/scratch";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "hm";
-      # otherwise it gives lockfile contains unlocked input (because its value is `path:.`)
-      inputs.user-profile.follows = "nixpkgs";
-      inputs.userConfig.follows = "nixpkgs";
-    };
-
-    # nova-ci = {
-    #   url = "git+ssh://git@git.novadiscovery.net/infra/ci-runner";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
-    jinko-seeder = {
-      url = "git+ssh://git@git.novadiscovery.net/jinko/dorayaki/jinko-seeder";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nur.url = "github:nix-community/NUR";
 
     # ouch-yazi-plugin = {
@@ -793,6 +772,7 @@
 
           modules = [
             ./hosts/laptop
+            self.inputs.nixos-hardware.nixosModules.dell-xps-13-9310
           ];
         };
 
@@ -803,8 +783,6 @@
           # self.inputs.nova-doctor.overlays.default);
           # self.inputs.nova-doctor.overlays.byNamePkgsOverlay
           modules = [
-            self.nixosModules.nova
-            self.inputs.nixos-hardware.nixosModules.dell-xps-13-9310
           ];
 
           # TODO retain existing specialArgs and inject mine ?!
@@ -819,7 +797,6 @@
               # so it
               configuration = "xps3910";
             };
-            doctor = self.inputs.nova-doctor;
           };
 
         };
@@ -847,18 +824,13 @@
           specialArgs = {
             withSecrets = true;
             # pkgs = myPkgs.extend(
-            #   self.inputs.nova-doctor.overlays.default).extend(
-            #   self.inputs.nova-doctor.overlays.byNamePkgsOverlay
             #
             #     );
           };
 
           modules = [
-            self.nixosModules.nova
             ({
               nixpkgs.overlays = [
-                self.inputs.nova-doctor.overlays.default
-                self.inputs.nova-doctor.overlays.autoCalledPackages
               ];
             })
           ];
@@ -876,14 +848,12 @@
       # TODO scan hm/{modules, profiles} folder
       homeProfiles = (importDir ./hm/profiles) // {
         neovim = ./hm/profiles/neovim;
-        nova = ./hm/profiles/nova/default.nix;
         mpv = ./hm/profiles/mpv.nix;
 
         teto-desktop = ./hm/profiles/desktop.nix;
         sway-notification-center = ./hm/profiles/swaync.nix;
         waybar = ./hm/profiles/waybar.nix;
 
-        # provided by nova-nix config
         # vscode = ./hm/profiles/vscode.nix;
       };
 
@@ -940,7 +910,6 @@
 
         default-hm = hm-common;
         teto-nogui = nixos/accounts/teto/teto.nix;
-        nova = nixos/profiles/nova.nix;
         nix-daemon = nixos/profiles/nix-daemon.nix;
         nix-ld = nixos/profiles/nix-ld.nix;
         ntp = nixos/profiles/ntp.nix;

@@ -1,0 +1,14 @@
+{
+  "plugins": {
+    "i3-vim-syntax": [],
+    "neovim": {
+      "rev": "72a04c4"
+    },
+    "pinkmare": [],
+    "rocks.nvim": {
+      "rev": "488639c"
+    },
+    "vim-listchars": [],
+    "vim-sorcerer": []
+  }
+}
