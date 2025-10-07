@@ -58,6 +58,7 @@ in
     panvimdoc # to generate vim doc from README, for instance in gp.nvim
     # poppler for pdf preview
 
+    viu # a console image viewer
     (pkgs.tetoLib.ignoreBroken mdcat) # markdown viewer
 
   ];

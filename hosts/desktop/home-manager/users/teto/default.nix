@@ -64,17 +64,7 @@
   # for programs not merged yet
   home.packages =
     with pkgs;
-    let
-      llmPkgs = [
-        koboldcpp
-        llama-cpp # for llama-server and benchmarks
-        # open-webui # broken
-        sillytavern
-        # python3Packages.unsloth # broken
-      ];
-    in
-    llmPkgs
-    ++ [
+    [
       # llm-ls # needed by the neovim plugin
 
       cointop # bitcoin tracker
@@ -85,7 +75,6 @@
       jaq # jq in rust
 
       lact # GPU controller, needs a daemon
-      lutris # for gaming
 
       # xorg.xwininfo # for stylish
       moar # test as pager
@@ -116,6 +105,7 @@
     enableIMPackages = true;
     japanese = true;
   };
+
   # package-sets.enableDesktopGUIPackages = true;
 
   home.sessionVariables = {

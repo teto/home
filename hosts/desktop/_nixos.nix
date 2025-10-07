@@ -8,6 +8,9 @@
   ...
 }:
 let
+  inherit (pkgs.tetoLib) ignoreBroken;
+
+
   haumea = flakeSelf.inputs.haumea;
 
   # NOT READY YET
@@ -63,6 +66,7 @@ in
     ../../nixos/profiles/greetd.nix
     ../../nixos/profiles/docker-daemon.nix
 
+      flakeSelf.inputs.harmonia.nixosModules.harmonia
     flakeSelf.nixosModules.desktop
     flakeSelf.nixosModules.nix-daemon
     flakeSelf.nixosModules.steam
@@ -227,13 +231,14 @@ in
     # Enable CUPS to print documents.
     # https://nixos.wiki/wiki/Printing
     printing = {
+      # set to 
       enable = true;
       browsing = false;
       drivers = [
         pkgs.gutenprint
         pkgs.gutenprintBin
         # See https://discourse.nixos.org/t/install-cups-driver-for-brother-printer/7169
-        pkgs.brlaser
+        (ignoreBroken pkgs.brlaser)
       ];
     };
 
@@ -318,6 +323,9 @@ in
       ''
     )
   ];
+
+  # testing nix cache
+  services.harmonia-dev.daemon.enable = true;
 
   environment.systemPackages = [
     pkgs.gpu-viewer

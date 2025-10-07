@@ -133,7 +133,7 @@ let
     # gcc # this is sadly a workaround to be able to run :TSInstall
     luajitPackages.luacheck
 
-    luaformatter
+    # luaformatter # broken
     # nvimLua.pkgs.luarocks # should be brought by rocks config
 
     # luaPackages.lua-lsp

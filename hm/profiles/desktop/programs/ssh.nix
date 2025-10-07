@@ -16,11 +16,11 @@
 
   # enableDefaultConfig = false;
 
-  addKeysToAgent = "yes";
-
   # can I have it per target ?
   # controlPath = "";
   matchBlocks = lib.optionalAttrs withSecrets {
+
+    # userKnownHostsFile
 
     gitlab = {
       match = "host gitlab.com";
@@ -36,6 +36,8 @@
       match = "user teto host ${secrets.jakku.hostname}";
       hostname = secrets.jakku.hostname;
       user = "teto";
+
+      addKeysToAgent = "yes";
       # le port depend du service
       port = secrets.jakku.sshPort;
       identityFile = "${secretsFolder}/ssh/id_rsa";
@@ -63,6 +65,7 @@
       identityFile = "${secretsFolder}/ssh/id_rsa";
       user = "teto";
       # host = "router";
+      addKeysToAgent = "yes";
       hostname = secrets.router.hostname;
       identitiesOnly = true;
       # experimental
@@ -74,6 +77,7 @@
     };
 
     router-lan = {
+      addKeysToAgent = "yes";
       # checkHostIP
       identityFile = "${secretsFolder}/ssh/id_rsa";
       user = "teto";

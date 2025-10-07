@@ -38,6 +38,8 @@
       flake = false;
     };
 
+    harmonia.url = "github:nix-community/harmonia";
+
     luals-busted-addon = {
       url = "github:LuaCATS/busted";
       flake = false;

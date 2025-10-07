@@ -100,9 +100,15 @@ in
 
     (mkIf cfg.llms {
       home.packages = [
+        koboldcpp
+        llama-cpp # for llama-server and benchmarks
+        # open-webui # broken
+        sillytavern
+        # python3Packages.unsloth # broken
 
         # pkgs.aider-chat # breaks
         pkgs.python3Packages.huggingface-hub
+        # pkgs.python3Packages.vllm
         # pkgs.repomix # to upload a codebase to llm
       ];
     })
@@ -130,7 +136,7 @@ in
           pkgs.timg # to display images in terminal, to compare with imgcat ?
           myImagemagick
 
-          pkgs.kcc # to convert ebooks to remarkable format
+          (ignoreBroken pkgs.kcc) # to convert ebooks to remarkable format
           pkgs.ncmpcpp # outdated/ replaced by rmpc
           # pkgs.mpc_cli
           # pkgs.ymuse # GUI
@@ -260,8 +266,8 @@ in
         (ignoreBroken python3Packages.subliminal) # to download subtitles
         immich-cli
         mujmap-unstable # to sync notmuch tags across jmap
-        oculante # image viewer
-        calcure
+        (ignoreBroken oculante) # image viewer
+        (ignoreBroken calcure)
         # signal-desktop # installe a la main
         # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail
         vimiv-qt
@@ -416,6 +422,8 @@ in
           perf-tools # to interpret
 
           rainfrog # database exploration
+        (ignoreBroken trurl) # used to parse url in the firefox-router executable
+
           process-compose # docker-compose - like
           # rpl # to replace strings across files
           strace
@@ -563,6 +571,7 @@ in
         pkgs.mokuro # broken because of manga-ocr
         pkgs.python3Packages.manga-ocr
         tagainijisho # japanse dict; like zkanji Qt based
+        (ignoreBroken tagainijisho) # japanse dict; like zkanji Qt based
         # flakeSelf.inputs.vocage.packages."x86_64-linux".vocage
         jiten # unfree, helpful for jap.nvim
         sudachi-rs # a japanese tokenizer (can have sudachidict builtins)
@@ -570,6 +579,16 @@ in
       ];
 
       # xdg.dataFile."jmdict".source = pkgs.jmdict;
+    })
+
+    (mkIf (cfg.japanese && cfg.llms) {
+
+      home.packages = with pkgs; [
+
+        pkgs.mokuro # broken because of manga-ocr
+        pkgs.python3Packages.manga-ocr
+      ];
+
     })
 
   ];
