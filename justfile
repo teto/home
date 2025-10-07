@@ -218,22 +218,23 @@ nix-check-db:
 
 # receive secrets
 secrets-wormhole-receive:
-    wormhole-rs receive
+  # TODO one issue here is that we dont restore permissions
+  # after we also need to call stow-secrets
+  wormhole-rs receive
 
 # rsync
 secrets-scp-sync:
     # laptop must exist in ssh config
-    scp -r laptop:/home/teto/home/secrets ~/home/secrets
+    scp -r laptop:/home/teto/home/secrets {{ SECRETS_FOLDER }}
 
 # install git hooks
 git-hooks:
     ln -sf {{ justfile_directory() }}/contrib/pre-push  .git/hooks
 
 secrets-send:
-    # wormhole-rs send ~/.gnupg
-    # wormhole-rs send ~/.password-store 
-    # wormhole-rs send ~/.ssh
-    wormhole-rs send ~/home/secrets
+    wormhole-rs send {{ SECRETS_FOLDER }}
+
+
 
 # snippet to regenerate the doc of some project
 panvimdoc:

@@ -1,6 +1,6 @@
 # https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/pi/pimsync/package.nix
 {
 
-  enable = true;
-
+  # broken
+  enable = false;
 }
