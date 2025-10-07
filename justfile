@@ -5,10 +5,8 @@
 NIXPKGS_REPO := env_var('HOME') / 'nixpkgs'
 BLOG_FOLDER := "${HOME}/blog"
 HM_REPO := "/home/teto/hm"
-SECRETS_FOLDER := justfile_directory() / "secrets"
 
 # not versioned, where we store secrets
-
 SECRETS_FOLDER := justfile_directory() / "secrets"
 
 import? 'justfile.generated'
