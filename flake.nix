@@ -304,35 +304,6 @@
       dotfilesPath = "/home/teto/home";
       secretsFolder = "/home/teto/home/secrets";
 
-      novaUserProfile = {
-        login = "teto";
-        firstname = "teto";
-        lastname = "sse";
-        displayname = "Matt";
-        username = "teto";
-        business_unit = "sse";
-        gitlabId = "matthieu.coudron";
-        keyboard_layout = "qwerty";
-
-        # generated with nix run nixpkgs.mkpasswd mkpasswd -m sha-512
-        # hashedPassword = secrets.users.teto.hashedPassword;
-        password = "$6$UcKAXNGR1brGF9S4$Xk.U9oCTMCnEnN5FoLni1BwxcfwkmVeyddzdyyHAR/EVXOGEDbzm/bTV4F6mWJxYa.Im85rHQsU8I3FhsHJie1";
-        # email = "matthieu.coudron@novadiscovery.com";
-
-        has_sudo = true;
-        collections = [
-          # "matthieu.coudron/fortunes"
-          "nova/nix-ld" # for monolix
-          "nova/julia"
-          "nova/python"
-          # "nova/virtualbox"
-        ];
-
-        # TEMP
-        laptop = true;
-        # so it
-        configuration = "xps3910";
-      };
 
       secrets = import ./nixpkgs/secrets.nix {
         inherit secretsFolder dotfilesPath;
@@ -382,8 +353,6 @@
             inherit withSecrets;
             flakeSelf = self;
             # TODO check how to remove one
-            userConfig = novaUserProfile;
-            inherit novaUserProfile;
 
             inherit dotfilesPath secretsFolder;
           };
@@ -418,11 +387,6 @@
             # mptcp = self.inputs.mptcp-flake.overlays.default;
             # nur = self.inputs.nur.overlay;
 
-            # the nova overlay just brings ztp-creds and gitlab-ssh-keys
-            # removing the overlay means we dont need it during evaluation
-            # we dont want to pull those inputs for secret-less envs
-            # self.inputs.nova-doctor.overlays.default
-            # self.inputs.nova-doctor.overlays.byNamePkgsOverlay
 
             # self.inputs.nixpkgs-wayland.overlay
             # self.inputs.nix.overlays.default
@@ -601,7 +565,6 @@
             inherit withSecrets;
             # flakeSelf.inputs = self.inputs;
             inherit flakeSelf;
-            inherit novaUserProfile;
             # TODO get it from ./. ?
             inherit dotfilesPath secretsFolder;
           };
@@ -782,8 +745,6 @@
         tatooine = laptop.extendModules {
           # pkgs = ;
           # myPkgs.extend(
-          # self.inputs.nova-doctor.overlays.default);
-          # self.inputs.nova-doctor.overlays.byNamePkgsOverlay
           modules = [
           ];
 
@@ -794,7 +755,7 @@
             inherit dotfilesPath;
 
             withSecrets = true;
-            userConfig = novaUserProfile // {
+            userConfig = {
               laptop = true;
               # so it
               configuration = "xps3910";

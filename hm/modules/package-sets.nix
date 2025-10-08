@@ -347,7 +347,6 @@ in
           sops # password 'manager'
           glab # gitlab cli
           hexyl # hexcode viewer
-          pkgs.trurl # used to parse url in the firefox-router executable
 
           libossp_uuid # for the 'libuuid' executable
 
@@ -422,7 +421,7 @@ in
           perf-tools # to interpret
 
           rainfrog # database exploration
-        (ignoreBroken trurl) # used to parse url in the firefox-router executable
+          (ignoreBroken trurl) # used to parse url in the firefox-router executable
 
           process-compose # docker-compose - like
           # rpl # to replace strings across files
@@ -570,7 +569,6 @@ in
         pkgs.kanji-stroke-order-font # for memento, font that shows strike order (!!) cool when learning
         pkgs.mokuro # broken because of manga-ocr
         pkgs.python3Packages.manga-ocr
-        tagainijisho # japanse dict; like zkanji Qt based
         (ignoreBroken tagainijisho) # japanse dict; like zkanji Qt based
         # flakeSelf.inputs.vocage.packages."x86_64-linux".vocage
         jiten # unfree, helpful for jap.nvim

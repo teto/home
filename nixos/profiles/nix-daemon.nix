@@ -12,6 +12,10 @@
     # flakeSelf.inputs.nix-schemas.packages.${pkgs.system}.nix
     ;
 
+    buildMachines = [
+
+    ];
+
     settings = {
       #   # http-connections = 25 is the default
       #   http2 = true;

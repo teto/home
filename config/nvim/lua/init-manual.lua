@@ -758,7 +758,7 @@ vim.keymap.set('n', '<leader>rg', '<Cmd>Grepper -tool rg -open -switch<CR>', { r
 --	 { noremap = true, silent = true }
 -- )
 
-require('teto.secrets')
+local has_secrets, secrets = pcall(require,'teto.secrets')
 
 -- if has_gitsigns then
 --     local tgitsigns = require('plugins.gitsigns')

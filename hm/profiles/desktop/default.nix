@@ -37,8 +37,7 @@ in
     flakeSelf.homeModules.package-sets
     # ./programs/gpg.nix
   ]
-  ++ lib.optionals (withSecrets) [
-    flakeSelf.homeProfiles.nova
+  ++ lib.optionals withSecrets [
   ];
 
   # doing so enables support for it in greetd
