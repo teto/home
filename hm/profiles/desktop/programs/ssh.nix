@@ -21,6 +21,16 @@
   matchBlocks = lib.optionalAttrs withSecrets {
 
     # userKnownHostsFile
+    github = {
+      match = "host github.com";
+      user = "teto";
+      identityFile = "${secretsFolder}/ssh/id_rsa";
+      identitiesOnly = true;
+      extraOptions = {
+        AddKeysToAgent = "yes";
+      };
+    };
+
 
     gitlab = {
       match = "host gitlab.com";

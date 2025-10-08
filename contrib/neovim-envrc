@@ -1,1 +1,1 @@
-use flake ~/neovim-nightly-overlay#toto
+use flake ~/neovim-nightly-overlay

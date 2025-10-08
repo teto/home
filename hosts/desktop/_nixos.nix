@@ -238,7 +238,7 @@ in
         pkgs.gutenprint
         pkgs.gutenprintBin
         # See https://discourse.nixos.org/t/install-cups-driver-for-brother-printer/7169
-        (ignoreBroken pkgs.brlaser)
+        pkgs.brlaser
       ];
     };
 
@@ -324,8 +324,6 @@ in
     )
   ];
 
-  # testing nix cache
-  services.harmonia-dev.daemon.enable = true;
 
   environment.systemPackages = [
     pkgs.gpu-viewer

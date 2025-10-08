@@ -8,9 +8,12 @@
   resolvconf.dnsSingleRequest = false;
 
   firewall.allowedTCPPorts =
-    lib.mkIf config.home-manager.users.teto.services.ollama.enable
+    lib.optionals config.home-manager.users.teto.services.ollama.enable
       # config.home-manage
-      [ config.home-manager.users.teto.services.ollama.port ];
+      [ config.home-manager.users.teto.services.ollama.port ]
+    ++ lib.optionals config.services.harmonia-dev.enable 
+      [ 443 80 ]
+      ;
 
   firewall.allowedUDPPorts = [ ];
 

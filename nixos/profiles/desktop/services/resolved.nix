@@ -1,4 +1,4 @@
 {
-  enable = false; # replaced by adguardhome
+  enable = true; # replaced by adguardhome
   dnssec = "false"; # "allow-downgrade";
 }
