@@ -1,11 +1,11 @@
 { ... }:
 {
-  enable = false;
   # _imports = [
   #   ../../../nixos/profiles/redis.nix
   # ];
 
   servers.test = {
+    enable = false;
 
     # bind = null; # bind to all interfaces
     # bind can accept several IPs

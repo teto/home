@@ -145,7 +145,7 @@ let
     manix # should be no need, telescope-manix should take care of it
     nodePackages.vscode-langservers-extracted # needed for jsonls aka "vscode-json-language-server"
     # prettier sadly can't use buildNpmPackage because no lockfile https://github.com/NixOS/nixpkgs/issues/229475
-    nodePackages.dockerfile-language-server-nodejs
+    dockerfile-language-server
 
     # TODO map it to a plugin instead
     # nodePackages.typescript-language-server

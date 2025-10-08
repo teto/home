@@ -18,7 +18,15 @@
     # logLevel = "TRACE";
 
     # default is openresolv
-    # dns = "systemd-resolved";
+    dns = if config.services.adguardhome.enable 
+      then "none"
+      else "systemd-resolved";
+
+    
+    appendNameservers = [
+      # refers to adguard home
+      "127.0.0.1"
+    ];
 
     # may generate problems
     wifi.scanRandMacAddress = false;

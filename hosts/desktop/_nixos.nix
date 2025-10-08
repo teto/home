@@ -83,8 +83,8 @@ in
     # ../../nixos/profiles/localai.nix
 
     ../../nixos/profiles/nextcloud.nix
-    ../../nixos/profiles/postgresql.nix
-    ../../nixos/profiles/redis.nix
+    # ../../nixos/profiles/postgresql.nix
+    # ../../nixos/profiles/redis.nix
 
   ]
 

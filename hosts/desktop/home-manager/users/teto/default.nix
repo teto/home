@@ -13,7 +13,7 @@
     # flakeSelf.homeModules.bash
 
     flakeSelf.homeProfiles.qutebrowser
-    flakeSelf.inputs.nix-index-database.hmModules.nix-index
+    flakeSelf.inputs.nix-index-database.homeModules.nix-index
 
     flakeSelf.homeModules.teto-nogui
     flakeSelf.homeModules.experimental
