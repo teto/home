@@ -104,6 +104,7 @@
     llms = false;
     enableIMPackages = true;
     japanese = true;
+    enableGaming = true;
   };
 
   # package-sets.enableDesktopGUIPackages = true;
