@@ -2,6 +2,8 @@
 #+author: teto
 #+NAME: demo
 
+This is "tetos", teto's OS, nixos-based.
+
 * home
 
 This folder contains my customizations for:

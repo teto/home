@@ -7,7 +7,8 @@
   openFirewall = false;
 
   # default is 80
-  port = 80;
+  # annoys 
+  port = 8084;
 
   # https://github.com/AdguardTeam/AdGuardHome/wiki/Configuration#configuration-file
   settings =  {

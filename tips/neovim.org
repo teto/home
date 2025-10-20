@@ -25,6 +25,12 @@ should work but it does not. Use intermediate file.
 
   i_ctrl-R then `=&rtp` and you are done !
 
+
+** development
+ 
+src/nvim/eval.lua contains functions
+ 
+ 
 ** debug slow situations
 
    @

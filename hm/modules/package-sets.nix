@@ -340,6 +340,7 @@ in
           (backblaze-b2.override { execName = "b2"; })
           dasht # ~ zeal but in terminal
           difftastic # smart diffs
+          lsof # to see open files
           docker-credential-helpers
           flakeSelf.inputs.starship-jj.packages.${pkgs.system}.default # custom.jj for starship
           gettext # for envsubst (TO NOT CONFOUND with gettext's envsubst)
@@ -359,6 +360,7 @@ in
           # gitAndTools.git-remote-hg
           # nix-prefetch-scripts # broken
           manix
+          net-tools # for netstat
           nix-output-monitor # 'nom'
 
           nix-diff
@@ -458,11 +460,20 @@ in
     })
 
     (mkIf cfg.enableGaming {
-      home.packages = with pkgs; [
-
-        lutris
-
-      ];
+      home.packages = let 
+        # workaroudn to be able to install yousician
+        # see https://github.com/NixOS/nixpkgs/issues/410677
+        my_lutris = pkgs.lutris.override {
+          extraLibraries =
+            pkgs: with pkgs; [
+              libadwaita
+              gtk4
+            ];
+        };
+      in 
+        with pkgs; [
+          my_lutris
+        ];
 
     })
 
