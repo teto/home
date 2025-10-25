@@ -16,8 +16,11 @@
     dns.bootstrap_dns = [ 
       "127.0.0.1" 
     ];
+
     dns.upstream_dns = [
+      # HACK this works only in this location
       "192.168.1.254" # router
+      "192.168.1.14" # router
     ];
 
     users = [];

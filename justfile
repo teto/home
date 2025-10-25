@@ -42,8 +42,9 @@ repl:
 
 # |& nom
 # env('HOST')
+# builders --option builders \"$NOVA_OVH1\" -j0
 [private]
-nixos-rebuild command builders="--option builders \"$NOVA_OVH1\" -j0":
+nixos-rebuild command builders="":
     nom build \
       .#nixosConfigurations.{{ HOSTNAME }}.config.system.build.toplevel \
       --override-input nixpkgs {{ NIXPKGS_REPO }} \

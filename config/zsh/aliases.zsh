@@ -45,25 +45,17 @@ rfw(){
 alias nvim-dev="nix develop --override-input nixpkgs /home/teto/nixpkgs --no-write-lock-file ./contrib#neovim-developer  --show-trace"
 # alias notif-center='kill -s USR1 $(pidof deadd-notification-center)'
 # --option extra-sandbox-paths "/bin/sh=$(readlink -f $(which bash))"
-alias local-rebuild="nixos-rebuild --flake ~/home --override-input nixpkgs-teto /home/teto/nixpkgs --override-input hm /home/teto/hm --override-input nova /home/teto/nova/doctor --override-input mptcp-flake /home/teto/mptcp/mptcp-flake --no-write-lock-file switch --show-trace --use-remote-sudo"
+# alias local-rebuild="nixos-rebuild --flake ~/home --override-input nixpkgs-teto /home/teto/nixpkgs --override-input hm /home/teto/hm --override-input nova /home/teto/nova/doctor --override-input mptcp-flake /home/teto/mptcp/mptcp-flake --no-write-lock-file switch --show-trace --use-remote-sudo"
 
 # Gitops quick
 # TODO check return type in bw unlock --check 
-alias bnr='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && nix develop --option builders "$NOVA_OVH1"'
+# alias bn='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && nix develop'
+# alias bnr='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && nix develop --option builders "$NOVA_OVH1"'
 alias nfs='nix flake show'
 
 
-
-alias bn='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && nix develop'
-# function bn {
-
-
-# }
-
 # https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz
 # -f channel:nixos-unstable'
-# github:nixos/nixpkgs/ff9efb0724de5ae0f9db9df2debefced7eb1571d
-# alias hsenv='nix shell nixpkgs#ghc nixpkgs#haskell.packages.ghc8107.cabal-install nixpkgs#pkg-config nixpkgs#haskell-language-server'
 
 # fzf-diff (https://medium.com/@GroundControl/better-git-diffs-with-fzf-89083739a9cb)
 function fzd {

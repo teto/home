@@ -759,7 +759,14 @@
               configuration = "xps3910";
             };
           };
+        };
 
+        neptune = mkNixosSystem {
+          modules = [
+            ./hosts/neptune/configuration.nix
+          ];
+          hostname = "neotokyo";
+          withSecrets = true;
         };
 
         neotokyo = mkNixosSystem {
@@ -1030,6 +1037,7 @@
 
         # for now
         # sshOpts = [ "-F" "ssh_config" ];
+        # TODO go through all nixosConfigurations actually
         nodes =
           let
             # system = "x86_64-linux";
@@ -1043,12 +1051,26 @@
             };
           in
           {
+            neptune =
+              genNode ({
+                name = "neptune";
+                # local-facing address
+                hostname = "192.168.1.21"; # temporary
+              })
+              // {
+                # sshOpts = [ "-F" "ssh_config" ];
+                sshUser = "mama";
+                sshOpts = [
+                  # "-i/home/teto/.ssh/id_rsa"
+                  # "-p${toString secrets.router.sshPort}"
+                ];
+              };
+
             router =
               genNode ({
                 name = "router";
                 # local-facing address
                 hostname = "router";
-                # hostname = "10.0.0.1";
               })
               // {
                 # sshOpts = [ "-F" "ssh_config" ];
@@ -1057,7 +1079,6 @@
                   # "-i/home/teto/.ssh/id_rsa"
                   # "-p${toString secrets.router.sshPort}"
                 ];
-
               };
 
             neotokyo =
