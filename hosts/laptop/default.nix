@@ -47,30 +47,6 @@ let
       ];
     };
 
-  # desktopAutoloaded =
-  #   { pkgs, ... }@args:
-  # flakeSelf.inputs.haumea.lib.load {
-  #   src = flakeSelf.inputs.nix-filter {
-  #     root = ../desktop;
-  #     include = [
-  #       # TODO just include directly
-  #       # "sops.nix"
-  #       "sops/secrets.nix"
-  #     ];
-  #     # exclude = [
-  #     #   "teto"
-  #     #   "root"
-  #     # ];
-  #   };
-  #
-  #   inputs = args // {
-  #     inputs = flakeSelf.inputs;
-  #   };
-  #   transformer = [
-  #     haumea.lib.transformers.liftDefault
-  #     (haumea.lib.transformers.hoistAttrs "_import" "import")
-  #   ];
-  # };
 in
 {
   imports = [
@@ -88,6 +64,7 @@ in
 
     ../../nixos/profiles/docker-daemon.nix
     ../../nixos/profiles/podman.nix
+    ../../nixos/profiles/pixiecore.nix
     # ../../nixos/profiles/homepage-dashboard.nix
     ../../nixos/profiles/qemu.nix
     ../../nixos/profiles/steam.nix
@@ -102,8 +79,6 @@ in
   ];
 
   nixpkgs.overlays = lib.optionals withSecrets [
-    flakeSelf.inputs.nova-doctor.overlays.default
-    flakeSelf.inputs.nova-doctor.overlays.autoCalledPackages
 
   ];
 
@@ -206,15 +181,6 @@ in
       enable = true;
       browsing = true;
       drivers = [ pkgs.gutenprint ];
-    };
-
-    pulseaudio = {
-      enable = false;
-      systemWide = false;
-
-      # extraClientConf =
-      # only this one has bluetooth
-      package = pkgs.pulseaudioFull;
     };
 
     # central regulatory domain agent (CRDA) to allow exchange between kernel and userspace

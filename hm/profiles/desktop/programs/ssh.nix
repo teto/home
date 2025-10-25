@@ -1,6 +1,7 @@
 {
   lib,
   secrets,
+  osConfig,
   withSecrets,
   secretsFolder,
   ...
@@ -22,6 +23,7 @@
   # TODO generate those from the list of nixosConfigurations ?
   # can I have it per target ?
   # controlPath = "";
+  # osConfig.
   matchBlocks = lib.optionalAttrs withSecrets {
 
     # userKnownHostsFile

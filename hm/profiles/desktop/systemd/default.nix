@@ -128,7 +128,7 @@
     };
 
     # user.services.
-    pimsync.Service = lib.mkIf config.programs.pimsync.enable {
+    pimsync.Service = lib.mkIf config.programs.pimsync-teto.enable {
       Environment = [
         "PATH=$PATH:${
           pkgs.lib.makeBinPath [

@@ -1,3 +1,0 @@
-http http://localhost:8081/v2/calibration_manager/calibration/${CALIB_CORE_ID}/snapshots/${CALIB_SNAP_ID}/performance X-jinko-manifest-version:1 X-jinko-manifest:eyJyZXNvdXJjZXMiOiB7fX0K
-http http://localhost:8081/v2/trial_manager/trial/${TRIAL_CORE_ID}/snapshots/${TRIAL_SNAP_ID}/performance X-jinko-manifest-version:1 X-jinko-manifest:eyJyZXNvdXJjZXMiOiB7fX0K
-

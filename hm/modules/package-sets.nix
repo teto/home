@@ -578,8 +578,6 @@ in
         # https://github.com/NixOS/nixpkgs/pull/368909
         pkgs.kakasi # convert kanjis into kanas etc
         pkgs.kanji-stroke-order-font # for memento, font that shows strike order (!!) cool when learning
-        pkgs.mokuro # broken because of manga-ocr
-        pkgs.python3Packages.manga-ocr
         (ignoreBroken tagainijisho) # japanse dict; like zkanji Qt based
         # flakeSelf.inputs.vocage.packages."x86_64-linux".vocage
         jiten # unfree, helpful for jap.nvim

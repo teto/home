@@ -432,7 +432,7 @@ vim.opt.clipboard = 'unnamedplus'
 -- display a menu when need to complete a command
 -- list:longest, -- list breaks the pum
 vim.opt.wildmode = { 'longest', 'list' } -- longest,list' => fills out longest then show list
-vim.opt.pumborder = "rounded"
+-- vim.opt.pumborder = "rounded"
 -- set wildoptions+=pum
 
 vim.g.hoogle_fzf_cache_file = vim.fn.stdpath('cache') .. '/hoogle_cache.json'

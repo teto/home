@@ -2,6 +2,7 @@
 # provide a default
 # Add justfile() function, returning the current justfile, and justfile_directory()
 
+HOSTNAME := `hostname`
 NIXPKGS_REPO := env_var('HOME') / 'nixpkgs'
 BLOG_FOLDER := "${HOME}/blog"
 HM_REPO := "/home/teto/hm"
@@ -40,10 +41,11 @@ repl:
 # nom can hide when there is a lock
 
 # |& nom
+# env('HOST')
 [private]
 nixos-rebuild command builders="--option builders \"$NOVA_OVH1\" -j0":
     nom build \
-      .#nixosConfigurations.jedha.config.system.build.toplevel \
+      .#nixosConfigurations.{{ HOSTNAME }}.config.system.build.toplevel \
       --override-input nixpkgs {{ NIXPKGS_REPO }} \
       --override-input hm {{ HM_REPO }} \
        {{ builders }} \
@@ -277,3 +279,7 @@ test-msmtp-send-mail:
 dbus-list-sessions:
     # org.freedesktop.DBus.ListNames
     dbus-send --session --dest=org.freedesktop.DBus --type=method_call --print-reply /org/freedesktop/DBus org.freedesktop.DBus.ListNames
+
+# discover local network
+avahi-discover:
+  avahi-browse --all --ignore-local --resolve --terminate

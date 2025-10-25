@@ -360,7 +360,7 @@
         };
 
       pkgImport =
-        src:
+        src: cudaSupport:
         import src {
           inherit system;
           overlays = [
@@ -387,14 +387,13 @@
             # mptcp = self.inputs.mptcp-flake.overlays.default;
             # nur = self.inputs.nur.overlay;
 
-
             # self.inputs.nixpkgs-wayland.overlay
             # self.inputs.nix.overlays.default
           ]
           ++ (src.lib.attrValues self.overlays);
           config = {
             # on desktop
-            cudaSupport = true;
+            inherit cudaSupport;
             cudaCapabilities = [
               "6.0"
               "7.0"
@@ -482,7 +481,8 @@
           };
         };
 
-      myPkgs = pkgImport self.inputs.nixpkgs;
+      myPkgs = pkgImport self.inputs.nixpkgs false;
+      myPkgsCuda = pkgImport self.inputs.nixpkgs true;
       unstablePkgs = pkgImport self.inputs.nixos-unstable;
       # stablePkgs = pkgImport self.inputs.nixos-stable;
 
@@ -743,8 +743,6 @@
 
         # see https://determinate.systems/posts/extending-nixos-configurations
         tatooine = laptop.extendModules {
-          # pkgs = ;
-          # myPkgs.extend(
           modules = [
           ];
 
@@ -785,6 +783,7 @@
         jedha = desktop.extendModules ({
 
           specialArgs = {
+            pkgs = myPkgsCuda;
             withSecrets = true;
             # pkgs = myPkgs.extend(
             #
@@ -972,13 +971,6 @@
               version = "g${self.inputs.rsync-yazi-plugin.shortRev}";
 
               src = self.inputs.rsync-yazi-plugin;
-
-              # meta = {
-              #   description = "Yazi plugin to preview archives";
-              #   homepage = "https://github.com/ndtoan96/ouch.yazi";
-              #   license = myPkgs.lib.licenses.mit;
-              #   maintainers = with myPkgs.lib.maintainers; [ ];
-              # };
             };
 
           };
