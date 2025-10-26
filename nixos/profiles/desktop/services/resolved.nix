@@ -1,4 +1,6 @@
+{ config, ...}:
 {
-  enable = false; # replaced by adguardhome
+  # conflicts with adguardhome
+  enable = !config.services.adguardhome.enable;
   dnssec = "false"; # "allow-downgrade";
 }

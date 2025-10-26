@@ -27,7 +27,8 @@
       # ../desktop/teto/default.nix  # Track for regressions
 
       # neovim should come from the nixos profile
-      ../../../../desktop/home-manager/users/teto/services/nextcloud-client.nix
+      flakeSelf.homeModules.nextcloud-client
+      # ../../../../jedha/home-manager/users/teto/services/nextcloud-client.nix
 
       # ../../../../../hm/profiles/wezterm.nix
       flakeSelf.homeProfiles.wezterm

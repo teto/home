@@ -483,7 +483,7 @@
 
       myPkgs = pkgImport self.inputs.nixpkgs false;
       myPkgsCuda = pkgImport self.inputs.nixpkgs true;
-      unstablePkgs = pkgImport self.inputs.nixos-unstable;
+      unstablePkgs = pkgImport self.inputs.nixos-unstable false;
       # stablePkgs = pkgImport self.inputs.nixos-stable;
 
       genKey = str: nixpkgs.lib.replaceStrings [ ".nix" ] [ "" ] (builtins.baseNameOf (toString str));
