@@ -14,6 +14,9 @@
 
     buildMachines = [
       {
+        # using secrets.nix
+        hostName = "jedha.local";
+        system =  "x86_64-linux";
       }
 
     ];

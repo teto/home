@@ -285,7 +285,7 @@
     yazi = {
       url = "github:sxyazi/yazi";
       # url = "github:sxyazi/yazi?rev=00e8adc3decc370a7e14caaeae3676361549fceb";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -394,9 +394,10 @@
           config = {
             # on desktop
             inherit cudaSupport;
+            # nvidia.acceptLicense = true;
             cudaCapabilities = [
-              "6.0"
-              "7.0"
+              # "6.0"
+              "8.9"
             ]; # can speed up some builds ?
             checkMeta = false;
             # showDerivationWarnings = ["maintainerless"];
@@ -442,6 +443,7 @@
                   "cuda_cudart"
                   "cuda_cccl"
                   "cuda_nvcc"
+                  "cudnn"
                   "libcublas"
                   "libcufile"
                   "cudatoolkit"
@@ -782,7 +784,7 @@
           withSecrets = false;
           hostname = "jedha";
           modules = [
-            ./hosts/desktop/_nixos.nix
+            ./hosts/jedha/_nixos.nix
           ];
         };
 

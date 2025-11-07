@@ -31,7 +31,7 @@ in
       let
         notify-send = "${pkgs.libnotify}/bin/notify-send";
         wpctl = "${pkgs.wireplumber}/bin/wpctl";
-        mpc = "${pkgs.mpc_cli}/bin/mpc";
+        mpc = "${pkgs.mpc}/bin/mpc";
         # pkgs.writeShellApplication
         getIntegerVolume = pkgs.writeShellScript "get-volume-as-integer" ''
           volume=$(${wpctl} get-volume @DEFAULT_AUDIO_SINK@ | cut -f2 -d' ')

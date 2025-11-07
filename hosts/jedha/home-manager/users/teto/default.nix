@@ -35,7 +35,6 @@
     ./services/swaync.nix
     ./services/mpd.nix
     ./services/mpris.nix
-    ./services/nextcloud-client.nix
     ./services/wpaperd.nix
   ]
   ++ lib.optionals withSecrets [
@@ -77,7 +76,7 @@
       lact # GPU controller, needs a daemon
 
       # xorg.xwininfo # for stylish
-      moar # test as pager
+      moor # test as pager
       presenterm # for presentations from terminal/markdown (in rust, supports images, pretty cool)
 
       sioyek # pdf reader

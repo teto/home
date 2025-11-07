@@ -60,7 +60,7 @@ in
         curl
         just # to read justfiles, *replace* Makefile
         jq
-        gitAndTools.gitFull # to get send-email
+        gitFull # to get send-email
         gnumake
         tree
         stow
@@ -136,7 +136,7 @@ in
           pkgs.timg # to display images in terminal, to compare with imgcat ?
           myImagemagick
 
-          (ignoreBroken pkgs.kcc) # to convert ebooks to remarkable format
+          pkgs.kcc # to convert ebooks to remarkable format
           pkgs.ncmpcpp # outdated/ replaced by rmpc
           # pkgs.mpc_cli
           # pkgs.ymuse # GUI
@@ -197,7 +197,7 @@ in
           # - dua
           # ncdu # to see disk usage
           dua
-          du-dust # dust binary: rust replacement of du
+          dust # dust binary: rust replacement of du
           duf # better df (rust)
 
           # ncpamixer # pulseaudio TUI mixer
@@ -356,8 +356,8 @@ in
           # just in my branch :'(
           # luaPackages.lua-lsp
           # gdb-debug = prev.enableDebgging prev.gdb ;
-          # gitAndTools.git-annex # fails on unstable
-          # gitAndTools.git-remote-hg
+          # git-annex # fails on unstable
+          # git-remote-hg
           # nix-prefetch-scripts # broken
           manix
           net-tools # for netstat
@@ -368,7 +368,7 @@ in
           nix-tree
           nix-melt
           netcat-gnu # plain 'netcat' is the bsd one
-          gitAndTools.diff-so-fancy
+          diff-so-fancy
           jq
 
           # editorconfig-core-c
@@ -384,19 +384,19 @@ in
           rbw
           util-linux # for lsns (namespace listing)
           just
-          gitAndTools.gitFull # to get send-email
+          gitFull # to get send-email
           gnumake
 
           # haxe # to test neovim developement
           eza # to list files
-          gitAndTools.diff-so-fancy # todo install it via the git config instead
-          gitAndTools.gh # github client
-          gitAndTools.git-absorb
-          gitAndTools.git-crypt
-          # gitAndTools.git-extras
-          gitAndTools.git-recent # check recently touched branches
-          gitAndTools.gitbatch # to fetch form several repos at once
-          gitAndTools.lab # to interact with gitlab
+          diff-so-fancy # todo install it via the git config instead
+          gh # github client
+          git-absorb
+          git-crypt
+          # git-extras
+          git-recent # check recently touched branches
+          gitbatch # to fetch form several repos at once
+          lab # to interact with gitlab
           gitu # like lazygit
 
           haskellPackages.fast-tags # generate TAGS file for vim
@@ -423,7 +423,7 @@ in
           perf-tools # to interpret
 
           rainfrog # database exploration
-          (ignoreBroken trurl) # used to parse url in the firefox-router executable
+          trurl # used to parse url in the firefox-router executable
 
           process-compose # docker-compose - like
           # rpl # to replace strings across files
@@ -538,7 +538,7 @@ in
     (mkIf cfg.fonts {
       home.packages = with pkgs; [
         # fonts
-        ubuntu_font_family
+        ubuntu-classic
         inconsolata # monospace
 
         # gpt recommended:
@@ -578,7 +578,7 @@ in
         # https://github.com/NixOS/nixpkgs/pull/368909
         pkgs.kakasi # convert kanjis into kanas etc
         pkgs.kanji-stroke-order-font # for memento, font that shows strike order (!!) cool when learning
-        (ignoreBroken tagainijisho) # japanse dict; like zkanji Qt based
+        (tagainijisho) # japanse dict; like zkanji Qt based
         # flakeSelf.inputs.vocage.packages."x86_64-linux".vocage
         jiten # unfree, helpful for jap.nvim
         sudachi-rs # a japanese tokenizer (can have sudachidict builtins)

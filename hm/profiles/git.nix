@@ -10,15 +10,13 @@
   # for aws-vault ?
   home.file.".ssh/allowed_signers".text = "* ${builtins.readFile ../../perso/keys/id_rsa.pub}";
 
+  programs.delta.enable = true;
+
   programs.git = {
     enable = true;
 
-    # mkForce due to nova
-    userName = lib.mkForce "Matthieu C.";
-    userEmail = lib.mkForce "886074+teto@users.noreply.github.com";
 
-    package = pkgs.gitAndTools.gitFull; # to get send-email
-    delta.enable = true;
+    package = pkgs.gitFull; # to get send-email
 
     includes = [
       # { path = config.xdg.configHome + "/git/config.inc"; }
@@ -26,19 +24,26 @@
     ];
     # https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work
 
-    aliases = {
-      s = "status";
-      st = "status";
-      br = "branch";
-      d = "diff";
-      mg = "mergetool";
-
-      # get top level directory of the repo
-      root = "git rev-parse --show-toplevel";
-    };
 
     # lots inspired by https://blog.gitbutler.com/how-git-core-devs-configure-git/
-    extraConfig = {
+    settings = { 
+      user = {
+        # mkForce due to nova
+        name = "Matthieu C.";
+        email = lib.mkForce "886074+teto@users.noreply.github.com";
+      };
+      alias = {
+        s = "status";
+        st = "status";
+        br = "branch";
+        d = "diff";
+        mg = "mergetool";
+
+        # get top level directory of the repo
+        root = "git rev-parse --show-toplevel";
+      };
+
+
       # breaks jkops
       branch = {
         sort = "-committerdate";
@@ -130,8 +135,8 @@
 
       # pager = {
       #   # diff-so-fancy | less --tabs=1,5 -RFX
-      #   diff = "${pkgs.gitAndTools.diff-so-fancy}/bin/diff-so-fancy | less --tabs=1,5 -RFX";
-      #   show = "${pkgs.gitAndTools.diff-so-fancy}/bin/diff-so-fancy | less --tabs=1,5 -RFX";
+      #   diff = "${pkgs.diff-so-fancy}/bin/diff-so-fancy | less --tabs=1,5 -RFX";
+      #   show = "${pkgs.diff-so-fancy}/bin/diff-so-fancy | less --tabs=1,5 -RFX";
       # };
     };
   };

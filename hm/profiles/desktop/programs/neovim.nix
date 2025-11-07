@@ -160,7 +160,7 @@ let
     # rnix-lsp
     rust-analyzer
     shellcheck
-    sumneko-lua-language-server
+    lua-language-server
     gopls # LSP for go
     marksman # markdown LSP server
 
@@ -266,7 +266,7 @@ in
   ;
 
   extraPython3Packages = p: [
-    p.jupyter_client
+    p.jupyter-client
     p.pyperclip # if you want to use molten_copy_output
     p.nbformat # to import/export notebooks
     p.pynvim

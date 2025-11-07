@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ flakeSelf, pkgs, ... }:
 {
   # _imports = [
   #   homeProfiles.yazi

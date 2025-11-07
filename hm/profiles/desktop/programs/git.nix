@@ -1,6 +1,5 @@
 { lib, ... }:
 {
-  difftastic.enableAsDifftool = true;
   # userEmail = "tiny.idea7043@fastmail.com";
   userEmail = lib.mkForce "886074+teto@users.noreply.github.com";
   signing = {

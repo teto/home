@@ -5,7 +5,7 @@
     pkgs.lm_sensors # to see CPU temperature (command 'sensors')
     pkgs.vlc # to see it in popcorn
 
-    ubuntu_font_family
+    ubuntu-classic
     inconsolata # monospace
     noto-fonts-cjk-sans # asiatic
     nerd-fonts.fira-code # otherwise no characters
