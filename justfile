@@ -54,7 +54,7 @@ nixos-rebuild command builders="":
 
     nixos-rebuild \
       --flake ~/home \
-      --use-remote-sudo \
+      --sudo \
       --override-input nixpkgs {{ NIXPKGS_REPO }} \
       --override-input hm {{ HM_REPO }} \
        {{ builders }} \

@@ -15,7 +15,7 @@ require('avante').setup({
         enable_token_counting = false,
         -- auto_approve_tool_permissions = {"bash", "replace_in_file"}, -- Auto-approve specific tools only
     },
-    provider = 'openai',
+    provider = 'gemini',
     ui = { border = 'single', background_color = '#FF0000' },
     -- provider = "ollama",
 
@@ -27,16 +27,20 @@ require('avante').setup({
     },
     providers = {
         azure = nil,
-        openai = {
-            api_key_name = 'cmd:cat /home/teto/.config/sops-nix/secrets/OPENAI_API_KEY_NOVA',
-        },
+		gemini = {
+		 api_key_name = 'cmd:cat /home/teto/.config/sops-nix/secrets/gemini_matt_key',
+		},
+        -- openai = {
+		-- api_key_name = 'cmd:cat /home/teto/.config/sops-nix/secrets/OPENAI_API_KEY_NOVA',
+        -- },
         ollama = {
+		 -- model = "qwq:32b",
             model = 'mistral',
             endpoint = 'http://127.0.0.1:11434',
             timeout = 30000, -- Timeout in milliseconds
             -- disable_tools = true, -- not supported by mistral (but inherited by others so...)
             --   disabled_tools = { "python" }, is also possible
-
+			is_env_set = require("avante.providers.ollama").check_endpoint_alive,
             extra_request_body = {
                 options = {
                     temperature = 0.75,

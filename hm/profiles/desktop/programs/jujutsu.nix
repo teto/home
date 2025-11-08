@@ -13,7 +13,7 @@
   enable = true;
   settings = {
     user = {
-      email = config.programs.git.userEmail;
+      email = config.programs.git.settings.user.email;
       name = "teto";
     };
 

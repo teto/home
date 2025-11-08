@@ -47,6 +47,7 @@
 
     # ./hardware.nix
     ./services/openssh.nix
+    ./services/sshguard.nix
     ./sops.nix
 
     # to get the first iteration going on

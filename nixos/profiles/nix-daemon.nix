@@ -8,17 +8,19 @@
 
     distributedBuilds = true;
 
-    package = pkgs.nixVersions.nix_2_31
-    # flakeSelf.inputs.nix-schemas.packages.${pkgs.system}.nix
-    ;
+    package = pkgs.nixVersions.nix_2_32;
 
     buildMachines = [
-      {
-        # using secrets.nix
-        hostName = "jedha.local";
-        system =  "x86_64-linux";
-      }
-
+      # {
+      #   # using secrets.nix
+      #   hostName = "jedha.local";
+      #   system =  "x86_64-linux";
+      # }
+      # {
+      #   # using secrets.nix
+      #   hostName = "laptop.local";
+      #   system =  "x86_64-linux";
+      # }
     ];
 
     settings = {

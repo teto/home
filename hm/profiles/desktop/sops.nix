@@ -32,14 +32,14 @@
 
   };
 
-  secrets."OPENAI_API_KEY" = {
-    # Key used to lookup in the sops file.
-    key = "OPENAI_API_KEY_NOVA";
-    mode = "400";
-  };
+  # removed from secrets
+  # secrets."OPENAI_API_KEY" = {
+  #   # Key used to lookup in the sops file.
+  #   key = "OPENAI_API_KEY_NOVA";
+  #   mode = "400";
+  # };
 
-  # OPENAI_API_KEY_PERSO
-  secrets."OPENAI_API_KEY_NOVA" = {
+  secrets."gemini_matt_key" = {
     mode = "400";
   };
 

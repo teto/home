@@ -22,7 +22,7 @@
     hostName = "nextcloud.${secrets.jakku.hostname}";
     # true ?
     https = false;
-    package = pkgs.nextcloud31;
+    package = pkgs.nextcloud32;
 
     # so I used to have
     # ✗ PHP opcache: The PHP OPcache module is not properly configured. OPcache is not working as it should, opcache_get_status() returns false, please check configuration.

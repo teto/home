@@ -2,11 +2,11 @@
   "plugins": {
     "i3-vim-syntax": [],
     "neovim": {
-      "rev": "72a04c4"
+      "rev": "eb3ff49"
     },
     "pinkmare": [],
     "rocks.nvim": {
-      "rev": "488639c"
+      "rev": "14cd216"
     },
     "vim-listchars": [],
     "vim-sorcerer": []
