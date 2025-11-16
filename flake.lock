@@ -2344,6 +2344,19 @@
         "url": "https://git.meli-email.org/meli/meli.git"
       }
     },
+    "memento-kanjidict": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1762579080,
+        "narHash": "sha256-5jpR13/lc+S2WDVOf+hpAiXfM36pyFwSAI+++Xk8HA0=",
+        "type": "tarball",
+        "url": "https://github.com/themoeway/jmdict-yomitan/releases/latest/download/JMdict_french.zip"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://github.com/themoeway/jmdict-yomitan/releases/latest/download/JMdict_french.zip"
+      }
+    },
     "mujmap": {
       "inputs": {
         "cargo2nix": "cargo2nix",
@@ -3712,6 +3725,7 @@
         "lux": "lux",
         "mcp-hub": "mcp-hub",
         "meli-src": "meli-src",
+        "memento-kanjidict": "memento-kanjidict",
         "mujmap": "mujmap",
         "neomutt-src": "neomutt-src",
         "neovide": "neovide",

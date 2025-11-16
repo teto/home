@@ -12,7 +12,7 @@ let
     -- }}}
   '';
 
-  mcp-hub = flakeSelf.inputs.mcp-hub.packages.${pkgs.system}.mcp-hub;
+  mcp-hub = flakeSelf.inputs.mcp-hub.packages.${pkgs.stdenv.hostPlatform.system}.mcp-hub;
 
   luaPlugin =
     attrs:

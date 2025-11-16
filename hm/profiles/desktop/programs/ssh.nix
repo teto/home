@@ -3,9 +3,36 @@
   secrets,
   osConfig,
   withSecrets,
+  flakeSelf,
   secretsFolder,
   ...
 }:
+let 
+  hostsConfigs = let 
+    # mcfg of type "nixosConfiguration"
+    genSshConfig = name: value:
+      let 
+        mcfg = value;
+        sshCfg = mcfg.config.services.openssh;
+      in
+        builtins.trace "SSH config for ${name}" (if sshCfg.enable then
+        {
+
+        }
+        # lib.warn if "teto" is not in users.users
+        else ({
+          match = "host ${mcfg.networking.hostname}";
+          # assumption ? or check/warn it has it ?
+          user = "teto";
+          identityFile = "${secretsFolder}/ssh/id_rsa";
+          identitiesOnly = true;
+          extraOptions = {
+            AddKeysToAgent = "yes";
+          };
+        }));
+  in 
+    lib.mapAttrs genSshConfig flakeSelf.nixosConfigurations;
+in
 {
 
   # HashKnownHosts no
@@ -24,7 +51,7 @@
   # can I have it per target ?
   # controlPath = "";
   # osConfig.
-  matchBlocks = lib.optionalAttrs withSecrets {
+  matchBlocks = hostsConfigs // (lib.optionalAttrs withSecrets {
 
     # userKnownHostsFile
     github = {
@@ -104,7 +131,7 @@
       port = 12666;
     };
 
-  };
+  });
 
   includes = [
     # break under haumea

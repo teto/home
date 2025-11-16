@@ -40,6 +40,11 @@
 
     harmonia.url = "github:nix-community/harmonia";
 
+    memento-kanjidict = {
+      url = "https://github.com/themoeway/jmdict-yomitan/releases/latest/download/JMdict_french.zip";
+      flake = false;
+    };
+
     luals-busted-addon = {
       url = "github:LuaCATS/busted";
       flake = false;
@@ -807,13 +812,14 @@
           ];
         });
 
-        test = router.extendModules ({
-          modules = [
-            hm.nixosModules.home-manager
-            self.homeProfiles.neovim
-          ];
-
-        });
+        # generates an error with neovim
+        # test = router.extendModules ({
+        #   modules = [
+        #     hm.nixosModules.home-manager
+        #     self.homeProfiles.neovim
+        #   ];
+        #
+        # });
       };
 
       # TODO scan hm/{modules, profiles} folder

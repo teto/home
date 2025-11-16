@@ -9,6 +9,7 @@
   # TODO use wrapper instead ?
   programs.mpv = {
 
+    # prints warning when not existing
     includes = [
       "manual.conf"
     ];
@@ -47,6 +48,8 @@
       pkgs.mpvScripts.mpvacious # Adds mpv keybindings to create Anki cards from movies and TV shows
       pkgs.mpvScripts.manga-reader
       pkgs.mpvScripts.mpris
+      pkgs.mpvScripts.thumbnail  # show thumbnail on hover
+      pkgs.mpvScripts.modernz  # new UI ? https://github.com/Samillion/ModernZ
       # pkgs.mpvScripts.mpv-notify-send # does not work ?
     ];
 

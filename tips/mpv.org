@@ -1,5 +1,11 @@
 open-in-mpv 
 
+* secondary sub title
+
+Mod+j cycle secondary-sid
+
+
+
 
 * enable debug
 
@@ -9,4 +15,6 @@ frontends
 
 https://github.com/mpv-player/mpv/wiki/Applications-using-mpv
 ff2mpv
+
+* subtitle delays
 you can adjust sub delay with 'z' and 'x' keys,
