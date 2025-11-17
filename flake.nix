@@ -395,10 +395,10 @@
             # on desktop
             inherit cudaSupport;
             # nvidia.acceptLicense = true;
-            cudaCapabilities = [
-              # "6.0"
-              "8.9"
-            ]; # can speed up some builds ?
+            # cudaCapabilities = [
+            #   # "6.0"
+            #   "8.9"
+            # ]; # can speed up some builds ?
             checkMeta = false;
             # showDerivationWarnings = ["maintainerless"];
             # permittedInsecurePackages = [

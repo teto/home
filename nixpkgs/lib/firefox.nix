@@ -11,6 +11,22 @@
   };
 
   searchEngines = {
+    "boardgamegeek" = {
+      urls = [
+        {
+          template = "https://boardgamegeek.org/search/{searchTerms}";
+          params = [
+            {
+              name = "query";
+              value = "{searchTerms}";
+            }
+          ];
+        }
+      ];
+      # icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+      definedAliases = [ "@bgg" ];
+    };
+
     "Jisho" = {
       urls = [
         {

@@ -100,10 +100,10 @@ in
 
     (mkIf cfg.llms {
       home.packages = [
-        koboldcpp
-        llama-cpp # for llama-server and benchmarks
+        pkgs.koboldcpp
+        pkgs.llama-cpp # for llama-server and benchmarks
         # open-webui # broken
-        sillytavern
+        # sillytavern
         # python3Packages.unsloth # broken
 
         # pkgs.aider-chat # breaks
@@ -136,7 +136,9 @@ in
           pkgs.timg # to display images in terminal, to compare with imgcat ?
           myImagemagick
 
-          pkgs.kcc # to convert ebooks to remarkable format
+
+          # borken cos of pymupdf
+          # pkgs.kcc # to convert ebooks to remarkable format
           pkgs.ncmpcpp # outdated/ replaced by rmpc
           # pkgs.mpc_cli
           # pkgs.ymuse # GUI

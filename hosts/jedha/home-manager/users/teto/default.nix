@@ -20,6 +20,9 @@
     flakeSelf.homeProfiles.wezterm
     # flakeSelf.homeModules.gnome-shell
 
+    flakeSelf.homeModules.nextcloud-client
+
+
     ./calendars.nix
     ./sway.nix
     ./systemd.nix
@@ -69,6 +72,8 @@
       cointop # bitcoin tracker
       # mdp # markdown CLI presenter
       # gthumb # image manager, great to tag pictures
+
+      footswitch  # to control foot pedals
       gnome-control-center
       gnome-maps
       jaq # jq in rust
@@ -100,7 +105,7 @@
     enableOfficePackages = true;
     kubernetes = true;
     developer = true;
-    llms = false;
+    llms = true;
     enableIMPackages = true;
     japanese = true;
     enableGaming = true;
