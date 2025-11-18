@@ -49,6 +49,7 @@ nixos-rebuild command builders="":
       .#nixosConfigurations.{{ HOSTNAME }}.config.system.build.toplevel \
       --override-input nixpkgs {{ NIXPKGS_REPO }} \
       --override-input hm {{ HM_REPO }} \
+      -j 1 \
        {{ builders }} \
        --no-write-lock-file --show-trace
 

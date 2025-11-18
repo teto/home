@@ -144,8 +144,8 @@
     };
 
     # neovim-src = {
-    #   url = "github:neovim/neovim";
-    #   # url = "github:teto/neovim?ref=teto/add-zsh-completion";
+    #   # url = "github:neovim/neovim";
+    #   url = "github:echasnovski/neovim?ref=teto/pack-lockfile-sync";
     #   flake = false;
     # };
 
