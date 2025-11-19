@@ -13,7 +13,7 @@
     # Default: pkgs.rstudio-server
     # Example: pkgs.rstudioServerWrapper.override { packages = [ pkgs.rPackages.ggplot2 ]; }
     # package = pkgs.rstudio-server;
-    # package = flakeSelf.inputs.jinko-stats.packages.${pkgs.system}.rstudio-server;
+    # package = flakeSelf.inputs.jinko-stats.packages.${pkgs.stdenv.hostPlatform.system}.rstudio-server;
     # 127.0.0.1
     # listenAddress
     # rserverExtraConfig = ''

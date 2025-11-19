@@ -6,6 +6,6 @@
 
     pkgs.vimPlugins.llm-nvim
 
-    flakeSelf.inputs.rest-nvim.packages.${pkgs.system}.rest-nvim-dev
+    flakeSelf.inputs.rest-nvim.packages.${pkgs.stdenv.hostPlatform.system}.rest-nvim-dev
   ];
 }

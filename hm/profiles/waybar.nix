@@ -35,7 +35,7 @@
             pkgs.curl
             pkgs.fuzzel
             # for the github notifier
-            (pkgs.tetoLib.ignoreBroken pkgs.world-wall-clock) # python
+            (pkgs.tetosLib.ignoreBroken pkgs.world-wall-clock) # python
             pkgs.jq
             pkgs.nvidia-system-monitor-qt
             pkgs.swaynotificationcenter

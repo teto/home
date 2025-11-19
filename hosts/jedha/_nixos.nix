@@ -8,7 +8,7 @@
   ...
 }:
 let
-  inherit (pkgs.tetoLib) ignoreBroken;
+  inherit (pkgs.tetosLib) ignoreBroken;
 
 
   haumea = flakeSelf.inputs.haumea;

@@ -8,7 +8,7 @@
 
 let
 
-  inherit (pkgs.tetoLib)
+  inherit (pkgs.tetosLib)
     luaPlugin
     genBlockLua
     ;

@@ -8,6 +8,8 @@
   ...
 }:
 let 
+
+  # 
   hostsConfigs = let 
     # mcfg of type "nixosConfiguration"
     genSshConfig = name: value:
@@ -21,7 +23,7 @@ let
         }
         # lib.warn if "teto" is not in users.users
         else ({
-          match = "host ${mcfg.networking.hostname}";
+          match = "host ${mcfg.config.networking.hostName}";
           # assumption ? or check/warn it has it ?
           user = "teto";
           identityFile = "${secretsFolder}/ssh/id_rsa";

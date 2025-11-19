@@ -1,13 +1,13 @@
 { flakeSelf, pkgs, ... }:
 let
-  myLib = pkgs.tetoLib;
+  myLib = pkgs.tetosLib;
 
 in
 {
   enable = true;
 
   # fix for "no fixed center_"
-  package = flakeSelf.inputs.waybar.packages.${pkgs.system}.waybar;
+  package = flakeSelf.inputs.waybar.packages.${pkgs.stdenv.hostPlatform.system}.waybar;
   systemd.enable = true;
 
   settings = {

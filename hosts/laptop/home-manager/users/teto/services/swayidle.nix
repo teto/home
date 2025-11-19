@@ -15,7 +15,7 @@
       {
         timeout = 5 * 60;
         # command = "${pkgs.swaylock}/bin/swaylock -fF";
-        command = "${pkgs.tetoLib.swaylockCmd}";
+        command = "${pkgs.tetosLib.swaylockCmd}";
       }
     ];
   };

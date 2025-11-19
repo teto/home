@@ -507,7 +507,6 @@
         in
 
         nixpkgs.lib.listToAttrs (
-
           nixpkgs.lib.map (x: nixpkgs.lib.nameValuePair (genKey x) x) listOfModules
         );
 
@@ -977,8 +976,9 @@
                 ;
             };
 
-            tetoLib = final.callPackage ./hm/lib.nix {
+            tetosLib = final.callPackage ./tetos/lib/default.nix {
               inherit dotfilesPath;
+              flakeSelf = self;
             };
 
             rsync-yazi = myPkgs.yaziPlugins.mkYaziPlugin {
@@ -1112,8 +1112,6 @@
               };
           };
       };
-
-      # defaultTemplate = templates.app;
 
     });
 }

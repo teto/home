@@ -8,7 +8,7 @@
 }:
 
 let
-  inherit (pkgs.tetoLib) ignoreBroken;
+  inherit (pkgs.tetosLib) ignoreBroken;
 in
 {
   imports = [
@@ -58,7 +58,7 @@ in
     # poppler for pdf preview
 
     viu # a console image viewer
-    (pkgs.tetoLib.ignoreBroken mdcat) # markdown viewer
+    (pkgs.tetosLib.ignoreBroken mdcat) # markdown viewer
 
   ];
 

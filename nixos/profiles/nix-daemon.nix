@@ -3,6 +3,18 @@
   flakeSelf,
   ...
 }:
+let 
+
+  # nixosConfigurations
+  # .nodes
+  b0 = pkgs.tetosLib.deployrsNodeToBuilderAttr flakeSelf.deploy.nodes.jedha;
+      # {
+      #   # using secrets.nix
+      #   hostName = "jedha.local";
+      #   system =  "x86_64-linux";
+      # };
+
+in
 {
   nix = {
 
@@ -11,11 +23,7 @@
     package = pkgs.nixVersions.nix_2_32;
 
     buildMachines = [
-      # {
-      #   # using secrets.nix
-      #   hostName = "jedha.local";
-      #   system =  "x86_64-linux";
-      # }
+      b0
       # {
       #   # using secrets.nix
       #   hostName = "laptop.local";

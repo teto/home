@@ -1,0 +1,6 @@
+
+https://github.com/yt-dlp/yt-dlp?tab=readme-ov-file#installing-plugins
+
+--list-extractors
+
+or run with --verbose to check the plugin has loaded.

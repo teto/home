@@ -2,7 +2,7 @@
   lib,
   pkgs,
   config,
-  # , tetoLib
+  # , tetosLib
   ...
 }:
 let
@@ -18,7 +18,7 @@ let
   rofi = pkgs.rofi-teto; # rofi-wayland;
   sharedConfig = pkgs.callPackage ./wm-config.nix { };
 
-  myLib = pkgs.tetoLib;
+  myLib = pkgs.tetosLib;
 in
 {
 

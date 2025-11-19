@@ -6,7 +6,13 @@
   secrets,
   ...
 }@args:
+let 
+  # builder0 = mkRemoteBuilderDesc "3.0";
+  builder0 = pkgs.tetosLib.mkRemoteBuilderDesc "3.0" flakeSelf.deploy.nodes.jedha;
+in
 {
+
+
 
   # programs.atuin = {
   #   enable = false;
@@ -19,6 +25,7 @@
 
     # goes to .profile
     sessionVariables = {
+      TETOS_BUILDER = builder0;
       HISTTIMEFORMAT = "%d.%m.%y %T ";
       # CAREFUL
       # HISTFILE="$XDG_CACHE_HOME/bash_history";

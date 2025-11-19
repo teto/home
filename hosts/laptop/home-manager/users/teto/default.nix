@@ -11,7 +11,7 @@
 
   imports =
     lib.optionals withSecrets [
-      # flakeSelf.inputs.git-repo-manager.packages.${pkgs.system}.git-repo-manager
+      # flakeSelf.inputs.git-repo-manager.packages.${pkgs.stdenv.hostPlatform.system}.git-repo-manager
     ]
     ++ [
       # flakeSelf.homeModules.experimental

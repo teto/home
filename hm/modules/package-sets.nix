@@ -10,7 +10,7 @@ with lib;
 let
   cfg = config.package-sets;
 
-  inherit (pkgs.tetoLib) ignoreBroken;
+  inherit (pkgs.tetosLib) ignoreBroken;
 in
 {
 
@@ -33,7 +33,7 @@ in
       # TODO convert into description
       # the kind of packages u don't want to compile
       # TODO les prendres depuis un channel avec des binaires ?
-      # with flakeSelf.inputs.nixos-stable.legacyPackages.${pkgs.system};
+      # with flakeSelf.inputs.nixos-stable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 
       enableIMPackages = mkEnableOption "IM packages";
       wifi = mkEnableOption "wifi packages";
@@ -82,14 +82,14 @@ in
       home.packages =
         let
           jj = pkgs.jujutsu; # replaced with the one from flake
-          # jjui = flakeSelf.inputs.jjui.packages.${pkgs.system}.jjui;
+          # jjui = flakeSelf.inputs.jjui.packages.${pkgs.stdenv.hostPlatform.system}.jjui;
           jjui = pkgs.jjui;
         in
         [
           jj
 
           # pkgs.ollama # to test huggingface
-          # flakeSelf.inputs.jujutsu.packages.${pkgs.system}.jujutsu
+          # flakeSelf.inputs.jujutsu.packages.${pkgs.stdenv.hostPlatform.system}.jujutsu
           jjui
 
           # pkgs.gg-jj
@@ -344,7 +344,7 @@ in
           difftastic # smart diffs
           lsof # to see open files
           docker-credential-helpers
-          flakeSelf.inputs.starship-jj.packages.${pkgs.system}.default # custom.jj for starship
+          flakeSelf.inputs.starship-jj.packages.${pkgs.stdenv.hostPlatform.system}.default # custom.jj for starship
           gettext # for envsubst (TO NOT CONFOUND with gettext's envsubst)
           sad # live replace with fzf, use like `fd | sad toto tata`
           sops # password 'manager'
@@ -443,8 +443,8 @@ in
           viddy # fileevent watcher
           watchman
 
-          flakeSelf.inputs.rippkgs.packages.${pkgs.system}.rippkgs
-          flakeSelf.inputs.rippkgs.packages.${pkgs.system}.rippkgs-index
+          flakeSelf.inputs.rippkgs.packages.${pkgs.stdenv.hostPlatform.system}.rippkgs
+          flakeSelf.inputs.rippkgs.packages.${pkgs.stdenv.hostPlatform.system}.rippkgs-index
         ];
 
     })

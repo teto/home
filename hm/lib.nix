@@ -1,17 +1,12 @@
 {
   pkgs,
   lib,
+  flakeSelf,
   dotfilesPath,
   ...
 }:
 let
   notify-send = "${pkgs.libnotify}/bin/notify-send";
-
-  genBlockLua = title: content: ''
-    -- ${title} {{{
-    ${content}
-    -- }}}
-  '';
 in
 {
 
@@ -45,39 +40,28 @@ in
     ];
 
   # TODO hopefully should get upstreamed
-  mkRemoteBuilderDesc =
-    machine:
-    with lib;
-    concatStringsSep " " ([
-      "${optionalString (machine.sshUser != null) "${machine.sshUser}@"}${machine.hostName}"
-      (
-        if machine.system != null then
-          machine.system
-        else if machine.systems != [ ] then
-          concatStringsSep "," machine.systems
-        else
-          "-"
-      )
-      (if machine.sshKey != null then machine.sshKey else "-")
-      (toString machine.maxJobs)
-      (toString machine.speedFactor)
-      (concatStringsSep "," (machine.supportedFeatures ++ machine.mandatoryFeatures))
-      (concatStringsSep "," machine.mandatoryFeatures)
-      # assume we r always > 2.4
-      (if machine.publicHostKey != null then machine.publicHostKey else "-")
-    ]);
+  # mkRemoteBuilderDesc =
+  #   machine:
+  #   with lib;
+  #   concatStringsSep " " ([
+  #     "${optionalString (machine.sshUser != null) "${machine.sshUser}@"}${machine.hostName}"
+  #     (
+  #       if machine.system != null then
+  #         machine.system
+  #       else if machine.systems != [ ] then
+  #         concatStringsSep "," machine.systems
+  #       else
+  #         "-"
+  #     )
+  #     (if machine.sshKey != null then machine.sshKey else "-")
+  #     (toString machine.maxJobs)
+  #     (toString machine.speedFactor)
+  #     (concatStringsSep "," (machine.supportedFeatures ++ machine.mandatoryFeatures))
+  #     (concatStringsSep "," machine.mandatoryFeatures)
+  #     # assume we r always > 2.4
+  #     (if machine.publicHostKey != null then machine.publicHostKey else "-")
+  #   ]);
 
-  luaPlugin =
-    attrs:
-    attrs
-    // {
-      type = "lua";
-      config = lib.optionalString (attrs ? config && attrs.config != null) (
-        genBlockLua attrs.plugin.pname attrs.config
-      );
-    };
-
-  inherit genBlockLua;
 
   /*
     convert a package to null because used to be borken
