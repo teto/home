@@ -596,6 +596,9 @@ in
       home.packages = [
 
         (pkgs.ghc.withPackages (hs: [ hs.tidal ]))
+        # otherwise we get rt could not load some synths from default-synths.scd, because sc3plugins are necessary and missing.
+        # doesnt' compile at the moment
+        # pkgs.supercollider-with-sc3-plugins
         pkgs.supercollider
       ];
 

@@ -15,6 +15,9 @@ alias nhs98="nix develop \$HOME/home#nhs98"
 alias nhs910="nix develop \$HOME/home#nhs910"
 alias nhs912="nix develop \$HOME/home#nhs912"
 # }}}
+#
+
+alias yr="yazi ./result"
 
 # TODO should use all runners
 # alias nall='nix develop --option builders "$NOVA_OVH1" -j0'

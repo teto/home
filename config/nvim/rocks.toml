@@ -51,7 +51,6 @@ neotest = "5.13.4"
 friendly-snippets = "scm"
 # "haskell-snippets.nvim" = "1.4.4"
 "yazi.nvim" = "13.0.0"
-# tree-sitter-haskell = "scm"
 # tree-sitter-org = "0.0.1"
 # "lspkind.nvim" = "scm"
 # "modicator.nvim" = "scm"
@@ -93,6 +92,7 @@ tree-sitter-norg = "0.2.6"
 tree-sitter-hurl = "0.0.31"
 "telescope.nvim" = "0.1.6"
 neotest-busted = "1.2.1"
+tree-sitter-haskell = "0.0.35"
 # nvim-treesitter-textobjects = "scm"
 # "rocks-treesitter.nvim" = "1.0.3"
 
@@ -274,4 +274,8 @@ rev = "a0c0f78e5db49580aa4aabc6dda1813bb9c789ee"
 [plugins.vim-tidal]
 git = "tidalcycles/vim-tidal"
 rev = "1.4.8"
+
+[plugins."tidal.nvim"]
+git = "https://github.com/grddavies/tidal.nvim"
+rev = "fa4673e181e18fd1719ae17a1d4f4ecce2de37aa"
 
