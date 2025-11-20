@@ -969,3 +969,5 @@ require('teto.lsp').ignore_simwork_extended_warnings()
 vim.g.tidal_target = "terminal"
 vim.g.tidal_sc_enable = 1
 -- tidal_default_config
+-- ghci -ghci-script /nix/store/f0ks6kcn0qch268ykcxnzp0fn5d24m4m-tidal-1.10.1-data/share/ghc-9.10.3/x86_64-linux-ghc-9.10.3-2c56/tidal-1.10.1/BootTidal.hs
+vim.g.tidal_boot= "/nix/store/f0ks6kcn0qch268ykcxnzp0fn5d24m4m-tidal-1.10.1-data/share/ghc-9.10.3/x86_64-linux-ghc-9.10.3-2c56/tidal-1.10.1/BootTidal.hs"
