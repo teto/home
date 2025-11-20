@@ -53,7 +53,10 @@ in
   # can I have it per target ?
   # controlPath = "";
   # osConfig.
-  matchBlocks = hostsConfigs // (lib.optionalAttrs withSecrets {
+  matchBlocks = 
+  # hostsConfigs
+  # // 
+    (lib.optionalAttrs withSecrets {
 
     # userKnownHostsFile
     github = {

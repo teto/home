@@ -332,9 +332,9 @@ in
   ];
 
   # $out here is the profile generation
-  system.systemBuilderCommands = ''
-    ln -s ${config.boot.kernelPackages.kernel.dev}/vmlinux $out/vmlinux
-  '';
+  # system.systemBuilderCommands = ''
+  #   ln -s ${config.boot.kernelPackages.kernel.dev}/vmlinux $out/vmlinux
+  # '';
 
   # use systemd program to set permissions instead of a nixpkgs script
   # might break some permissions see https://github.com/NixOS/nixpkgs/pull/353659

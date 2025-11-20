@@ -11,38 +11,43 @@ let
   netboot = pkgs.callPackage ./netboot.nix { };
 
   # build = 
-   # sys = flakeSelf.nixosConfigurations.laptop.extendModules {
-   #   modules = [
-   #     (modulesPath + "/installer/netboot/netboot-minimal.nix")
-   #    ];
-   #  };
+   sys = flakeSelf.nixosConfigurations.laptop.extendModules {
+     modules = [
+       (modulesPath + "/installer/netboot/netboot-minimal.nix")
+       {
+         boot.supportedFilesystems = {
+            zfs = lib.mkForce false;
+         };
+       }
+      ];
+    };
     build = sys.config.system.build;
 
-  sys = lib.nixosSystem {
-    system = "x86_64-linux";
-    modules = [
-      ({ config, pkgs, lib, modulesPath, ... }: {
-        imports = [ (modulesPath + "/installer/netboot/netboot-minimal.nix") ];
-        config = {
-          services.openssh = {
-            enable = true;
-            openFirewall = true;
-
-            settings = {
-              PasswordAuthentication = false;
-              KbdInteractiveAuthentication = false;
-            };
-          };
-
-          users.users.root.openssh.authorizedKeys.keys = [
-            # "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI..."
-            "${secretsFolder}/ssh/id_rsa.pub"
-
-          ];
-        };
-      })
-    ];
-  };
+  # sys = lib.nixosSystem {
+  #   system = "x86_64-linux";
+  #   modules = [
+  #     ({ config, pkgs, lib, modulesPath, ... }: {
+  #       imports = [ (modulesPath + "/installer/netboot/netboot-minimal.nix") ];
+  #       config = {
+  #         services.openssh = {
+  #           enable = true;
+  #           openFirewall = true;
+  #
+  #           settings = {
+  #             PasswordAuthentication = false;
+  #             KbdInteractiveAuthentication = false;
+  #           };
+  #         };
+  #
+  #         users.users.root.openssh.authorizedKeys.keys = [
+  #           # "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI..."
+  #           "${secretsFolder}/ssh/id_rsa.pub"
+  #
+  #         ];
+  #       };
+  #     })
+  #   ];
+  # };
 
 in
 {
