@@ -3,7 +3,6 @@
   pkgs,
   flakeSelf,
   withSecrets,
-  secrets,
   ...
 }:
 let
@@ -47,6 +46,19 @@ let
       ];
     };
 
+  tetosLib = pkgs.tetosLib;
+
+  # nixosConfigurations
+  # .nodes
+  builder0 = (tetosLib.nixosConfToBuilderAttr {} flakeSelf.nixosConfigurations.jedha);
+
+  # b1 = pkgs.tetosLib.deployrsNodeToBuilderAttr flakeSelf.deploy.nodes.jedha;
+      # {
+      #   # using secrets.nix
+      #   hostName = "jedha.local";
+      #   system =  "x86_64-linux";
+      # };
+
 in
 {
   imports = [
@@ -63,23 +75,29 @@ in
     flakeSelf.nixosModules.desktop
 
     ../../nixos/profiles/laptop.nix
-    ../../nixos/profiles/docker-daemon.nix
+    # ../../nixos/profiles/docker-daemon.nix
     ../../nixos/profiles/podman.nix
-    # ../../nixos/profiles/pixiecore.nix
-    flakeSelf.nixosProfiles.pixiecore
 
     # ../../nixos/profiles/homepage-dashboard.nix
-    ../../nixos/profiles/qemu.nix
     ../../nixos/profiles/steam.nix
-    # ../../nixos/profiles/sway.nix
-    # ../../nixos/profiles/adb.nix
     ../../nixos/profiles/kanata.nix
-    ../../nixos/profiles/postgresql.nix
+    # ../../nixos/profiles/postgresql.nix
+
     # ../../nixos/profiles/home-assistant.nix
     # usually inactive, just to test some stuff
     # ../../nixos/modules/libvirtd.nix
 
   ];
+  
+  nix.buildMachines = [
+      builder0
+      # {
+      #   # using secrets.nix
+      #   hostName = "laptop.local";
+      #   system =  "x86_64-linux";
+      # }
+    ];
+
 
   nixpkgs.overlays = lib.optionals withSecrets [
 
@@ -239,10 +257,9 @@ in
   # smartcard service for yubikey
   # can conflict with gpg-agent depending on config
   services.pcscd.enable = true;
-
   services.yubikey-agent.enable = true;
 
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.05";
 
   services.journald.extraConfig = ''
     # alternatively one can run journalctl --vacuum-time=2d

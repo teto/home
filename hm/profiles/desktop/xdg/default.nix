@@ -1,7 +1,9 @@
 {
   pkgs,
+  lib,
   secretsFolder,
   secrets,
+  withSecrets, 
   ...
 }:
 {
@@ -47,7 +49,7 @@
     ];
   };
 
-  configFile."bash/lib.sh".text = ''
+  configFile."bash/lib.sh".text = lib.optionalString withSecrets ''
     TETO_SECRETS_FOLDER=${secretsFolder}
     TETO_PERSONAL_EMAIL=${secrets.accounts.mail.fastmail_perso.login}
   '';

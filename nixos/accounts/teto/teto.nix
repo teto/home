@@ -4,6 +4,7 @@
   # options,
   # lib,
   # , secrets
+  secretsFolder,
   ...
 }:
 {
@@ -43,6 +44,8 @@
 
     openssh.authorizedKeys.keyFiles = [
       ../../../perso/keys/id_rsa.pub
+      # cant read if not in repo so
+      # "${secretsFolder}/ssh/id_rsa.pub"
     ];
 
   };

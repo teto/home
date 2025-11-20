@@ -1,9 +1,9 @@
 [preview]
   # extra_args = []
-show_at_bottom = true
-  show_at_start = true
-  width_percentage = 50.0
-  width_increment_percentage = 5.0
+# show_at_bottom = true
+show_at_start = true
+width_percentage = 50.0
+width_increment_percentage = 5.0
 # experimental_log_batching_enabled = true
 
 [keys]

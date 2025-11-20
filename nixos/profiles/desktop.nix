@@ -199,6 +199,9 @@ in
   # security.pam.loginLimits
   systemd.coredump.enable = false;
 
+  # boot.loader.timeout = lib.mkForce 5;
+  system.nixos.distroName = "Tetonos";
+
   # see
   #JournalSizeMax=767M
   #MaxUse=

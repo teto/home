@@ -15,7 +15,7 @@
 
   # may need to select appropriate driver
   # choose between latest, beta, vulkan_beta, stable
-  package = config.boot.kernelPackages.nvidiaPackages.latest;
+  package = config.boot.kernelPackages.nvidiaPackages.stable;
   nvidiaSettings = true;
   # Power management is nearly always required to get nvidia GPUs to
   # behave on suspend, due to firmware bugs.

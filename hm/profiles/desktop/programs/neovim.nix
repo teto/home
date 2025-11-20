@@ -29,7 +29,7 @@ let
     # pkgs.vimPlugins.blink-cmp-git # autocomplete github issues/PRs
   ];
 
-  neotestPlugins = with pkgs.vimPlugins; [
+  neotestPlugins =  [
     # neotest
     # neotest-haskell
   ];
@@ -173,17 +173,18 @@ let
 
     pyright # python lsp
 
+    tree-sitter  # might help install treesitter grammars
     yaml-language-server # ~100MB
     yamllint # for none-ls json formatting
     yamlfmt
   ];
 
   # TODO get lua interpreter to select the good lua packages
-  nvimLua = config.programs.neovim.finalPackage.passthru.unwrapped.lua;
+  # nvimLua = config.programs.neovim.finalPackage.passthru.unwrapped.lua;
 
-  finalLua = nvimLua.override {
-    packageOverrides = flakeSelf.inputs.rikai-nvim.overlays.luaOverlay;
-  };
+  # finalLua = nvimLua.override {
+  #   packageOverrides = flakeSelf.inputs.rikai-nvim.overlays.luaOverlay;
+  # };
 
 in
 {

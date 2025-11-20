@@ -4,21 +4,11 @@
   lib,
   ...
 }:
-let 
-  tetosLib = pkgs.tetosLib;
+# let 
+  # tetosLib = pkgs.tetosLib;
 
-  # nixosConfigurations
-  # .nodes
-  builder0 = (tetosLib.nixosConfToBuilderAttr {} flakeSelf.nixosConfigurations.jedha);
 
-  # b1 = pkgs.tetosLib.deployrsNodeToBuilderAttr flakeSelf.deploy.nodes.jedha;
-      # {
-      #   # using secrets.nix
-      #   hostName = "jedha.local";
-      #   system =  "x86_64-linux";
-      # };
-
-in
+# in
 {
   nix = {
 
@@ -26,14 +16,6 @@ in
 
     package = pkgs.nixVersions.nix_2_32;
 
-    buildMachines = [
-      builder0
-      # {
-      #   # using secrets.nix
-      #   hostName = "laptop.local";
-      #   system =  "x86_64-linux";
-      # }
-    ];
 
     settings = {
       #   # http-connections = 25 is the default

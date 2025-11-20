@@ -112,6 +112,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-wizard = {
+      url = "github:km-clay/nixos-wizard";
+      # inputs.nixpkgs.follows = "nixpkgs";
+
+    };
+
     lux = {
       url = "github:nvim-neorocks/lux";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -306,9 +312,11 @@
     }:
     let
 
+      # tetonos ?
       tetosConfig = {
         # should it depend on home.homeDirectory instead ?
         inherit dotfilesPath secretsFolder;
+        # withSecrets 
       };
 
       dotfilesPath = "/home/teto/home";
@@ -493,7 +501,8 @@
           };
         };
 
-      myPkgs = pkgImport self.inputs.nixpkgs false;
+      # myPkgs = pkgImport self.inputs.nixpkgs false;
+      myPkgs = myPkgsCuda ;
       myPkgsCuda = pkgImport self.inputs.nixpkgs true;
       unstablePkgs = pkgImport self.inputs.nixos-unstable false;
       # stablePkgs = pkgImport self.inputs.nixos-stable;
@@ -749,13 +758,30 @@
 
           modules = [
             ./hosts/laptop
-            self.inputs.nixos-hardware.nixosModules.dell-xps-13-9310
           ];
         };
 
         # see https://determinate.systems/posts/extending-nixos-configurations
         tatooine = laptop.extendModules {
           modules = [
+            self.inputs.nixos-hardware.nixosModules.dell-xps-13-9310
+            self.nixosProfiles.pixiecore
+            ({ pkgs, ... }: let
+              builder0 = (pkgs.tetosLib.nixosConfToBuilderAttr {} self.nixosConfigurations.jedha);
+            in
+
+              {
+              nix.buildMachines = [
+                builder0
+                # {
+                #   # using secrets.nix
+                #   hostName = "laptop.local";
+                #   system =  "x86_64-linux";
+                # }
+              ];
+            })
+
+
           ];
 
           # TODO retain existing specialArgs and inject mine ?!
@@ -765,11 +791,11 @@
             inherit dotfilesPath;
 
             withSecrets = true;
-            userConfig = {
-              laptop = true;
-              # so it
-              configuration = "xps3910";
-            };
+            # userConfig = {
+            #   laptop = true;
+            #   # so it
+            #   configuration = "xps3910";
+            # };
           };
         };
 
