@@ -62,6 +62,7 @@ in
     # TODO this triggers the error on boot I think
     flakeSelf.nixosModules.desktop
 
+    ../../nixos/profiles/laptop.nix
     ../../nixos/profiles/docker-daemon.nix
     ../../nixos/profiles/podman.nix
     ../../nixos/profiles/pixiecore.nix
@@ -142,8 +143,6 @@ in
   };
 
   # it is necessary to use dnssec though :(
-  networking.resolvconf.dnsExtensionMechanism = false;
-  networking.resolvconf.dnsSingleRequest = true; # juste pour test
   networking.hostName = "tatooine"; # Define your hostname.
 
   hardware = {

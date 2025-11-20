@@ -965,3 +965,7 @@ end, { buffer = false, desc = 'Diagnostics' })
 -- })
 
 require('teto.lsp').ignore_simwork_extended_warnings()
+-- vim.g.tidal_ghci = "ghci"
+vim.g.tidal_target = "terminal"
+vim.g.tidal_sc_enable = 1
+-- tidal_default_config

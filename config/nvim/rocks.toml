@@ -271,3 +271,7 @@ dev = true
 git = "elanmed/fzf-lua-frecency.nvim"
 rev = "a0c0f78e5db49580aa4aabc6dda1813bb9c789ee"
 
+[plugins.vim-tidal]
+git = "tidalcycles/vim-tidal"
+rev = "1.4.8"
+

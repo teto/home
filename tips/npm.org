@@ -2,6 +2,16 @@
 
 * npm 
 
+** where are packages installed ? 
+
+
+
+```
+npm list -g 
+/home/teto/.cache/npm-packages/lib
+└── strudel@1.0.5
+```
+
 ** how to access help
   manpage available via `npm help install`
 
@@ -25,7 +35,7 @@ npm install lodash@latest --save
  
 ** test
    `npm i playwright`
- npm list -g allows to list installed programs and their install folders, for instance:
+ for instance:
  ~/.npm-global/lib
  
 ** How to install from lockfile

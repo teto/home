@@ -17,6 +17,7 @@ in
   options = {
     package-sets = {
 
+      audio = mkEnableOption "live audio writing";
       fonts = mkEnableOption "extra fonts";
       desktop = mkEnableOption "desktop packages";
       yubikey = mkEnableOption "yubikey packages";
@@ -284,7 +285,7 @@ in
     (mkIf cfg.enableDesktopGUIPackages {
       home.packages = with pkgs; [
         hakuneko
-        memento # broken capable to display 2 subtitles at same time
+        # memento # broken capable to display 2 subtitles at same time
         vlc
         # pinta # photo editing
 
@@ -590,6 +591,15 @@ in
       # xdg.dataFile."jmdict".source = pkgs.jmdict;
     })
 
+    (mkIf cfg.audio {
+
+      home.packages = [
+
+        (pkgs.ghc.withPackages (hs: [ hs.tidal ]))
+        pkgs.supercollider
+      ];
+
+    })
     (mkIf (cfg.japanese && cfg.llms) {
 
       home.packages = with pkgs; [

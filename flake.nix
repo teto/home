@@ -305,7 +305,12 @@
       ...
     }:
     let
-      # should it depend on home.homeDirectory instead ?
+
+      tetosConfig = {
+        # should it depend on home.homeDirectory instead ?
+        inherit dotfilesPath secretsFolder;
+      };
+
       dotfilesPath = "/home/teto/home";
       secretsFolder = "/home/teto/home/secrets";
 
@@ -603,6 +608,7 @@
             just # to run justfiles
             magic-wormhole-rs # to transfer secrets
             nix-output-monitor
+            nodejs
             self.inputs.firefox2nix.packages.${system}.default
             termscp-matt
             treefmt-home
@@ -977,7 +983,7 @@
             };
 
             tetosLib = final.callPackage ./tetos/lib/default.nix {
-              inherit dotfilesPath;
+              inherit dotfilesPath secretsFolder;
               flakeSelf = self;
             };
 
@@ -1087,6 +1093,17 @@
                   # "-i/home/teto/.ssh/id_rsa"
                   # "-p${toString secrets.router.sshPort}"
                 ];
+              };
+
+            #
+            jedha = 
+              genNode ({
+                name = "jedha";
+                hostname = "jedha.local";
+              })
+              // {
+                interactiveSudo = true;
+                sshUser = "teto";
               };
 
             neotokyo =

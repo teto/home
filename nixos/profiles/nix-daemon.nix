@@ -1,13 +1,17 @@
 {
   pkgs,
   flakeSelf,
+  lib,
   ...
 }:
 let 
+  tetosLib = pkgs.tetosLib;
 
   # nixosConfigurations
   # .nodes
-  b0 = pkgs.tetosLib.deployrsNodeToBuilderAttr flakeSelf.deploy.nodes.jedha;
+  builder0 = (tetosLib.nixosConfToBuilderAttr {} flakeSelf.nixosConfigurations.jedha);
+
+  # b1 = pkgs.tetosLib.deployrsNodeToBuilderAttr flakeSelf.deploy.nodes.jedha;
       # {
       #   # using secrets.nix
       #   hostName = "jedha.local";
@@ -23,7 +27,7 @@ in
     package = pkgs.nixVersions.nix_2_32;
 
     buildMachines = [
-      b0
+      builder0
       # {
       #   # using secrets.nix
       #   hostName = "laptop.local";

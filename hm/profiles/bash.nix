@@ -3,12 +3,22 @@
   pkgs,
   flakeSelf,
   lib,
+  secretsFolder,
   secrets,
   ...
 }@args:
 let 
-  # builder0 = mkRemoteBuilderDesc "3.0";
-  builder0 = pkgs.tetosLib.mkRemoteBuilderDesc "3.0" flakeSelf.deploy.nodes.jedha;
+  builder0 = lib.mkRemoteBuilderDesc "3.0" 
+  (pkgs.tetosLib.nixosConfToBuilderAttr 
+    {
+      sshKey = "${secretsFolder}/ssh/id_rsa";
+      # I might need to set it ?
+      publicHostKey = null;
+    }
+    flakeSelf.nixosConfigurations.jedha)
+  ;
+    # TODO add jedha
+    # flakeSelf.deploy.nodes.jedha;
 in
 {
 

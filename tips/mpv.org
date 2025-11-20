@@ -5,7 +5,9 @@ open-in-mpv
 Mod+j cycle secondary-sid
 
 
+* sptlrx 
 
+for synced lyrics. rmpc does it better though ?
 
 * enable debug
 
