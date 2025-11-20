@@ -885,6 +885,7 @@
 
       nixosProfiles = {
         gnome = ./nixos/profiles/gnome.nix;
+        pixiecore = ./nixos/profiles/pixiecore.nix;
       };
 
       nixosModules = (importDir ./nixos/modules) // {

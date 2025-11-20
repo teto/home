@@ -71,6 +71,8 @@ in
     flakeSelf.nixosModules.nix-daemon
     flakeSelf.nixosModules.steam
     flakeSelf.nixosModules.universal
+
+    flakeSelf.nixosProfiles.pixiecore
     # ../../nixos/profiles/opensnitch.nix
     # ../../nixos/profiles/podman.nix
     ../../nixos/profiles/rmfakecloud.nix
@@ -330,7 +332,7 @@ in
   ];
 
   # $out here is the profile generation
-  system.extraSystemBuilderCmds = ''
+  system.systemBuilderCommands = ''
     ln -s ${config.boot.kernelPackages.kernel.dev}/vmlinux $out/vmlinux
   '';
 

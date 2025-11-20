@@ -16,7 +16,7 @@ in
     # listen
     # cmdLine = ;
 
-     dhcpNoBind = true; # Use existing DHCP server.
+    dhcpNoBind = true; # Use existing DHCP server.
 
     quick = "ubuntu";
     openFirewall = true;

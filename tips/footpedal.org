@@ -1,0 +1,8 @@
+
+* https://github.com/rgerganov/footswitch
+sudo scythe -r 
+
+from https://www.fnac.com/mp17602488/Scythe-USB-Foot-Switch-2-Triple-pedale-filaire/w-4 I think
+
+
+

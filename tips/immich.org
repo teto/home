@@ -1,0 +1,6 @@
+
+problem with:
+
+- "remove from album" vs "delete" 
+- cancel delete
+- remove

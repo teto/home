@@ -65,7 +65,9 @@ in
     ../../nixos/profiles/laptop.nix
     ../../nixos/profiles/docker-daemon.nix
     ../../nixos/profiles/podman.nix
-    ../../nixos/profiles/pixiecore.nix
+    # ../../nixos/profiles/pixiecore.nix
+    flakeSelf.nixosProfiles.pixiecore
+
     # ../../nixos/profiles/homepage-dashboard.nix
     ../../nixos/profiles/qemu.nix
     ../../nixos/profiles/steam.nix

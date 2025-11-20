@@ -15,6 +15,7 @@ https://nixos.org/manual/nixos/stable/#sec-installation
 
   mkfs.ext4 -L nixos /dev/sda1
 
+* disable a systemd service autostart
 
 * get ip in installer
 dhcpcd
