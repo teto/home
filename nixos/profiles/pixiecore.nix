@@ -75,9 +75,10 @@ let
             flakeSelf.inputs.nixos-wizard.packages."x86_64-linux".default
           ];
 
-          users.users.teto.openssh.authorizedKeys.keys = [
-            (builtins.readFile ../../perso/keys/id_rsa.pub)
-          ];
+          # this is problematic because it sets tteto as both a system and a normal user
+          # users.users.teto.openssh.authorizedKeys.keys = [
+          #   (builtins.readFile ../../perso/keys/id_rsa.pub)
+          # ];
 
           users.users.root.openssh.authorizedKeys.keys = [
             (builtins.readFile ../../perso/keys/id_rsa.pub)
@@ -85,6 +86,8 @@ let
             # "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI..."
             # "${secretsFolder}/ssh/id_rsa.pub"
           ];
+
+          system.stateVersion = "25.11";
         };
       })
     ];

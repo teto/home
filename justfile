@@ -236,7 +236,7 @@ secrets-wormhole-receive:
 # rsync
 secrets-scp-sync:
     # laptop must exist in ssh config
-    scp -r jedha.local:/home/teto/home/secrets {{ SECRETS_FOLDER }}
+    scp -P12666 -r teto@192.168.1.16:/home/teto/home/secrets {{ SECRETS_FOLDER }}
 
 # install git hooks
 git-hooks:

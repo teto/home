@@ -650,12 +650,14 @@ vim.g.spinner_frames = { '⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷' 
 if use_fzf_lua then
     require('plugins.fzf-lua')
     -- else frecency doesnt appear
-    require('fzf-lua-frecency').setup({
-        cwd_only = true,
-        -- all_files = nil,
-        stat_file = true,
-        display_score = true,
-    })
+	local has_fzf_lua_frecency, fzf_lua_frecency = pcall(require, 'fzf-lua-frecency')
+
+    -- fzf_lua_frecency.setup({
+    --     cwd_only = true,
+    --     -- all_files = nil,
+    --     stat_file = true,
+    --     display_score = true,
+    -- })
     require('teto.fzf-lua').register_keymaps()
 end
 
