@@ -16,7 +16,6 @@
 
     package = pkgs.nixVersions.nix_2_32;
 
-
     settings = {
       #   # http-connections = 25 is the default
       #   http2 = true;
@@ -31,9 +30,10 @@
       # experimental-features = nix-command flakes auto-allocate-uids
       extra-experimental-features = "auto-allocate-uids nix-command flakes cgroups";
 
-      # substituters = [
-      #   "https://nix-community.cachix.org"
-      # ];
+      substituters = [
+        # "https://nix-community.cachix.org"
+       "https://cache.nixos-cuda.org"
+      ];
 
       extra-substituters = [
         "https://haskell-language-server.cachix.org"

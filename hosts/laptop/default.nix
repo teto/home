@@ -33,7 +33,6 @@ let
         ]
         ++ lib.optionals (!withSecrets) [
           "sops/secrets.nix"
-          "services/openssh.nix"
         ];
       };
 
@@ -66,8 +65,12 @@ in
     # should not ?!
     # desktopAutoloaded
 
-    ./generated.nix
+    ../../tetos/disk-config.nix
 
+    # removed 'cos it clashed with disk-config but these are not the same
+    # ./generated.nix
+
+    flakeSelf.inputs.disko.nixosModules.disko
     flakeSelf.nixosModules.desktop
     flakeSelf.nixosModules.nix-ld
 

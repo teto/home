@@ -50,19 +50,36 @@ This folder contains my customizations for:
 - zsh (alternative to bash)
 
 
-* nixos Install via flakes
+* nixos install via PXE
+
+We use [[https://github.com/nix-community/nixos-anywhere][nixos-anywhere]] + [[https://github.com/nix-community/disko][disko]], aka we need a SERVER machine in the same LAN as the NEW machine to deploy from. 
+1. SERVER: Enable the pixiecore service
+2. NEW: start via PXE
+3. NEW: echo LUKS_PASSWORD > /tmp/secret.key
+4. SERVER: run `just bootstrap`
 
 As long as flakes are not supported natively, you need to:
 #+BEGIN_SRC shell
 # when not setting #my-machine, defaults to hostname
 # deploy a first generation without any secrets but in my favorite environment
-$ nixos-rebuild switch --flake 'github:teto/home#laptop' --use-remote-sudo --option accept-flake-config true --option extra-experimental-features 'nix-command flakes'
+$ nixos-rebuild switch --flake 'github:teto/home#laptop' --sudo --option accept-flake-config true --option extra-experimental-features 'nix-command flakes'
 $ just stow-config stow-home stow-local
 # once you've moved on the secrets to where they must be, you can deploy the final configuration
 $ nixos-rebuild switch --flake 'github:teto/home#laptop-with-secrets' --use-remote-sudo --option accept-flake-config true --option extra-experimental-features 'nix-command flakes'
 #+END_SRC
 
 
+* bootstrap from scratch
+
+As long as flakes are not supported natively, you need to:
+#+BEGIN_SRC shell
+# when not setting #my-machine, defaults to hostname
+# deploy a first generation without any secrets but in my favorite environment
+$ nixos-rebuild switch --flake 'github:teto/home#laptop' --sudo --option accept-flake-config true --option extra-experimental-features 'nix-command flakes'
+$ just stow-config stow-home stow-local
+# once you've moved on the secrets to where they must be, you can deploy the final configuration
+$ nixos-rebuild switch --flake 'github:teto/home#laptop-with-secrets' --use-remote-sudo --option accept-flake-config true --option extra-experimental-features 'nix-command flakes'
+#+END_SRC
 
 
 * Approach to handling secrets
@@ -154,3 +171,5 @@ Apart from dd, to create a windows installer USB key, unetbootin worked the best
 
 
 Tell me what to do please
+
+

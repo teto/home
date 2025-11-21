@@ -21,6 +21,15 @@ set dotenv-load := true
 
 switch-remote: (nixos-rebuild "switch")
 
+
+# deploy a brand new nixos install
+bootstrap:
+    # todo fix the target 
+    # use --extra-files
+    nixos-anywhere --target-host root@bootstrap.local --flake '.#laptop' \
+    --disk-encryption-keys /tmp/disk-1.key /tmp/disk-1.key
+
+
 # just to save the command
 
 # should be loaded into zsh history instead

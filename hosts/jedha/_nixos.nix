@@ -63,10 +63,10 @@ in
   imports = [
     autoloadedNixosModule # loaded by haumea
     ./_boot.nix
-    ../../nixos/profiles/greetd.nix
     ../../nixos/profiles/docker-daemon.nix
 
-      flakeSelf.inputs.harmonia.nixosModules.harmonia
+    flakeSelf.inputs.harmonia.nixosModules.harmonia
+    flakeSelf.nixosProfiles.greetd
     flakeSelf.nixosModules.desktop
     flakeSelf.nixosModules.nix-daemon
     flakeSelf.nixosModules.steam
@@ -83,13 +83,8 @@ in
 
     # TODO moved from their
     # ../../nixos/profiles/localai.nix
-
-    ../../nixos/profiles/nextcloud.nix
-    # ../../nixos/profiles/postgresql.nix
-    # ../../nixos/profiles/redis.nix
-
+    # ../../nixos/profiles/nextcloud.nix
   ]
-
   ;
 
   # TODO check how it interacts with less
@@ -111,9 +106,6 @@ in
 
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_17;
   # services.xserver.displayManager.gdm.enable = true;
-
-  # nesting clones can be useful to prevent GC of some packages
-  # https://nixos.org/nix-dev/2017-June/023967.html
 
   # it apparently still is quite an important thing to have
   boot.devSize = "5g";
@@ -266,17 +258,6 @@ in
   security.rtkit.enable = true;
 
   # }}}
-
-  # ebpf ?
-  # broken in https://github.com/NixOS/nixpkgs/issues/56724
-  # programs.bcc.enable = true;
-
-  # /alsa-base.conf
-  # environment.etc."modprobe.d/alsa.conf".text = ''
-  #   # we want nvidia to get index 1 see
-  #   # https://wiki.archlinux.org/title/Advanced_Linux_Sound_Architecture#Set_the_default_sound_card
-  #   options snd_hda_intel index=1
-  # '';
 
   # set on shell initialisation (e.g. in /etc/profile
   environment.variables = {

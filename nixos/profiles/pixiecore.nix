@@ -8,46 +8,87 @@
   ...
 }:
 let
-  netboot = pkgs.callPackage ./netboot.nix { };
+    build = sys.config.system.build;
 
   # build = 
-   sys = flakeSelf.nixosConfigurations.laptop.extendModules {
-     modules = [
-       (modulesPath + "/installer/netboot/netboot-minimal.nix")
-       {
+   # sys = flakeSelf.nixosConfigurations.laptop.extendModules {
+   #   modules = [
+   #     (modulesPath + "/installer/netboot/netboot-minimal.nix")
+   #     {
+   #       boot.supportedFilesystems = {
+   #          zfs = lib.mkForce false;
+   #       };
+   #     }
+   #    ];
+   #  };
+
+
+  # TODO enable mdns / avahi and give him host name "bootstrap.local"
+  sys = lib.nixosSystem {
+    system = "x86_64-linux";
+    modules = [
+      ({ config, pkgs, lib, modulesPath, ... }: {
+        imports = [
+          (modulesPath + "/installer/netboot/netboot-minimal.nix") 
+{
          boot.supportedFilesystems = {
             zfs = lib.mkForce false;
          };
        }
-      ];
-    };
-    build = sys.config.system.build;
+        ];
+        config = {
+          nix = {
+            settings = {
+              extra-experimental-features = "auto-allocate-uids nix-command flakes cgroups";
 
-  # sys = lib.nixosSystem {
-  #   system = "x86_64-linux";
-  #   modules = [
-  #     ({ config, pkgs, lib, modulesPath, ... }: {
-  #       imports = [ (modulesPath + "/installer/netboot/netboot-minimal.nix") ];
-  #       config = {
-  #         services.openssh = {
-  #           enable = true;
-  #           openFirewall = true;
-  #
-  #           settings = {
-  #             PasswordAuthentication = false;
-  #             KbdInteractiveAuthentication = false;
-  #           };
-  #         };
-  #
-  #         users.users.root.openssh.authorizedKeys.keys = [
-  #           # "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI..."
-  #           "${secretsFolder}/ssh/id_rsa.pub"
-  #
-  #         ];
-  #       };
-  #     })
-  #   ];
-  # };
+              substituters = [
+                # "https://nix-community.cachix.org"
+                "https://cache.nixos-cuda.org"
+              ];
+
+              trusted-public-keys = [
+
+                "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
+              ];
+            };
+
+
+          };
+
+          # to automatically run disko ?
+          # environment.etc."bashrc.local".text = ''
+          #   '';
+
+          services.openssh = {
+            enable = true;
+            openFirewall = true;
+
+            settings = {
+              PasswordAuthentication = false;
+              KbdInteractiveAuthentication = false;
+            };
+          };
+
+          environment.systemPackages = [
+            # TODO provide a better neovim / hx
+            pkgs.neovim
+            flakeSelf.inputs.nixos-wizard.packages."x86_64-linux".default
+          ];
+
+          users.users.teto.openssh.authorizedKeys.keys = [
+            (builtins.readFile ../../perso/keys/id_rsa.pub)
+          ];
+
+          users.users.root.openssh.authorizedKeys.keys = [
+            (builtins.readFile ../../perso/keys/id_rsa.pub)
+
+            # "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI..."
+            # "${secretsFolder}/ssh/id_rsa.pub"
+          ];
+        };
+      })
+    ];
+  };
 
 in
 {

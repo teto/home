@@ -25,6 +25,10 @@
       url = "github:Kirottu/anyrun";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     edict-kanji-db = {
       url = "https://github.com/odrevet/edict_database/releases/download/v0.0.2/kanji.zip";
       flake = false;
@@ -627,6 +631,9 @@
             ssh-to-age
             wormhole-rs # "wormhole-rs send"
 
+            nixos-anywhere
+            disko
+
             # boot debug
             # chntpw # broken to edit BCD (Boot configuration data) from windows
             efibootmgr
@@ -912,6 +919,7 @@
       nixosProfiles = {
         gnome = ./nixos/profiles/gnome.nix;
         pixiecore = ./nixos/profiles/pixiecore.nix;
+        greetd = ./nixos/profiles/greetd.nix;
       };
 
       nixosModules = (importDir ./nixos/modules) // {
