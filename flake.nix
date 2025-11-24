@@ -764,14 +764,15 @@
           hostname = "laptop";
 
           modules = [
-            ./hosts/laptop
+            ./hosts/tatooine
           ];
         };
 
         # see https://determinate.systems/posts/extending-nixos-configurations
         tatooine = laptop.extendModules {
           modules = [
-            self.inputs.nixos-hardware.nixosModules.dell-xps-13-9310
+            # self.inputs.nixos-hardware.nixosModules.dell-xps-13-9310
+            self.inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen5
             self.nixosProfiles.pixiecore
             ({ pkgs, ... }: let
               builder0 = (pkgs.tetosLib.nixosConfToBuilderAttr {} self.nixosConfigurations.jedha);

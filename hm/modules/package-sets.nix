@@ -284,7 +284,6 @@ in
 
     (mkIf cfg.enableDesktopGUIPackages {
       home.packages = with pkgs; [
-        hakuneko
         # memento # broken capable to display 2 subtitles at same time
         vlc
         # pinta # photo editing
@@ -577,11 +576,13 @@ in
 
     (mkIf cfg.japanese {
       home.packages = with pkgs; [
+        hakuneko
+
 
         # https://github.com/NixOS/nixpkgs/pull/368909
         pkgs.kakasi # convert kanjis into kanas etc
         pkgs.kanji-stroke-order-font # for memento, font that shows strike order (!!) cool when learning
-        (tagainijisho) # japanse dict; like zkanji Qt based
+        (tagainijisho) # japanese dict; like zkanji Qt based
         # flakeSelf.inputs.vocage.packages."x86_64-linux".vocage
         jiten # unfree, helpful for jap.nvim
         sudachi-rs # a japanese tokenizer (can have sudachidict builtins)

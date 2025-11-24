@@ -2,10 +2,12 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs
+{ config
+, lib
+, pkgs
 , flakeSelf
-, ... }:
-
+, ...
+}:
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -105,6 +107,8 @@
      wine
      wget
   ];
+
+  package-sets.enableOfficePackages = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
