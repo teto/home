@@ -117,6 +117,10 @@
   # https://discourse.nixos.org/t/how-do-you-pin-a-firefox-extensions-add-on-to-the-firefox-toolbar/36081
   # browser.uiCustomization.state
   myDefaultSettings = {
+    #
+    "browser.aboutConfig.showWarning" = "false";
+    "browser.download.autohideButton" = "false";
+    "browser.newtabpage.activity-stream.topSitesRows" = 3;
 
     # to avoid all those freaking advised article
     "browser.newtabpage.activity-stream.feeds.section.topstories" = "false";

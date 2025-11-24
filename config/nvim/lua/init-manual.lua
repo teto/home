@@ -652,12 +652,14 @@ if use_fzf_lua then
     -- else frecency doesnt appear
 	local has_fzf_lua_frecency, fzf_lua_frecency = pcall(require, 'fzf-lua-frecency')
 
-    -- fzf_lua_frecency.setup({
-    --     cwd_only = true,
-    --     -- all_files = nil,
-    --     stat_file = true,
-    --     display_score = true,
-    -- })
+	if has_fzf_lua_frecency then
+		fzf_lua_frecency.setup({
+			cwd_only = true,
+			-- all_files = nil,
+			stat_file = true,
+			display_score = true,
+		})
+	end
     require('teto.fzf-lua').register_keymaps()
 end
 

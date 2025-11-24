@@ -358,11 +358,11 @@
           modules, # array
           withSecrets, # bool
           hostname,
+          pkgs ? myPkgs
         }:
         nixpkgs.lib.nixosSystem {
-          inherit system;
+          inherit system pkgs;
           # pkgs = self.inputs.nixos-unstable.legacyPackages.${system}.pkgs;
-          pkgs = myPkgs;
           modules = [
             self.inputs.sops-nix.nixosModules.sops
             hm.nixosModules.home-manager
@@ -505,8 +505,8 @@
           };
         };
 
-      # myPkgs = pkgImport self.inputs.nixpkgs false;
-      myPkgs = myPkgsCuda ;
+      myPkgs = pkgImport self.inputs.nixpkgs false;
+      # myPkgs = myPkgsCuda ;
       myPkgsCuda = pkgImport self.inputs.nixpkgs true;
       unstablePkgs = pkgImport self.inputs.nixos-unstable false;
       # stablePkgs = pkgImport self.inputs.nixos-stable;
@@ -807,10 +807,11 @@
         };
 
         neptune = mkNixosSystem {
+          pkgs = myPkgs;
           modules = [
             ./hosts/neptune/configuration.nix
           ];
-          hostname = "neotokyo";
+          hostname = "neptune";
           withSecrets = true;
         };
 
@@ -917,6 +918,8 @@
       };
 
       nixosProfiles = {
+
+        avahi = ./nixos/profiles/avahi.nix;
         gnome = ./nixos/profiles/gnome.nix;
         pixiecore = ./nixos/profiles/pixiecore.nix;
         greetd = ./nixos/profiles/greetd.nix;

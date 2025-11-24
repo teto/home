@@ -18,7 +18,9 @@
 /* @define-color highlight #e2be7d; */
 /* @define-color comment #7f848e; */
 
-@import url("/home/teto/.cache/wal/waybar-gtk.css");
+/* @import url("/home/teto/.cache/wal/waybar-gtk.css"); */
+/* could I use ~?  */
+@import url("/home/teto/.cache/wallust/waybar.css");
 
 @define-color workspace-bg-unfocused #64724D;
 @define-color workspace-bg-focused #64727D;

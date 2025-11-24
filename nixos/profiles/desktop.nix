@@ -37,6 +37,7 @@ in
     flakeSelf.inputs.nix-index-database.nixosModules.nix-index
     flakeSelf.nixosModules.nvd
     flakeSelf.nixosModules.universal
+    flakeSelf.nixosProfiles.avahi
     flakeSelf.nixosProfiles.gnome
     flakeSelf.nixosModules.nix-daemon
     flakeSelf.nixosModules.sudo

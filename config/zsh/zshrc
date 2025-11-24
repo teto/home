@@ -336,7 +336,6 @@ teatimer() {
 }
 
 # # To add support for TTYs this line can be optionally added.
-# source ~/.cache/wal/colors-tty.sh
 # TODO configure from HM module
 # if [[ -n $KITTY_INSTALLATION_DIR ]]; then
 #   export KITTY_SHELL_INTEGRATION="enabled"

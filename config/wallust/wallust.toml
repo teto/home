@@ -84,6 +84,16 @@ palette = "dark"
 # NOTE: prefer '' over "" for paths, avoids escaping.
 #zathura = { template = 'zathura', target = '~/.config/zathura/zathurarc' }
 
+rofi.template= "colors-rofi.rasi"
+rofi.target = '~/.cache/wallust/colors.rasi' 
+
+waybar.template = "waybar.css"
+waybar.target= "~/.cache/wallust/waybar.css"
+
+
+# kitty
+kitty = { src='kitty.conf', dst='~/.config/kitty/colors.conf'}
+
 # OPTIONALLY It can accept `new_engine = true`: This "new engine" difers by using  double brackets like `{{variable}}`
 # instead of one like usual, which helps with file formats that use brackets like json. With the `new_engine` enabled
 # you can escape and produce a literal `{{` by `{{{{}}`, and for `}}` you escape it with `{{}}}}`.

@@ -5,6 +5,7 @@
   ...
 }:
 {
+  services.avahi = {
   # inspired by novos
   enable = true;
   ipv6 = false; # bug with multiple hostnames
@@ -66,8 +67,10 @@
     #   </service-group>
     # '';
   };
+
   browseDomains = [
     # "0pointer.de"
     "zeroconf.org"
   ];
+};
 }

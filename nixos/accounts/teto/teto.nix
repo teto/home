@@ -4,7 +4,7 @@
   # options,
   # lib,
   # , secrets
-  secretsFolder,
+  # secretsFolder,
   ...
 }:
 {

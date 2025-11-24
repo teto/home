@@ -51,6 +51,8 @@
     ./sops.nix
 
     # to get the first iteration going on
+    ./services/tandoor.nix
+    ./services/linkwarden.nix
     ./services/gitolite.nix
     ./services/nextcloud.nix
     ./services/postgresqlBackup.nix

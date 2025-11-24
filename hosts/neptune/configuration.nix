@@ -2,12 +2,16 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs
+, flakeSelf
+, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      flakeSelf.nixosProfiles.avahi
+      ../../nixos/accounts/teto/teto.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -20,7 +24,7 @@
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # Set your time zone.
-  # time.timeZone = "Europe/Paris";
+  time.timeZone = "Europe/Paris";
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -45,7 +49,17 @@
   services.xserver.xkb.options = "eurosign:e,caps:escape";
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.printing = {
+    enable = true;
+      browsing = false;
+      drivers = [
+        pkgs.gutenprint
+        pkgs.gutenprintBin
+        # See https://discourse.nixos.org/t/install-cups-driver-for-brother-printer/7169
+        pkgs.brlaser
+      ];
+  };
+
 
   # Enable sound.
   # services.pulseaudio.enable = true;
@@ -59,17 +73,28 @@
   # services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.mama = {
-   isNormalUser = true;
-   extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-   packages = with pkgs; [
-     tree
-   ];
+  users.users = {
+    mama = {
+      isNormalUser = true;
+      extraGroups = [
+        "audio"
+        "wheel"
+        "ic2"
+      ]; # Enable ‘sudo’ for the user.
+      packages = with pkgs; [
+        tree
+      ];
+    
+   };
+   teto = {
+     uid = lib.mkForce 1001;
+    };
  };
 
   # xserver disappears in recent one
-  services.xserver.desktopManager.gnome.enable = true;
-services.gnome.games.enable = true;
+  services.desktopManager.gnome.enable = true;
+  services.gnome.games.enable = true;
+
   programs.firefox.enable = true;
 
   # List packages installed in system profile.
