@@ -1,3 +1,4 @@
+# disko main config
 {
 
   # shall we add a swap partition later ?

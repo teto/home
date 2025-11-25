@@ -49,7 +49,8 @@ let
 
   # nixosConfigurations
   # .nodes
-  builder0 = (tetosLib.nixosConfToBuilderAttr {} flakeSelf.nixosConfigurations.jedha);
+  builder_jedha = (tetosLib.nixosConfToBuilderAttr {} flakeSelf.nixosConfigurations.jedha);
+  builder_neotokyo = (tetosLib.nixosConfToBuilderAttr {} flakeSelf.nixosConfigurations.neotokyo);
 
   # b1 = pkgs.tetosLib.deployrsNodeToBuilderAttr flakeSelf.deploy.nodes.jedha;
       # {
@@ -85,6 +86,8 @@ in
     ../../nixos/profiles/steam.nix
     ../../nixos/profiles/kanata.nix
     # ../../nixos/profiles/postgresql.nix
+    # ./services/tandoor.nix
+    # ./services/linkwarden.nix
 
     # ../../nixos/profiles/home-assistant.nix
     # usually inactive, just to test some stuff
@@ -92,8 +95,16 @@ in
 
   ];
   
+  # services.tandoor-recipes.enable = true;
+  # services.linkwarden = {
+  #   enable = true;
+  #   secretFiles.NEXTAUTH_SECRET = "TOTO";
+  # };
+
+
   nix.buildMachines = [
-      builder0
+      # builder_neotokyo
+
       # {
       #   # using secrets.nix
       #   hostName = "laptop.local";

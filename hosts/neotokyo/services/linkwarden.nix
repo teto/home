@@ -1,6 +1,10 @@
 { config, lib, pkgs, ... }:
 {
   
-  services.linkwarden.enable = true;
+  services.linkwarden = {
+
+    enable = true;
+    # secretFiles.NEXTAUTH_SECRET = ;
+  };
 
 }

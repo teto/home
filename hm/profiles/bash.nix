@@ -8,7 +8,17 @@
   ...
 }@args:
 let 
-  builder0 = lib.mkRemoteBuilderDesc "3.0" 
+  builder_neotokyo = lib.mkRemoteBuilderDesc "3.0" 
+  (pkgs.tetosLib.nixosConfToBuilderAttr 
+    {
+      sshKey = "${secretsFolder}/ssh/id_rsa";
+      # I might need to set it ?
+      publicHostKey = null;
+    }
+    flakeSelf.nixosConfigurations.neotokyo)
+  ;
+
+  builder_jedha = lib.mkRemoteBuilderDesc "3.0" 
   (pkgs.tetosLib.nixosConfToBuilderAttr 
     {
       sshKey = "${secretsFolder}/ssh/id_rsa";
@@ -17,6 +27,7 @@ let
     }
     flakeSelf.nixosConfigurations.jedha)
   ;
+
     # TODO add jedha
     # flakeSelf.deploy.nodes.jedha;
 in
@@ -35,7 +46,8 @@ in
 
     # goes to .profile
     sessionVariables = {
-      TETOS_BUILDER = builder0;
+      TETOS_0 = builder_neotokyo;
+      TETOS_1 = builder_jedha;
       HISTTIMEFORMAT = "%d.%m.%y %T ";
       # CAREFUL
       # HISTFILE="$XDG_CACHE_HOME/bash_history";
@@ -43,8 +55,8 @@ in
       # full path towards thee ~/.password-store folder
       # AWS_VAULT_PASS_PASSWORD_STORE_DIR="nova";
       # AWS_VAULT_PASS_PASSWORD_STORE_DIR
-      AWS_VAULT_PASS_PREFIX = "nova";
-      AWS_VAULT_BACKEND = "pass";
+      # AWS_VAULT_PASS_PREFIX = "nova";
+      # AWS_VAULT_BACKEND = "pass";
       # SUDO_PROMPT="	a[sudo] please enter a password: ";
     };
 

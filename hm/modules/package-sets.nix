@@ -151,6 +151,7 @@ in
           pkgs.nautilus # demande webkit/todo replace by nemo ?
           # mcomix # manga reader
           pkgs.popcorntime
+          pkgs.peaclock  # show big clock in terminal
           # gnome.california # fails
           # khard # see khal.nix instead ?
           # libsecret  # to consult
@@ -284,7 +285,6 @@ in
 
     (mkIf cfg.enableDesktopGUIPackages {
       home.packages = with pkgs; [
-        # memento # broken capable to display 2 subtitles at same time
         vlc
         # pinta # photo editing
 
@@ -575,8 +575,15 @@ in
     })
 
     (mkIf cfg.japanese {
-      home.packages = with pkgs; [
+      home.packages = with pkgs; 
+        let 
+          # capable to display 2 subtitles at same time 
+          # like mpv but with a lsit of subtitles
+          memento-with-ocr =  memento.override( { withOcr = true; });
+        in
+ [
         hakuneko
+        memento-with-ocr
 
 
         # https://github.com/NixOS/nixpkgs/pull/368909
