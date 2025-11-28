@@ -1,7 +1,10 @@
 # created as per https://joinemm.dev/blog/yubikey-nixos-guide
+{ secretsFolder, ... }:
 {
   # useless ? nixos
   enable = true;
+
+  homedir = "${secretsFolder}/gnupg";
 
   # https://support.yubico.com/hc/en-us/articles/4819584884124-Resolving-GPG-s-CCID-conflicts
   scdaemonSettings = {
