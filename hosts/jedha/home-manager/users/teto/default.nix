@@ -102,7 +102,7 @@
 
   package-sets = {
 
-    audio = true;
+    audio = false;
     enableOfficePackages = true;
     kubernetes = true;
     developer = true;

@@ -280,3 +280,7 @@ rev = "1.4.8"
 git = "https://github.com/grddavies/tidal.nvim"
 rev = "fa4673e181e18fd1719ae17a1d4f4ecce2de37aa"
 
+[plugins."jj.nvim"]
+git = "nicolasgb/jj.nvim"
+rev = "v0.1.0"
+

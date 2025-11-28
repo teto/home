@@ -20,7 +20,6 @@ in
     flakeSelf.homeProfiles.developer
     flakeSelf.homeProfiles.mpv
     flakeSelf.homeProfiles.vscode
-    # flakeSelf.homeProfiles.waybar # breaks eval ?!
 
       flakeSelf.homeModules.fzf
       flakeSelf.homeModules.teto-zsh
@@ -35,10 +34,8 @@ in
     flakeSelf.homeModules.services-mujmap
     flakeSelf.homeModules.pimsync
     flakeSelf.homeModules.package-sets
-    # ./programs/gpg.nix
   ]
-  ++ lib.optionals withSecrets [
-  ];
+  ;
 
   # doing so enables support for it in greetd
   # services.gnome.gnome-keyring.enable = true;

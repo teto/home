@@ -1,4 +1,3 @@
 {
 
-  chawan.enable = true;
 }

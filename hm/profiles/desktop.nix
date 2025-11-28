@@ -1,13 +1,13 @@
 {
-  config,
-  flakeSelf,
-  pkgs,
-  lib,
-  # system,
-  withSecrets,
-  dotfilesPath,
-  # , secretsFolder
-  ...
+config,
+flakeSelf,
+pkgs,
+lib,
+# system,
+withSecrets,
+dotfilesPath
+, secretsFolder
+, ...
 }:
 let
 
@@ -36,6 +36,9 @@ in
     ./zsh.nix
 
   ];
+
+  home.file.".password-store".source = config.lib.file.mkOutOfStoreSymlink "${secretsFolder}/password-store-teto";
+  # home.file.".gnupg".source = config.lib.file.mkOutOfStoreSymlink "${secretsFolder}/gnupg";
 
   # allows to find fonts enabled through home.packages
   fonts.fontconfig.enable = true;

@@ -11,7 +11,13 @@
 
   # programs.code
 
-  programs.chawan.enable = true;
+
+  services.secret-service = 
+  {
+    enable = true;
+  };
+
+  # programs.chawan.enable = false;
 
   # programs.lapce.enable = true;
   programs.mods = {
@@ -26,7 +32,6 @@
 
   home.packages = [
 
-    flakeSelf.inputs.lux.packages.${pkgs.stdenv.hostPlatform.system}.lux-cli # fails to build
   ];
 
   # services.trayscale.enable = true;
