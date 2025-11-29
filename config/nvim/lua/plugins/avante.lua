@@ -15,7 +15,7 @@ require('avante').setup({
         enable_token_counting = false,
         -- auto_approve_tool_permissions = {"bash", "replace_in_file"}, -- Auto-approve specific tools only
     },
-    provider = 'gemini',
+    provider = 'claude',
     ui = { border = 'single', background_color = '#FF0000' },
     -- provider = "ollama",
 
@@ -27,6 +27,16 @@ require('avante').setup({
     },
     providers = {
         azure = nil,
+	   claude = {
+		 endpoint = "https://api.anthropic.com",
+		 model = "claude-3-5-sonnet-20241022",
+		 -- extra_request_body = {
+		 --   temperature = 0.75,
+		 --   max_tokens = 4096,
+		 -- },
+		 api_key_name = 'cmd:cat /home/teto/.config/sops-nix/secrets/gemini_matt_key',
+	   },
+
 		gemini = {
 		 api_key_name = 'cmd:cat /home/teto/.config/sops-nix/secrets/gemini_matt_key',
 		},

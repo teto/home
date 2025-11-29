@@ -76,6 +76,22 @@ fzf_lua.setup({
     'default-title',
     commands = { sort_lastused = true },
     -- [...]
+	buffers = {
+	  prompt            = 'Buffers❯ ',
+	  file_icons        = true,         -- show file icons (true|"devicons"|"mini")?
+	  color_icons       = true,         -- colorize file|git icons
+	  sort_lastused     = true,         -- sort buffers() by last used
+	  show_unloaded     = true,         -- show unloaded buffers
+	  cwd_only          = false,        -- buffers for the cwd only
+	},
+
+	 nvim_options = {
+	 actions           = {
+	   ["enter"]     = { fn = FzfLua.actions.nvim_opt_edit_local, reload = true },
+	   ["shift-enter"] = { fn = FzfLua.actions.nvim_opt_edit_global, reload = true },
+	 },
+
+   },
     fzf_opts = {
         -- [...]
         -- it shows raw ansi codes when disabled !

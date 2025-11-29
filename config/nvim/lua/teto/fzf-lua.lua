@@ -108,7 +108,8 @@ function M.register_keymaps()
     end, { desc = 'Fuzzysearch buffers' })
 
     vim.keymap.set('n', '<Leader>C', function()
-        fzf_lua.colorschemes()
+	 -- awesome_colorschemes can download and install colorschemes
+	 fzf_lua.colorschemes()
     end, { desc = 'Select a colorscheme' })
 
     vim.keymap.set('n', '<Leader>l', function()

@@ -103,6 +103,7 @@ in
       home.packages = [
         pkgs.koboldcpp
         pkgs.llama-cpp # for llama-server and benchmarks
+        pkgs.claude-code
         # open-webui # broken
         # sillytavern
         # python3Packages.unsloth # broken

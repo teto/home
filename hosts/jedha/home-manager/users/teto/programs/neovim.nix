@@ -33,18 +33,10 @@ let
     # (luaPlugin { plugin = nvim-ufo; })
     # (luaPlugin { plugin = nvim-dbee; })
 
-    # testin
-    # TODO restore
-    # (luaPlugin { plugin = image-nvim; })
-
     # (luaPlugin {
     #  # this is a peculiarly complex one that needs pynvim, image.nvim
     #  plugin = molten-nvim;
     # })
-
-    # TODO should be able to handle it via rocks ?
-    # avante lets you use neovim as cursor IDE
-    # (luaPlugin { plugin = avante-nvim; })
 
     # I've not been using it so far
     # (luaPlugin { plugin = nvim-dap; })
@@ -90,10 +82,6 @@ let
     # { plugin = kui-nvim; }
     # FIX https://github.com/NixOS/nixpkgs/issues/169293 first
 
-    # (luaPlugin { plugin = telescope-manix; })
-    # call with :Hoogle
-    # (luaPlugin { plugin = glow-nvim; })
-
     # (luaPlugin {
     #   plugin = fzf-hoogle-vim;
     #   config = ''
@@ -105,42 +93,6 @@ let
     # cool but I dont use it
     # (luaPlugin { plugin = stylish-nvim; })
 
-    # doesnt seem to work + problematic on neovide
-    # (luaPlugin {
-    #  plugin = image-nvim;
-    #     /* lua */
-    #     config =  ''
-    #       require("image").setup({
-    #         backend = "kitty",
-    #         integrations = {
-    #           markdown = {
-    #             enabled = true,
-    #             sizing_strategy = "auto",
-    #             download_remote_images = false,
-    #             clear_in_insert_mode = true,
-    #           },
-    #           neorg = {
-    #             enabled = false,
-    #           },
-    #         },
-    #         max_width = nil,
-    #         max_height = nil,
-    #         max_width_window_percentage = nil,
-    #         max_height_window_percentage = 50,
-    #         kitty_method = "normal",
-    #         kitty_tmux_write_delay = 10,
-    #         window_overlap_clear_enabled = false,
-    #         window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
-    #       })
-    #     '';
-    # })
-
-    # WIP
-    # (luaPlugin { plugin = nvim-telescope-zeal-cli; })
-
-    # (luaPlugin { plugin = minimap-vim; })
-
-    # (luaPlugin { plugin = rest-nvim; })
   ];
 
   filetypePlugins = with pkgs.vimPlugins; [

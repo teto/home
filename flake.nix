@@ -432,27 +432,25 @@
             # and sublime because guy has to eat
             allowUnfreePredicate =
               pkg:
-              # let
-              #   ensureList = x: if builtins.isList x then x else [ x ];
-              # in
-              # package:
-              #               builtins.all (
-              #                 license:
-              #                 license.free
-              #                 || builtins.elem license.shortName [
-              #                   "CUDA EULA"
-              #                   "cuDNN EULA"
-              #                   "cuSPARSELt EULA"
-              #                   "cuTENSOR EULA"
-              #                   "NVidia OptiX EULA"
-              #                 ]
-              #               ) (ensureList package.meta.license);
-              # };
               let
+                ensureList = x: if builtins.isList x then x else [ x ];
+                hasCudaLicense = package:
+                            builtins.all (
+                              license:
+                              license.free
+                              || builtins.elem license.shortName [
+                                "CUDA EULA"
+                                "cuDNN EULA"
+                                "cuSPARSELt EULA"
+                                "cuTENSOR EULA"
+                                "NVidia OptiX EULA"
+                              ]
+                            ) (ensureList package.meta.license);
                 legacyPkgs = nixpkgs.legacyPackages.${system};
                 pkgName = legacyPkgs.lib.getName pkg;
               in
-              if legacyPkgs.lib.hasPrefix "cuda" pkgName then
+              # if legacyPkgs.lib.hasPrefix "cuda" pkgName then
+              if hasCudaLicense "cuda" pkgName then
                 true
               else
                 builtins.elem pkgName [
@@ -462,30 +460,30 @@
                   "claude-code"
 
                   # cuda stuff, mostly for local-ai
-                  "cuda_cudart"
-                  "cuda_cccl"
-                  "cuda_nvcc"
-                  "cudnn"
-                  "libcublas"
-                  "libcufile"
-                  "cudatoolkit"
-                  "libcurand"
-                  "libcusparse"
-                  "nvidia-x11"
-                  "nvidia-settings"
-                  "libnvjitlink"
-                  "libcufft"
-                  "cudnn"
-                  "libnpp"
-                  "cuda-merged"
-                  "cuda_cuobjdump"
-                  "cuda_gdb"
-                  "cuda_nvdisasm"
-                  "libcusolver"
-                  "libXNVCtrl"
-                  "libcusparse_lt"
+                  # "cuda_cudart"
+                  # "cuda_cccl"
+                  # "cuda_nvcc"
+                  # "cudnn"
+                  # "libcublas"
+                  # "libcufile"
+                  # "cudatoolkit"
+                  # "libcurand"
+                  # "libcusparse"
+                  # "nvidia-x11"
+                  # "nvidia-settings"
+                  # "libnvjitlink"
+                  # "libcufft"
+                  # "cudnn"
+                  # "libnpp"
+                  # "cuda-merged"
+                  # "cuda_cuobjdump"
+                  # "cuda_gdb"
+                  # "cuda_nvdisasm"
+                  # "libcusolver"
+                  # "libXNVCtrl"
+                  # "libcusparse_lt"
 
-                  "lens-desktop" # kubernetes resource viewer
+                  # "lens-desktop" # kubernetes resource viewer
                   "ec2-api-tools"
                   "jiten" # japanese software recognition tool / use sudachi instead
                   "google-chrome"
