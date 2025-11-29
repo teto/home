@@ -6,8 +6,30 @@
     AutofillCreditCardEnabled = false;
     DisableFirefoxStudies = true;
 
+    DisableFirefoxAccounts = false;
+    # DisableFirefoxSuggest = true;
+    # DisableFormHistory = true;
     DisableTelemetry = true;
     DisplayMenuBar = "default-off";
+    DontCheckDefaultBrowser = false;
+    Homepage = {
+      # URL = "chrome://browser/content/blanktab.html";
+      StartPage = "previous-session";
+    };
+
+    NewTabPage = false;
+    OfferToSaveLogins = false;
+    OverrideFirstRunPage = "";
+    PictureInPicture = {
+      Enabled = false;
+      Locked = true;
+    };
+    # SearchBar = "unified";
+    # ShowHomeButton = false;
+    TranslateEnabled = false;
+
+    # See https://discourse.nixos.org/t/browser-and-browser-wars/70027/21
+    # ExtensionSettings
   };
 
   searchEngines = {
