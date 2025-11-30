@@ -43,8 +43,8 @@
     };
 
     harmonia = {
-      # url = "github:nix-community/harmonia";
-      url = "github:teto/harmonia?ref=teto/remove-mdDoc";
+      url = "github:nix-community/harmonia";
+      # url = "github:teto/harmonia?ref=teto/remove-mdDoc";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

@@ -48,7 +48,6 @@
 
   # services.opensnitch-ui.enable
 
-  # TODO use mkSymlinkOufOf  ? ?
   # xdg.configFile."zsh/zshrc.generated".source = ../../../config/zsh/zshrc;
 
   # programs.nh.enable = true;

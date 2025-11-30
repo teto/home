@@ -1,5 +1,0 @@
-aws eks update-kubeconfig --name jinko-prod
-kubectl api-resources 
-aws eks update-kubeconfig --name jk-dev --profile nova-sandbox --user-alias jk-dev
-kubectl apply -f custom/my-ingress-route.yaml --context jk-dev
-
