@@ -150,11 +150,8 @@ in
   #   "/crypto_keyfile.bin" = null;
   # };
 
-  # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = [ "nvidia" ];
 
   # Enable swap on luks
-  # boot.initrd.luks.devices."luks-abd09d4b-3972-405a-b314-44821af95c0e".device = "/dev/disk/by-uuid/abd09d4b-3972-405a-b314-44821af95c0e";
   # boot.initrd.luks.devices."luks-abd09d4b-3972-405a-b314-44821af95c0e".keyFile = "/crypto_keyfile.bin";
 
   ### HWP
@@ -249,7 +246,7 @@ in
   swapDevices = [
     {
       device = "/fucking_swap";
-      size = 16000; # in MB
+      size = 32000; # in MB
       # randomEncryption.enable = true;
       # options = [ "nofail" ];
       # priority = 5;
@@ -258,10 +255,10 @@ in
 
   # default is 60. Range is 0-200. Lower number says use RAM rather than swap.
   # I considered it, didn't try it out yet
-  zramSwap = {
-    enable = false;
-    priority = 10; # higher than HDD swap
-  };
+  # zramSwap = {
+  #   enable = false;
+  #   priority = 10; # higher than HDD swap
+  # };
 
   programs.gnome-disks = {
     enable = true;

@@ -1,6 +1,12 @@
 { pkgs, lib, ... }:
 {
 
+  initrd.availableKernelModules = [
+    # "aesni_intel"
+    "cryptd"
+    "dm-snapshot"
+  ];
+
   plymouth.theme = "spinner";
   plymouth.enable = false; # I cant get to login with plymouth ?
   # todo rename data to assets ?
@@ -16,7 +22,7 @@
   tmp.tmpfsSize = "5Gb";
 
   kernelParams = [
-    "mem_sleep_default=deep"
+    # "mem_sleep_default=deep"
     "plymouth.use-simpledrm" # kesako ?
 
     # "acpi_backlight=legacy"
@@ -33,7 +39,7 @@
   kernelModules = [
     # "af_key" # for ipsec/vpn support
     "kvm"
-    "kvm-intel" # for virtualisation
+    # "kvm-intel" # for virtualisation
   ];
 
   kernel.sysctl = {

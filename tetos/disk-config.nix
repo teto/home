@@ -21,7 +21,9 @@
                 mountOptions = [ "umask=0077" ];
               };
             };
+            # todo rename
             luks = {
+              # end = "-32G";
               size = "100%";
               content = {
                 type = "luks";
@@ -36,6 +38,25 @@
                 };
               };
             };
+
+            # availableKernelModules
+
+            # encryptedSwap = {
+            #   size = "10M";
+            #   content = {
+            #     type = "swap";
+            #     randomEncryption = true;
+            #     priority = 100; # prefer to encrypt as long as we have space for it
+            #   };
+            # };
+            # plainSwap = {
+            #   size = "100%";
+            #   content = {
+            #     type = "swap";
+            #     discardPolicy = "both";
+            #     resumeDevice = true; # resume from hiberation from this device
+            #   };
+            # };
           };
         };
       };

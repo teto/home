@@ -15,6 +15,8 @@
 
   # check https://github.com/NixOS/nixpkgs/issues/291217
   acceleration = "cuda";
+  # acceleration = "nvidia";
+
   # folders where to find models:
   # Default: "\${config.services.ollama.home}/models"
   # models = "/mnt/ext/ollama/models";

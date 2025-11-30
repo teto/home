@@ -51,7 +51,6 @@
     ./sops.nix
 
     # to get the first iteration going on
-    ./services/tandoor.nix
     ./services/linkwarden.nix
     ./services/gitolite.nix
     ./services/nextcloud.nix
@@ -60,13 +59,8 @@
     ./services/immich.nix
 
     # ../../nixos/modules/hercules-ci-agents.nix
-    # ../../nixos/profiles/docker-daemon.nix
 
     flakeSelf.nixosModules.server
-
-    # just to help someone on irc
-    # <nixpkgs/nixos/modules/profiles/hardened.nix>
-
   ];
 
   # virtualisation.docker.enable = true;
@@ -106,7 +100,6 @@
   home-manager.users = {
     root = {
       imports = [
-
         flakeSelf.homeProfiles.neovim
         (
           { ... }:
@@ -154,7 +147,6 @@
   ];
 
   # create a service to monitor new blog
-  # systemd.
 
   # services.gitolite.adminPubkey = secrets.gitolitePublicKey;
 
