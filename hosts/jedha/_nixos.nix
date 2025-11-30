@@ -67,7 +67,8 @@ in
 
     flakeSelf.inputs.harmonia.nixosModules.harmonia
     flakeSelf.nixosProfiles.greetd
-    flakeSelf.nixosModules.desktop
+    flakeSelf.nixosProfiles.desktop
+
     flakeSelf.nixosModules.nix-daemon
     flakeSelf.nixosModules.steam
     flakeSelf.nixosModules.universal
@@ -83,7 +84,6 @@ in
 
     # TODO moved from their
     # ../../nixos/profiles/localai.nix
-    # ../../nixos/profiles/nextcloud.nix
   ]
   ;
 

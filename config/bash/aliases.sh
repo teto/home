@@ -21,6 +21,7 @@ alias yr="yazi ./result"
 
 # TODO should use all runners
 # alias nall='nix develop --option builders "$NOVA_OVH1" -j0'
+alias jg="just -g "
 alias nr="nix run "
 alias nr1='nix run --option builders "$NOVA_OVH1" -j0'
 alias nr2='nix run --option builders "$NOVA_CAMPUS1" -j0'

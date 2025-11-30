@@ -39,6 +39,10 @@ llama:
 
 # voice recognition
 whisper:
+  #  whisper-server \
+  # -m /home/teto/.cache/huggingface/hub/models--ggerganov--whisper.cpp/snapshots/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-large-v3.bin \
+  # --port ${LLM_LOCAL_PORT}
+  # services.wyoming.openwakeword.enable
   llama-server -m /home/teto/.cache/huggingface/hub/models--ggerganov--whisper.cpp/snapshots/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-large-v3.bin -c 2048 --port ${LLM_LOCAL_PORT} -ngl 33
   
 # Update nixpkgs neovim plugins

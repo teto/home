@@ -33,7 +33,7 @@ let
   # todo rely on a lib to manipulate network
   show = at: "${at.address}/${toString at.prefixLength}";
 
-  externalInterface = "wlan0";
+  # externalInterface = "wlan0";
 
 in
 {

@@ -142,6 +142,7 @@
 
   environment.systemPackages = [
     pkgs.neovim
+    pkgs.nixpkgs-review
     pkgs.zola # needed in the post-receive hook of the blog !
     pkgs.yazi
   ];

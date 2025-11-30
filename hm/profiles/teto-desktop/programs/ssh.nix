@@ -17,12 +17,9 @@ let
         mcfg = value;
         sshCfg = mcfg.config.services.openssh;
       in
-        builtins.trace "SSH config for ${name}" (if sshCfg.enable then
-        {
-
-        }
+        builtins.trace "SSH config for ${name}" (lib.optionalAttrs sshCfg.enable 
         # lib.warn if "teto" is not in users.users
-        else ({
+        ({
           match = "host ${mcfg.config.networking.hostName}";
           # assumption ? or check/warn it has it ?
           user = "teto";
@@ -54,8 +51,8 @@ in
   # controlPath = "";
   # osConfig.
   matchBlocks = 
-  # hostsConfigs
-  # // 
+  hostsConfigs
+  // 
     (lib.optionalAttrs withSecrets {
 
     # userKnownHostsFile

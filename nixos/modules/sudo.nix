@@ -10,10 +10,7 @@ in
 {
   options = {
     security.sudo = {
-      bellOnPrompt = lib.mkEnableOption {
-        description = "Enable bell on sudo";
-        # default = false;
-      };
+      bellOnPrompt = lib.mkEnableOption "Bell on sudo";
     };
   };
 

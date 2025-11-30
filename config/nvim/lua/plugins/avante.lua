@@ -26,15 +26,15 @@ require('avante').setup({
         -- provider =
     },
     providers = {
-        azure = nil,
+	   azure = nil,
 	   claude = {
 		 endpoint = "https://api.anthropic.com",
-		 model = "claude-3-5-sonnet-20241022",
+		 model = "claude-sonnet-4-5-20250929",
 		 -- extra_request_body = {
 		 --   temperature = 0.75,
 		 --   max_tokens = 4096,
 		 -- },
-		 api_key_name = 'cmd:cat /home/teto/.config/sops-nix/secrets/gemini_matt_key',
+		 api_key_name = 'cmd:cat /home/teto/.config/sops-nix/secrets/claude_api_key',
 	   },
 
 		gemini = {

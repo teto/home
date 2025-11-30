@@ -100,16 +100,6 @@ in
 
   # };
 
-  # to get manpages
-  documentation.enable = true;
-  # set it to true to help
-  documentation.nixos.includeAllModules = false;
-
-  # on master it is disabled
-  documentation.man.enable = true; # temp
-  documentation.doc.enable = false; # builds html doc, slow
-  documentation.info.enable = false;
-
   environment.systemPackages = [ ];
 
   # networking.firewall.checkReversePath = false; # for nixops
@@ -220,9 +210,20 @@ in
   #   ProtectHome=no
   # '';
   # this is slow
-  documentation.nixos.enable = true;
+  # documentation = {
+  #   nixos = {
+  #   # to get manpages
+  #   enable = true;
+  #   # adds home-manager and my own option as well to man configuration.nix
+  #   includeAllModules = true; 
+  # };
+  #
+  #   # on master it is disabled
+  #   man.enable = true; # temp
+  #   doc.enable = false; # builds html doc, slow
+  #   info.enable = false;
+  # };
 
   # programs.file-roller.enable = true;
   programs.system-config-printer.enable = true;
-
 }

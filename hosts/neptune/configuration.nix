@@ -12,7 +12,9 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      flakeSelf.nixosProfiles.desktop
       flakeSelf.nixosProfiles.avahi
+      flakeSelf.nixosModules.default-hm
       ../../nixos/accounts/teto/teto.nix
     ];
 
@@ -93,6 +95,20 @@
     };
  };
 
+ home-manager.users = {
+   mama = 
+   {
+           package-sets.enableOfficePackages = true;
+
+  };
+   teto = {
+
+      package-sets.enableOfficePackages = true;
+   };
+  };
+
+
+
   # xserver disappears in recent one
   services.desktopManager.gnome.enable = true;
   services.gnome.games.enable = true;
@@ -108,7 +124,6 @@
      wget
   ];
 
-  package-sets.enableOfficePackages = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

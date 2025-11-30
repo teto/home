@@ -102,7 +102,9 @@ in
     (mkIf cfg.llms {
       home.packages = [
         pkgs.koboldcpp
+        # llama-cpp-with-curl
         pkgs.llama-cpp # for llama-server and benchmarks
+        pkgs.llama-swap
         pkgs.claude-code
         # open-webui # broken
         # sillytavern

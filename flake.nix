@@ -42,7 +42,11 @@
       flake = false;
     };
 
-    harmonia.url = "github:nix-community/harmonia";
+    harmonia = {
+      # url = "github:nix-community/harmonia";
+      url = "github:teto/harmonia?ref=teto/remove-mdDoc";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     memento-kanjidict = {
       url = "https://github.com/themoeway/jmdict-yomitan/releases/latest/download/JMdict_french.zip";
@@ -749,8 +753,7 @@
           modules = [
             hm.nixosModules.home-manager
             self.inputs.nixos-hardware.nixosModules.pcengines-apu
-            # self.nixosModules.default-hm
-            ./hosts/router/default.nix
+            ./hosts/router
           ];
         };
 
@@ -758,9 +761,7 @@
         # TODO use mkNixosSystem
         laptop = mkNixosSystem {
           withSecrets = false;
-
           hostname = "laptop";
-
           modules = [
             ./hosts/tatooine
           ];
@@ -920,6 +921,8 @@
       nixosProfiles = {
 
         avahi = ./nixos/profiles/avahi.nix;
+        # desktop = ./nixos/profiles/desktop.nix;
+        desktop = nixos/profiles/desktop.nix;
         gnome = ./nixos/profiles/gnome.nix;
         pixiecore = ./nixos/profiles/pixiecore.nix;
         laptop = ./nixos/profiles/laptop;
@@ -937,7 +940,6 @@
         ntp = nixos/profiles/ntp.nix;
 
         universal = hosts/config-all.nix;
-        desktop = nixos/profiles/desktop.nix;
         server = nixos/profiles/server.nix;
         steam = nixos/profiles/steam.nix;
       };

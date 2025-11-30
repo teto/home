@@ -45,12 +45,12 @@ let
       ];
     };
 
-  tetosLib = pkgs.tetosLib;
+  # tetosLib = pkgs.tetosLib;
 
   # nixosConfigurations
   # .nodes
-  builder_jedha = (tetosLib.nixosConfToBuilderAttr {} flakeSelf.nixosConfigurations.jedha);
-  builder_neotokyo = (tetosLib.nixosConfToBuilderAttr {} flakeSelf.nixosConfigurations.neotokyo);
+  # builder_jedha = (tetosLib.nixosConfToBuilderAttr {} flakeSelf.nixosConfigurations.jedha);
+  # builder_neotokyo = (tetosLib.nixosConfToBuilderAttr {} flakeSelf.nixosConfigurations.neotokyo);
 
   # b1 = pkgs.tetosLib.deployrsNodeToBuilderAttr flakeSelf.deploy.nodes.jedha;
       # {
@@ -72,13 +72,10 @@ in
     # ./generated.nix
 
     flakeSelf.inputs.disko.nixosModules.disko
-    flakeSelf.nixosModules.desktop
     flakeSelf.nixosModules.nix-ld
-    flakeSelf.nixosModules.desktop
 
+    flakeSelf.nixosProfiles.desktop
     flakeSelf.nixosProfiles.laptop
-    # ../../nixos/profiles/laptop.nix
-
     # ../../nixos/profiles/docker-daemon.nix
     flakeSelf.nixosProfiles.podman
     # ../../nixos/profiles/podman.nix
