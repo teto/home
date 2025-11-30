@@ -888,7 +888,7 @@
         # hosts/desktop/home-manager/users/teto/default.nix;
 
         # needs zsh-extra ?
-        teto-zsh = ./hm/profiles/zsh.nix;
+        teto-zsh = ./hm/profiles/teto-zsh.nix;
 
         teto-nogui = (
           {
@@ -916,11 +916,14 @@
         yazi = ./hm/profiles/yazi.nix;
       };
 
+      # (importDir ./nixos/modules)
       nixosProfiles = {
 
         avahi = ./nixos/profiles/avahi.nix;
         gnome = ./nixos/profiles/gnome.nix;
         pixiecore = ./nixos/profiles/pixiecore.nix;
+        laptop = ./nixos/profiles/laptop;
+        podman = ./nixos/profiles/podman.nix;
         greetd = ./nixos/profiles/greetd.nix;
       };
 

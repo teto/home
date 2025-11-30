@@ -11,7 +11,7 @@
 
     ./bash.nix
     ./git.nix
-    ./zsh.nix
+    ./teto-zsh.nix
   ];
 
   programs.man.enable = true;

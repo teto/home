@@ -14,6 +14,9 @@ lib.optionalAttrs withSecrets {
   # This is using an age key that is expected to already be in the filesystem
   # sops.age.keyFile = "secrets/age.key";
   age.keyFile = "${secretsFolder}/age.key";
+  # It's also possible to use a ssh key, but only when it has no password:
+  #age.sshKeyPaths = [ "/home/user/path-to-ssh-key" ];
+
   # By default secrets are owned by root:root. Furthermore the parent directory /run/secrets is only owned by root and the keys group has read access to it:
   # This is the actual specification of the secrets.
   secrets.github_token = {
@@ -39,6 +42,10 @@ lib.optionalAttrs withSecrets {
   #   key = "OPENAI_API_KEY_NOVA";
   #   mode = "400";
   # };
+
+  secrets."claude_api_key" = {
+    mode = "400";
+  };
 
   secrets."gemini_matt_key" = {
     mode = "400";

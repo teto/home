@@ -21,13 +21,6 @@ in
     flakeSelf.homeProfiles.mpv
     flakeSelf.homeProfiles.vscode
 
-      flakeSelf.homeModules.fzf
-      flakeSelf.homeModules.teto-zsh
-      flakeSelf.homeModules.yazi
-      flakeSelf.homeModules.services-mujmap
-      flakeSelf.homeModules.pimsync
-      flakeSelf.homeModules.package-sets
-
     flakeSelf.homeModules.fzf
     flakeSelf.homeModules.teto-zsh
     flakeSelf.homeModules.yazi
@@ -36,6 +29,9 @@ in
     flakeSelf.homeModules.package-sets
   ]
   ;
+
+  # systemd.tmpfiles.rules = [
+
 
   # doing so enables support for it in greetd
   # services.gnome.gnome-keyring.enable = true;

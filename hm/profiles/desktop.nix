@@ -4,8 +4,9 @@ flakeSelf,
 pkgs,
 lib,
 # system,
-withSecrets,
-dotfilesPath
+withSecrets
+, secrets
+, dotfilesPath
 , secretsFolder
 , ...
 }:
@@ -15,7 +16,7 @@ let
   autoloadedModule =
     { pkgs, ... }@args:
     haumea.lib.load {
-      src = ./desktop;
+      src = ./teto-desktop;
       inputs = args // {
         inputs = flakeSelf.inputs;
       };
@@ -31,9 +32,9 @@ in
   imports = [
     autoloadedModule
     ./common.nix
+    flakeSelf.homeProfiles.teto-zsh
     flakeSelf.homeProfiles.sway
     flakeSelf.homeProfiles.neovim
-    ./zsh.nix
 
   ];
 
@@ -110,7 +111,7 @@ in
       # pinentry = pkgs.pinentry-gnome3;
       pinentry = pkgs.pinentry-rofi;
       # see https://github.com/nix-community/home-manager/issues/2476
-      device_id = "111252f7-88b7-47f2-abb9-03dc4b2469ed";
+      device_id = secrets.bitwarden.device-id;
     };
   };
 

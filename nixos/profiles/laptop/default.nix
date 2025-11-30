@@ -1,8 +1,13 @@
 { config, lib, pkgs, ... }:
 {
-  
-  package-sets.wifi = true;
   # package-sets.yubikey = true;
+
+
+  # use tuned ?
+  powerManagement = {
+    powertop.enable = true;
+    # cpuFreqGovernor = "powersave";
+  };
 
   services.logind = {
     settings.Login = {

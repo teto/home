@@ -1,36 +1,8 @@
 {
   config,
-  pkgs,
-  flakeSelf,
   lib,
-  secretsFolder,
-  secrets,
   ...
 }@args:
-let 
-  builder_neotokyo = lib.mkRemoteBuilderDesc "3.0" 
-  (pkgs.tetosLib.nixosConfToBuilderAttr 
-    {
-      sshKey = "${secretsFolder}/ssh/id_rsa";
-      # I might need to set it ?
-      publicHostKey = null;
-    }
-    flakeSelf.nixosConfigurations.neotokyo)
-  ;
-
-  builder_jedha = lib.mkRemoteBuilderDesc "3.0" 
-  (pkgs.tetosLib.nixosConfToBuilderAttr 
-    {
-      sshKey = "${secretsFolder}/ssh/id_rsa";
-      # I might need to set it ?
-      publicHostKey = null;
-    }
-    flakeSelf.nixosConfigurations.jedha)
-  ;
-
-    # TODO add jedha
-    # flakeSelf.deploy.nodes.jedha;
-in
 {
 
 
@@ -46,18 +18,7 @@ in
 
     # goes to .profile
     sessionVariables = {
-      TETOS_0 = builder_neotokyo;
-      TETOS_1 = builder_jedha;
       HISTTIMEFORMAT = "%d.%m.%y %T ";
-      # CAREFUL
-      # HISTFILE="$XDG_CACHE_HOME/bash_history";
-      # TODO pass the correct port, how to do that ? need ssh_config support
-      # full path towards thee ~/.password-store folder
-      # AWS_VAULT_PASS_PASSWORD_STORE_DIR="nova";
-      # AWS_VAULT_PASS_PASSWORD_STORE_DIR
-      # AWS_VAULT_PASS_PREFIX = "nova";
-      # AWS_VAULT_BACKEND = "pass";
-      # SUDO_PROMPT="	a[sudo] please enter a password: ";
     };
 
     # "ignorespace"
@@ -67,7 +28,6 @@ in
       "pwd"
     ];
     # shellOptions = [ "histappend" "checkwinsize" "extglob" "globstar" "checkjobs" ];
-    historyFile = "${config.xdg.cacheHome}/bash_history";
     # historyFile = "$XDG_CACHE_HOME/bash_history";
     shellAliases = {
       # ".."="cd ..";
@@ -92,26 +52,15 @@ in
       # }}}
 
       ns = "nix-shell";
-      lg = "lazygit";
       #mostly for testin
       # dfh="df --human-readable";
       # duh="du --human-readable";
       # --reverse|head";
       latest = "eza --sort newest -l | tail ";
 
-      # trans aliases{{{
-      fren = "trans -from fr -to en ";
-      enfr = "trans -from en -to fr ";
-      jpfr = "trans -from ja -to fr ";
-      frjp = "trans -from fr -to ja ";
-      jpen = "trans -from ja -to en ";
-      enjp = "trans -from en -to ja ";
-      # }}}
-
       dmesg = "dmesg --color=always|less";
 
       netstat_tcp = "netstat -ltnp";
-      nixpaste = "curl -F \"text=<-\" http://nixpaste.lbr.uno";
 
       # git variables {{{
       gl = "git log";
@@ -137,6 +86,7 @@ in
     initExtra = ''
       # enable vimode
       set -o vi
+      # if the file exists
       source $XDG_CONFIG_HOME/bash/aliases.sh
     '';
   };

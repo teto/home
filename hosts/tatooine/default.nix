@@ -74,16 +74,17 @@ in
     flakeSelf.inputs.disko.nixosModules.disko
     flakeSelf.nixosModules.desktop
     flakeSelf.nixosModules.nix-ld
-
-    # TODO this triggers the error on boot I think
     flakeSelf.nixosModules.desktop
 
-    ../../nixos/profiles/laptop.nix
+    flakeSelf.nixosProfiles.laptop
+    # ../../nixos/profiles/laptop.nix
+
     # ../../nixos/profiles/docker-daemon.nix
-    ../../nixos/profiles/podman.nix
+    flakeSelf.nixosProfiles.podman
+    # ../../nixos/profiles/podman.nix
 
     # ../../nixos/profiles/homepage-dashboard.nix
-    ../../nixos/profiles/steam.nix
+    # ../../nixos/profiles/steam.nix
     ../../nixos/profiles/kanata.nix
     # ../../nixos/profiles/postgresql.nix
     # ./services/tandoor.nix
@@ -117,11 +118,9 @@ in
 
   ];
 
-  boot.blacklistedKernelModules = [ "nouveau" ];
+  # boot.blacklistedKernelModules = [ "nouveau" ];
 
   # enables command on boot/suspend etc
-  # powerManagement.enable = true;
-  # powerManagement.cpuFreqGovernor = "powersave";
 
   security.polkit.enable = true;
 

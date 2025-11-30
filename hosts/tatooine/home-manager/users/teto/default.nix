@@ -44,7 +44,7 @@
   programs.nh.enable = true;
 
   package-sets = {
-    audio = true;
+    audio = false;
     enableDesktopGUIPackages = true;
     enableIMPackages = true;
     scientificSoftware = true;
