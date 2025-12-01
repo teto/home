@@ -12,16 +12,6 @@
 
     # avoid systemd boot messages interrupt TUI.
     useTextGreeter = true;
-
-    # swayConfig = pkgs.writeText "greetd-sway-config" ''
-    #   # `-l` activates layer-shell mode. Notice that `swaymsg exit` will run after gtkgreet.
-    #   exec "${pkgs.greetd.gtkgreet}/bin/gtkgreet -l; swaymsg exit"
-    #   bindsym Mod4+shift+e exec swaynag \
-    #     -t warning \
-    #     -m 'What do you want to do?' \
-    #     -b 'Poweroff' 'systemctl poweroff' \
-    #     -b 'Reboot' 'systemctl reboot'
-    # '';
     settings = {
 
       # SESSION_DIRS = "${config.services.xserver.displayManager.sessionData.desktops}/share";
@@ -38,21 +28,13 @@
         # Desktop environments
         #
         # greetd only accepts environment-less commands to be used to start a session. Therefore, if your desktop environment requires either arguments or environment variables, you will need to create a wrapper script and refer to it in an appropriate desktop file.
-        #
         # For example, to run X11 Gnome, you may need to start it through startx and configure your ~/.xinitrc (or an external xinitrc with a wrapper script):
-        #
         # exec gnome-session
-        #
         # To run Wayland Gnome, you would need to create a wrapper script akin to the following:
-        #
         # XDG_SESSION_TYPE=wayland dbus-run-session gnome-session
-        #
         # Then refer to your wrapper script in a custom desktop file (in a directory declared with the -s/--sessions option):
-        #
         # Name=Wayland Gnome
         # Exec=/path/to/my/wrapper.sh
-        #
-        # tuigreet = "${}";
         # --xsessions ${config.services.xserver.displayManager.sessionData.desktops}/share/xsessions:${config.services.xserver.displayManager.sessionData.desktops}/share/wayland-sessions
         command =
           let
@@ -125,13 +107,18 @@
             # sessionPackages = lib.concatStringsSep ":" config.services.displayManager.sessionPackages;
             hmSessionPath = "${config.home-manager.users.teto.home.path}/share/wayland-sessions";
 
+            tuigreetCmd = builtins.trace
+            "sessionPath: ${waylandSessionsPath}\nsessionData: ${sessionData}\nhome.path: ${hmSessionPath}"
+            "${lib.getExe pkgs.tuigreet} ${flags}";
+
+            regreetCmd = "cage -s -mlast -- regreet";
+
           in
           # services.displayManager.sessionPackages
           # builtins.trace "home.path: ${config.home-manager.users.teto.home.path}/share/wayland-sessions"
           # config.services.xserver.displayManager.session.desktops
-          builtins.trace
-            "sessionPath: ${waylandSessionsPath}\nsessionData: ${sessionData}\nhome.path: ${hmSessionPath}"
-            "${lib.getExe pkgs.tuigreet} ${flags}";
+
+          regreetCmd;
 
         # user = "greeter"; # it's the default already
       };
@@ -147,6 +134,8 @@
     };
 
   };
+
+  programs.regreet.enable = true;
 
   environment.systemPackages = [
     pkgs.tuigreet

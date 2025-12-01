@@ -16,6 +16,8 @@ in {
     };
   };
 
+  # TODO add transcribe mappings to sway
+
   # TODO generate a systemd startup service/ or a udev thing ?
   # all pedals need to be set
   # scythe -1 -m ctrl -a h -a o -2 -m alt -a f4 -3 -b mouse_double

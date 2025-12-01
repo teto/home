@@ -1,6 +1,10 @@
 # Write your default config options here!
 #vg=opengl
+# osc=no
 term-status-msg="Time: ${time-pos}"
+
+# yes/always
+keep-open=no
 
 # equivalent to 'Q'
 save-position-on-quit

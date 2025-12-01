@@ -18,7 +18,8 @@
     # See https://github.com/junegunn/fzf/issues/4346#issuecomment-2810047340   showLastUse = true;
 
     historyWidgetOptions = [ "--bind enter:accept-or-print-query" ];
-    fileWidgetOptions = [ "--tiebreak=index" ];
+    # chunk,length,begin
+    fileWidgetOptions = [ "--tiebreak=chunk,index" ];
 
     # bound to CTRL_T
     # 'fre' list files in DB depending on their 'frecency'

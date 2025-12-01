@@ -658,6 +658,15 @@ if use_fzf_lua then
 			-- all_files = nil,
 			stat_file = true,
 			display_score = true,
+			fzf_opts = {
+				["--multi"] = true,
+				-- ,begin
+				['--tiebreak'] = "length,chunk",
+
+				-- ["--scheme"] = "path",
+				-- ["--no-sort"] = true,
+			},
+
 		})
 	end
     require('teto.fzf-lua').register_keymaps()

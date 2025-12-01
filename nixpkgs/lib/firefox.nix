@@ -12,10 +12,10 @@
     DisableTelemetry = true;
     DisplayMenuBar = "default-off";
     DontCheckDefaultBrowser = false;
-    Homepage = {
-      # URL = "chrome://browser/content/blanktab.html";
-      StartPage = "previous-session";
-    };
+    # Homepage = {
+    #   # URL = "chrome://browser/content/blanktab.html";
+    #   StartPage = "previous-session";
+    # };
 
     NewTabPage = false;
     OfferToSaveLogins = false;

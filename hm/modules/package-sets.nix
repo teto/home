@@ -129,6 +129,8 @@ in
         [
           pkgs.phinger-cursors # attempt to draw a bigger cursor pointer in sway
 
+          pkgs.ffmpeg # to transcribe audio
+
           acpi # for acpi -V
           pkgs.ani-cli # to watch anime
 
@@ -270,7 +272,7 @@ in
         # newsboat #
         bmm # bookmark manager
         carl # not upstreamed yet. cargo cal
-        (ignoreBroken python3Packages.subliminal) # to download subtitles
+        python3Packages.subliminal # to download subtitles
         immich-cli
         mujmap-unstable # to sync notmuch tags across jmap
         (ignoreBroken oculante) # image viewer

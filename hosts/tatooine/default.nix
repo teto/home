@@ -247,6 +247,7 @@ in
       # randomEncryption.enable = true;
       # options = [ "nofail" ];
       # priority = 5;
+      # options = ["discard"];
     }
   ];
 

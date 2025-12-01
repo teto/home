@@ -15,9 +15,12 @@
     ];
 
     config = {
+      ytdl-raw-options="write-auto-sub=,write-sub=,sub-lang=en";
+      sub-auto="fuzzy";
+      osc = "no"; # mandatory  with the modernz plugin
       profile = "gpu-hq";
       force-window = "yes";
-      ytdl-format = "bestvideo+bestaudio";
+      # ytdl-format = "bestvideo+bestaudio";
       # cache-default = 4000000;
     };
 
@@ -44,6 +47,8 @@
     #   });
 
     scripts = [
+      # pkgs.tetosLib.ignoreBroken 
+      (pkgs.mpvScripts.autosub) # works with subliminal
 
       pkgs.mpvScripts.mpvacious # Adds mpv keybindings to create Anki cards from movies and TV shows
       pkgs.mpvScripts.manga-reader

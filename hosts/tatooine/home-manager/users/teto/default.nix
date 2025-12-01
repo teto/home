@@ -34,6 +34,8 @@
       flakeSelf.homeProfiles.wezterm
     ];
 
+  programs.memento.enable = true;
+
   home.sessionPath = [
     "$HOME/.local/bin"
   ];
@@ -42,6 +44,11 @@
   # services.opensnitch-ui.enable = false;
 
   programs.nh.enable = true;
+
+  home.packages = [
+    pkgs.power-options
+    pkgs.claude-code
+  ];
 
   package-sets = {
     audio = false;

@@ -60,6 +60,8 @@ function M.register_keymaps()
     -- )
     --   end)
 
+
+
     vim.keymap.set('n', '<Leader>o', function()
         -- first check if we are
         local files_picker_name = 'files'
@@ -73,6 +75,7 @@ function M.register_keymaps()
         end
 
         -- TODO combine or use global
+		-- (currently the first picker options apply to all). 
         fzf_lua.combine({
 
             -- can be a table as well

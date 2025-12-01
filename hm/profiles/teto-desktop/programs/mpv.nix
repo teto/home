@@ -54,11 +54,7 @@
   #   });
 
   scripts = [
-
-    pkgs.mpvScripts.mpvacious # Adds mpv keybindings to create Anki cards from movies and TV shows
-    pkgs.mpvScripts.manga-reader
     pkgs.mpvScripts.mpris
-    # (pkgs.tetosLib.ignoreBroken pkgs.mpvScripts.autosub)
 
     # pkgs.mpvScripts.mpv-notify-send # does not work ?
   ];

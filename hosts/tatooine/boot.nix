@@ -1,6 +1,11 @@
 { pkgs, lib, ... }:
 {
 
+  # by name would be better
+  # probably used with resume_offset 
+  resumeDevice = "/dev/disk/by-partlabel/disk-main-luks";
+
+  initrd.systemd.enable = true;
   initrd.availableKernelModules = [
     # "aesni_intel"
     "cryptd"
@@ -13,7 +18,8 @@
   # plymouth.logo = ../../data/boot-plymouth-logo.png;
 
   # lib.mkForce
-  kernelPackages = pkgs.linuxPackages_6_17; # pkgs.linuxPackages_latest;
+  kernelPackages = pkgs.linuxPackages_latest;
+  # kernelPackages = pkgs.linuxPackages_6_17; # pkgs.linuxPackages_latest;
 
   # it apparently still is quite an important thing to have
   devSize = "5g";
@@ -21,7 +27,10 @@
   # tmp.tmpfsSize = "5Gb";
   tmp.tmpfsSize = "5Gb";
 
+  # filefrag -v /home
   kernelParams = [
+    # used with resumeDevice. computed by filefrag -v /fucking_swap
+    "resume_offset=692224"
     # "mem_sleep_default=deep"
     "plymouth.use-simpledrm" # kesako ?
 
@@ -33,8 +42,6 @@
     # "ahci.mobile_lpm_policy=3"
     # "rtc_cmos.use_acpi_alarm=1"
   ];
-
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
 
   kernelModules = [
     # "af_key" # for ipsec/vpn support

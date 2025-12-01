@@ -562,6 +562,7 @@
             self.homeModules.nvimpager
 
             self.homeModules.bash
+            self.homeModules.memento
             self.homeModules.kitty
             self.homeModules.zsh
 

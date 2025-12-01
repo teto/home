@@ -97,6 +97,10 @@ fzf_lua.setup({
         -- it shows raw ansi codes when disabled !
         -- ['--ansi'] = false, -- for speed
         ['--history'] = fzf_history_dir,
+
+		--   pretty important actually
+  --   Tiebreak criteria explained:
+		['--tiebreak'] = "chunk,length,begin",
         -- to get the prompt at the top
         -- ['--layout'] = 'reverse', -- reverse is the default
         -- ["--no-scrollbar"] = true,
