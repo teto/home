@@ -924,6 +924,8 @@
         avahi = ./nixos/profiles/avahi.nix;
         # desktop = ./nixos/profiles/desktop.nix;
         desktop = nixos/profiles/desktop.nix;
+        hedgedoc = ./nixos/profiles/hedgedoc.nix;
+
         gnome = ./nixos/profiles/gnome.nix;
         pixiecore = ./nixos/profiles/pixiecore.nix;
         laptop = ./nixos/profiles/laptop;

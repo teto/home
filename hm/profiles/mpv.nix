@@ -9,11 +9,6 @@
   # TODO use wrapper instead ?
   programs.mpv = {
 
-    # prints warning when not existing
-    includes = [
-      "manual.conf"
-    ];
-
     config = {
       ytdl-raw-options="write-auto-sub=,write-sub=,sub-lang=en";
       sub-auto="fuzzy";

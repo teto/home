@@ -24,6 +24,7 @@ let
           "security/"
           "programs/"
           "hardware/"
+          "home-manager/user/root/"
 
         ];
 
@@ -74,6 +75,7 @@ in
     flakeSelf.inputs.disko.nixosModules.disko
     flakeSelf.nixosModules.nix-ld
 
+    flakeSelf.nixosProfiles.hedgedoc
     flakeSelf.nixosProfiles.desktop
     flakeSelf.nixosProfiles.laptop
     # ../../nixos/profiles/docker-daemon.nix
@@ -154,11 +156,11 @@ in
   ### HWP
 
   home-manager.users = {
-    root = {
-      imports = [
-        ./home-manager/users/root/default.nix
-      ];
-    };
+    # root = {
+    #   imports = [
+    #     ./home-manager/users/root/default.nix
+    #   ];
+    # };
 
     teto = {
       # TODO it should load the whole folder

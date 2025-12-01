@@ -18,15 +18,15 @@
   system.stateVersion = "24.05";
 
   # imported from gandhi ?
-  boot.initrd.kernelModules = [
-    "xen-blkfront"
-    "xen-tpmfront"
-    "xen-kbdfront"
-    "xen-fbfront"
-    "xen-netfront"
-    "xen-pcifront"
-    "xen-scsifront"
-  ];
+  # boot.initrd.kernelModules = [
+  #   "xen-blkfront"
+  #   "xen-tpmfront"
+  #   "xen-kbdfront"
+  #   "xen-fbfront"
+  #   "xen-netfront"
+  #   "xen-pcifront"
+  #   "xen-scsifront"
+  # ];
 
   # This is to get a prompt via the "openstack console url show" command
   systemd.services."getty@tty1" = {
@@ -38,6 +38,7 @@
   imports = [
     # for gandi
     "${modulesPath}/virtualisation/openstack-config.nix"
+    ./gandi.nix
 
     flakeSelf.nixosModules.teto-nogui
     flakeSelf.nixosModules.default-hm
@@ -57,6 +58,7 @@
     ./services/postgresqlBackup.nix
     ./services/nginx.nix
     ./services/immich.nix
+    ./services/hedgedoc.nix
 
     # ../../nixos/modules/hercules-ci-agents.nix
 

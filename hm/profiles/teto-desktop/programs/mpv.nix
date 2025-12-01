@@ -16,7 +16,8 @@
   enable = true;
 
   includes = [
-    "manual.conf"
+    "./manual.conf"
+    "profiles/anime.conf"
   ];
 
   # see https://wiki.archlinux.org/title/Mpv
