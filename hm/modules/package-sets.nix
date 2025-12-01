@@ -152,7 +152,7 @@ in
           pkgs.libva-utils
 
           # take the version from stable ?
-          # qutebrowser # broken keyboard driven fantastic browser
+          pkgs.qutebrowser # broken keyboard driven fantastic browser
           pkgs.nautilus # demande webkit/todo replace by nemo ?
           # mcomix # manga reader
           pkgs.popcorntime

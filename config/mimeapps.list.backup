@@ -41,4 +41,4 @@ application/binary=sublime_text.desktop;
 
 
 [Removed Associations]
-application/pdf=Mendeley.desktop
+application/pdf=Mendeley.desktop;draw.desktop

@@ -12,7 +12,7 @@
   imports = [
     # flakeSelf.homeModules.bash
 
-    flakeSelf.homeProfiles.qutebrowser
+    # flakeSelf.homeProfiles.qutebrowser # does nothing
     flakeSelf.inputs.nix-index-database.homeModules.nix-index
 
     flakeSelf.homeModules.teto-nogui

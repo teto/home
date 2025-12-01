@@ -1,9 +1,4 @@
 [[plugin.deps]]
-use = "yazi-rs/plugins:chmod"
-rev = "600614a"
-hash = ""
-
-[[plugin.deps]]
 use = "yazi-rs/plugins:smart-enter"
 rev = "2730199"
 hash = "7918aab6a71caf31b58411f789195677"

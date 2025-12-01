@@ -292,6 +292,11 @@ in
 
   };
 
+  powerManagement = {
+    enable = true;
+    powertop = true;
+  };
+
   # try giving stable ids to our GPUs
   services.udev.packages = [
     (pkgs.writeTextDir "etc/udev/rules.d/42-static-gpu-naming.rules"

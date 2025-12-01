@@ -10,6 +10,8 @@
   user.sessionVariables = {
     QT_QPA_PLATFORM = "wayland";
     XDG_SESSION_TYPE = "wayland";
+    # in/dbus-update-activation-environment --systemd --all
+    # PATH=
     # QT_WAYLAND_DISABLE_WINDOWDECORATION=1
     # SetLoginEnvironment=no
   };

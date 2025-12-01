@@ -32,7 +32,6 @@
 
       substituters = [
         # "https://nix-community.cachix.org"
-       "https://cache.nixos-cuda.org"
       ];
 
       extra-substituters = [
@@ -40,8 +39,7 @@
       ];
       trusted-public-keys = [
         # "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        # "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
-        "haskell-language-server.cachix.org-1:juFfHrwkOxqIOZShtC4YC1uT1bBcq2RSvC7OMKx0Nz8="
+        # "haskell-language-server.cachix.org-1:juFfHrwkOxqIOZShtC4YC1uT1bBcq2RSvC7OMKx0Nz8="
       ];
       # trusted-users = [ "teto" ];
     };
