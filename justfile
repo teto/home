@@ -31,14 +31,16 @@ bootstrap-desktop target="bootstrap.local":
 # might need to change with root after reboot
 # --phases
 # target can be ubuntu@myvps.com
+# we specify the client key else a new one gets regenerated every time and one 
+# can't reconnect easily
 bootstrap-vps target:
     # TODO create /tmp/luks.key if it doesn't exist yet
     # --copy-host-keys  to avoid having to remove old fingerprint
     nixos-anywhere --target-host {{target}} --flake '.#neotokyo' \
     --copy-host-keys \
     --generate-hardware-config nixos-generate-config hosts/neotokyo/hardware.nix \
-    --debug \
-    --disk-encryption-keys /tmp/luks.key /tmp/luks.key
+    -i secrets/ssh/id_rsa \
+    --debug
 
 # just to save the command
 

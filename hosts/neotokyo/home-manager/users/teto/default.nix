@@ -15,6 +15,7 @@ let
     - sudo systemctl status phppfm.service
     - sudo systemctl start nextcloud-add-user to create the teto user
     - everything is in /var/lib/nextcloud
+    - to check the backups: systemctl status restic-backups-immich-db-to-backblaze.service
   '';
   # TODO add a justfile to run the basic steps
   banner = "You can start the nextcloud-add-user.service unit if teto user doesnt exist yet";

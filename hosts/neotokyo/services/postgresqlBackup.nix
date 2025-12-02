@@ -29,9 +29,6 @@ in
 
     # Path of directory where the PostgreSQL database dumps will be placed.
     # Default: "/var/backup/postgresql"
-    # location = "";
-
-    # serviceConfig =
   };
 
   # see TMPFILES.D(5)
@@ -47,8 +44,6 @@ in
   # mv ${encBackupFileLocation} ${backupDir}/ && \
 
   systemd.services."postgresqlBackup-${dbName}".serviceConfig = {
-    # script = pkgs.writeShellScriptBin "pg-db-archive" ''
-
     # change the owner so that the restic job can read the file and back it up
     ExecStartPost = pkgs.writeShellScript "pg-db-archive" ''
       ## Define the backup directory path:
@@ -137,6 +132,7 @@ in
     UMask = lib.mkForce "0027";
   };
 
+  # TODO add onFailure template to send a mail
   systemd.services.restic-backups-immich-db-to-backblaze.serviceConfig = {
     Group = "immich"; # such that it can read the files
   };
