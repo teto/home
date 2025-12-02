@@ -1,5 +1,13 @@
 
-problem with:
+* backup procedure
+
+restic uploads to backblaze via systemd service
+
+* restoration procedure
+
+
+
+* UX problems with:
 
 - "remove from album" vs "delete" 
 - cancel delete

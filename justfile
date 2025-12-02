@@ -23,11 +23,25 @@ set dotenv-load := true
 switch-remote: (nixos-rebuild "switch")
 
 # deploy a brand new nixos install
-bootstrap:
-    # todo fix the target 
-    # use --extra-files
-    nixos-anywhere --target-host root@bootstrap.local --flake '.#laptop' \
+bootstrap-desktop target="bootstrap.local":
+    nixos-anywhere --target-host root@{{ target }} --flake '.#laptop' \
     --disk-encryption-keys /tmp/disk-1.key /tmp/disk-1.key
+
+# use --extra-files
+# might need to change with root after reboot
+# --phases
+# target can be ubuntu@myvps.com
+# we specify the client key else a new one gets regenerated every time and one
+
+# can't reconnect easily
+bootstrap-vps target:
+    # TODO create /tmp/luks.key if it doesn't exist yet
+    # --copy-host-keys  to avoid having to remove old fingerprint
+    nixos-anywhere --target-host {{ target }} --flake '.#neotokyo' \
+    --copy-host-keys \
+    --generate-hardware-config nixos-generate-config hosts/neotokyo/hardware.nix \
+    -i secrets/ssh/id_rsa \
+    --debug
 
 # just to save the command
 
@@ -279,6 +293,9 @@ udev-restart:
     sudo udevadm trigger
 
 # rsync-send:
+
+nix-ping-store:
+    nix store info --store http://jedha.local
 
 test-msmtp-send-mail:
     # TODO generate the mail headers

@@ -7,7 +7,6 @@
 {
 
   # for android development
-
   services.restic.backups = {
     localbackup = {
       exclude = [ "/home/*/.cache" ];

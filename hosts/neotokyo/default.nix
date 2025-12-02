@@ -17,7 +17,7 @@
     };
   };
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "25.05";
 
   # imported from gandhi ?
   # boot.initrd.kernelModules = [
@@ -30,36 +30,39 @@
   #   "xen-scsifront"
   # ];
 
-  # This is to get a prompt via the "openstack console url show" command
-  systemd.services."getty@tty1" = {
-    enable = lib.mkForce true;
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig.Restart = "always";
-  };
-
   imports = [
-    # for gandi
-    "${modulesPath}/virtualisation/openstack-config.nix"
-    ./gandi.nix
 
+    # ONE OR THE OTHER
+    # for gandi
+    # ./gandi.nix
+    ./ovh.nix
+
+    ./disko-config.nix
+
+    ../../nixos/profiles/systemd-on-failure-service.nix
+
+    flakeSelf.inputs.disko.nixosModules.disko
     flakeSelf.nixosModules.teto-nogui
     flakeSelf.nixosModules.default-hm
     # flakeSelf.nixosModules.neovim
     flakeSelf.nixosModules.ntp
     flakeSelf.nixosModules.nix-daemon
 
-    # ./hardware.nix
-    ./services/openssh.nix
-    ./services/sshguard.nix
+    ./hardware.nix
     ./sops.nix
 
-    # to get the first iteration going on
-    ./services/linkwarden.nix
+    ./programs/msmtp.nix
+
+    ./services/openssh.nix
+    ./services/sshguard.nix
     ./services/gitolite.nix
     ./services/nextcloud.nix
     ./services/postgresqlBackup.nix
     ./services/nginx.nix
     ./services/immich.nix
+
+    # testing
+    ./services/linkwarden.nix
     ./services/hedgedoc.nix
 
     # ../../nixos/modules/hercules-ci-agents.nix
@@ -133,18 +136,19 @@
     # because it's so hard to timely open VNC, we increase timetout
     timeout = lib.mkForce 15;
     # just to generate the entry used by ubuntu's grub
-    grub = {
-      enable = true;
-      useOSProber = false;
-      # install to none, we just need the generated config
-      # for ubuntu grub to discover
-      device = lib.mkForce "/dev/xvda";
-    };
+    # grub = {
+    #   enable = true;
+    #   useOSProber = false;
+    #   # install to none, we just need the generated config
+    #   # for ubuntu grub to discover
+    #   # device = lib.mkForce "/dev/xvda";
+    # };
   };
 
   # security.sudo.wheelNeedsPassword = true;
 
   environment.systemPackages = [
+    pkgs.msmtp # to send mails
     pkgs.neovim
     pkgs.nixpkgs-review
     pkgs.zola # needed in the post-receive hook of the blog !

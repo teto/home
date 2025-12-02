@@ -3,7 +3,12 @@
 
   # by name would be better
   # probably used with resume_offset
-  resumeDevice = "/dev/disk/by-partlabel/disk-main-luks";
+
+  # Failed to check if resume=/dev/disk/by-partlabel/disk-main-luks is the same device as EFI HibernateLocation device '/dev/disk/by-uuid/febbdREDACTED"
+  # https://www.kernel.org/doc/Documentation/power/swsusp-and-swap-files.txt
+  # should point at the partition
+  # /dev/mapper/crypted"; wouldn't work
+  resumeDevice = "/dev/nvme0n1p2";
 
   initrd.systemd.enable = true;
   initrd.availableKernelModules = [

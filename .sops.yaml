@@ -1,7 +1,4 @@
-# This example uses YAML anchors which allows reuse of multiple keys 
-# without having to repeat yourself.
-# Also see https://github.com/Mic92/dotfiles/blob/master/nixos/.sops.yaml
-# for a more complex example.
+# Also see https://github.com/Mic92/dotfiles/blob/master/nixos/.sops.yaml for a more complex example.
 # age-keygen -y ~/.config/sops/age/keys.txt to regenerate public key
 keys:
  - &teto-pgp 64BB678705EF85ABF7345F69BD024BD9C261596D
@@ -15,10 +12,6 @@ creation_rules:
       - *neotokyo
       - *teto-age
   - path_regex: secrets/desktop-secrets.yaml
-    key_groups:
-    - age:
-      - *teto-age
-  - path_regex: nixos/profiles/desktop/secrets.yml
     key_groups:
     - age:
       - *teto-age

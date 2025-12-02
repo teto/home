@@ -53,6 +53,11 @@
       flake = false;
     };
 
+    nixos-anywhere = {
+      url = "github:teto/nixos-anywhere?ref=teto/keep-tempDir";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     luals-busted-addon = {
       url = "github:LuaCATS/busted";
       flake = false;
@@ -135,8 +140,6 @@
       url = "github:ravitemer/mcp-hub";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-
 
     # peerix.url = "github:cid-chan/peerix";
     # mptcp-flake.url = "github:teto/mptcp-flake/fix-flake";
@@ -287,7 +290,6 @@
     #   url = "github:nix-community/nix-direnv";
     #   flake = false;
     # };
-
 
     stylix = {
       url = "github:nix-community/stylix";
@@ -634,7 +636,7 @@
             ssh-to-age
             wormhole-rs # "wormhole-rs send"
 
-            nixos-anywhere
+            self.inputs.nixos-anywhere.packages.${system}.nixos-anywhere
             disko
 
             # boot debug
@@ -775,13 +777,13 @@
             self.nixosProfiles.pixiecore
             (
               { pkgs, ... }:
-              let
-                builder0 = (pkgs.tetosLib.nixosConfToBuilderAttr { } self.nixosConfigurations.jedha);
-              in
+              # let
+              #   # builder0 = (pkgs.tetosLib.nixosConfToBuilderAttr {} self.nixosConfigurations.jedha);
+              # in
 
               {
                 nix.buildMachines = [
-                  builder0
+                  # builder0
                   # {
                   #   # using secrets.nix
                   #   hostName = "laptop.local";

@@ -67,7 +67,8 @@ in
     # should not ?!
     # desktopAutoloaded
 
-    ../../tetos/disk-config.nix
+    ../../nixos/profiles/disko-desktop.nix
+    # ../../tetos/disk-config.nix
 
     # removed 'cos it clashed with disk-config but these are not the same
     # ./generated.nix
