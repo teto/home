@@ -1,6 +1,7 @@
 {
   config,
   secrets,
+  dotfilesPath,
   pkgs,
   ...
 }:

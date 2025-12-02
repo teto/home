@@ -36,10 +36,12 @@
   # TODO try an equivalent with mail
   user.services = {
     # copied from nixos nixos/doc/manual/administration/service-mgmt.chapter.md, hoping it works the same
+    # needs DBUS_SESSION_BUS_ADDRESS
     "notify-teto@".serviceConfig = {
       # /run/wrappers/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" \
       #   ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning "Interrupted" "Scan interrupted. Don't forget to have it run to completion at least once a week!"
       # exit 1
+
       ExecStart = pkgs.writeScript "notify-and-wait" ''
         #!${pkgs.stdenv.shell}
 
@@ -84,6 +86,7 @@
         }"
       ];
       # TODO add notmuch_CONFIG ?
+      OnFailure = "notify-teto@%i.service";
     };
 
     # TODO move somewhere else close to mbsync

@@ -50,7 +50,7 @@ repl:
 # nom can hide when there is a lock
 
 # |& nom
-# env('HOST')
+# env('HOST')       -j 1 \
 # builders --option builders \"$NOVA_OVH1\" -j0
 [private]
 nixos-rebuild command builders="":
@@ -58,7 +58,7 @@ nixos-rebuild command builders="":
       .#nixosConfigurations.{{ HOSTNAME }}.config.system.build.toplevel \
       --override-input nixpkgs {{ NIXPKGS_REPO }} \
       --override-input hm {{ HM_REPO }} \
-      -j 1 \
+      -j1 --max-jobs 1 \
        {{ builders }} \
        --no-write-lock-file --show-trace
 

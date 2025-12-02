@@ -194,6 +194,9 @@ in
           "${mod}+Shift+Return" =
             ''exec --no-startup-id ${term} -d "$(${toString ../../bin/kitty-get-cwd.sh})"'';
 
+          # Text to speech
+          "Ctrl+f1" = "record-myself";
+
           Menu = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
           "${mod}+Tab" = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
           # TODO dwindow exclusively with WIN

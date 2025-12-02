@@ -4,7 +4,8 @@
   lib,
   withSecrets,
   secretsFolder,
-  ...
+  dotfilesPath
+, ...
 }:
 
 let
@@ -30,6 +31,7 @@ in
   ]
   ;
 
+  # todo create some files per default
   # systemd.tmpfiles.rules = [
 
 
@@ -54,6 +56,13 @@ in
     (pkgs.tetosLib.ignoreBroken mdcat) # markdown viewer
 
   ];
+
+  home.sessionVariables = {
+    PATH = "${dotfilesPath}/bin";
+  };
+
+
+  
 
   package-sets = {
 

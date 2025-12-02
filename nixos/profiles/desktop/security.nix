@@ -36,7 +36,8 @@
     u2f = {
       enable = true;
       settings = {
-        interactive = true; # Insert your U2F device, then press ENTER.
+        # Disable to avoid the nagging message 'Insert your U2F device, then press ENTER.'
+        # interactive = true;
         cue = true; # will print Please touch the device.
       };
     };

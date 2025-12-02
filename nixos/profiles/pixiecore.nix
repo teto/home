@@ -30,12 +30,9 @@ let
       ({ config, pkgs, lib, modulesPath, ... }: {
         imports = [
           (modulesPath + "/installer/netboot/netboot-minimal.nix") 
-{
-         boot.supportedFilesystems = {
-            zfs = lib.mkForce false;
-         };
-       }
+          ../accounts/teto/teto.nix
         ];
+
         config = {
           nix = {
             settings = {
@@ -47,13 +44,15 @@ let
               ];
 
               trusted-public-keys = [
-
                 "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
               ];
             };
-
-
           };
+
+         boot.supportedFilesystems = {
+           # had compilation issues with it
+            zfs = lib.mkForce false;
+         };
 
           # to automatically run disko ?
           # environment.etc."bashrc.local".text = ''
@@ -68,6 +67,8 @@ let
               KbdInteractiveAuthentication = false;
             };
           };
+
+          security.sudo.wheelNeedsPassword = false;
 
           environment.systemPackages = [
             # TODO provide a better neovim / hx
