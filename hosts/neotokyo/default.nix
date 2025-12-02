@@ -17,7 +17,7 @@
     };
   };
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "25.05";
 
   # imported from gandhi ?
   # boot.initrd.kernelModules = [
@@ -38,17 +38,22 @@
   };
 
   imports = [
-    # for gandi
-    "${modulesPath}/virtualisation/openstack-config.nix"
-    ./gandi.nix
 
+    # ONE OR THE OTHER
+    # for gandi
+    # ./gandi.nix
+    ./ovh.nix
+
+    ./disko-config.nix
+
+    flakeSelf.inputs.disko.nixosModules.disko
     flakeSelf.nixosModules.teto-nogui
     flakeSelf.nixosModules.default-hm
     # flakeSelf.nixosModules.neovim
     flakeSelf.nixosModules.ntp
     flakeSelf.nixosModules.nix-daemon
 
-    # ./hardware.nix
+    ./hardware.nix
     ./services/openssh.nix
     ./services/sshguard.nix
     ./sops.nix
@@ -126,6 +131,7 @@
     };
   };
 
+
   boot.loader = {
     #    systemd-boot.enable = true;
     # efi.canTouchEfiVariables = true; # allows to run $ efi...
@@ -133,13 +139,13 @@
     # because it's so hard to timely open VNC, we increase timetout
     timeout = lib.mkForce 15;
     # just to generate the entry used by ubuntu's grub
-    grub = {
-      enable = true;
-      useOSProber = false;
-      # install to none, we just need the generated config
-      # for ubuntu grub to discover
-      device = lib.mkForce "/dev/xvda";
-    };
+    # grub = {
+    #   enable = true;
+    #   useOSProber = false;
+    #   # install to none, we just need the generated config
+    #   # for ubuntu grub to discover
+    #   # device = lib.mkForce "/dev/xvda";
+    # };
   };
 
   # security.sudo.wheelNeedsPassword = true;

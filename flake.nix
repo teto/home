@@ -53,6 +53,11 @@
       flake = false;
     };
 
+    nixos-anywhere = {
+      url = "github:teto/nixos-anywhere?ref=teto/keep-tempDir";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     luals-busted-addon = {
       url = "github:LuaCATS/busted";
       flake = false;
@@ -642,7 +647,7 @@
             ssh-to-age
             wormhole-rs # "wormhole-rs send"
 
-            nixos-anywhere
+            self.inputs.nixos-anywhere.packages.${system}.nixos-anywhere
             disko
 
             # boot debug

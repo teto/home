@@ -19,4 +19,9 @@
     "xen-scsifront"
   ];
   
+
+
+  boot.loader.grub.device = lib.mkForce "/dev/xvda";
+
+
 }
