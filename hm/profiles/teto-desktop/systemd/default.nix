@@ -11,13 +11,10 @@
     QT_QPA_PLATFORM = "wayland";
     XDG_SESSION_TYPE = "wayland";
     # in/dbus-update-activation-environment --systemd --all
-    # PATH=
-    # QT_WAYLAND_DISABLE_WINDOWDECORATION=1
     # SetLoginEnvironment=no
   };
 
   # when use-xdg-directories is true, the bin is in $XDG_STATE_HOME/
-  # PATH= "${dotfilesPath}/bin";
   # /home/teto/.local/state/nix/profile/bin
 
   # systemctl --user show-environment to check value
@@ -37,35 +34,38 @@
   user.services = {
     # copied from nixos nixos/doc/manual/administration/service-mgmt.chapter.md, hoping it works the same
     # needs DBUS_SESSION_BUS_ADDRESS
-    "notify-teto@".serviceConfig = {
-      # /run/wrappers/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" \
-      #   ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning "Interrupted" "Scan interrupted. Don't forget to have it run to completion at least once a week!"
-      # exit 1
+    "notify-teto@" = {
+      Service = {
+        # /run/wrappers/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" \
+        #   ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning "Interrupted" "Scan interrupted. Don't forget to have it run to completion at least once a week!"
+        # exit 1
 
-      ExecStart = pkgs.writeScript "notify-and-wait" ''
-        #!${pkgs.stdenv.shell}
+        ExecStart = pkgs.writeScript "notify-and-wait" ''
+          #!${pkgs.stdenv.shell}
 
-        notify_and_wait() {
-          ADDRESS=$1
-          USERID=''${ADDRESS#/run/user/}
-          # gnome-shell doesn't respect the timeout from notify-send,
-          # hence the additional timeout command to make sure we exit
-          # before the end of time
-          result=$(/run/wrappers/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" \
-              ${pkgs.coreutils}/bin/timeout 60s ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning -A "interrupt=Interrupt today's scan" -A "continue=OK, start now" "Daily scan" "Daily scan will start in one minute")
-          if [ "$result" = "interrupt" ]; then
-            /run/wrappers/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" \
-              ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning "Interrupted" "Scan interrupted. Don't forget to have it run to completion at least once a week!"
-            exit 1
-          fi
-        }
-        for ADDRESS in /run/user/*; do
-          notify_and_wait "$ADDRESS" &
-        done
-      '';
+          notify_and_wait() {
+            ADDRESS=$1
+            USERID=''${ADDRESS#/run/user/}
+            # gnome-shell doesn't respect the timeout from notify-send,
+            # hence the additional timeout command to make sure we exit
+            # before the end of time
+            result=$(/run/wrappers/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" \
+                ${pkgs.coreutils}/bin/timeout 60s ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning -A "interrupt=A failure happened" -A "continue=OK, start now" "Daily scan" "Daily scan will start in one minute")
+            if [ "$result" = "interrupt" ]; then
+              /run/wrappers/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" \
+                ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning "Interrupted" "Scan interrupted. Don't forget to have it run to completion at least once a week!"
+              exit 1
+            fi
+          }
+          for ADDRESS in /run/user/*; do
+            notify_and_wait "$ADDRESS" &
+          done
+        '';
+      };
 
       # User = "...";
     };
+
     # "base-unit@".serviceConfig = {
     #   ExecStart = "...";
     #   User = "...";
@@ -76,17 +76,23 @@
     # };
 
     # TODO enable conditionnally on account/services
-    mujmap-fastmail.Service = {
-      Environment = [
-        "PATH=${
-          pkgs.lib.makeBinPath [
-            pkgs.pass-teto
-            pkgs.bash
-          ]
-        }"
-      ];
-      # TODO add notmuch_CONFIG ?
-      OnFailure = "notify-teto@%i.service";
+    mujmap-fastmail = {
+      Service = {
+        Environment = [
+          "PATH=${
+            pkgs.lib.makeBinPath [
+              pkgs.pass-teto
+              pkgs.bash
+            ]
+          }"
+        ];
+      };
+      # unitConfig.OnFailureJobMode = "isolate";
+
+      Unit = {
+        # TODO add notmuch_CONFIG ?
+        OnFailure = "notify-teto@%i.service";
+      };
     };
 
     # TODO move somewhere else close to mbsync

@@ -58,10 +58,7 @@ in
   ];
 
   home.sessionVariables = {
-    PATH = "${dotfilesPath}/bin";
   };
-
-
   
 
   package-sets = {
