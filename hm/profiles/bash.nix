@@ -2,7 +2,7 @@
   config,
   lib,
   ...
-}@args:
+}:
 {
 
   # programs.atuin = {

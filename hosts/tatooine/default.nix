@@ -169,7 +169,9 @@ in
   };
 
   # it is necessary to use dnssec though :(
+  # hostId
   networking.hostName = "tatooine"; # Define your hostname.
+  networking.domain = "tatooine.local";
 
   hardware = {
     enableAllFirmware = true;
@@ -219,6 +221,14 @@ in
     locate.enable = true;
     # dbus.packages = [ ];
   };
+
+  # experimental
+  # niriswitch on hm level
+  programs.niri.enable = true;
+
+  services.displayManager.logToFile = true;
+
+  # services.displayManager.ly.enable = true;
 
   # for tests
   # services.vault = {

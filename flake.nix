@@ -136,6 +136,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+
+
     # peerix.url = "github:cid-chan/peerix";
     # mptcp-flake.url = "github:teto/mptcp-flake/fix-flake";
     mujmap = {
@@ -286,6 +288,12 @@
     #   flake = false;
     # };
 
+
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # treefmt-nix.url = "github:numtide/treefmt-nix";
     treefmt-nix.url = "github:teto/treefmt-nix?ref=teto/add-hujsonfmt";
 
@@ -304,7 +312,7 @@
     yazi = {
       url = "github:sxyazi/yazi";
       # url = "github:sxyazi/yazi?rev=00e8adc3decc370a7e14caaeae3676361549fceb";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -919,6 +927,7 @@
         desktop = nixos/profiles/desktop.nix;
         hedgedoc = ./nixos/profiles/hedgedoc.nix;
 
+        openssh = ./nixos/profiles/openssh.nix;
         gnome = ./nixos/profiles/gnome.nix;
         pixiecore = ./nixos/profiles/pixiecore.nix;
         laptop = ./nixos/profiles/laptop;

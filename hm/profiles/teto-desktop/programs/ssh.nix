@@ -31,6 +31,7 @@ let
                 identitiesOnly = true;
                 extraOptions = {
                   AddKeysToAgent = "yes";
+                  HostName = "${mcfg.config.networking.domain}";
                 };
               }
             )

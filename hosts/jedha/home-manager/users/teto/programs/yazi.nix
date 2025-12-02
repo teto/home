@@ -11,6 +11,6 @@
     enable = true;
     enableBashIntegration = true;
     enableZshIntegration = true;
-    # package = flakeSelf.inputs.yazi.packages.${pkgs.stdenv.hostPlatform.system}.yazi;
+    package = flakeSelf.inputs.yazi.packages.${pkgs.stdenv.hostPlatform.system}.yazi;
   };
 }

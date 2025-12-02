@@ -1,13 +1,13 @@
 {
-  config,
-  pkgs,
+  flakeSelf,
   lib,
   secrets,
   ...
 }:
 {
   imports = [
-    ../../../nixos/profiles/openssh.nix
+    # ../../../nixos/profiles/openssh.nix
+    flakeSelf.nixosProfiles.openssh
   ];
 
   services.openssh = {
@@ -28,6 +28,5 @@
       PermitRootLogin = lib.mkForce "no";
       HostKey = "/run/secrets/ssh_host_key";
     };
-
   };
 }

@@ -1,9 +1,6 @@
 final: prev: {
 
   # gufw is a GUI to iptables
-
-  # lib = final.callPackage ./lib.nix {};
-  # inherit (final.callPackage ./lib.nix { }) mkRemoteBuilderDesc;
   # wrap moc to load config from XDG_CONFIG via -C
   moc-wrapped = final.symlinkJoin {
     name = "moc-wrapped-${final.moc.version}";
