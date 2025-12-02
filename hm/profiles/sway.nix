@@ -214,10 +214,20 @@ in
           # Notes is a custom command
           "${mod}+F1" =
             ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command 'kitty nvim +Notes'  '';
+
+          # replace by rmcp
           "${mod}+F2" =
             ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty ${config.programs.ncmpcpp.package}/bin/ncmpcpp' '';
+
+          # replace with 'Avante'
           "${mod}+F3" =
             ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 60 --height 50 --mark gp_nvim --command "kitty nvim -cLlmChat" '';
+
+          "${mad}+m" = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command meli '';
+
+          "${mad}+n" =
+            ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command 'kitty nvim +Notes'  '';
+
 
           # TODO implement Travis/Pasting Voice recognized text
           # "${mod}+F4" =

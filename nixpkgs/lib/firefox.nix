@@ -4,24 +4,31 @@
 
     AutofillAddressEnabled = false;
     AutofillCreditCardEnabled = false;
-    DisableFirefoxStudies = true;
 
+    BlockAboutConfig = false;
+
+    DisableFirefoxStudies = true;
     DisableFirefoxAccounts = false;
+
     # DisableFirefoxSuggest = true;
     # DisableFormHistory = true;
     DisableTelemetry = true;
     DisplayMenuBar = "default-off";
     DontCheckDefaultBrowser = false;
+    HardwareAcceleration = true;
+    DisablePocket = true;
+
     # Homepage = {
     #   # URL = "chrome://browser/content/blanktab.html";
     #   StartPage = "previous-session";
     # };
+    # NewTabPage = false;
+    NoDefaultBookmarks = true;
 
-    NewTabPage = false;
     OfferToSaveLogins = false;
-    OverrideFirstRunPage = "";
+    # OverrideFirstRunPage = "";
     PictureInPicture = {
-      Enabled = false;
+      Enabled = true;
       Locked = true;
     };
     # SearchBar = "unified";

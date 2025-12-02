@@ -10,6 +10,8 @@
 {
   networking = {
     hostName = "neotokyo";
+    domain = secrets.jakku.domain;
+
     firewall = {
       enable = true;
     };

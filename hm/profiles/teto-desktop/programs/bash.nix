@@ -7,7 +7,8 @@
   , ... 
 }:
 let 
-  builder_neotokyo = lib.mkRemoteBuilderDesc "3.0" 
+  inherit (lib) mkRemoteBuilderDesc;
+  builder_neotokyo = mkRemoteBuilderDesc "3.0" 
   (pkgs.tetosLib.nixosConfToBuilderAttr 
     {
       sshKey = "${secretsFolder}/ssh/id_rsa";
@@ -17,7 +18,7 @@ let
     flakeSelf.nixosConfigurations.neotokyo)
   ;
 
-  builder_jedha = lib.mkRemoteBuilderDesc "3.0" 
+  builder_jedha = mkRemoteBuilderDesc "3.0" 
   (pkgs.tetosLib.nixosConfToBuilderAttr 
     {
       sshKey = "${secretsFolder}/ssh/id_rsa";

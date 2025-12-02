@@ -31,15 +31,11 @@ in
 
   # check about:policies
   policies = ffLib.commonPolicies // {
-    BlockAboutConfig = false;
     AppAutoUpdate = true;
 
     # DefaultDownloadDirectory
     # DisableFormHistory;
-    DisablePocket = true;
-    HardwareAcceleration = true;
     # buggy see https://github.com/nix-community/home-manager/issues/5821
-    NoDefaultBookmarks = true;
     # OfferToSaveLoginsDefault =
     # TranslateEnabled =
     PDFjs = false;

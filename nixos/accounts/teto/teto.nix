@@ -32,6 +32,7 @@
       "podman"
       "postgres"
       "rtkit" # for pipewire
+      "seat" # necessary for lemurs
       "wheel" # for sudo
       "www" # for zola
       # config.users.groups.keys.name

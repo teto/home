@@ -7,14 +7,8 @@
 {
   # call with 
   mk_builder_from_deployrs_node = nodes:
-
-       
-
       [];
-      # lib.mkRemote
-    
 
-  # lib.mkRemoteBuilderDesc nixVersion machine;
   deployrsNodeToBuilderAttr = node: 
     # mcfg = node.config.
     {
@@ -40,6 +34,7 @@
     cfg = nixosConf.config;
   in
     builderAttrs // {
+      # domain
       hostName =  cfg.networking.hostName;
       inherit system protocol maxJobs speedFactor supportedFeatures mandatoryFeatures;
       sshUser = "teto";
@@ -48,7 +43,4 @@
       publicHostKey = null;
 
     };
-
-  # builder0 = lib.mkRemoteBuilderDesc "3.0" 
-  #     (deployrsNodeToBuilderAttr flakeSelf.deploy.nodes.jedha);
 }

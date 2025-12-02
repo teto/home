@@ -63,7 +63,7 @@ in
   imports = [
     autoloadedNixosModule # loaded by haumea
     ./_boot.nix
-    ../../nixos/profiles/docker-daemon.nix
+    # ../../nixos/profiles/docker-daemon.nix
 
     flakeSelf.inputs.harmonia.nixosModules.harmonia
     flakeSelf.nixosProfiles.greetd
@@ -118,11 +118,8 @@ in
 
   swapDevices = [
     {
-      # label = "dartagnan";
       device = "/fucking_swap";
-      # size = 8192; # in MB
-      # size = 4096; # in MB
-      size = 16000; # in MB
+      size = 48000; # in MB
     }
   ];
 
@@ -174,7 +171,6 @@ in
     # https://discourse.nixos.org/t/ddcci-kernel-driver/22186/3
     "i2c-dev"
     "ddcci_backlight" # to control external monitors brightness
-
   ];
 
   boot.kernel.sysctl = {
@@ -195,8 +191,6 @@ in
     # "net.core.rmem_max" = 4194304;
     # "net.core.wmem_max" = 1048576;
   };
-
-  # networking.hostName = "jedha"; # Define your hostname.
 
   i18n.glibcLocales = pkgs.glibcLocales.override {
     # hum
@@ -253,7 +247,6 @@ in
     ];
   };
 
-  # networking.enableIPv6 = false;
   # rtkit is optional but recommended {{{
   security.rtkit.enable = true;
 

@@ -1,6 +1,9 @@
 { config, lib, ... }:
 {
-  hostName = "jedha"; # Define your hostname.
+  hostName = "jedha";
+  domain = "jedha.local"; # Define your hostname.
+
+  # hosts = [];
 
   # creates problem with buffalo check if it blocks requests or what
   # it is necessary to use dnssec though :(
