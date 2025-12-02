@@ -294,3 +294,11 @@ dbus-list-sessions:
 # discover local network
 avahi-discover:
   avahi-browse --all --ignore-local --resolve --terminate
+
+# you need to bump the flake first since nix-forecast doesn't accept input overrides yet
+nix-forecast:
+  nix-forecast -s -c .#nixosConfigurations.{{HOSTNAME}}
+
+# see 'nix-forecast' warning
+nix-weather:
+   nix-weather -n {{HOSTNAME}} -c .

@@ -284,3 +284,7 @@ rev = "fa4673e181e18fd1719ae17a1d4f4ecce2de37aa"
 git = "nicolasgb/jj.nvim"
 rev = "v0.1.0"
 
+[plugins."ansify.nvim"]
+git = "tmccombs/ansify.nvim"
+rev = "v1.0.0"
+

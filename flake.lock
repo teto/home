@@ -2173,11 +2173,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1761469703,
-        "narHash": "sha256-XIhGmFIkGwFvhib63LKBJ2kTt7wOqLPC1APsAVawGsQ=",
+        "lastModified": 1764543115,
+        "narHash": "sha256-+j5CF3fbC0AiS5JTsodgdCYs3nBm3zMPfhlFcwp+L7o=",
         "owner": "teto",
         "repo": "home-manager",
-        "rev": "5dfaad6cb86e3772893d9e5bfeeb01d7df1bf3a5",
+        "rev": "0483b658d0c2fc409756a9be99dc3cde12bce87b",
         "type": "github"
       },
       "original": {
@@ -3527,11 +3527,11 @@
     },
     "nixpkgs_8": {
       "locked": {
-        "lastModified": 1763658465,
-        "narHash": "sha256-Qf6YHOa1FUTzUOQ3xLA8Gz1P9YguqonuZeHC1CWBbls=",
+        "lastModified": 1764588491,
+        "narHash": "sha256-ZohRvrxNYEPyW4MMCk4kIxYAclTA6V3xv2S+cmLk4vE=",
         "owner": "teto",
         "repo": "nixpkgs",
-        "rev": "7f3363fa4fa59827b7715e4a9921d626bf459e3c",
+        "rev": "9540c865b9a4d60cd89b127d6751b874a591e05f",
         "type": "github"
       },
       "original": {

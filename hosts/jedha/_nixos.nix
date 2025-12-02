@@ -294,7 +294,7 @@ in
 
   powerManagement = {
     enable = true;
-    powertop = true;
+    powertop.enable = true;
   };
 
   # try giving stable ids to our GPUs

@@ -5,6 +5,8 @@ alias nb='nix build'
 alias nb1='nix build --option builders "$NOVA_OVH1" -j0'
 alias n1='nix develop --option builders "$NOVA_OVH1" -j0'
 alias n2='nix develop --option builders "$NOVA_CAMPUS1" -j0'
+#
+alias nrc="nix repl --expr 'import <nixpkgs> { config.cudaSupport = true; config.allowUnfree = true; }'"
 # alias n3='nix develop --option builders "$NOVA_CAMPUS2" -j0'
 
 alias avante='nvim -c "lua vim.defer_fn(function()require(\"avante.api\").zen_mode()end, 100)"'
