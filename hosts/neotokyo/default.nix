@@ -49,17 +49,20 @@
     flakeSelf.nixosModules.nix-daemon
 
     ./hardware.nix
-    ./services/openssh.nix
-    ./services/sshguard.nix
     ./sops.nix
 
-    # to get the first iteration going on
-    ./services/linkwarden.nix
+    ./programs/msmtp.nix 
+
+    ./services/openssh.nix
+    ./services/sshguard.nix
     ./services/gitolite.nix
     ./services/nextcloud.nix
     ./services/postgresqlBackup.nix
     ./services/nginx.nix
     ./services/immich.nix
+
+    # testing
+    ./services/linkwarden.nix
     ./services/hedgedoc.nix
 
     # ../../nixos/modules/hercules-ci-agents.nix

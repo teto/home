@@ -125,9 +125,6 @@ in
         # immediately if it missed the last start time
       };
 
-      serviceConfig = {
-        OnSuccess="";
-      };
     };
   };
 
@@ -139,6 +136,7 @@ in
   # TODO add onFailure template to send a mail
   systemd.services.restic-backups-immich-db-to-backblaze.serviceConfig = {
     Group = "immich"; # such that it can read the files
+    OnSuccess="send-mail-to-teto@";
   };
 
   # services.restic.server.enable

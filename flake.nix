@@ -787,13 +787,14 @@
             # self.inputs.nixos-hardware.nixosModules.dell-xps-13-9310
             self.inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen5
             self.nixosProfiles.pixiecore
-            ({ pkgs, ... }: let
-              builder0 = (pkgs.tetosLib.nixosConfToBuilderAttr {} self.nixosConfigurations.jedha);
-            in
+            ({ pkgs, ... }:
+            # let
+            #   # builder0 = (pkgs.tetosLib.nixosConfToBuilderAttr {} self.nixosConfigurations.jedha);
+            # in
 
               {
               nix.buildMachines = [
-                builder0
+                # builder0
                 # {
                 #   # using secrets.nix
                 #   hostName = "laptop.local";

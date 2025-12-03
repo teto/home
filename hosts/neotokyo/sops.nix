@@ -16,7 +16,9 @@
   # to avoid the 'secrets.yaml' is not in the Nix store.
   sops.validateSopsFiles = false;
 
+  # Paths to ssh keys added as age keys during sops description.
   sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+
   # sops.age.keyFile = "/home/teto/home/secrets/age.key";
 
   # %r gets replaced with a runtime directory, use %% to specify a '%'
