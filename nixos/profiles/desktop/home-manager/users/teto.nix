@@ -10,9 +10,8 @@
     flakeSelf.homeProfiles.teto-desktop
   ];
 
-
   home.packages = [
-  
-      flakeSelf.inputs.lux.packages.${pkgs.stdenv.hostPlatform.system}.lux-cli
-    ];
+
+    flakeSelf.inputs.lux.packages.${pkgs.stdenv.hostPlatform.system}.lux-cli
+  ];
 }

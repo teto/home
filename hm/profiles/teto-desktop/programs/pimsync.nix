@@ -3,10 +3,10 @@
   enable = true;
 
   settings = [
-  {
+    {
 
-    name = "status_path";
-    params = [ "${config.xdg.dataHome}/pimsync/status" ];
-  }
+      name = "status_path";
+      params = [ "${config.xdg.dataHome}/pimsync/status" ];
+    }
   ];
 }

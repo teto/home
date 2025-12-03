@@ -40,27 +40,32 @@
         #   ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning "Interrupted" "Scan interrupted. Don't forget to have it run to completion at least once a week!"
         # exit 1
 
-        ExecStart = pkgs.writeScript "notify-and-wait" ''
-          #!${pkgs.stdenv.shell}
+        ExecStart =
+          let
+            myScript = pkgs.writeScript "notify-and-wait" ''
+              #!${pkgs.stdenv.shell}
 
-          notify_and_wait() {
-            ADDRESS=$1
-            USERID=''${ADDRESS#/run/user/}
-            # gnome-shell doesn't respect the timeout from notify-send,
-            # hence the additional timeout command to make sure we exit
-            # before the end of time
-            result=$(/run/wrappers/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" \
-                ${pkgs.coreutils}/bin/timeout 60s ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning -A "interrupt=A failure happened" -A "continue=OK, start now" "Daily scan" "Daily scan will start in one minute")
-            if [ "$result" = "interrupt" ]; then
-              /run/wrappers/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" \
-                ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning "Interrupted" "Scan interrupted. Don't forget to have it run to completion at least once a week!"
-              exit 1
-            fi
-          }
-          for ADDRESS in /run/user/*; do
-            notify_and_wait "$ADDRESS" &
-          done
-        '';
+              notify_and_wait() {
+                ADDRESS=$1
+                USERID=''${ADDRESS#/run/user/}
+                # gnome-shell doesn't respect the timeout from notify-send,
+                # hence the additional timeout command to make sure we exit
+                # before the end of time
+                result=$(/run/wrappers/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" \
+                    ${pkgs.coreutils}/bin/timeout 60s ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning -A "interrupt=service $1 failed" -A "continue=OK, start now" "hum scan" "Daily scan will start in one minute")
+                if [ "$result" = "interrupt" ]; then
+                  /run/wrappers/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" \
+                    ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning "Interrupted" "Process failed"
+                  exit 1
+                fi
+              }
+              for ADDRESS in /run/user/*; do
+                notify_and_wait "$ADDRESS" &
+              done
+            '';
+            # %n => full unit name
+          in
+          "${myScript} %n";
       };
 
       # User = "...";

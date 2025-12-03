@@ -133,7 +133,7 @@ let
       # settings.password_command = getPasswordCommand "perso/fastmail_mc_jmap";
       # ${pkgs.pass-teto}/bin/
       # ${pkgs.strace}/bin/strace -o /tmp/mujmap.log -f
-      settings.password_command = "${dotfilesPath}/bin/pass-perso show perso/fastmail_mc_jmap";
+      settings.password_command = "${pkgs.pass-perso}/bin/pass-perso show perso/fastmail_mc_jmap";
       settings.config_dir = mailDirBasePath;
 
       # settings.session_url = "https://api.fastmail.com/.well-known/jmap";

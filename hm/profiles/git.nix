@@ -15,7 +15,6 @@
   programs.git = {
     enable = true;
 
-
     package = pkgs.gitFull; # to get send-email
 
     includes = [
@@ -24,9 +23,8 @@
     ];
     # https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work
 
-
     # lots inspired by https://blog.gitbutler.com/how-git-core-devs-configure-git/
-    settings = { 
+    settings = {
       user = {
         # mkForce due to nova
         name = "Matthieu C.";
@@ -42,7 +40,6 @@
         # get top level directory of the repo
         root = "git rev-parse --show-toplevel";
       };
-
 
       # breaks jkops
       branch = {

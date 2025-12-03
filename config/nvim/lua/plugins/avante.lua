@@ -26,31 +26,31 @@ require('avante').setup({
         -- provider =
     },
     providers = {
-	   azure = nil,
-	   claude = {
-		 endpoint = "https://api.anthropic.com",
-		 model = "claude-sonnet-4-5-20250929",
-		 -- extra_request_body = {
-		 --   temperature = 0.75,
-		 --   max_tokens = 4096,
-		 -- },
-		 api_key_name = 'cmd:cat /home/teto/.config/sops-nix/secrets/claude_api_key',
-	   },
+        azure = nil,
+        claude = {
+            endpoint = 'https://api.anthropic.com',
+            model = 'claude-sonnet-4-5-20250929',
+            -- extra_request_body = {
+            --   temperature = 0.75,
+            --   max_tokens = 4096,
+            -- },
+            api_key_name = 'cmd:cat /home/teto/.config/sops-nix/secrets/claude_api_key',
+        },
 
-		gemini = {
-		 api_key_name = 'cmd:cat /home/teto/.config/sops-nix/secrets/gemini_matt_key',
-		},
+        gemini = {
+            api_key_name = 'cmd:cat /home/teto/.config/sops-nix/secrets/gemini_matt_key',
+        },
         -- openai = {
-		-- api_key_name = 'cmd:cat /home/teto/.config/sops-nix/secrets/OPENAI_API_KEY_NOVA',
+        -- api_key_name = 'cmd:cat /home/teto/.config/sops-nix/secrets/OPENAI_API_KEY_NOVA',
         -- },
         ollama = {
-		 -- model = "qwq:32b",
+            -- model = "qwq:32b",
             model = 'mistral',
             endpoint = 'http://127.0.0.1:11434',
             timeout = 30000, -- Timeout in milliseconds
             -- disable_tools = true, -- not supported by mistral (but inherited by others so...)
             --   disabled_tools = { "python" }, is also possible
-			is_env_set = require("avante.providers.ollama").check_endpoint_alive,
+            is_env_set = require('avante.providers.ollama').check_endpoint_alive,
             extra_request_body = {
                 options = {
                     temperature = 0.75,

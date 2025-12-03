@@ -1,18 +1,19 @@
-{ lib
-, rustPlatform
-, fetchFromGitHub
-, pkg-config
-, gtk3
-, gtk4
-, libadwaita
-, webkitgtk_4_1
-, wrapGAppsHook4
-, pciutils
-, usbutils
-, acpi
-, brightnessctl
-, yad
-, xorg
+{
+  lib,
+  rustPlatform,
+  fetchFromGitHub,
+  pkg-config,
+  gtk3,
+  gtk4,
+  libadwaita,
+  webkitgtk_4_1,
+  wrapGAppsHook4,
+  pciutils,
+  usbutils,
+  acpi,
+  brightnessctl,
+  yad,
+  xorg,
 }:
 
 rustPlatform.buildRustPackage rec {
@@ -28,7 +29,7 @@ rustPlatform.buildRustPackage rec {
 
   cargoHash = "sha256-fLm9zewuQsgPc92YOM0i6eLwDB0efIcSe6kKbbk0P6E=";
 
-  doCheck = false;  # Skip tests as we're only building specific packages
+  doCheck = false; # Skip tests as we're only building specific packages
 
   nativeBuildInputs = [
     pkg-config
@@ -45,8 +46,10 @@ rustPlatform.buildRustPackage rec {
   # Build the GTK frontend and daemon manager
   buildAndTestSubdir = null;
   cargoBuildFlags = [
-    "--package" "power-daemon-mgr"
-    "--package" "frontend-gtk"
+    "--package"
+    "power-daemon-mgr"
+    "--package"
+    "frontend-gtk"
   ];
 
   postInstall = ''
@@ -69,15 +72,17 @@ rustPlatform.buildRustPackage rec {
   # Runtime dependencies that need to be in PATH
   preFixup = ''
     gappsWrapperArgs+=(
-      --prefix PATH : ${lib.makeBinPath [
-        pciutils      # lspci
-        usbutils      # lsusb
-        acpi          # acpi
-        brightnessctl # optional: brightness control
-        yad           # dialog utility
-        xorg.xset     # optional: display power management
-        xorg.xrandr   # optional: display configuration
-      ]}
+      --prefix PATH : ${
+        lib.makeBinPath [
+          pciutils # lspci
+          usbutils # lsusb
+          acpi # acpi
+          brightnessctl # optional: brightness control
+          yad # dialog utility
+          xorg.xset # optional: display power management
+          xorg.xrandr # optional: display configuration
+        ]
+      }
     )
   '';
 

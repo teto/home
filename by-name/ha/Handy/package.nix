@@ -34,19 +34,22 @@ let
 
   # Generate package-lock.json from package.json
   # Note: This requires network access, so __noChroot is needed
-  srcWithLockfile = runCommand "handy-src-with-lockfile" {
-    nativeBuildInputs = [ nodejs ];
-    __noChroot = true;
-    outputHashMode = "recursive";
-    outputHashAlgo = "sha256";
-    outputHash = lib.fakeHash;
-  } ''
-    cp -r ${src} $TMPDIR/source
-    chmod -R +w $TMPDIR/source
-    cd $TMPDIR/source
-    npm install --package-lock-only --ignore-scripts
-    cp -r . $out
-  '';
+  srcWithLockfile =
+    runCommand "handy-src-with-lockfile"
+      {
+        nativeBuildInputs = [ nodejs ];
+        __noChroot = true;
+        outputHashMode = "recursive";
+        outputHashAlgo = "sha256";
+        outputHash = lib.fakeHash;
+      }
+      ''
+        cp -r ${src} $TMPDIR/source
+        chmod -R +w $TMPDIR/source
+        cd $TMPDIR/source
+        npm install --package-lock-only --ignore-scripts
+        cp -r . $out
+      '';
 
   npmDeps = fetchNpmDeps {
     src = srcWithLockfile;

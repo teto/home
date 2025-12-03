@@ -15,8 +15,8 @@
 
     extraSessionCommands = lib.mkForce "";
     extraOptions = [
-      "--verbose"
-      "--debug"
+      # "--verbose"
+      # "--debug"
       # "--unsupported-gpu" # to work with the quadro
     ];
 

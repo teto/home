@@ -1,13 +1,14 @@
-{ pkgs
-, flakeSelf
-, lib
-, dotfilesPath
-, secretsFolder
-, ...
+{
+  pkgs,
+  flakeSelf,
+  lib,
+  dotfilesPath,
+  secretsFolder,
+  ...
 }:
 let
-  nix-builders = import ./nix-builder.nix  { inherit flakeSelf lib secretsFolder; };
-  neovim = import ./neovim.nix  { inherit flakeSelf lib; };
+  nix-builders = import ./nix-builder.nix { inherit flakeSelf lib secretsFolder; };
+  neovim = import ./neovim.nix { inherit flakeSelf lib; };
   notify-send = "${pkgs.libnotify}/bin/notify-send";
 
 in

@@ -11,9 +11,10 @@
     lib.optionals config.home-manager.users.teto.services.ollama.enable
       # config.home-manage
       [ config.home-manager.users.teto.services.ollama.port ]
-    ++ lib.optionals config.services.harmonia-dev.cache.enable 
-      [ 443 80 ]
-      ;
+    ++ lib.optionals config.services.harmonia-dev.cache.enable [
+      443
+      80
+    ];
 
   firewall.allowedUDPPorts = [ ];
 

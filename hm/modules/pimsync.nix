@@ -42,7 +42,7 @@ let
         path = a.local.path;
         postHook =
           if a.vdirsyncer.postHook != null then
-            (pkgs.writeShellScriptBin "post-hook" a.vdirsyncer.postHook + "/bin/post-hook")
+            (pkgs.writeShellApplication "post-hook" a.vdirsyncer.postHook + "/bin/post-hook")
           else
             null;
       }

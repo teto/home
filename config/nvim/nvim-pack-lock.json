@@ -1,7 +1,7 @@
 {
   "plugins": {
     "fzf-lua-enchanted-files": {
-      "rev": "20594d52b8ae23b4bedcbd234f7ef6b0ceff2bb0",
+      "rev": "8c6b9790e9cec5a8213a384319b53c2b7435cd46",
       "src": "https://github.com/otavioschwanck/fzf-lua-enchanted-files"
     },
     "i3-vim-syntax": {
@@ -16,8 +16,12 @@
       "rev": "cf2a288696b03d0934da713d66c6d71557b5c997",
       "src": "https://github.com/rose-pine/neovim"
     },
+    "nvim-lspconfig": {
+      "rev": "effe4bf2e1afb881ea67291c648b68dd3dfc927a",
+      "src": "https://github.com/neovim/nvim-lspconfig"
+    },
     "pinkmare": {
-      "rev": "004a3a11194d0586c523a785f08cf2ccf4181254",
+      "rev": "542b98d0788585bd693fd02181aecf87497c41c0",
       "src": "https://github.com/Matsuuu/pinkmare"
     },
     "rocks.nvim": {

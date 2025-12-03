@@ -180,22 +180,5 @@ in
 
     # actually exists already "cliphist-fzf"
     # alias fzf-clip to it ?
-    # (lib.mkIf cfg.enableClipboardSelector {
-    #
-    #   home.packages = let
-    #     # writeShellApplication
-    #     fzf-clip = pkgs.writeShellApplication {
-    #       name = "fzf-clip";
-    #       runtimeInputs = [
-    #       ];
-    #
-    #       text = ''
-    #         cliphist list | fzf --no-sort | cliphist decode | wl-copy
-    #       '';
-    #     };
-    #   in [
-    #     fzf-clip
-    #   ];
-    # })
   ];
 }

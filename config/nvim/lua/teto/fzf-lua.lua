@@ -60,8 +60,6 @@ function M.register_keymaps()
     -- )
     --   end)
 
-
-
     vim.keymap.set('n', '<Leader>o', function()
         -- first check if we are
         local files_picker_name = 'files'
@@ -75,7 +73,7 @@ function M.register_keymaps()
         end
 
         -- TODO combine or use global
-		-- (currently the first picker options apply to all). 
+        -- (currently the first picker options apply to all).
         fzf_lua.combine({
 
             -- can be a table as well
@@ -111,8 +109,8 @@ function M.register_keymaps()
     end, { desc = 'Fuzzysearch buffers' })
 
     vim.keymap.set('n', '<Leader>C', function()
-	 -- awesome_colorschemes can download and install colorschemes
-	 fzf_lua.colorschemes()
+        -- awesome_colorschemes can download and install colorschemes
+        fzf_lua.colorschemes()
     end, { desc = 'Select a colorscheme' })
 
     vim.keymap.set('n', '<Leader>l', function()

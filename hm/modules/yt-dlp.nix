@@ -1,7 +1,13 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
-   cfg = config.programs.yt-dlp;
-in {
+  cfg = config.programs.yt-dlp;
+in
+{
   options = {
     programs.yt-dlp = {
       # enable = lib.mkEnableOption "yt-dlp";

@@ -1,7 +1,13 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
-   cfg = config.programs.memento;
-in {
+  cfg = config.programs.memento;
+in
+{
   options = {
     programs.memento = {
       enable = lib.mkEnableOption "memento";

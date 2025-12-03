@@ -650,25 +650,24 @@ vim.g.spinner_frames = { '⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷' 
 if use_fzf_lua then
     require('plugins.fzf-lua')
     -- else frecency doesnt appear
-	local has_fzf_lua_frecency, fzf_lua_frecency = pcall(require, 'fzf-lua-frecency')
+    local has_fzf_lua_frecency, fzf_lua_frecency = pcall(require, 'fzf-lua-frecency')
 
-	if has_fzf_lua_frecency then
-		fzf_lua_frecency.setup({
-			cwd_only = true,
-			-- all_files = nil,
-			stat_file = true,
-			display_score = true,
-			fzf_opts = {
-				["--multi"] = true,
-				-- ,begin
-				['--tiebreak'] = "length,chunk",
+    if has_fzf_lua_frecency then
+        fzf_lua_frecency.setup({
+            cwd_only = true,
+            -- all_files = nil,
+            stat_file = true,
+            display_score = true,
+            fzf_opts = {
+                ['--multi'] = true,
+                -- ,begin
+                ['--tiebreak'] = 'length,chunk',
 
-				-- ["--scheme"] = "path",
-				-- ["--no-sort"] = true,
-			},
-
-		})
-	end
+                -- ["--scheme"] = "path",
+                -- ["--no-sort"] = true,
+            },
+        })
+    end
     require('teto.fzf-lua').register_keymaps()
 end
 
@@ -772,7 +771,7 @@ vim.keymap.set('n', '<leader>rg', '<Cmd>Grepper -tool rg -open -switch<CR>', { r
 --	 { noremap = true, silent = true }
 -- )
 
-local has_secrets, secrets = pcall(require,'teto.secrets')
+local has_secrets, secrets = pcall(require, 'teto.secrets')
 
 -- if has_gitsigns then
 --     local tgitsigns = require('plugins.gitsigns')
@@ -860,17 +859,24 @@ vim.lsp.enable('rust_analyzer')
 vim.lsp.enable('clangd')
 vim.lsp.enable('pyright')
 vim.lsp.enable('yamlls')
+vim.lsp.enable('just')
 
 -- testing packadd
 vim.pack.add({
+    -- my real neovim package manager (with nix)
+    'https://github.com/nvim-neorocks/rocks.nvim',
+
+    'https://github.com/neovim/nvim-lspconfig',
     'https://github.com/teto/vim-listchars',
+
+    -- themes
     'https://github.com/adlawson/vim-sorcerer',
     'https://github.com/Matsuuu/pinkmare',
+
     -- doesnt work ?
     -- "https://github.com/otavioschwanck/fzf-lua-enchanted-files",
     'https://github.com/PotatoesMaster/i3-vim-syntax',
     'https://github.com/rose-pine/neovim',
-    'https://github.com/nvim-neorocks/rocks.nvim',
 })
 
 -- Autoload from everything lsp/ in rtp
@@ -912,7 +918,7 @@ require('teto.cursorline')
 local mclipboard = require('teto.clipboard')
 
 vim.keymap.set('n', '<F7>', function()
-    mclipboard.copy_filename()
+    mclipboard.copy_filename(false)
 end, { desc = 'Copy buffer filename' })
 
 -- Set highlight for GitSignsAdd with green background
@@ -979,11 +985,12 @@ end, { buffer = false, desc = 'Diagnostics' })
 
 require('teto.lsp').ignore_simwork_extended_warnings()
 -- vim.g.tidal_ghci = "ghci"
-vim.g.tidal_target = "terminal"
+vim.g.tidal_target = 'terminal'
 vim.g.tidal_sc_enable = 1
+
 -- tidal_default_config
 -- ghci -ghci-script /nix/store/f0ks6kcn0qch268ykcxnzp0fn5d24m4m-tidal-1.10.1-data/share/ghc-9.10.3/x86_64-linux-ghc-9.10.3-2c56/tidal-1.10.1/BootTidal.hs
--- todo generate via nix
-vim.g.tidal_boot= "/nix/store/f0ks6kcn0qch268ykcxnzp0fn5d24m4m-tidal-1.10.1-data/share/ghc-9.10.3/x86_64-linux-ghc-9.10.3-2c56/tidal-1.10.1/BootTidal.hs"
+-- TODO generate via nix
+vim.g.tidal_boot = nix_deps.tidal_boot .. 'BootTidal.hs'
 
 -- require("jj").setup({})

@@ -4,9 +4,8 @@
   lib,
   ...
 }:
-# let 
-  # tetosLib = pkgs.tetosLib;
-
+# let
+# tetosLib = pkgs.tetosLib;
 
 # in
 {

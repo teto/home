@@ -2,17 +2,34 @@
 
 NIXPKGS := "/home/teto/nixpkgs"
 
+LLAMA_MODELS_DIR := env('HOME') / 'llama-models'
+# LLM_LOCAL_PORT := env('LLM_LOCAL_PORT', 11111)
+
 # select a target
 default:
     just --choose
+
+# Start mistral server
+llama: 
+  llama-server -m {{LLAMA_MODELS_DIR}}/mistral-7b-openorca.Q6_K.gguf -c 2048 --port ${LLM_LOCAL_PORT} -ngl 33
+
+# voice recognition
+whisper:
+  #  whisper-server \
+  # -m /home/teto/.cache/huggingface/hub/models--ggerganov--whisper.cpp/snapshots/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-large-v3.bin \
+  # --port ${LLM_LOCAL_PORT}
+  # services.wyoming.openwakeword.enable
+  llama-server -m /home/teto/.cache/huggingface/hub/models--ggerganov--whisper.cpp/snapshots/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-large-v3.bin -c 2048 --port ${LLM_LOCAL_PORT} -ngl 33
+  
 
 # find machines on local network
 avahi-discover:
   avahi-browse -d local _workstation._tcp -t --resolve
 
-simwork-install-my-env:
-  ln -sf {{justfile_directory()}}/../../nova/justfile justfile.local
-  ln -sf $HOME/home/nova/.envrc .envrc
+# install neovim dev files
+neovim-direnv:
+  # ln -sf {{justfile_directory()}}/../../nova/justfile justfile.local
+  ln -sf $HOME/home/contrib/neovim-envrc .envrc
 
 # Merge some hardcoded shell commands in shell history
 zsh-load-history:
@@ -33,18 +50,6 @@ update-luarocks:
   # TODO pass token
   nix run '.#luarocks-packages-updater' -- --proc=4 --github-token=$(pass show 'github token')
 
-# Start mistral server
-llama: 
-  llama-server -m ~/models/mistral-7b-openorca.Q6_K.gguf -c 2048 --port ${LLM_LOCAL_PORT} -ngl 33
-
-# voice recognition
-whisper:
-  #  whisper-server \
-  # -m /home/teto/.cache/huggingface/hub/models--ggerganov--whisper.cpp/snapshots/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-large-v3.bin \
-  # --port ${LLM_LOCAL_PORT}
-  # services.wyoming.openwakeword.enable
-  llama-server -m /home/teto/.cache/huggingface/hub/models--ggerganov--whisper.cpp/snapshots/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-large-v3.bin -c 2048 --port ${LLM_LOCAL_PORT} -ngl 33
-  
 # Update nixpkgs neovim plugins
 update-neovim-packages:
   nix run '.#neovim-plugins-updater' -- --proc=4 --github-token=$GITHUB_TOKEN

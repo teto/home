@@ -21,7 +21,7 @@ in
     #   # this will create a default account which will then break the
     #   # default added via primary
     syslog         on
-    ${lib.optionalString (config.accounts.email.accounts?fastmail) "aliases ${aliasesFile}"}
+    ${lib.optionalString (config.accounts.email.accounts ? fastmail) "aliases ${aliasesFile}"}
     "# should be in middle";
   '';
   # extraConfig = "# test commment";

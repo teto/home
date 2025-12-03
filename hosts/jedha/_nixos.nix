@@ -10,7 +10,6 @@
 let
   inherit (pkgs.tetosLib) ignoreBroken;
 
-
   haumea = flakeSelf.inputs.haumea;
 
   # NOT READY YET
@@ -84,8 +83,7 @@ in
 
     # TODO moved from their
     # ../../nixos/profiles/localai.nix
-  ]
-  ;
+  ];
 
   # TODO check how it interacts with less
   # environment.etc."inputrc".source = ../../config/inputrc;
@@ -225,7 +223,7 @@ in
     # Enable CUPS to print documents.
     # https://nixos.wiki/wiki/Printing
     printing = {
-      # set to 
+      # set to
       enable = true;
       browsing = false;
       drivers = [
@@ -311,7 +309,6 @@ in
       ''
     )
   ];
-
 
   environment.systemPackages = [
     pkgs.gpu-viewer

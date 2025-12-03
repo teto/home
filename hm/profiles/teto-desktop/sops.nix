@@ -1,7 +1,7 @@
 {
   secretsFolder,
   withSecrets,
-  lib
+  lib,
 }:
 lib.optionalAttrs withSecrets {
   # SECRETS appear in ~/.config/sops-nix/secrets/*

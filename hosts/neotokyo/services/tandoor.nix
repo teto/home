@@ -1,5 +1,10 @@
-{ config, lib, pkgs, ... }:
 {
-  
-    services.tandoor-recipes.enable = true;
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+
+  services.tandoor-recipes.enable = true;
 }

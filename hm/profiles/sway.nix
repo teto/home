@@ -30,7 +30,7 @@ in
       enable = true;
 
       # just trying what's advised at https://github.com/NixOS/nixpkgs/issues/177900#issuecomment-3167947983
-      extraCommands = [" --all"];
+      extraCommands = [ " --all" ];
 
       # turns out enabling way-displays kills of all that
       # variables = [
@@ -40,8 +40,6 @@ in
       #     "XDG_CURRENT_DESKTOP"
       #     "XDG_SESSION_TYPE"
       #     "NIXOS_OZONE_WL"
-      #     "XCURSOR_THEME"
-      #     "XCURSOR_SIZE"
       #   ];
     };
 

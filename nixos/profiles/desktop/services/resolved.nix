@@ -1,4 +1,4 @@
-{ config, ...}:
+{ config, ... }:
 {
   # conflicts with adguardhome
   enable = !config.services.adguardhome.enable;

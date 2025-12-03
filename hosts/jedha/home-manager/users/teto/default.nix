@@ -22,7 +22,6 @@
 
     flakeSelf.homeModules.nextcloud-client
 
-
     ./calendars.nix
     ./sway.nix
     ./systemd.nix
@@ -63,41 +62,39 @@
   '';
 
   # for programs not merged yet
-  home.packages =
-    with pkgs;
-    [
-      # llm-ls # needed by the neovim plugin
+  home.packages = with pkgs; [
+    # llm-ls # needed by the neovim plugin
 
-      cointop # bitcoin tracker
-      # mdp # markdown CLI presenter
-      # gthumb # image manager, great to tag pictures
+    cointop # bitcoin tracker
+    # mdp # markdown CLI presenter
+    # gthumb # image manager, great to tag pictures
 
-      footswitch  # to control foot pedals
-      gnome-control-center
-      gnome-maps
-      jaq # jq in rust
+    footswitch # to control foot pedals
+    gnome-control-center
+    gnome-maps
+    jaq # jq in rust
 
-      lact # GPU controller, needs a daemon
+    lact # GPU controller, needs a daemon
 
-      # xorg.xwininfo # for stylish
-      moor # test as pager
-      presenterm # for presentations from terminal/markdown (in rust, supports images, pretty cool)
+    # xorg.xwininfo # for stylish
+    moor # test as pager
+    presenterm # for presentations from terminal/markdown (in rust, supports images, pretty cool)
 
-      sioyek # pdf reader
-      tailspin # (broken) a log viewer based on less ("spin" or "tsspin" is the executable)
-      # tig
-      wally-cli # to flash ergodox keyboards
-      wine
+    sioyek # pdf reader
+    tailspin # (broken) a log viewer based on less ("spin" or "tsspin" is the executable)
+    # tig
+    wally-cli # to flash ergodox keyboards
+    wine
 
-      # take the version from stable ?
-      nautilus # demande webkit/todo replace by nemo ?
-      # hexyl # hex editor
-      # simple-scan
-      # vifm
-      # anyrun
+    # take the version from stable ?
+    nautilus # demande webkit/todo replace by nemo ?
+    # hexyl # hex editor
+    # simple-scan
+    # vifm
+    # anyrun
 
-      # bridge-utils# pour  brctl
-    ];
+    # bridge-utils# pour  brctl
+  ];
 
   package-sets = {
 

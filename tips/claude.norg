@@ -1,0 +1,17 @@
+
+  1. Sandbox Mode (Type this command):
+  /sandbox
+  This restricts write access to only your current directory and provides OS-level isolation.
+
+  2. Deny All File Access (Most Restrictive):
+
+  Edit ~/.claude/settings.json:
+  {
+    "permissions": {
+      "deny": [
+        "Read(**)",
+        "Edit(**)",
+        "Bash(**)"
+      ]
+    }
+}

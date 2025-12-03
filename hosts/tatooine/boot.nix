@@ -2,7 +2,7 @@
 {
 
   # by name would be better
-  # probably used with resume_offset 
+  # probably used with resume_offset
   resumeDevice = "/dev/disk/by-partlabel/disk-main-luks";
 
   initrd.systemd.enable = true;

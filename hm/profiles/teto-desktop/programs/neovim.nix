@@ -29,7 +29,7 @@ let
     # pkgs.vimPlugins.blink-cmp-git # autocomplete github issues/PRs
   ];
 
-  neotestPlugins =  [
+  neotestPlugins = [
     # neotest
     # neotest-haskell
   ];
@@ -157,6 +157,8 @@ let
     # pythonPackages.pdftotext  # should appear only in RC ? broken
     nil # a nix lsp, can be debugged with NIL_LOG_PATH and NIL_LOG=nil=debug
     nixd # another nix LSP
+
+    just-lsp
     # rnix-lsp
     rust-analyzer
     shellcheck
@@ -173,7 +175,7 @@ let
 
     pyright # python lsp
 
-    tree-sitter  # might help install treesitter grammars
+    tree-sitter # might help install treesitter grammars
     yaml-language-server # ~100MB
     yamllint # for none-ls json formatting
     yamlfmt

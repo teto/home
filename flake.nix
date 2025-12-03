@@ -324,12 +324,11 @@
       tetosConfig = {
         # should it depend on home.homeDirectory instead ?
         inherit dotfilesPath secretsFolder;
-        # withSecrets 
+        # withSecrets
       };
 
       dotfilesPath = "/home/teto/home";
       secretsFolder = "/home/teto/home/secrets";
-
 
       secrets = import ./nixpkgs/secrets.nix {
         inherit secretsFolder dotfilesPath;
@@ -338,10 +337,10 @@
       # sshLib = import ./nixpkgs/lib/ssh.nix { inherit secrets; flakeSelf.inputs = self.inputs; };
       system = "x86_64-linux";
 
-      # TODO check out packagesFromDirectoryRecursive  as well ?
+      # loads packages in by-name/
       byNamePkgsOverlay = import "${nixpkgs}/pkgs/top-level/by-name-overlay.nix" ./by-name;
 
-      #
+      # loads packages in pkgs/
       autoloadedPkgsOverlay =
         final: _prev:
         nixpkgs.legacyPackages.${system}.lib.packagesFromDirectoryRecursive {
@@ -362,7 +361,7 @@
           modules, # array
           withSecrets, # bool
           hostname,
-          pkgs ? myPkgs
+          pkgs ? myPkgs,
         }:
         nixpkgs.lib.nixosSystem {
           inherit system pkgs;
@@ -389,7 +388,7 @@
         src: cudaSupport:
         import src {
           inherit system;
-          overlays = [
+          overlays = (src.lib.attrValues self.overlays) ++ [
             (final: prev: {
               # expose it for byNamePkgsOverlay
               inherit treefmt-nix;
@@ -409,14 +408,8 @@
 
             byNamePkgsOverlay
             autoloadedPkgsOverlay
-            # self.inputs.rofi-hoogle.overlay
-            # mptcp = self.inputs.mptcp-flake.overlays.default;
-            # nur = self.inputs.nur.overlay;
+          ];
 
-            # self.inputs.nixpkgs-wayland.overlay
-            # self.inputs.nix.overlays.default
-          ]
-          ++ (src.lib.attrValues self.overlays);
           config = {
             # on desktop
             inherit cudaSupport;
@@ -438,18 +431,19 @@
               pkg:
               let
                 ensureList = x: if builtins.isList x then x else [ x ];
-                hasCudaLicense = package:
-                            builtins.all (
-                              license:
-                              license.free
-                              || builtins.elem license.shortName [
-                                "CUDA EULA"
-                                "cuDNN EULA"
-                                "cuSPARSELt EULA"
-                                "cuTENSOR EULA"
-                                "NVidia OptiX EULA"
-                              ]
-                            ) (ensureList package.meta.license);
+                hasCudaLicense =
+                  package:
+                  builtins.all (
+                    license:
+                    license.free
+                    || builtins.elem license.shortName [
+                      "CUDA EULA"
+                      "cuDNN EULA"
+                      "cuSPARSELt EULA"
+                      "cuTENSOR EULA"
+                      "NVidia OptiX EULA"
+                    ]
+                  ) (ensureList package.meta.license);
                 legacyPkgs = nixpkgs.legacyPackages.${system};
                 pkgName = legacyPkgs.lib.getName pkg;
               in
@@ -526,9 +520,7 @@
               (nixpkgs.lib.filesystem.listFilesRecursive folder);
         in
 
-        nixpkgs.lib.listToAttrs (
-          nixpkgs.lib.map (x: nixpkgs.lib.nameValuePair (genKey x) x) listOfModules
-        );
+        nixpkgs.lib.listToAttrs (nixpkgs.lib.map (x: nixpkgs.lib.nameValuePair (genKey x) x) listOfModules);
 
       hm-common =
         {
@@ -708,9 +700,10 @@
 
           inherit (myPkgs)
             jmdict
-            # local-ai-teto # conflicts with llama-cpp ?
             meli-git
             # neomutt
+            pass-perso
+            mujmap-unstable
             popcorntime-teto
             sway-scratchpad
             gpt4all
@@ -730,8 +723,6 @@
           # ]);
 
           inherit (unstablePkgs)
-            # nhs92
-            # nhs94
             nhs96
             nhs98
             ;
@@ -774,21 +765,23 @@
             # self.inputs.nixos-hardware.nixosModules.dell-xps-13-9310
             self.inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen5
             self.nixosProfiles.pixiecore
-            ({ pkgs, ... }: let
-              builder0 = (pkgs.tetosLib.nixosConfToBuilderAttr {} self.nixosConfigurations.jedha);
-            in
+            (
+              { pkgs, ... }:
+              let
+                builder0 = (pkgs.tetosLib.nixosConfToBuilderAttr { } self.nixosConfigurations.jedha);
+              in
 
               {
-              nix.buildMachines = [
-                builder0
-                # {
-                #   # using secrets.nix
-                #   hostName = "laptop.local";
-                #   system =  "x86_64-linux";
-                # }
-              ];
-            })
-
+                nix.buildMachines = [
+                  builder0
+                  # {
+                  #   # using secrets.nix
+                  #   hostName = "laptop.local";
+                  #   system =  "x86_64-linux";
+                  # }
+                ];
+              }
+            )
 
           ];
 
@@ -969,83 +962,32 @@
 
       overlays = {
 
-        autoupdating =
-          final: prev:
-          let
-            llama-cpp-matt = (
-              final.llama-cpp-with-curl.override {
-                cudaSupport = true;
-                blasSupport = false;
-                rocmSupport = false;
-                openclSupport = false;
-                # stdenv = prev.gcc11Stdenv;
-              }
-            );
+        # no sense to reexport those
+        # mptcp = self.inputs.mptcp-flake.overlays.default;
+        # nur = self.inputs.nur.overlay;
 
-          in
-          {
+        autoupdating = final: prev: {
 
-            inherit llama-cpp-matt;
-
-            neomutt-dev = prev.lib.warn "neomutt override" (
-              prev.neomutt.overrideAttrs ({
-                src = self.inputs.neomutt-src;
-              })
-            );
-
-            local-ai-teto = (
-              prev.local-ai.override ({
-                # with_cublas = true;
-                # with_tts = false;
-                # with_stablediffusion = false; # sthg about CUDA_RUNTIME_DIR
-              })
-            );
-
-            # see https://github.com/NixOS/nixpkgs/pull/257760
-            ollamagpu = final.ollama.override { llama-cpp = llama-cpp-matt; };
-
-            mujmap-unstable = self.inputs.mujmap.packages.x86_64-linux.mujmap;
-
-            # neovide = prev.neovide.overrideAttrs(oa: {
-            #  src = self.inputs.neovide;
-            # });
-
-            # moved to by-name
-            # pass-custom = (pkgs.pass.override { waylandSupport = true; }).withExtensions (
-            #   ext: with ext; [
-            #     pass-import
-            #     pass-tail
-            #   ]
-            # );
-
-            firefox-addons = import ./overlays/firefox/generated.nix {
-              inherit (final)
-                buildFirefoxXpiAddon
-                fetchurl
-                lib
-                stdenv
-                ;
-            };
-
-            tetosLib = final.callPackage ./tetos/lib/default.nix {
-              inherit dotfilesPath secretsFolder;
-              flakeSelf = self;
-            };
-
-            rsync-yazi = myPkgs.yaziPlugins.mkYaziPlugin {
-              pname = "rsync.yazi";
-              version = "g${self.inputs.rsync-yazi-plugin.shortRev}";
-
-              src = self.inputs.rsync-yazi-plugin;
-            };
-
+          tetosLib = final.callPackage ./tetos/lib/default.nix {
+            inherit dotfilesPath secretsFolder;
+            flakeSelf = self;
           };
+
+          rsync-yazi = myPkgs.yaziPlugins.mkYaziPlugin {
+            pname = "rsync.yazi";
+            version = "g${self.inputs.rsync-yazi-plugin.shortRev}";
+            src = self.inputs.rsync-yazi-plugin;
+          };
+        };
 
         # TODO
         local = import ./overlays/pkgs/default.nix;
-        haskell = import ./overlays/haskell.nix;
-        overrides = import ./overlays/overrides.nix;
-        python = import ./overlays/python.nix;
+        # haskell = import ./overlays/haskell.nix;
+        overrides = import ./overlays/overrides.nix {
+          inherit secretsFolder;
+          flakeSelf = self;
+        };
+        # python = import ./overlays/python.nix;
         lua = import ./overlays/lua.nix;
       };
 
@@ -1141,7 +1083,7 @@
               };
 
             #
-            jedha = 
+            jedha =
               genNode ({
                 name = "jedha";
                 hostname = "jedha.local";

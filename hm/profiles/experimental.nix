@@ -11,9 +11,7 @@
 
   # programs.code
 
-
-  services.secret-service = 
-  {
+  services.secret-service = {
     enable = true;
   };
 

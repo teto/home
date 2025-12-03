@@ -118,5 +118,4 @@ in
     ];
   };
 
-  # home.packages = extraPackages;
 }

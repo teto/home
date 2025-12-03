@@ -1,7 +1,13 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
-   cfg = config.programs.wallust;
-in {
+  cfg = config.programs.wallust;
+in
+{
   options = {
     programs.wallust = {
       enable = lib.mkEnableOption "wallust";

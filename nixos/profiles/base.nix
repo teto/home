@@ -1,8 +1,10 @@
-{ config
-, lib
-, pkgs
-, flakeSelf
-, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  flakeSelf,
+  ...
+}:
 {
   # to generate ssh config file for the nix builder
   # programs.ssh = {
@@ -13,5 +15,5 @@
   # imports = [
   #   flakeSelf.homeModules.neovim
   # ];
-  
+
 }

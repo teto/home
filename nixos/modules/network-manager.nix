@@ -18,11 +18,8 @@
     # logLevel = "TRACE";
 
     # default is openresolv
-    dns = if config.services.adguardhome.enable 
-      then "none"
-      else "systemd-resolved";
+    dns = if config.services.adguardhome.enable then "none" else "systemd-resolved";
 
-    
     appendNameservers = [
       # refers to adguard home
       "127.0.0.1"

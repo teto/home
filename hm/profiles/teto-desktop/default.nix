@@ -4,8 +4,8 @@
   lib,
   withSecrets,
   secretsFolder,
-  dotfilesPath
-, ...
+  dotfilesPath,
+  ...
 }:
 
 let
@@ -28,12 +28,10 @@ in
     flakeSelf.homeModules.services-mujmap
     flakeSelf.homeModules.pimsync
     flakeSelf.homeModules.package-sets
-  ]
-  ;
+  ];
 
   # todo create some files per default
   # systemd.tmpfiles.rules = [
-
 
   # doing so enables support for it in greetd
   # services.gnome.gnome-keyring.enable = true;
@@ -46,20 +44,19 @@ in
   # '';
 
   home.packages = with pkgs; [
+    pass-perso
     (ignoreBroken pkgs.aider-chat) # breaks
-    mujmap-unstable
     notmuch # needed for waybar-custom-notmuch.sh
     panvimdoc # to generate vim doc from README, for instance in gp.nvim
     # poppler for pdf preview
 
     viu # a console image viewer
-    (pkgs.tetosLib.ignoreBroken mdcat) # markdown viewer
+    (mdcat) # markdown viewer
 
   ];
 
   home.sessionVariables = {
   };
-  
 
   package-sets = {
 

@@ -107,10 +107,9 @@
             # sessionPackages = lib.concatStringsSep ":" config.services.displayManager.sessionPackages;
             hmSessionPath = "${config.home-manager.users.teto.home.path}/share/wayland-sessions";
 
-            tuigreetCmd = builtins.trace
-            "sessionPath: ${waylandSessionsPath}\nsessionData: ${sessionData}\nhome.path: ${hmSessionPath}"
-            "${lib.getExe pkgs.tuigreet} ${flags}";
+            tuigreetCmd = builtins.trace "sessionPath: ${waylandSessionsPath}\nsessionData: ${sessionData}\nhome.path: ${hmSessionPath}" "${lib.getExe pkgs.tuigreet} ${flags}";
 
+            # WLR_NO_HARDWARE_CURSORS=1 ?
             regreetCmd = "cage -s -mlast -- regreet";
 
           in

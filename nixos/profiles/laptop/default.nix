@@ -1,7 +1,11 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   # package-sets.yubikey = true;
-
 
   # use tuned ?
   powerManagement = {

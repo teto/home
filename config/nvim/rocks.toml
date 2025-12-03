@@ -76,7 +76,7 @@ fzf-lua = "0.0.2296"
 # volt is a UI library
 volt= "scm"
 # "telescope.nvim" = "0.1.6"
-nvim-lspconfig= "2.5.0"
+# nvim-lspconfig= "2.5.0"
 # tree-sitter-org = "0.0.1"
 "grug-far.nvim"= "1.6.52"
 # orgmode = "0.7.1"

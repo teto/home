@@ -16,7 +16,6 @@
     enable = true;
     xwayland = false;
     extraOptions = [
-      # -Dlegacy-wl-drm
       "--unsupported-gpu"
     ];
 

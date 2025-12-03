@@ -62,6 +62,4 @@ in
   #     (if machine.publicHostKey != null then machine.publicHostKey else "-")
   #   ]);
 
-
-
 }

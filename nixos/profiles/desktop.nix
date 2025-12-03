@@ -215,7 +215,7 @@ in
   #   # to get manpages
   #   enable = true;
   #   # adds home-manager and my own option as well to man configuration.nix
-  #   includeAllModules = true; 
+  #   includeAllModules = true;
   # };
   #
   #   # on master it is disabled

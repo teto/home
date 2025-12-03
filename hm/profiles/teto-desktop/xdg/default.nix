@@ -3,7 +3,7 @@
   lib,
   secretsFolder,
   secrets,
-  withSecrets, 
+  withSecrets,
   ...
 }:
 {

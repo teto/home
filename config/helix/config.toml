@@ -1,0 +1,20 @@
+  [keys.normal]
+  # Change file picker from Space+f to Ctrl+p
+  C-p = "file_picker"
+
+  # Or use a different leader key combo
+  # Example: Use Space+o instead
+  [keys.normal.space]
+  o = "file_picker"
+
+  Common file-related commands you can remap:
+
+  [keys.normal]
+  C-p = "file_picker"              # Open file picker
+  C-o = "file_picker_in_current_directory"  # Open in current dir
+  C-b = "buffer_picker"            # Switch buffers
+  C-s = ":w"                       # Save file
+
+  [keys.normal.space]
+  f = "file_picker"                # Space+f (default)
+  b = "buffer_picker"              # Space+b (default)

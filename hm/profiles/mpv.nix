@@ -10,8 +10,8 @@
   programs.mpv = {
 
     config = {
-      ytdl-raw-options="write-auto-sub=,write-sub=,sub-lang=en";
-      sub-auto="fuzzy";
+      ytdl-raw-options = "write-auto-sub=,write-sub=,sub-lang=en";
+      sub-auto = "fuzzy";
       osc = "no"; # mandatory  with the modernz plugin
       profile = "gpu-hq";
       force-window = "yes";
@@ -42,14 +42,14 @@
     #   });
 
     scripts = [
-      # pkgs.tetosLib.ignoreBroken 
+      # pkgs.tetosLib.ignoreBroken
       (pkgs.mpvScripts.autosub) # works with subliminal
 
       pkgs.mpvScripts.mpvacious # Adds mpv keybindings to create Anki cards from movies and TV shows
       pkgs.mpvScripts.manga-reader
       pkgs.mpvScripts.mpris
-      pkgs.mpvScripts.thumbnail  # show thumbnail on hover
-      pkgs.mpvScripts.modernz  # new UI ? https://github.com/Samillion/ModernZ
+      pkgs.mpvScripts.thumbnail # show thumbnail on hover
+      pkgs.mpvScripts.modernz # new UI ? https://github.com/Samillion/ModernZ
       # pkgs.mpvScripts.mpv-notify-send # does not work ?
     ];
 

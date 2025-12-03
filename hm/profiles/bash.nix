@@ -5,8 +5,6 @@
 }@args:
 {
 
-
-
   # programs.atuin = {
   #   enable = false;
   #   enableZshIntegration = true;

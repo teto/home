@@ -1,5 +1,5 @@
 { lib, ... }:
-let 
+let
   genBlockLua = title: content: ''
     -- ${title} {{{
     ${content}
@@ -18,6 +18,5 @@ in
         genBlockLua attrs.plugin.pname attrs.config
       );
     };
-
 
 }

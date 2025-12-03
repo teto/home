@@ -18,8 +18,7 @@
     primary_threshold_ms = 5000;
 
     # Ignore clips that match any of the MIME types.
-    sensitive_mime_types = ["x-kde-passwordManagerHint"];
-
+    sensitive_mime_types = [ "x-kde-passwordManagerHint" ];
 
     watcher = {
       # Enable watching the X11/Wayland clipboard selection.

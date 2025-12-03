@@ -104,8 +104,8 @@ in
         pkgs.koboldcpp
         # llama-cpp-with-curl
         pkgs.llama-cpp # for llama-server and benchmarks
-        pkgs.llama-swap
-        pkgs.claude-code
+        pkgs.llama-swap # allows to switch between models at runtime
+        pkgs.claude-code # anthropic agent
         # open-webui # broken
         # sillytavern
         # python3Packages.unsloth # broken
@@ -142,7 +142,6 @@ in
           pkgs.timg # to display images in terminal, to compare with imgcat ?
           myImagemagick
 
-
           # borken cos of pymupdf
           # pkgs.kcc # to convert ebooks to remarkable format
           pkgs.ncmpcpp # outdated/ replaced by rmpc
@@ -156,7 +155,7 @@ in
           pkgs.nautilus # demande webkit/todo replace by nemo ?
           # mcomix # manga reader
           pkgs.popcorntime
-          pkgs.peaclock  # show big clock in terminal
+          pkgs.peaclock # show big clock in terminal
           # gnome.california # fails
           # khard # see khal.nix instead ?
           # libsecret  # to consult
@@ -467,18 +466,20 @@ in
     })
 
     (mkIf cfg.enableGaming {
-      home.packages = let 
-        # workaroudn to be able to install yousician
-        # see https://github.com/NixOS/nixpkgs/issues/410677
-        my_lutris = pkgs.lutris.override {
-          extraLibraries =
-            pkgs: with pkgs; [
-              libadwaita
-              gtk4
-            ];
-        };
-      in 
-        with pkgs; [
+      home.packages =
+        let
+          # workaroudn to be able to install yousician
+          # see https://github.com/NixOS/nixpkgs/issues/410677
+          my_lutris = pkgs.lutris.override {
+            extraLibraries =
+              pkgs: with pkgs; [
+                libadwaita
+                gtk4
+              ];
+          };
+        in
+        with pkgs;
+        [
           my_lutris
         ];
 
@@ -580,26 +581,26 @@ in
     })
 
     (mkIf cfg.japanese {
-      home.packages = with pkgs; 
-        let 
-          # capable to display 2 subtitles at same time 
+      home.packages =
+        with pkgs;
+        let
+          # capable to display 2 subtitles at same time
           # like mpv but with a lsit of subtitles
-          memento-with-ocr =  memento.override( { withOcr = true; });
+          memento-with-ocr = memento.override ({ withOcr = true; });
         in
- [
-        hakuneko
-        memento-with-ocr
+        [
+          hakuneko
+          memento-with-ocr
 
-
-        # https://github.com/NixOS/nixpkgs/pull/368909
-        pkgs.kakasi # convert kanjis into kanas etc
-        pkgs.kanji-stroke-order-font # for memento, font that shows strike order (!!) cool when learning
-        (tagainijisho) # japanese dict; like zkanji Qt based
-        # flakeSelf.inputs.vocage.packages."x86_64-linux".vocage
-        jiten # unfree, helpful for jap.nvim
-        sudachi-rs # a japanese tokenizer (can have sudachidict builtins)
-        sudachidict # exists in small/medium/large
-      ];
+          # https://github.com/NixOS/nixpkgs/pull/368909
+          pkgs.kakasi # convert kanjis into kanas etc
+          pkgs.kanji-stroke-order-font # for memento, font that shows strike order (!!) cool when learning
+          (tagainijisho) # japanese dict; like zkanji Qt based
+          # flakeSelf.inputs.vocage.packages."x86_64-linux".vocage
+          jiten # unfree, helpful for jap.nvim
+          sudachi-rs # a japanese tokenizer (can have sudachidict builtins)
+          sudachidict # exists in small/medium/large
+        ];
 
       # xdg.dataFile."jmdict".source = pkgs.jmdict;
     })

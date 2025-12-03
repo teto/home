@@ -8,6 +8,7 @@ BLOG_FOLDER := "${HOME}/blog"
 HM_REPO := "/home/teto/hm"
 
 # not versioned, where we store secrets
+
 SECRETS_FOLDER := justfile_directory() / "secrets"
 
 import? 'justfile.generated'
@@ -21,14 +22,12 @@ set dotenv-load := true
 
 switch-remote: (nixos-rebuild "switch")
 
-
 # deploy a brand new nixos install
 bootstrap:
     # todo fix the target 
     # use --extra-files
     nixos-anywhere --target-host root@bootstrap.local --flake '.#laptop' \
     --disk-encryption-keys /tmp/disk-1.key /tmp/disk-1.key
-
 
 # just to save the command
 
@@ -42,15 +41,15 @@ switch: (nixos-rebuild "switch" "")
 rollback: (nixos-rebuild "switch" "--rollback")
 
 repl:
-  nix repl ~/home \
-      --override-input nixpkgs {{ NIXPKGS_REPO }} \
-      --override-input hm {{ HM_REPO }}
+    nix repl ~/home \
+        --override-input nixpkgs {{ NIXPKGS_REPO }} \
+        --override-input hm {{ HM_REPO }}
 
 # --log-format internal-json
 # nom can hide when there is a lock
-
 # |& nom
 # env('HOST')       -j 1 \
+
 # builders --option builders \"$NOVA_OVH1\" -j0
 [private]
 nixos-rebuild command builders="":
@@ -229,9 +228,9 @@ nix-check-db:
 
 # receive secrets
 secrets-wormhole-receive:
-  # TODO one issue here is that we dont restore permissions
-  # after we also need to call stow-secrets
-  wormhole-rs receive
+    # TODO one issue here is that we dont restore permissions
+    # after we also need to call stow-secrets
+    wormhole-rs receive
 
 # rsync
 secrets-scp-sync:
@@ -244,8 +243,6 @@ git-hooks:
 
 secrets-send:
     wormhole-rs send {{ SECRETS_FOLDER }}
-
-
 
 # snippet to regenerate the doc of some project
 panvimdoc:
@@ -293,12 +290,12 @@ dbus-list-sessions:
 
 # discover local network
 avahi-discover:
-  avahi-browse --all --ignore-local --resolve --terminate
+    avahi-browse --all --ignore-local --resolve --terminate
 
 # you need to bump the flake first since nix-forecast doesn't accept input overrides yet
 nix-forecast:
-  nix-forecast -s -c .#nixosConfigurations.{{HOSTNAME}}
+    nix-forecast -s -c .#nixosConfigurations.{{ HOSTNAME }}
 
 # see 'nix-forecast' warning
 nix-weather:
-   nix-weather -n {{HOSTNAME}} -c .
+    nix-weather -n {{ HOSTNAME }} -c .

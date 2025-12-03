@@ -2,21 +2,22 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config
-, lib
-, pkgs
-, flakeSelf
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  flakeSelf,
+  ...
 }:
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      flakeSelf.nixosProfiles.desktop
-      flakeSelf.nixosProfiles.avahi
-      flakeSelf.nixosModules.default-hm
-      ../../nixos/accounts/teto/teto.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    flakeSelf.nixosProfiles.desktop
+    flakeSelf.nixosProfiles.avahi
+    flakeSelf.nixosModules.default-hm
+    ../../nixos/accounts/teto/teto.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -25,7 +26,7 @@
   networking.hostName = "neptune"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
@@ -45,9 +46,6 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-
-  
-
   # Configure keymap in X11
   services.xserver.xkb.layout = "fr";
   services.xserver.xkb.options = "eurosign:e,caps:escape";
@@ -55,23 +53,22 @@
   # Enable CUPS to print documents.
   services.printing = {
     enable = true;
-      browsing = false;
-      drivers = [
-        pkgs.gutenprint
-        pkgs.gutenprintBin
-        # See https://discourse.nixos.org/t/install-cups-driver-for-brother-printer/7169
-        pkgs.brlaser
-      ];
+    browsing = false;
+    drivers = [
+      pkgs.gutenprint
+      pkgs.gutenprintBin
+      # See https://discourse.nixos.org/t/install-cups-driver-for-brother-printer/7169
+      pkgs.brlaser
+    ];
   };
-
 
   # Enable sound.
   # services.pulseaudio.enable = true;
   # OR
-   services.pipewire = {
-     enable = true;
-     pulse.enable = true;
-   };
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true;
+  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
@@ -88,26 +85,23 @@
       packages = with pkgs; [
         tree
       ];
-    
-   };
-   teto = {
-     uid = lib.mkForce 1001;
+
     };
- };
-
- home-manager.users = {
-   mama = 
-   {
-           package-sets.enableOfficePackages = true;
-
+    teto = {
+      uid = lib.mkForce 1001;
+    };
   };
-   teto = {
+
+  home-manager.users = {
+    mama = {
+      package-sets.enableOfficePackages = true;
+
+    };
+    teto = {
 
       package-sets.enableOfficePackages = true;
-   };
+    };
   };
-
-
 
   # xserver disappears in recent one
   services.desktopManager.gnome.enable = true;
@@ -118,12 +112,11 @@
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
-     libreoffice
-     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-     wine
-     wget
+    libreoffice
+    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    wine
+    wget
   ];
-
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -137,10 +130,10 @@
 
   # Enable the OpenSSH daemon.
   services.openssh = {
-     enable = true;
-     settings = {
-       PasswordAuthentication = false;
-      };
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+    };
   };
 
   # Open ports in the firewall.
@@ -175,4 +168,3 @@
   system.stateVersion = "25.05"; # Did you read the comment?
 
 }
-

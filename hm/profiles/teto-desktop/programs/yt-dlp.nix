@@ -1,13 +1,18 @@
-{ config, lib, pkgs, ... }:
-let 
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
 
 in
 {
-  
+
   enable = true;
   # can symlinkJoin plugins under "yt-dlp-plugins"
   # https://github.com/yt-dlp/yt-dlp?tab=readme-ov-file#installing-plugins
-  package =  pkgs.yt-dlp;
+  package = pkgs.yt-dlp;
   settings = {
     embed-thumbnail = true;
     embed-subs = true;

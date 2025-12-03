@@ -15,7 +15,8 @@ let
 
   pluginsMap = pkgs.callPackage ./plugins.nix { inherit flakeSelf; };
 
-  myNeovimUnwrapped = flakeSelf.inputs.neovim-nightly-overlay.packages."${pkgs.stdenv.hostPlatform.system}".neovim;
+  myNeovimUnwrapped =
+    flakeSelf.inputs.neovim-nightly-overlay.packages."${pkgs.stdenv.hostPlatform.system}".neovim;
   # nvimLua = config.programs.neovim.finalPackage.passthru.unwrapped.lua;
 
   rawPlugins =
@@ -91,16 +92,22 @@ in
       {
         enable = true;
         # TODO add sqlite_clib_path to the wrapper ?
-        text = ''
-          local M = {}
-          M.gcc_path = "${pkgs.gcc}/bin/gcc"
-          M.lua_interpreter = "${luaInterpreter}"
-          M.luarocks_executable = "${luaInterpreter.pkgs.luarocks_bootstrap}/bin/luarocks"
-          M.sqlite_clib_path = "${pkgs.sqlite.out}/lib/libsqlite3${pkgs.stdenv.hostPlatform.extensions.sharedLibrary}"
-          M.edict_kanjidb = "${flakeSelf.inputs.edict-kanji-db}/kanji.db"
-          M.edict_expressiondb = "${flakeSelf.inputs.edict-expression-db}/expression.db"
-          return M
-        '';
+        text =
+          let
+            ghcEnv4Tidal = (pkgs.ghc.withPackages (hs: [ hs.tidal ]));
+
+          in
+          ''
+            local M = {}
+            M.gcc_path = "${pkgs.gcc}/bin/gcc"
+            M.lua_interpreter = "${luaInterpreter}"
+            M.luarocks_executable = "${luaInterpreter.pkgs.luarocks_bootstrap}/bin/luarocks"
+            M.sqlite_clib_path = "${pkgs.sqlite.out}/lib/libsqlite3${pkgs.stdenv.hostPlatform.extensions.sharedLibrary}"
+            M.edict_kanjidb = "${flakeSelf.inputs.edict-kanji-db}/kanji.db"
+            M.edict_expressiondb = "${flakeSelf.inputs.edict-expression-db}/expression.db"
+            M.tidal_boot = "${ghcEnv4Tidal}/tidal-1.10.1/BootTidal.hs"
+            return M
+          '';
       };
 
     # could use toLua or buildLuarocksConfig

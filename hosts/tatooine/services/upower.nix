@@ -5,7 +5,7 @@
   ...
 }:
 {
-  # enabled by tuned 
+  # enabled by tuned
   # enable = false;
   # percentageLow = 35;
   # percentageCritical = 30;

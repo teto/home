@@ -54,11 +54,11 @@ let
   # builder_neotokyo = (tetosLib.nixosConfToBuilderAttr {} flakeSelf.nixosConfigurations.neotokyo);
 
   # b1 = pkgs.tetosLib.deployrsNodeToBuilderAttr flakeSelf.deploy.nodes.jedha;
-      # {
-      #   # using secrets.nix
-      #   hostName = "jedha.local";
-      #   system =  "x86_64-linux";
-      # };
+  # {
+  #   # using secrets.nix
+  #   hostName = "jedha.local";
+  #   system =  "x86_64-linux";
+  # };
 
 in
 {
@@ -94,24 +94,22 @@ in
     # ../../nixos/modules/libvirtd.nix
 
   ];
-  
+
   # services.tandoor-recipes.enable = true;
   # services.linkwarden = {
   #   enable = true;
   #   secretFiles.NEXTAUTH_SECRET = "TOTO";
   # };
 
-
   nix.buildMachines = [
-      # builder_neotokyo
+    # builder_neotokyo
 
-      # {
-      #   # using secrets.nix
-      #   hostName = "laptop.local";
-      #   system =  "x86_64-linux";
-      # }
-    ];
-
+    # {
+    #   # using secrets.nix
+    #   hostName = "laptop.local";
+    #   system =  "x86_64-linux";
+    # }
+  ];
 
   nixpkgs.overlays = lib.optionals withSecrets [
 
@@ -148,7 +146,6 @@ in
   #   # for systemd-crypt or luks ?
   #   "/crypto_keyfile.bin" = null;
   # };
-
 
   # Enable swap on luks
   # boot.initrd.luks.devices."luks-abd09d4b-3972-405a-b314-44821af95c0e".keyFile = "/crypto_keyfile.bin";

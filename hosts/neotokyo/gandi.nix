@@ -1,13 +1,14 @@
-{ config
-, lib
-, pkgs
-, modulesPath
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
 }:
 {
   imports = [
-        "${modulesPath}/virtualisation/openstack-config.nix"
-    ];
+    "${modulesPath}/virtualisation/openstack-config.nix"
+  ];
 
   boot.initrd.kernelModules = [
     "xen-blkfront"
@@ -18,5 +19,5 @@
     "xen-pcifront"
     "xen-scsifront"
   ];
-  
+
 }

@@ -1,14 +1,14 @@
 {
-config,
-flakeSelf,
-pkgs,
-lib,
-# system,
-withSecrets
-, secrets
-, dotfilesPath
-, secretsFolder
-, ...
+  config,
+  flakeSelf,
+  pkgs,
+  lib,
+  # system,
+  withSecrets,
+  secrets,
+  dotfilesPath,
+  secretsFolder,
+  ...
 }:
 let
 
@@ -38,7 +38,8 @@ in
 
   ];
 
-  home.file.".password-store".source = config.lib.file.mkOutOfStoreSymlink "${secretsFolder}/password-store-teto";
+  home.file.".password-store".source =
+    config.lib.file.mkOutOfStoreSymlink "${secretsFolder}/password-store-teto";
   # TODO link .config
   # home.file.".password-store".source = config.lib.file.mkOutOfStoreSymlink "${secretsFolder}/password-store-teto";
   # home.file.".gnupg".source = config.lib.file.mkOutOfStoreSymlink "${secretsFolder}/gnupg";
