@@ -42,6 +42,10 @@
 
         ExecStart =
           let
+            # ${pkgs.coreutils}/bin/timeout 60s
+                # result=$(/run/wrappers/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" \
+              # ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning -A "interrupt=service $1 failed" -A "continue=OK, start now" "hum scan" "Daily scan will start in one minute")
+
             myScript = pkgs.writeScript "notify-and-wait" ''
               #!${pkgs.stdenv.shell}
 
@@ -51,8 +55,6 @@
                 # gnome-shell doesn't respect the timeout from notify-send,
                 # hence the additional timeout command to make sure we exit
                 # before the end of time
-                result=$(/run/wrappers/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" \
-                    ${pkgs.coreutils}/bin/timeout 60s ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning -A "interrupt=service $1 failed" -A "continue=OK, start now" "hum scan" "Daily scan will start in one minute")
                 if [ "$result" = "interrupt" ]; then
                   /run/wrappers/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" \
                     ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning "Interrupted" "Process failed"

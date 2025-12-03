@@ -110,14 +110,15 @@
             tuigreetCmd = builtins.trace "sessionPath: ${waylandSessionsPath}\nsessionData: ${sessionData}\nhome.path: ${hmSessionPath}" "${lib.getExe pkgs.tuigreet} ${flags}";
 
             # WLR_NO_HARDWARE_CURSORS=1 ?
-            regreetCmd = "cage -s -mlast -- regreet";
+            # regreetCmd = "cage -s -mlast -- regreet";
 
           in
           # services.displayManager.sessionPackages
           # builtins.trace "home.path: ${config.home-manager.users.teto.home.path}/share/wayland-sessions"
           # config.services.xserver.displayManager.session.desktops
+            tuigreetCmd;
 
-          regreetCmd;
+          # regreetCmd;
 
         # user = "greeter"; # it's the default already
       };
