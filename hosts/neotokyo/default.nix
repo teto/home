@@ -30,13 +30,6 @@
   #   "xen-scsifront"
   # ];
 
-  # This is to get a prompt via the "openstack console url show" command
-  systemd.services."getty@tty1" = {
-    enable = lib.mkForce true;
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig.Restart = "always";
-  };
-
   imports = [
 
     # ONE OR THE OTHER
@@ -45,6 +38,8 @@
     ./ovh.nix
 
     ./disko-config.nix
+
+    ../../nixos/profiles/systemd-on-failure-service.nix
 
     flakeSelf.inputs.disko.nixosModules.disko
     flakeSelf.nixosModules.teto-nogui
@@ -151,6 +146,7 @@
   # security.sudo.wheelNeedsPassword = true;
 
   environment.systemPackages = [
+    pkgs.msmtp # to send mails
     pkgs.neovim
     pkgs.nixpkgs-review
     pkgs.zola # needed in the post-receive hook of the blog !

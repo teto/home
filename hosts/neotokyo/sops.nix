@@ -11,7 +11,7 @@
   # This will add secrets.yml to the nix store
   # You can avoid this by adding a string to the full path instead, i.e.
   # todo use homeDir of users.teto ?
-  sops.defaultSopsFile = "neotokyo-secrets.yaml";
+  sops.defaultSopsFile = "${config.home-manager.users.teto.home.homeDirectory}/neotokyo-secrets.yaml";
 
   # to avoid the 'secrets.yaml' is not in the Nix store.
   sops.validateSopsFiles = false;

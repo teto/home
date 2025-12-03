@@ -124,6 +124,10 @@ in
         # NB: the option Persistent=true triggers the service
         # immediately if it missed the last start time
       };
+
+      serviceConfig = {
+        OnSuccess="";
+      };
     };
   };
 

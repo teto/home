@@ -17,12 +17,10 @@ in
   # TODO add default account ?
   # lib.mkAfte
   configContent = ''
-
-    #   # this will create a default account which will then break the
-    #   # default added via primary
+    # this will create a default account which will then break the
+    # default added via primary
     syslog         on
     ${lib.optionalString (config.accounts.email.accounts?fastmail) "aliases ${aliasesFile}"}
-    "# should be in middle";
   '';
   # extraConfig = "# test commment";
   # extraAccounts = ''
