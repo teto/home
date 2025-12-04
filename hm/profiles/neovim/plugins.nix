@@ -1,6 +1,6 @@
+# this is the basic config I want on every host
 {
   pkgs,
-  flakeSelf,
   ...
 }:
 let
@@ -15,10 +15,12 @@ in
 
   basePlugins = with pkgs.vimPlugins; [
 
-    (luaPlugin {
-      plugin = flakeSelf.inputs.rocks-nvim.packages.${pkgs.stdenv.hostPlatform.system}.rocks-nvim;
-    })
+    # installed via vim.pack for now ?
+    # (luaPlugin {
+    #   plugin = flakeSelf.inputs.rocks-nvim.packages.${pkgs.stdenv.hostPlatform.system}.rocks-nvim;
+    # })
     # (luaPlugin { plugin = rocks-nvim; })
+
     # (luaPlugin { plugin = rocks-git-nvim; })
 
     (luaPlugin { plugin = fzf-lua; })
@@ -52,45 +54,22 @@ in
 
     # { plugin = jbyuki/venn.nvim; }
 
-    (luaPlugin {
-      plugin = fzf-vim;
-      # " mostly fzf mappings, use TAB to mark several files at the same time
-      # " https://github.com/neovim/neovim/issues/4487
-      config = ''
-        vim.g.fzf_command_prefix = 'Fzf' -- prefix commands :Files become :FzfFiles, etc.
-        vim.g.fzf_nvim_statusline = 0 -- disable statusline overwriting'';
-    })
+    # (luaPlugin {
+    #   plugin = fzf-vim;
+    #   # " mostly fzf mappings, use TAB to mark several files at the same time
+    #   # " https://github.com/neovim/neovim/issues/4487
+    #   config = ''
+    #     vim.g.fzf_command_prefix = 'Fzf' -- prefix commands :Files become :FzfFiles, etc.
+    #     vim.g.fzf_nvim_statusline = 0 -- disable statusline overwriting'';
+    # })
 
     # defined in overrides:
     # TODO we should be able to do without !
-    fzfWrapper
+    # fzfWrapper
 
     #  nvim-colorizer
     # (luaPlugin { plugin = nvim-terminal-lua; config = "require('terminal').setup()"; })
 
-    # TODO move to rocks
-    # {
-    #   plugin = vim-dasht;
-    # config = ''
-    # " When in Python, also search NumPy, SciPy, and Pandas:
-    # let g:dasht_filetype_docsets = {} " filetype => list of docset name regexp
-    # let g:dasht_filetype_docsets['python'] = ['(num|sci)py', 'pandas']
-    # " search related docsets
-    # nnoremap <Leader>k :Dasht<Space>
-    # " search ALL the docsets
-    # nnoremap <Leader><Leader>k :Dasht!<Space>
-    # " search related docsets
-    # nnoremap ,k <Cmd>call Dasht([expand('<cword>'), expand('<cWORD>')])<Return>
-    # " search ALL the docsets
-    # nnoremap <silent> <Leader><Leader>K :call Dasht([expand('<cword>'), expand('<cWORD>')], '!')<Return>
-    # '';
-    #   # optional = true;
-    # }
-
-    # {
-    #   plugin = sql-nvim;
-    #   # config = "let g:sql_clib_path = '${pkgs.sqlite.out}/lib/libsqlite3.so'";
-    # }
 
     # I am replacing vim-fugitive  with diffview-nvim because it's lua and easier to change probably to support jujutsu
     { plugin = vim-fugitive; }
@@ -127,11 +106,10 @@ in
       '';
     })
 
-    vim-nix
+    vim-nix # for NixEdit
+    vim-rsi # the goat
 
-    # ctrl-e causes an issue with telescope prompt
-    vim-rsi
-
+    visual-whitespace-nvim # shows spaces/tabs upon visual selection. Lovely
     # ' " syntax file for neomutt
     # neomutt-vim
     (luaPlugin {

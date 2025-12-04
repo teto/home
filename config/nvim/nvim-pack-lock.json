@@ -20,6 +20,10 @@
       "rev": "effe4bf2e1afb881ea67291c648b68dd3dfc927a",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
+    "nvim-thyme": {
+      "rev": "13b2a55dad7b86ae6c83d51fc640eb00b45c4525",
+      "src": "https://github.com/aileot/nvim-thyme"
+    },
     "pinkmare": {
       "rev": "542b98d0788585bd693fd02181aecf87497c41c0",
       "src": "https://github.com/Matsuuu/pinkmare"

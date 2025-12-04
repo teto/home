@@ -39,7 +39,7 @@ in
   ];
 
   home.file.".password-store".source =
-    config.lib.file.mkOutOfStoreSymlink "${secretsFolder}/password-store-teto";
+    config.lib.file.mkOutOfStoreSymlink "${secretsFolder}/password-store-perso";
   # TODO link .config
   # home.file.".password-store".source = config.lib.file.mkOutOfStoreSymlink "${secretsFolder}/password-store-teto";
   # home.file.".gnupg".source = config.lib.file.mkOutOfStoreSymlink "${secretsFolder}/gnupg";

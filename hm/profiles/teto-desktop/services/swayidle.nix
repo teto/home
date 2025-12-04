@@ -12,15 +12,8 @@
     }
   ];
 
-  events = [
-    {
-      event = "before-sleep";
-      command = "swaylock";
-    }
-    {
-      event = "lock";
-      command = "lock";
-    }
-  ];
-  # };
+  events = {
+      before-sleep = "swaylock";
+      lock = "lock";
+    };
 }

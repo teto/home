@@ -1,3 +1,6 @@
 <space>f to pick file
 
+d to delete
+ctrl-c to comment (v to select)
+
 hx --health

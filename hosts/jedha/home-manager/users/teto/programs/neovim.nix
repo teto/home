@@ -8,12 +8,13 @@
 let
 
   # reference flakeSelf instead ?
-  nvimLib = pkgs.callPackages ../../../../../../hm/profiles/neovim/lib.nix { };
+  # todo reference pkgs.neovimLib instead?
+  nvimLib = pkgs.tetosLib.neovim;
 
   inherit (nvimLib) luaPlugin;
 
   # try via rocks.nvim first
-  neotestPlugins = with pkgs.vimPlugins; [
+  neotestPlugins = [
     # neotest
     # neotest-haskell
   ];
@@ -25,7 +26,6 @@ let
 
   luaPlugins = with pkgs.vimPlugins; [
     # pkgs.vimPlugins.vim-nixhash # :NixHash
-    # pkgs.vimPlugins.targets-vim # to get 'ci/'
     # TODO check that it brings xxd in scope
     # pkgs.vimPlugins.hex-nvim
 

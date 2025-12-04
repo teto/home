@@ -1,4 +1,5 @@
 {
+  # test with streamlink to mpv ?
   enable = true;
   # dataDir ?
   # group ?

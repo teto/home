@@ -6,11 +6,26 @@
 }:
 let
   cfg = config.programs.footswitch;
+
+  pedalOption = id: lib.mkOption {
+    type = lib.types.str;
+    default = "";
+    description = ''
+      mapping for pedal ${id}
+    '';
+  };
 in
 {
   options = {
     programs.footswitch = {
       enable = lib.mkEnableOption "footswitch";
+
+      pedal1 = pedalOption "1";
+
+
+      pedal2 = pedalOption "2";
+
+      pedal3 = pedalOption "3";
 
       # custom = lib.mkOption {
       #   default = false;
@@ -22,6 +37,24 @@ in
     };
   };
 
+
+  # set it as an activationscript
+  config = lib.mkIf cfg.enable {
+
+  # dont need sudo
+  system.activationScripts.footswitch-configuration = ''
+    PATH=$PATH:${
+      lib.makeBinPath [
+        pkgs.footswitch
+      ]
+    }
+
+    scythe -1 -m alt -a f1 -2 -a f24
+  '';
+
+}
+
+ 
   # TODO add transcribe mappings to sway
 
   # TODO generate a systemd startup service/ or a udev thing ?

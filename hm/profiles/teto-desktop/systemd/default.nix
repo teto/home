@@ -99,6 +99,8 @@
       Unit = {
         # TODO add notmuch_CONFIG ?
         OnFailure = "desktop-notification@%i.service";
+        After="gpg-agent.socket";
+        Wants="gpg-agent.socket";
       };
     };
 

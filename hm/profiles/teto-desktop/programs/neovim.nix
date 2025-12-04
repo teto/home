@@ -211,7 +211,6 @@ in
   # ];
   #
   plugins = [
-    # TODO hacking on this
 
     # TODO replaced with https://github.com/yutkat/git-rebase-auto-diff.nvim
     # {
@@ -223,6 +222,7 @@ in
     #   # '';
     # }
 
+    # TODO move to default ones
     (luaPlugin {
       plugin = pkgs.vimPlugins.unicode-vim;
       # ${pkgs.vimPlugins.unicode-vim.passthru.initLua}
@@ -233,6 +233,30 @@ in
         vim.keymap.set ( "n", "ga",  "<Plug>(UnicodeGA)", { remap = true, } )
       '';
     })
+
+    # TODO move to rocks
+    # {
+    #   plugin = vim-dasht;
+    # config = ''
+    # " When in Python, also search NumPy, SciPy, and Pandas:
+    # let g:dasht_filetype_docsets = {} " filetype => list of docset name regexp
+    # let g:dasht_filetype_docsets['python'] = ['(num|sci)py', 'pandas']
+    # " search related docsets
+    # nnoremap <Leader>k :Dasht<Space>
+    # " search ALL the docsets
+    # nnoremap <Leader><Leader>k :Dasht!<Space>
+    # " search related docsets
+    # nnoremap ,k <Cmd>call Dasht([expand('<cword>'), expand('<cWORD>')])<Return>
+    # " search ALL the docsets
+    # nnoremap <silent> <Leader><Leader>K :call Dasht([expand('<cword>'), expand('<cWORD>')], '!')<Return>
+    # '';
+    #   # optional = true;
+    # }
+
+    # {
+    #   plugin = sql-nvim;
+    #   # config = "let g:sql_clib_path = '${pkgs.sqlite.out}/lib/libsqlite3.so'";
+    # }
 
   ]
   ++ luaPlugins

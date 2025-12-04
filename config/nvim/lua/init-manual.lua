@@ -877,6 +877,9 @@ vim.pack.add({
     -- "https://github.com/otavioschwanck/fzf-lua-enchanted-files",
     'https://github.com/PotatoesMaster/i3-vim-syntax',
     'https://github.com/rose-pine/neovim',
+
+	-- fennel testing
+	'https://github.com/aileot/nvim-thyme'
 })
 
 -- Autoload from everything lsp/ in rtp
@@ -993,3 +996,32 @@ vim.g.tidal_sc_enable = 1
 vim.g.tidal_boot = nix_deps.tidal_boot .. 'BootTidal.hs'
 
 -- require("jj").setup({})
+
+  vim.keymap.set('n', 'gF', function()
+    local file = vim.fn.expand('<cfile>')
+    if file == '' then
+      print('No file under cursor')
+      return
+    end
+
+    -- Create parent directories if they don't exist
+    local dir = vim.fn.fnamemodify(file, ':h')
+    if dir ~= '' and vim.fn.isdirectory(dir) == 0 then
+      vim.fn.mkdir(dir, 'p')
+    end
+
+    -- Edit the file (creates it if it doesn't exist)
+    vim.cmd('edit ' .. vim.fn.fnameescape(file))
+  end, { desc = 'Go to file, create if missing' })
+
+-- Wrapping the `require` in `function-end` is important for lazy-load.
+-- table.insert(package.loaders, function(...)
+--   return require("thyme").loader(...) -- Make sure to `return` the result!
+-- end)
+
+-- Note: Add a cache path to &rtp. The path MUST include the literal substring "/thyme/compile".
+local thyme_cache_prefix = vim.fn.stdpath("cache") .. "/thyme/compiled"
+vim.opt.rtp:prepend(thyme_cache_prefix)
+-- Note: `vim.loader` internally cache &rtp, and recache it if modified.
+-- Please test the best place to `vim.loader.enable()` by yourself.
+-- vim.loader.enable() -- (optional) before the `bootstrap`s above, it could increase startuptime.
