@@ -67,6 +67,8 @@ in
     # should not ?!
     # desktopAutoloaded
 
+    flakeSelf.nixosProfiles.pixiecore
+
     ../../nixos/profiles/disko-desktop.nix
     # ../../tetos/disk-config.nix
 

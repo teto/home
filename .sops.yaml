@@ -4,12 +4,14 @@ keys:
  - &teto-pgp 64BB678705EF85ABF7345F69BD024BD9C261596D
  - &teto-age age18etpu3xwwsv87ysarwndzaxdv3dw7a7zzytxrhdc2gtls0cr0elsa79uc5
  # generated via ssh-to-age
- - &neotokyo age15uagn9lkcdwxuk8ecmzuv24pf9paqtxxufsn0pj4a5ykga2e55xs2632zn
+ - &neotokyo_gandi age15uagn9lkcdwxuk8ecmzuv24pf9paqtxxufsn0pj4a5ykga2e55xs2632zn
+ - &neotokyo_ovh age19x926sq5yh3gkx8pq8pug86l0kk04g63kgq4hrqxdkgjx27jnftqungnl0
 creation_rules:
   - path_regex: secrets/neotokyo-secrets.yaml
     key_groups:
     - age:
-      - *neotokyo
+      - *neotokyo_gandi
+      - *neotokyo_ovh
       - *teto-age
   - path_regex: secrets/desktop-secrets.yaml
     key_groups:

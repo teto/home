@@ -772,27 +772,7 @@
         # see https://determinate.systems/posts/extending-nixos-configurations
         tatooine = laptop.extendModules {
           modules = [
-            # self.inputs.nixos-hardware.nixosModules.dell-xps-13-9310
             self.inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen5
-            self.nixosProfiles.pixiecore
-            (
-              { pkgs, ... }:
-              # let
-              #   # builder0 = (pkgs.tetosLib.nixosConfToBuilderAttr {} self.nixosConfigurations.jedha);
-              # in
-
-              {
-                nix.buildMachines = [
-                  # builder0
-                  # {
-                  #   # using secrets.nix
-                  #   hostName = "laptop.local";
-                  #   system =  "x86_64-linux";
-                  # }
-                ];
-              }
-            )
-
           ];
 
           # TODO retain existing specialArgs and inject mine ?!
@@ -854,15 +834,6 @@
             })
           ];
         });
-
-        # generates an error with neovim
-        # test = router.extendModules ({
-        #   modules = [
-        #     hm.nixosModules.home-manager
-        #     self.homeProfiles.neovim
-        #   ];
-        #
-        # });
       };
 
       # TODO scan hm/{modules, profiles} folder

@@ -22,7 +22,7 @@ in
   };
   config = lib.mkIf cfg.enable {
 
-    xdg.configFile."memento/mpv.conf".text = config.xdg.configFile."mpv/mpv.conf".text;
+    # xdg.configFile."memento/mpv.conf".text = config.xdg.configFile."mpv/mpv.conf".text;
 
   };
 }
