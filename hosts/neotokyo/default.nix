@@ -148,6 +148,9 @@
   # security.sudo.wheelNeedsPassword = true;
 
   environment.systemPackages = [
+    pkgs.restic # testing against restic
+    # pkgs.rustic # testing against restic
+    pkgs.backblaze-b2-tetos
     pkgs.msmtp # to send mails
     pkgs.neovim
     pkgs.nixpkgs-review

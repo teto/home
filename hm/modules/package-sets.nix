@@ -343,7 +343,7 @@ in
           # bmm # rust bookmark manager (not package yet)
           bfs # https://github.com/tavianator/bfs
           cargo
-          (backblaze-b2.override { execName = "b2"; })
+          backblaze-b2-tetos
           dasht # ~ zeal but in terminal
           difftastic # smart diffs
           lsof # to see open files

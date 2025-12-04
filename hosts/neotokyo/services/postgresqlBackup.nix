@@ -82,6 +82,7 @@ in
       passwordFile = "/var/run/secrets/restic/backup_immich_repo_password";
       paths =
         let
+          # TODO see if we cant retreive it from the service configuration
           # depends on "IMMICH_MEDIA_LOCATION=/var/lib/immich"
           UPLOAD_LOCATION = "/var/lib/immich";
         in

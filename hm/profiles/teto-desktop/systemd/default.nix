@@ -86,6 +86,7 @@
     mujmap-fastmail = {
       Service = {
         Environment = [
+          "GNUPGHOME=${config.programs.gpg.homedir}"
           "PATH=${
             pkgs.lib.makeBinPath [
               pkgs.pass-teto

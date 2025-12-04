@@ -20,6 +20,8 @@ in
     }
   );
 
+  backblaze-b2-tetos = final.backblaze-b2.override { execName = "b2"; };
+
   firefox-addons = import ./firefox/generated.nix {
     inherit (final)
       buildFirefoxXpiAddon

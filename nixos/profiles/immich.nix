@@ -5,10 +5,6 @@
   secrets,
   ...
 }:
-let
-  # typesenseApiKeyFile = pkgs.writeText "typesense-api-key" "12318551487654187654";
-
-in
 {
 
   services.immich = {

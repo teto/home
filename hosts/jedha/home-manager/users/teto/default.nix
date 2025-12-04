@@ -93,6 +93,11 @@
     # vifm
     # anyrun
 
+
+    # pgstosrt
+    subtitleedit  # for windows
+    vobsub2srt
+
     # bridge-utils# pour  brctl
   ];
 

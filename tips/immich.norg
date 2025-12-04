@@ -5,7 +5,8 @@ restic uploads to backblaze via systemd service
 
 * restoration procedure
 
-
+1. Stop the newly deployed instance
+2. Move UPLOAD_LOCATION
 
 * UX problems with:
 

@@ -144,7 +144,9 @@
     # peerix.url = "github:cid-chan/peerix";
     # mptcp-flake.url = "github:teto/mptcp-flake/fix-flake";
     mujmap = {
-      url = "github:elizagamedev/mujmap";
+      # url = "github:elizagamedev/mujmap";
+      url = "github:Lyndeno/mujmap";
+      # url = "github:spencerjackson/mujmap?ref=feature-pushLocalMail";
       # inputs.nixpkgs.follows = "nixpkgs"; # breaks build
     };
 

@@ -104,9 +104,6 @@ systemd-credentials:
     # systemd-ask-password -n | systemd-creds encrypt --name=foo-secret -p - - 
     systemd-creds encrypt --name=foo-secret -p INPUT OUTPUT
 
-aws-update-kubeconfig:
-    aws eks update-kubeconfig --name jk-dev --profile nova-sandbox --user-alias jk-dev
-
 # regen fortunes (not necessary with some fortunes version ?!)
 # strfile not necessarilyu in PATH !
 
@@ -158,16 +155,18 @@ stow-config:
 stow-home:
     stow --dotfiles -t {{ home_directory() }} home
 
+# TODO remove ?
 # symlink bin/ dotfiles into $HOME
 stow-bin:
     mkdir -p "{{ data_directory() }}/../bin"
     stow -t "{{ data_directory() }}/../bin" bin
 
 # symlink e.g. aws credentials in their expected position
-stow-secrets:
-    ln -s {{ SECRETS_FOLDER }}/aws  {{ home_directory() }}/.aws
-    ln -s {{ SECRETS_FOLDER }}/password-store  {{ home_directory() }}/.password-store
-    # ln -s {{ justfile_directory() }}/ 
+# remove, done via nix
+# stow-secrets:
+#     ln -s {{ SECRETS_FOLDER }}/aws  {{ home_directory() }}/.aws
+#     ln -s {{ SECRETS_FOLDER }}/password-store  {{ home_directory() }}/.password-store
+#     # ln -s {{ justfile_directory() }}/ 
 
 # symlink to XDG_DATA_HOME
 stow-local:
@@ -247,6 +246,7 @@ secrets-wormhole-receive:
     wormhole-rs receive
 
 # rsync
+# TODO remove once yazi proved it works nice
 secrets-scp-sync:
     # laptop must exist in ssh config
     scp -P12666 -r teto@192.168.1.16:/home/teto/home/secrets {{ SECRETS_FOLDER }}
