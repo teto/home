@@ -3,12 +3,13 @@
   config,
   lib,
   pkgs,
+  flakeSelf,
   ...
 }:
 {
 
   imports = [
-    ../../../../../../hm/profiles/swaync.nix
+    flakeSelf.homeProfiles.swaync.nix
   ];
 
   services.swaync = {

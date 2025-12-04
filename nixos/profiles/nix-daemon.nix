@@ -1,13 +1,7 @@
 {
   pkgs,
-  flakeSelf,
-  lib,
   ...
 }:
-# let
-# tetosLib = pkgs.tetosLib;
-
-# in
 {
   nix = {
 

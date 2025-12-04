@@ -1,4 +1,5 @@
 luals-addons.lua
+.nvim-thyme.fnl
 plugged/*
 .netrwhist
 plugin/packer

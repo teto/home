@@ -966,7 +966,7 @@
 
         # TODO
         local = import ./overlays/pkgs/default.nix;
-        # haskell = import ./overlays/haskell.nix;
+        haskell = import ./overlays/haskell.nix;
         overrides = import ./overlays/overrides.nix {
           inherit secretsFolder;
           flakeSelf = self;

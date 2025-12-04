@@ -7,6 +7,7 @@
   ...
 }:
 let
+  firefox = pkgs.callPackage ./firefox.nix {};
   nix-builders = import ./nix-builder.nix { inherit flakeSelf lib secretsFolder; };
   neovim = import ./neovim.nix { inherit flakeSelf lib; };
   notify-send = "${pkgs.libnotify}/bin/notify-send";
@@ -15,6 +16,7 @@ in
 {
   inherit
     nix-builders
+    firefox
     neovim
     ;
 

@@ -21,6 +21,7 @@
     # flakeSelf.homeModules.gnome-shell
 
     flakeSelf.homeModules.nextcloud-client
+    flakeSelf.homeModules.llama-cpp
 
     ./calendars.nix
     ./sway.nix
@@ -30,8 +31,9 @@
     ./programs/waybar.nix # TODO resotre ?
     ./programs/zsh.nix
 
-    ./services/local-ai.nix
-    ./services/ollama.nix
+    ./services/llama-cpp.nix
+    # ./services/local-ai.nix
+    # ./services/ollama.nix
     ./services/kanshi.nix
     ./services/ssh-agent.nix
     ./services/swaync.nix

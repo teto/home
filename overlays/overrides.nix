@@ -23,8 +23,8 @@ in
   backblaze-b2-tetos = final.backblaze-b2.override { execName = "b2"; };
 
   firefox-addons = import ./firefox/generated.nix {
+    inherit (final.pkgs.tetosLib.firefox)       buildFirefoxXpiAddon;
     inherit (final)
-      buildFirefoxXpiAddon
       fetchurl
       lib
       stdenv
