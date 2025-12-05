@@ -20,6 +20,18 @@ in
     }
   );
 
+  pass-import-high-password-length = final.passExtensions.pass-import.overrideAttrs({
+    # src = /home/teto/pass-import;
+
+    src = final.fetchFromGitHub {
+        owner = "teto";
+        repo = "pass-import";
+        rev = "d903431e73e88406c32e58196a468662bca55055";
+        hash = "sha256-95BJ5l0JNem8zHF6aJwA7TijORGOX2DK5rIw5DGJe+k=";
+      };
+
+  });
+
   backblaze-b2-tetos = final.backblaze-b2.override { execName = "b2"; };
 
   firefox-addons = import ./firefox/generated.nix {
@@ -48,14 +60,19 @@ in
   #     ;
   #   })).overrideAttrs({ doInstallCheck = false ; });
   #
+
+
+  # in the source code we have:
+# PREFIX="${PASSWORD_STORE_DIR:-$HOME/.password-store}"
+# EXTENSIONS="${PASSWORD_STORE_EXTENSIONS_DIR:-$PREFIX/.extensions}"
   pass-perso = final.writeShellApplication {
     name = "pass-perso";
     runtimeInputs = [
-      final.pass-teto
+      # final.pass-teto
     ];
     text = ''
       export PASSWORD_STORE_DIR="${secretsFolder}/password-store-perso"
-      pass $@
+      ${final.pass-teto}/bin/pass $@
     '';
     checkPhase = ":";
   };

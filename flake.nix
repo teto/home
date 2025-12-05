@@ -206,7 +206,7 @@
     };
 
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixos-stable.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixos-stable.url = "github:nixos/nixpkgs/nixos-25.11";
     # nixpkgs-for-hls.url = "github:nixos/nixpkgs?rev=612f97239e2cc474c13c9dafa0df378058c5ad8d";
 
     # nix-search-cli = {
@@ -619,8 +619,8 @@
         default = nixpkgs.legacyPackages.${system}.mkShell {
           name = "dotfiles-shell";
           buildInputs = with myPkgs; [
-
             age
+            pkgs.bitwarden-cli # to sync passwords
             dmidecode
             deploy-rs.packages.${system}.deploy-rs
             fzf # for just's "--select"
@@ -711,6 +711,7 @@
           nvim = self.nixosConfigurations.desktop.config.home-manager.users.teto.programs.neovim.finalPackage;
 
           inherit (myPkgs)
+            pass-import-high-password-length
             jmdict
             meli-git
             # neomutt

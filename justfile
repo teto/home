@@ -71,7 +71,7 @@ nixos-rebuild command builders="":
       .#nixosConfigurations.{{ HOSTNAME }}.config.system.build.toplevel \
       --override-input nixpkgs {{ NIXPKGS_REPO }} \
       --override-input hm {{ HM_REPO }} \
-      -j1 --max-jobs 1 \
+      -j1 --max-jobs 10 \
        {{ builders }} \
        --no-write-lock-file --show-trace
 
@@ -255,7 +255,7 @@ secrets-scp-sync:
 git-hooks:
     ln -sf {{ justfile_directory() }}/contrib/pre-push  .git/hooks
 
-secrets-send:
+secrets-wormhole-send:
     wormhole-rs send {{ SECRETS_FOLDER }}
 
 # snippet to regenerate the doc of some project
@@ -265,6 +265,7 @@ panvimdoc:
 monitor-list:
     ddcutil detect
 
+# set as mapping ?
 monitor-increase-brightness:
     ddcutil setvcp 10 + 10
     # ddcutil setvcp 10 - 10
@@ -316,3 +317,9 @@ nix-forecast:
 # see 'nix-forecast' warning
 nix-weather:
     nix-weather -n {{ HOSTNAME }} -c .
+
+# TODO this should be generated in justfile.generated ?
+bitwarden-sync-to-password-store:
+  # bw login
+  bw export
+  pass-perso import pass bitwarden  <FILE>

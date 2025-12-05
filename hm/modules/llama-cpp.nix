@@ -3,12 +3,13 @@
   config,
   lib,
   pkgs,
-  utils,
   ...
 }:
 
 let
   cfg = config.services.llama-cpp;
+  utils = import ../../lib/utils.nix { inherit lib config pkgs; };
+
 in
 {
 
@@ -71,7 +72,10 @@ in
       Service = {
         Type = "idle";
         KillSignal = "SIGINT";
-        ExecStart = "${cfg.package}/bin/llama-server --log-disable --host ${cfg.host} --port ${builtins.toString cfg.port} -m ${cfg.model} ${utils.escapeSystemdExecArgs cfg.extraFlags}";
+        # need to restore:
+        # ${lib.utils.escapeSystemdExecArgs cfg.extraFlags}";
+        # but how to import utils ? see nixos/modules/misc/extra-arguments.nix
+        ExecStart = "${cfg.package}/bin/llama-server --log-disable --host ${cfg.host} --port ${builtins.toString cfg.port} -m ${cfg.model} ";
         Restart = "on-failure";
         RestartSec = 300;
 

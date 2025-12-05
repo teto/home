@@ -12,6 +12,8 @@ alias nrc="nix repl --expr 'import <nixpkgs> { config.cudaSupport = true; config
 alias avante='nvim -c "lua vim.defer_fn(function()require(\"avante.api\").zen_mode()end, 100)"'
 alias st="systemctl-tui"
 
+alias reboot-windows="systemctl --reboot-argument=3 reboot"
+
 # Haskell related aliases{{{
 alias nhs98="nix develop \$HOME/home#nhs98"
 alias nhs910="nix develop \$HOME/home#nhs910"

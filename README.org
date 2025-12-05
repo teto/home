@@ -1,8 +1,19 @@
 #+title: how to use this repo
 #+author: teto
 #+NAME: demo
+#+LINK: nixos-anywhere https://github.com/nix-community/nixos-anywhere
+#+LINK: disko https://github.com/nix-community/disko
 
-This is "tetos", teto's OS, nixos-based.
+This is *tetos*, teto's OS, nixos-based, conceived by me for me.
+I make it public because I love libre software and this makes sharing snippets easier.
+Dont expect to be able to use it as it is a spaghetti of hacks, for instance it relies on forks of nixpkgs and home-manager.
+
+The main difficulty to allow reproducible deployments is the handling of secrets.
+This is why my nixosConfigurations can be built with and without secrets depending on a boolean `withSecrets` forwarded via `specialArgs`.
+
+My main secrets are handled with sops and not gitted (no way I would put those public).
+
+If you scroll a bit, you will find sparse tutorials on how to deploy both on a LAN (PXE) or remotely (e.g. VPS). Kudos to [[nixos-anywhere][nixos-anywhere]] and [[disko]] for making this easier than ever.
 
 * home
 
@@ -52,7 +63,7 @@ This folder contains my customizations for:
 
 * nixos-anywhere install via PXE
 
-We use [[https://github.com/nix-community/nixos-anywhere][nixos-anywhere]] + [[https://github.com/nix-community/disko][disko]], aka we need a SERVER machine in the same LAN as the NEW machine to deploy from. 
+We use [[nixos-anywhere][nixos-anywhere]] + [[disko][disko]], aka we need a SERVER machine in the same LAN as the NEW machine to deploy from. 
 1. SERVER: Enable the pixiecore service
 2. NEW: start via PXE
 3. NEW: echo LUKS_PASSWORD > /tmp/secret.key

@@ -51,11 +51,13 @@ in
     # poppler for pdf preview
 
     viu # a console image viewer
-    (mdcat) # markdown viewer
-
+    mdcat # markdown viewer
   ];
 
   home.sessionVariables = {
+    # might be a hack
+    PASSWORD_STORE_ENABLE_EXTENSIONS=1;
+    PASSWORD_STORE_EXTENSIONS_DIR="${dotfilesPath}/contrib/pass-extensions";
   };
 
   package-sets = {
