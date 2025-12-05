@@ -1,4 +1,10 @@
 
+* mode wiki
+
+:Neork workspace notes
+Entre pour suivre les liens
+
+* tangling
 https://github.com/nvim-neorg/neorg/wiki/Tangling
 
 :Neorg tangle current-file

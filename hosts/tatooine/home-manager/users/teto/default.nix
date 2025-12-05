@@ -10,10 +10,7 @@
 {
 
   imports =
-    lib.optionals withSecrets [
-      # flakeSelf.inputs.git-repo-manager.packages.${pkgs.stdenv.hostPlatform.system}.git-repo-manager
-    ]
-    ++ [
+    [
       # flakeSelf.homeModules.experimental
       ./sway.nix
       ./programs/waybar.nix
@@ -28,12 +25,17 @@
 
       # neovim should come from the nixos profile
       flakeSelf.homeModules.nextcloud-client
+      flakeSelf.homeModules.llama-cpp
       # ../../../../jedha/home-manager/users/teto/services/nextcloud-client.nix
 
-      # ../../../../../hm/profiles/wezterm.nix
+      # flakeSelf.homeProfiles.llama-cpp
       flakeSelf.homeProfiles.wezterm
     ];
 
+    # testing
+    services.llama-cpp = {
+      enable = true;
+    };
   programs.memento.enable = true;
 
   home.sessionPath = [

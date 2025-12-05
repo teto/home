@@ -22,10 +22,9 @@ function M.setup()
             ['core.dirman'] = { -- Manages Neorg workspaces
                 config = {
                     workspaces = {
-                        notes = '~/Nextcloud/local_notes',
-                        home = '~/Nextcloud/notes',
-                        work = '~/Nextcloud/nova/notes',
-                        ml = '~/Nextcloud/notes/ml',
+                        offline = '~/Nextcloud/local_notes',
+                        notes = '~/Nextcloud/notes',
+                        -- ml = '~/Nextcloud/notes/ml',
                         -- notes = "~/Nextcloud/Notes",
                     },
                     default_workspace = 'notes',

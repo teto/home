@@ -52,6 +52,8 @@ in
 
     viu # a console image viewer
     mdcat # markdown viewer
+
+      # flakeSelf.inputs.git-repo-manager.packages.${pkgs.stdenv.hostPlatform.system}.git-repo-manager
   ];
 
   home.sessionVariables = {

@@ -1,1 +1,0 @@
-dist-newstyle/build/x86_64-linux/ghc-8.8.4/blog-hakyll-0.1.0.0/x/site/build/site/site watch

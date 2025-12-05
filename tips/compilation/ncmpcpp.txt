@@ -1,2 +1,0 @@
-If boost system libraries not found on debian / Ubuntu use:
-BOOST_LIB_SUFFIX="" ./configure

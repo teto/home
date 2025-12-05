@@ -1,3 +1,0 @@
-Readline permet d'avoir l'autocomplétion donc hyper important
-
-./configure --with-pdf --with-cwdrc --with-readline=gnu
