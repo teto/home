@@ -9,7 +9,7 @@
 {
 
   imports = [
-    flakeSelf.homeProfiles.swaync.nix
+    flakeSelf.homeProfiles.swaync
   ];
 
   services.swaync = {
