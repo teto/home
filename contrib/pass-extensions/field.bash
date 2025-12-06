@@ -1,13 +1,10 @@
 # shellcheck disable=2148
 cmd_show_field() {
   # TODO 
-  echo "hello world"
   local field_name="$1"
   shift
   res=$(cmd_show "$@")
-  echo "RESULT:"
-  echo "$res"
-  sed -n "s/^${field_name}: //p" "$res"
+  echo "$res" | sed -n "s/^${field_name}: //p" 
   # Using grep and sed:
   # grep "^login:" file.txt | sed 's/login: //'
   #

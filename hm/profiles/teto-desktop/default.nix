@@ -58,7 +58,7 @@ in
 
   home.sessionVariables = {
     # might be a hack
-    PASSWORD_STORE_ENABLE_EXTENSIONS=1;
+    PASSWORD_STORE_ENABLE_EXTENSIONS="true";  # it must be "true" and nothing else !
     PASSWORD_STORE_EXTENSIONS_DIR="${dotfilesPath}/contrib/pass-extensions";
   };
 

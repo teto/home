@@ -8,7 +8,8 @@
   # https://www.kernel.org/doc/Documentation/power/swsusp-and-swap-files.txt
   # should point at the partition
   # /dev/mapper/crypted"; wouldn't work
-  resumeDevice = "/dev/nvme0n1p2";
+  resumeDevice = "/dev/disk/by-uuid/febbd1a4-c36a-489d-ab5c-b4e9281ab892";
+  # ou bien resume=UUID=febbd1a4-c36a-489d-ab5c-b4e9281ab892 ?
 
   initrd.systemd.enable = true;
   initrd.availableKernelModules = [
@@ -16,6 +17,9 @@
     "cryptd"
     "dm-snapshot"
   ];
+
+  # Ensure initrd has resume support
+  initrd.luks.devices."crypted".allowDiscards = true;
 
   plymouth.theme = "spinner";
   plymouth.enable = false; # I cant get to login with plymouth ?

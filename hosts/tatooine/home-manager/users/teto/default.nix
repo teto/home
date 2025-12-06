@@ -34,7 +34,7 @@
 
     # testing
     services.llama-cpp = {
-      enable = true;
+      enable = false;
     };
   programs.memento.enable = true;
 

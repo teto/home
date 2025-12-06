@@ -23,6 +23,7 @@ let
     pkgs.vimPlugins.nvim-treesitter-parsers.nix
     pkgs.vimPlugins.nvim-treesitter-parsers.hurl
     pkgs.vimPlugins.nvim-treesitter-parsers.norg
+    pkgs.vimPlugins.nvim-treesitter-parsers.norg-meta
   ];
 
   luaPlugins = with pkgs.vimPlugins; [
