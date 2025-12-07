@@ -1,9 +1,10 @@
 
 
-reverseproxy: nginx
+* first deploy
 
-We use et’s Encrypt uses the ACME protocol to verify that you control a given domain name and to issue you a certificate. 
-Using a "wildcard"
+1. just bootstrap-vps
+2. upload its sops secrets
 
+* subsequent deploys
 
 * backup procedure

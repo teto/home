@@ -136,7 +136,8 @@ ALTER ROLE teto WITH SUPERUSER CREATEROLE CREATEDB;
 `\du`
 
 # how to switch databases ?
-postgres=# \c sales
+
+first connect to DB with `\c sales`
 
 CREATE ROLE username superuser;
 

@@ -1,0 +1,12 @@
+
+# might as well be 
+immich-stop:
+  systemctl stop immich-server.service
+
+# restore-immich
+# https://docs.immich.app/administration/backup-and-restore/
+gunzip --stdout "immich.sql.gz" \
+| sed "s/SELECT pg_catalog.set_config('search_path', '', false);/SELECT pg_catalog.set_config('search_path', 'public, pg_catalog', true);/g" \
+| sudo -u immich psql --dbname=immich
+# might have to delete the table if it already existed: DROP DATABASE immich;
+# CREATE DATABASE immich OWNER immich;

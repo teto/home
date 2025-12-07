@@ -36,3 +36,4 @@ result
 
 # very important not to version those
 secrets/*
+b2-mount

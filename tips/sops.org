@@ -2,6 +2,8 @@
 
   https://github.com/Mic92/sops-nix
 
+sops now supports ssh keys but sops-nix doesnt yet see https://github.com/Mic92/sops-nix/issues/824
+
 #+BEGIN_SRC
 #+END_SRC
 

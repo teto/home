@@ -44,6 +44,7 @@ alias jctl="journalctl -b0"
 alias gap="git add -p"
 alias grc="git rebase --continue"
 alias gra="git rebase --abort"
+alias gpf="git push --force-with-lease"
 
 # rename mptcp ?
 # alias mp="mptcpanalyzer"

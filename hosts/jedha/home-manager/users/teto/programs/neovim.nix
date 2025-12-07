@@ -22,8 +22,12 @@ let
   treesitterPlugins = with pkgs.vimPlugins; [
     pkgs.vimPlugins.nvim-treesitter-parsers.nix
     pkgs.vimPlugins.nvim-treesitter-parsers.hurl
-    pkgs.vimPlugins.nvim-treesitter-parsers.norg
-    pkgs.vimPlugins.nvim-treesitter-parsers.norg-meta
+
+    # these dont exist
+    # pkgs.vimPlugins.nvim-treesitter-parsers.norg
+    # pkgs.vimPlugins.nvim-treesitter-parsers.norg-meta
+    pkgs.tree-sitter-grammars.tree-sitter-norg
+    pkgs.tree-sitter-grammars.tree-sitter-norg-meta
   ];
 
   luaPlugins = with pkgs.vimPlugins; [

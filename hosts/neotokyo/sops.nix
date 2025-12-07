@@ -1,12 +1,10 @@
 {
   config,
-  secretsFolder,
-  dotfilesPath,
+  lib,
   ...
 }:
 {
   imports = [
-    # ../../nixos/profiles/sops.nix
   ];
   # This will add secrets.yml to the nix store
   # You can avoid this by adding a string to the full path instead, i.e.
@@ -25,5 +23,27 @@
   # sign. Runtime dir is $XDG_RUNTIME_DIR on linux and $(getconf
   # DARWIN_USER_TEMP_DIR) on darwin.
   # path = "%r/test.txt";
+
+  sops.secrets = lib.mkIf config.services.postgresqlBackup.enable {
+    "restic/backblaze_backup_immich_credentials" = {
+      mode = "440";
+      # path = "%r/github_token";
+      owner = config.users.users.teto.name;
+      group = config.users.users.teto.group;
+    };
+
+    "restic/endpoint" = {
+      mode = "440";
+      # path = "%r/github_token";
+      owner = config.users.users.teto.name;
+      group = config.users.users.teto.group;
+    };
+
+    "restic/backup_immich_repo_password" = {
+      mode = "440";
+      owner = config.users.users.teto.name;
+      group = config.users.users.teto.group;
+    };
+  };
 
 }

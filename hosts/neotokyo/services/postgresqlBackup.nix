@@ -143,25 +143,4 @@ in
   # services.restic.server.enable
   #      Whether to enable Restic REST Server.
 
-  sops.secrets = {
-    "restic/backblaze_backup_immich_credentials" = {
-      mode = "440";
-      # path = "%r/github_token";
-      owner = config.users.users.teto.name;
-      group = config.users.users.teto.group;
-    };
-
-    "restic/endpoint" = {
-      mode = "440";
-      # path = "%r/github_token";
-      owner = config.users.users.teto.name;
-      group = config.users.users.teto.group;
-    };
-
-    "restic/backup_immich_repo_password" = {
-      mode = "440";
-      owner = config.users.users.teto.name;
-      group = config.users.users.teto.group;
-    };
-  };
 }

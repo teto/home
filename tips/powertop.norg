@@ -1,0 +1,7 @@
+ powertop --calibrate
+ It seems you didn't run the initial calibration. If you are running on NB, disconnect AC and run:
+# powertop --calibrate
+Then let the powertop to collect enough data (approx. 1 hour). After then it will show approx. wattage for each process / device. When you exit, it saves its state and the message should gone.
+
+It is only warning and it should be ignored, if it annoy you and you can't/don't want to run the calibration just:
+# touch /var/cache/powertop/saved_parameters.powertop

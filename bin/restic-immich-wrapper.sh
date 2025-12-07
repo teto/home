@@ -2,9 +2,11 @@
 # TODO consolidate/merge back into bin/restic-wrapper.sh ?
 set -x
 export AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY RESTIC_REPOSITORY_FILE
-AWS_ACCESS_KEY_ID="$(pass show self-hosting/backblaze-restic-immich-backup-key/username)"
-AWS_SECRET_ACCESS_KEY="$(pass show self-hosting/backblaze-restic-immich-backup-key/password)"
+AWS_ACCESS_KEY_ID="$(pass field "login" self-hosting/backblaze-immich-restic-backup-key)"
+# TODO use my plugin
+AWS_SECRET_ACCESS_KEY="$(pass show self-hosting/backblaze-immich-restic-backup-key | head -n1)"
 
+# TODO I might as well put the bucket name in bitwarden as well
 RESTIC_REPOSITORY_FILE="$HOME/.config/sops-nix/secrets/restic/neotokyo-immich-bucket"
 # export RESTIC_PASSWORD_FILE=
 

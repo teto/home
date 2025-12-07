@@ -1,4 +1,4 @@
-{ config, ... }:
+{ pkgs, ... }:
 {
 
   enable = false;
@@ -14,8 +14,7 @@
   # example = "/path/to/ollama/models";
 
   # check https://github.com/NixOS/nixpkgs/issues/291217
-  acceleration = "cuda";
-  # acceleration = "nvidia";
+  package = pkgs.ollama-cuda;
 
   # folders where to find models:
   # Default: "\${config.services.ollama.home}/models"

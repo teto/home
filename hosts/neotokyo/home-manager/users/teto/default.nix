@@ -33,4 +33,6 @@ in
   programs.zsh.loginExtra = ''
     cat "${pkgs.writeText "login-welcome" welcomeMessage}";
   '';
+
+  home.file."justfile".source =  ./justfile;
 }

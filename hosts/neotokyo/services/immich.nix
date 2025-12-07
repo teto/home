@@ -10,8 +10,17 @@
     enable = true;
     # host = ""; # all interfaces (example from module option) breaks with nginx
 
+
     # The group immich should run as.
     group = "immich";
+
+
+    # database = {
+    #
+    #   enableVectorChord = false;
+    #   enableVectors = false;
+    #
+    # };
 
     machine-learning = {
       # enable = lib.mkForce true;

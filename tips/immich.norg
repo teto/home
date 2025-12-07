@@ -8,6 +8,9 @@ restic uploads to backblaze via systemd service
 1. Stop the newly deployed instance
 2. Move UPLOAD_LOCATION
 
+3. stop immich process
+4. https://docs.immich.app/administration/backup-and-restore/
+
 * UX problems with:
 
 - "remove from album" vs "delete" 

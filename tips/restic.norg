@@ -25,3 +25,5 @@ RESTIC_READ_CONCURRENCY
   export RESTIC_REPOSITORY=
 # export RESTIC_PASSWORD_FILE=/etc/restic-password
 
+
+restic restore snapshot id
