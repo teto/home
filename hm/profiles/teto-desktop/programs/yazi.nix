@@ -15,7 +15,7 @@
     # foo = ./foo;
     ouch = pkgs.yaziPlugins.ouch;
     # TODO package flakeSelf.inputs.rsync-yazi-plugin;
-    rsync = pkgs.rsync-yazi; # packaged by myself
+    # rsync = pkgs.rsync-yazi; # packaged by myself
     mediainfo = pkgs.yaziPlugins.mediainfo;
 
     # rsync-packaged = pkgs.mkYaziPlugin {

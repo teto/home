@@ -4,9 +4,8 @@
   ...
 }:
 {
-
   # TODO fix ports
-  enable = true;
+  enable = false;
 
   # else I end up with
   # "The option `services.llama-swap.settings' was accessed but has no value defined. Try setting the option."

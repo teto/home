@@ -19,15 +19,19 @@ let
     # neotest-haskell
   ];
 
-  treesitterPlugins = with pkgs.vimPlugins; [
+  treesitterPlugins = let 
+      inherit (pkgs.neovimUtils) grammarToPlugin;
+    in [
     pkgs.vimPlugins.nvim-treesitter-parsers.nix
     pkgs.vimPlugins.nvim-treesitter-parsers.hurl
 
     # these dont exist
     # pkgs.vimPlugins.nvim-treesitter-parsers.norg
     # pkgs.vimPlugins.nvim-treesitter-parsers.norg-meta
-    pkgs.tree-sitter-grammars.tree-sitter-norg
-    pkgs.tree-sitter-grammars.tree-sitter-norg-meta
+
+    # these dont exist yet
+    (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-norg)
+    (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-norg-meta)
   ];
 
   luaPlugins = with pkgs.vimPlugins; [

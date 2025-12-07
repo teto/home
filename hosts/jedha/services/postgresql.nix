@@ -6,11 +6,7 @@
   ...
 }:
 {
-  # _imports = [
-  #   ../../nixos/profiles/postgresql.nix
-  # ];
-
-  enable = false;
+  # enable = false;
   enableTCPIP = true; # if false, use TCP via localhost only or via socket
 
   # port par defaut est 5432

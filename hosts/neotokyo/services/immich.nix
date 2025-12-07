@@ -1,5 +1,4 @@
 {
-  dotfilesPath,
   secrets,
   pkgs,
   lib,

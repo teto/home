@@ -64,6 +64,8 @@ in
     ./_boot.nix
     # ../../nixos/profiles/docker-daemon.nix
 
+    flakeSelf.inputs.buildbot-nix.nixosModules.buildbot-master
+    flakeSelf.inputs.buildbot-nix.nixosModules.buildbot-worker
     flakeSelf.inputs.harmonia.nixosModules.harmonia
     flakeSelf.nixosProfiles.greetd
     flakeSelf.nixosProfiles.desktop
@@ -285,7 +287,14 @@ in
 
   powerManagement = {
     enable = true;
-    powertop.enable = true;
+    powertop = {
+      enable = true;
+      postStart = ''
+        echo 'on' > '/sys/bus/usb/devices/1-5.4/power/control';
+        echo 'on' > '/sys/bus/usb/devices/1-9/power/control';
+        echo 'enabled' > '/sys/class/net/wlp10s0/device/power/wakeup';
+      '';
+    };
   };
 
   # try giving stable ids to our GPUs

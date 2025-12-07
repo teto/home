@@ -53,7 +53,7 @@ ts_config.setup({
             'rust',
             'bash',
             -- 'nix',
-            'org',
+            -- 'org',
             'python',
             'http', -- while I am working on the parser !
             -- 'c',
