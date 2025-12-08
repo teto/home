@@ -7,6 +7,9 @@
 }:
 let
   acmeRoot = "/var/lib/acme/";
+
+  # config.services.jellyfin.port doesn't exist
+  defaultJellyfinPort = 8096;
 in
 {
 
@@ -105,6 +108,25 @@ in
         '';
 
       };
-    };
+    } 
+    // lib.optionalAttrs config.services.jellyfin.enable {
+      # inspired by nixaar project
+      "jellyfin.${secrets.jakku.hostname}" = {
+          enableACME = true;
+          forceSSL = true;
+          locations."/" = {
+            recommendedProxySettings = true;
+            proxyWebsockets = true;
+        
+            proxyPass = "http://127.0.0.1:${builtins.toString defaultJellyfinPort}";
+          };
+
+        # root = pkgs.runCommand "testdir" { } ''
+        #   mkdir "$out"
+        #   echo hello world > "$out/index.html"
+        # '';
+        };
+      }
+    ;
   };
 }

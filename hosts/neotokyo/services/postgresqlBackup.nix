@@ -41,6 +41,8 @@ in
     # TODO check if this takes precedence over postgresqlBackup tmpfiles
     "d '/var/backup/postgresql' 0750 postgres backup - -"
   ];
+  # TODO immich now generates its own backups we could use
+  # /var/lib/immich/backups/
 
   # mv ${encBackupFileLocation} ${backupDir}/ && \
 

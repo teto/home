@@ -18,6 +18,7 @@ let
         include = [ 
           "services/jellyfin.nix"
           "services/buildbot-nix.nix"
+          "services/transmission.nix"
         ];
         exclude = [
           # "teto"
@@ -148,7 +149,10 @@ in
           { ... }:
           {
             # why do i need that already ? for the nix-daemon ?
-            programs.ssh.enable = true;
+            programs.ssh = {
+              enable = true;
+              enableDefaultConfig = true;
+            };
           }
         )
 

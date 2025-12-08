@@ -2,27 +2,29 @@
 {
   # this is the coordinating node
   # launches systemd.services.buildbot-master
+  # clientId = Ov23lifRfN1z1fF5Uw2j for oauth
 
   master = {
-    enable = true;
+    enable = false;
 
     # kkind of a cache ?
     niks3 = {
       enable = false;
       package = pkgs.hello;
     };
-
-
     domain = "buildbot.${secrets.jakku.hostname}";
-  authBackend = "github";
+    workersFile = pkgs.writeText "workers.json" ''
+      [
+      ]'';
+
   github = {
-    appId = 2429409;  # The numeric App ID
+    appId = 2429409;  # The numeric App ID (buildbox-nix-teto = 2429409)
     appSecretKeyFile = "/run/secrets/buildbot-client-secret";  # Path to the downloaded private key
 
     # MUST BE SET FOR github
     # Optional: Enable OAuth for user login
-    oauthId = "<oauth-client-id>";
-    oauthSecretFile = "/path/to/oauth-secret";
+    # oauthId = "<oauth-client-id>";
+    # oauthSecretFile = "/path/to/oauth-secret";
 
     # I thought it was not used ?
     webhookSecretFile = pkgs.writeText "webhookSecret" "00000000000000000000"; # FIXME: replace this with a secret not stored in the nix store
@@ -33,10 +35,6 @@
 
   # just to fix eval
   #         # { "name": "eve", "pass": "XXXXXXXXXXXXXXXXXXXX", "cores": 16 }
-
-    workersFile = pkgs.writeText "workers.json" ''
-      [
-      ]'';
   };
 
   # TODO setup worker

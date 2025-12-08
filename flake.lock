@@ -161,16 +161,15 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1765211207,
-        "narHash": "sha256-dZNl4/wYzkM5zyFV9qTAy9PA6KxclA/Kus9oynCAiis=",
-        "owner": "teto",
+        "lastModified": 1765229650,
+        "narHash": "sha256-i+nRqDnqnkytva/3uVjAIMlkv8fh/BOTpYIq5EunBOQ=",
+        "owner": "nix-community",
         "repo": "buildbot-nix",
-        "rev": "63c01b65bb9338ea2a53ab4b51fc439d1060883f",
+        "rev": "af5a582396fa643e640b77674143cee1ac633f95",
         "type": "github"
       },
       "original": {
-        "owner": "teto",
-        "ref": "teto/hack-niks3-eval-error",
+        "owner": "nix-community",
         "repo": "buildbot-nix",
         "type": "github"
       }

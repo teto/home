@@ -26,8 +26,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     buildbot-nix = {
-      # url = "github:nix-community/buildbot-nix";
-      url = "github:teto/buildbot-nix?ref=teto/hack-niks3-eval-error";
+      url = "github:nix-community/buildbot-nix";
+      # url = "github:teto/buildbot-nix?ref=teto/hack-niks3-eval-error";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     disko = {

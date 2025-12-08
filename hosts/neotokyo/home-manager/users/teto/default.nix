@@ -26,6 +26,7 @@ in
   '';
 
   imports = [
+    flakeSelf.homeProfiles.bash
     flakeSelf.homeModules.yazi
   ];
 

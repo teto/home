@@ -48,7 +48,7 @@
     };
   } 
   // 
-    # lib.optionalAttrs config.services.buildbot-master.enable 
+    lib.optionalAttrs config.services.buildbot-master.enable 
     {
     "buildbot-client-secret" = {
       mode = "440";
