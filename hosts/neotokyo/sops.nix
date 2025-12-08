@@ -6,6 +6,7 @@
 {
   imports = [
   ];
+
   # This will add secrets.yml to the nix store
   # You can avoid this by adding a string to the full path instead, i.e.
   # todo use homeDir of users.teto ?
@@ -24,7 +25,8 @@
   # DARWIN_USER_TEMP_DIR) on darwin.
   # path = "%r/test.txt";
 
-  sops.secrets = lib.mkIf config.services.postgresqlBackup.enable {
+  sops.secrets =
+      lib.optionalAttrs config.services.postgresqlBackup.enable {
     "restic/backblaze_backup_immich_credentials" = {
       mode = "440";
       # path = "%r/github_token";
@@ -44,6 +46,16 @@
       owner = config.users.users.teto.name;
       group = config.users.users.teto.group;
     };
-  };
+  } 
+  // 
+    # lib.optionalAttrs config.services.buildbot-master.enable 
+    {
+    "buildbot-client-secret" = {
+      mode = "440";
+      owner = config.users.users.buildbot.name;
+      group = config.users.users.teto.group;
+    };
+    }
+  ;
 
 }

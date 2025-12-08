@@ -161,15 +161,16 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1763946641,
-        "narHash": "sha256-kPP7k2b+Dkd91yJO01y3l1F0t+Mqvv8+FrPfjcCwszg=",
-        "owner": "nix-community",
+        "lastModified": 1765211207,
+        "narHash": "sha256-dZNl4/wYzkM5zyFV9qTAy9PA6KxclA/Kus9oynCAiis=",
+        "owner": "teto",
         "repo": "buildbot-nix",
-        "rev": "cd32d1c420320383bfcc80c1b0b402b6a7eccc23",
+        "rev": "63c01b65bb9338ea2a53ab4b51fc439d1060883f",
         "type": "github"
       },
       "original": {
-        "owner": "nix-community",
+        "owner": "teto",
+        "ref": "teto/hack-niks3-eval-error",
         "repo": "buildbot-nix",
         "type": "github"
       }
@@ -5060,16 +5061,15 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1765117358,
-        "narHash": "sha256-1lj2VxPb1yJBpF+KYja1sRc553TF+8JQQ3QkfR2yYAk=",
-        "owner": "teto",
+        "lastModified": 1765182259,
+        "narHash": "sha256-sHonZ+LFsc/NbaZsbqAfC0YwwRDhSG7MK6U3G+aV7Rc=",
+        "owner": "sxyazi",
         "repo": "yazi",
-        "rev": "08682dea04d005bfee18aa2c1d31f817e8bbfd05",
+        "rev": "396f634bb85d20b31971f4fb77fd938101bce494",
         "type": "github"
       },
       "original": {
-        "owner": "teto",
-        "ref": "teto/add-manpage",
+        "owner": "sxyazi",
         "repo": "yazi",
         "type": "github"
       }

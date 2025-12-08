@@ -26,7 +26,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     buildbot-nix = {
-      url = "github:nix-community/buildbot-nix";
+      # url = "github:nix-community/buildbot-nix";
+      url = "github:teto/buildbot-nix?ref=teto/hack-niks3-eval-error";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     disko = {
@@ -238,11 +239,6 @@
 
     nur.url = "github:nix-community/NUR";
 
-    # ouch-yazi-plugin = {
-    #   url = "github:ndtoan96/ouch.yazi";
-    #   flake = false;
-    # };
-
     # https://git.sr.ht/~whynothugo/pimsync
     pimsync-src = {
       # "sourcehut:"
@@ -263,12 +259,6 @@
       # url = "/home/teto/neovim/jap.nvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # # TODO use from nixpkgs
-    # rsync-yazi-plugin = {
-    #   url = "github:GianniBYoung/rsync.yazi";
-    #   flake = false;
-    # };
 
     rest-nvim = {
       url = "github:teto/rest.nvim?ref=matt/nix-expo";
@@ -318,8 +308,8 @@
       # inputs.nixpkgs.follows = "nixpkgs";
     };
     yazi = {
-      # url = "github:sxyazi/yazi";
-      url = "github:teto/yazi?ref=teto/add-manpage";
+      url = "github:sxyazi/yazi";
+      # url = "github:teto/yazi?ref=teto/add-manpage";
       # url = "github:sxyazi/yazi?rev=00e8adc3decc370a7e14caaeae3676361549fceb";
       inputs.nixpkgs.follows = "nixpkgs";
     };

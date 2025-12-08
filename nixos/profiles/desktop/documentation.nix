@@ -4,6 +4,9 @@
     enable = true;
     # adds home-manager and my own option as well to man configuration.nix
     includeAllModules = true;
+
+    # had to set it to false because of buildbot-nix
+    options.warningsAreErrors = false;
   };
 
   # on master it is disabled

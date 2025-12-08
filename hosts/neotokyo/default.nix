@@ -7,6 +7,36 @@
   lib,
   ...
 }:
+let 
+    haumea = flakeSelf.inputs.haumea;
+
+  autoloadedProfiles =
+    { pkgs, ... }@args:
+    haumea.lib.load {
+      src = flakeSelf.inputs.nix-filter {
+        root = ./.;
+        include = [ 
+          "services/jellyfin.nix"
+          "services/buildbot-nix.nix"
+        ];
+        exclude = [
+          # "teto"
+          # "users"
+          # "home-manager" # exclude home-manager because intputs are not the same: it must be imported differently
+          # "root"
+        ];
+      };
+
+      inputs = args // {
+        # inputs = flakeSelf.inputs;
+      };
+      transformer = [
+        haumea.lib.transformers.liftDefault
+        (haumea.lib.transformers.hoistLists "_imports" "imports")
+      ];
+    };
+
+in
 {
   networking = {
     hostName = "neotokyo";
@@ -37,6 +67,7 @@
     # ./gandi.nix
     ./ovh.nix
 
+    autoloadedProfiles
     ./disko-config.nix
 
     ../../nixos/profiles/systemd-on-failure-service.nix
@@ -61,13 +92,18 @@
     ./services/nginx.nix
     ./services/immich.nix
 
+    # ./services/jellyfin.nix
+
     # testing
-    ./services/linkwarden.nix
+    # ./services/vaultwarden.nix
+    # ./services/linkwarden.nix
     ./services/hedgedoc.nix
 
     # ../../nixos/modules/hercules-ci-agents.nix
 
     flakeSelf.nixosModules.server
+    flakeSelf.inputs.buildbot-nix.nixosModules.buildbot-master
+    flakeSelf.inputs.buildbot-nix.nixosModules.buildbot-worker
   ];
 
   # virtualisation.docker.enable = true;

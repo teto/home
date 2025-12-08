@@ -8,7 +8,7 @@
 
 let
   cfg = config.services.llama-cpp;
-  utils = import ../../lib/utils.nix { inherit lib config pkgs; };
+  # utils = import ../../lib/utils.nix { inherit lib config pkgs; };
 
 in
 {
@@ -65,9 +65,11 @@ in
   config = lib.mkIf cfg.enable {
 
     systemd.user.services.llama-cpp = {
-      description = "LLaMA C++ server";
-      after = [ "network.target" ];
-      wantedBy = [ "multi-user.target" ];
+      Unit = {
+        Description = "LLaMA C++ server";
+        WantedBy = [ "multi-user.target" ];
+        # After = [ "network.target" ];
+      };
 
       Service = {
         Type = "idle";
