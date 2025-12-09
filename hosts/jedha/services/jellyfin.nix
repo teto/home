@@ -1,6 +1,6 @@
 {
   # test with streamlink to mpv ?
-  enable = true;
+  enable = false;
   # dataDir ?
   # group ?
   openFirewall = true;

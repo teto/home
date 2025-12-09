@@ -4,6 +4,9 @@
 # [revsets]
 # # By default, show the current stack of work.
 # log = 'stack(@)'
+[remotes]
+# jj config set --user remotes.origin.auto-track-bookmarks 'glob:*'
+gh.auto-track-bookmarks = 'glob:*'
 
 [aliases]
 # `jj l` shows commits on the working-copy commit's (anonymous) bookmark
@@ -205,7 +208,7 @@ commit_id = "green"
 # avoided the '/' because it creates issues with gitlab slugifying for components
 # fetch = ["up", "origin"] # ["upstream", "origin"]
 # push = "gh"
-auto-local-bookmark = true
+# auto-local-bookmark = true
 
 [snapshot]
 max-new-file-size = "10MiB"

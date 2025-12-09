@@ -6,6 +6,9 @@
   user = "transmission";
   group = "media"; # not secure enough but let's try ?
 
+  openFirewall = true;
+  openPeerPorts = true;
+
   # services.transmission.home
   #     The directory where Transmission will create ‘.config/transmission-daemon’. as well as ‘Downloads/’ unless services.transmission.settings.download-dir[1] is changed, and
   #     ‘.incomplete/’ unless services.transmission.settings.incomplete-dir[2] is changed.

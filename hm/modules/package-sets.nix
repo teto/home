@@ -377,6 +377,8 @@ in
           diff-so-fancy
           jq
 
+          pwgen
+
           # editorconfig-core-c
           # for fuser, useful when can't umount a directory
           # https://unix.stackexchange.com/questions/107885/busy-device-on-umount

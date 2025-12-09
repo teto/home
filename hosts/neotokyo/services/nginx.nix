@@ -126,7 +126,12 @@ in
         #   echo hello world > "$out/index.html"
         # '';
         };
-      }
-    ;
+      } 
+    // lib.optionalAttrs config.services.buildbot-nix.master.enable {
+      "${config.services.buildbot-nix.master.domain}" = {
+          enableACME = true;
+          forceSSL = true;
+      };
+    };
   };
 }

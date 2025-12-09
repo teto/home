@@ -1,11 +1,13 @@
 { secrets, pkgs, ...}:
+let 
+  bbSecrets = secrets.jakku.buildbot;
+in
 {
   # this is the coordinating node
   # launches systemd.services.buildbot-master
-  # clientId = Ov23lifRfN1z1fF5Uw2j for oauth
 
   master = {
-    enable = false;
+    enable = true;
 
     # kkind of a cache ?
     niks3 = {
@@ -13,25 +15,29 @@
       package = pkgs.hello;
     };
     domain = "buildbot.${secrets.jakku.hostname}";
+
+    useHTTPS = true;
+
+    # we reduce the number of cores to not overwhelm the server
     workersFile = pkgs.writeText "workers.json" ''
       [
+        { "name": "neotokyo", "pass": "${bbSecrets.workerSecret}", "cores": 1 }
+
       ]'';
 
   github = {
-    # https://github.com/login/oauth/authorize?client_id=2429409
-    appId = 2429409;  # The numeric App ID (buildbox-nix-teto = 2429409)
+    appId = bbSecrets.appId;  # The numeric App ID 
     appSecretKeyFile = "/run/secrets/buildbot-client-secret";  # Path to the downloaded private key
 
     # MUST BE SET FOR github
-    # Optional: Enable OAuth for user login
-    # oauthId = "<oauth-client-id>";
-    # oauthSecretFile = "/path/to/oauth-secret";
+    oauthId = bbSecrets.oauthClientId;
+    oauthSecretFile = pkgs.writeText "placeholder-secret" bbSecrets.oauthSecret;
 
     # I thought it was not used ?
-    webhookSecretFile = pkgs.writeText "webhookSecret" "00000000000000000000"; # FIXME: replace this with a secret not stored in the nix store
+    webhookSecretFile = pkgs.writeText "webhookSecret" bbSecrets.workerSecret;
 
     # Optional: Filter which repositories to build
-    # topic = "buildbot-nix";  # Only build repos with this topic
+    topic = "buildbot";  # Only build repos with this topic
   };
 
   # just to fix eval
@@ -39,4 +45,13 @@
   };
 
   # TODO setup worker
+  worker = {
+    enable = true;
+    name = "neotokyo";
+    workerPasswordFile = pkgs.writeText "worker-password-file" bbSecrets.workerSecret;
+    # The number of workers to start (default: 0 == the number of CPU cores).
+    # If you experience flaky builds under high load, try to reduce this value.
+    # workers = 0;
+  };
+
 }

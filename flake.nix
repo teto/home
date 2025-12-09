@@ -292,8 +292,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # treefmt-nix.url = "github:numtide/treefmt-nix";
-    treefmt-nix.url = "github:teto/treefmt-nix?ref=teto/add-hujsonfmt";
+    transgression-tui = {
+      url = "github:PanAeon/transg-tui";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+      
+
+    treefmt-nix.url = "github:numtide/treefmt-nix";
+    # treefmt-nix.url = "github:teto/treefmt-nix?ref=teto/add-hujsonfmt";
+
 
     # doesnt have a nixpkgs input
     vocage.url = "git+https://git.sr.ht/~teto/vocage?ref=flake";

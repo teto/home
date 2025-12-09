@@ -221,6 +221,8 @@ in
   # security.sudo.wheelNeedsPassword = true;
 
   environment.systemPackages = [
+    # flakeSelf.inputs.transgression-tui.packages.${pkgs.stdenv.hostPlatform.system}.transgression-tui
+    pkgs.tremc
     pkgs.restic # testing against restic
     pkgs.sops 
     # pkgs.rustic # testing against restic
