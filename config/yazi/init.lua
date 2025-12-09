@@ -1,3 +1,8 @@
+local has_sshfs, sshfs = pcall(require, 'sshfs')
+if has_sshfs then
+
+ require("sshfs"):setup()
+end
 -- inspired by https://yazi-rs.github.io/docs/tips/
 Status:children_add(function(self)
     local h = self._current.hovered
