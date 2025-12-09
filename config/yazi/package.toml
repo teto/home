@@ -1,12 +1,17 @@
 [[plugin.deps]]
 use = "stelcodes/bunny"
-rev = "a0b4e18"
-hash = "7acba2bb504c67dd7f2da135b88aae1b"
+rev = "7137a44"
+hash = "58bfa473bcac8574400e573787954512"
 
 [[plugin.deps]]
 use = "dedukun/bookmarks"
 rev = "9ef1254"
 hash = "92fbb5483657fa7976cdf4e0104e18e0"
+
+[[plugin.deps]]
+use = "uhs-robert/sshfs"
+rev = "75a025c"
+hash = "e1cebecfee70daef1f97aa083209340c"
 
 [flavor]
 deps = []

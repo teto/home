@@ -27,7 +27,7 @@
         # "https://nix-community.cachix.org"
       ];
 
-      extra-substituters = [
+      trusted-substituters = [
         "https://haskell-language-server.cachix.org"
       ];
       trusted-public-keys = [

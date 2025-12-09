@@ -18,6 +18,7 @@
       ]'';
 
   github = {
+    # https://github.com/login/oauth/authorize?client_id=2429409
     appId = 2429409;  # The numeric App ID (buildbox-nix-teto = 2429409)
     appSecretKeyFile = "/run/secrets/buildbot-client-secret";  # Path to the downloaded private key
 

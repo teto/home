@@ -118,6 +118,12 @@ in
       # that's where we gonna store our libraries
       createHome = true; 
     };
+    # users.media = {
+    #   # that's where we gonna store our libraries
+    #   # todo create some directories like movies/music with tmpfiles.d ?
+    #   createHome = true; 
+    # };
+
     users.teto = {
       # name = "Matt";
       extraGroups = [
@@ -146,9 +152,27 @@ in
         # ../../perso/keys/id_rsa.pub
       ];
     };
+
+    groups.media = {
+      members = [
+        config.users.users.${config.services.jellyfin.user}.name
+        config.users.users.${config.services.transmission.user}.name
+        config.users.users.teto.name
+      ];
+    };
     groups.backup = { };
     groups.www = { };
   };
+
+  # TODO create folders for transmission/jellyfin in /media or /home/media
+  systemd.tmpfiles.rules = [
+    # "d '${cfg.location}' 0700 postgres - - -"
+
+    # 'backup' group hasread access only
+    # 0740 would be better but for now just make it work
+    # TODO check if this takes precedence over postgresqlBackup tmpfiles
+    # "d '/var/backup/postgresql' 0750 postgres backup - -"
+  ];
 
   home-manager.users = {
     root = {
