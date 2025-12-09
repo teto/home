@@ -16,9 +16,13 @@ let
       src = flakeSelf.inputs.nix-filter {
         root = ./.;
         include = [ 
+          # wrong ? 
+          "users/users/root.nix"
+
           "services/jellyfin.nix"
           "services/buildbot-nix.nix"
           "services/transmission.nix"
+          "services/jellyfin.nix"
         ];
         exclude = [
           # "teto"
@@ -107,16 +111,21 @@ in
     flakeSelf.inputs.buildbot-nix.nixosModules.buildbot-worker
   ];
 
-  # virtualisation.docker.enable = true;
-
   users = {
 
+    # that's where we 
+    users.jellyfin = {
+      # that's where we gonna store our libraries
+      createHome = true; 
+    };
     users.teto = {
       # name = "Matt";
       extraGroups = [
         "nextcloud" # to be able to list files
         "backup" # to read
         "www" # to be able to write into the nginx read folder /var/www
+
+        "jellyfin"
       ];
     };
     users.postgres = {

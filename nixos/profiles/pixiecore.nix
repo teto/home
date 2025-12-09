@@ -105,7 +105,7 @@ let
 in
 {
   services.pixiecore = {
-    enable = true;
+    # enable = false; # enable it per host
     debug = true;
 
     # extraArguments = ;

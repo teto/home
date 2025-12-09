@@ -4,7 +4,7 @@
   enable = true;
 
   # credentialsFile = 
-  # downloadDirPermissions =
+  # downloadDirPermissions = "750";
   # home = "/var/lib/transmission";
   # openPeerPorts
   # openRPCPort

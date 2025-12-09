@@ -5,6 +5,8 @@
   ...
 }:
 {
+
   programs.ssh.enableDefaultConfig = false;
 
 }
+
