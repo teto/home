@@ -23,6 +23,8 @@ in
       model = lib.mkOption {
         type = lib.types.path;
         example = "/models/mistral-instruct-7b/ggml-model-q4_0.gguf";
+        # default = "";
+        # default = "/home/teto/llama-models/mistral-7b-openorca.Q6_K.gguf";
         description = "Model path.";
       };
 
@@ -67,9 +69,14 @@ in
     systemd.user.services.llama-cpp = {
       Unit = {
         Description = "LLaMA C++ server";
-        WantedBy = [ "multi-user.target" ];
-        # After = [ "network.target" ];
+        After = [ "network.target" ];
+        # After = [ "graphical-session.target" ];
+        # PartOf = [ "graphical-session.target" ];
+
       };
+      # Install = {
+      #   WantedBy = [ "multi-user.target" ];
+      # };
 
       Service = {
         Type = "idle";
@@ -82,42 +89,41 @@ in
         RestartSec = 300;
 
         # for GPU acceleration
-        PrivateDevices = false;
-
-        # hardening
-        DynamicUser = true;
-        CapabilityBoundingSet = "";
-        RestrictAddressFamilies = [
-          "AF_INET"
-          "AF_INET6"
-          "AF_UNIX"
-        ];
-        NoNewPrivileges = true;
-        PrivateMounts = true;
-        PrivateTmp = true;
-        PrivateUsers = true;
-        ProtectClock = true;
-        ProtectControlGroups = true;
-        ProtectHome = true;
-        ProtectKernelLogs = true;
-        ProtectKernelModules = true;
-        ProtectKernelTunables = true;
-        ProtectSystem = "strict";
-        MemoryDenyWriteExecute = true;
-        LockPersonality = true;
-        RemoveIPC = true;
-        RestrictNamespaces = true;
-        RestrictRealtime = true;
-        RestrictSUIDSGID = true;
-        SystemCallArchitectures = "native";
-        SystemCallFilter = [
-          "@system-service"
-          "~@privileged"
-        ];
-        SystemCallErrorNumber = "EPERM";
-        ProtectProc = "invisible";
-        ProtectHostname = true;
-        ProcSubset = "pid";
+        # PrivateDevices = false;
+        #
+        # # hardening
+        # CapabilityBoundingSet = "";
+        # RestrictAddressFamilies = [
+        #   "AF_INET"
+        #   "AF_INET6"
+        #   "AF_UNIX"
+        # ];
+        # NoNewPrivileges = true;
+        # PrivateMounts = true;
+        # PrivateTmp = true;
+        # PrivateUsers = true;
+        # ProtectClock = true;
+        # ProtectControlGroups = true;
+        # ProtectHome = true;
+        # ProtectKernelLogs = true;
+        # ProtectKernelModules = true;
+        # ProtectKernelTunables = true;
+        # ProtectSystem = "strict";
+        # MemoryDenyWriteExecute = true;
+        # LockPersonality = true;
+        # RemoveIPC = true;
+        # RestrictNamespaces = true;
+        # RestrictRealtime = true;
+        # RestrictSUIDSGID = true;
+        # SystemCallArchitectures = "native";
+        # SystemCallFilter = [
+        #   "@system-service"
+        #   "~@privileged"
+        # ];
+        # SystemCallErrorNumber = "EPERM";
+        # ProtectProc = "invisible";
+        # ProtectHostname = true;
+        # ProcSubset = "pid";
       };
     };
 
