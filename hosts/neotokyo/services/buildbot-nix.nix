@@ -22,8 +22,9 @@ in
     workersFile = pkgs.writeText "workers.json" ''
       [
         { "name": "neotokyo", "pass": "${bbSecrets.workerSecret}", "cores": 1 }
-
       ]'';
+
+      admins = ["teto"];
 
   github = {
     appId = bbSecrets.appId;  # The numeric App ID 
@@ -48,6 +49,8 @@ in
   worker = {
     enable = true;
     name = "neotokyo";
+    # number of workers. 0 for a per node
+    workers = 1;
     workerPasswordFile = pkgs.writeText "worker-password-file" bbSecrets.workerSecret;
     # The number of workers to start (default: 0 == the number of CPU cores).
     # If you experience flaky builds under high load, try to reduce this value.
