@@ -10,6 +10,3 @@
 [submodule "buku_run"]
 	path = buku_run
 	url = https://github.com/carnager/buku_run.git
-[submodule "rofi-themes"]
-	path = rofi-themes
-	url = https://github.com/davatorium/rofi-themes
