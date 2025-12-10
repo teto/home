@@ -52,6 +52,14 @@ in
 
   backblaze-b2-tetos = final.backblaze-b2.override { execName = "b2"; };
 
+  # replaced by native yazi ?
+  # rsync-yazi = myPkgs.yaziPlugins.mkYaziPlugin {
+  #   pname = "rsync.yazi";
+  #   version = "g${self.inputs.rsync-yazi-plugin.shortRev}";
+  #   src = self.inputs.rsync-yazi-plugin;
+  # };
+
+
   firefox-addons = import ./firefox/generated.nix {
     inherit (final.pkgs.tetosLib.firefox)       buildFirefoxXpiAddon;
     inherit (final)

@@ -30,11 +30,12 @@ let
     # pkgs.vimPlugins.nvim-treesitter-parsers.norg-meta
 
     # these dont exist yet
-    (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-norg)
-    (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-norg-meta)
+    # (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-norg)
+    # (grammarToPlugin pkgs.tree-sitter-grammars.tree-sitter-norg-meta)
   ];
 
   luaPlugins = with pkgs.vimPlugins; [
+    pkgs.vimPlugins.neorg
     # pkgs.vimPlugins.vim-nixhash # :NixHash
     # TODO check that it brings xxd in scope
     # pkgs.vimPlugins.hex-nvim
@@ -117,7 +118,7 @@ in
   programs.neovim = {
 
     plugins =
-      luaPlugins
+        luaPlugins
       ++ filetypePlugins
       ++ treesitterPlugins
       # ++ telescopePlugins
