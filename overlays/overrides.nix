@@ -132,9 +132,19 @@ in
     cargoBuildFlags = "--no-default-features";
   });
 
-  flameshotGrim = final.flameshot.override ({
-    enableWlrSupport = true;
-  });
+          # this exists in ml-tests, let's upstream some of the changes first
+          # jupyter4ihaskell = myPkgs.jupyter-teto;
+          # jupyter-teto = python3.withPackages(ps: [
+          #  ps.notebook
+          #  ps.jupyter-client
+          # ]);
+
+
+
+  # flameshotGrim = final.flameshot.override ({
+  #   enableWlrSupport = true;
+  # });
+
   # overrideAttrs (oldAttrs: {
   #   src = prev.fetchFromGitHub {
   #     owner = "flameshot-org";

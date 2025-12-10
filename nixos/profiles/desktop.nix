@@ -11,7 +11,7 @@ let
     { pkgs, ... }@args:
     flakeSelf.inputs.haumea.lib.load {
       src = flakeSelf.inputs.nix-filter {
-        root = ./desktop;
+        root = "${flakeSelf}/nixos/profiles/desktop";
       };
 
       inputs = args // {

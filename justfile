@@ -315,3 +315,6 @@ bitwarden-sync-to-password-store:
   # bw login
   bw export
   pass-perso import pass bitwarden  <FILE>
+ 
+refresh-ssh-public-keys:
+  ssh-keyscan -q -p4231 -ted25519 neotokyo.fr | cut -d' ' -f2,3 > host_key.pub

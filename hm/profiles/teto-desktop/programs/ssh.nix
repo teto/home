@@ -5,39 +5,15 @@
   withSecrets,
   flakeSelf,
   secretsFolder,
+  pkgs,
   ...
 }:
 let
 
-  #
+  tetosLib = pkgs.tetosLib;
+
   hostsConfigs =
-    let
-      # mcfg of type "nixosConfiguration"
-      genSshConfig =
-        name: value:
-        let
-          mcfg = value;
-          sshCfg = mcfg.config.services.openssh;
-        in
-        builtins.trace "SSH config for ${name}" (
-          lib.optionalAttrs sshCfg.enable
-            # lib.warn if "teto" is not in users.users
-            (
-              {
-                match = "host ${mcfg.config.networking.hostName}";
-                # assumption ? or check/warn it has it ?
-                user = "teto";
-                identityFile = "${secretsFolder}/ssh/id_rsa";
-                identitiesOnly = true;
-                extraOptions = {
-                  AddKeysToAgent = "yes";
-                  HostName = "${mcfg.config.networking.domain}";
-                };
-              }
-            )
-        );
-    in
-    lib.mapAttrs genSshConfig flakeSelf.nixosConfigurations;
+    lib.mapAttrs tetosLib.genSshClientConfig flakeSelf.nixosConfigurations;
 in
 {
 
@@ -81,6 +57,7 @@ in
         };
       };
 
+      # this should be generated already ?
       neotokyo-teto = {
         match = "user teto host ${secrets.jakku.hostname}";
         hostname = secrets.jakku.hostname;
@@ -91,9 +68,11 @@ in
         port = secrets.jakku.sshPort;
         identityFile = "${secretsFolder}/ssh/id_rsa";
         identitiesOnly = true;
+        # identityAgent =
         serverAliveCountMax = 3;
-        # sendEnv
+        sendEnv = [ "GITHUB_TOKEN" ];
         extraOptions = {
+            # KnownHostsCommand is in addition to those listed in UserKnownHostsFile and GlobalKnownHostsFile
 
         };
       };
@@ -145,6 +124,11 @@ in
     # so we hardcoded it
     "/home/teto/.config/ssh/config"
   ];
+
+  # GlobalKnownHostfiles Specifies one or more files to use for the global host key database, separated by whitespace. The default is /etc/ssh/ssh_known_hosts, /etc/ssh/ssh_known_hosts2.
+  extraOptionOverrides = {
+
+  };
 
   # TODO parts of this should be accessible from
   # extraConfig = ''

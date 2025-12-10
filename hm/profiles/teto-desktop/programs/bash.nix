@@ -12,7 +12,8 @@ let
     pkgs.tetosLib.nixosConfToBuilderAttr {
       sshKey = "${secretsFolder}/ssh/id_rsa";
       # I might need to set it ?
-      publicHostKey = null;
+      # can
+      publicHostKey = builtins.readFile ../../../../hosts/neotokyo/host_key.pub;
     } flakeSelf.nixosConfigurations.neotokyo
   );
 

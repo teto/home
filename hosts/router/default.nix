@@ -302,6 +302,8 @@ in
     useNetworkd = true;
     useDHCP = false;
     hostName = "router";
+    domain = "router.local";
+
     # networking.dhcpcd.enable = true;
     usePredictableInterfaceNames = true;
     # networking.firewall.interfaces.enp1s0.allowedTCPPorts = [ 4949 ];

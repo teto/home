@@ -30,6 +30,35 @@ in
     nixosConfToBuilderAttr
     ;
 
+
+    # generate a client ssh config from the server config
+    genSshClientConfig =
+        name: value:
+        let
+          mcfg = value;
+          sshCfg = mcfg.config.services.openssh;
+        in
+        builtins.trace "SSH config for ${name}" (
+          lib.optionalAttrs sshCfg.enable
+            # lib.warn if "teto" is not in users.users
+            (
+              {
+                match = "host ${mcfg.config.networking.hostName}";
+                # assumption ? or check/warn it has it ?
+                user = "teto";
+                identityFile = "${secretsFolder}/ssh/id_rsa";
+                identitiesOnly = true;
+                extraOptions = {
+                  AddKeysToAgent = "yes";
+                  HostName = lib.throwIf (mcfg.config.networking.domain == null) 
+                      "Missing domaing for ${name}" 
+                  mcfg.config.networking.domain ;
+                };
+              }
+            )
+        );
+
+
   # TODO pass icon
   muteAudio = pkgs.writeShellScript "mute-volume" ''
 

@@ -1,12 +1,27 @@
 
+# help:
+#  echo <<EOF
+#     Welcome to neotokyo, dear master.
+#
+#     A few tips:
+#     - `journalctl -b0 -r` to see what's up lately
+#     - sudo systemctl start redis-nextcloud.service
+#     - sudo systemctl status phppfm.service
+#     - sudo systemctl start nextcloud-add-user to create the teto user
+#     - everything is in /var/lib/nextcloud
+#     - to check the backups: systemctl status restic-backups-immich-db-to-backblaze.service
+#   EOF
+
 # might as well be 
 immich-stop:
   systemctl stop immich-server.service
 
+
 # restore-immich
 # https://docs.immich.app/administration/backup-and-restore/
-gunzip --stdout "immich.sql.gz" \
-| sed "s/SELECT pg_catalog.set_config('search_path', '', false);/SELECT pg_catalog.set_config('search_path', 'public, pg_catalog', true);/g" \
-| sudo -u immich psql --dbname=immich
-# might have to delete the table if it already existed: DROP DATABASE immich;
-# CREATE DATABASE immich OWNER immich;
+immich-restore backup:
+  gunzip --stdout {{backup}}\
+  | sed "s/SELECT pg_catalog.set_config('search_path', '', false);/SELECT pg_catalog.set_config('search_path', 'public, pg_catalog', true);/g" \
+  | sudo -u immich psql --dbname=immich
+  # might have to delete the table if it already existed: DROP DATABASE immich;
+  # CREATE DATABASE immich OWNER immich;

@@ -282,11 +282,6 @@
       url = "gitlab:lanastara_foss/starship-jj";
     };
 
-    # nix-direnv = {
-    #   url = "github:nix-community/nix-direnv";
-    #   flake = false;
-    # };
-
     stylix = {
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -307,7 +302,7 @@
 
     # AModules/fix-expand-fill-no-center
     # https://github.com/Alexays/Waybar/pull/3881
-    waybar.url = "github:Alexays/Waybar?ref=pull/3881/head";
+    # waybar.url = "github:Alexays/Waybar?ref=pull/3881/head";
 
     # doesn't work, hypridle seems better fitted ?
     wayland-pipewire-idle-inhibit = {
@@ -316,8 +311,6 @@
     };
     yazi = {
       url = "github:sxyazi/yazi";
-      # url = "github:teto/yazi?ref=teto/add-manpage";
-      # url = "github:sxyazi/yazi?rev=00e8adc3decc370a7e14caaeae3676361549fceb";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -730,13 +723,6 @@
 
           nvim-unwrapped = myPkgs.neovim-unwrapped;
 
-          # TODO this exists in ml-tests, let's upstream some of the changes first
-          # jupyter4ihaskell = myPkgs.jupyter-teto;
-          # jupyter-teto = python3.withPackages(ps: [
-          #  ps.notebook
-          #  ps.jupyter-client
-          # ]);
-
           inherit (unstablePkgs)
             nhs96
             nhs98
@@ -750,6 +736,7 @@
       # // other-schemas.schemas
       ;
 
+      # TODO import from hosts/ via importDir
       nixosConfigurations = rec {
         # TODO generate those from the hosts folder ?
         # with aliases ?

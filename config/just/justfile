@@ -5,9 +5,14 @@ NIXPKGS := "/home/teto/nixpkgs"
 LLAMA_MODELS_DIR := env('HOME') / 'llama-models'
 # LLM_LOCAL_PORT := env('LLM_LOCAL_PORT', 11111)
 
+
 # select a target
 default:
     just --choose
+
+
+neotokyo-help:
+  just -f hosts/neotokyo/home-manager/users/teto/justfile
 
 # Start mistral server
 llama: 
