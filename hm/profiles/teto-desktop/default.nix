@@ -30,12 +30,6 @@ in
     flakeSelf.homeModules.package-sets
   ];
 
-  # todo create some files per default
-  # systemd.tmpfiles.rules = [
-
-  # doing so enables support for it in greetd
-  # services.gnome.gnome-keyring.enable = true;
-
   # TODO restore this
   # # generate an addressbook that can be used later
   # home.file."bin-nix/generate-addressbook".text = ''

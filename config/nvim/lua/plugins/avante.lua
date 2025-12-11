@@ -9,13 +9,13 @@
 -- })
 -- require('avante_lib').load()
 
--- local llama_hostname = "jedha.local"
-local llama_hostname = "localhost"
+local llama_hostname = "jedha.local"
+-- local llama_hostname = "localhost"
 
 -- TODO load configuration from llm-providers.json
 -- lua vim.json.decode(str, opts)
 require('avante').setup({
-    debug = false, -- print error messages
+    debug = true, -- print error messages
     behaviour = {
         auto_set_keymaps = false,
         enable_token_counting = false,
@@ -103,14 +103,33 @@ require('avante').setup({
     -- openai_api_key = os.getenv("OPENAI_API_KEY")
 
     windows = {
-        ask = {
-            floating = false, -- Open the 'AvanteAsk' prompt in a floating window
-            start_insert = true, -- Start insert mode when opening the ask window
-            border = 'rounded',
-            ---@type "ours" | "theirs"
-            focus_on_apply = 'ours', -- which diff to focus after applying
-        },
+    position = "right",
+    fillchars = "eob: ",
+	-- TODO remove
+    sidebar_header = {
+      enabled = false, -- true, false to enable/disable the header
+      align = "center", -- left, center, right for title
+      rounded = true,
     },
+	spinner = {
+      generating = { "·", "✢", "✳", "∗", "✻", "✽" },
+      thinking = { "🤯", "🙄" },
+
+	},
+    input = {
+      prefix = "> ",
+      height = 8, -- Height of the input window in vertical layout
+    }
+    },
+
+	 ask = {
+
+		 floating = false, -- Open the 'AvanteAsk' prompt in a floating window
+		 start_insert = true, -- Start insert mode when opening the ask window
+		 border = 'rounded',
+		 ---@type "ours" | "theirs"
+		 focus_on_apply = 'ours', -- which diff to focus after applying
+	 },
     custom_tools = {
         {
             name = 'run_model_manager_tests', -- Unique name for the tool
@@ -193,6 +212,11 @@ require('avante').setup({
             details = 'Nothing more',
         },
     },
+
+	prompt_logger = {
+	  enabled = true, -- toggle logging entirely
+	  log_dir = vim.fn.stdpath("cache"), -- directory where logs are saved
+	},
 })
 
 -- vim.api.nvim_create_user_command('', '!hasktags .', { desc = 'Regenerate tags' })

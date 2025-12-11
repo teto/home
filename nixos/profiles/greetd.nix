@@ -8,7 +8,8 @@
 
   # https://man.sr.ht/~kennylevinsen/greetd/
   services.greetd = {
-    enable = true;
+    # let host enable it
+    # enable = false;
 
     # avoid systemd boot messages interrupt TUI.
     useTextGreeter = true;
