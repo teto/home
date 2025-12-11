@@ -23,8 +23,8 @@ set dotenv-load := true
 switch-remote: (nixos-rebuild "switch")
 
 # deploy a brand new nixos install
-bootstrap-desktop target="bootstrap.local":
-    nixos-anywhere --target-host root@{{ target }} --flake '.#laptop' \
+bootstrap-desktop target="root@bootstrap.local":
+    nixos-anywhere --target-host {{ target }} --flake '.#laptop' \
     --disk-encryption-keys /tmp/disk-1.key /tmp/disk-1.key
 
 # use --extra-files
@@ -318,3 +318,7 @@ bitwarden-sync-to-password-store:
  
 refresh-ssh-public-keys:
   ssh-keyscan -q -p4231 -ted25519 neotokyo.fr | cut -d' ' -f2,3 > host_key.pub
+
+# list firewall rules
+firewall-list:
+  sudo iptables -n -L

@@ -263,10 +263,6 @@ rev = "3ba0c02c378503739f1fdb95cff3ea2aad48db3e"
 git = "max397574/colortils.nvim"
 rev = "v1.2.0"
 
-# [plugins."mcphub.nvim"]
-# # :MCPHub
-# dev = true 
-
 [plugins."fzf-lua-frecency.nvim"]
 git = "elanmed/fzf-lua-frecency.nvim"
 rev = "a0c0f78e5db49580aa4aabc6dda1813bb9c789ee"

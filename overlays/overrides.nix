@@ -39,7 +39,6 @@ in
 });
 
   pass-import-high-password-length = final.passExtensions.pass-import.overrideAttrs({
-    # src = /home/teto/pass-import;
 
     src = final.fetchFromGitHub {
         owner = "teto";
@@ -140,10 +139,6 @@ in
           # ]);
 
 
-
-  # flameshotGrim = final.flameshot.override ({
-  #   enableWlrSupport = true;
-  # });
 
   # overrideAttrs (oldAttrs: {
   #   src = prev.fetchFromGitHub {

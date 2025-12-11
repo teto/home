@@ -52,12 +52,14 @@
       ];
     };
     Unit = {
+
       PartOf = [ "tray.target" ];
       # waybar might be slow to start but because of portals instead
       # StartLimitIntervalSec = 100;
       #
       # StartLimitIntervalUSec=10s;
-
+      StartLimitIntervalSec=60;
+      StartLimitBurst=10;
     };
     Install.WantedBy = [ "tray.target" ];
 

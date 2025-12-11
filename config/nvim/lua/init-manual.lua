@@ -933,7 +933,6 @@ vim.api.nvim_set_hl(0, 'GitSignsChangeLn', {
     bg = '#00FF00', -- Green background
 })
 
-vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/mcphub.nvim')
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/hurl.nvim')
 -- useless, I need to tweak the lua path ?
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/lual')

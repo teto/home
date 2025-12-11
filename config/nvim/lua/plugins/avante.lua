@@ -9,7 +9,8 @@
 -- })
 -- require('avante_lib').load()
 
-local llama_hostname = "jedha.local"
+-- local llama_hostname = "jedha.local"
+local llama_hostname = "localhost"
 
 -- TODO load configuration from llm-providers.json
 -- lua vim.json.decode(str, opts)
@@ -52,10 +53,13 @@ require('avante').setup({
 
 		-- see https://github.com/yetone/avante.nvim/issues/2238
 		llamaswap = {
-		  model = "",
+		  __inherited_from = "openai",
+		  -- model = "",
+		  model = "/home/teto/llama-models/mistral-7b-openorca.Q6_K.gguf",
 		  endpoint = 'http://'..llama_hostname..':8080/v1',
 		  timeout = 30000, -- Timeout in milliseconds
-		  __inherited_from = "openai",
+		  -- empty key is required else avante complains
+		  api_key_name = '',
 		},
         ollama = {
             -- model = "qwq:32b",

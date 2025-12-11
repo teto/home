@@ -22,7 +22,7 @@ in
   };
   config = lib.mkIf cfg.enableScrollback {
     programs.kitty.settings = {
-      scrollback_pager = ''nvim -R -c ":set ft=terminal" -c "set concealcursor=n" '';
+      scrollback_pager = ''nvim -R -c "set ft=terminal" -c "set concealcursor=n" '';
     };
   };
 }

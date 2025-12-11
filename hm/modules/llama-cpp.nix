@@ -3,13 +3,20 @@
   config,
   lib,
   pkgs,
+  # utils,
+  pkgsPath,
+  osConfig,
   ...
 }:
 
 let
   cfg = config.services.llama-cpp;
-  # utils = import ../../lib/utils.nix { inherit lib config pkgs; };
 
+  # TODO upstream to HM ?
+  utils = import "${pkgsPath}/nixos/lib/utils.nix" {
+    inherit config lib;
+    pkgs = null;
+  };
 in
 {
 
@@ -82,10 +89,13 @@ in
         Type = "idle";
         KillSignal = "SIGINT";
         # need to restore:
-        # ${lib.utils.escapeSystemdExecArgs cfg.extraFlags}";
+        # 
         # but how to import utils ? see nixos/modules/misc/extra-arguments.nix
-        ExecStart = "${cfg.package}/bin/llama-server --log-disable --host ${cfg.host} --port ${builtins.toString cfg.port} -m ${cfg.model} ";
-        Restart = "on-failure";
+        # --log-disable
+        ExecStart = "${cfg.package}/bin/llama-server --host ${cfg.host} --port ${builtins.toString cfg.port} -m ${cfg.model} ${utils.escapeSystemdExecArgs cfg.extraFlags}";
+        # Restart = "on-failure";
+        Restart = "always"; 
+
         RestartSec = 300;
 
         # for GPU acceleration
@@ -127,12 +137,12 @@ in
       };
     };
 
-    # reference osConfig ?
-    # networking.firewall = lib.mkIf cfg.openFirewall {
+    # refer to osConfig ? wont work
+    # osConfig.config.networking.firewall = lib.mkIf cfg.openFirewall {
     #   allowedTCPPorts = [ cfg.port ];
     # };
 
   };
 
-  meta.maintainers = with lib.maintainers; [ newam ];
+  meta.maintainers = with lib.maintainers; [ teto ];
 }
