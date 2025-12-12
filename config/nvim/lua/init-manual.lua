@@ -868,18 +868,24 @@ vim.pack.add({
 
     'https://github.com/neovim/nvim-lspconfig',
     'https://github.com/teto/vim-listchars',
+	'https://github.com/yutkat/git-rebase-auto-diff.nvim',
 
     -- themes
     'https://github.com/adlawson/vim-sorcerer',
     'https://github.com/Matsuuu/pinkmare',
-
-    -- doesnt work ?
-    -- "https://github.com/otavioschwanck/fzf-lua-enchanted-files",
-    'https://github.com/PotatoesMaster/i3-vim-syntax',
     'https://github.com/rose-pine/neovim',
+	'https://github.com/marko-cerovac/material.nvim',
+	'https://github.com/NLKNguyen/papercolor-theme',
+	'https://github.com/vim-scripts/Solarized',
+
+    -- filetypes
+    'https://github.com/PotatoesMaster/i3-vim-syntax',
+	'https://github.com/overleaf/vim-env-syntax',
 
 	-- fennel testing
-	'https://github.com/aileot/nvim-thyme'
+	-- 'https://github.com/aileot/nvim-thyme'
+	'https://github.com/calvinchengx/vim-aftercolors',
+	'https://github.com/raddari/last-color.nvim',
 })
 
 -- Autoload from everything lsp/ in rtp

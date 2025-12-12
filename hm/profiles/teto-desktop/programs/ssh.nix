@@ -34,6 +34,7 @@ in
   # osConfig.
   matchBlocks =
     hostsConfigs
+    # TODO we could customize them, with sendEnv for instance ?
     // (lib.optionalAttrs withSecrets {
 
       # userKnownHostsFile
@@ -62,10 +63,9 @@ in
         match = "user teto host ${secrets.jakku.hostname}";
         hostname = secrets.jakku.hostname;
         user = "teto";
-
         addKeysToAgent = "yes";
         # le port depend du service
-        port = secrets.jakku.sshPort;
+        # port = secrets.jakku.sshPort;
         identityFile = "${secretsFolder}/ssh/id_rsa";
         identitiesOnly = true;
         # identityAgent =
@@ -88,33 +88,33 @@ in
         # port = 12666;
       };
 
-      router = {
-        # checkHostIP
-        identityFile = "${secretsFolder}/ssh/id_rsa";
-        user = "teto";
-        # host = "router";
-        addKeysToAgent = "yes";
-        hostname = secrets.router.hostname;
-        identitiesOnly = true;
-        # experimental
-        # https://github.com/nix-community/home-manager/pull/2992
-        match = "host router";
-        # port = 12666;
-        # RemoteCommand
-        # SendEnv LANG LC_*
-      };
+      # router = {
+      #   # checkHostIP
+      #   identityFile = "${secretsFolder}/ssh/id_rsa";
+      #   user = "teto";
+      #   # host = "router";
+      #   addKeysToAgent = "yes";
+      #   hostname = secrets.router.hostname;
+      #   identitiesOnly = true;
+      #   # experimental
+      #   # https://github.com/nix-community/home-manager/pull/2992
+      #   match = "host router";
+      #   # port = 12666;
+      #   # RemoteCommand
+      #   # SendEnv LANG LC_*
+      # };
 
-      router-lan = {
-        addKeysToAgent = "yes";
-        # checkHostIP
-        identityFile = "${secretsFolder}/ssh/id_rsa";
-        user = "teto";
-        # host = "router";
-        hostname = "10.0.0.1";
-        identitiesOnly = true;
-        match = "host router-lan";
-        port = 12666;
-      };
+      # router-lan = {
+      #   addKeysToAgent = "yes";
+      #   # checkHostIP
+      #   identityFile = "${secretsFolder}/ssh/id_rsa";
+      #   user = "teto";
+      #   # host = "router";
+      #   hostname = "10.0.0.1";
+      #   identitiesOnly = true;
+      #   match = "host router-lan";
+      #   port = 12666;
+      # };
 
     });
 

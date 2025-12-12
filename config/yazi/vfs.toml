@@ -1,3 +1,11 @@
 # workaround a yazi bug
-[services.neotokyo]
+[services]
+[services."neotokyo.fr"]
 type = "sftp"
+
+
+# [services.my-server]
+# type = "sftp"
+# host = "1.2.3.4"
+# user = "root"
+# port = 22

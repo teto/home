@@ -198,8 +198,9 @@
     };
 
     nix = {
-      # url = "github:NixOS/nix";
-      url = "github:teto/nix?ref=teto/remove-assert-outputsSubstitutionTried";
+      url = "github:NixOS/nix?ref=2.33.0";
+      # url = "github:teto/nix?ref=teto/remove-assert-outputsSubstitutionTried";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-schemas.url = "github:DeterminateSystems/nix-src/flake-schemas";
@@ -331,6 +332,7 @@
       tetosConfig = {
         # should it depend on home.homeDirectory instead ?
         inherit dotfilesPath secretsFolder;
+        # acts as builder ?
         # withSecrets
       };
 
@@ -343,6 +345,9 @@
 
       # sshLib = import ./nixpkgs/lib/ssh.nix { inherit secrets; flakeSelf.inputs = self.inputs; };
       system = "x86_64-linux";
+
+      # Eval the treefmt modules from ./treefmt.nix
+      treefmtEval = treefmt-nix.lib.evalModule myPkgs ./treefmt.nix;
 
       # loads packages in by-name/
       byNamePkgsOverlay = import "${nixpkgs}/pkgs/top-level/by-name-overlay.nix" ./by-name;
@@ -688,9 +693,8 @@
         runScript = "ldd";
       };
 
-      #
-
-      formatter = self.packages.${system}.treefmt-home;
+      formatter = treefmtEval.config.build.wrapper;
+      # formatter = self.packages.${system}.treefmt-home;
 
       packages =
         self.inputs.neovim-nightly-overlay.packages.${system}
@@ -718,17 +722,23 @@
             gpt4all-cuda
             termscp-matt
             # pimsync-dev
-            rsync-yazi
+            # rsync-yazi
             ;
 
           nvim-unwrapped = myPkgs.neovim-unwrapped;
 
           inherit (unstablePkgs)
-            nhs96
+            # nhs96
             nhs98
             ;
 
         };
+
+        checks = {
+          # formatting = treefmtEval.${myPkgs.system}.config.build.check self;
+          # formatting = (treefmt-nix.lib.evalModule myPkgs ./treefmt.nix).config.build.check;
+        };
+
     })
     // ({
       # Tell Nix what schemas to use.
@@ -947,11 +957,6 @@
             flakeSelf = self;
           };
 
-          rsync-yazi = myPkgs.yaziPlugins.mkYaziPlugin {
-            pname = "rsync.yazi";
-            version = "g${self.inputs.rsync-yazi-plugin.shortRev}";
-            src = self.inputs.rsync-yazi-plugin;
-          };
         };
 
         # TODO

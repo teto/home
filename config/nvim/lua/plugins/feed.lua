@@ -1,10 +1,17 @@
 require('feed').setup({
+ -- picker = "fzf-lua",
+ progress = "bar",
     feeds = {
         -- These two styles both work
         -- "https://neovim.io/news.xml",
+        -- {
+        --     'https://www.reddit.com/r/NHKEasyNews.rss',
+        --     name = 'NHK News Web easy (subreddit)',
+        --     tags = { 'japanese' },
+        -- },
         {
-            'https://www.reddit.com/r/NHKEasyNews.rss',
-            name = 'NHK News Web easy (subreddit)',
+            'https://nhkeasier.com/feed/',
+            name = 'NHK News Web easy',
             tags = { 'japanese' },
         },
         {

@@ -1,8 +1,16 @@
 {
   "plugins": {
+    "Solarized": {
+      "rev": "736ad791ed23ef0fe6bb52e82039e1435ca9f30c",
+      "src": "https://github.com/vim-scripts/Solarized"
+    },
     "fzf-lua-enchanted-files": {
       "rev": "8c6b9790e9cec5a8213a384319b53c2b7435cd46",
       "src": "https://github.com/otavioschwanck/fzf-lua-enchanted-files"
+    },
+    "git-rebase-auto-diff.nvim": {
+      "rev": "6fd2f5ba63828e5c4fd59bb1b75ef7525a5ce39f",
+      "src": "https://github.com/yutkat/git-rebase-auto-diff.nvim"
     },
     "i3-vim-syntax": {
       "rev": "affe37e89911c47831cb5b87697ac70e48bb3e0f",
@@ -11,6 +19,10 @@
     "last-color.nvim": {
       "rev": "000e3e50047602f4b9725dd33aff631018592595",
       "src": "https://github.com/raddari/last-color.nvim"
+    },
+    "material.nvim": {
+      "rev": "8a34cb0d05e12a05b64edaf6ca1c3c7bde545628",
+      "src": "https://github.com/marko-cerovac/material.nvim"
     },
     "neovim": {
       "rev": "cf2a288696b03d0934da713d66c6d71557b5c997",
@@ -24,6 +36,10 @@
       "rev": "13b2a55dad7b86ae6c83d51fc640eb00b45c4525",
       "src": "https://github.com/aileot/nvim-thyme"
     },
+    "papercolor-theme": {
+      "rev": "0cfe64ffb24c21a6101b5f994ca342a74c977aef",
+      "src": "https://github.com/NLKNguyen/papercolor-theme"
+    },
     "pinkmare": {
       "rev": "542b98d0788585bd693fd02181aecf87497c41c0",
       "src": "https://github.com/Matsuuu/pinkmare"
@@ -31,6 +47,14 @@
     "rocks.nvim": {
       "rev": "f2a2907365a73325502e1461c670b0f8c78cbbf8",
       "src": "https://github.com/nvim-neorocks/rocks.nvim"
+    },
+    "vim-aftercolors": {
+      "rev": "89b7c45a48a661da88a3a574ef9fa90b936064a4",
+      "src": "https://github.com/calvinchengx/vim-aftercolors"
+    },
+    "vim-env-syntax": {
+      "rev": "2137f77840fe6e5e67dc0422f1759ab1ddc86d60",
+      "src": "https://github.com/overleaf/vim-env-syntax"
     },
     "vim-listchars": {
       "rev": "c9839537f8a6a32726a504cc34113719a7dcd8fc",

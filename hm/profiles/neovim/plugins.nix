@@ -23,6 +23,9 @@ in
 
     # (luaPlugin { plugin = rocks-git-nvim; })
 
+    highlight-undo-nvim
+    lualine-nvim
+
     (luaPlugin { plugin = fzf-lua; })
     (luaPlugin {
       plugin = oil-nvim;
@@ -111,7 +114,6 @@ in
 
     visual-whitespace-nvim # shows spaces/tabs upon visual selection. Lovely
     # ' " syntax file for neomutt
-    # neomutt-vim
     (luaPlugin {
       plugin = vim-sayonara;
       config = ''

@@ -47,6 +47,7 @@ in
                 # assumption ? or check/warn it has it ?
                 user = "teto";
                 identityFile = "${secretsFolder}/ssh/id_rsa";
+                port = builtins.head sshCfg.ports;
                 identitiesOnly = true;
                 extraOptions = {
                   AddKeysToAgent = "yes";
