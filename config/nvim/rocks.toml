@@ -215,6 +215,10 @@ rev = "v1.2.0"
 git = "https://github.com/grddavies/tidal.nvim"
 rev = "fa4673e181e18fd1719ae17a1d4f4ecce2de37aa"
 
+[plugins."codecompanion.nvim"]
+git = "olimorris/codecompanion.nvim"
+rev = "v17.33.0"
+
 # [plugins."jj.nvim"]
 # git = "nicolasgb/jj.nvim"
 # rev = "v0.1.0"
