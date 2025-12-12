@@ -13,10 +13,12 @@ let
       sshKey = "${secretsFolder}/ssh/id_rsa";
       # I might need to set it ?
       # can
+      # it's a base64 version of it
       publicHostKey = builtins.readFile ../../../../hosts/neotokyo/host_key.pub;
     } flakeSelf.nixosConfigurations.neotokyo
   );
 
+  # public host key of the remote machine.  If omitted, SSH uses its regular known_hosts file.
   builder_jedha = mkRemoteBuilderDesc "3.0" (
     pkgs.tetosLib.nixosConfToBuilderAttr {
       sshKey = "${secretsFolder}/ssh/id_rsa";

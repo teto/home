@@ -3,16 +3,14 @@
 # Lynx web browser
 {
   lib,
-  stdenv,
+  python3,
   fetchFromGitLab,
   # , zeal
   # , lynx
   # , python3Packages
   # , sqlite
   # , writePython3
-  xdg,
-  beautifulsoup4,
-  buildPythonApplication,
+  # xdg,
 }:
 let
 
@@ -30,17 +28,18 @@ let
   #   } (builtins.readFile "${src}/zeal-cli")
 
 in
-buildPythonApplication {
+python3.pkgs.buildPythonApplication {
 
   pname = "zeal-cli";
   version = "0.6.1.20230320";
   inherit src;
+  # pyproject = true;
 
   format = "other";
 
   propagatedBuildInputs = [
-    xdg
-    beautifulsoup4
+    python3.pkgs.xdg
+    python3.pkgs.beautifulsoup4
   ];
 
   # sourceRoot = "";

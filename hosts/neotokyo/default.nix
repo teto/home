@@ -114,10 +114,10 @@ in
   users = {
 
     # that's where we 
-    users.jellyfin = {
-      # that's where we gonna store our libraries
-      createHome = true; 
-    };
+    # users.jellyfin = {
+    #   # that's where we gonna store our libraries
+    #   createHome = true; 
+    # };
     # users.media = {
     #   # that's where we gonna store our libraries
     #   # todo create some directories like movies/music with tmpfiles.d ?
@@ -131,7 +131,8 @@ in
         "backup" # to read
         "www" # to be able to write into the nginx read folder /var/www
 
-        "jellyfin"
+        "media"
+        # "jellyfin"
       ];
     };
     users.postgres = {
@@ -155,7 +156,8 @@ in
 
     groups.media = {
       members = [
-        config.users.users.${config.services.jellyfin.user}.name
+        # doesnt have a user ?
+        # config.users.users.${config.services.jellyfin.user}.name
         config.users.users.${config.services.transmission.user}.name
         config.users.users.teto.name
       ];

@@ -106,12 +106,17 @@ in
         pkgs.llama-cpp # for llama-server and benchmarks
         pkgs.llama-swap # allows to switch between models at runtime
         pkgs.claude-code # anthropic agent
+        
         # open-webui # broken
         # sillytavern
         # python3Packages.unsloth # broken
 
         # pkgs.aider-chat # breaks
         pkgs.python3Packages.huggingface-hub
+
+        # a competitor of "safetensors_explorer"
+        pkgs.python3Packages.gguf
+
         # pkgs.python3Packages.vllm
         # pkgs.repomix # to upload a codebase to llm
       ];

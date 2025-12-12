@@ -1,12 +1,14 @@
 {
   stdenv,
-  buildPythonPackage,
+  python3,
   fetchPypi,
 }:
 
-buildPythonPackage rec {
+python3.pkgs.buildPythonPackage rec {
   pname = "doxypypy";
   version = "0.8.8.6";
+
+  pyproject = true;
 
   src = fetchPypi {
     inherit pname version;

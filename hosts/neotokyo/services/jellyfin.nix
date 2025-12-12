@@ -5,6 +5,9 @@
   # group ?
   openFirewall = true;
 
+  user = "media";
+  group = "media";
+
   # TODO use "media" as group, same for transmission
   # group = 
   

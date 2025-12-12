@@ -36,8 +36,8 @@
     # TODO add tmpfiles rules to create these folders
     # allow everyone to reach this folder ?
     watch-dir = "/home/teto/torrents";
-    # add it to jellyfin library or 
-    download-dir = "/home/jellyfin/movies";
-    incomplete-dir = "/home/jellyfin/transmission-downloads-in-progress";
+    # must be absolute path
+    download-dir = "/media";
+    incomplete-dir = "/media/transmission-downloads-in-progress";
   };
 }

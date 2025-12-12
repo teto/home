@@ -1,6 +1,9 @@
 { secrets, pkgs, ...}:
 let 
   bbSecrets = secrets.jakku.buildbot;
+  repoAllowlist = [
+      "teto/home"
+    ];
 in
 {
   # this is the coordinating node
@@ -38,7 +41,9 @@ in
     webhookSecretFile = pkgs.writeText "webhookSecret" bbSecrets.workerSecret;
 
     # Optional: Filter which repositories to build
-    topic = "buildbot";  # Only build repos with this topic
+    # topic = "buildbot";  # Only build repos with this topic
+    topic = null;
+    inherit repoAllowlist;
   };
 
   # just to fix eval

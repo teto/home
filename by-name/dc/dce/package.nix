@@ -6,7 +6,7 @@
   autoreconfHook,
   libtool,
   intltool,
-  pkgconfig,
+  pkg-config,
   ns-3,
   gcc,
   castxml ? null,
@@ -98,7 +98,7 @@ let
     ]
     ++ lib.optionals withExamples [ openssl ];
 
-    nativeBuildInputs = [ pkgconfig ];
+    nativeBuildInputs = [ pkg-config ];
 
     doCheck = true;
 

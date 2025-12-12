@@ -698,7 +698,8 @@
 
       packages =
         self.inputs.neovim-nightly-overlay.packages.${system}
-        // (byNamePkgsOverlay myPkgs { })
+        # strip of 
+        // (builtins.removeAttrs (byNamePkgsOverlay myPkgs { }) [ "_internalCallByNamePackageFile"])
         // (autoloadedPkgsOverlay myPkgs { })
         // {
           /*

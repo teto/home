@@ -2,9 +2,10 @@
 alias pc="process-compose"
 alias n="nix develop"
 alias nb='nix build'
-alias nb1='nix build --option builders "$NOVA_OVH1" -j0'
-alias n1='nix develop --option builders "$NOVA_OVH1" -j0'
-alias n2='nix develop --option builders "$NOVA_CAMPUS1" -j0'
+alias nf='nix flake'
+alias nb1='nix build --option builders "$TETOS_0" -j0'
+alias n1='nix develop --option builders "$TETOS_0" -j0'
+alias n2='nix develop --option builders "$TETOS_1" -j0'
 #
 alias nrc="nix repl --expr 'import <nixpkgs> { config.cudaSupport = true; config.allowUnfree = true; }'"
 # alias n3='nix develop --option builders "$NOVA_CAMPUS2" -j0'
@@ -26,15 +27,15 @@ alias nhs912="nix develop \$HOME/home#nhs912"
 alias yr="yazi ./result"
 
 # TODO should use all runners
-# alias nall='nix develop --option builders "$NOVA_OVH1" -j0'
+# alias nall='nix develop --option builders "$TETOS_0" -j0'
 alias j="just -g"
 alias jg="just -g "
 complete -F _complete_alias jg
 complete -F _complete_alias j
 
 alias nr="nix run "
-alias nr1='nix run --option builders "$NOVA_OVH1" -j0'
-alias nr2='nix run --option builders "$NOVA_CAMPUS1" -j0'
+alias nr1='nix run --option builders "$TETOS_0" -j0'
+alias nr2='nix run --option builders "$TETOS_1" -j0'
 alias nl="nix log "
 alias g="git"
 alias y=yazi
@@ -102,6 +103,8 @@ alias nm="nm -l"
 alias ts="tailscale"
 # }}}
 
+
+# test atuin instead or histdb ?
 export MCFLY_KEY_SCHEME=vim
 
 # defaults to 'RANK'

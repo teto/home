@@ -6,7 +6,8 @@
 
 python3.pkgs.buildPythonApplication rec {
   pname = "papis-zotero";
-  version = "0.1.2";
+  version = "0.2";
+  pyproject = true;
 
   # Missing tests on Pypi
   src = fetchFromGitHub {

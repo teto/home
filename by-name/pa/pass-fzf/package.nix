@@ -1,1 +1,0 @@
-ficoos/pass-fzf
