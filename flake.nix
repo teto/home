@@ -35,11 +35,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     edict-kanji-db = {
-      url = "https://github.com/odrevet/edict_database/releases/download/v0.0.2/kanji.zip";
+      url = "https://github.com/odrevet/edict_database/releases/download/v0.0.5/kanji.zip";
       flake = false;
     };
     edict-expression-db = {
-      url = "https://github.com/odrevet/edict_database/releases/download/v0.0.2/expression.zip";
+      url = "https://github.com/odrevet/edict_database/releases/download/v0.0.5/expression.zip";
       flake = false;
     };
     furigana-url = {
@@ -261,10 +261,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    rest-nvim = {
-      url = "github:teto/rest.nvim?ref=matt/nix-expo";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # rest-nvim = {
+    #   url = "github:teto/rest.nvim?ref=matt/nix-expo";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     # rofi-hoogle.url = "github:teto/rofi-hoogle/fixup";
     rofi-hoogle = {

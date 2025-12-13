@@ -5,7 +5,8 @@
   # group ?
   openFirewall = true;
 
-  user = "media";
+  # 
+  user = "jellyfin";
   group = "media";
 
   # TODO use "media" as group, same for transmission

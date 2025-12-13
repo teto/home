@@ -65,7 +65,7 @@ nix = [
 rules = [
    # these are all defaults:{{{
 	# { name = "*/", use = [ "edit", "open", "reveal" ] },
-	# { mime = "text/*",  use = [ "edit", "reveal" ] },
+	{ mime = "text/*",  use = [ "edit", "reveal" ] },
 	# { mime = "image/*", use = [ "open", "reveal" ] },
 	# { mime = "video/*", use = [ "play", "reveal" ] },
 	# { mime = "audio/*", use = [ "play", "reveal" ] },

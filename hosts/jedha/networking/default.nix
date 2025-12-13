@@ -19,7 +19,7 @@
       config.home-manager.users.teto.services.ollama.port 
     ++ lib.optional config.home-manager.users.teto.services.llama-cpp.enable 
       config.home-manager.users.teto.services.llama-cpp.port 
-    ++ lib.optionals config.services.harmonia-dev.cache.enable [
+    ++ lib.optionals config.services.harmonia.cache.enable [
       443
       80
     ];

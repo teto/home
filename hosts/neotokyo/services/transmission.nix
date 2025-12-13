@@ -37,7 +37,7 @@
     # allow everyone to reach this folder ?
     watch-dir = "/home/teto/torrents";
     # must be absolute path
-    download-dir = "/media";
+    download-dir = "/media/transmission-downloads";
     incomplete-dir = "/media/transmission-downloads-in-progress";
   };
 }

@@ -26,7 +26,9 @@
   # path = "%r/test.txt";
 
   sops.secrets =
-      lib.optionalAttrs config.services.postgresqlBackup.enable {
+    # check depending on services.restic. instead 
+    # lib.optionalAttrs config.services.postgresqlBackup.enable 
+    {
     "restic/backblaze_backup_immich_credentials" = {
       mode = "440";
       # path = "%r/github_token";

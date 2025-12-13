@@ -89,6 +89,7 @@ volt= "scm"
 # "telescope.nvim" = "0.1.6"
 # neotest-busted = "1.2.1"
 tree-sitter-haskell = "0.0.35"
+"rest.nvim" = "3.13.0"
 # nvim-treesitter-textobjects = "scm"
 # "rocks-treesitter.nvim" = "1.0.3"
 

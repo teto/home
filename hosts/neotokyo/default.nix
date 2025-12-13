@@ -19,10 +19,10 @@ let
           # wrong ? 
           "users/users/root.nix"
 
+          "services/harmonia.nix"
           "services/jellyfin.nix"
           "services/buildbot-nix.nix"
           "services/transmission.nix"
-          "services/jellyfin.nix"
         ];
         exclude = [
           # "teto"
@@ -96,6 +96,7 @@ in
     ./services/postgresqlBackup.nix
     ./services/nginx.nix
     ./services/immich.nix
+    ./services/restic.nix
 
     # ./services/jellyfin.nix
 

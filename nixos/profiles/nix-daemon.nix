@@ -8,8 +8,8 @@
 
     distributedBuilds = true;
 
-    # pkgs.nixVersions.nix_2_32;
-    package = flakeSelf.inputs.nix.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    package = pkgs.nixVersions.nix_2_32;
+    # package = flakeSelf.inputs.nix.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
     settings = {
       #   # http-connections = 25 is the default

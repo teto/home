@@ -32,6 +32,7 @@ in
 
 
     # generate a client ssh config from the server config
+    # https://fmartingr.com/blog/2022/08/12/using-ssh-config-match-to-connect-to-a-host-using-multiple-ip-or-hostnames/
     genSshClientConfig =
         name: value:
         let
@@ -43,7 +44,7 @@ in
             # lib.warn if "teto" is not in users.users
             (
               {
-                match = "host ${mcfg.config.networking.hostName}";
+                match = ''host="${mcfg.config.networking.hostName},${mcfg.config.networking.domain}"'';
                 # assumption ? or check/warn it has it ?
                 user = "teto";
                 identityFile = "${secretsFolder}/ssh/id_rsa";

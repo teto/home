@@ -58,6 +58,7 @@ let
 
   luaPlugins = with pkgs.vimPlugins; [
 
+
     # (luaPlugin {
     #   plugin = avante-nvim;
     #   #   .overrideAttrs({
@@ -301,7 +302,7 @@ in
   ];
 
   extraPackages =
-    extraPackages
+       extraPackages
     ++ pkgs.vimPlugins.llm-nvim.runtimeDeps # temporary workaround
     # provides typescript-language-server
     ++ pkgs.vimPlugins.typescript-tools-nvim.runtimeDeps
@@ -309,7 +310,8 @@ in
       pkgs.typescript # for tsserver
       pkgs.stylua # for lua formatting
       pkgs.gitlab-ci-ls # gitlab lsp
-      mcp-hub
+
+      # mcp-hub
     ]
 
   ;
