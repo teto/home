@@ -15,6 +15,12 @@
   wayland.windowManager.sway = {
     enable = true;
     xwayland = false;
+
+
+    systemd.variables = [
+      " --all" # hack
+    ];
+
     extraOptions = [
       "--unsupported-gpu"
     ];

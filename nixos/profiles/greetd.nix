@@ -9,7 +9,7 @@
   # https://man.sr.ht/~kennylevinsen/greetd/
   services.greetd = {
     # let host enable it
-    # enable = false;
+    enable = false;
 
     # avoid systemd boot messages interrupt TUI.
     useTextGreeter = true;
@@ -125,23 +125,25 @@
       };
 
       # initial_session => autologin !!
-      initial_session = {
-        # should be the one provided byy home-manager
-        # command = "${pkgs.sway}/bin/sway";
-        command = "sway";
-        user = "teto";
-      };
+      # initial_session = {
+      #   # should be the one provided byy home-manager
+      #   # command = "${pkgs.sway}/bin/sway";
+      #   command = "sway";
+      #   user = "teto";
+      # };
 
     };
 
   };
 
-  programs.regreet.enable = true;
+  
 
-  environment.systemPackages = [
-    pkgs.tuigreet
-    pkgs.greetd # to allow for testing, setting GREETD_SOCK
-  ];
+  programs.regreet.enable = false;
+
+  # environment.systemPackages = [
+  #   pkgs.tuigreet
+  #   pkgs.greetd # to allow for testing, setting GREETD_SOCK
+  # ];
 
   # Edit gtkgreet list of login environments, which is by default read from /etc/greetd/environments
   # environment.etc."greetd/environments".text = ''

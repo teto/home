@@ -106,6 +106,9 @@ in
         pkgs.llama-cpp # for llama-server and benchmarks
         pkgs.llama-swap # allows to switch between models at runtime
         pkgs.claude-code # anthropic agent
+
+        # libggml.so conflicts with llama-cpp's
+        # pkgs.whisper-cpp # to test with rikai.nvim and pushtotalk
         
         # open-webui # broken
         # sillytavern

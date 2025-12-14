@@ -10,7 +10,6 @@ let
     Welcome to neotokyo, dear master.
 
     A few tips:
-    - `journalctl -b0 -r` to see what's up lately
     - just help
   '';
     # - sudo systemctl start redis-nextcloud.service
@@ -22,9 +21,11 @@ let
   banner = "You can start the nextcloud-add-user.service unit if teto user doesnt exist yet";
 in
 {
-  programs.bash.shellAliases = {
-
+  home.shellAliases = {
+    st = "systemctl-tui";
+    jctl = "journalctl -b0 -r";
   };
+
   programs.bash.initExtra = ''
     cat "${pkgs.writeText "welcome-message" banner}";
   '';
@@ -34,16 +35,16 @@ in
     flakeSelf.homeModules.yazi
   ];
 
+  # todo set zsh as default 
   programs.zsh = {
     enable = true;
     loginExtra = ''
       cat "${pkgs.writeText "login-welcome" welcomeMessage}";
     '';
-    shellAliases = {
-      st = "systemctl-tui";
-      jctl = "journalctl -b0";
-
-    };
+    # shellAliases = {
+    #   st = "systemctl-tui";
+    #   jctl = "journalctl -b0";
+    # };
   };
 
   home.file."justfile".source =  ./justfile;

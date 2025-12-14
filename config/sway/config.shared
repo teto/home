@@ -25,8 +25,8 @@ set $w7 7
 set $w8 8
 set $w9 9
 
-floating_minimum_size 75 x 50
-floating_maximum_size -1 x -1
+# floating_minimum_size 75 x 50
+# floating_maximum_size -1 x -1
 
 # Mod4 => window key
 set $mad Super_L
@@ -34,5 +34,5 @@ set $mad Super_L
 # The middle button over a titlebar kills the window
 bindsym --release button2 kill
 
-smart_gaps yes
+# smart_gaps yes
 

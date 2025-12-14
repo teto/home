@@ -106,7 +106,6 @@ in
   };
 
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_17;
-  # services.xserver.displayManager.gdm.enable = true;
 
   # it apparently still is quite an important thing to have
   boot.devSize = "5g";

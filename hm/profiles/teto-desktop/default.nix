@@ -50,6 +50,19 @@ in
       # flakeSelf.inputs.git-repo-manager.packages.${pkgs.stdenv.hostPlatform.system}.git-repo-manager
   ];
 
+  home.shellAliases = {
+    lg = "lazygit";
+    # trans aliases{{{
+    fren = "trans -from fr -to en ";
+    enfr = "trans -from en -to fr ";
+    jpfr = "trans -from ja -to fr ";
+    frjp = "trans -from fr -to ja ";
+    jpen = "trans -from ja -to en ";
+    enjp = "trans -from en -to ja ";
+    # }}}
+  };
+
+
   home.sessionVariables = {
     # might be a hack
     PASSWORD_STORE_ENABLE_EXTENSIONS="true";  # it must be "true" and nothing else !

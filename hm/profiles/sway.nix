@@ -2,8 +2,9 @@
   lib,
   pkgs,
   config,
+dotfilesPath
   # , tetosLib
-  ...
+  , ...
 }:
 let
   # key modifier
@@ -30,7 +31,9 @@ in
       enable = true;
 
       # just trying what's advised at https://github.com/NixOS/nixpkgs/issues/177900#issuecomment-3167947983
-      extraCommands = [ " --all" ];
+      extraCommands = [ 
+
+      ];
 
       # turns out enabling way-displays kills of all that
       # variables = [
@@ -149,7 +152,7 @@ in
         #     output "Some Company ABC123 0x00000000" pos 1920 0
         "*" = {
           adaptive_sync = "off";
-          bg = "${../../wallpapers/nebula.jpg} fill";
+          bg = "${dotfilesPath}/wallpapers/nebula.jpg fill";
         };
 
       };
@@ -304,6 +307,9 @@ in
     # to list cards
     # ls -l /sys/class/drm/renderD*/device/driver
     # WLR_DRM_DEVICES
+    #       export XDG_CURRENT_DESKTOP=sway
+    # export XDG_SESSION_DESKTOP=sway
+    #
     extraSessionCommands = ''
 
        # useful for electron based apps: slack / vscode 
@@ -313,8 +319,6 @@ in
       export QT_QPA_PLATFORM=wayland
       export SDL_VIDEODRIVER=wayland
       export _JAVA_AWT_WM_NONREPARENTING=1
-      export XDG_CURRENT_DESKTOP=sway
-      export XDG_SESSION_DESKTOP=sway
       export SDL_VIDEODRIVER=wayland
       export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
       # select first igpu then nvidia

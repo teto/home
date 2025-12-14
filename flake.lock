@@ -433,27 +433,27 @@
     "edict-expression-db": {
       "flake": false,
       "locked": {
-        "lastModified": 1661970495,
-        "narHash": "sha256-kATPO01awNHbqS0LWAdnwWw2WWYKn+J+UH9lKlicpeY=",
+        "lastModified": 1759464277,
+        "narHash": "sha256-9o7QlV93mN6tHkDpcIncltNmgYzMnUzazwu46Bfbxow=",
         "type": "tarball",
-        "url": "https://github.com/odrevet/edict_database/releases/download/v0.0.2/expression.zip"
+        "url": "https://github.com/odrevet/edict_database/releases/download/v0.0.5/expression.zip"
       },
       "original": {
         "type": "tarball",
-        "url": "https://github.com/odrevet/edict_database/releases/download/v0.0.2/expression.zip"
+        "url": "https://github.com/odrevet/edict_database/releases/download/v0.0.5/expression.zip"
       }
     },
     "edict-kanji-db": {
       "flake": false,
       "locked": {
-        "lastModified": 1661970513,
-        "narHash": "sha256-vwe8hMOk6ShnmDq+Y/1EecZOfCXsBGNYCOZzTh6Jvuc=",
+        "lastModified": 1759464387,
+        "narHash": "sha256-UdGDn1EleiCOmn4YT9ZiYbNOg1IVid/DSGaBfszzE9Y=",
         "type": "tarball",
-        "url": "https://github.com/odrevet/edict_database/releases/download/v0.0.2/kanji.zip"
+        "url": "https://github.com/odrevet/edict_database/releases/download/v0.0.5/kanji.zip"
       },
       "original": {
         "type": "tarball",
-        "url": "https://github.com/odrevet/edict_database/releases/download/v0.0.2/kanji.zip"
+        "url": "https://github.com/odrevet/edict_database/releases/download/v0.0.5/kanji.zip"
       }
     },
     "expression-db": {

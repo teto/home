@@ -45,15 +45,6 @@ in
   historyFile = "${config.xdg.cacheHome}/bash_history";
 
   shellAliases = {
-    lg = "lazygit";
-    # trans aliases{{{
-    fren = "trans -from fr -to en ";
-    enfr = "trans -from en -to fr ";
-    jpfr = "trans -from ja -to fr ";
-    frjp = "trans -from fr -to ja ";
-    jpen = "trans -from ja -to en ";
-    enjp = "trans -from en -to ja ";
-    # }}}
 
     nixpaste = "curl -F \"text=<-\" http://nixpaste.lbr.uno";
 

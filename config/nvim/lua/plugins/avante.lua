@@ -16,13 +16,18 @@ local llama_hostname = "jedha.local"
 -- lua vim.json.decode(str, opts)
 require('avante').setup({
     debug = true, -- print error messages
+
+	-- can be a function as well
+	-- avante is very talkative by default
+	override_prompt_dir = vim.fn.expand(vim.fn.stdpath('config').."/avante_prompts"),
+
     behaviour = {
         auto_set_keymaps = false,
         enable_token_counting = false,
         -- auto_approve_tool_permissions = {"bash", "replace_in_file"}, -- Auto-approve specific tools only
     },
     -- provider = 'claude',
-    provider = 'llamaswap',
+    provider = 'llamacpp',
     ui = { border = 'single', background_color = '#FF0000' },
     -- provider = "ollama",
 
@@ -52,32 +57,43 @@ require('avante').setup({
         -- },
 
 		-- see https://github.com/yetone/avante.nvim/issues/2238
-		llamaswap = {
+		llamacpp = {
 		  __inherited_from = "openai",
 		  -- model = "",
-		  model = "/home/teto/llama-models/mistral-7b-openorca.Q6_K.gguf",
+		  -- ministral-3B-Instruct-2512
+		  model = "Devstral-Small-2505",
+		  -- model = "/home/teto/llama-models/mistral-7b-openorca.Q6_K.gguf",
 		  endpoint = 'http://'..llama_hostname..':8080/v1',
 		  timeout = 30000, -- Timeout in milliseconds
+
+		  -- tools send a shitton of tokens
+		  -- not supported by mistral (but inherited by others so...)
+		  disable_tools = true,
+
 		  -- empty key is required else avante complains
 		  api_key_name = '',
+		  extra_request_body = {
+			max_tokens = 1000, -- to avoid infinite loops
+		  }
 		},
-        ollama = {
-            -- model = "qwq:32b",
-            model = 'mistral',
-            endpoint = 'http://127.0.0.1:11434',
-            timeout = 30000, -- Timeout in milliseconds
-            -- disable_tools = true, -- not supported by mistral (but inherited by others so...)
-            --   disabled_tools = { "python" }, is also possible
-            is_env_set = require('avante.providers.ollama').check_endpoint_alive,
-            extra_request_body = {
-                options = {
-                    temperature = 0.75,
-                    -- 32768
-                    num_ctx = 20480,
-                    keep_alive = '10m',
-                },
-            },
-        },
+
+        -- ollama = {
+        --     -- model = "qwq:32b",
+        --     model = 'mistral',
+        --     endpoint = 'http://127.0.0.1:11434',
+        --     timeout = 30000, -- Timeout in milliseconds
+        --     -- disable_tools = true, -- not supported by mistral (but inherited by others so...)
+        --     --   disabled_tools = { "python" }, is also possible
+        --     is_env_set = require('avante.providers.ollama').check_endpoint_alive,
+        --     extra_request_body = {
+        --         options = {
+        --             temperature = 0.75,
+        --             -- 32768
+        --             num_ctx = 20480,
+        --             keep_alive = '10m',
+        --         },
+        --     },
+        -- },
         ['local:mistral-nemo'] = {
             model = 'devstral',
             __inherited_from = 'ollama',
