@@ -101,6 +101,11 @@ in
 
     (mkIf cfg.llms {
       home.packages = [
+
+        # these 2 are for claude's /sandbox mode
+        pkgs.socat 
+        pkgs.bubblewrap
+
         pkgs.koboldcpp
         # llama-cpp-with-curl
         pkgs.llama-cpp # for llama-server and benchmarks

@@ -37,6 +37,7 @@ in
           # The text used within the title
           title = "Login master はぉ";
         };
+      };
 
       environment_switcher = {
 

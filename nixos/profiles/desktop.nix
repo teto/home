@@ -53,6 +53,22 @@ in
     # ./desktop/sops.nix
   ];
 
+
+  # todo conditionize
+  #   #! /bin/sh
+  # exec sway
+
+
+      # #! /bin/sh
+      # exec ${lib.getExe config.programs.sway.package}
+  environment.etc."lemurs/wayland/sway-systemd" = {
+    mode = "755";
+    text = ''
+      systemctl start --user sway-session
+    '';
+  };
+
+
   # see https://github.com/NixOS/nixpkgs/issues/15293
   # Set your time zone.
   time.timeZone = "Europe/Paris";

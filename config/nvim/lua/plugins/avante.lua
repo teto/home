@@ -20,12 +20,25 @@ require('avante').setup({
 	-- can be a function as well
 	-- avante is very talkative by default
 	override_prompt_dir = vim.fn.expand(vim.fn.stdpath('config').."/avante_prompts"),
+	-- system_prompt = "";
+  -- rules = {
+  --   project_dir = nil, ---@type string | nil (could be relative dirpath)
+  --   global_dir = nil, ---@type string | nil (absolute dirpath)
+  -- },
+	
 
     behaviour = {
         auto_set_keymaps = false,
         enable_token_counting = false,
         -- auto_approve_tool_permissions = {"bash", "replace_in_file"}, -- Auto-approve specific tools only
+		-- support_paste_from_clipboard
+		auto_focus_on_diff_view = true,
+		auto_add_current_file = true,
+		-- vs 'popup
+		confirmation_ui_style = "inline_buttons",
+
     },
+
     -- provider = 'claude',
     provider = 'llamacpp',
     ui = { border = 'single', background_color = '#FF0000' },
@@ -61,7 +74,14 @@ require('avante').setup({
 		  __inherited_from = "openai",
 		  -- model = "",
 		  -- ministral-3B-Instruct-2512
-		  model = "Devstral-Small-2505",
+		  -- 
+-- I srv   load_models:     Llama3.2-3B-Esper2.Q4_K_M
+-- I srv   load_models:     Ministral-3-14B-Base-2512.Q6_K
+-- I srv   load_models:     ggml-org_Qwen2.5-Coder-3B-Q8_0-GGUF_qwen2.5-coder-3b-q8_0
+-- I srv   load_models:     mistral-7b-openorca.Q6_K
+-- I srv   load_models:     mistralai/Ministral-3-3B-Instruct-2512-GGUF
+-- I srv   load_models:     mistralai_Devstral-Small-2-24B-Instruct-2512-IQ2_M
+		  model = "mistralai/Ministral-3-3B-Instruct-2512-GGUF",
 		  -- model = "/home/teto/llama-models/mistral-7b-openorca.Q6_K.gguf",
 		  endpoint = 'http://'..llama_hostname..':8080/v1',
 		  timeout = 30000, -- Timeout in milliseconds
@@ -133,6 +153,7 @@ require('avante').setup({
 
 	},
     input = {
+	 -- used as sign_define
       prefix = "> ",
       height = 8, -- Height of the input window in vertical layout
     }
@@ -233,6 +254,10 @@ require('avante').setup({
 	  enabled = true, -- toggle logging entirely
 	  log_dir = vim.fn.stdpath("cache"), -- directory where logs are saved
 	},
+
+	-- disabled_tools = { "python" },
+	-- custom_tools
+	-- slash_commands = 
 })
 
 -- vim.api.nvim_create_user_command('', '!hasktags .', { desc = 'Regenerate tags' })
