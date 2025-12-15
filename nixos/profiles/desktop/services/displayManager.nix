@@ -41,7 +41,9 @@ in
 
       environment_switcher = {
 
+        switcher_visibility = "visible";
         remember = true;
+        toggle_hint = "Switcher %key%";
       };
       focus_behaviour = "password";
       show_pw_title = true;

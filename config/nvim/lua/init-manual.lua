@@ -888,6 +888,11 @@ vim.pack.add({
 	'https://github.com/raddari/last-color.nvim',
 })
 
+-- wont work if last-color is not installed
+local theme = require('last-color').recall() or 'sonokai'
+-- print("Setting colorscheme ", theme )
+vim.cmd(('colorscheme %s'):format(theme))
+
 -- Autoload from everything lsp/ in rtp
 -- local configs = {}
 --
@@ -1030,3 +1035,13 @@ vim.opt.rtp:prepend(thyme_cache_prefix)
 -- Note: `vim.loader` internally cache &rtp, and recache it if modified.
 -- Please test the best place to `vim.loader.enable()` by yourself.
 -- vim.loader.enable() -- (optional) before the `bootstrap`s above, it could increase startuptime.
+
+-- rag_service.launch_rag_service(function()
+--   -- Callback when service is ready
+--   print("RAG service is running!")
+-- end)
+function rag_add()
+	local rag_service = require('avante.rag_service')
+
+	rag_service.add_resource("/home/teto/blog")
+end

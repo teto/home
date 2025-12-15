@@ -194,7 +194,7 @@ in
           # sxiv # simple image viewer
           # unstable.transmission_gtk  # bittorrent client
           # vimiv # image viewer
-          # ytfzf # broken browse youtube
+          ytfzf # broken browse youtube
           # zathura # broken
           usbutils
           bandwhich # to monitor per app bandwidth

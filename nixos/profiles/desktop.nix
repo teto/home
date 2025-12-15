@@ -57,6 +57,15 @@ in
   # todo conditionize
   #   #! /bin/sh
   # exec sway
+  services.kmscon = {
+    enable = true;
+    hwRender = true;
+    fonts = [{
+      name = "Noto Sans Mono CJK JP";
+      package = pkgs.noto-fonts-cjk-sans;
+    }];
+  };
+
 
 
       # #! /bin/sh
@@ -64,7 +73,8 @@ in
   environment.etc."lemurs/wayland/sway-systemd" = {
     mode = "755";
     text = ''
-      systemctl start --user sway-session
+      #! /bin/sh
+      exec systemctl start --user sway-session.service
     '';
   };
 

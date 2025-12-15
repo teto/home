@@ -25,8 +25,26 @@ require('avante').setup({
   --   project_dir = nil, ---@type string | nil (could be relative dirpath)
   --   global_dir = nil, ---@type string | nil (absolute dirpath)
   -- },
-	
-
+  rag_service = { -- RAG service configuration
+    enabled = false, -- Enables the RAG service
+    host_mount = os.getenv("HOME"), -- Host mount path for the RAG service (Docker will mount this path)
+    runner = "nix", -- The runner for the RAG service (can use docker or nix)
+    llm = { -- Configuration for the Language Model (LLM) used by the RAG service
+      provider = "claude", -- The LLM provider
+      -- endpoint = "https://api.openai.com/v1", -- The LLM API endpoint
+      api_key = "", -- The environment variable name for the LLM API key
+      -- model = "gpt-4o-mini", -- The LLM model name
+      -- extra = nil, -- Extra configuration options for the LLM
+    },
+    embed = { -- Configuration for the Embedding model used by the RAG service
+      provider = "claude", -- The embedding provider
+      -- endpoint = "https://api.openai.com/v1", -- The embedding API endpoint
+      api_key = "", -- The environment variable name for the embedding API key
+      -- model = "text-embedding-3-large", -- The embedding model name
+      extra = nil, -- Extra configuration options for the embedding model
+    },
+    -- docker_extra_args = "", -- Extra arguments to pass to the docker command
+  },
     behaviour = {
         auto_set_keymaps = false,
         enable_token_counting = false,
@@ -154,6 +172,7 @@ require('avante').setup({
 	},
     input = {
 	 -- used as sign_define
+	 -- function H.signs() vim.fn.sign_define("AvanteInputPromptSign", { text = Config.windows.input.prefix }) end
       prefix = "> ",
       height = 8, -- Height of the input window in vertical layout
     }
