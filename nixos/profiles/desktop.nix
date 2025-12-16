@@ -72,9 +72,13 @@ in
       # exec ${lib.getExe config.programs.sway.package}
   environment.etc."lemurs/wayland/sway-systemd" = {
     mode = "755";
+    # sway creates systemd.user.targets.sway-session 
+    # for now we import everything
+    # /nix/store/rxzvps8zldnz4sgphbw6893n6ikai6gn-dbus-1.14.10/bin/dbus-update-activation-environment --systemd  --all 
     text = ''
       #! /bin/sh
-      exec systemctl start --user sway-session.service
+      ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd --all;
+      systemctl start --user --wait sway-session.service
     '';
   };
 
