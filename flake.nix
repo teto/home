@@ -327,6 +327,16 @@
       ...
     }:
     let
+      lib = self.inputs.nixpkgs.lib.extend (
+        prev: _:
+        import ./tetos/lib {
+          # inherit (self) inputs;
+
+          pkgs = myPkgs;
+          inherit dotfilesPath secretsFolder;
+          flakeSelf = self;
+          lib = prev;
+        });
 
       # tetonos ?
       tetosConfig = {
@@ -385,13 +395,9 @@
           ++ modules;
 
           specialArgs = {
-            inherit hostname;
-            inherit secrets;
-            inherit withSecrets;
-            flakeSelf = self;
-            # TODO check how to remove one
-
+            inherit withSecrets secrets hostname lib;
             inherit dotfilesPath secretsFolder;
+            flakeSelf = self;
           };
 
         };
@@ -895,8 +901,8 @@
         yazi = ./hm/profiles/yazi.nix;
       };
 
-      # (importDir ./nixos/modules)
-      nixosProfiles = {
+      # 
+      nixosProfiles = (importDir ./nixos/profiles)  // {
 
         avahi = ./nixos/profiles/avahi.nix;
         # desktop = ./nixos/profiles/desktop.nix;

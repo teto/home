@@ -8,8 +8,23 @@ let
     p: t: prev.lib.cleanSourceFilter p t && baseNameOf p != "build"
   );
 
+  notify-send = "${final.libnotify}/bin/notify-send";
+
 in
 {
+  tetos = {
+    # TODO pass icon
+    muteAudio = prev.writeShellScript "mute-volume" ''
+
+      ${final.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; ${notify-send} --icon=speaker_no_sound -e -h boolean:audio-toggle:1 -h string:synchronous:audio-volume -u low 'Toggling audio';
+    '';
+
+    # -f --image ~/.config/wallpapers/snow_woods.jpg"
+    swaylockCmd = prev.writeShellScript "lock-screen" ''
+      ${final.swaylock-effects}/bin/swaylock
+    '';
+  };
+
   llama-cpp-matt = (
     final.llama-cpp-with-curl.override {
       cudaSupport = true;

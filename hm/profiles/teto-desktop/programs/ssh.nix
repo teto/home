@@ -1,6 +1,7 @@
 {
   lib,
   secrets,
+  config,
   osConfig,
   withSecrets,
   flakeSelf,
@@ -119,10 +120,9 @@ in
     });
 
   includes = [
-    # break under haumea
-    # "${config.xdg.configHome}/ssh/config"
+    "${config.xdg.configHome}/ssh/config"
     # so we hardcoded it
-    "/home/teto/.config/ssh/config"
+    # "/home/teto/.config/ssh/config"
   ];
 
   # GlobalKnownHostfiles Specifies one or more files to use for the global host key database, separated by whitespace. The default is /etc/ssh/ssh_known_hosts, /etc/ssh/ssh_known_hosts2.

@@ -547,10 +547,10 @@ vim.g.fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %
 vim.api.nvim_create_autocmd('ColorScheme', {
     desc = 'Set italic codelens on new colorschemes',
     callback = function()
-        local bgcol = vim.api.nvim_get_hl(0, { name = 'Normal' })
-        local c = require('colortils')
-        local utils = require('colortils.utils.colors')
-        local hl_normal = vim.api.nvim_get_hl(0, { name = 'Normal' })
+        -- local bgcol = vim.api.nvim_get_hl(0, { name = 'Normal' })
+        -- local c = require('colortils')
+        -- local utils = require('colortils.utils.colors')
+        -- local hl_normal = vim.api.nvim_get_hl(0, { name = 'Normal' })
         -- local
         -- TODO use teto.colors
         -- utils.get_grey(hl_normal.bg)
@@ -629,7 +629,7 @@ end, {
 -- local verbose_output = false
 -- require("tealmaker").build_all(verbose_output)
 
-local has_sniprun, sniprun = pcall(require, 'sniprun')
+local has_sniprun, _sniprun = pcall(require, 'sniprun')
 
 if has_sniprun then
     require('plugins.sniprun')
@@ -649,33 +649,9 @@ vim.g.spinner_frames = { '⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷' 
 
 if use_fzf_lua then
     require('plugins.fzf-lua')
-    -- else frecency doesnt appear
-    local has_fzf_lua_frecency, fzf_lua_frecency = pcall(require, 'fzf-lua-frecency')
-
-    if has_fzf_lua_frecency then
-        fzf_lua_frecency.setup({
-            cwd_only = true,
-            -- all_files = nil,
-            stat_file = true,
-            display_score = true,
-            fzf_opts = {
-                ['--multi'] = true,
-                -- ,begin
-                ['--tiebreak'] = 'length,chunk',
-
-                -- ["--scheme"] = "path",
-                -- ["--no-sort"] = true,
-            },
-        })
-    end
     require('teto.fzf-lua').register_keymaps()
-end
-
-if use_telescope then
-    local tts = require('teto.telescope')
-    -- if we want to use telescope
-    tts.setup()
-    tts.telescope_create_keymaps()
+else
+	vim.notify("fzf-lua is MISSING !?")
 end
 
 -- since it was not merge yet
@@ -771,8 +747,6 @@ vim.keymap.set('n', '<leader>rg', '<Cmd>Grepper -tool rg -open -switch<CR>', { r
 --	 { noremap = true, silent = true }
 -- )
 
-local has_secrets, secrets = pcall(require, 'teto.secrets')
-
 -- if has_gitsigns then
 --     local tgitsigns = require('plugins.gitsigns')
 --     tgitsigns.setup()
@@ -821,7 +795,7 @@ end, { desc = 'Highlights ANSI termcodes in curbuf' })
 -- because it's installed via nix due to its rust dependencies, we have to call it manually
 require('plugins.blink-cmp')
 
-local b64 = require('teto.b64')
+-- local b64 = require('teto.b64')
 
 vim.keymap.set('v', '<leader>b', function() end)
 vim.keymap.set('v', '<leader>B', '<Plug>(ToBase64)')
@@ -861,10 +835,17 @@ vim.lsp.enable('pyright')
 vim.lsp.enable('yamlls')
 vim.lsp.enable('just')
 
+-- used by `lx check`
+vim.lsp.enable('emmylua_ls')
+
+-- todo luau_lsp + luacheck ?
+-- vim.lsp.enable('just')
+
 -- testing packadd
 vim.pack.add({
     -- my real neovim package manager (with nix)
     'https://github.com/nvim-neorocks/rocks.nvim',
+	-- 'https://github.com/elanmed/fzf-lua-frecency.nvim', -- to rocks
 
     'https://github.com/neovim/nvim-lspconfig',
     'https://github.com/teto/vim-listchars',

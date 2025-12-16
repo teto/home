@@ -24,7 +24,7 @@ path = "/home/teto/neovim"
 # List of Neovim plugins to install alongside their versions.
 # If the plugin name contains a dot then you must add quotes to the key name!
 [plugins]
-"rocks-git.nvim"= "2.5.6"
+"rocks-git.nvim"= "2.5.7"
 "rocks-config.nvim" = "3.1.2"
 # "diffview.nvim" = "scm"
 "haskell-tools.nvim" = "6.2.0"
@@ -49,7 +49,7 @@ auto-session = "2.5.1"
 "lsp_signature.nvim" = "0.3.1"
 friendly-snippets = "scm"
 # "haskell-snippets.nvim" = "1.4.4"
-"yazi.nvim" = "13.0.0"
+"yazi.nvim" = "13.1.0"
 # tree-sitter-org = "0.0.1"
 
 # "lspkind.nvim" = "scm"
@@ -69,13 +69,13 @@ friendly-snippets = "scm"
 vim-startuptime= "4.5.0"
 menu= "scm"
 # "snacks.nvim" = "2.6.0"
-fzf-lua = "0.0.2296"
+fzf-lua = "0.0.2383"
 # "lz.n" = "2.12.0"
 "indent-blankline.nvim" = "3.9.0"
 # "llm.nvim"= "scm"
 # volt is a UI library
 volt= "scm"
-"grug-far.nvim"= "1.6.52"
+"grug-far.nvim"= "1.6.53"
 # orgmode = "0.7.1"
 # neogit = "2.0.0"
 # "diffview.nvim" = "scm"
@@ -90,6 +90,8 @@ volt= "scm"
 # neotest-busted = "1.2.1"
 tree-sitter-haskell = "0.0.35"
 "rest.nvim" = "3.13.0"
+tree-sitter-html = "0.0.40"
+tree-sitter-xml = "0.0.42"
 # nvim-treesitter-textobjects = "scm"
 # "rocks-treesitter.nvim" = "1.0.3"
 
@@ -132,7 +134,6 @@ rev = "v0.0.1"
 git = "gbprod/none-ls-shellcheck.nvim"
 rev = "0f84461241e76e376a95fb7391deac82dc3efdbf"
 
-
 [plugins."better-digraphs.nvim"]
 git = "protex/better-digraphs.nvim"
 rev = "5b2c63418d1e2c91d17f6d4e966bdafc5072a8d9"
@@ -170,38 +171,21 @@ branch = "master"
 git = "aaronik/treewalker.nvim"
 rev = "4992fa9d27792b7a573e4545c9b2c4e61aba4f44"
 
-# [plugins."endec.nvim"]
-# git = "ovk/endec.nvim"
-# rev = "949ece728ecc0cacf3c6c81bbcda186fe3fef5cf"
-
 [plugins."nvim-colorizer.lua"]
 git = "norcalli/nvim-colorizer.lua"
 rev = "a065833f35a3a7cc3ef137ac88b5381da2ba302e"
 
-# [plugins."statuscol.nvim"]
-# git = "luukvbaal/statuscol.nvim"
-# rev = "c399884e8f64019ec9bb581251f9710915b7f996"
+[plugins."statuscol.nvim"]
+git = "luukvbaal/statuscol.nvim"
+rev = "c399884e8f64019ec9bb581251f9710915b7f996"
 
 [plugins."lsp-progress.nvim"]
 git = "linrongbin16/lsp-progress.nvim"
 rev = "v1.0.15"
 
-# [plugins."visual-whitespace.nvim"]
-# git = "mcauley-penney/visual-whitespace.nvim"
-# rev = "d55348fab9254bf208766efac9a35100ac474ec0"
-
-# [plugins."img-clip.nvim"]
-# git = "hakonharnes/img-clip.nvim"
-# rev = "v0.6.0"
-
 [plugins."fcitx.nvim"]
 git = "h-hg/fcitx.nvim"
 rev = "dcb6b70888aa893d3d223bb777d4117bbdac06a7"
-
-# to be used as an api
-# [plugins."color-converter.nvim"]
-# git = "ntbbloodbath/color-converter.nvim"
-# rev = "5888e92cbccf0de202d2b617f6a8f3011a43bd52"
 
 [plugins.nvim-luadev]
 git = "bfredl/nvim-luadev"
@@ -217,7 +201,11 @@ rev = "fa4673e181e18fd1719ae17a1d4f4ecce2de37aa"
 
 [plugins."codecompanion.nvim"]
 git = "olimorris/codecompanion.nvim"
-rev = "v17.33.0"
+rev = "v18.1.1"
+
+[plugins."fzf-lua-frecency.nvim"]
+git = "elanmed/fzf-lua-frecency.nvim"
+rev = "4c37d8d967a51f718af5d9556b72f16c5185c05b"
 
 # [plugins."jj.nvim"]
 # git = "nicolasgb/jj.nvim"

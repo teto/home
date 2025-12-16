@@ -1,3 +1,8 @@
+
+
+vim.g.feed_debug = true
+
+
 require('feed').setup({
  -- picker = "fzf-lua",
  progress = "bar",

@@ -65,6 +65,7 @@ in
       # };
     };
   };
+
   config = lib.mkMerge [
     (lib.mkIf cfg.enableLiveRegex (
       let
@@ -152,11 +153,10 @@ in
       # --accept-nth=N[,..]      Define which fields to print on accept
       programs.fzf.historyWidgetOptions = [ "--with-nth=2.." ];
 
-      programs.zsh.initContent = ''
-        ${zshIntegration}
-      '';
+      programs.zsh.initContent = zshIntegration;
     })
 
+    # check if that doesnt overlap with pass-fzf extension ?
     (lib.mkIf cfg.zshPassCompletion {
 
       programs.zsh.initContent = ''

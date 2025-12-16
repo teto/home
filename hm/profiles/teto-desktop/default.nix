@@ -21,6 +21,7 @@ in
     flakeSelf.homeProfiles.developer
     flakeSelf.homeProfiles.mpv
     flakeSelf.homeProfiles.vscode
+    # flakeSelf.homeProfiles.yt-dlp
 
     flakeSelf.homeModules.fzf
     flakeSelf.homeModules.teto-zsh
@@ -50,7 +51,7 @@ in
       # flakeSelf.inputs.git-repo-manager.packages.${pkgs.stdenv.hostPlatform.system}.git-repo-manager
   ];
 
-  home.shellAliases = {
+  home.shell.aliases = {
     lg = "lazygit";
     # trans aliases{{{
     fren = "trans -from fr -to en ";

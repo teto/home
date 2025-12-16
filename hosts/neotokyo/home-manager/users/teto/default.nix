@@ -21,7 +21,7 @@ let
   banner = "You can start the nextcloud-add-user.service unit if teto user doesnt exist yet";
 in
 {
-  home.shellAliases = {
+  home.shell.aliases = {
     st = "systemctl-tui";
     jctl = "journalctl -b0 -r";
   };
@@ -31,6 +31,7 @@ in
   '';
 
   imports = [
+    flakeSelf.homeProfiles.yt-dlp
     flakeSelf.homeProfiles.bash
     flakeSelf.homeModules.yazi
   ];

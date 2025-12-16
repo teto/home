@@ -10,7 +10,6 @@ let
   firefox = pkgs.callPackage ./firefox.nix {};
   nix-builders = import ./nix-builder.nix { inherit flakeSelf lib secretsFolder; };
   neovim = import ./neovim.nix { inherit flakeSelf lib; };
-  notify-send = "${pkgs.libnotify}/bin/notify-send";
 
 in
 {
@@ -61,16 +60,6 @@ in
         );
 
 
-  # TODO pass icon
-  muteAudio = pkgs.writeShellScript "mute-volume" ''
-
-    ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; ${notify-send} --icon=speaker_no_sound -e -h boolean:audio-toggle:1 -h string:synchronous:audio-volume -u low 'Toggling audio';
-  '';
-
-  # -f --image ~/.config/wallpapers/snow_woods.jpg"
-  swaylockCmd = pkgs.writeShellScript "lock-screen" ''
-    ${pkgs.swaylock-effects}/bin/swaylock
-  '';
 
   # temporary solution since it's not portable
   getPassword =

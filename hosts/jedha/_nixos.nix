@@ -192,23 +192,6 @@ in
     # "net.core.wmem_max" = 1048576;
   };
 
-  i18n.glibcLocales = pkgs.glibcLocales.override {
-    # hum
-    allLocales = true;
-    # 229 fr_FR.UTF-8/UTF-8 \
-    # 230 fr_FR/ISO-8859-1 \
-    # 231 fr_FR@euro/ISO-8859-15 \
-    locales = [
-      "fr_FR.UTF-8/UTF-8"
-      "en_US.UTF-8/UTF-8"
-      "ja_JP.utf8"
-      # ja_JP
-      "ja_JP.eucjp"
-      # ja_JP.ujis
-      # ja_JP.utf8
-    ];
-  };
-
   # List services that you want to enable:
   services = {
     # gnome = {

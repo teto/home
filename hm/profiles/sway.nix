@@ -209,7 +209,7 @@ in
           # "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
 
           # TODO make it a command
-          "${mod}+Ctrl+L" = "exec ${myLib.swaylockCmd} ";
+          "${mod}+Ctrl+L" = "exec ${pkgs.tetos.swaylockCmd} ";
 
           # kitty nvim -c ":Neorg workspace notes"
           # Notes is a custom command

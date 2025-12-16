@@ -8,6 +8,10 @@
       "rev": "8c6b9790e9cec5a8213a384319b53c2b7435cd46",
       "src": "https://github.com/otavioschwanck/fzf-lua-enchanted-files"
     },
+    "fzf-lua-frecency.nvim": {
+      "rev": "4c37d8d967a51f718af5d9556b72f16c5185c05b",
+      "src": "https://github.com/elanmed/fzf-lua-frecency.nvim"
+    },
     "git-rebase-auto-diff.nvim": {
       "rev": "6fd2f5ba63828e5c4fd59bb1b75ef7525a5ce39f",
       "src": "https://github.com/yutkat/git-rebase-auto-diff.nvim"

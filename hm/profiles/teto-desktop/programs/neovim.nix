@@ -130,6 +130,7 @@ let
     bash-language-server
     black
     editorconfig-checker # used in null-ls
+    emmylua-ls # same as in `lx check`
     fswatch # better file watching starting with 0.10
     go # for gitlab.nvim, we can probably ditch it afterwards
     # gcc # this is sadly a workaround to be able to run :TSInstall

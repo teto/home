@@ -3,15 +3,24 @@
 #+NAME: demo
 #+LINK: nixos-anywhere https://github.com/nix-community/nixos-anywhere
 #+LINK: disko https://github.com/nix-community/disko
+#+LINK: sops-nix-github https://github.com/Mic92/sops-nix
+#+LINK: haumea https://github.com/nix-community/haumea
 
 This is *tetos*, teto's OS, nixos-based, conceived by me for me.
+It contains the configuration for my machines/servers.
 I make it public because I love libre software and this makes sharing snippets easier.
-Dont expect to be able to use it as it is a spaghetti of hacks, for instance it relies on forks of nixpkgs and home-manager.
+Dont expect to be able to use this repo as it is a spaghetti of hacks and relies on forks of nixpkgs and home-manager.
 
-The main difficulty to allow reproducible deployments is the handling of secrets.
-This is why my nixosConfigurations can be built with and without secrets depending on a boolean `withSecrets` forwarded via `specialArgs`.
+* a few highlights
+- I rely on [[nixos-anywhere][nixos-anywhere]] + [[disko][disko]] to deploy new machines. For local deployements, I use one machine as a PXE server to bootstrap install from a nicer environment
+- My main difficulty when deploying machines is handling secrets. I dont want to put git secrets - even cyphered - online.
+This is why my *nixosConfigurations* can be built __with__ and __without__ secrets depending on a boolean `withSecrets` forwarded via `specialArgs`.
+This lets me deploy a machine with most of my customizations before migrating my secrets and run a final deployement with all secrets available.
+My secrets are handled with [[sops-nix-github][sops-nix]] and not gitted (no way I would put those public).
+- the flake exposes `nixosModules` along with `homeModules`. I name configurations that can be shared between hosts "profiles" (some would call it "roles") so the flake exposes `nixosProfiles` as well as `homeProfiles`
+- nix packages/modules/profiles are autoloaded according to the folder hierarchy. This is made possible by [[haumea][haumea]].
+I dont necessarily recommand haumea though because it can lead to some hard to diagnose error messages and while elegant it makes sideeffects harder to track down IMO.
 
-My main secrets are handled with sops and not gitted (no way I would put those public).
 
 If you scroll a bit, you will find sparse tutorials on how to deploy both on a LAN (PXE) or remotely (e.g. VPS). Kudos to [[nixos-anywhere][nixos-anywhere]] and [[disko]] for making this easier than ever.
 
@@ -103,7 +112,7 @@ $ nixos-rebuild switch --flake 'github:teto/home#laptop-with-secrets' --use-remo
 
   ** Infrastructure secrets
 
-  The solution I adopted is [[https://github.com/Mic92/sops-nix][sops-nix]] which reads secrets from sops files.
+  The solution I adopted is [[sops-nix-github][sops-nix]] which reads secrets from sops files.
 
   *** How to securely load those secrets in systemd units ?
 

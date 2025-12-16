@@ -1,7 +1,9 @@
 
-systemctl get-default
+systemctl get-default  / set-default
 systemctl list-dependencies
 systemctl show-environment --user ?
+loginctl show-session $XDG_SESSION_ID --value --property=Type
+tty
 
 * notify on failure
 

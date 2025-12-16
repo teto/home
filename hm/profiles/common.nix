@@ -28,12 +28,8 @@
   home.shell = {
     enableZshIntegration = true;
     enableBashIntegration = true;
-
   };
 
-  # why is it not under shell ?
-  home.shellAliases = {
-    };
 
   # you can switch from cli with xkb-switch or xkblayout-state
   # set to null to disable

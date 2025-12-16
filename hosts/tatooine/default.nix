@@ -78,7 +78,9 @@ in
     flakeSelf.inputs.disko.nixosModules.disko
     flakeSelf.nixosModules.nix-ld
 
-    flakeSelf.nixosProfiles.hedgedoc
+    # ../../nixos/profiles/rmfakecloud.nix
+    # flakeSelf.nixosProfiles.hedgedoc
+    flakeSelf.nixosProfiles.rmfakecloud
     flakeSelf.nixosProfiles.desktop
     flakeSelf.nixosProfiles.laptop
     # ../../nixos/profiles/docker-daemon.nix
@@ -98,6 +100,8 @@ in
 
   ];
 
+  services.rmfakecloud.enable = true;
+
   # services.tandoor-recipes.enable = true;
   # services.linkwarden = {
   #   enable = true;
@@ -114,9 +118,7 @@ in
     # }
   ];
 
-  nixpkgs.overlays = lib.optionals withSecrets [
-
-  ];
+  nixpkgs.overlays = lib.optionals withSecrets [ ];
 
   # boot.blacklistedKernelModules = [ "nouveau" ];
 
@@ -156,12 +158,6 @@ in
   ### HWP
 
   home-manager.users = {
-    # root = {
-    #   imports = [
-    #     ./home-manager/users/root/default.nix
-    #   ];
-    # };
-
     teto = {
       # TODO it should load the whole folder
       imports = [

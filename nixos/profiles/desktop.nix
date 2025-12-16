@@ -54,16 +54,37 @@ in
   ];
 
 
-  # todo conditionize
-  #   #! /bin/sh
-  # exec sway
+  # attempt to print japanese characters
   services.kmscon = {
-    enable = true;
+    enable = false; # disabled because it's ugly
     hwRender = true;
     fonts = [{
       name = "Noto Sans Mono CJK JP";
       package = pkgs.noto-fonts-cjk-sans;
     }];
+  };
+
+  console = {
+    font = "ter-v32n";  # Terminus font, larger size
+    packages = [ pkgs.terminus_font ];
+    useXkbConfig = true;
+  };
+
+  i18n.glibcLocales = pkgs.glibcLocales.override {
+    # hum
+    allLocales = true;
+    # 229 fr_FR.UTF-8/UTF-8 \
+    # 230 fr_FR/ISO-8859-1 \
+    # 231 fr_FR@euro/ISO-8859-15 \
+    locales = [
+      "fr_FR.UTF-8/UTF-8"
+      "en_US.UTF-8/UTF-8"
+      "ja_JP.utf8"
+      # ja_JP
+      "ja_JP.eucjp"
+      # ja_JP.ujis
+      # ja_JP.utf8
+    ];
   };
 
 

@@ -20,7 +20,7 @@ in
         format = "{volume}% {icon}";
         # 🔈
         format-muted = "<span background='red'>🔇</span>";
-        on-click = myLib.muteAudio;
+        on-click = pkgs.tetos.muteAudio;
         format-icons = [
           "🔈"
           "🔉"
