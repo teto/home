@@ -7,5 +7,20 @@
 			"config/wireshark",
 			"config/mpv"
 		]
-	}
+	},
+  "diagnostics": {
+    "disable": [
+    ],
+     "globals": [
+      "ya",
+                    "vim",
+                    "describe",
+                    "it",
+                    "before_each",
+                    "after_each",
+                    "pending",
+                    "teardown"
+
+     ]
+   }
 }

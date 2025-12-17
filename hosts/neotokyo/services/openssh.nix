@@ -20,6 +20,7 @@
     # ];
     # new format
     settings = {
+      AcceptEnv = [ "GITHUB_TOKEN"];
       # LogLevel = "VERBOSE";
       LogLevel = lib.mkForce "DEBUG";
       KbdInteractiveAuthentication = false;

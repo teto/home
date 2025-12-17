@@ -30,6 +30,10 @@
     enableBashIntegration = true;
   };
 
+  home.shellAliases = {
+    st = "systemctl-tui";
+    jctl = "journalctl -b0 -r";
+  };
 
   # you can switch from cli with xkb-switch or xkblayout-state
   # set to null to disable

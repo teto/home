@@ -165,7 +165,7 @@ let
     # rnix-lsp
     rust-analyzer
     shellcheck
-    lua-language-server
+    # lua-language-server # replaced with emmylua-ls
     gopls # LSP for go
     marksman # markdown LSP server
 

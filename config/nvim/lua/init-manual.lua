@@ -6,7 +6,7 @@
 -- showcmdloc
 -- require('avante_lib').load()
 --
---
+--https://github.com/EmmyLuaLs/emmylua-analyzer-rust/blob/main/docs/config/emmyrc_json_EN.md#-complete-configuration-example
 --
 -- https://www.reddit.com/r/neovim/comments/1kcz8un/great_improvements_to_the_cmdline_in_nightly/
 -- require('vim._extui').enable({})
@@ -41,7 +41,6 @@ local has_fzf_lua, _fzf_lua = pcall(require, 'fzf-lua')
 
 -- set to true to enable it
 local use_fzf_lua = has_fzf_lua and true
-local use_telescope = not use_fzf_lua
 
 local map = vim.keymap.set
 
@@ -828,7 +827,7 @@ require('plugins.nvim-treesitter-textobjects')
 -- require('plugins.nvim-treesitter')
 
 -- one can pass a list as well
-vim.lsp.enable('lua_ls')
+-- vim.lsp.enable('lua_ls')  -- todo remove replaced by emmylua
 vim.lsp.enable('rust_analyzer')
 vim.lsp.enable('clangd')
 vim.lsp.enable('pyright')
@@ -847,7 +846,7 @@ vim.pack.add({
     'https://github.com/nvim-neorocks/rocks.nvim',
 	-- 'https://github.com/elanmed/fzf-lua-frecency.nvim', -- to rocks
 
-    'https://github.com/neovim/nvim-lspconfig',
+    -- 'https://github.com/neovim/nvim-lspconfig',
     'https://github.com/teto/vim-listchars',
 	'https://github.com/yutkat/git-rebase-auto-diff.nvim',
 
@@ -1011,8 +1010,8 @@ vim.g.tidal_boot = nix_deps.tidal_boot .. 'BootTidal.hs'
 -- end)
 
 -- Note: Add a cache path to &rtp. The path MUST include the literal substring "/thyme/compile".
-local thyme_cache_prefix = vim.fn.stdpath("cache") .. "/thyme/compiled"
-vim.opt.rtp:prepend(thyme_cache_prefix)
+-- local thyme_cache_prefix = vim.fn.stdpath("cache") .. "/thyme/compiled"
+-- vim.opt.rtp:prepend(thyme_cache_prefix)
 -- Note: `vim.loader` internally cache &rtp, and recache it if modified.
 -- Please test the best place to `vim.loader.enable()` by yourself.
 -- vim.loader.enable() -- (optional) before the `bootstrap`s above, it could increase startuptime.

@@ -51,8 +51,12 @@ in
       # flakeSelf.inputs.git-repo-manager.packages.${pkgs.stdenv.hostPlatform.system}.git-repo-manager
   ];
 
-  home.shell.aliases = {
+  home.shellAliases = {
     lg = "lazygit";
+    st = "systemctl-tui";
+    v = "nvim";
+    y = "yazi";
+
     # trans aliases{{{
     fren = "trans -from fr -to en ";
     enfr = "trans -from en -to fr ";

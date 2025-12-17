@@ -175,6 +175,8 @@ in
           # newsboat #
           # mujmap # to sync notmuch tags across jmap
           pkgs.vlc
+          emmylua-ls # lua LSP written in rust
+          emmylua-check # lua LSP written in rust
           # element-desktop # TODO this should go into nix profile install
           # mcomix # manga reader
           # TODO
