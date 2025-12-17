@@ -525,20 +525,12 @@
       unstablePkgs = pkgImport self.inputs.nixos-unstable false;
       # stablePkgs = pkgImport self.inputs.nixos-stable;
 
-      genKey = str: nixpkgs.lib.replaceStrings [ ".nix" ] [ "" ] (builtins.baseNameOf (toString str));
 
       # converts the name via genKey
-      importDir =
-        folder:
-        let
-          listOfModules =
-            nixpkgs.lib.filter
-              # and != default.nix ?
-              (n: nixpkgs.lib.strings.hasSuffix ".nix" n)
-              (nixpkgs.lib.filesystem.listFilesRecursive folder);
-        in
+      # move it to lib ?
+      # 
 
-        nixpkgs.lib.listToAttrs (nixpkgs.lib.map (x: nixpkgs.lib.nameValuePair (genKey x) x) listOfModules);
+        # nixpkgs.lib.listToAttrs (nixpkgs.lib.map (x: nixpkgs.lib.nameValuePair (genKey x) x) listOfModules);
 
       hm-common =
         {
@@ -753,7 +745,7 @@
       # // other-schemas.schemas
       ;
 
-      # TODO import from hosts/ via importDir
+      # TODO import from hosts/ via lib.importDir
       nixosConfigurations = rec {
         # TODO generate those from the hosts folder ?
         # with aliases ?
@@ -846,18 +838,16 @@
       };
 
       # TODO scan hm/{modules, profiles} folder
-      homeProfiles = (importDir ./hm/profiles) // {
+      homeProfiles = lib.importDir ./hm/profiles // {
+        # TODO importdir should check for default.nix
         neovim = ./hm/profiles/neovim;
-        mpv = ./hm/profiles/mpv.nix;
 
         teto-desktop = ./hm/profiles/desktop.nix;
         sway-notification-center = ./hm/profiles/swaync.nix;
-        waybar = ./hm/profiles/waybar.nix;
-
         # vscode = ./hm/profiles/vscode.nix;
       };
 
-      homeModules = (importDir ./hm/modules) // {
+      homeModules = lib.importDir ./hm/modules // {
 
         mod-cliphist = ./hm/modules/cliphist.nix;
 
@@ -897,38 +887,20 @@
           }
         );
 
-        xdg = ./hm/profiles/xdg.nix;
-        yazi = ./hm/profiles/yazi.nix;
+        # xdg = ./hm/profiles/xdg.nix;
+        # yazi = ./hm/profiles/yazi.nix;
       };
 
-      # 
-      nixosProfiles = (importDir ./nixos/profiles)  // {
+      # todo rename folder
+      nixosProfiles = lib.importDir ./nixos/profiles;
 
-        avahi = ./nixos/profiles/avahi.nix;
-        # desktop = ./nixos/profiles/desktop.nix;
-        desktop = nixos/profiles/desktop.nix;
-        hedgedoc = ./nixos/profiles/hedgedoc.nix;
 
-        openssh = ./nixos/profiles/openssh.nix;
-        gnome = ./nixos/profiles/gnome.nix;
-        pixiecore = ./nixos/profiles/pixiecore.nix;
-        laptop = ./nixos/profiles/laptop;
-        podman = ./nixos/profiles/podman.nix;
-        greetd = ./nixos/profiles/greetd.nix;
-      };
-
-      nixosModules = (importDir ./nixos/modules) // {
-        # neovim = nixos/profiles/neovim.nix;
-
+      nixosModules = lib.importDir ./nixos/modules // {
         default-hm = hm-common;
         teto-nogui = nixos/accounts/teto/teto.nix;
-        nix-daemon = nixos/profiles/nix-daemon.nix;
-        nix-ld = nixos/profiles/nix-ld.nix;
-        ntp = nixos/profiles/ntp.nix;
 
+        # todo move to profiles
         universal = hosts/config-all.nix;
-        server = nixos/profiles/server.nix;
-        steam = nixos/profiles/steam.nix;
       };
 
       templates = {

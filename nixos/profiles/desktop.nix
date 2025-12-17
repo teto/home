@@ -39,7 +39,7 @@ in
     flakeSelf.nixosModules.universal
     flakeSelf.nixosProfiles.avahi
     flakeSelf.nixosProfiles.gnome
-    flakeSelf.nixosModules.nix-daemon
+    flakeSelf.nixosProfiles.nix-daemon
     flakeSelf.nixosModules.sudo
 
     ./greetd.nix

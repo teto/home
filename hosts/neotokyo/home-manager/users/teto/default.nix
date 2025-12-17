@@ -31,7 +31,7 @@ in
   '';
 
   imports = [
-    flakeSelf.homeProfiles.yt-dlp
+    # flakeSelf.homeProfiles.yt-dlp
     flakeSelf.homeProfiles.bash
     flakeSelf.homeModules.yazi
   ];

@@ -81,8 +81,8 @@ in
     flakeSelf.nixosModules.teto-nogui
     flakeSelf.nixosModules.default-hm
     # flakeSelf.nixosModules.neovim
-    flakeSelf.nixosModules.ntp
-    flakeSelf.nixosModules.nix-daemon
+    flakeSelf.nixosProfiles.ntp
+    flakeSelf.nixosProfiles.nix-daemon
 
     ./hardware.nix
     ./sops.nix
@@ -107,7 +107,7 @@ in
 
     # ../../nixos/modules/hercules-ci-agents.nix
 
-    flakeSelf.nixosModules.server
+    flakeSelf.nixosProfiles.server
     flakeSelf.inputs.buildbot-nix.nixosModules.buildbot-master
     flakeSelf.inputs.buildbot-nix.nixosModules.buildbot-worker
   ];

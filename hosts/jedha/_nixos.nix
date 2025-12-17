@@ -70,9 +70,9 @@ in
     flakeSelf.inputs.harmonia.nixosModules.harmonia
     flakeSelf.nixosProfiles.greetd
     flakeSelf.nixosProfiles.desktop
+    flakeSelf.nixosProfiles.nix-daemon
 
-    flakeSelf.nixosModules.nix-daemon
-    flakeSelf.nixosModules.steam
+    flakeSelf.nixosProfiles.steam
     flakeSelf.nixosModules.universal
 
     flakeSelf.nixosProfiles.pixiecore

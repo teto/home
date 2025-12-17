@@ -76,7 +76,7 @@ in
     # ./generated.nix
 
     flakeSelf.inputs.disko.nixosModules.disko
-    flakeSelf.nixosModules.nix-ld
+    flakeSelf.nixosProfiles.nix-ld
 
     # ../../nixos/profiles/rmfakecloud.nix
     # flakeSelf.nixosProfiles.hedgedoc

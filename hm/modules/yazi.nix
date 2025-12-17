@@ -10,7 +10,6 @@ in
 {
   options = {
     programs.yazi = {
-      enable = lib.mkEnableOption "yazi";
       custom = lib.mkOption {
         default = false;
         type = lib.types.bool;

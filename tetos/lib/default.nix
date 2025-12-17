@@ -29,6 +29,32 @@ in
     nixosConfToBuilderAttr
     ;
 
+      importDir =
+        folder:
+        let
+          genKey = str: lib.replaceStrings [ ".nix" ] [ "" ] (builtins.baseNameOf (toString str));
+
+          pred = name: val:
+            lib.strings.hasSuffix ".nix" name;
+
+          transformEntry = filename: val:
+            let 
+              key = genKey filename;
+              val' = folder + "/${filename}";
+            in 
+
+            lib.nameValuePair key val';
+
+          listOfModules =
+              lib.mapAttrs'
+                  transformEntry
+                  (lib.filterAttrs pred 
+                    (builtins.readDir folder))
+                ;
+
+        in
+          listOfModules;
+
 
     # generate a client ssh config from the server config
     # https://fmartingr.com/blog/2022/08/12/using-ssh-config-match-to-connect-to-a-host-using-multiple-ip-or-hostnames/
