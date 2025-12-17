@@ -8,12 +8,11 @@
 
 let
 
-  inherit (pkgs.tetosLib)
-    luaPlugin
+  inherit (lib)
     genBlockLua
     ;
 
-  pluginsMap = pkgs.callPackage ./plugins.nix { inherit flakeSelf; };
+  pluginsMap = pkgs.callPackage ./plugins.nix { inherit flakeSelf lib; };
 
   myNeovimUnwrapped =
     flakeSelf.inputs.neovim-nightly-overlay.packages."${pkgs.stdenv.hostPlatform.system}".neovim;

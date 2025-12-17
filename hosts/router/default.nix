@@ -39,6 +39,9 @@ in
 {
   # pcengines/apu/
   imports = [
+    flakeSelf.inputs.nixos-hardware.nixosModules.pcengines-apu
+    flakeSelf.nixosModules.default-hm
+
     ./iwd.nix
     ./hardware.nix
     ../config-all.nix
@@ -46,7 +49,6 @@ in
     ../../nixos/profiles/router.nix
     ../../nixos/profiles/home-assistant.nix
 
-    flakeSelf.nixosModules.default-hm
   ];
 
   environment.systemPackages = with pkgs; [

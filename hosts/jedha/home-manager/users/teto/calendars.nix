@@ -3,7 +3,6 @@
   pkgs,
   lib,
   secrets,
-  tetosLib,
   withSecrets,
   ...
 }:

@@ -42,7 +42,6 @@
     #   });
 
     scripts = [
-      # pkgs.tetosLib.ignoreBroken
       (pkgs.mpvScripts.autosub) # works with subliminal
 
       pkgs.mpvScripts.mpvacious # Adds mpv keybindings to create Anki cards from movies and TV shows

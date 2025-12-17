@@ -1,10 +1,12 @@
 # this is the basic config I want on every host
 {
   pkgs,
+  lib,
   ...
 }:
 let
-  inherit (pkgs.tetosLib.neovim) luaPlugin;
+  # libNeovim = import ../../../tetos/lib/default.nix { inherit lib; };
+  inherit (lib.neovim) luaPlugin;
 in
 {
   telescopePlugins = [
@@ -130,7 +132,7 @@ in
     })
   ];
 
-  filetypePlugins = with pkgs.vimPlugins; [
+  filetypePlugins = [
     # TODO package neomutt.vim
     # { plugin = wmgraphviz-vim; }
     # { plugin = vim-toml; }

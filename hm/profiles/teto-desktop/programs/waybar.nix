@@ -1,8 +1,4 @@
 { flakeSelf, pkgs, ... }:
-let
-  myLib = pkgs.tetosLib;
-
-in
 {
   enable = true;
 

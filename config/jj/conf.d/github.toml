@@ -1,0 +1,32 @@
+# stolen from https://github.com/jj-vcs/jj/discussions/5388
+[aliases]
+track-github-PR = ["util", "exec", "--", 'sh', '-euxc', '''
+  PR=$1
+  gh pr view --json headRepository,headRefName,headRepositoryOwner $PR --jq '"
+    set_remote() {
+      jj 2>/dev/null git remote add \"$1\" \"$2\" ||
+      jj git remote set-url \"$1\" \"$2\"
+    }
+    set_remote \(.headRepositoryOwner.login) git@github.com:\(.headRepositoryOwner.login)/\(.headRepository.name)
+    jj git fetch --remote \(.headRepositoryOwner.login) --branch \(.headRefName)
+    jj bookmark track \(.headRefName)@\(.headRepositoryOwner.login)
+    origin=$(gh repo view --json owner,name --jq .owner.login)
+    set_remote \"$origin\" \"$(gh repo view --json sshUrl --jq .sshUrl)\"
+    git fetch --force --update-head-ok \"$origin\" \"refs/pull/'"$PR"'/head:refs/remotes/$origin/pull/'"$PR"'\"
+  "' |
+  sh -euxs
+''', "jj-track-github-PR"]
+
+untrack-github-PR = ["util", "exec", "--", 'sh', '-euxc', '''
+  PR=$1
+  gh pr view --json headRepository,headRefName,headRepositoryOwner $PR --jq '"
+    jj bookmark forget \(.headRefName) || true
+    origin=$(gh repo view --json owner,name --jq .owner.login)
+    git for-each-ref --format \"delete %(refname)\" \\
+      \"refs/remotes/\(.headRepositoryOwner.login)/\(.headRefName)\" \\
+      \"refs/remotes/$origin/pull/'"$PR"'\" |
+    tee /dev/stderr |
+    git update-ref --stdin
+  "' |
+  sh -euxs
+''', "jj-untrack-github-PR"]

@@ -70,7 +70,7 @@ lib.optionalAttrs withSecrets {
         userName = secrets.accounts.mail.fastmail_perso.email;
 
         # needs to be an app-specific password/token
-        passwordCommand = (pkgs.tetosLib.getPassword "perso/fastmail_mc/password")
+        passwordCommand = (lib.getPassword "perso/fastmail_mc/password")
         # "pass-perso show perso/fastmail_mc/password"
         ;
       };
@@ -136,7 +136,7 @@ lib.optionalAttrs withSecrets {
         # needs to be an app-specific password/token
         # getPasswordCommand = account: lib.strings.escapeShellArgs (pkgs.tetosLib.getPassword account);
 
-        passwordCommand = pkgs.tetosLib.getPassword "nova/mail";
+        passwordCommand = lib.getPassword "nova/mail";
         # passwordCommand = (tetosLib.getPassword "perso/fastmail_mc");
         # "~/dotfiles/bin/pass-show" "iij/nextcloud"
         # ];

@@ -1,4 +1,4 @@
-{ secretsFolder, flakeSelf }:
+{ lib, secretsFolder, flakeSelf }:
 final: prev:
 let
   # see https://github.com/NixOS/nixpkgs/issues/29605#issuecomment-332474682
@@ -75,10 +75,11 @@ in
 
 
   firefox-addons = import ./firefox/generated.nix {
-    inherit (final.pkgs.tetosLib.firefox)       buildFirefoxXpiAddon;
+    # inherit (lib.firefox)       buildFirefoxXpiAddon;
+    inherit lib;
     inherit (final)
+    buildFirefoxXpiAddon
       fetchurl
-      lib
       stdenv
       ;
   };
@@ -153,6 +154,17 @@ in
           #  ps.jupyter-client
           # ]);
 
+
+              # # TODO get lua interpreter to select the good lua packages
+              # nvimLua = config.programs.neovim.finalPackage.passthru.unwrapped.lua;
+
+              # luajit = prev.luajit.override {
+              #   packageOverrides = self.inputs.rikai-nvim.overlays.luaOverlay;
+              # };
+              #
+              # lua5_1 = prev.lua5_1.override {
+              #   packageOverrides = self.inputs.rikai-nvim.overlays.luaOverlay;
+              # };
 
 
   # overrideAttrs (oldAttrs: {

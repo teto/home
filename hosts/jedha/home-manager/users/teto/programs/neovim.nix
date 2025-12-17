@@ -9,7 +9,7 @@ let
 
   # reference flakeSelf instead ?
   # todo reference pkgs.neovimLib instead?
-  nvimLib = pkgs.tetosLib.neovim;
+  nvimLib = lib.neovim;
 
   inherit (nvimLib) luaPlugin;
 

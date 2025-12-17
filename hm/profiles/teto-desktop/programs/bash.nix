@@ -9,7 +9,7 @@
 let
   inherit (lib) mkRemoteBuilderDesc;
   builder_neotokyo = mkRemoteBuilderDesc "3.0" (
-    pkgs.tetosLib.nixosConfToBuilderAttr {
+    lib.nixosConfToBuilderAttr {
       sshKey = "${secretsFolder}/ssh/id_rsa";
       # I might need to set it ?
       # can
@@ -20,7 +20,7 @@ let
 
   # public host key of the remote machine.  If omitted, SSH uses its regular known_hosts file.
   builder_jedha = mkRemoteBuilderDesc "3.0" (
-    pkgs.tetosLib.nixosConfToBuilderAttr {
+    lib.nixosConfToBuilderAttr {
       sshKey = "${secretsFolder}/ssh/id_rsa";
       # I might need to set it ?
       publicHostKey = null;

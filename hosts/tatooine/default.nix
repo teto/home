@@ -46,8 +46,6 @@ let
       ];
     };
 
-  # tetosLib = pkgs.tetosLib;
-
   # nixosConfigurations
   # .nodes
   # builder_jedha = (tetosLib.nixosConfToBuilderAttr {} flakeSelf.nixosConfigurations.jedha);

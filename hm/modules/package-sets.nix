@@ -10,7 +10,7 @@ with lib;
 let
   cfg = config.package-sets;
 
-  inherit (pkgs.tetosLib) ignoreBroken;
+  inherit (lib) ignoreBroken;
 in
 {
 

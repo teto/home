@@ -8,7 +8,7 @@
 }:
 let
   hostsConfigs =
-    lib.mapAttrs pkgs.tetosLib.genSshClientConfig flakeSelf.nixosConfigurations;
+    lib.mapAttrs lib.genSshClientConfig flakeSelf.nixosConfigurations;
 in
 
 {

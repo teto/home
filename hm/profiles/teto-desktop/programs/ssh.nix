@@ -10,11 +10,8 @@
   ...
 }:
 let
-
-  tetosLib = pkgs.tetosLib;
-
   hostsConfigs =
-    lib.mapAttrs tetosLib.genSshClientConfig flakeSelf.nixosConfigurations;
+    lib.mapAttrs lib.genSshClientConfig flakeSelf.nixosConfigurations;
 in
 {
 

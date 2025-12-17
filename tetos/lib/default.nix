@@ -4,12 +4,15 @@
   lib,
   dotfilesPath,
   secretsFolder,
+  secrets,
   ...
 }:
 let
   firefox = pkgs.callPackage ./firefox.nix {};
   nix-builders = import ./nix-builder.nix { inherit flakeSelf lib secretsFolder; };
   neovim = import ./neovim.nix { inherit flakeSelf lib; };
+
+  myPkgs = pkgs;
 
 in
 {
@@ -28,6 +31,37 @@ in
     deployrsNodeToBuilderAttr
     nixosConfToBuilderAttr
     ;
+
+      /**
+        default system
+        modules: List
+      */
+      mkNixosSystem =
+        {
+          modules, # array
+          withSecrets, # bool
+          hostname,
+          pkgs ? myPkgs,
+        }:
+        lib.nixosSystem {
+          system = "x86_64-linux";
+          inherit pkgs;
+          # pkgs = self.inputs.nixos-unstable.legacyPackages.${system}.pkgs;
+          modules = [
+            flakeSelf.inputs.sops-nix.nixosModules.sops
+            flakeSelf.inputs.hm.nixosModules.home-manager
+
+          ]
+          ++ modules;
+
+          specialArgs = {
+            inherit withSecrets secrets hostname lib;
+            inherit dotfilesPath secretsFolder;
+            inherit flakeSelf;
+          };
+
+        };
+
 
       importDir =
         folder:

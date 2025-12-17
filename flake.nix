@@ -90,6 +90,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # https://github.com/DeterminateSystems/nix-src/pull/217
     flake-schemas.url = "github:DeterminateSystems/flake-schemas";
 
     firefox2nix.url = "git+https://git.sr.ht/~rycee/mozilla-addons-to-nix";
@@ -327,34 +328,34 @@
       ...
     }:
     let
-      lib = self.inputs.nixpkgs.lib.extend (
+      # lib = lib.extend (_: _: self.inputs.hm.lib // builtins.trace "${lib.neovim.toto}" lib);
+
+      lib =  self.inputs.nixpkgs.lib.extend (
         prev: _:
-        import ./tetos/lib {
+        self.inputs.hm.lib  // (import ./tetos/lib {
           # inherit (self) inputs;
 
           pkgs = myPkgs;
-          inherit dotfilesPath secretsFolder;
+          inherit dotfilesPath secretsFolder secrets;
           flakeSelf = self;
           lib = prev;
-        });
+        }));
 
       # tetonos ?
-      tetosConfig = {
-        # should it depend on home.homeDirectory instead ?
-        inherit dotfilesPath secretsFolder;
-        # acts as builder ?
-        # withSecrets
-      };
+      # tetosConfig = {
+      #   # should it depend on home.homeDirectory instead ?
+      #   inherit dotfilesPath secretsFolder;
+      #   # acts as builder ?
+      #   # withSecrets
+      # };
 
+      system = "x86_64-linux";
       dotfilesPath = "/home/teto/home";
       secretsFolder = "/home/teto/home/secrets";
 
       secrets = import ./nixpkgs/secrets.nix {
         inherit secretsFolder dotfilesPath;
       };
-
-      # sshLib = import ./nixpkgs/lib/ssh.nix { inherit secrets; flakeSelf.inputs = self.inputs; };
-      system = "x86_64-linux";
 
       # Eval the treefmt modules from ./treefmt.nix
       treefmtEval = treefmt-nix.lib.evalModule myPkgs ./treefmt.nix;
@@ -374,33 +375,6 @@
           directory = ./pkgs;
         };
 
-      /**
-        default system
-        modules: List
-      */
-      mkNixosSystem =
-        {
-          modules, # array
-          withSecrets, # bool
-          hostname,
-          pkgs ? myPkgs,
-        }:
-        nixpkgs.lib.nixosSystem {
-          inherit system pkgs;
-          # pkgs = self.inputs.nixos-unstable.legacyPackages.${system}.pkgs;
-          modules = [
-            self.inputs.sops-nix.nixosModules.sops
-            hm.nixosModules.home-manager
-          ]
-          ++ modules;
-
-          specialArgs = {
-            inherit withSecrets secrets hostname lib;
-            inherit dotfilesPath secretsFolder;
-            flakeSelf = self;
-          };
-
-        };
 
       pkgImport =
         src: cudaSupport:
@@ -410,20 +384,7 @@
             (final: prev: {
               # expose it for byNamePkgsOverlay
               inherit treefmt-nix;
-
-              # # TODO get lua interpreter to select the good lua packages
-              # nvimLua = config.programs.neovim.finalPackage.passthru.unwrapped.lua;
-
-              # luajit = prev.luajit.override {
-              #   packageOverrides = self.inputs.rikai-nvim.overlays.luaOverlay;
-              # };
-              #
-              # lua5_1 = prev.lua5_1.override {
-              #   packageOverrides = self.inputs.rikai-nvim.overlays.luaOverlay;
-              # };
-
             })
-
             byNamePkgsOverlay
             autoloadedPkgsOverlay
           ];
@@ -432,15 +393,9 @@
             # on desktop
             inherit cudaSupport;
             # nvidia.acceptLicense = true;
-            # cudaCapabilities = [
-            #   # "6.0"
-            #   "8.9"
-            # ]; # can speed up some builds ?
+            # cudaCapabilities = [ "8.9" ]; # can speed up some builds ?
             checkMeta = false;
             # showDerivationWarnings = ["maintainerless"];
-            # permittedInsecurePackages = [
-            #   "nix"
-            # ];
 
             allowUnfree = true;
             # this list makes me wanna vomit (except steam maybe because they do good for linux),
@@ -503,7 +458,7 @@
                   "ec2-api-tools"
                   "jiten" # japanese software recognition tool / use sudachi instead
                   "google-chrome"
-                  "slack"
+                  # "slack"
                   "steam"
                   "steam-original"
                   "steam-runtime"
@@ -524,13 +479,6 @@
       myPkgsCuda = pkgImport self.inputs.nixpkgs true;
       unstablePkgs = pkgImport self.inputs.nixos-unstable false;
       # stablePkgs = pkgImport self.inputs.nixos-stable;
-
-
-      # converts the name via genKey
-      # move it to lib ?
-      # 
-
-        # nixpkgs.lib.listToAttrs (nixpkgs.lib.map (x: nixpkgs.lib.nameValuePair (genKey x) x) listOfModules);
 
       hm-common =
         {
@@ -591,11 +539,11 @@
           ];
           home-manager.extraSpecialArgs = {
             secrets = lib.optionalAttrs withSecrets secrets;
-            inherit withSecrets;
-            # flakeSelf.inputs = self.inputs;
-            inherit flakeSelf;
-            # TODO get it from ./. ?
-            inherit dotfilesPath secretsFolder;
+            inherit withSecrets flakeSelf dotfilesPath secretsFolder;
+            inherit lib;
+            # https://github.com/nix-community/home-manager/issues/5980
+
+            # lib = lib.extend (_: _: self.inputs.hm.lib // builtins.trace "${lib.neovim.toto}" lib);
           };
 
           home-manager.users = {
@@ -658,10 +606,6 @@
           '';
         };
 
-        # debug =
-        # default = nixpkgs.legacyPackages.${system}.mkShell {
-        #   name = "dotfiles-shell";
-
         inherit (unstablePkgs)
           nhs96
           nhs98
@@ -669,26 +613,6 @@
           nhs912
           ;
 
-      };
-
-      # Downloads/linux_monolixSuite2024R1/monolixSuite-pkg-output
-      # ➜ nix-shell -p steam-run --run "steam-run ./monolixSuite2024R1"
-      monolix = unstablePkgs.buildFHSEnv {
-        name = "monolix";
-        # this should be somewhat synced with what exists in nix-ld ?
-        targetPkgs = [
-          unstablePkgs.xorg.xcbutilwm.out # for libxcb-icccm.so.4
-          unstablePkgs.fontconfig.lib # for libfontconfig.so.1
-
-        ];
-        # inherit targetPkgs;
-        runScript = "ldd";
-      };
-
-      poetry = unstablePkgs.buildFHSEnv {
-        name = "poetry";
-        # inherit targetPkgs;
-        runScript = "ldd";
       };
 
       formatter = treefmtEval.config.build.wrapper;
@@ -733,6 +657,7 @@
 
         };
 
+        # TODO run evals and treefmt checks
         checks = {
           # formatting = treefmtEval.${myPkgs.system}.config.build.check self;
           # formatting = (treefmt-nix.lib.evalModule myPkgs ./treefmt.nix).config.build.check;
@@ -749,20 +674,18 @@
       nixosConfigurations = rec {
         # TODO generate those from the hosts folder ?
         # with aliases ?
-        router = mkNixosSystem {
+        router = lib.mkNixosSystem {
           withSecrets = true;
           hostname = "router";
 
           modules = [
-            hm.nixosModules.home-manager
-            self.inputs.nixos-hardware.nixosModules.pcengines-apu
             ./hosts/router
           ];
         };
 
         # it doesn't have to be called like that !
-        # TODO use mkNixosSystem
-        laptop = mkNixosSystem {
+        # TODO use lib.mkNixosSystem
+        laptop = lib.mkNixosSystem {
           withSecrets = false;
           hostname = "laptop";
           modules = [
@@ -779,8 +702,7 @@
           # TODO retain existing specialArgs and inject mine ?!
           specialArgs = {
             hostname = "tatooine";
-            inherit secrets;
-            inherit dotfilesPath;
+            inherit secrets dotfilesPath;
 
             withSecrets = true;
             # userConfig = {
@@ -791,7 +713,7 @@
           };
         };
 
-        neptune = mkNixosSystem {
+        neptune = lib.mkNixosSystem {
           pkgs = myPkgs;
           modules = [
             ./hosts/neptune/configuration.nix
@@ -800,7 +722,7 @@
           withSecrets = true;
         };
 
-        neotokyo = mkNixosSystem {
+        neotokyo = lib.mkNixosSystem {
           modules = [
             ./hosts/neotokyo/default.nix
           ];
@@ -809,7 +731,7 @@
         };
 
         # desktop is a
-        desktop = mkNixosSystem {
+        desktop = lib.mkNixosSystem {
           withSecrets = false;
           hostname = "jedha";
           modules = [
@@ -819,21 +741,14 @@
 
         # nix build .#nixosConfigurations.teapot.config.system.build.toplevel
         jedha = desktop.extendModules ({
-
           specialArgs = {
             pkgs = myPkgsCuda;
             withSecrets = true;
+            inherit lib;
             # pkgs = myPkgs.extend(
-            #
             #     );
           };
-
-          modules = [
-            ({
-              nixpkgs.overlays = [
-              ];
-            })
-          ];
+          modules = [ ];
         });
       };
 
@@ -844,7 +759,6 @@
 
         teto-desktop = ./hm/profiles/desktop.nix;
         sway-notification-center = ./hm/profiles/swaync.nix;
-        # vscode = ./hm/profiles/vscode.nix;
       };
 
       homeModules = lib.importDir ./hm/modules // {
@@ -855,11 +769,7 @@
         experimental = ./hm/profiles/experimental.nix;
         gnome-shell = ./hm/profiles/gnome.nix;
 
-        # ollama = hosts/desktop/home-manager/users/teto/services/ollama.nix;
-
         # (modulesFromDir ./hm/modules)
-
-        # bash = ./hm/profiles/bash.nix;
         # hosts/desktop/home-manager/users/teto/default.nix;
 
         # needs zsh-extra ?
@@ -929,20 +839,11 @@
         # mptcp = self.inputs.mptcp-flake.overlays.default;
         # nur = self.inputs.nur.overlay;
 
-        autoupdating = final: prev: {
-
-          tetosLib = final.callPackage ./tetos/lib/default.nix {
-            inherit dotfilesPath secretsFolder;
-            flakeSelf = self;
-          };
-
-        };
-
         # TODO
         local = import ./overlays/pkgs/default.nix;
         haskell = import ./overlays/haskell.nix;
         overrides = import ./overlays/overrides.nix {
-          inherit secretsFolder;
+          inherit secretsFolder lib;
           flakeSelf = self;
         };
         # python = import ./overlays/python.nix;

@@ -6,7 +6,7 @@
 }:
 let
 
-  ffLib = pkgs.tetosLib.firefox;
+  ffLib = lib.firefox;
     # pkgs.callPackage ../../../../nixpkgs/lib/firefox.nix { };
 
 in

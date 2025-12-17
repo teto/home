@@ -8,8 +8,6 @@ let
   # or use {pkgs.kitty}/bin/kitty
   term = "${pkgs.kitty}/bin/kitty";
 
-  myLib = pkgs.tetosLib;
-
   # key modifier
   # mad = "Mod4";
   # mod = "Mod1";

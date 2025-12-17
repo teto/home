@@ -9,7 +9,7 @@
 }:
 
 let
-  inherit (pkgs.tetosLib) ignoreBroken;
+  inherit (lib) ignoreBroken;
 in
 {
   imports = [

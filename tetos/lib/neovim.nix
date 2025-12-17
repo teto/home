@@ -7,6 +7,8 @@ let
   '';
 in
 {
+
+  toto = "42";
   inherit genBlockLua;
 
   luaPlugin =

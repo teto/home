@@ -1,10 +1,9 @@
 {
   lib,
   pkgs,
-  config,
-dotfilesPath
-  # , tetosLib
-  , ...
+  config
+, dotfilesPath
+, ...
 }:
 let
   # key modifier
@@ -18,8 +17,6 @@ let
 
   rofi = pkgs.rofi-teto; # rofi-wayland;
   sharedConfig = pkgs.callPackage ./wm-config.nix { };
-
-  myLib = pkgs.tetosLib;
 in
 {
 
