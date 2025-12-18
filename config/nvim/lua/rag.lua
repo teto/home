@@ -1,3 +1,4 @@
+-- inspired by https://github.com/yetone/avante.nvim/issues/1587
 
 local rag_service = require('avante.rag_service')
 

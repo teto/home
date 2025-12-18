@@ -77,11 +77,11 @@ require('avante').setup({
             --   temperature = 0.75,
             --   max_tokens = 4096,
             -- },
-            api_key_name = 'cmd:cat /home/teto/.config/sops-nix/secrets/claude_api_key',
+            api_key_name = 'cmd:cat '..os.getenv('HOME')..'/.config/sops-nix/secrets/claude_api_key',
         },
 
         gemini = {
-            api_key_name = 'cmd:cat /home/teto/.config/sops-nix/secrets/gemini_matt_key',
+            api_key_name = 'cmd:cat '..os.getenv('HOME')..'/.config/sops-nix/secrets/gemini_matt_key',
         },
         -- openai = {
         -- api_key_name = 'cmd:cat /home/teto/.config/sops-nix/secrets/OPENAI_API_KEY_NOVA',
@@ -161,7 +161,7 @@ require('avante').setup({
     fillchars = "eob: ",
 	-- TODO remove
     sidebar_header = {
-      enabled = false, -- true, false to enable/disable the header
+      enabled = true, -- true, false to enable/disable the header
       align = "center", -- left, center, right for title
       rounded = true,
     },
@@ -187,40 +187,40 @@ require('avante').setup({
 		 focus_on_apply = 'ours', -- which diff to focus after applying
 	 },
     custom_tools = {
-        {
-            name = 'run_model_manager_tests', -- Unique name for the tool
-            description = 'run the ModelManagerSpec', -- Description shown to AI
-            param = { -- Input parameters (optional)
-                type = 'table',
-                fields = {
-                    -- {
-                    --   name = "target",
-                    --   description = "Package or directory to test (e.g. './pkg/...' or './internal/pkg')",
-                    --   type = "string",
-                    --   optional = true,
-                    -- },
-                },
-            },
-            returns = { -- Expected return values
-                {
-                    name = 'result',
-                    description = 'Result of the fetch',
-                    type = 'string',
-                },
-                {
-                    name = 'error',
-                    description = 'Error message if the fetch was not successful',
-                    type = 'string',
-                    optional = true,
-                },
-            },
-            func = function(params, on_log, on_complete) -- Custom function to execute
-                -- local target = params.target or "./..."
-                -- Shell command to execute
-                command = 'nix run .#simwork.model-manager._tests'
-                return vim.fn.system(command)
-            end,
-        },
+        -- {
+        --     name = 'run_model_manager_tests', -- Unique name for the tool
+        --     description = 'run the ModelManagerSpec', 
+        --     param = { -- Input parameters (optional)
+        --         type = 'table',
+        --         fields = {
+        --             -- {
+        --             --   name = "target",
+        --             --   description = "Package or directory to test (e.g. './pkg/...' or './internal/pkg')",
+        --             --   type = "string",
+        --             --   optional = true,
+        --             -- },
+        --         },
+        --     },
+        --     returns = { -- Expected return values
+        --         {
+        --             name = 'result',
+        --             description = 'Result of the fetch',
+        --             type = 'string',
+        --         },
+        --         {
+        --             name = 'error',
+        --             description = 'Error message if the fetch was not successful',
+        --             type = 'string',
+        --             optional = true,
+        --         },
+        --     },
+        --     func = function(params, on_log, on_complete) -- Custom function to execute
+        --         -- local target = params.target or "./..."
+        --         -- Shell command to execute
+        --         command = 'nix run .#simwork.model-manager._tests'
+        --         return vim.fn.system(command)
+        --     end,
+        -- },
 
         -- {
         --   name = "run_go_tests",  -- Unique name for the tool

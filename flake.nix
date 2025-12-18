@@ -42,6 +42,10 @@
       url = "https://github.com/odrevet/edict_database/releases/download/v0.0.5/expression.zip";
       flake = false;
     };
+    emmylua = {
+      url = "github:EmmyLuaLs/emmylua-analyzer-rust";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     furigana-url = {
       url = "https://github.com/Doublevil/JmdictFurigana/releases/download/2.3.1%2B2024-11-25/JmdictFurigana.json.tar.gz";
       flake = false;

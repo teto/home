@@ -10,7 +10,7 @@ with lib;
 let
   cfg = config.package-sets;
 
-  inherit (lib) ignoreBroken;
+  system = pkgs.stdenv.hostPlatform.system;
 in
 {
 
@@ -175,8 +175,8 @@ in
           # newsboat #
           # mujmap # to sync notmuch tags across jmap
           pkgs.vlc
-          emmylua-ls # lua LSP written in rust
-          emmylua-check # lua LSP written in rust
+          flakeSelf.inputs.emmylua.packages.${system}.emmylua_ls # lua LSP written in rust
+          flakeSelf.inputs.emmylua.packages.${system}.emmylua_check # lua LSP written in rust
           # element-desktop # TODO this should go into nix profile install
           # mcomix # manga reader
           # TODO
@@ -211,7 +211,7 @@ in
           imv # image viewer
           lazygit # kinda like tig
           libnotify
-          (ignoreBroken moc-wrapped) # music player
+          (lib.ignoreBroken moc-wrapped) # music player
           mupdf.bin # evince does better too
 
           ## Alternatives to consider:
@@ -246,6 +246,7 @@ in
           sublime3
           # sysz # fzf for systemd, see systemd-tui too
           translate-shell # call with `trans`
+          tray-tui  # make tray menus accessible to CLI
           unzip
           viu # a console image viewer
           wireshark
@@ -289,8 +290,8 @@ in
         python3Packages.subliminal # to download subtitles
         immich-cli
         mujmap-unstable # to sync notmuch tags across jmap
-        (ignoreBroken oculante) # image viewer
-        (ignoreBroken calcure)
+        (lib.ignoreBroken oculante) # image viewer
+        (lib.ignoreBroken calcure)
         # signal-desktop # installe a la main
         # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail
         vimiv-qt
@@ -363,7 +364,7 @@ in
           difftastic # smart diffs
           lsof # to see open files
           docker-credential-helpers
-          flakeSelf.inputs.starship-jj.packages.${pkgs.stdenv.hostPlatform.system}.default # custom.jj for starship
+          flakeSelf.inputs.starship-jj.packages.${system}.default # custom.jj for starship
           gettext # for envsubst (TO NOT CONFOUND with gettext's envsubst)
           sad # live replace with fzf, use like `fd | sad toto tata`
           sops # password 'manager'
