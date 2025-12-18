@@ -2,11 +2,9 @@
   lib,
   secrets,
   config,
-  osConfig,
   withSecrets,
   flakeSelf,
   secretsFolder,
-  pkgs,
   ...
 }:
 let

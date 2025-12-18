@@ -33,8 +33,10 @@ in
   imports = [
     # flakeSelf.homeProfiles.yt-dlp
     flakeSelf.homeProfiles.bash
-    flakeSelf.homeModules.yazi
+    flakeSelf.homeProfiles.yt-dlp
   ];
+
+  programs.yt-dlp.enable = true;
 
   # todo set zsh as default 
   programs.zsh = {

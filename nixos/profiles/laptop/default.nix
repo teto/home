@@ -13,6 +13,10 @@
     # cpuFreqGovernor = "powersave";
   };
 
+  environment.systemPackages = [
+    pkgs.power-options # packaged myself
+  ];
+
   services.logind = {
     settings.Login = {
       # conflicted with another value

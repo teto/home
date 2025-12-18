@@ -1,6 +1,5 @@
 {
   config,
-  lib,
   pkgs,
   ...
 }:
@@ -138,7 +137,7 @@
     # https://www.zigbee2mqtt.io/information/configuration.html
     settings = {
       # homeassistant = config.services.home-assistant.enable;
-      homeassistant = false;
+      # homeassistant = false;
       permit_join = true; # todo disable after configuration for secuirty
       serial = {
         # according to https://www.zigbee2mqtt.io/guide/adapters/#recommended

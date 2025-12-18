@@ -8,7 +8,6 @@
   news.display = "silent";
 
   imports = [
-
     ./bash.nix
     ./git.nix
     ./teto-zsh.nix
@@ -20,17 +19,13 @@
   # https://github.com/commercialhaskell/stack/issues/2358
   # home.file.".stack/config.yaml".source = ../home/stack.yaml;
 
-  xdg = {
-    enable = true;
-    mime.enable = true;
-  };
-
   home.shell = {
     enableZshIntegration = true;
     enableBashIntegration = true;
   };
 
   home.shellAliases = {
+    v = "nvim";
     st = "systemctl-tui";
     jctl = "journalctl -b0 -r";
   };

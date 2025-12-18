@@ -10,12 +10,8 @@
   # for aws-vault ?
   home.file.".ssh/allowed_signers".text = "* ${builtins.readFile ../../perso/keys/id_rsa.pub}";
 
-  programs.delta.enable = true;
-
   programs.git = {
     enable = true;
-
-    package = pkgs.gitFull; # to get send-email
 
     includes = [
       # { path = config.xdg.configHome + "/git/config.inc"; }

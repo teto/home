@@ -42,7 +42,7 @@ in
     flakeSelf.nixosProfiles.nix-daemon
     flakeSelf.nixosModules.sudo
 
-    ./greetd.nix
+    # ./greetd.nix
     ./ntp.nix
     ../modules/network-manager.nix
     # ../../nixos/profiles/librenms.nix

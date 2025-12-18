@@ -26,11 +26,7 @@
   # written by teto
   programs.fzf.enableLiveRegex = true;
 
-  programs.xdg.enable = true;
-
-  home.packages = [
-
-  ];
+  home.packages = [ ];
 
   # services.trayscale.enable = true;
 
@@ -39,9 +35,6 @@
   # services.wl-clip-persist.enable = true;
 
   programs.vifm.enable = true;
-
-  wayland.windowManager.wayfire.enable = false;
-  # programs.wayfire.enable = true;
 
   # programs.htop = {
   #   enabled = true;

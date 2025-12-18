@@ -18,14 +18,6 @@ let
 in
 # BandModifier5Ghz
 {
-  # config = {
-  # sops.secrets = {
-  #   "iwd_neotokyo.psk" = {
-  #     # https://github.com/Mic92/sops-nix?tab=readme-ov-file#binary
-  #     sopsFile = ./iwd_neotokyo.psk;
-  #     format = "binary";
-  #   };
-  # };
 
   # man tmpfiles.d
   systemd.tmpfiles.rules = [

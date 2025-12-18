@@ -39,6 +39,11 @@ in
   # '';
 
   home.packages = with pkgs; [
+    stow
+    systemctl-tui
+    pciutils # for lspci
+
+    # only for matt ?
     pass-perso
     (ignoreBroken pkgs.aider-chat) # breaks
     notmuch # needed for waybar-custom-notmuch.sh

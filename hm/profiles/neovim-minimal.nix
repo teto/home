@@ -7,12 +7,10 @@
 
 {
   programs.neovim = {
-    enable = false;
+    enable = true;
     vimAlias = false;
     highlightOnYank = true;
     plugins = with pkgs.vimPlugins; [
-      sensible
-      fugitive
       # vim-colorschemes
       # {
       #   plugin = vimtex;
@@ -24,6 +22,16 @@
       # }
       vim-nix
     ];
+
+    extraLuaConfig = lib.mkBefore (
+      ''
+        vim.g.mapleader = ' '
+
+        vim.opt.hidden = true -- you can open a new buffer even if current is unsaved (error E37) =
+        vim.opt.number = true
+        vim.opt.relativenumber = true
+      '');
+
     extraConfig = ''
       set shiftwidth=4
       set expandtab

@@ -12,6 +12,9 @@
 local llama_hostname = "jedha.local"
 -- local llama_hostname = "localhost"
 
+
+
+
 -- TODO load configuration from llm-providers.json
 -- lua vim.json.decode(str, opts)
 require('avante').setup({
@@ -161,7 +164,7 @@ require('avante').setup({
     fillchars = "eob: ",
 	-- TODO remove
     sidebar_header = {
-      enabled = true, -- true, false to enable/disable the header
+      enabled = false, -- true, false to enable/disable the header
       align = "center", -- left, center, right for title
       rounded = true,
     },

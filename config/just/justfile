@@ -76,3 +76,8 @@ nix-index args:
 
 nix-gc:
   nix-collect-garbage --delete-older-than 3d
+
+nix-closure-size derivation:
+  # $(nix-build ./shell.nix -A inputDerivation)
+  # $(nix build --print-out-paths drv)
+  nix path-info -Sh {{derivation}}

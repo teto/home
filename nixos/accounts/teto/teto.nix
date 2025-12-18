@@ -1,14 +1,8 @@
 {
-  # config,
   pkgs,
-  # options,
-  # lib,
-  # , secrets
-  # secretsFolder,
   ...
 }:
 {
-  programs.zsh.enable = true;
 
   users.users.teto = {
 

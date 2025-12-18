@@ -48,6 +48,14 @@ in
   # allows to find fonts enabled through home.packages
   fonts.fontconfig.enable = true;
 
+  programs.delta.enable = true;
+
+  xdg = {
+    enable = true;
+    mime.enable = true;
+  };
+
+
   i18n.glibcLocales = pkgs.glibcLocales.override {
     allLocales = true;
     # 229 fr_FR.UTF-8/UTF-8 \

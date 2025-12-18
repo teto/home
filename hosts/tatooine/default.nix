@@ -67,29 +67,21 @@ in
 
     flakeSelf.nixosProfiles.pixiecore
 
-    ../../nixos/profiles/disko-desktop.nix
-    # ../../tetos/disk-config.nix
-
+    flakeSelf.nixosProfiles.disko-desktop
     # removed 'cos it clashed with disk-config but these are not the same
     # ./generated.nix
 
     flakeSelf.inputs.disko.nixosModules.disko
     flakeSelf.nixosProfiles.nix-ld
 
-    # ../../nixos/profiles/rmfakecloud.nix
     # flakeSelf.nixosProfiles.hedgedoc
-    flakeSelf.nixosProfiles.rmfakecloud
+    # flakeSelf.nixosProfiles.rmfakecloud # useless without hacking remarkable
     flakeSelf.nixosProfiles.desktop
     flakeSelf.nixosProfiles.laptop
-    # ../../nixos/profiles/docker-daemon.nix
     flakeSelf.nixosProfiles.podman
-    # ../../nixos/profiles/podman.nix
 
     # ../../nixos/profiles/homepage-dashboard.nix
-    # ../../nixos/profiles/steam.nix
-    ../../nixos/profiles/kanata.nix
-    # ../../nixos/profiles/postgresql.nix
-    # ./services/tandoor.nix
+    flakeSelf.nixosProfiles.kanata
     # ./services/linkwarden.nix
 
     # ../../nixos/profiles/home-assistant.nix
@@ -98,17 +90,12 @@ in
 
   ];
 
-  services.rmfakecloud.enable = true;
-
-  # services.tandoor-recipes.enable = true;
-  # services.linkwarden = {
+  # services.vaultwarden = {
   #   enable = true;
-  #   secretFiles.NEXTAUTH_SECRET = "TOTO";
   # };
 
   nix.buildMachines = [
     # builder_neotokyo
-
     # {
     #   # using secrets.nix
     #   hostName = "laptop.local";
@@ -116,19 +103,10 @@ in
     # }
   ];
 
-  nixpkgs.overlays = lib.optionals withSecrets [ ];
-
-  # boot.blacklistedKernelModules = [ "nouveau" ];
 
   # enables command on boot/suspend etc
-
   security.polkit.enable = true;
 
-  # https://github.com/rycee/home-manager/pull/829
-  # https://discourse.nixos.org/t/sway-nixos-home-manager-conflict/20760/10
-
-  # To control power levels via powerprofilesctl
-  # services.power-profiles-daemon.enable = true;
 
   # this is for gaming
   # just trying to make some steam warnings go away
@@ -199,13 +177,6 @@ in
       at-spi2-core.enable = true; # for keyring it seems
     };
 
-    # Enable CUPS to print documents.
-    # https://nixos.wiki/wiki/Printing
-    printing = {
-      enable = true;
-      browsing = true;
-      drivers = [ pkgs.gutenprint ];
-    };
 
     # central regulatory domain agent (CRDA) to allow exchange between kernel and userspace
     # to prevent the "failed to load regulatory.db" ?
@@ -223,9 +194,7 @@ in
   # niriswitch on hm level
   programs.niri.enable = true;
 
-  services.displayManager.logToFile = true;
 
-  # services.displayManager.ly.enable = true;
 
   # for tests
   # services.vault = {
@@ -285,12 +254,4 @@ in
   # to remove "TSC_DEADLINE disabled due to Errata;
   # please update microcode to version: 0x22"
   # hardware.cpu.intel.updateMicrocode = true;
-
-  # services.logind = {
-  #   # see https://bbs.archlinux.org/viewtopic.php?id=225977 for problems with LID
-  #   # lidSwitch = "ignore";
-  #   lidSwitch = "suspend";
-  #   lidSwitchDocked = "suspend";
-  #   lidSwitchExternalPower = "ignore";
-  # };
 }

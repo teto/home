@@ -1,5 +1,8 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 {
+
+  package = pkgs.gitFull; # to get send-email
+
   settings = {
     user = {
       email = lib.mkForce "886074+teto@users.noreply.github.com";

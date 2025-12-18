@@ -501,40 +501,36 @@
           # disables the Home Manager option nixpkgs.*
           home-manager.useGlobalPkgs = true;
 
+          # shall we import all modules ?
           home-manager.sharedModules = [
             # remote broken
             self.inputs.wayland-pipewire-idle-inhibit.homeModules.default
-            # todo home-manager
             self.inputs.sops-nix.homeManagerModules.sops
-            # self.homeModules.services-swaync
 
-            # And add the home-manager module
-            ./hm/modules/xdg.nix # does nothing
-            self.homeProfiles.fzf # todo move to common.nix ?
+            self.homeProfiles.fzf
+            self.homeProfiles.common
+            self.homeProfiles.neovim-minimal
+            # self.homeProfiles.neovim # takes too much space for router
 
             # TODO it should autoload those
             self.homeModules.nvimpager
-
             self.homeModules.bash
             self.homeModules.memento
             self.homeModules.kitty
             self.homeModules.zsh
-
             self.homeModules.fre
             # self.homeModules.mod-cliphist
             self.homeModules.fzf
-
-            self.homeProfiles.common
-            self.homeProfiles.neovim
             self.homeModules.neovim
             self.homeModules.pimsync
             self.homeModules.package-sets
             self.homeModules.tig
+            self.homeModules.yazi
 
-            (
-              { ... }:
+              (
+                { ... }:
               {
-                home.stateVersion = "24.11";
+                home.stateVersion = "25.11";
 
                 # to avoid warnings about incompatible stateVersions
                 home.enableNixpkgsReleaseCheck = false;
@@ -664,7 +660,7 @@
         # TODO run evals and treefmt checks
         checks = {
           # formatting = treefmtEval.${myPkgs.system}.config.build.check self;
-          # formatting = (treefmt-nix.lib.evalModule myPkgs ./treefmt.nix).config.build.check;
+          formatting = (treefmt-nix.lib.evalModule myPkgs ./treefmt.nix).config.build.check;
         };
 
     })
@@ -770,11 +766,7 @@
         mod-cliphist = ./hm/modules/cliphist.nix;
 
         # for stuff not in home-manager yet
-        experimental = ./hm/profiles/experimental.nix;
-        gnome-shell = ./hm/profiles/gnome.nix;
-
-        # (modulesFromDir ./hm/modules)
-        # hosts/desktop/home-manager/users/teto/default.nix;
+        # experimental = ./hm/profiles/experimental.nix;
 
         # needs zsh-extra ?
         teto-zsh = ./hm/profiles/teto-zsh.nix;
@@ -792,7 +784,8 @@
             imports = [
               # And add the home-manager module
               self.homeProfiles.common
-              self.homeProfiles.neovim
+              self.homeProfiles.neovim-minimal
+
               # self.homeProfiles.yazi
               self.homeModules.neovim
               self.homeModules.bash

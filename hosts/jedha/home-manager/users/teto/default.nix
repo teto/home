@@ -15,11 +15,11 @@
     # flakeSelf.homeProfiles.qutebrowser # does nothing
     flakeSelf.inputs.nix-index-database.homeModules.nix-index
 
-    flakeSelf.homeModules.teto-nogui
-    flakeSelf.homeModules.experimental
+    flakeSelf.homeProfiles.experimental
     flakeSelf.homeProfiles.wezterm
     # flakeSelf.homeModules.gnome-shell
 
+    flakeSelf.homeModules.teto-nogui
     flakeSelf.homeModules.nextcloud-client
     flakeSelf.homeModules.llama-cpp
 

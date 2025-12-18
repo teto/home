@@ -33,9 +33,10 @@
     ];
 
     # testing
-    services.llama-cpp = {
-      enable = false;
-    };
+  services.llama-cpp = {
+    enable = false;
+  };
+
   programs.memento.enable = true;
 
   home.sessionPath = [
@@ -47,11 +48,12 @@
 
   programs.nh.enable = true;
 
-  home.packages = [
-    pkgs.power-options
-    pkgs.claude-code
-  ];
+  programs.claude-code.enable = true;
 
+  # home.packages = [
+  #   pkgs.claude-code
+  # ];
+  #
   package-sets = {
     audio = false;
     enableDesktopGUIPackages = true;

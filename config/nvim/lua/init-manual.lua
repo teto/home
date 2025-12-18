@@ -59,6 +59,9 @@ vim.g.rikai = {
 -- new option
 vim.o.winborder = 'rounded'
 
+-- that's where treesitter installs grammars
+-- vim.opt.rtp:prepend('/home/teto/parsers')
+
 diagnostic_default_config = {
     -- disabled because too big in haskell
     virtual_lines = {
@@ -288,8 +291,6 @@ vim.g.maplocalleader = ' '
 
 vim.opt.colorcolumn = { 100 }
 
--- that's where treesitter installs grammars
-vim.opt.rtp:prepend('/home/teto/parsers')
 
 -- lazy/config.lua sets vim.go.loadplugins = false so I used to run packloadall to restore those plugins
 -- but there seems to be a bug somewhere as overriding VIMRUNTIME would then be dismissed and it would used
@@ -595,6 +596,7 @@ vim.g.fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %
 -- "   au BufWritePost $MYVIMRC,.vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc,init.vim so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
 -- " augroup END
 
+-- move to nix ?
 vim.keymap.set('n', '<leader>rg', '<Cmd>Grepper -tool rg -open -switch<CR>')
 
 -- vim.keymap.set("n", "<leader>rgb", "<Cmd>Grepper -tool rgb -open -switch -buffer<CR>")
@@ -611,19 +613,13 @@ vim.api.nvim_create_autocmd('BufReadPost', {
     end,
 })
 
-vim.api.nvim_create_autocmd('BufReadPost', {
-    pattern = '*.jsonzlib',
-    callback = function()
-        -- " autocmd BufReadPre *.jsonzlib %!pigz -dc "%" - | jq '.'
-        print('MATCHED JSONZLIB PATTERN')
-    end,
-})
-
-vim.api.nvim_create_user_command('ViewChunk', function()
-    vim.cmd('!view_json %')
-end, {
-    desc = 'View nova chunk file',
-})
+-- vim.api.nvim_create_autocmd('BufReadPost', {
+--     pattern = '*.jsonzlib',
+--     callback = function()
+--         -- " autocmd BufReadPre *.jsonzlib %!pigz -dc "%" - | jq '.'
+--         print('MATCHED JSONZLIB PATTERN')
+--     end,
+-- })
 
 -- local verbose_output = false
 -- require("tealmaker").build_all(verbose_output)
@@ -961,9 +957,7 @@ vim.keymap.set('n', ',jl', function()
     vim.cmd([[ Rikai lookup ]])
 end, { buffer = false, desc = 'Japanese lookup' })
 
-vim.keymap.set('n', '<D-j>', function()
-    vim.cmd([[ Rikai lookup ]])
-end, { buffer = false, desc = 'Japanese lookup' })
+vim.keymap.set({'n', 'v'}, '<D-j>', function() vim.cmd([[ Rikai lookup ]]) end, { buffer = false, desc = 'Japanese lookup' })
 
 vim.keymap.set('n', '<leader>d', function()
     vim.cmd([[ FzfLua diagnostics_document ]])
@@ -1015,3 +1009,7 @@ vim.g.tidal_boot = nix_deps.tidal_boot .. 'BootTidal.hs'
 -- Note: `vim.loader` internally cache &rtp, and recache it if modified.
 -- Please test the best place to `vim.loader.enable()` by yourself.
 -- vim.loader.enable() -- (optional) before the `bootstrap`s above, it could increase startuptime.
+
+
+-- api.nvim_set_option_value("winbar", winbar_text, { win = winid })
+

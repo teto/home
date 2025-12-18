@@ -5,6 +5,10 @@
   ...
 }:
 {
+
+  environment.systemPackages = [
+    pkgs.bridge-utils
+  ];
   boot.kernel.sysctl = {
     # if you use ipv4, this is all you need
     "net.ipv4.conf.all.forwarding" = true;

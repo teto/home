@@ -53,21 +53,15 @@ in
 
   };
 
+  # this gets merged by default
   config = mkMerge [
     ({
       # INSTALLED whatever the config
       home.packages = with pkgs; [
-        btop
         curl
-        just # to read justfiles, *replace* Makefile
-        jq
-        gitFull # to get send-email
-        gnumake
+        # gitFull # to get send-email
+        # gnumake
         tree
-        stow
-        systemctl-tui
-        pciutils # for lspci
-        wget
         # zenith  # resources monitor
       ];
     })
@@ -106,10 +100,10 @@ in
         pkgs.socat 
         pkgs.bubblewrap
 
-        pkgs.koboldcpp
+        # pkgs.koboldcpp
         # llama-cpp-with-curl
         pkgs.llama-cpp # for llama-server and benchmarks
-        pkgs.llama-swap # allows to switch between models at runtime
+        # pkgs.llama-swap # allows to switch between models at runtime
         pkgs.claude-code # anthropic agent
 
         # libggml.so conflicts with llama-cpp's
@@ -322,7 +316,6 @@ in
         wirelesstools # to get iwconfig
         iw
         wavemon
-        bluetuith # Bluetooth TUI
 
         # aircrack-ng # TODO move to hacking package-set
       ];
@@ -358,6 +351,8 @@ in
           bcal # calculatrice
           # bmm # rust bookmark manager (not package yet)
           bfs # https://github.com/tavianator/bfs
+          binutils
+          btop
           cargo
           backblaze-b2-tetos
           dasht # ~ zeal but in terminal
@@ -425,9 +420,9 @@ in
 
           haskellPackages.fast-tags # generate TAGS file for vim
           hurl # http tester (broken)
-          httpie # for api testing
-
-          fre # generate a frequency database
+          # httpie # for api testing
+          #
+          # fre # generate a frequency database
 
           # there is also https://github.com/TaKO8Ki/gobang
           lazysql # SQL editor
@@ -460,13 +455,14 @@ in
           uv # to install python packages
           unar # used to view archives by yazi (now using ouch ?)
           whois
+          wget
           zeal-custom # doc for developers
           xan # CLI csv helper
-          viddy # fileevent watcher
+          # viddy # fileevent watcher
           watchman
 
-          flakeSelf.inputs.rippkgs.packages.${pkgs.stdenv.hostPlatform.system}.rippkgs
-          flakeSelf.inputs.rippkgs.packages.${pkgs.stdenv.hostPlatform.system}.rippkgs-index
+          # flakeSelf.inputs.rippkgs.packages.${pkgs.stdenv.hostPlatform.system}.rippkgs
+          # flakeSelf.inputs.rippkgs.packages.${pkgs.stdenv.hostPlatform.system}.rippkgs-index
         ];
 
     })

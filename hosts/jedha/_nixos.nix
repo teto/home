@@ -60,7 +60,6 @@ in
   imports = [
     autoloadedNixosModule # loaded by haumea
     ./_boot.nix
-    # ../../nixos/profiles/docker-daemon.nix
 
     flakeSelf.inputs.buildbot-nix.nixosModules.buildbot-master
     flakeSelf.inputs.buildbot-nix.nixosModules.buildbot-worker
@@ -74,9 +73,8 @@ in
     flakeSelf.nixosModules.universal
 
     flakeSelf.nixosProfiles.pixiecore
-    # ../../nixos/profiles/opensnitch.nix
+    # flakeSelf.nixosProfiles.opensnitch
     # ../../nixos/profiles/podman.nix
-    ../../nixos/profiles/rmfakecloud.nix
   ]
   ++ lib.optionals withSecrets [
     # TODO restore
@@ -200,9 +198,6 @@ in
     # Enable CUPS to print documents.
     # https://nixos.wiki/wiki/Printing
     printing = {
-      # set to
-      enable = true;
-      browsing = false;
       drivers = [
         pkgs.gutenprint
         pkgs.gutenprintBin

@@ -23,6 +23,9 @@ let
 in
 
 {
+  logToFile = true;
+
+  # services.displayManager.ly.enable = true;
 
   lemurs = {
     enable = true;

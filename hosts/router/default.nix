@@ -42,19 +42,20 @@ in
     flakeSelf.inputs.nixos-hardware.nixosModules.pcengines-apu
     flakeSelf.nixosModules.default-hm
 
-    ./iwd.nix
+    # ./iwd.nix # unused it seems
     ./hardware.nix
     ../config-all.nix
     ./services/openssh.nix
-    ../../nixos/profiles/router.nix
-    ../../nixos/profiles/home-assistant.nix
+    flakeSelf.nixosProfiles.avahi
+    flakeSelf.nixosProfiles.router
+    flakeSelf.nixosProfiles.home-assistant
 
   ];
 
   environment.systemPackages = with pkgs; [
-    flashrom # to be able to flash the bios see https://teklager.se/en/knowledge-base/apu-bios-upgrade/
-    dmidecode # to get version of the bios: dmidecode -t bios
-    bridge-utils
+    # disabled for now to reduce memory print
+    # flashrom # to be able to flash the bios see https://teklager.se/en/knowledge-base/apu-bios-upgrade/
+    # dmidecode # to get version of the bios: dmidecode -t bios
     iw
     iwd # contains iwmon
     # pkgs.wirelesstools # to get iwconfig
@@ -63,7 +64,9 @@ in
   ];
 
   home-manager.users.root = {
-    imports = [ flakeSelf.homeProfiles.neovim ];
+    # imports = [ 
+    #   flakeSelf.homeProfiles.neovim-minimal 
+    # ];
   };
 
   # TODO use from flake or from unstable
@@ -72,8 +75,7 @@ in
     # TODO it should load the whole folder
     imports = [
       flakeSelf.homeModules.teto-nogui
-      flakeSelf.homeProfiles.neovim
-      ./teto/nix.nix
+      # ./teto/nix.nix # done at 
     ];
 
     package-sets.wifi = true;
@@ -410,13 +412,6 @@ in
     };
   };
 
-  services.xserver = {
-    videoDrivers = [
-      # "nouveau"
-      "nvidia"
-    ];
-  };
-
   # services.dhcpd4 = {
   #   enable = true;
 
@@ -435,5 +430,6 @@ in
 
   time.timeZone = "Europe/Paris";
 
+  # TODO bump it
   system.stateVersion = "24.05";
 }

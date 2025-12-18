@@ -25,3 +25,7 @@ immich-restore backup:
   | sudo -u immich psql --dbname=immich
   # might have to delete the table if it already existed: DROP DATABASE immich;
   # CREATE DATABASE immich OWNER immich;
+
+# TODO generate email
+test-msmtp-send-mail:
+  cat contrib/2025-05-04-21.38.53.mail | msmtp --read-envelope-from --read-recipients 

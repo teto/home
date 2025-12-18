@@ -7,6 +7,7 @@
 {
   config,
   pkgs,
+  flakeSelf,
   secrets,
   options,
   lib,
@@ -18,7 +19,7 @@
   imports = [
     ../nixos/accounts/root/root.nix
     ../nixos/accounts/teto/teto.nix
-    ../nixos/profiles/ntp.nix
+    flakeSelf.nixosProfiles.ntp
     # ../nixos/profiles/neovim.nix
   ];
 
@@ -35,12 +36,11 @@
     ]
     ++ (with pkgs; [
       # autoconf
-      binutils
       curl
       fd # replaces 'find'
       file
       # lsof
-      sudo
+      # sudo
     ]);
 
   # TODO it appears in /etc/bashrc !
@@ -48,6 +48,8 @@
     # oftenly used programs {{{
     v = "nvim";
     c = "cat";
+    st = "systemctl-tui";
+    jctl = "journalctlb -b0 -r";
     # }}}
   };
 
@@ -79,7 +81,10 @@
     '';
   };
 
+  # todo might not be necessary on server ?
   programs.zsh = {
+    enable = true;
+
     # autosuggestions.async
     interactiveShellInit = ''
       stty -ixon

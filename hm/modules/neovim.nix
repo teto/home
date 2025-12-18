@@ -77,7 +77,7 @@ let
     #        modules = {
     #          -- not default but recommended, align lua lines with fnl source
     #          -- for more debuggable errors, but less readable lua.
-    #          -- correlate = true
+ g  #          -- correlate = true
     #        },
     #        -- options passed to fennel.compile for macros, defaults as shown
     #        macros = {
