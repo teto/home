@@ -186,6 +186,7 @@ vim.g.rocks_nvim = {
     -- TODO removing this generates errors at runtime :'(
     luarocks_binary = nix_deps.luarocks_executable,
     -- /home/teto/.local/share/nvim/rocks/luarocks-config.lua
+	---@diagnostic disable-next-line: need-check-nil
     luarocks_config = luarocks_config_fn(),
     _log_level = vim.log.levels.TRACE,
 
@@ -198,7 +199,6 @@ vim.g.rocks_nvim = {
         auto_highlight = {},
         auto_install = 'prompt',
         parser_map = {},
-        ---@type string[] | fun(lang: string, bufnr: integer):boolean
 
         -- filetypes or a function
         disable = {
@@ -1015,13 +1015,3 @@ vim.g.tidal_boot = nix_deps.tidal_boot .. 'BootTidal.hs'
 -- Note: `vim.loader` internally cache &rtp, and recache it if modified.
 -- Please test the best place to `vim.loader.enable()` by yourself.
 -- vim.loader.enable() -- (optional) before the `bootstrap`s above, it could increase startuptime.
-
--- rag_service.launch_rag_service(function()
---   -- Callback when service is ready
---   print("RAG service is running!")
--- end)
-function rag_add()
-	local rag_service = require('avante.rag_service')
-
-	rag_service.add_resource("/home/teto/blog")
-end
