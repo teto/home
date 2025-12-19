@@ -94,7 +94,6 @@ in
         text =
           let
             ghcEnv4Tidal = (pkgs.ghc.withPackages (hs: [ hs.tidal ]));
-
           in
           ''
             local M = {}

@@ -258,13 +258,6 @@ in
         autosuggestion.enable = true;
         autosuggestion.highlight = "fg=#d787ff,bold";
 
-        # fre_chpwd() {
-        #   fre --add "$(pwd)"
-        # }
-        # typeset -gaU chpwd_functions
-        # chpwd_functions+=fre_chpwd
-        # if [ -f "$ZDOTDIR/zshrc" ]; then
-        # fi
         initContent = ''
           source $ZDOTDIR/zshrc
         '';

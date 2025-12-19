@@ -102,7 +102,9 @@ require('avante').setup({
 -- I srv   load_models:     mistral-7b-openorca.Q6_K
 -- I srv   load_models:     mistralai/Ministral-3-3B-Instruct-2512-GGUF
 -- I srv   load_models:     mistralai_Devstral-Small-2-24B-Instruct-2512-IQ2_M
-		  model = "mistralai/Ministral-3-3B-Instruct-2512-GGUF",
+		  -- model = "mistralai/Ministral-3-3B-Instruct-2512-GGUF",
+		  model = 'ministral3-3b-q4',
+		  -- model = 'ministral3-14b'
 		  -- model = "/home/teto/llama-models/mistral-7b-openorca.Q6_K.gguf",
 		  endpoint = 'http://'..llama_hostname..':8080/v1',
 		  timeout = 30000, -- Timeout in milliseconds
@@ -282,6 +284,7 @@ require('avante').setup({
 	-- slash_commands = 
 })
 
+ -- "AvanteViewBufferUpdated"
 -- vim.api.nvim_create_user_command('', '!hasktags .', { desc = 'Regenerate tags' })
 
 -- https://github.com/NixOS/nixpkgs/pull/408463

@@ -109,6 +109,8 @@ in
 {
   programs.neovim = {
 
+    package = lib.mkForce flakeSelf.inputs.neovim-nightly-overlay.packages."${pkgs.stdenv.hostPlatform.system}".neovim-debug;
+
     plugins =
         luaPlugins
       ++ filetypePlugins

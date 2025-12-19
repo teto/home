@@ -7,5 +7,5 @@ systemctl is-active --quiet mujmap-fastfmail
 
 updates="toto"
 alt="running"
-tooltip="TOTO"
+tooltip="TOOLTIP"
 echo "{ \"text\":\"$updates\", \"alt\":\"$alt\", \"tooltip\":\"$tooltip\" }"

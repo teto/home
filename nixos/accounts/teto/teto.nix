@@ -3,6 +3,8 @@
   ...
 }:
 {
+  # necessary else nixpkgs complains teto wont be able to login
+  programs.zsh.enable = true;
 
   users.users.teto = {
 

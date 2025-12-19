@@ -179,11 +179,12 @@
       # inputs.neovim-src.follows = "neovim-src";
     };
 
-    # neovim-src = {
-    #   # url = "github:neovim/neovim";
-    #   url = "github:echasnovski/neovim?ref=teto/pack-lockfile-sync";
-    #   flake = false;
-    # };
+    neovim-src = {
+      url = "github:neovim/neovim";
+      # url = "github:lewis6991/neovim?ref=feat/optfunc";
+      # url = "github:echasnovski/neovim?ref=teto/pack-lockfile-sync";
+      flake = false;
+    };
 
     # TODO extend vim plugins from this overlay
     # neovim-overlay.url = "github:teto/neovim-nightly-overlay/vimPlugins-overlay";

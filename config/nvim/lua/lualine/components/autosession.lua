@@ -14,14 +14,14 @@
 --
 -- function M:update_status(is_focused)
 --
---  self.status = "TOTO"
---  return "TOTO"
+--  self.status = "STATUS"
+--  return "STATUS"
 -- end
 
 local function location()
     -- local line = vim.fn.line('.')
     -- local col = vim.fn.charcol('.')
-    return 'TOTO'
+    return 'localtion'
 end
 
 return location

@@ -6,7 +6,6 @@ local clip = require('teto.clipboard')
 -- local hl = require('lualine.highlight')
 -- hl.get_stl_default_hl()
 -- print(vim.inspect(hl))
-
 -- print(vim.inspect(obsession_component))
 
 -- local component = {function() return "toto" end , color = {fg= "red"}}
@@ -83,14 +82,22 @@ require('lualine').setup({
         -- Disable winbar for these filetypes
         disabled_filetypes = {
             winbar = {
-                'help',
-                'markdown',
-                'qf',
-                'AvanteInput',
-                'AvanteSelectedFiles',
-                -- 'AvanteConfirm',
-                'Avante',
+			 -- 'Avante',
+			 'help',
+			 'markdown',
+			 'qf',
+			 'AvanteInput',
+			 'AvanteSelectedFiles',
+			 -- 'AvanteConfirm',
+			 'Avante',
             },
+
+			statusline = {
+			 'AvanteInput',
+			 'AvanteSelectedFiles',
+			 -- 'AvanteConfirm',
+			 'Avante',
+			}
         },
         -- disabled_filetypes = {}
     },

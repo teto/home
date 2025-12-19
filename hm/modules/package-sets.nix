@@ -421,8 +421,6 @@ in
           haskellPackages.fast-tags # generate TAGS file for vim
           hurl # http tester (broken)
           # httpie # for api testing
-          #
-          # fre # generate a frequency database
 
           # there is also https://github.com/TaKO8Ki/gobang
           lazysql # SQL editor

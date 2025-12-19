@@ -18,7 +18,7 @@ FzfLua.register_extension('jj_files', fzf_jj.jj_files, vim.tbl_deep_extend('keep
 --             valid = true,
 --             value = entry,
 --             ordinal = entry, -- What's used for filtering/sorting matches
---             display = 'TOTO ' .. entry, -- How the display is rendered
+--             display = 'EZTRY ' .. entry, -- How the display is rendered
 --         }
 --     end,
 -- }

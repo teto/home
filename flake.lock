@@ -2444,7 +2444,7 @@
         "flake-parts": "flake-parts_19",
         "git-hooks": "git-hooks_5",
         "hercules-ci-effects": "hercules-ci-effects_2",
-        "neovim-src": "neovim-src_2",
+        "neovim-src": "neovim-src_3",
         "nixpkgs": "nixpkgs_11",
         "treefmt-nix": "treefmt-nix_5"
       },
@@ -2471,11 +2471,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1766016290,
-        "narHash": "sha256-YMf/PUyY4z7RlIe/Dzn1NnxZGS0Vp2eHxcMNWJM9q+A=",
+        "lastModified": 1766102654,
+        "narHash": "sha256-F2g1gDd88D5KI6j2YIfXn0Vcug+wNqcwFyKWQ/CnPUY=",
         "owner": "nix-community",
         "repo": "neovim-nightly-overlay",
-        "rev": "f7fbc4e3d4ccea45eaa5b187884592eb42dfdbbd",
+        "rev": "f5c873a02a0607bf5847d85af629dbb86dd75f4e",
         "type": "github"
       },
       "original": {
@@ -2487,11 +2487,11 @@
     "neovim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1766014002,
-        "narHash": "sha256-KE/ufBGH8XFXTw3Vt1DrK1rQmAEp1Q+oyLQibX5UKO0=",
+        "lastModified": 1766104332,
+        "narHash": "sha256-T7MN/sbX+j4dCkmIqX1LERFWk11cSpr9CdTmuky+yLI=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "c172fd9f464d5766eab9071e8f4770504c920c05",
+        "rev": "5f22cf5af3425fb0d461bf82220a633bebe10932",
         "type": "github"
       },
       "original": {
@@ -2501,6 +2501,22 @@
       }
     },
     "neovim-src_2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1766104332,
+        "narHash": "sha256-T7MN/sbX+j4dCkmIqX1LERFWk11cSpr9CdTmuky+yLI=",
+        "owner": "neovim",
+        "repo": "neovim",
+        "rev": "5f22cf5af3425fb0d461bf82220a633bebe10932",
+        "type": "github"
+      },
+      "original": {
+        "owner": "neovim",
+        "repo": "neovim",
+        "type": "github"
+      }
+    },
+    "neovim-src_3": {
       "flake": false,
       "locked": {
         "lastModified": 1759535609,
@@ -3713,6 +3729,7 @@
         "neomutt-src": "neomutt-src",
         "neovide": "neovide",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
+        "neovim-src": "neovim-src_2",
         "nix": "nix_2",
         "nix-filter": "nix-filter",
         "nix-index-database": "nix-index-database",

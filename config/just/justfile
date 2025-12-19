@@ -18,7 +18,10 @@ neotokyo-help:
 llama: 
   # llama-server -m {{LLAMA_MODELS_DIR}}/mistral-7b-openorca.Q6_K.gguf -c 2048 --port ${LLM_LOCAL_PORT} -ngl 33
   # /mistral-7b-openorca.Q6_K.gguf
-  llama-server --host 0.0.0.0 --port 8080 --models-dir /home/teto/llama-models --jinja -v --log-prefix --models-preset ~/llama-models/presets.ini
+  llama-server --host 0.0.0.0 --port 8080 --models-dir {{LLAMA_MODELS_DIR}} --jinja -v --log-prefix --models-preset ~/home/contrib/llama-presets.ini
+
+llama-bench:
+   llama-bench -m {{LLAMA_MODELS_DIR}}/mistralai_Ministral-3-3B-Instruct-2512-GGUF_Ministral-3-3B-Instruct-2512-Q4_K_M.gguf
 
 # voice recognition
 whisper:

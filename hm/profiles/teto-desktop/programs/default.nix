@@ -5,7 +5,7 @@
   tig.enable = true;
 
   fre = {
-    enable = true;
+    enable = false;
     enableAsFzfFile = true;
   };
 

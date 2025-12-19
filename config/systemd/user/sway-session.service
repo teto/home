@@ -3,15 +3,21 @@
 [Unit]
 Description=sway - SirCmpwn's Wayland window manager
 Documentation=man:sway(5)
-BindsTo=sway-session.target
+; BindsTo=sway-session.target
 ; Wants=sway-session-pre.target
 ; After=sway-session-pre.target
 Before=sway-session.target
+BindsTo=graphical-session.target
+Wants=graphical-session-pre.target
+After=graphical-session-pre.target
 
 [Service]
-Type=Notify
+; Type=Notify
+Type=simple
 ; EnvironmentFile=-%h/.config/sway/env
 ; todo it cant find sway in PATH , PATH looks empty
+; line make you able to logout to dm and login into sway again
+ExecStartPre=systemctl --user unset-environment WAYLAND_DISPLAY DISPLAY 
 ExecStart=/etc/profiles/per-user/teto/bin/sway
 Restart=on-failure
 RestartSec=1

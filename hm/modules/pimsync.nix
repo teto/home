@@ -376,7 +376,6 @@ in
 }
 # { config, lib, pkgs, ... }:
 # let
-#    cfg = config.programs.fre;
 # in {
 #   options = {
 #     programs.pimsync = {
