@@ -13,6 +13,12 @@ local llama_hostname = "jedha.local"
 -- local llama_hostname = "localhost"
 
 
+local provider = 'llamacpp'
+if os.hostname() == "tatooine" then
+  provider = "claude"
+end
+  
+
 
 
 -- TODO load configuration from llm-providers.json
@@ -61,7 +67,7 @@ require('avante').setup({
     },
 
     -- provider = 'claude',
-    provider = 'llamacpp',
+    provider = provider,
     ui = { border = 'single', background_color = '#FF0000' },
     -- provider = "ollama",
 

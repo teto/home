@@ -363,6 +363,7 @@ in
           gettext # for envsubst (TO NOT CONFOUND with gettext's envsubst)
           sad # live replace with fzf, use like `fd | sad toto tata`
           sops # password 'manager'
+          sqlitebrowser # to help debug rikai etc
           glab # gitlab cli
           hexyl # hexcode viewer
 
@@ -376,7 +377,7 @@ in
           # git-annex # fails on unstable
           # git-remote-hg
           # nix-prefetch-scripts # broken
-          manix
+          manix  # nix doc, might be outdated 
           net-tools # for netstat
           nix-output-monitor # 'nom'
 
@@ -410,12 +411,12 @@ in
           eza # to list files
           diff-so-fancy # todo install it via the git config instead
           gh # github client
-          git-absorb
+          # git-absorb  Using jujutsu now
           git-crypt
           # git-extras
           git-recent # check recently touched branches
           gitbatch # to fetch form several repos at once
-          lab # to interact with gitlab
+          # lab # to interact with gitlab
           gitu # like lazygit
 
           haskellPackages.fast-tags # generate TAGS file for vim
