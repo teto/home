@@ -1,4 +1,7 @@
 { pkgs }:
+let 
+  install_url= "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+in
 {
   # copy/pasted from
   # https://gitlab.com/rycee/nur-expressions/-/blob/master/pkgs/firefox-addons/default.nix?ref_type=heads
@@ -37,10 +40,14 @@
   #   }
   # );
 
+  # check     # https://mozilla.github.io/policy-templates/
+  # DisableBuiltinPDFViewer
+
   commonPolicies = {
 
     AutofillAddressEnabled = false;
     AutofillCreditCardEnabled = false;
+
 
     BlockAboutConfig = false;
 
@@ -52,8 +59,12 @@
     DisableTelemetry = true;
     DisplayMenuBar = "default-off";
     DontCheckDefaultBrowser = false;
+    DisplayBookmarksToolbar = "always";
     HardwareAcceleration = true;
     DisablePocket = true;
+
+    OfferToSaveLoginsDefault = false;
+    PromptForDownloadLocation = true;
 
     # Homepage = {
     #   # URL = "chrome://browser/content/blanktab.html";
@@ -72,7 +83,53 @@
     # ShowHomeButton = false;
     TranslateEnabled = false;
 
+    DefaultDownloadDirectory = "\${home}/Downloads";
+
     # See https://discourse.nixos.org/t/browser-and-browser-wars/70027/21
+    /* ---- EXTENSIONS ---- */
+    # Check about:support for extension/add-on ID strings.
+    # Valid strings for installation_mode are "allowed", "blocked",
+    # "force_installed" and "normal_installed".
+    ExtensionSettings = {
+        "*" =  {
+          "blocked_install_message"= "Custom error message.";
+          # "install_sources"= ["https://yourwebsite.com/*"];
+          # "installation_mode"= "blocked";
+          "allowed_types"= ["extension"];
+        };
+        # "uBlock0@raymondhill.net": {
+        #   "installation_mode": "force_installed",
+        #   "install_url": "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi"
+        # },
+              # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.firefox.policies
+      "uBlock0@raymondhill.net" = {
+        default_area = "menupanel";
+        # install_url = install_url;
+        installation_mode = "force_installed";
+        private_browsing = true;
+      };
+
+      # NihongoTube
+
+      # audible tab
+      "{0cd726db-f954-44f2-bf4f-7ed0de734de2}" = {
+        default_area = "menupanel";
+        installation_mode = "force_installed";
+      };
+
+      # 10ten
+      "{59812185-ea92-4cca-8ab7-cfcacee81281}" = {
+        default_area = "menupanel";
+        installation_mode = "force_installed";
+      };
+
+      # bonjourr
+      "{4f391a9e-8717-4ba6-a5b1-488a34931fcb}" = {
+        # default_area = "menupanel";
+        installation_mode = "force_installed";
+
+      };
+    };
     # ExtensionSettings
   };
 

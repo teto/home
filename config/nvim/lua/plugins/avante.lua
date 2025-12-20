@@ -13,9 +13,9 @@ local llama_hostname = "jedha.local"
 -- local llama_hostname = "localhost"
 
 
-local provider = 'llamacpp'
-if os.hostname() == "tatooine" then
-  provider = "claude"
+local provider = "claude"
+if vim.fn.hostname() == "jedha" then
+  provider = 'llamacpp'
 end
   
 

@@ -183,6 +183,7 @@ in
     # see https://wireless.wiki.kernel.org/en/developers/regulatory
     udev.packages = [
       pkgs.yubikey-personalization
+      pkgs.brightnessctl
     ];
 
     # just locate

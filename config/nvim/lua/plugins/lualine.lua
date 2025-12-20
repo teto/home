@@ -95,6 +95,7 @@ require('lualine').setup({
 			statusline = {
 			 'AvanteInput',
 			 'AvanteSelectedFiles',
+			 'AvanteTodos',
 			 -- 'AvanteConfirm',
 			 'Avante',
 			}

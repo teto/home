@@ -134,6 +134,8 @@ in
           myImagemagick = pkgs.imagemagick.override ({ ghostscriptSupport = true; });
         in
         [
+          pkgs.brightnessctl # attempt to draw a bigger cursor pointer in sway
+
           pkgs.phinger-cursors # attempt to draw a bigger cursor pointer in sway
 
           pkgs.ffmpeg # to transcribe audio
@@ -333,7 +335,7 @@ in
       home.packages =
         with pkgs;
         let
-          mcp-servers = [ pkgs.github-mcp-server ];
+          # mcp-servers = [ pkgs.github-mcp-server ];
 
           zeal-custom = pkgs.zeal.overrideAttrs (oa: {
 
@@ -344,8 +346,8 @@ in
 
           });
         in
-        mcp-servers
-        ++ [
+        # mcp-servers
+        [
           argbash # to generate bash parsers
           automake
           bcal # calculatrice
@@ -459,6 +461,8 @@ in
           xan # CLI csv helper
           # viddy # fileevent watcher
           watchman
+
+          # wakeonlan # for 
 
           # flakeSelf.inputs.rippkgs.packages.${pkgs.stdenv.hostPlatform.system}.rippkgs
           # flakeSelf.inputs.rippkgs.packages.${pkgs.stdenv.hostPlatform.system}.rippkgs-index

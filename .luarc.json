@@ -8,6 +8,10 @@
 			"config/mpv"
 		]
 	},
+    "diagnostics.severity": {
+      "redefined-local": "Warning",
+      "missing-fields": "Hint"
+    },
   "diagnostics": {
     "disable": [
     ],

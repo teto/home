@@ -68,7 +68,9 @@ let
     let
       notify-send = "${pkgs.libnotify}/bin/notify-send";
       wpctl = "${pkgs.wireplumber}/bin/wpctl";
+
       mpc = "${pkgs.mpc}/bin/mpc";
+
       # pkgs.writeShellApplication
       getIntegerVolume = pkgs.writeShellScript "get-volume-as-integer" ''
         volume=$(${wpctl} get-volume @DEFAULT_AUDIO_SINK@ | cut -f2 -d' ')
@@ -106,19 +108,21 @@ let
       # XF86MonBrightnessUp = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +10%; exec ${notify-send} --icon=brightness -u low -t 1000 -h int:value:$(${getBrightness}) -e -h string:synchronous:brightness-level 'Brightness' 'Raised brightness'";
       # TODO reference brightnessctl
       XF86MonBrightnessUp = let 
-        pkgs.writeShellApplication {
+        brightnessScript = pkgs.writeShellApplication {
           name = "brightness-mgr";
           runtimeInputs = [
             # final.pass-teto
+            pkgs.brightnessctl # 
+            pkgs.libnotify # for notify-send
           ];
+          # pass up
           text = builtins.readFile ../../bin/set-brightness.sh;
 
           checkPhase = ":";
-
-
-# 
         };
-      # in "exec ${brightnessctl}/bin/brightnessctl set +10%; exec ${notify-send} --icon=brightness -u low -t 1000 -h int:value:$(${getBrightness}) -e -h string:synchronous:brightness-level 'Brightness' 'Raised brightness'";
+      in
+        "exec ${brightnessScript} up 10%";
+
       XF86MonBrightnessDown = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 10%-; exec ${notify-send} --icon=brightness-low -u low -t 1000 -h int:value:$(${getBrightness}) -e -h string:synchronous:brightness-level 'Brightness' 'Lowered brightness'";
       # XF86MonBrightnessDown = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 10%-";
 

@@ -191,7 +191,7 @@ vim.g.rocks_nvim = {
     -- /home/teto/.local/share/nvim/rocks/luarocks-config.lua
 	---@diagnostic disable-next-line: need-check-nil
     luarocks_config = luarocks_config_fn(),
-    _log_level = vim.log.levels.TRACE,
+    -- _log_level = vim.log.levels.TRACE,
 
     -- checkout constants.DEFAULT_DEV_SERVERS
     servers = { 'https://luarocks.org/manifests/neorocks/' },

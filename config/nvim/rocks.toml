@@ -30,7 +30,7 @@ path = "/home/teto/neovim"
 "haskell-tools.nvim" = "6.2.0"
 
 # needed the patch from https://github.com/nvimtools/none-ls.nvim/pull/277/
-# "none-ls.nvim" = "scm"
+"none-ls.nvim" = "scm"
 "none-ls-extras.nvim" = "scm"
 
 "bufferline.nvim" = "4.9.1"
@@ -80,11 +80,11 @@ volt= "scm"
 # neogit = "2.0.0"
 # "diffview.nvim" = "scm"
 # tree-sitter-norg = "0.2.6"
-"none-ls.nvim"= "scm"
 # tree-sitter-orgmode = "2.0.1"
 "gitsigns.nvim"= "1.0.2"
 "feed.nvim" = "2.19.2"
-"typescript-tools.nvim" = "scm"
+# "typescript-tools.nvim" = "scm"
+
 # tree-sitter-hurl = "0.0.31"
 # "telescope.nvim" = "0.1.6"
 # neotest-busted = "1.2.1"
@@ -113,7 +113,8 @@ tree-sitter-xml = "0.0.42"
 
 [plugins."rikai.nvim"]
 # rev = "scm"
-dir = "/home/teto/neovim/rikai.nvim"
+dev = true
+# dir = "/home/teto/neovim/rikai.nvim"
 
 # seems ineffective ?
 # [plugins."command-and-cursor.nvim"]

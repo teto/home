@@ -94,22 +94,23 @@ in
       # with pkgs;
 
       # pkgs.open-in-mpv
-      extensions = {
-        packages =
-          ffLib.commonExtensions
-          ++ (with pkgs; [
-            # TODO no need for bitwarden anymore
-            firefox-addons.browserpass
-            firefox-addons."10ten-ja-reader"
-            # firefox-addons.audibleTabExtension
-            firefox-addons.switch-to-audible-tab
-            firefox-addons.refined-github
-            # pkgs.nur.repos.rycee.firefox-addons.browserpass-otp
-
-          ]);
-        # autoDisableScopes = 0;
-        # update.autoUpdateDefault = false;
-      };
+      # TODO install via policy instead
+      # extensions = {
+      #   packages =
+      #     ffLib.commonExtensions
+      #     ++ (with pkgs; [
+      #       # TODO no need for bitwarden anymore
+      #       firefox-addons.browserpass
+      #       firefox-addons."10ten-ja-reader"
+      #       # firefox-addons.audibleTabExtension
+      #       firefox-addons.switch-to-audible-tab
+      #       firefox-addons.refined-github
+      #       # pkgs.nur.repos.rycee.firefox-addons.browserpass-otp
+      #
+      #     ]);
+      #   # autoDisableScopes = 0;
+      #   # update.autoUpdateDefault = false;
+      # };
 
       search = {
         force = true;

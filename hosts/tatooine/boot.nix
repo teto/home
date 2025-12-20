@@ -44,6 +44,7 @@
     "plymouth.use-simpledrm" # kesako ?
 
     # "acpi_backlight=legacy"
+
     # "acpi_osi=linux"
 
     # "acpi_backlight=vendor"

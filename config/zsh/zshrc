@@ -156,8 +156,8 @@ bindkey '^Z' fancy-ctrl-z
 autoload -Uz add-zsh-hook
 autoload -z edit-command-line
 
-# because I hate it
-export PULUMI_SKIP_UPDATE_CHECK=1
+# because I hate the "new software" notifications
+# export PULUMI_SKIP_UPDATE_CHECK=1
 
 # notifies when long command finishes
 # zbell should recognize aliases
