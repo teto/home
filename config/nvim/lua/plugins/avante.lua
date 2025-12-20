@@ -99,25 +99,19 @@ require('avante').setup({
 		-- see https://github.com/yetone/avante.nvim/issues/2238
 		llamacpp = {
 		  __inherited_from = "openai",
-		  -- model = "",
-		  -- ministral-3B-Instruct-2512
-		  -- 
--- I srv   load_models:     Llama3.2-3B-Esper2.Q4_K_M
--- I srv   load_models:     Ministral-3-14B-Base-2512.Q6_K
--- I srv   load_models:     ggml-org_Qwen2.5-Coder-3B-Q8_0-GGUF_qwen2.5-coder-3b-q8_0
--- I srv   load_models:     mistral-7b-openorca.Q6_K
--- I srv   load_models:     mistralai/Ministral-3-3B-Instruct-2512-GGUF
--- I srv   load_models:     mistralai_Devstral-Small-2-24B-Instruct-2512-IQ2_M
-		  -- model = "mistralai/Ministral-3-3B-Instruct-2512-GGUF",
-		  model = 'ministral3-3b-q4',
+		  -- model = 'ministral3-3b-q4',
+		  model = 'devstral2-24b-iq2',
 		  -- model = 'ministral3-14b'
 		  -- model = "/home/teto/llama-models/mistral-7b-openorca.Q6_K.gguf",
 		  endpoint = 'http://'..llama_hostname..':8080/v1',
 		  timeout = 30000, -- Timeout in milliseconds
 
+		  use_ReAct_prompt = false,
+		  -- parse_curl_args
+
 		  -- tools send a shitton of tokens
 		  -- not supported by mistral (but inherited by others so...)
-		  disable_tools = true,
+		  disable_tools = false,
 
 		  -- empty key is required else avante complains
 		  api_key_name = '',

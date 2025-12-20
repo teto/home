@@ -1,16 +1,28 @@
 # doc at https://f1bonacc1.github.io/process-compose/configuration/
 #
 is_strict: true
+log_level: info 
+log_location: /tmp/pc.log
+log_configuration:
+  rotation:
+    max_size_mb: 1  # the max size in MB of the logfile before it's rolled
+    max_age_days: 3 # the max age in days to keep a logfile
+    max_backups: 3  # the max number of rolled files to keep
+
+# load it from .env instead , apparently via "process-compose -e .env"
+environment:
+ - "LLAMA_MODELS_DIR=/home/teto/llama-models"
+
 
 processes:
   redis:
     command: |
-      echo "TOTO"
-      sleep 40
-    depends_on:
-      runtrial:
-        # condition: toto
-        condition: process_completed_successfully
+      echo "Starting llama"
+      llama-server --host 0.0.0.0 --port 8080 --models-dir ${LLAMA_MODELS_DIR} --jinja -v --log-prefix --models-preset ~/home/contrib/llama-presets.ini
+    # depends_on:
+      # runtrial:
+      #   # condition: toto
+      #   condition: process_completed_successfully
 
   # one shot task, hence why we disable it now
   runtrial:

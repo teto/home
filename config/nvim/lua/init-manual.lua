@@ -1011,18 +1011,5 @@ vim.g.tidal_boot = nix_deps.tidal_boot .. 'BootTidal.hs'
 -- vim.loader.enable() -- (optional) before the `bootstrap`s above, it could increase startuptime.
 
 
-vim.api.nvim_create_autocmd({'User'}, {
-	pattern = 'AvanteViewBufferUpdated',
-	desc = "display provider statistics in statusline",
-	callback = function(args)
-        -- print("Called matt's on_attach autocmd")
-        if not (args.data and args.data.client_id) then
-            return
-        end
-
-		vim.print('received avantes results')
-	end
-})
-
--- api.nvim_set_option_value("winbar", winbar_text, { win = winid })
+require'teto.avante'
 
