@@ -46,14 +46,16 @@ in
 
   shellAliases = {
 
-    nixpaste = "curl -F \"text=<-\" http://nixpaste.lbr.uno";
+    # nixpaste = "curl -F \"text=<-\" http://nixpaste.lbr.uno";
 
+    m = "neomutt";
+    ns = "nix-shell";
   };
 
   # source_if_exists
+  #     source $XDG_CONFIG_HOME/bash/lib.sh
   initExtra = ''
     source $XDG_CONFIG_HOME/bash/aliases.sh
-    source $XDG_CONFIG_HOME/bash/lib.sh
     source $XDG_CONFIG_HOME/bash/bashrc.sh || true
   '';
 

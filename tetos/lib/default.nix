@@ -63,7 +63,7 @@ in
         };
 
     /**
-
+    Maps over folders in folder
     */
     importDirectories = folder:
       let
@@ -72,7 +72,17 @@ in
         transformEntry = dirname: val:
           let 
             key = dirname;
-            val' = folder + "/${dirname}";
+            val' = lib.mkNixosSystem {
+              # ideally we would return both versions
+                withSecrets = true;
+                hostname = dirname;
+                modules = [
+                  # ./hosts/tatooine
+                  (folder + "/${dirname}")
+                ];
+              };
+
+
           in 
 
           lib.nameValuePair key val';

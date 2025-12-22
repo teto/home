@@ -19,6 +19,9 @@
     # enableGitAnnex = false;
     # by default dataLib -> /var/lib/gitolite
     # dataDir = /home/teto/gitolite;
+
+    # perl code
+    # extraGitoliteRc
   };
 
   # then one could activate gitweb

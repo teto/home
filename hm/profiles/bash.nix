@@ -35,7 +35,6 @@
 
       v = "nvim";
       c = "cat";
-      m = "neomutt";
       y = "yazi";
 
       n = "nix develop";
@@ -49,7 +48,6 @@
       lt = "eza -al --sort=modified";
       # }}}
 
-      ns = "nix-shell";
       #mostly for testin
       # dfh="df --human-readable";
       # duh="du --human-readable";
@@ -84,8 +82,6 @@
     initExtra = ''
       # enable vimode
       set -o vi
-      # if the file exists
-      source $XDG_CONFIG_HOME/bash/aliases.sh
     '';
   };
 

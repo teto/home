@@ -119,8 +119,8 @@ let
       # brightnessctl brightness-low
       # XF86MonBrightnessUp = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +10%; exec ${notify-send} --icon=brightness -u low -t 1000 -h int:value:$(${getBrightness}) -e -h string:synchronous:brightness-level 'Brightness' 'Raised brightness'";
       # TODO reference brightnessctl
-      XF86MonBrightnessUp = "exec ${brightnessScript} up 10%";
-      XF86MonBrightnessDown= "exec ${brightnessScript} down 10%";
+      XF86MonBrightnessUp = "exec ${brightnessScript}/bin/brightness-mgr up 10%";
+      XF86MonBrightnessDown= "exec ${brightnessScript}/bin/brightness-mgr down 10%-";
       # XF86MonBrightnessDown = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 10%-; exec ${notify-send} --icon=brightness-low -u low -t 1000 -h int:value:$(${getBrightness}) -e -h string:synchronous:brightness-level 'Brightness' 'Lowered brightness'";
       # XF86MonBrightnessDown = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 10%-";
 

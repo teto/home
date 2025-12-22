@@ -701,15 +701,15 @@
         };
 
         # see https://determinate.systems/posts/extending-nixos-configurations
-        tatooine = laptop.extendModules {
-          # TODO retain existing specialArgs and inject mine ?!
-          specialArgs = {
-            hostname = "tatooine";
-            inherit secrets dotfilesPath;
-
-            withSecrets = true;
-          };
-        };
+        # tatooine = laptop.extendModules {
+        #   # TODO retain existing specialArgs and inject mine ?!
+        #   specialArgs = {
+        #     hostname = "tatooine";
+        #     inherit secrets dotfilesPath;
+        #
+        #     withSecrets = true;
+        #   };
+        # };
 
         neptune = lib.mkNixosSystem {
           pkgs = myPkgs;
