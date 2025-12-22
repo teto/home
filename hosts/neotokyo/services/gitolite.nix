@@ -6,6 +6,9 @@
 }:
 {
 
+
+  # git clone gitolite@host:gitolite-admin.git
+
   # enable gitolite
   services.gitolite = {
     enable = true;

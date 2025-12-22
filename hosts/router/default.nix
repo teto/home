@@ -44,10 +44,10 @@ in
 
     # ./iwd.nix # unused it seems
     ./hardware.nix
-    ../config-all.nix
     ./services/openssh.nix
     flakeSelf.nixosProfiles.avahi
     flakeSelf.nixosProfiles.router
+    flakeSelf.nixosProfiles.universal
     flakeSelf.nixosProfiles.home-assistant
 
   ];

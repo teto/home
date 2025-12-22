@@ -38,6 +38,7 @@ in
 
       enableIMPackages = mkEnableOption "IM packages";
       wifi = mkEnableOption "wifi packages";
+      bluetooth = mkEnableOption "bluetooth";
       energy = mkEnableOption "energy management packages";
       enableGaming = mkEnableOption "Gaming packages";
       waylandPackages = mkEnableOption "Wayland packages";
@@ -65,6 +66,13 @@ in
         # zenith  # resources monitor
       ];
     })
+
+    (mkIf cfg.bluetooth {
+      home.packages = with pkgs; [
+        pkgs.bluetuith
+      ];
+    })
+
 
     (mkIf cfg.yubikey {
       home.packages = with pkgs; [
@@ -181,7 +189,7 @@ in
           # gcalc
           # nomacs # image viewer
           # nyxt      # lisp browser
-          # pulseaudioFull # for pactl
+          pulseaudioFull # for pactl
           # replace with rust-wormhole
           # requires xdmcp https://github.com/freedesktop/libXdmcp
           rmpc # rust mpd client with synced lyrics and cover display !
@@ -603,7 +611,9 @@ in
         let
           # capable to display 2 subtitles at same time
           # like mpv but with a lsit of subtitles
-          memento-with-ocr = memento.override ({ withOcr = true; });
+          memento-with-ocr = memento
+            .override ({ withOcr = true; })
+            ;
         in
         [
           hakuneko

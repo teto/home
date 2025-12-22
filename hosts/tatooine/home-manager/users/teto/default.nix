@@ -37,17 +37,18 @@
     enable = false;
   };
 
-  programs.memento.enable = true;
+  # programs.memento.enable = true;
 
   home.sessionPath = [
-    "$HOME/.local/bin"
+    # "$HOME/.local/bin"
   ];
 
   # broken on unstable because python2
   # services.opensnitch-ui.enable = false;
 
-  programs.nh.enable = true;
+  programs.nh.enable = false;
 
+  # TODO enable sandboxing
   programs.claude-code.enable = true;
 
   # home.packages = [
@@ -55,7 +56,9 @@
   # ];
   #
   package-sets = {
+    # livecoding
     audio = false;
+    bluetooth = true;
     enableDesktopGUIPackages = true;
     enableIMPackages = true;
     scientificSoftware = true;
@@ -65,7 +68,7 @@
     japanese = true;
   };
 
-  #  stow-config / stow-home ?
+  # tow-config / stow-home ?
   home.file.".inputrc" = {
     # dotfilesPath
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/home/home/dot-inputrc";

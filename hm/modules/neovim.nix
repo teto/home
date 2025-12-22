@@ -50,7 +50,7 @@ let
     # {  plugin = aniseed;
     # runtime = {
     #      "ftplugin/c.vim".text = "setlocal omnifunc=v:lua.vim.lsp.omnifunc";
-    # # "toto".text = ''
+    # # "zaz".text = ''
     # # -- test fennel
     # #  '';
     # };

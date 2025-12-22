@@ -8,3 +8,5 @@
 * subsequent deploys
 
 * backup procedure
+
+- save the gitolite-admin repo

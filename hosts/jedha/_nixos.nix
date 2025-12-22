@@ -70,7 +70,7 @@ in
     flakeSelf.nixosProfiles.nix-daemon
 
     flakeSelf.nixosProfiles.steam
-    flakeSelf.nixosModules.universal
+    flakeSelf.nixosProfiles.universal
 
     flakeSelf.nixosProfiles.pixiecore
     # flakeSelf.nixosProfiles.opensnitch

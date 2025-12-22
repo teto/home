@@ -6,7 +6,8 @@
   ...
 }@mainArgs:
 {
-  imports = [ ../../hosts/config-all.nix ];
+  imports = [ 
+  ];
 
   environment.systemPackages = with pkgs; [
     host.dnsutils

@@ -20,6 +20,7 @@ My secrets are handled with [[sops-nix-github][sops-nix]] and not gitted (no way
 - the flake exposes `nixosModules` along with `homeModules`. I name configurations that can be shared between hosts "profiles" (some would call it "roles") so the flake exposes `nixosProfiles` as well as `homeProfiles`
 - nix packages/modules/profiles are autoloaded according to the folder hierarchy. This is made possible by [[haumea][haumea]].
 I dont necessarily recommand haumea though because it can lead to some hard to diagnose error messages and while elegant it makes sideeffects harder to track down IMO.
+- automated generation of ssh client configuration from the various nixosConfigurations ssh servers
 
 
 If you scroll a bit, you will find sparse tutorials on how to deploy both on a LAN (PXE) or remotely (e.g. VPS). Kudos to [[nixos-anywhere][nixos-anywhere]] and [[disko]] for making this easier than ever.

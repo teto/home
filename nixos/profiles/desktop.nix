@@ -10,13 +10,14 @@ let
   autoloadedModule =
     { pkgs, ... }@args:
     flakeSelf.inputs.haumea.lib.load {
-      src = flakeSelf.inputs.nix-filter {
-        root = "${flakeSelf}/nixos/profiles/desktop";
-      };
+      src = builtins.trace "${flakeSelf}/nixos/profiles/desktop" "${flakeSelf}/nixos/profiles/desktop";
+      # Breaks everything
+      # flakeSelf.inputs.nix-filter {
+      #   root = "${flakeSelf}/nixos/profiles/desktop";
+      # };
 
       inputs = args // {
         inputs = flakeSelf.inputs;
-        # inherit config;
       };
       transformer = [
         flakeSelf.inputs.haumea.lib.transformers.liftDefault
@@ -30,13 +31,15 @@ in
     autoloadedModule
 
     flakeSelf.nixosModules.default-hm
+
     # flakeSelf.inputs.mptcp-flake.nixosModules.mptcp
     # flakeSelf.inputs.peerix.nixosModules.peerix
 
     # installed via HM
     flakeSelf.inputs.nix-index-database.nixosModules.nix-index
     flakeSelf.nixosModules.nvd
-    flakeSelf.nixosModules.universal
+
+    flakeSelf.nixosProfiles.universal
     flakeSelf.nixosProfiles.avahi
     flakeSelf.nixosProfiles.gnome
     flakeSelf.nixosProfiles.nix-daemon
@@ -158,7 +161,7 @@ in
   # networking.firewall.allowedTCPPorts = [ 631 ];
 
   hardware = {
-    # enableAllFirmware =true;
+    enableAllFirmware =true;
     enableRedistributableFirmware = true;
     # High quality BT calls
   };
@@ -206,8 +209,6 @@ in
     };
   };
 
-  # systemd.packages = [ ];
-
   nix = {
 
     # This priority propagates to build processes. 0 is the default Unix process I/O priority, 7 is the lowest
@@ -217,7 +218,6 @@ in
       "nixpkgs=/home/teto/nixpkgs"
     ];
 
-    settings.log-lines = 20;
     # either use --option extra-binary-caches http://hydra.nixos.org/
     # handy to hack/fix around
     # readOnlyStore = false;

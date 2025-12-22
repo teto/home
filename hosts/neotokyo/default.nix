@@ -97,6 +97,7 @@ in
     ./services/nginx.nix
     ./services/immich.nix
     ./services/restic.nix
+    ./services/llama-cpp.nix
 
     # ./services/jellyfin.nix
 

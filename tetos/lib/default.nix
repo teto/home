@@ -62,8 +62,31 @@ in
 
         };
 
+    /**
 
-      importDir =
+    */
+    importDirectories = folder:
+      let
+        # transformEntry = lib.id;
+        pred = key: val: val == "directory";
+        transformEntry = dirname: val:
+          let 
+            key = dirname;
+            val' = folder + "/${dirname}";
+          in 
+
+          lib.nameValuePair key val';
+
+        folders = 
+          lib.mapAttrs'
+                  transformEntry
+                  (lib.filterAttrs pred
+                    (builtins.readDir folder))
+                ;
+        in
+          folders;
+
+      importFiles =
         folder:
         let
           genKey = str: lib.replaceStrings [ ".nix" ] [ "" ] (builtins.baseNameOf (toString str));

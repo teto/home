@@ -989,13 +989,20 @@ vim.g.tidal_boot = nix_deps.tidal_boot .. 'BootTidal.hs'
     end
 
     -- Create parent directories if they don't exist
-    local dir = vim.fn.fnamemodify(file, ':h')
+    -- local dir = vim.fn.fnamemodify(file, ':h')
+	-- todo confirm with user before creating the folder
+
+    local from_dir = vim.fn.fnamemodify(vim.fn.expand('%'), ':p:h')
+	print("Selected dir:", from_dir)
+	local new_filename = vim.fs.joinpath(from_dir, file)
+	print("new_filename:", new_filename)
+
+    local dir = vim.fn.fnamemodify(new_filename, ':h')
     if dir ~= '' and vim.fn.isdirectory(dir) == 0 then
       vim.fn.mkdir(dir, 'p')
     end
-
     -- Edit the file (creates it if it doesn't exist)
-    vim.cmd('edit ' .. vim.fn.fnameescape(file))
+    vim.cmd('edit ' .. vim.fn.fnameescape(new_filename))
   end, { desc = 'Go to file, create if missing' })
 
 -- Wrapping the `require` in `function-end` is important for lazy-load.

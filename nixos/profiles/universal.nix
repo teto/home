@@ -17,8 +17,8 @@
 {
 
   imports = [
-    ../nixos/accounts/root/root.nix
-    ../nixos/accounts/teto/teto.nix
+    ../accounts/root/root.nix
+    ../accounts/teto/teto.nix
     flakeSelf.nixosProfiles.ntp
     # ../nixos/profiles/neovim.nix
   ];

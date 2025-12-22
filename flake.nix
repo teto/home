@@ -671,8 +671,14 @@
       # // other-schemas.schemas
       ;
 
-      # TODO import from hosts/ via lib.importDir
-      nixosConfigurations = rec {
+      # TODO import from hosts/ via lib.importFiles
+      # autoload from hosts
+      # todo map over the attributes to regenerate them without secrets
+      # adjust the hostnames accordingly ?
+      nixosConfigurations = 
+        lib.importDirectories ./hosts
+        //
+        rec {
         # TODO generate those from the hosts folder ?
         # with aliases ?
         router = lib.mkNixosSystem {
@@ -696,21 +702,12 @@
 
         # see https://determinate.systems/posts/extending-nixos-configurations
         tatooine = laptop.extendModules {
-          modules = [
-            self.inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen5
-          ];
-
           # TODO retain existing specialArgs and inject mine ?!
           specialArgs = {
             hostname = "tatooine";
             inherit secrets dotfilesPath;
 
             withSecrets = true;
-            # userConfig = {
-            #   laptop = true;
-            #   # so it
-            #   configuration = "xps3910";
-            # };
           };
         };
 
@@ -754,15 +751,15 @@
       };
 
       # TODO scan hm/{modules, profiles} folder
-      homeProfiles = lib.importDir ./hm/profiles // {
+      homeProfiles = lib.importFiles ./hm/profiles // {
         # TODO importdir should check for default.nix
         neovim = ./hm/profiles/neovim;
 
         teto-desktop = ./hm/profiles/desktop.nix;
-        sway-notification-center = ./hm/profiles/swaync.nix;
+        # sway-notification-center = ./hm/profiles/swaync.nix;
       };
 
-      homeModules = lib.importDir ./hm/modules // {
+      homeModules = lib.importFiles ./hm/modules // {
 
         mod-cliphist = ./hm/modules/cliphist.nix;
 
@@ -794,23 +791,16 @@
             ];
           }
         );
-
-        # xdg = ./hm/profiles/xdg.nix;
-        # yazi = ./hm/profiles/yazi.nix;
       };
 
-      # todo rename folder
-      nixosProfiles = lib.importDir ./nixos/profiles;
+      nixosProfiles = lib.importFiles ./nixos/profiles;
 
-
-      nixosModules = lib.importDir ./nixos/modules // {
+      nixosModules = lib.importFiles ./nixos/modules // {
         default-hm = hm-common;
         teto-nogui = nixos/accounts/teto/teto.nix;
-
-        # todo move to profiles
-        universal = hosts/config-all.nix;
       };
 
+      # autoload via lib.importDirectories
       templates = {
         default = {
           path = ./nixpkgs/templates/default;
@@ -823,7 +813,7 @@
         };
         lua = {
           path = ./nixpkgs/templates/lua;
-          description = "A flake to help develop haskell libraries.";
+          description = "A flake to help develop lua libraries.";
         };
         python = {
           path = ./nixpkgs/poetry/haskell;

@@ -76,11 +76,23 @@ let
         volume=$(${wpctl} get-volume @DEFAULT_AUDIO_SINK@ | cut -f2 -d' ')
         ${pkgs.perl}/bin/perl -e "print 100 * $volume"
       '';
-      getBrightness = pkgs.writeShellScript "get-brightness-as-integer" ''
-        # -m => machine
-        brightness=$(${pkgs.brightnessctl}/bin/brightnessctl -m info | cut -f4 -d, )
-        echo $brightness
-      '';
+      # getBrightness = pkgs.writeShellScript "get-brightness-as-integer" ''
+      #   # -m => machine
+      #   brightness=$(${pkgs.brightnessctl}/bin/brightnessctl -m info | cut -f4 -d, )
+      #   echo $brightness
+      # '';
+        brightnessScript = pkgs.writeShellApplication {
+          name = "brightness-mgr";
+          runtimeInputs = [
+            # final.pass-teto
+            pkgs.brightnessctl # 
+            pkgs.libnotify # for notify-send
+          ];
+          # pass up
+          text = builtins.readFile ../../bin/set-brightness.sh;
+
+          checkPhase = ":";
+        };
 
     in
     # { name = "get-volume-as-integer";
@@ -107,23 +119,9 @@ let
       # brightnessctl brightness-low
       # XF86MonBrightnessUp = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +10%; exec ${notify-send} --icon=brightness -u low -t 1000 -h int:value:$(${getBrightness}) -e -h string:synchronous:brightness-level 'Brightness' 'Raised brightness'";
       # TODO reference brightnessctl
-      XF86MonBrightnessUp = let 
-        brightnessScript = pkgs.writeShellApplication {
-          name = "brightness-mgr";
-          runtimeInputs = [
-            # final.pass-teto
-            pkgs.brightnessctl # 
-            pkgs.libnotify # for notify-send
-          ];
-          # pass up
-          text = builtins.readFile ../../bin/set-brightness.sh;
-
-          checkPhase = ":";
-        };
-      in
-        "exec ${brightnessScript} up 10%";
-
-      XF86MonBrightnessDown = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 10%-; exec ${notify-send} --icon=brightness-low -u low -t 1000 -h int:value:$(${getBrightness}) -e -h string:synchronous:brightness-level 'Brightness' 'Lowered brightness'";
+      XF86MonBrightnessUp = "exec ${brightnessScript} up 10%";
+      XF86MonBrightnessDown= "exec ${brightnessScript} down 10%";
+      # XF86MonBrightnessDown = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 10%-; exec ${notify-send} --icon=brightness-low -u low -t 1000 -h int:value:$(${getBrightness}) -e -h string:synchronous:brightness-level 'Brightness' 'Lowered brightness'";
       # XF86MonBrightnessDown = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 10%-";
 
       # "XF86Display" = "exec " + ../../rofi-scripts/monitor_layout.sh ;
@@ -132,13 +130,11 @@ let
 
       XF86AudioNext = "exec ${mpc} next; exec notify-send --icon=forward -h string:synchronous:mpd 'Audio next'";
       XF86AudioPrev = "exec ${mpc} next; exec notify-send --icon=backward -h string:synchronous:mpd 'Audio previous'";
-      # XF86AudioPrev exec mpc prev; exec notify-send "Audio prev"
       XF86AudioPlay = "exec ${mpc} toggle; exec notify-send --icon=play-pause -h string:synchronous:mpd 'mpd' 'Audio Pause' -e ";
-      # XF86AudioPause (pas presente sur mon clavier ?
+      # XF86AudioPlay = "exec ${pkgs.vlc}/bin/vlc; exec ${notify-send} --icon=media-playback-stop-symbolic -u low 'test'";
 
       XF86AudioStop = "exec ${mpc} stop; exec notify-send --icon=stop -h string:synchronous:mpd 'Stopped Audio' -e";
 
-      # XF86AudioPlay = "exec ${pkgs.vlc}/bin/vlc; exec ${notify-send} --icon=media-playback-stop-symbolic -u low 'test'";
     };
 
 in

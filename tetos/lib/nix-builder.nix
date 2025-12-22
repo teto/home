@@ -37,7 +37,7 @@
     in
     builderAttrs
     // {
-      hostName = cfg.networking.hostName;
+      hostName = cfg.networking.domain;
       inherit
         system
         protocol

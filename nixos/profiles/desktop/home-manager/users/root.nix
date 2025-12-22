@@ -18,7 +18,7 @@ in
     enableDefaultConfig = false;
     # todo add publickey for my server
 
-    # matchBlocks = hostsConfigs;
+    matchBlocks = hostsConfigs;
 
 
     # KnownHostsCommand

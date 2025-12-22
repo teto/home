@@ -23,6 +23,6 @@ jq --compact-output \
   --null-input \
   --arg text "$text" \
   --arg class "unmuted" \
-  '{"text": $text, "tooltip": "toto", "class": $class}'
+  '{"text": $text, "tooltip": "tooltip", "class": $class}'
 
 # fi

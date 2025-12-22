@@ -18,6 +18,5 @@
     # Alternatively
     # requirePassFile = "./redis.txt";
     # requirePass = "toto";
-    # vmOverCommit = 1;
   };
 }

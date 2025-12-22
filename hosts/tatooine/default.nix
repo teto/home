@@ -51,13 +51,6 @@ let
   # builder_jedha = (tetosLib.nixosConfToBuilderAttr {} flakeSelf.nixosConfigurations.jedha);
   # builder_neotokyo = (tetosLib.nixosConfToBuilderAttr {} flakeSelf.nixosConfigurations.neotokyo);
 
-  # b1 = pkgs.tetosLib.deployrsNodeToBuilderAttr flakeSelf.deploy.nodes.jedha;
-  # {
-  #   # using secrets.nix
-  #   hostName = "jedha.local";
-  #   system =  "x86_64-linux";
-  # };
-
 in
 {
   imports = [
@@ -65,7 +58,7 @@ in
     # should not ?!
     # desktopAutoloaded
 
-    flakeSelf.nixosProfiles.pixiecore
+    # flakeSelf.nixosProfiles.pixiecore
 
     flakeSelf.nixosProfiles.disko-desktop
     # removed 'cos it clashed with disk-config but these are not the same
@@ -73,6 +66,7 @@ in
 
     flakeSelf.inputs.disko.nixosModules.disko
     flakeSelf.nixosProfiles.nix-ld
+    flakeSelf.inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen5
 
     # flakeSelf.nixosProfiles.hedgedoc
     # flakeSelf.nixosProfiles.rmfakecloud # useless without hacking remarkable
@@ -93,6 +87,27 @@ in
   # services.vaultwarden = {
   #   enable = true;
   # };
+
+  services.pipewire.wireplumber.configPackages =
+  [
+    # pkgs.hello
+    (pkgs.writeTextDir "share/wireplumber/wireplumber.conf.d/10-bluez.conf" ''
+      monitor.bluez.properties = {
+        bluez5.roles = [ a2dp_sink a2dp_source bap_sink bap_source hsp_hs hsp_ag hfp_hf hfp_ag ]
+        bluez5.codecs = [ sbc sbc_xq aac ]
+        bluez5.enable-sbc-xq = true
+        bluez5.hfphsp-backend = "native"
+      }
+    '')
+  ];
+
+  systemd.user.services.pipewire.environment = {
+      PIPEWIRE_DEBUG="5";
+    };
+
+  # systemd.user.services.wireplumber.environment = {
+  #     WIREPLUMBER_DEBUG="5";
+  #   };
 
   nix.buildMachines = [
     # builder_neotokyo
@@ -152,11 +167,40 @@ in
     enableAllFirmware = true;
     enableRedistributableFirmware = true;
     sane.enable = true;
+
+    # cant be enabled with pipewire
+    # pulseaudio = {
+    #   enable = true;
+    #   package = pkgs.pulseaudioFull;
+    # };
+
     # High quality BT calls
+    # https://nixos.wiki/wiki/Bluetooth
     bluetooth = {
       enable = true;
       powerOnBoot = false;
-      # hsphfpd.enable = false; # conflicts with pipewire
+      # package = 
+      # written to /etc/bluetooth/main.conf
+      settings = {
+
+        General = {
+          Name = "toto";
+
+          # Shows battery charge of connected devices on supported
+          # Bluetooth adapters. Defaults to 'false'.
+          Experimental = true;
+
+          # to work with a2dp profile (seems outdated)
+          # unknown key
+          # Enable = "Source,Sink,Media,Socket";
+        };
+        Policy = {
+        # Enable all controllers when they are found. This includes
+        # adapters present on start as well as adapters that are plugged
+        # in later on. Defaults to 'true'.
+        AutoEnable = true;
+        };
+      };
     };
     graphics = {
       enable = true;

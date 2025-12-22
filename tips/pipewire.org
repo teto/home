@@ -10,3 +10,9 @@ wpctl set-default
 Volume: 0.35
 ❯ wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.4
 ❯ wpctl get-volume @DEFAULT_AUDIO_SINK@
+
+* bluetooth issues
+
+
+pw-cli list-objects  | grep bluetooth
+pactl list sinks short
