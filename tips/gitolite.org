@@ -1,3 +1,8 @@
+
+* check access
+
+look at /var/lib/gitolite/.ssh/authorized_keys
+
 gitolite help
 https://gitolite.com/gitolite/cookbook
 

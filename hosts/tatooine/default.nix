@@ -25,7 +25,6 @@ let
           "programs/"
           "hardware/"
           "home-manager/user/root/"
-
         ];
 
         exclude = [
@@ -237,7 +236,7 @@ in
 
   # experimental
   # niriswitch on hm level
-  programs.niri.enable = true;
+  programs.niri.enable = false;
 
 
 
@@ -284,10 +283,7 @@ in
 
   # smartcard service for yubikey
   # can conflict with gpg-agent depending on config
-  services.pcscd.enable = true;
-  services.yubikey-agent.enable = true;
-
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
 
   services.journald.extraConfig = ''
     # alternatively one can run journalctl --vacuum-time=2d

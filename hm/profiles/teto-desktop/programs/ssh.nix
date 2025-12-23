@@ -73,6 +73,7 @@ in
         };
       };
 
+      # as a user we should be able to override the key
       neotokyo-gitolite-admin = {
         match = "user gitolite host ${secrets.jakku.hostname}";
         hostname = secrets.jakku.hostname;
@@ -84,40 +85,10 @@ in
         # port = 12666;
       };
 
-      # router = {
-      #   # checkHostIP
-      #   identityFile = "${secretsFolder}/ssh/id_rsa";
-      #   user = "teto";
-      #   # host = "router";
-      #   addKeysToAgent = "yes";
-      #   hostname = secrets.router.hostname;
-      #   identitiesOnly = true;
-      #   # experimental
-      #   # https://github.com/nix-community/home-manager/pull/2992
-      #   match = "host router";
-      #   # port = 12666;
-      #   # RemoteCommand
-      #   # SendEnv LANG LC_*
-      # };
-
-      # router-lan = {
-      #   addKeysToAgent = "yes";
-      #   # checkHostIP
-      #   identityFile = "${secretsFolder}/ssh/id_rsa";
-      #   user = "teto";
-      #   # host = "router";
-      #   hostname = "10.0.0.1";
-      #   identitiesOnly = true;
-      #   match = "host router-lan";
-      #   port = 12666;
-      # };
-
     });
 
   includes = [
     "${config.xdg.configHome}/ssh/config"
-    # so we hardcoded it
-    # "/home/teto/.config/ssh/config"
   ];
 
   # GlobalKnownHostfiles Specifies one or more files to use for the global host key database, separated by whitespace. The default is /etc/ssh/ssh_known_hosts, /etc/ssh/ssh_known_hosts2.
@@ -125,10 +96,4 @@ in
 
   };
 
-  # TODO parts of this should be accessible from
-  # extraConfig = ''
-  #   Include
-  #   # TODO remove when doctor's home-manager is ok
-  #   Include ${config.xdg.configHome}/nova/jinkompute/ssh_config
-  # '';
 }

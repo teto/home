@@ -18,20 +18,20 @@
     };
 
     # # this generates what looks like an ok config but jj doesn't seem to care for it
-    "--scope" = [
-      {
-        "--when"."repositories" = [ "~/nova" ];
-        "user" = {
-          email = secrets.accounts.mail.nova.email;
-          name = secrets.accounts.mail.nova.displayName;
-        };
-        "git" = {
-
-          push = "up";
-          fetch = "up";
-        };
-      }
-    ];
+    # "--scope" = [
+    #   {
+    #     "--when"."repositories" = [ "~/nova" ];
+    #     "user" = {
+    #       email = secrets.accounts.mail.nova.email;
+    #       name = secrets.accounts.mail.nova.displayName;
+    #     };
+    #     "git" = {
+    #
+    #       push = "up";
+    #       fetch = "up";
+    #     };
+    #   }
+    # ];
 
     # "--scope.user" = {
     #     email = secrets.accounts.mail.nova.email;

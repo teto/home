@@ -97,7 +97,7 @@
     # https://github.com/DeterminateSystems/nix-src/pull/217
     flake-schemas.url = "github:DeterminateSystems/flake-schemas";
 
-    firefox2nix.url = "git+https://git.sr.ht/~rycee/mozilla-addons-to-nix";
+    # firefox2nix.url = "git+https://git.sr.ht/~rycee/mozilla-addons-to-nix";
 
     flake-utils.url = "github:numtide/flake-utils";
 
@@ -573,17 +573,14 @@
             fzf # for just's "--select"
             git-crypt # to run `git-crypt export-key`
             just # to run justfiles
-            magic-wormhole-rs # to transfer secrets
             nix-output-monitor
-            nodejs
-            self.inputs.firefox2nix.packages.${system}.default
+            # nodejs # what for ?
             termscp-matt
-            treefmt-home
+            treefmt-home # use formatter instead ?
             ripgrep
             rustic # testing against restic
             sops # to decrypt secrets
             ssh-to-age
-            wormhole-rs # "wormhole-rs send"
 
             self.inputs.nixos-anywhere.packages.${system}.nixos-anywhere
             disko
@@ -591,9 +588,18 @@
             # boot debug
             # chntpw # broken to edit BCD (Boot configuration data) from windows
             efibootmgr
+
+            # yubikey deps
             smartmontools # for smartctl
             pamtester # to test yubikey https://nixos.wiki/wiki/Yubikey
             pam_u2f # pamu2fcfg > ~/.config/Yubico/u2f_keys
+
+            magic-wormhole-rs # to transfer secrets
+            wormhole-rs # "wormhole-rs send"
+          ]
+          ++ [
+            # removed because it was using IFD and we use firefox policies instead
+            # self.inputs.firefox2nix.packages.${system}.default
           ];
 
           # TODO set SOPS_A
@@ -720,13 +726,13 @@
           withSecrets = true;
         };
 
-        neotokyo = lib.mkNixosSystem {
-          modules = [
-            ./hosts/neotokyo/default.nix
-          ];
-          hostname = "neotokyo";
-          withSecrets = true;
-        };
+        # neotokyo = lib.mkNixosSystem {
+        #   modules = [
+        #     ./hosts/neotokyo/default.nix
+        #   ];
+        #   hostname = "neotokyo";
+        #   withSecrets = true;
+        # };
 
         # desktop is a
         desktop = lib.mkNixosSystem {

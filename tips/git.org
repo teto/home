@@ -27,6 +27,8 @@ git config --list --show-origin --show-scope
 git config --global --edit
 
 
+git symbolic-ref HEAD refs/heads/main to change default branch on server
+
 * debug ssh
 
  GIT_SSH_COMMAND="ssh -v"

@@ -6,7 +6,7 @@
   ...
 }:
 let
-  acmeRoot = "/var/lib/acme/";
+  # acmeRoot = "/var/lib/acme/";
 
   # config.services.jellyfin.port doesn't exist
   defaultJellyfinPort = 8096;
@@ -30,6 +30,7 @@ in
       we are trying to generate a multidomain certificate here,
       inspired by:
       - https://discourse.nixos.org/t/nixos-nginx-acme-ssl-certificates-for-multiple-domains/19608/3
+      - https://discourse.nixos.org/t/setup-a-wildcard-certificate-with-acme-on-a-custom-domain-name-hosted-by-powerdns/15055/6
     */
     certs."blog.${secrets.jakku.hostname}" = {
       # blog.${secrets.jakku.hostname}
@@ -44,23 +45,15 @@ in
         # "blog.${secrets.jakku.hostname}"
         "www.${secrets.jakku.hostname}"
         "${secrets.jakku.hostname}"
-        # "www.example.com"
       ];
-      # https://discourse.nixos.org/t/setup-a-wildcard-certificate-with-acme-on-a-custom-domain-name-hosted-by-powerdns/15055/6
     };
-    # certs."${secrets.jakku.hostname}" = {
-    #   # ${secrets.jakku.hostname}
-    #   webroot = "/var/lib/acme/";
-    #   email = "cert+admin@example.de";
-    #   group = "nginx";
-    #   extraDomainNames = [ "www.example.de" ];
-    # };
   };
 
   users.users.nginx.extraGroups = [ "acme" ];
 
   systemd.tmpfiles.rules = [
     "d /var/www 0775 nginx www"
+    "d /var/www/blog-generated 0775 nginx www"
   ];
 
   services.nginx = {
@@ -72,8 +65,6 @@ in
       "blog.${secrets.jakku.hostname}" = {
 
         # I had to manually "chmod a+x /var/lib/gitolite"
-        # root = "/var/lib/gitolite/blog-generated";
-        # root = "/home/teto/blog-generated-www";
         root = "/var/www/blog-generated";
 
         # default = true; # wtf does this do ?

@@ -7,6 +7,7 @@
 [remotes]
 # jj config set --user remotes.origin.auto-track-bookmarks 'glob:*'
 gh.auto-track-bookmarks = 'glob:*'
+up.auto-track-bookmarks = 'glob:*'
 
 [aliases]
 # `jj l` shows commits on the working-copy commit's (anonymous) bookmark

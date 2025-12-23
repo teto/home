@@ -51,10 +51,12 @@
   # TODO enable sandboxing
   programs.claude-code.enable = true;
 
-  # home.packages = [
-  #   pkgs.claude-code
-  # ];
-  #
+
+  home.packages = [
+    # pkgs.claude-code
+    pkgs.llama-cpp
+  ];
+
   package-sets = {
     # livecoding
     audio = false;
