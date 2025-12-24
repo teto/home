@@ -520,7 +520,7 @@
             self.homeModules.kitty
             self.homeModules.zsh
             self.homeModules.fre
-            # self.homeModules.mod-cliphist
+            # self.homeModules.cliphist
             self.homeModules.fzf
             self.homeModules.neovim
             self.homeModules.pimsync
@@ -558,6 +558,8 @@
     in
     flake-utils.lib.eachSystem [ "x86_64-linux" ] (system: {
 
+
+      # todo create a bootstrap devShell
       devShells = {
         # devShell when working on this repo:
         # and also when bootstrapping a new machine which is why I add some basic tooling
@@ -603,12 +605,22 @@
           ];
 
           # TODO set SOPS_A
-          shellHook = ''
+          shellHook = let
+            # --from ${} 
+            generatedJustfile = myPkgs.writeText "justfile.generated" ''
+              test-msmtp-send-mail:
+                  # TODO generate the mail headers
+                  cat contrib/2025-05-04-21.38.53.mail | msmtp --read-envelope-from --read-recipients -afastmail ${secrets.users.teto.email}
+                  '';
+
+          in ''
             export SOPS_AGE_KEY_FILE=$PWD/secrets/age.key
             # TODO rely on scripts/load-restic.sh now ?
             export RESTIC_REPOSITORY_FILE=/run/secrets/restic/teto-bucket
             export RESTIC_PASSWORD_FILE=
             source config/bash/aliases.sh
+
+            ln -s ${generatedJustfile} justfile.generated
             echo "Run just ..."
           '';
         };
@@ -767,13 +779,11 @@
 
       homeModules = lib.importFiles ./hm/modules // {
 
-        mod-cliphist = ./hm/modules/cliphist.nix;
-
         # for stuff not in home-manager yet
         # experimental = ./hm/profiles/experimental.nix;
 
         # needs zsh-extra ?
-        teto-zsh = ./hm/profiles/teto-zsh.nix;
+        # teto-zsh = ./hm/profiles/teto-zsh.nix;
 
         teto-nogui = (
           {

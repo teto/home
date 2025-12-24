@@ -21,10 +21,10 @@ in
     flakeSelf.homeProfiles.developer
     flakeSelf.homeProfiles.mpv
     flakeSelf.homeProfiles.vscode
+    flakeSelf.homeProfiles.teto-zsh
     # flakeSelf.homeProfiles.yt-dlp
 
     flakeSelf.homeModules.fzf
-    flakeSelf.homeModules.teto-zsh
     flakeSelf.homeModules.yazi
     flakeSelf.homeModules.services-mujmap
     flakeSelf.homeModules.pimsync

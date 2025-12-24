@@ -75,7 +75,7 @@ in
     autoloadedProfiles
     ./disko-config.nix
 
-    ../../nixos/profiles/systemd-on-failure-service.nix
+    flakeSelf.nixosProfiles.systemd-on-failure-service
 
     flakeSelf.inputs.disko.nixosModules.disko
     flakeSelf.nixosModules.teto-nogui

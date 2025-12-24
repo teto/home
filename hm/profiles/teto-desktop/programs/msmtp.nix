@@ -16,7 +16,8 @@ in
   enable = true;
   # TODO add default account ?
   # lib.mkAfte
-  configContent = ''
+  # vs extraConfig
+  configContent = lib.mkAfter ''
     # this will create a default account which will then break the
     # default added via primary
     syslog         on

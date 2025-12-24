@@ -166,8 +166,8 @@ in
     # in
     # ["${script}/bin/pass-show" accountName];
     [
-      # ${pkgs.pass-teto}/bin/
-      "${dotfilesPath}/bin/pass-perso"
+      "${pkgs.pass-perso}/bin/pass-perso"
+      # "${dotfilesPath}/bin/pass-perso"
       "show"
       accountName
     ];

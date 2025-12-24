@@ -148,38 +148,6 @@ let
     # smtp.tls.useStartTls = false;
   };
 
-  nova = # {{{
-    accountExtra // {
-      astroid = {
-        enable = false;
-      };
-      neomutt = {
-        enable = false;
-      };
-
-      mbsync = mbsyncConfig // {
-        remove = "both";
-        extraConfig.account = {
-          AuthMechs = "LOGIN";
-        };
-        # sync = false;
-      };
-      msmtp.enable = true;
-      notmuch = {
-        enable = true;
-      };
-
-      primary = false;
-      userName = secrets.accounts.mail.nova.email;
-      realName = "Matthieu coudron";
-      address = secrets.accounts.mail.nova.email;
-      flavor = "gmail.com";
-      smtp.tls.useStartTls = true;
-
-      passwordCommand = getPasswordCommand "nova/mail";
-    };
-  # }}}
-
   gmail = accountExtra // {
     gpg = gpgModule;
     astroid.enable = true;
@@ -193,68 +161,68 @@ let
     folders.trash = "Trash";
 
     # CopyArrivalDate
-    mbsync = mbsyncConfig // {
-      remove = "both";
-      # how to destroy on gmail ?
-      # expunge = "both";
-      # Exclude everything under the internal [Gmail] folder, except the interesting folders
-      # Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail"
-      # "[Gmail]/Inbox"
-      # patterns = ["* ![Gmail]*" "[Gmail]/Sent Mail" "[Gmail]/Starred" ];
-      # to be able to create drafts ?
-      create = "both";
-      groups.personal = {
-        channels = {
-          inbox = {
-            farPattern = "";
-            nearPattern = "";
-            extraConfig = {
-              Create = "Both";
-            };
-          };
-          sent = {
-            # farPattern = config.accounts.email.accounts.gmail.folders.sent;
-            farPattern = "[Gmail]/Sent Mail";
-            nearPattern = "Sent";
-            extraConfig = {
-              Create = "Both";
-            };
-          };
-          trash = {
-            farPattern = config.accounts.email.accounts.gmail.folders.trash;
-            # farPattern = "[Gmail]/Trash";
-            nearPattern = "Trash";
-            extraConfig = {
-              Create = "Both";
-            };
-          };
-          # starred = {
-          #   farPattern = "[Gmail]/Starred";
-          #   nearPattern = "Starred";
-          # };
-          # drafts = {
-          #   farPattern = config.accounts.email.accounts.gmail.folders.drafts;
-          #   nearPattern = "Drafts";
-          # };
-          # spam = {
-          #   farPattern = config.accounts.email.accounts.gmail.folders.drafts;
-          #   nearPattern = "Spam";
-          # };
-        };
-      };
-      extraConfig.account = {
-        # PipelineDepth = 50;
-        # AuthMechs = "LOGIN";
-        # SSLType = "IMAPS";
-        # SSLVersions = "TLSv1.2";
-      };
-      extraConfig.remote = {
-        Account = "gmail";
-      };
-      extraConfig.local = {
-        SubFolders = "Verbatim";
-      };
-    };
+    # mbsync = mbsyncConfig // {
+    #   remove = "both";
+    #   # how to destroy on gmail ?
+    #   # expunge = "both";
+    #   # Exclude everything under the internal [Gmail] folder, except the interesting folders
+    #   # Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail"
+    #   # "[Gmail]/Inbox"
+    #   # patterns = ["* ![Gmail]*" "[Gmail]/Sent Mail" "[Gmail]/Starred" ];
+    #   # to be able to create drafts ?
+    #   create = "both";
+    #   groups.personal = {
+    #     channels = {
+    #       inbox = {
+    #         farPattern = "";
+    #         nearPattern = "";
+    #         extraConfig = {
+    #           Create = "Both";
+    #         };
+    #       };
+    #       sent = {
+    #         # farPattern = config.accounts.email.accounts.gmail.folders.sent;
+    #         farPattern = "[Gmail]/Sent Mail";
+    #         nearPattern = "Sent";
+    #         extraConfig = {
+    #           Create = "Both";
+    #         };
+    #       };
+    #       trash = {
+    #         farPattern = config.accounts.email.accounts.gmail.folders.trash;
+    #         # farPattern = "[Gmail]/Trash";
+    #         nearPattern = "Trash";
+    #         extraConfig = {
+    #           Create = "Both";
+    #         };
+    #       };
+    #       # starred = {
+    #       #   farPattern = "[Gmail]/Starred";
+    #       #   nearPattern = "Starred";
+    #       # };
+    #       # drafts = {
+    #       #   farPattern = config.accounts.email.accounts.gmail.folders.drafts;
+    #       #   nearPattern = "Drafts";
+    #       # };
+    #       # spam = {
+    #       #   farPattern = config.accounts.email.accounts.gmail.folders.drafts;
+    #       #   nearPattern = "Spam";
+    #       # };
+    #     };
+    #   };
+    #   extraConfig.account = {
+    #     # PipelineDepth = 50;
+    #     # AuthMechs = "LOGIN";
+    #     # SSLType = "IMAPS";
+    #     # SSLVersions = "TLSv1.2";
+    #   };
+    #   extraConfig.remote = {
+    #     Account = "gmail";
+    #   };
+    #   extraConfig.local = {
+    #     SubFolders = "Verbatim";
+    #   };
+    # };
 
     msmtp.enable = true;
 
@@ -276,9 +244,8 @@ in
     maildirBasePath = mailDirBasePath;
     accounts = lib.optionalAttrs withSecrets {
       inherit
-        # gmail
+        gmail
         fastmail
-        # nova # access pb
         ;
     };
   };

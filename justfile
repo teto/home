@@ -290,9 +290,6 @@ udev-restart:
 nix-ping-store:
     nix store info --store http://jedha.local
 
-test-msmtp-send-mail:
-    # TODO generate the mail headers
-    cat contrib/2025-05-04-21.38.53.mail | msmtp --read-envelope-from --read-recipients 
 
 dbus-list-sessions:
     # org.freedesktop.DBus.ListNames
