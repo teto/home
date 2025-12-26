@@ -43,8 +43,8 @@
         ExecStart =
           let
             # ${pkgs.coreutils}/bin/timeout 60s
-                # result=$(/run/wrappers/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" \
-              # ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning -A "interrupt=service $1 failed" -A "continue=OK, start now" "hum scan" "Daily scan will start in one minute")
+            # result=$(/run/wrappers/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" \
+            # ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning -A "interrupt=service $1 failed" -A "continue=OK, start now" "hum scan" "Daily scan will start in one minute")
 
             myScript = pkgs.writeScript "notify-and-wait" ''
               #!${pkgs.stdenv.shell}
@@ -100,8 +100,8 @@
       Unit = {
         # TODO add notmuch_CONFIG ?
         OnFailure = "desktop-notification@%i.service";
-        After="gpg-agent.socket";
-        Wants="gpg-agent.socket";
+        After = "gpg-agent.socket";
+        Wants = "gpg-agent.socket";
       };
     };
 

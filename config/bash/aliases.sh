@@ -103,7 +103,6 @@ alias nm="nm -l"
 alias ts="tailscale"
 # }}}
 
-
 # test atuin instead or histdb ?
 export MCFLY_KEY_SCHEME=vim
 

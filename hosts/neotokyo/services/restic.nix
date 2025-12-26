@@ -1,4 +1,4 @@
-{ config, secrets, ...}:
+{ config, secrets, ... }:
 {
   # if you want to get a notification
   # https://www.arthurkoziel.com/restic-backups-b2-nixos/
@@ -11,7 +11,7 @@
       ];
 
       # that's where our provider (backblaze) credentials go
-      environmentFile = "/var/run/secrets/restic/backblaze_backup_immich_credentials";
+      environmentFile = config.sops.secrets."restic/backblaze_backup_immich_credentials".path;
       # this is the restic password
       passwordFile = config.sops.secrets."restic/backup_immich_repo_password".path;
       # passwordFile = "/var/run/secrets/restic/backup_immich_repo_password";
@@ -64,4 +64,3 @@
     };
   };
 }
-

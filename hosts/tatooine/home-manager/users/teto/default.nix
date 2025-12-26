@@ -9,30 +9,29 @@
 }:
 {
 
-  imports =
-    [
-      # flakeSelf.homeModules.experimental
-      ./sway.nix
-      ./programs/waybar.nix
-      ./programs/neovim.nix
-      ./programs/zsh.nix
-      ./services/mpd.nix
-      ./services/blueman-applet.nix
-      ./services/wpaperd.nix
-      # ./services/swayidle.nix
+  imports = [
+    # flakeSelf.homeModules.experimental
+    ./sway.nix
+    ./programs/waybar.nix
+    ./programs/neovim.nix
+    ./programs/zsh.nix
+    ./services/mpd.nix
+    ./services/blueman-applet.nix
+    ./services/wpaperd.nix
+    # ./services/swayidle.nix
 
-      # ../desktop/teto/default.nix  # Track for regressions
+    # ../desktop/teto/default.nix  # Track for regressions
 
-      # neovim should come from the nixos profile
-      flakeSelf.homeModules.nextcloud-client
-      flakeSelf.homeModules.llama-cpp
-      # ../../../../jedha/home-manager/users/teto/services/nextcloud-client.nix
+    # neovim should come from the nixos profile
+    flakeSelf.homeModules.nextcloud-client
+    flakeSelf.homeModules.llama-cpp
+    # ../../../../jedha/home-manager/users/teto/services/nextcloud-client.nix
 
-      # flakeSelf.homeProfiles.llama-cpp
-      flakeSelf.homeProfiles.wezterm
-    ];
+    # flakeSelf.homeProfiles.llama-cpp
+    flakeSelf.homeProfiles.wezterm
+  ];
 
-    # testing
+  # testing
   services.llama-cpp = {
     enable = false;
   };
@@ -50,7 +49,6 @@
 
   # TODO enable sandboxing
   programs.claude-code.enable = true;
-
 
   home.packages = [
     # pkgs.claude-code

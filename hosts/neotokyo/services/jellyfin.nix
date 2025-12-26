@@ -5,12 +5,12 @@
   # group ?
   openFirewall = true;
 
-  # 
+  #
   user = "jellyfin";
   group = "media";
 
   # TODO use "media" as group, same for transmission
-  # group = 
-  
+  # group =
+
   # services.jellyseerr.enable is a request manager for jellyfin
 }

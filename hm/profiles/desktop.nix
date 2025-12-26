@@ -55,7 +55,6 @@ in
     mime.enable = true;
   };
 
-
   i18n.glibcLocales = pkgs.glibcLocales.override {
     allLocales = true;
     # 229 fr_FR.UTF-8/UTF-8 \

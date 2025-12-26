@@ -16,7 +16,6 @@
     enable = true;
     xwayland = false;
 
-
     systemd.variables = [
       " --all" # hack
     ];

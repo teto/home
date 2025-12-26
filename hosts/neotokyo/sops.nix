@@ -26,38 +26,41 @@
   # path = "%r/test.txt";
 
   sops.secrets =
-    # check depending on services.restic. instead 
-    # lib.optionalAttrs config.services.postgresqlBackup.enable 
+    # check depending on services.restic. instead
+    # lib.optionalAttrs config.services.postgresqlBackup.enable
     {
-    "restic/backblaze_backup_immich_credentials" = {
-      mode = "440";
-      # path = "%r/github_token";
-      owner = config.users.users.teto.name;
-      group = config.users.users.teto.group;
-    };
+      "restic/backblaze_backup_immich_credentials" = {
+        mode = "440";
+        # path = "%r/github_token";
+        owner = config.users.users.teto.name;
+        group = config.users.users.teto.group;
+      };
 
-    "restic/endpoint" = {
-      mode = "440";
-      # path = "%r/github_token";
-      owner = config.users.users.teto.name;
-      group = config.users.users.teto.group;
-    };
+      "restic/endpoint" = {
+        mode = "440";
+        # path = "%r/github_token";
+        owner = config.users.users.teto.name;
+        group = config.users.users.teto.group;
+      };
 
-    "restic/backup_immich_repo_password" = {
-      mode = "440";
-      owner = config.users.users.teto.name;
-      group = config.users.users.teto.group;
-    };
-  } 
-  // 
-    lib.optionalAttrs config.services.buildbot-master.enable 
-    {
-    "buildbot-client-secret" = {
-      mode = "440";
-      owner = config.users.users.buildbot.name;
-      group = config.users.users.teto.group;
-    };
+      "restic/backup_immich_repo_password" = {
+        mode = "440";
+        owner = config.users.users.teto.name;
+        group = config.users.users.teto.group;
+      };
+
+      "fastmail_msmtp" = {
+        mode = "400";
+        owner = config.users.users.teto.name;
+        group = config.users.users.teto.group;
+      };
     }
-  ;
+    // lib.optionalAttrs config.services.buildbot-master.enable {
+      "buildbot-client-secret" = {
+        mode = "440";
+        owner = config.users.users.buildbot.name;
+        group = config.users.users.teto.group;
+      };
+    };
 
 }

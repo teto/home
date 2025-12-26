@@ -11,12 +11,13 @@ let
 
     A few tips:
     - just help
+    - tremc
   '';
-    # - sudo systemctl start redis-nextcloud.service
-    # - sudo systemctl status phppfm.service
-    # - sudo systemctl start nextcloud-add-user to create the teto user
-    # - everything is in /var/lib/nextcloud
-    # - to check the backups: systemctl status restic-backups-immich-db-to-backblaze.service
+  # - sudo systemctl start redis-nextcloud.service
+  # - sudo systemctl status phppfm.service
+  # - sudo systemctl start nextcloud-add-user to create the teto user
+  # - everything is in /var/lib/nextcloud
+  # - to check the backups: systemctl status restic-backups-immich-db-to-backblaze.service
   # TODO add a justfile to run the basic steps
   banner = "You can start the nextcloud-add-user.service unit if teto user doesnt exist yet";
 in
@@ -30,15 +31,17 @@ in
     cat "${pkgs.writeText "welcome-message" banner}";
   '';
 
+  programs.msmtp.enable = true;
+
   imports = [
-    # flakeSelf.homeProfiles.yt-dlp
+    flakeSelf.homeModules.teto-nogui
     flakeSelf.homeProfiles.bash
     flakeSelf.homeProfiles.yt-dlp
   ];
 
   programs.yt-dlp.enable = true;
 
-  # todo set zsh as default 
+  # todo set zsh as default
   programs.zsh = {
     enable = true;
     loginExtra = ''
@@ -50,5 +53,5 @@ in
     # };
   };
 
-  home.file."justfile".source =  ./justfile;
+  home.file."justfile".source = ./justfile;
 }

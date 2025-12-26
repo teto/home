@@ -1,4 +1,8 @@
-{ lib, secretsFolder, flakeSelf }:
+{
+  lib,
+  secretsFolder,
+  flakeSelf,
+}:
 final: prev:
 let
   # see https://github.com/NixOS/nixpkgs/issues/29605#issuecomment-332474682
@@ -36,31 +40,31 @@ in
   );
 
   meli-git = final.meli.overrideAttrs (drv: rec {
-  name = "meli-${version}";
-  version = "g${flakeSelf.inputs.meli-src.shortRev}";
-  src = flakeSelf.inputs.meli-src;
+    name = "meli-${version}";
+    version = "g${flakeSelf.inputs.meli-src.shortRev}";
+    src = flakeSelf.inputs.meli-src;
 
-  cargoPatches = [ ];
-  useFetchCargoVendor = true;
+    cargoPatches = [ ];
+    useFetchCargoVendor = true;
 
-  cargoDeps = final.rustPlatform.fetchCargoVendor {
-    inherit src;
-    hash = "sha256-OyOLAw3HzXY85Jwolh4Wqjmm6au6wRwGq5WkicOt5eg=";
-  };
+    cargoDeps = final.rustPlatform.fetchCargoVendor {
+      inherit src;
+      hash = "sha256-OyOLAw3HzXY85Jwolh4Wqjmm6au6wRwGq5WkicOt5eg=";
+    };
 
-  checkFlags = drv.checkFlags ++ [
-    "--skip=test_imap_watch"
-  ];
-});
+    checkFlags = drv.checkFlags ++ [
+      "--skip=test_imap_watch"
+    ];
+  });
 
-  pass-import-high-password-length = final.passExtensions.pass-import.overrideAttrs({
+  pass-import-high-password-length = final.passExtensions.pass-import.overrideAttrs ({
 
     src = final.fetchFromGitHub {
-        owner = "teto";
-        repo = "pass-import";
-        rev = "d903431e73e88406c32e58196a468662bca55055";
-        hash = "sha256-95BJ5l0JNem8zHF6aJwA7TijORGOX2DK5rIw5DGJe+k=";
-      };
+      owner = "teto";
+      repo = "pass-import";
+      rev = "d903431e73e88406c32e58196a468662bca55055";
+      hash = "sha256-95BJ5l0JNem8zHF6aJwA7TijORGOX2DK5rIw5DGJe+k=";
+    };
 
   });
 
@@ -73,7 +77,8 @@ in
   #   src = self.inputs.rsync-yazi-plugin;
   # };
 
-    buildFirefoxXpiAddon = {
+  buildFirefoxXpiAddon =
+    {
       stdenv ? final.stdenv,
       fetchurl ? final.fetchurl,
       pname,
@@ -109,7 +114,7 @@ in
     # inherit (lib.firefox)       buildFirefoxXpiAddon;
     inherit lib;
     inherit (final)
-    buildFirefoxXpiAddon
+      buildFirefoxXpiAddon
       fetchurl
       stdenv
       ;
@@ -133,10 +138,9 @@ in
   #   })).overrideAttrs({ doInstallCheck = false ; });
   #
 
-
   # in the source code we have:
-# PREFIX="${PASSWORD_STORE_DIR:-$HOME/.password-store}"
-# EXTENSIONS="${PASSWORD_STORE_EXTENSIONS_DIR:-$PREFIX/.extensions}"
+  # PREFIX="${PASSWORD_STORE_DIR:-$HOME/.password-store}"
+  # EXTENSIONS="${PASSWORD_STORE_EXTENSIONS_DIR:-$PREFIX/.extensions}"
   pass-perso = final.writeShellApplication {
     name = "pass-perso";
     runtimeInputs = [
@@ -178,25 +182,23 @@ in
     cargoBuildFlags = "--no-default-features";
   });
 
-          # this exists in ml-tests, let's upstream some of the changes first
-          # jupyter4ihaskell = myPkgs.jupyter-teto;
-          # jupyter-teto = python3.withPackages(ps: [
-          #  ps.notebook
-          #  ps.jupyter-client
-          # ]);
+  # this exists in ml-tests, let's upstream some of the changes first
+  # jupyter4ihaskell = myPkgs.jupyter-teto;
+  # jupyter-teto = python3.withPackages(ps: [
+  #  ps.notebook
+  #  ps.jupyter-client
+  # ]);
 
+  # # TODO get lua interpreter to select the good lua packages
+  # nvimLua = config.programs.neovim.finalPackage.passthru.unwrapped.lua;
 
-              # # TODO get lua interpreter to select the good lua packages
-              # nvimLua = config.programs.neovim.finalPackage.passthru.unwrapped.lua;
-
-              # luajit = prev.luajit.override {
-              #   packageOverrides = self.inputs.rikai-nvim.overlays.luaOverlay;
-              # };
-              #
-              # lua5_1 = prev.lua5_1.override {
-              #   packageOverrides = self.inputs.rikai-nvim.overlays.luaOverlay;
-              # };
-
+  # luajit = prev.luajit.override {
+  #   packageOverrides = self.inputs.rikai-nvim.overlays.luaOverlay;
+  # };
+  #
+  # lua5_1 = prev.lua5_1.override {
+  #   packageOverrides = self.inputs.rikai-nvim.overlays.luaOverlay;
+  # };
 
   # overrideAttrs (oldAttrs: {
   #   src = prev.fetchFromGitHub {

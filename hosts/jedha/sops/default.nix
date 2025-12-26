@@ -16,6 +16,4 @@
   # sops.age.keyFile = "secrets/age.key";
   age.keyFile = "${secretsFolder}/age.key";
 
-
-
 }

@@ -68,19 +68,11 @@ in
     #     vim.g.fzf_nvim_statusline = 0 -- disable statusline overwriting'';
     # })
 
-    # defined in overrides:
-    # TODO we should be able to do without !
-    # fzfWrapper
-
     #  nvim-colorizer
     # (luaPlugin { plugin = nvim-terminal-lua; config = "require('terminal').setup()"; })
 
-
     # I am replacing vim-fugitive  with diffview-nvim because it's lua and easier to change probably to support jujutsu
     { plugin = vim-fugitive; }
-
-    # testing my fork
-    # { plugin = diffview-nvim; }
 
     vim-scriptease # create commans like :Messages
 
@@ -107,7 +99,7 @@ in
       plugin = vim-grepper;
       # careful these mappings are not applied as they arrive before the plug declaration
       config = ''
-        -- TODO grepper config
+        vim.keymap.set('n', '<leader>rg', '<Cmd>Grepper -tool rg -open -switch<CR>')
       '';
     })
 
@@ -157,6 +149,8 @@ in
   luaPlugins = with pkgs.vimPlugins; [
 
     # { plugin = modicator-nvim; }
+    # testing my fork
+    # { plugin = diffview-nvim; }
 
     (luaPlugin {
       plugin = marks-nvim;

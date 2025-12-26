@@ -13,7 +13,7 @@
   ];
 
   events = {
-      before-sleep = "swaylock";
-      lock = "lock";
-    };
+    before-sleep = "swaylock";
+    lock = "lock";
+  };
 }

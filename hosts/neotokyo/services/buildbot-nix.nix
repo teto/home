@@ -1,9 +1,9 @@
-{ secrets, pkgs, ...}:
-let 
+{ secrets, pkgs, ... }:
+let
   bbSecrets = secrets.jakku.buildbot;
   repoAllowlist = [
-      "teto/home"
-    ];
+    "teto/home"
+  ];
 in
 {
   # this is the coordinating node
@@ -27,27 +27,27 @@ in
         { "name": "neotokyo", "pass": "${bbSecrets.workerSecret}", "cores": 1 }
       ]'';
 
-      admins = ["teto"];
+    admins = [ "teto" ];
 
-  github = {
-    appId = bbSecrets.appId;  # The numeric App ID 
-    appSecretKeyFile = "/run/secrets/buildbot-client-secret";  # Path to the downloaded private key
+    github = {
+      appId = bbSecrets.appId; # The numeric App ID
+      appSecretKeyFile = "/run/secrets/buildbot-client-secret"; # Path to the downloaded private key
 
-    # MUST BE SET FOR github
-    oauthId = bbSecrets.oauthClientId;
-    oauthSecretFile = pkgs.writeText "placeholder-secret" bbSecrets.oauthSecret;
+      # MUST BE SET FOR github
+      oauthId = bbSecrets.oauthClientId;
+      oauthSecretFile = pkgs.writeText "placeholder-secret" bbSecrets.oauthSecret;
 
-    # I thought it was not used ?
-    webhookSecretFile = pkgs.writeText "webhookSecret" bbSecrets.workerSecret;
+      # I thought it was not used ?
+      webhookSecretFile = pkgs.writeText "webhookSecret" bbSecrets.workerSecret;
 
-    # Optional: Filter which repositories to build
-    # topic = "buildbot";  # Only build repos with this topic
-    topic = null;
-    inherit repoAllowlist;
-  };
+      # Optional: Filter which repositories to build
+      # topic = "buildbot";  # Only build repos with this topic
+      topic = null;
+      inherit repoAllowlist;
+    };
 
-  # just to fix eval
-  #         # { "name": "eve", "pass": "XXXXXXXXXXXXXXXXXXXX", "cores": 16 }
+    # just to fix eval
+    #         # { "name": "eve", "pass": "XXXXXXXXXXXXXXXXXXXX", "cores": 16 }
   };
 
   # TODO setup worker

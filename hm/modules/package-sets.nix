@@ -73,7 +73,6 @@ in
       ];
     })
 
-
     (mkIf cfg.yubikey {
       home.packages = with pkgs; [
         yubioath-flutter # not sure it's great yubikey-manager #
@@ -105,7 +104,7 @@ in
       home.packages = [
 
         # these 2 are for claude's /sandbox mode
-        pkgs.socat 
+        pkgs.socat
         pkgs.bubblewrap
 
         # pkgs.koboldcpp
@@ -116,7 +115,7 @@ in
 
         # libggml.so conflicts with llama-cpp's
         # pkgs.whisper-cpp # to test with rikai.nvim and pushtotalk
-        
+
         # open-webui # broken
         # sillytavern
         # python3Packages.unsloth # broken
@@ -250,7 +249,7 @@ in
           sublime3
           # sysz # fzf for systemd, see systemd-tui too
           translate-shell # call with `trans`
-          tray-tui  # make tray menus accessible to CLI
+          tray-tui # make tray menus accessible to CLI
           unzip
           viu # a console image viewer
           wireshark
@@ -387,7 +386,7 @@ in
           # git-annex # fails on unstable
           # git-remote-hg
           # nix-prefetch-scripts # broken
-          manix  # nix doc, might be outdated 
+          manix # nix doc, might be outdated
           net-tools # for netstat
           nix-output-monitor # 'nom'
 
@@ -470,7 +469,7 @@ in
           # viddy # fileevent watcher
           watchman
 
-          # wakeonlan # for 
+          # wakeonlan # for
 
           # flakeSelf.inputs.rippkgs.packages.${pkgs.stdenv.hostPlatform.system}.rippkgs
           # flakeSelf.inputs.rippkgs.packages.${pkgs.stdenv.hostPlatform.system}.rippkgs-index
@@ -611,9 +610,7 @@ in
         let
           # capable to display 2 subtitles at same time
           # like mpv but with a lsit of subtitles
-          memento-with-ocr = memento
-            .override ({ withOcr = true; })
-            ;
+          memento-with-ocr = memento.override ({ withOcr = true; });
         in
         [
           hakuneko

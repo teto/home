@@ -46,7 +46,7 @@ local map = vim.keymap.set
 
 local valid_file, nix_deps = pcall(require, 'generated-by-nix')
 if not valid_file then
-    error('Invalid generated-by-nix')
+    vim.notify('Invalid generated-by-nix')
 end
 vim.g.rikai = {
     kanjidb = nix_deps.edict_kanjidb,
@@ -189,7 +189,7 @@ vim.g.rocks_nvim = {
     -- TODO removing this generates errors at runtime :'(
     luarocks_binary = nix_deps.luarocks_executable,
     -- /home/teto/.local/share/nvim/rocks/luarocks-config.lua
-	---@diagnostic disable-next-line: need-check-nil
+    ---@diagnostic disable-next-line: need-check-nil
     luarocks_config = luarocks_config_fn(),
     -- _log_level = vim.log.levels.TRACE,
 
@@ -290,7 +290,6 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 vim.opt.colorcolumn = { 100 }
-
 
 -- lazy/config.lua sets vim.go.loadplugins = false so I used to run packloadall to restore those plugins
 -- but there seems to be a bug somewhere as overriding VIMRUNTIME would then be dismissed and it would used
@@ -596,9 +595,8 @@ vim.g.fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %
 -- "   au BufWritePost $MYVIMRC,.vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc,init.vim so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
 -- " augroup END
 
--- move to nix ?
-vim.keymap.set('n', '<leader>rg', '<Cmd>Grepper -tool rg -open -switch<CR>')
-
+-- moved to nix ?
+-- vim.keymap.set('n', '<leader>rg', '<Cmd>Grepper -tool rg -open -switch<CR>')
 -- vim.keymap.set("n", "<leader>rgb", "<Cmd>Grepper -tool rgb -open -switch -buffer<CR>")
 
 -- vim.api.nvim_create_augroup('bufcheck', {clear = true})
@@ -646,7 +644,7 @@ if use_fzf_lua then
     require('plugins.fzf-lua')
     require('teto.fzf-lua').register_keymaps()
 else
-	vim.notify("fzf-lua is MISSING !?")
+    vim.notify('fzf-lua is MISSING !?')
 end
 
 -- since it was not merge yet
@@ -840,28 +838,28 @@ vim.lsp.enable('emmylua_ls')
 vim.pack.add({
     -- my real neovim package manager (with nix)
     'https://github.com/nvim-neorocks/rocks.nvim',
-	-- 'https://github.com/elanmed/fzf-lua-frecency.nvim', -- to rocks
+    -- 'https://github.com/elanmed/fzf-lua-frecency.nvim', -- to rocks
 
     -- 'https://github.com/neovim/nvim-lspconfig',
     'https://github.com/teto/vim-listchars',
-	'https://github.com/yutkat/git-rebase-auto-diff.nvim',
+    'https://github.com/yutkat/git-rebase-auto-diff.nvim',
 
     -- themes
     'https://github.com/adlawson/vim-sorcerer',
     'https://github.com/Matsuuu/pinkmare',
     'https://github.com/rose-pine/neovim',
-	'https://github.com/marko-cerovac/material.nvim',
-	'https://github.com/NLKNguyen/papercolor-theme',
-	'https://github.com/vim-scripts/Solarized',
+    'https://github.com/marko-cerovac/material.nvim',
+    'https://github.com/NLKNguyen/papercolor-theme',
+    'https://github.com/vim-scripts/Solarized',
 
     -- filetypes
     'https://github.com/PotatoesMaster/i3-vim-syntax',
-	'https://github.com/overleaf/vim-env-syntax',
+    'https://github.com/overleaf/vim-env-syntax',
 
-	-- fennel testing
-	-- 'https://github.com/aileot/nvim-thyme'
-	'https://github.com/calvinchengx/vim-aftercolors',
-	'https://github.com/raddari/last-color.nvim',
+    -- fennel testing
+    -- 'https://github.com/aileot/nvim-thyme'
+    'https://github.com/calvinchengx/vim-aftercolors',
+    'https://github.com/raddari/last-color.nvim',
 })
 
 -- wont work if last-color is not installed
@@ -957,7 +955,9 @@ vim.keymap.set('n', ',jl', function()
     vim.cmd([[ Rikai lookup ]])
 end, { buffer = false, desc = 'Japanese lookup' })
 
-vim.keymap.set({'n', 'v'}, '<D-j>', function() vim.cmd([[ Rikai lookup ]]) end, { buffer = false, desc = 'Japanese lookup' })
+vim.keymap.set({ 'n', 'v' }, '<D-j>', function()
+    vim.cmd([[ Rikai lookup ]])
+end, { buffer = false, desc = 'Japanese lookup' })
 
 vim.keymap.set('n', '<leader>d', function()
     vim.cmd([[ FzfLua diagnostics_document ]])
@@ -981,29 +981,29 @@ vim.g.tidal_boot = nix_deps.tidal_boot .. 'BootTidal.hs'
 
 -- require("jj").setup({})
 
-  vim.keymap.set('n', 'gF', function()
+vim.keymap.set('n', 'gF', function()
     local file = vim.fn.expand('<cfile>')
     if file == '' then
-      print('No file under cursor')
-      return
+        print('No file under cursor')
+        return
     end
 
     -- Create parent directories if they don't exist
     -- local dir = vim.fn.fnamemodify(file, ':h')
-	-- todo confirm with user before creating the folder
+    -- todo confirm with user before creating the folder
 
     local from_dir = vim.fn.fnamemodify(vim.fn.expand('%'), ':p:h')
-	print("Selected dir:", from_dir)
-	local new_filename = vim.fs.joinpath(from_dir, file)
-	print("new_filename:", new_filename)
+    print('Selected dir:', from_dir)
+    local new_filename = vim.fs.joinpath(from_dir, file)
+    print('new_filename:', new_filename)
 
     local dir = vim.fn.fnamemodify(new_filename, ':h')
     if dir ~= '' and vim.fn.isdirectory(dir) == 0 then
-      vim.fn.mkdir(dir, 'p')
+        vim.fn.mkdir(dir, 'p')
     end
     -- Edit the file (creates it if it doesn't exist)
     vim.cmd('edit ' .. vim.fn.fnameescape(new_filename))
-  end, { desc = 'Go to file, create if missing' })
+end, { desc = 'Go to file, create if missing' })
 
 -- Wrapping the `require` in `function-end` is important for lazy-load.
 -- table.insert(package.loaders, function(...)
@@ -1017,6 +1017,4 @@ vim.g.tidal_boot = nix_deps.tidal_boot .. 'BootTidal.hs'
 -- Please test the best place to `vim.loader.enable()` by yourself.
 -- vim.loader.enable() -- (optional) before the `bootstrap`s above, it could increase startuptime.
 
-
-require'teto.avante'
-
+require('teto.avante')

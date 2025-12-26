@@ -87,8 +87,7 @@ in
   #   enable = true;
   # };
 
-  services.pipewire.wireplumber.configPackages =
-  [
+  services.pipewire.wireplumber.configPackages = [
     # pkgs.hello
     (pkgs.writeTextDir "share/wireplumber/wireplumber.conf.d/10-bluez.conf" ''
       monitor.bluez.properties = {
@@ -101,8 +100,8 @@ in
   ];
 
   systemd.user.services.pipewire.environment = {
-      PIPEWIRE_DEBUG="5";
-    };
+    PIPEWIRE_DEBUG = "5";
+  };
 
   # systemd.user.services.wireplumber.environment = {
   #     WIREPLUMBER_DEBUG="5";
@@ -117,10 +116,8 @@ in
     # }
   ];
 
-
   # enables command on boot/suspend etc
   security.polkit.enable = true;
-
 
   # this is for gaming
   # just trying to make some steam warnings go away
@@ -178,7 +175,7 @@ in
     bluetooth = {
       enable = true;
       powerOnBoot = false;
-      # package = 
+      # package =
       # written to /etc/bluetooth/main.conf
       settings = {
 
@@ -194,10 +191,10 @@ in
           # Enable = "Source,Sink,Media,Socket";
         };
         Policy = {
-        # Enable all controllers when they are found. This includes
-        # adapters present on start as well as adapters that are plugged
-        # in later on. Defaults to 'true'.
-        AutoEnable = true;
+          # Enable all controllers when they are found. This includes
+          # adapters present on start as well as adapters that are plugged
+          # in later on. Defaults to 'true'.
+          AutoEnable = true;
         };
       };
     };
@@ -220,7 +217,6 @@ in
       at-spi2-core.enable = true; # for keyring it seems
     };
 
-
     # central regulatory domain agent (CRDA) to allow exchange between kernel and userspace
     # to prevent the "failed to load regulatory.db" ?
     # see https://wireless.wiki.kernel.org/en/developers/regulatory
@@ -237,8 +233,6 @@ in
   # experimental
   # niriswitch on hm level
   programs.niri.enable = false;
-
-
 
   # for tests
   # services.vault = {

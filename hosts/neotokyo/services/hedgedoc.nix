@@ -14,7 +14,7 @@ in
 {
 
   services.hedgedoc = {
-    enable = true;
+    enable = false;
     configureNginx = true;
 
     settings = {

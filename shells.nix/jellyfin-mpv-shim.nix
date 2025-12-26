@@ -1,4 +1,6 @@
-{ pkgs ? import <nixpkgs> {} }:
+{
+  pkgs ? import <nixpkgs> { },
+}:
 
 pkgs.mkShell {
   buildInputs = with pkgs; [
@@ -10,7 +12,7 @@ pkgs.mkShell {
     python3Packages.virtualenv
 
     # System dependencies
-    mpv  # Required for python-mpv bindings
+    mpv # Required for python-mpv bindings
 
     # Optional: GUI dependencies (for extras)
     gobject-introspection

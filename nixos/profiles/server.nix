@@ -6,7 +6,7 @@
   ...
 }@mainArgs:
 {
-  imports = [ 
+  imports = [
   ];
 
   environment.systemPackages = with pkgs; [

@@ -46,7 +46,7 @@
       # git config core.sshCommand "ssh -vvv"
       # useful when merging from kernel
       checkout = {
-        defaultRemote = "upstream";
+        defaultRemote = "up";
       };
 
       # https://git-scm.com/book/en/v2/Git-Tools-Credential-StoragE

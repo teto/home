@@ -298,11 +298,9 @@
       url = "github:PanAeon/transg-tui";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-      
 
     treefmt-nix.url = "github:numtide/treefmt-nix";
     # treefmt-nix.url = "github:teto/treefmt-nix?ref=teto/add-hujsonfmt";
-
 
     # doesnt have a nixpkgs input
     vocage.url = "git+https://git.sr.ht/~teto/vocage?ref=flake";
@@ -335,16 +333,18 @@
     let
       # lib = lib.extend (_: _: self.inputs.hm.lib // builtins.trace "${lib.neovim.toto}" lib);
 
-      lib =  self.inputs.nixpkgs.lib.extend (
+      lib = self.inputs.nixpkgs.lib.extend (
         prev: _:
-        self.inputs.hm.lib  // (import ./tetos/lib {
+        self.inputs.hm.lib
+        // (import ./tetos/lib {
           # inherit (self) inputs;
 
           pkgs = myPkgs;
           inherit dotfilesPath secretsFolder secrets;
           flakeSelf = self;
           lib = prev;
-        }));
+        })
+      );
 
       # tetonos ?
       # tetosConfig = {
@@ -379,7 +379,6 @@
           callPackage = final.newScope { flakeSelf = self; };
           directory = ./pkgs;
         };
-
 
       pkgImport =
         src: cudaSupport:
@@ -485,79 +484,8 @@
       unstablePkgs = pkgImport self.inputs.nixos-unstable false;
       # stablePkgs = pkgImport self.inputs.nixos-stable;
 
-      hm-common =
-        {
-          config,
-          lib,
-          pkgs,
-          withSecrets,
-          flakeSelf,
-          secrets,
-          ...
-        }:
-        {
-          home-manager.verbose = true;
-          # install through the use of user.users.USER.packages
-          home-manager.useUserPackages = true;
-          # disables the Home Manager option nixpkgs.*
-          home-manager.useGlobalPkgs = true;
-
-          # shall we import all modules ?
-          home-manager.sharedModules = [
-            # remote broken
-            self.inputs.wayland-pipewire-idle-inhibit.homeModules.default
-            self.inputs.sops-nix.homeManagerModules.sops
-
-            self.homeProfiles.fzf
-            self.homeProfiles.common
-            self.homeProfiles.neovim-minimal
-            # self.homeProfiles.neovim # takes too much space for router
-
-            # TODO it should autoload those
-            self.homeModules.nvimpager
-            self.homeModules.bash
-            self.homeModules.memento
-            self.homeModules.kitty
-            self.homeModules.zsh
-            self.homeModules.fre
-            # self.homeModules.cliphist
-            self.homeModules.fzf
-            self.homeModules.neovim
-            self.homeModules.pimsync
-            self.homeModules.package-sets
-            self.homeModules.tig
-            self.homeModules.yazi
-
-              (
-                { ... }:
-              {
-                home.stateVersion = "25.11";
-
-                # to avoid warnings about incompatible stateVersions
-                home.enableNixpkgsReleaseCheck = false;
-              }
-            )
-          ];
-          home-manager.extraSpecialArgs = {
-            secrets = lib.optionalAttrs withSecrets secrets;
-            inherit withSecrets flakeSelf dotfilesPath secretsFolder;
-            inherit lib;
-            # https://github.com/nix-community/home-manager/issues/5980
-
-            # lib = lib.extend (_: _: self.inputs.hm.lib // builtins.trace "${lib.neovim.toto}" lib);
-          };
-
-          home-manager.users = {
-            teto = {
-              imports = [
-              ];
-            };
-          };
-        };
-
     in
     flake-utils.lib.eachSystem [ "x86_64-linux" ] (system: {
-
 
       # todo create a bootstrap devShell
       devShells = {
@@ -567,62 +495,66 @@
         # - git-crypt
         default = nixpkgs.legacyPackages.${system}.mkShell {
           name = "dotfiles-shell";
-          buildInputs = with myPkgs; [
-            age
-            pkgs.bitwarden-cli # to sync passwords
-            dmidecode
-            deploy-rs.packages.${system}.deploy-rs
-            fzf # for just's "--select"
-            git-crypt # to run `git-crypt export-key`
-            just # to run justfiles
-            nix-output-monitor
-            # nodejs # what for ?
-            termscp-matt
-            treefmt-home # use formatter instead ?
-            ripgrep
-            rustic # testing against restic
-            sops # to decrypt secrets
-            ssh-to-age
+          buildInputs =
+            with myPkgs;
+            [
+              age
+              pkgs.bitwarden-cli # to sync passwords
+              dmidecode
+              deploy-rs.packages.${system}.deploy-rs
+              fzf # for just's "--select"
+              git-crypt # to run `git-crypt export-key`
+              just # to run justfiles
+              nix-output-monitor
+              # nodejs # what for ?
+              termscp-matt
+              treefmt-home # use formatter instead ?
+              ripgrep
+              rustic # testing against restic
+              sops # to decrypt secrets
+              ssh-to-age
 
-            self.inputs.nixos-anywhere.packages.${system}.nixos-anywhere
-            disko
+              self.inputs.nixos-anywhere.packages.${system}.nixos-anywhere
+              disko
 
-            # boot debug
-            # chntpw # broken to edit BCD (Boot configuration data) from windows
-            efibootmgr
+              # boot debug
+              # chntpw # broken to edit BCD (Boot configuration data) from windows
+              efibootmgr
 
-            # yubikey deps
-            smartmontools # for smartctl
-            pamtester # to test yubikey https://nixos.wiki/wiki/Yubikey
-            pam_u2f # pamu2fcfg > ~/.config/Yubico/u2f_keys
+              # yubikey deps
+              smartmontools # for smartctl
+              pamtester # to test yubikey https://nixos.wiki/wiki/Yubikey
+              pam_u2f # pamu2fcfg > ~/.config/Yubico/u2f_keys
 
-            magic-wormhole-rs # to transfer secrets
-            wormhole-rs # "wormhole-rs send"
-          ]
-          ++ [
-            # removed because it was using IFD and we use firefox policies instead
-            # self.inputs.firefox2nix.packages.${system}.default
-          ];
+              magic-wormhole-rs # to transfer secrets
+              wormhole-rs # "wormhole-rs send"
+            ]
+            ++ [
+              # removed because it was using IFD and we use firefox policies instead
+              # self.inputs.firefox2nix.packages.${system}.default
+            ];
 
           # TODO set SOPS_A
-          shellHook = let
-            # --from ${} 
-            generatedJustfile = myPkgs.writeText "justfile.generated" ''
-              test-msmtp-send-mail:
-                  # TODO generate the mail headers
-                  cat contrib/2025-05-04-21.38.53.mail | msmtp --read-envelope-from --read-recipients -afastmail ${secrets.users.teto.email}
-                  '';
+          shellHook =
+            let
+              # --from ${}
+              generatedJustfile = myPkgs.writeText "justfile.generated" ''
+                test-msmtp-send-mail:
+                    # TODO generate the mail headers
+                    cat contrib/2025-05-04-21.38.53.mail | msmtp --read-envelope-from --read-recipients -afastmail ${secrets.users.teto.email}
+              '';
 
-          in ''
-            export SOPS_AGE_KEY_FILE=$PWD/secrets/age.key
-            # TODO rely on scripts/load-restic.sh now ?
-            export RESTIC_REPOSITORY_FILE=/run/secrets/restic/teto-bucket
-            export RESTIC_PASSWORD_FILE=
-            source config/bash/aliases.sh
+            in
+            ''
+              export SOPS_AGE_KEY_FILE=$PWD/secrets/age.key
+              # TODO rely on scripts/load-restic.sh now ?
+              export RESTIC_REPOSITORY_FILE=/run/secrets/restic/teto-bucket
+              export RESTIC_PASSWORD_FILE=
+              source config/bash/aliases.sh
 
-            ln -s ${generatedJustfile} justfile.generated
-            echo "Run just ..."
-          '';
+              ln -s ${generatedJustfile} justfile.generated
+              echo "Run just ..."
+            '';
         };
 
         inherit (unstablePkgs)
@@ -639,8 +571,8 @@
 
       packages =
         self.inputs.neovim-nightly-overlay.packages.${system}
-        # strip of 
-        // (builtins.removeAttrs (byNamePkgsOverlay myPkgs { }) [ "_internalCallByNamePackageFile"])
+        # strip of
+        // (builtins.removeAttrs (byNamePkgsOverlay myPkgs { }) [ "_internalCallByNamePackageFile" ])
         // (autoloadedPkgsOverlay myPkgs { })
         // {
           /*
@@ -676,11 +608,11 @@
 
         };
 
-        # TODO run evals and treefmt checks
-        checks = {
-          # formatting = treefmtEval.${myPkgs.system}.config.build.check self;
-          formatting = (treefmt-nix.lib.evalModule myPkgs ./treefmt.nix).config.build.check;
-        };
+      # TODO run evals and treefmt checks
+      checks = {
+        # formatting = treefmtEval.${myPkgs.system}.config.build.check self;
+        formatting = (treefmt-nix.lib.evalModule myPkgs ./treefmt.nix).config.build.check;
+      };
 
     })
     // ({
@@ -693,10 +625,7 @@
       # autoload from hosts
       # todo map over the attributes to regenerate them without secrets
       # adjust the hostnames accordingly ?
-      nixosConfigurations = 
-        lib.importDirectories ./hosts
-        //
-        rec {
+      nixosConfigurations = lib.importDirectories ./hosts // rec {
         # TODO generate those from the hosts folder ?
         # with aliases ?
         router = lib.mkNixosSystem {
@@ -774,16 +703,12 @@
         neovim = ./hm/profiles/neovim;
 
         teto-desktop = ./hm/profiles/desktop.nix;
-        # sway-notification-center = ./hm/profiles/swaync.nix;
       };
 
       homeModules = lib.importFiles ./hm/modules // {
 
         # for stuff not in home-manager yet
         # experimental = ./hm/profiles/experimental.nix;
-
-        # needs zsh-extra ?
-        # teto-zsh = ./hm/profiles/teto-zsh.nix;
 
         teto-nogui = (
           {
@@ -793,12 +718,10 @@
             ...
           }:
           {
-            # inspire ./teto/default.nix
-
             imports = [
               # And add the home-manager module
+              self.homeProfiles.neovim
               self.homeProfiles.common
-              self.homeProfiles.neovim-minimal
 
               # self.homeProfiles.yazi
               self.homeModules.neovim
@@ -812,7 +735,7 @@
       nixosProfiles = lib.importFiles ./nixos/profiles;
 
       nixosModules = lib.importFiles ./nixos/modules // {
-        default-hm = hm-common;
+        default-hm = self.nixosProfiles.hm-default;
         teto-nogui = nixos/accounts/teto/teto.nix;
       };
 

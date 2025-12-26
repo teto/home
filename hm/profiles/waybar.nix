@@ -58,8 +58,8 @@
       # StartLimitIntervalSec = 100;
       #
       # StartLimitIntervalUSec=10s;
-      StartLimitIntervalSec=60;
-      StartLimitBurst=10;
+      StartLimitIntervalSec = 60;
+      StartLimitBurst = 10;
     };
     Install.WantedBy = [ "tray.target" ];
 

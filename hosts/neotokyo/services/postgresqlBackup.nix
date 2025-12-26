@@ -69,17 +69,18 @@ in
   #   "z ${backupEncPassphraseFile} 400 postgres postgres"
   # ];
 
-
   systemd.services.immich-server.serviceConfig = {
     # we override the default 0077 such that the backup job can read the files
     UMask = lib.mkForce "0027";
   };
 
   # TODO add onFailure template to send a mail
-  systemd.services.restic-backups-immich-db-to-backblaze.serviceConfig = lib.mkIf (config.services.restic.backups ? immich-db-to-backblaze) {
-    Group = "immich"; # such that it can read the files
-    OnSuccess = "send-mail-to-teto@";
-  };
+  systemd.services.restic-backups-immich-db-to-backblaze.serviceConfig =
+    lib.mkIf (config.services.restic.backups ? immich-db-to-backblaze)
+      {
+        Group = "immich"; # such that it can read the files
+        OnSuccess = "send-mail-to-teto@";
+      };
 
   # services.restic.server.enable
   #      Whether to enable Restic REST Server.

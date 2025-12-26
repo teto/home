@@ -8,8 +8,7 @@
   ...
 }:
 let
-  hostsConfigs =
-    lib.mapAttrs lib.genSshClientConfig flakeSelf.nixosConfigurations;
+  hostsConfigs = lib.mapAttrs lib.genSshClientConfig flakeSelf.nixosConfigurations;
 in
 {
 
@@ -68,7 +67,7 @@ in
         serverAliveCountMax = 3;
         sendEnv = [ "GITHUB_TOKEN" ];
         extraOptions = {
-            # KnownHostsCommand is in addition to those listed in UserKnownHostsFile and GlobalKnownHostsFile
+          # KnownHostsCommand is in addition to those listed in UserKnownHostsFile and GlobalKnownHostsFile
 
         };
       };

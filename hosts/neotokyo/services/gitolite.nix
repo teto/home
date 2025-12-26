@@ -35,8 +35,7 @@
       $RC{SITE_INFO}  = 'This is our private repository host';
       $RC{LOCAL_CODE} =  "$rc{GL_ADMIN_BASE}/local",
       push( @{$RC{ENABLE}}, 'repo-specific-hooks'); # enable the command/feature
-      '';
-
+    '';
 
     # hooks deployed to every  repo
     # commonHooks = [ ];

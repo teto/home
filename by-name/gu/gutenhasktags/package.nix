@@ -1,7 +1,11 @@
-
 # { haskell }:
-{ hello, haskell, fetchFromGitHub, lib}:
-  hello
+{
+  hello,
+  haskell,
+  fetchFromGitHub,
+  lib,
+}:
+hello
 # haskell.packages.ghc9103.callPackage (
 # {
 #   base,

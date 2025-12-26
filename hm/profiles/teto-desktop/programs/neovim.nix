@@ -6,13 +6,13 @@
   ...
 }:
 let
-  genBlockLua = title: content: ''
-    -- ${title} {{{
-    ${content}
-    -- }}}
-  '';
+  inherit (lib)
+    genBlockLua
+    ;
 
-  mcp-hub = flakeSelf.inputs.mcp-hub.packages.${pkgs.stdenv.hostPlatform.system}.mcp-hub;
+  pluginsMap = pkgs.callPackage ../../neovim/plugins.nix { inherit flakeSelf lib; };
+
+  # mcp-hub = flakeSelf.inputs.mcp-hub.packages.${pkgs.stdenv.hostPlatform.system}.mcp-hub;
 
   luaPlugin =
     attrs:
@@ -57,7 +57,6 @@ let
   ];
 
   luaPlugins = with pkgs.vimPlugins; [
-
 
     # (luaPlugin {
     #   plugin = avante-nvim;
@@ -128,11 +127,10 @@ let
 
   extraPackages = with pkgs; [
     bash-language-server
-    black
+    # black
     editorconfig-checker # used in null-ls
     fswatch # better file watching starting with 0.10
-    go # for gitlab.nvim, we can probably ditch it afterwards
-    # gcc # this is sadly a workaround to be able to run :TSInstall
+    # go # for gitlab.nvim, we can probably ditch it afterwards
     luajitPackages.luacheck
 
     # luaformatter # broken
@@ -147,7 +145,7 @@ let
     manix # should be no need, telescope-manix should take care of it
     nodePackages.vscode-langservers-extracted # needed for jsonls aka "vscode-json-language-server"
     # prettier sadly can't use buildNpmPackage because no lockfile https://github.com/NixOS/nixpkgs/issues/229475
-    dockerfile-language-server
+    # dockerfile-language-server
 
     # TODO map it to a plugin instead
     # nodePackages.typescript-language-server
@@ -190,8 +188,11 @@ let
   #   packageOverrides = flakeSelf.inputs.rikai-nvim.overlays.luaOverlay;
   # };
 
+  vimPlugins = pkgs.vimPlugins;
 in
 {
+  # _imports = [
+  # ];
   enableBlink = true;
   enableMyDefaults = true;
   useAsManViewer = true;
@@ -199,19 +200,19 @@ in
   lsp.mapOnAttach = true;
   lualsAddons = true;
 
-  # enableYazi = true;
+  treesitter = {
+    enable = true;
 
-  # local nix_deps = require('generated-by-nix')
+    plugins = [
+      vimPlugins.nvim-surround
+    ];
+  };
 
   extraLuaConfig = # lua
     lib.mkAfter ''
       require('init-manual')
     '';
 
-  # _imports = [
-  #   flakeSelf.homeProfiles.neovim
-  # ];
-  #
   plugins = [
 
     # TODO replaced with https://github.com/yutkat/git-rebase-auto-diff.nvim
@@ -265,6 +266,7 @@ in
   ++ blinkPlugins
   ++ filetypePlugins
   ++ treesitterPlugins
+  ++ pluginsMap.colorschemePlugins
   # ++ telescopePlugins
   ++ neotestPlugins;
 
@@ -290,6 +292,10 @@ in
     lp.alogger
     lp.mega-cmdparse
     lp.mega-logging # should not be needed ?
+
+    lp.nvim-nio
+    # lp.fzy
+
   ]
   # nvimLua.pkgs.rest-nvim.propagatedBuildInputs
   ;
@@ -302,7 +308,7 @@ in
   ];
 
   extraPackages =
-       extraPackages
+    extraPackages
     ++ pkgs.vimPlugins.llm-nvim.runtimeDeps # temporary workaround
     # provides typescript-language-server
     ++ pkgs.vimPlugins.typescript-tools-nvim.runtimeDeps
@@ -312,6 +318,5 @@ in
       pkgs.gitlab-ci-ls # gitlab lsp
 
       # mcp-hub
-    ]
-  ;
+    ];
 }

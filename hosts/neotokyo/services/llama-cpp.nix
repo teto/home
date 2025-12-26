@@ -1,9 +1,15 @@
-{ config, lib, pkgs, secrets, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  secrets,
+  ...
+}:
 {
   services.llama-cpp = {
-    enable = false; 
+    enable = false;
 
-  #       "--api-key-file"
+    #       "--api-key-file"
 
     extraFlags = [
       # Load and run the model:
@@ -16,12 +22,12 @@
       "32"
       "--numa"
       "numactl"
-  ];
+    ];
 
-  host = "0.0.0.0";
-  # TODO use a hugging-face url
-  # model = "/models/mistral-instruct-7b/ggml-model-q4_0.gguf";
-  openFirewall = true;
+    host = "0.0.0.0";
+    # TODO use a hugging-face url
+    # model = "/models/mistral-instruct-7b/ggml-model-q4_0.gguf";
+    openFirewall = true;
 
   };
 }

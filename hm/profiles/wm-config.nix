@@ -81,18 +81,18 @@ let
       #   brightness=$(${pkgs.brightnessctl}/bin/brightnessctl -m info | cut -f4 -d, )
       #   echo $brightness
       # '';
-        brightnessScript = pkgs.writeShellApplication {
-          name = "brightness-mgr";
-          runtimeInputs = [
-            # final.pass-teto
-            pkgs.brightnessctl # 
-            pkgs.libnotify # for notify-send
-          ];
-          # pass up
-          text = builtins.readFile ../../bin/set-brightness.sh;
+      brightnessScript = pkgs.writeShellApplication {
+        name = "brightness-mgr";
+        runtimeInputs = [
+          # final.pass-teto
+          pkgs.brightnessctl
+          pkgs.libnotify # for notify-send
+        ];
+        # pass up
+        text = builtins.readFile ../../bin/set-brightness.sh;
 
-          checkPhase = ":";
-        };
+        checkPhase = ":";
+      };
 
     in
     # { name = "get-volume-as-integer";
@@ -120,7 +120,7 @@ let
       # XF86MonBrightnessUp = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +10%; exec ${notify-send} --icon=brightness -u low -t 1000 -h int:value:$(${getBrightness}) -e -h string:synchronous:brightness-level 'Brightness' 'Raised brightness'";
       # TODO reference brightnessctl
       XF86MonBrightnessUp = "exec ${brightnessScript}/bin/brightness-mgr up 10%";
-      XF86MonBrightnessDown= "exec ${brightnessScript}/bin/brightness-mgr down 10%-";
+      XF86MonBrightnessDown = "exec ${brightnessScript}/bin/brightness-mgr down 10%-";
       # XF86MonBrightnessDown = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 10%-; exec ${notify-send} --icon=brightness-low -u low -t 1000 -h int:value:$(${getBrightness}) -e -h string:synchronous:brightness-level 'Brightness' 'Lowered brightness'";
       # XF86MonBrightnessDown = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 10%-";
 

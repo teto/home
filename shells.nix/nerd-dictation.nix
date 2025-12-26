@@ -1,26 +1,30 @@
-{ pkgs ? import <nixpkgs> {} }:
+{
+  pkgs ? import <nixpkgs> { },
+}:
 
 pkgs.mkShell {
   buildInputs = with pkgs; [
     # Python with vosk package
-    (python3.withPackages (ps: with ps; [
-      # vosk
-      # Development tools
-      black
-      # Testing tools
-      pytest
-    ]))
+    (python3.withPackages (
+      ps: with ps; [
+        # vosk
+        # Development tools
+        black
+        # Testing tools
+        pytest
+      ]
+    ))
 
     # Audio recording utilities (choose one or have multiple available)
-    pulseaudio  # provides parec command
-    sox         # alternative audio recording
-    pipewire    # provides pw-cat command
+    pulseaudio # provides parec command
+    sox # alternative audio recording
+    pipewire # provides pw-cat command
 
     # Input simulation utilities (choose one or have multiple available)
-    xdotool     # X11 input simulation (default)
-    ydotool     # Wayland/X11/TTY input simulation
-    dotool      # Wayland/X11/TTY input simulation
-    wtype       # Wayland input simulation
+    xdotool # X11 input simulation (default)
+    ydotool # Wayland/X11/TTY input simulation
+    dotool # Wayland/X11/TTY input simulation
+    wtype # Wayland input simulation
 
     # Optional: useful development tools
     git

@@ -1,9 +1,9 @@
 {
   lib,
   pkgs,
-  config
-, dotfilesPath
-, ...
+  config,
+  dotfilesPath,
+  ...
 }:
 let
   # key modifier
@@ -28,7 +28,7 @@ in
       enable = true;
 
       # just trying what's advised at https://github.com/NixOS/nixpkgs/issues/177900#issuecomment-3167947983
-      extraCommands = [ 
+      extraCommands = [
 
       ];
 

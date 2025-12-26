@@ -6,4 +6,3 @@
   browsing = true;
   drivers = [ pkgs.gutenprint ];
 }
-

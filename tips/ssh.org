@@ -7,6 +7,11 @@
  https://superuser.com/questions/1173594/get-configuration-of-running-sshd
  sshd  -T
 
+* audit ssh client settings ?
+
+ssh-audit -c
+ssh -p 2222 test@localhost
+
 # How to create a tunnel
 # https://linuxize.com/post/how-to-setup-ssh-tunneling/
 ssh -L [LOCAL_IP:]LOCAL_PORT:DESTINATION:DESTINATION_PORT [USER@]SSH_SERVER

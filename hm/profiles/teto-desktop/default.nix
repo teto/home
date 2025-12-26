@@ -2,6 +2,7 @@
   flakeSelf,
   pkgs,
   lib,
+  config,
   withSecrets,
   secretsFolder,
   dotfilesPath,
@@ -39,21 +40,21 @@ in
   # '';
 
   home.packages = with pkgs; [
-    stow
-    systemctl-tui
-    pciutils # for lspci
-
-    # only for matt ?
-    pass-perso
     (ignoreBroken pkgs.aider-chat) # breaks
+    mdcat # markdown viewer
     notmuch # needed for waybar-custom-notmuch.sh
     panvimdoc # to generate vim doc from README, for instance in gp.nvim
+    pciutils # for lspci
+    # only for matt ?
+    pass-perso
     # poppler for pdf preview
 
+    stow
+    timr-tui # rust clock
+    systemctl-tui
     viu # a console image viewer
-    mdcat # markdown viewer
 
-      # flakeSelf.inputs.git-repo-manager.packages.${pkgs.stdenv.hostPlatform.system}.git-repo-manager
+    # flakeSelf.inputs.git-repo-manager.packages.${pkgs.stdenv.hostPlatform.system}.git-repo-manager
   ];
 
   home.shellAliases = {
@@ -72,11 +73,10 @@ in
     # }}}
   };
 
-
   home.sessionVariables = {
     # might be a hack
-    PASSWORD_STORE_ENABLE_EXTENSIONS="true";  # it must be "true" and nothing else !
-    PASSWORD_STORE_EXTENSIONS_DIR="${dotfilesPath}/contrib/pass-extensions";
+    PASSWORD_STORE_ENABLE_EXTENSIONS = "true"; # it must be "true" and nothing else !
+    PASSWORD_STORE_EXTENSIONS_DIR = "${dotfilesPath}/contrib/pass-extensions";
   };
 
   package-sets = {
@@ -89,6 +89,12 @@ in
     yubikey = true;
     waylandPackages = true;
   };
+
+  # neovim workarounds:
+  # - for treesitter (provide compiler such that nvim-treesitter can install grammars
+  # - for rocks.nvim: give him a tree to luarocks
+  # todo should depend on
+  # xdg.
 
   home.language = {
     # monetary =

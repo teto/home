@@ -56,19 +56,20 @@ in
     # ./desktop/sops.nix
   ];
 
-
   # attempt to print japanese characters
   services.kmscon = {
     enable = false; # disabled because it's ugly
     hwRender = true;
-    fonts = [{
-      name = "Noto Sans Mono CJK JP";
-      package = pkgs.noto-fonts-cjk-sans;
-    }];
+    fonts = [
+      {
+        name = "Noto Sans Mono CJK JP";
+        package = pkgs.noto-fonts-cjk-sans;
+      }
+    ];
   };
 
   console = {
-    font = "ter-v32n";  # Terminus font, larger size
+    font = "ter-v32n"; # Terminus font, larger size
     packages = [ pkgs.terminus_font ];
     useXkbConfig = true;
   };
@@ -90,22 +91,19 @@ in
     ];
   };
 
-
-
-      # #! /bin/sh
-      # exec ${lib.getExe config.programs.sway.package}
+  # #! /bin/sh
+  # exec ${lib.getExe config.programs.sway.package}
   environment.etc."lemurs/wayland/sway-systemd" = {
     mode = "755";
-    # sway creates systemd.user.targets.sway-session 
+    # sway creates systemd.user.targets.sway-session
     # for now we import everything
-    # /nix/store/rxzvps8zldnz4sgphbw6893n6ikai6gn-dbus-1.14.10/bin/dbus-update-activation-environment --systemd  --all 
+    # /nix/store/rxzvps8zldnz4sgphbw6893n6ikai6gn-dbus-1.14.10/bin/dbus-update-activation-environment --systemd  --all
     text = ''
       #! /bin/sh
       ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd --all;
       systemctl start --user --wait sway-session.service
     '';
   };
-
 
   # see https://github.com/NixOS/nixpkgs/issues/15293
   # Set your time zone.
@@ -161,7 +159,7 @@ in
   # networking.firewall.allowedTCPPorts = [ 631 ];
 
   hardware = {
-    enableAllFirmware =true;
+    enableAllFirmware = true;
     enableRedistributableFirmware = true;
     # High quality BT calls
   };

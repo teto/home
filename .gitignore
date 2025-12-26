@@ -1,4 +1,5 @@
 # **
+*.generated
 /.gp.md
 /.direnv
 /*.log

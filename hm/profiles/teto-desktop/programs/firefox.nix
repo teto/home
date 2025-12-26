@@ -7,7 +7,7 @@
 let
 
   ffLib = lib.firefox;
-    # pkgs.callPackage ../../../../nixpkgs/lib/firefox.nix { };
+  # pkgs.callPackage ../../../../nixpkgs/lib/firefox.nix { };
 
 in
 {

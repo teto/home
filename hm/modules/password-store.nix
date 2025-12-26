@@ -1,7 +1,13 @@
-{ config, lib, dotfilesPath, ... }:
+{
+  config,
+  lib,
+  dotfilesPath,
+  ...
+}:
 let
-   cfg = config.programs.password-store;
-in {
+  cfg = config.programs.password-store;
+in
+{
   options = {
     programs.password-store = {
       enableExtensions = lib.mkEnableOption "password-store extensions";
@@ -19,8 +25,8 @@ in {
   config = lib.mkIf cfg.enable {
     home.sessionVariables = {
 
-      PASSWORD_STORE_ENABLE_EXTENSIONS="true";  # it must be "true" and nothing else !
-      PASSWORD_STORE_EXTENSIONS_DIR="${dotfilesPath}/contrib/pass-extensions";
+      PASSWORD_STORE_ENABLE_EXTENSIONS = "true"; # it must be "true" and nothing else !
+      PASSWORD_STORE_EXTENSIONS_DIR = "${dotfilesPath}/contrib/pass-extensions";
     };
 
   };

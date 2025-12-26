@@ -2,49 +2,46 @@
 
 NIXPKGS := "/home/teto/nixpkgs"
 
+# set dotenv-load := ".env.local"
 
-# set dotenv-load := ".env.local"  
-set dotenv-load 
+set dotenv-load := true
 
 # LLAMA_MODELS_DIR loadeed from .env
 # LLAMA_MODELS_DIR := env('HOME') / 'llama-models'
 # LLM_LOCAL_PORT := env('LLM_LOCAL_PORT', 11111)
 
-
 # select a target
 default:
     just --choose
 
-
 neotokyo-help:
-  just -f hosts/neotokyo/home-manager/users/teto/justfile
+    just -f hosts/neotokyo/home-manager/users/teto/justfile
 
 # Start mistral server
-llama: 
-  # llama-server -m ${LLAMA_MODELS_DIR}/mistral-7b-openorca.Q6_K.gguf -c 2048 --port ${LLM_LOCAL_PORT} -ngl 33
-  # /mistral-7b-openorca.Q6_K.gguf
-  llama-server --host 0.0.0.0 --port 8080 --models-dir ${LLAMA_MODELS_DIR} --jinja -v --log-prefix --models-preset ~/home/contrib/llama-presets.ini
+llama:
+    # llama-server -m ${LLAMA_MODELS_DIR}/mistral-7b-openorca.Q6_K.gguf -c 2048 --port ${LLM_LOCAL_PORT} -ngl 33
+    # /mistral-7b-openorca.Q6_K.gguf
+    llama-server --host 0.0.0.0 --port 8080 --models-dir ${LLAMA_MODELS_DIR} --jinja -v --log-prefix --models-preset ~/home/contrib/llama-presets.ini
 
 llama-bench:
-   llama-bench -m ${LLAMA_MODELS_DIR}/mistralai_Ministral-3-3B-Instruct-2512-GGUF_Ministral-3-3B-Instruct-2512-Q4_K_M.gguf
+    llama-bench -m ${LLAMA_MODELS_DIR}/mistralai_Ministral-3-3B-Instruct-2512-GGUF_Ministral-3-3B-Instruct-2512-Q4_K_M.gguf
 
 # voice recognition
 whisper:
-  #  whisper-server \
-  # -m /home/teto/.cache/huggingface/hub/models--ggerganov--whisper.cpp/snapshots/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-large-v3.bin \
-  # --port ${LLM_LOCAL_PORT}
-  # services.wyoming.openwakeword.enable
-  llama-server -m /home/teto/.cache/huggingface/hub/models--ggerganov--whisper.cpp/snapshots/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-large-v3.bin -c 2048 --port ${LLM_LOCAL_PORT} -ngl 33
-  
+    #  whisper-server \
+    # -m /home/teto/.cache/huggingface/hub/models--ggerganov--whisper.cpp/snapshots/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-large-v3.bin \
+    # --port ${LLM_LOCAL_PORT}
+    # services.wyoming.openwakeword.enable
+    llama-server -m /home/teto/.cache/huggingface/hub/models--ggerganov--whisper.cpp/snapshots/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-large-v3.bin -c 2048 --port ${LLM_LOCAL_PORT} -ngl 33
 
 # find machines on local network
 avahi-discover:
-  avahi-browse -d local _workstation._tcp -t --resolve
+    avahi-browse -d local _workstation._tcp -t --resolve
 
 # install neovim dev files
 neovim-direnv:
-  # ln -sf {{justfile_directory()}}/../../nova/justfile justfile.local
-  ln -sf $HOME/home/contrib/neovim-envrc .envrc
+    # ln -sf {{ justfile_directory() }}/../../nova/justfile justfile.local
+    ln -sf $HOME/home/contrib/neovim-envrc .envrc
 
 # Merge some hardcoded shell commands in shell history
 zsh-load-history:
@@ -52,7 +49,7 @@ zsh-load-history:
     # man zshbuiltins(1)
     # fc = Fix Cache
 
-    hist_file="{{config_directory()}}/zsh/shell_history.txt"
+    hist_file="{{ config_directory() }}/zsh/shell_history.txt"
     # -R  => reads the history from the given file
     builtin fc -R -I "$hist_file"
 
@@ -61,31 +58,31 @@ zsh-load-history:
 
 # update luarocks packages
 update-luarocks:
-  # TODO run in command directory
-  # TODO pass token
-  nix run '.#luarocks-packages-updater' -- --proc=4 --github-token=$(pass show 'github token')
+    # TODO run in command directory
+    # TODO pass token
+    nix run '.#luarocks-packages-updater' -- --proc=4 --github-token=$(pass show 'github token')
 
 # Update nixpkgs neovim plugins
 update-neovim-packages:
-  nix run '.#neovim-plugins-updater' -- --proc=4 --github-token=$GITHUB_TOKEN
+    nix run '.#neovim-plugins-updater' -- --proc=4 --github-token=$GITHUB_TOKEN
 
 # fetch new mail
 mail-sync:
-  systemctl start --user mujmap-fastmail.service
-  # systemctl start --user mujmap-fastmail.service
+    systemctl start --user mujmap-fastmail.service
+    # systemctl start --user mujmap-fastmail.service
 
 # generate database executable -> nix attributes
 nixpkgs-index:
- rippkgs-index nixpkgs {{NIXPKGS}} --index ~/.local/share/rippkgs-index.sqlite
+    rippkgs-index nixpkgs {{ NIXPKGS }} --index ~/.local/share/rippkgs-index.sqlite
 
 # TODO finish
 nix-index args:
-  nix run github:nix-community/nix-index-database {{args}}
+    nix run github:nix-community/nix-index-database {{ args }}
 
 nix-gc:
-  nix-collect-garbage --delete-older-than 3d
+    nix-collect-garbage --delete-older-than 3d
 
 nix-closure-size derivation:
-  # $(nix-build ./shell.nix -A inputDerivation)
-  # $(nix build --print-out-paths drv)
-  nix path-info -Sh {{derivation}}
+    # $(nix-build ./shell.nix -A inputDerivation)
+    # $(nix build --print-out-paths drv)
+    nix path-info -Sh {{ derivation }}

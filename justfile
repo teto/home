@@ -148,6 +148,7 @@ stow-home:
     stow --dotfiles -t {{ home_directory() }} home
 
 # TODO remove ?
+
 # symlink bin/ dotfiles into $HOME
 stow-bin:
     mkdir -p "{{ data_directory() }}/../bin"
@@ -158,7 +159,7 @@ stow-bin:
 # stow-secrets:
 #     ln -s {{ SECRETS_FOLDER }}/aws  {{ home_directory() }}/.aws
 #     ln -s {{ SECRETS_FOLDER }}/password-store  {{ home_directory() }}/.password-store
-#     # ln -s {{ justfile_directory() }}/ 
+#     # ln -s {{ justfile_directory() }}/
 
 # symlink to XDG_DATA_HOME
 stow-local:
@@ -238,6 +239,7 @@ secrets-wormhole-receive:
     wormhole-rs receive
 
 # rsync
+
 # TODO remove once yazi proved it works nice
 secrets-scp-sync:
     # laptop must exist in ssh config
@@ -290,7 +292,6 @@ udev-restart:
 nix-ping-store:
     nix store info --store http://jedha.local
 
-
 dbus-list-sessions:
     # org.freedesktop.DBus.ListNames
     dbus-send --session --dest=org.freedesktop.DBus --type=method_call --print-reply /org/freedesktop/DBus org.freedesktop.DBus.ListNames
@@ -309,13 +310,13 @@ nix-weather:
 
 # TODO this should be generated in justfile.generated ?
 bitwarden-sync-to-password-store:
-  # bw login
-  bw export
-  pass-perso import pass bitwarden  <FILE>
- 
+    # bw login
+    bw export
+    pass-perso import pass bitwarden  <FILE>
+
 refresh-ssh-public-keys:
-  ssh-keyscan -q -p4231 -ted25519 neotokyo.fr | cut -d' ' -f2,3 > host_key.pub
+    ssh-keyscan -q -p4231 -ted25519 neotokyo.fr | cut -d' ' -f2,3 > host_key.pub
 
 # list firewall rules
 firewall-list:
-  sudo iptables -n -L
+    sudo iptables -n -L

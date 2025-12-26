@@ -7,16 +7,17 @@
   lib,
   ...
 }:
-let 
-    haumea = flakeSelf.inputs.haumea;
+let
+  haumea = flakeSelf.inputs.haumea;
 
   autoloadedProfiles =
     { pkgs, ... }@args:
     haumea.lib.load {
       src = flakeSelf.inputs.nix-filter {
         root = ./.;
-        include = [ 
-          # wrong ? 
+        include = [
+          # wrong ?
+          "home-manager/"
           "users/users/root.nix"
 
           "services/harmonia.nix"
@@ -33,6 +34,7 @@ let
       };
 
       inputs = args // {
+        osConfig = config;
         # inputs = flakeSelf.inputs;
       };
       transformer = [
@@ -65,11 +67,24 @@ in
   #   "xen-scsifront"
   # ];
 
+  boot.kernel.sysctl = {
+    "fs.protected_fifos" = 2;
+    "fs.protected_regular" = 2;
+    "fs.suid_dumpable" = false;
+    "kernel.kptr_restrict" = 2;
+    "kernel.sysrq" = false;
+    "kernel.unprivileged_bpf_disabled" = true;
+  };
+
+  # some hardening
+  boot.blacklistedKernelModules = [
+    "dccp"
+    "sctp"
+    "rds"
+    "tipc"
+  ];
   imports = [
 
-    # ONE OR THE OTHER
-    # for gandi
-    # ./gandi.nix
     ./ovh.nix
 
     autoloadedProfiles
@@ -80,7 +95,6 @@ in
     flakeSelf.inputs.disko.nixosModules.disko
     flakeSelf.nixosModules.teto-nogui
     flakeSelf.nixosModules.default-hm
-    # flakeSelf.nixosModules.neovim
     flakeSelf.nixosProfiles.ntp
     flakeSelf.nixosProfiles.nix-daemon
 
@@ -115,15 +129,15 @@ in
 
   users = {
 
-    # that's where we 
+    # that's where we
     # users.jellyfin = {
     #   # that's where we gonna store our libraries
-    #   createHome = true; 
+    #   createHome = true;
     # };
     # users.media = {
     #   # that's where we gonna store our libraries
     #   # todo create some directories like movies/music with tmpfiles.d ?
-    #   createHome = true; 
+    #   createHome = true;
     # };
 
     users.teto = {
@@ -144,6 +158,7 @@ in
       ];
     };
 
+    # might not be needed anymore ? for gitolite ?
     users.git = {
       isSystemUser = true;
       group = "www";
@@ -155,6 +170,11 @@ in
         # ../../perso/keys/id_rsa.pub
       ];
     };
+
+    users.immich.extraGroups = [
+      "video"
+      "render"
+    ];
 
     groups.media = {
       members = [
@@ -178,33 +198,17 @@ in
     # "d '/var/backup/postgresql' 0750 postgres backup - -"
   ];
 
-  home-manager.users = {
-    root = {
-      imports = [
-        flakeSelf.homeProfiles.neovim
-        (
-          { ... }:
-          {
-            # why do i need that already ? for the nix-daemon ?
-            programs.ssh = {
-              enable = true;
-              enableDefaultConfig = true;
-            };
-          }
-        )
-
-      ];
-    };
-    teto = {
-      # TODO it should load the whole folder
-      imports = [
-        ./home-manager/users/teto/default.nix
-        flakeSelf.homeModules.teto-nogui
-        # flakeSelf.homeProfiles.neovim
-        # flakeSelf.homeProfiles.yazi
-      ];
-    };
-  };
+  # home-manager.users = {
+  #
+  #   teto = {
+  #     # TODO it should load the whole folder
+  #     imports = [
+  #       # ./home-manager/users/teto/default.nix
+  #       # flakeSelf.homeProfiles.neovim
+  #       # flakeSelf.homeProfiles.yazi
+  #     ];
+  #   };
+  # };
 
   boot.loader = {
     #    systemd-boot.enable = true;
@@ -223,16 +227,17 @@ in
   };
 
   # security.sudo.wheelNeedsPassword = true;
+  security.sudo.execWheelOnly = true;
 
   environment.systemPackages = [
     # flakeSelf.inputs.transgression-tui.packages.${pkgs.stdenv.hostPlatform.system}.transgression-tui
     pkgs.tremc
     pkgs.restic # testing against restic
-    pkgs.sops 
+    pkgs.sops
     # pkgs.rustic # testing against restic
     pkgs.backblaze-b2-tetos
     pkgs.msmtp # to send mails
-    pkgs.neovim
+    pkgs.systemctl-tui
     pkgs.nixpkgs-review
     pkgs.zola # needed in the post-receive hook of the blog !
     pkgs.yazi

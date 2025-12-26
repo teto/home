@@ -64,8 +64,8 @@ in
   ];
 
   home-manager.users.root = {
-    # imports = [ 
-    #   flakeSelf.homeProfiles.neovim-minimal 
+    # imports = [
+    #   flakeSelf.homeProfiles.neovim-minimal
     # ];
   };
 
@@ -75,7 +75,7 @@ in
     # TODO it should load the whole folder
     imports = [
       flakeSelf.homeModules.teto-nogui
-      # ./teto/nix.nix # done at 
+      # ./teto/nix.nix # done at
     ];
 
     package-sets.wifi = true;

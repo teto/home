@@ -6,6 +6,6 @@
 }:
 {
   enable = true;
-  
+
   # package = pkgs.flameshotGrim;
 }

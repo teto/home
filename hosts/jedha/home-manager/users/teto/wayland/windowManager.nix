@@ -1,4 +1,3 @@
 {
   wayfire.enable = false;
 }
-

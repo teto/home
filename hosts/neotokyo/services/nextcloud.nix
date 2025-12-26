@@ -10,7 +10,7 @@
 
   imports = [
     flakeSelf.nixosModules.nextcloud
-    ../../../nixos/profiles/nextcloud.nix
+    flakeSelf.nixosProfiles.nextcloud
   ];
 
   services.nextcloud = {
@@ -93,7 +93,7 @@
   systemd.services.nextcloud-add-user = {
     path = [ config.services.nextcloud.occ ];
     script = ''
-      export OC_PASS="$(cat /run/secrets/nextcloud/tetoPassword)"
+      export OC_PASS="$(cat ${config.sops.secrets."nextcloud/tetoPassword".path})"
       nextcloud-occ user:add --password-from-env teto
       ${config.services.nextcloud.occ}/bin/nextcloud-occ user:setting teto settings email "${secrets.users.teto.email}"
     '';

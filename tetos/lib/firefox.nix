@@ -1,6 +1,6 @@
 { pkgs }:
-let 
-  install_url= "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+let
+  install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
 in
 {
   # copy/pasted from
@@ -48,7 +48,6 @@ in
     AutofillAddressEnabled = false;
     AutofillCreditCardEnabled = false;
 
-
     BlockAboutConfig = false;
 
     DisableFirefoxStudies = true;
@@ -86,22 +85,22 @@ in
     DefaultDownloadDirectory = "\${home}/Downloads";
 
     # See https://discourse.nixos.org/t/browser-and-browser-wars/70027/21
-    /* ---- EXTENSIONS ---- */
+    # ---- EXTENSIONS ----
     # Check about:support for extension/add-on ID strings.
     # Valid strings for installation_mode are "allowed", "blocked",
     # "force_installed" and "normal_installed".
     ExtensionSettings = {
-        "*" =  {
-          "blocked_install_message"= "Custom error message.";
-          # "install_sources"= ["https://yourwebsite.com/*"];
-          # "installation_mode"= "blocked";
-          "allowed_types"= ["extension"];
-        };
-        # "uBlock0@raymondhill.net": {
-        #   "installation_mode": "force_installed",
-        #   "install_url": "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi"
-        # },
-              # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.firefox.policies
+      "*" = {
+        "blocked_install_message" = "Custom error message.";
+        # "install_sources"= ["https://yourwebsite.com/*"];
+        # "installation_mode"= "blocked";
+        "allowed_types" = [ "extension" ];
+      };
+      # "uBlock0@raymondhill.net": {
+      #   "installation_mode": "force_installed",
+      #   "install_url": "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi"
+      # },
+      # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.firefox.policies
       "uBlock0@raymondhill.net" = {
         default_area = "menupanel";
         # install_url = install_url;

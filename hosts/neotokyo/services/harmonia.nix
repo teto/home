@@ -8,4 +8,3 @@
   # TODO write one
   # cache.signKeyPaths = [ "/var/lib/secrets/harmonia.secret" ];
 }
-

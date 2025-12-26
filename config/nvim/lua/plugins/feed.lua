@@ -1,11 +1,8 @@
-
-
 vim.g.feed_debug = true
 
-
 require('feed').setup({
- -- picker = "fzf-lua",
- progress = "bar",
+    -- picker = "fzf-lua",
+    progress = 'bar',
     feeds = {
         -- These two styles both work
         -- "https://neovim.io/news.xml",
@@ -15,7 +12,7 @@ require('feed').setup({
         --     tags = { 'japanese' },
         -- },
         {
-		 'https://nhkeasier.com/feed/?no-furiganas',
+            'https://nhkeasier.com/feed/?no-furiganas',
             -- 'https://nhkeasier.com/feed/',
             name = 'NHK News Web easy',
             tags = { 'japanese' },

@@ -6,7 +6,6 @@
 }:
 {
   imports = [
-    # ../../../nixos/profiles/openssh.nix
     flakeSelf.nixosProfiles.openssh
   ];
 
@@ -20,7 +19,12 @@
     # ];
     # new format
     settings = {
-      AcceptEnv = [ "GITHUB_TOKEN"];
+
+      MaxAuthTries = 3;
+      # LoginGraceTime = 500;
+      Protocol = 2;
+      ChallengeResponseAuthentication = false;
+      AcceptEnv = [ "GITHUB_TOKEN" ];
       # LogLevel = "VERBOSE";
       LogLevel = lib.mkForce "DEBUG";
       KbdInteractiveAuthentication = false;
@@ -28,6 +32,12 @@
       X11Forwarding = false;
       PermitRootLogin = lib.mkForce "no";
       HostKey = "/run/secrets/ssh_host_key";
+
+      AllowUsers = [
+        "teto"
+        "gitolite"
+      ];
+      # KexAlgorithms =
     };
   };
 }

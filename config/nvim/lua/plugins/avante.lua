@@ -9,61 +9,58 @@
 -- })
 -- require('avante_lib').load()
 
-local llama_hostname = "jedha.local"
+local llama_hostname = 'jedha.local'
 -- local llama_hostname = "localhost"
 
-
-local provider = "claude"
-if vim.fn.hostname() == "jedha" then
-  provider = 'llamacpp'
+local provider = 'claude'
+if vim.fn.hostname() == 'jedha' then
+    provider = 'llamacpp'
 end
-  
 
-
+local xdg_config = vim.env.XDG_CONFIG_HOME or os.getenv('HOME') .. '/.config'
 
 -- TODO load configuration from llm-providers.json
 -- lua vim.json.decode(str, opts)
 require('avante').setup({
     debug = true, -- print error messages
 
-	-- can be a function as well
-	-- avante is very talkative by default
-	override_prompt_dir = vim.fn.expand(vim.fn.stdpath('config').."/avante_prompts"),
-	-- system_prompt = "";
-  -- rules = {
-  --   project_dir = nil, ---@type string | nil (could be relative dirpath)
-  --   global_dir = nil, ---@type string | nil (absolute dirpath)
-  -- },
-  rag_service = { -- RAG service configuration
-    enabled = false, -- Enables the RAG service
-    host_mount = os.getenv("HOME"), -- Host mount path for the RAG service (Docker will mount this path)
-    runner = "nix", -- The runner for the RAG service (can use docker or nix)
-    llm = { -- Configuration for the Language Model (LLM) used by the RAG service
-      provider = "claude", -- The LLM provider
-      -- endpoint = "https://api.openai.com/v1", -- The LLM API endpoint
-      api_key = "", -- The environment variable name for the LLM API key
-      -- model = "gpt-4o-mini", -- The LLM model name
-      -- extra = nil, -- Extra configuration options for the LLM
+    -- can be a function as well
+    -- avante is very talkative by default
+    override_prompt_dir = vim.fn.expand(vim.fn.stdpath('config') .. '/avante_prompts'),
+    -- system_prompt = "";
+    -- rules = {
+    --   project_dir = nil, ---@type string | nil (could be relative dirpath)
+    --   global_dir = nil, ---@type string | nil (absolute dirpath)
+    -- },
+    rag_service = { -- RAG service configuration
+        enabled = false, -- Enables the RAG service
+        host_mount = os.getenv('HOME'), -- Host mount path for the RAG service (Docker will mount this path)
+        runner = 'nix', -- The runner for the RAG service (can use docker or nix)
+        llm = { -- Configuration for the Language Model (LLM) used by the RAG service
+            provider = 'claude', -- The LLM provider
+            -- endpoint = "https://api.openai.com/v1", -- The LLM API endpoint
+            api_key = '', -- The environment variable name for the LLM API key
+            -- model = "gpt-4o-mini", -- The LLM model name
+            -- extra = nil, -- Extra configuration options for the LLM
+        },
+        embed = { -- Configuration for the Embedding model used by the RAG service
+            provider = 'claude', -- The embedding provider
+            -- endpoint = "https://api.openai.com/v1", -- The embedding API endpoint
+            api_key = '', -- The environment variable name for the embedding API key
+            -- model = "text-embedding-3-large", -- The embedding model name
+            extra = nil, -- Extra configuration options for the embedding model
+        },
+        -- docker_extra_args = "", -- Extra arguments to pass to the docker command
     },
-    embed = { -- Configuration for the Embedding model used by the RAG service
-      provider = "claude", -- The embedding provider
-      -- endpoint = "https://api.openai.com/v1", -- The embedding API endpoint
-      api_key = "", -- The environment variable name for the embedding API key
-      -- model = "text-embedding-3-large", -- The embedding model name
-      extra = nil, -- Extra configuration options for the embedding model
-    },
-    -- docker_extra_args = "", -- Extra arguments to pass to the docker command
-  },
     behaviour = {
         auto_set_keymaps = false,
         enable_token_counting = false,
         -- auto_approve_tool_permissions = {"bash", "replace_in_file"}, -- Auto-approve specific tools only
-		-- support_paste_from_clipboard
-		auto_focus_on_diff_view = true,
-		auto_add_current_file = true,
-		-- vs 'popup
-		confirmation_ui_style = "inline_buttons",
-
+        -- support_paste_from_clipboard
+        auto_focus_on_diff_view = true,
+        auto_add_current_file = true,
+        -- vs 'popup
+        confirmation_ui_style = 'inline_buttons',
     },
 
     -- provider = 'claude',
@@ -86,39 +83,40 @@ require('avante').setup({
             --   temperature = 0.75,
             --   max_tokens = 4096,
             -- },
-            api_key_name = 'cmd:cat '..os.getenv('HOME')..'/.config/sops-nix/secrets/claude_api_key',
+            -- should use XDG_CONFIG_HOME or
+            api_key_name = 'cmd:cat ' .. (vim.fs.joinpath(xdg_config, 'sops-nix/secrets/claude_api_key')),
         },
 
         gemini = {
-            api_key_name = 'cmd:cat '..os.getenv('HOME')..'/.config/sops-nix/secrets/gemini_matt_key',
+            api_key_name = 'cmd:cat ' .. os.getenv('HOME') .. '/.config/sops-nix/secrets/gemini_matt_key',
         },
         -- openai = {
         -- api_key_name = 'cmd:cat /home/teto/.config/sops-nix/secrets/OPENAI_API_KEY_NOVA',
         -- },
 
-		-- see https://github.com/yetone/avante.nvim/issues/2238
-		llamacpp = {
-		  __inherited_from = "openai",
-		  -- model = 'ministral3-3b-q4',
-		  model = 'devstral2-24b-iq2',
-		  -- model = 'ministral3-14b'
-		  -- model = "/home/teto/llama-models/mistral-7b-openorca.Q6_K.gguf",
-		  endpoint = 'http://'..llama_hostname..':8080/v1',
-		  timeout = 30000, -- Timeout in milliseconds
+        -- see https://github.com/yetone/avante.nvim/issues/2238
+        llamacpp = {
+            __inherited_from = 'openai',
+            -- model = 'ministral3-3b-q4',
+            model = 'devstral2-24b-iq2',
+            -- model = 'ministral3-14b'
+            -- model = "/home/teto/llama-models/mistral-7b-openorca.Q6_K.gguf",
+            endpoint = 'http://' .. llama_hostname .. ':8080/v1',
+            timeout = 30000, -- Timeout in milliseconds
 
-		  use_ReAct_prompt = false,
-		  -- parse_curl_args
+            use_ReAct_prompt = false,
+            -- parse_curl_args
 
-		  -- tools send a shitton of tokens
-		  -- not supported by mistral (but inherited by others so...)
-		  disable_tools = false,
+            -- tools send a shitton of tokens
+            -- not supported by mistral (but inherited by others so...)
+            disable_tools = false,
 
-		  -- empty key is required else avante complains
-		  api_key_name = '',
-		  extra_request_body = {
-			max_tokens = 1000, -- to avoid infinite loops
-		  }
-		},
+            -- empty key is required else avante complains
+            api_key_name = '',
+            extra_request_body = {
+                max_tokens = 1000, -- to avoid infinite loops
+            },
+        },
 
         -- ollama = {
         --     -- model = "qwq:32b",
@@ -162,39 +160,38 @@ require('avante').setup({
     -- openai_api_key = os.getenv("OPENAI_API_KEY")
 
     windows = {
-    position = "right",
-    fillchars = "eob: ",
-	-- TODO remove
-    sidebar_header = {
-      enabled = false, -- true, false to enable/disable the header
-      align = "center", -- left, center, right for title
-      rounded = true,
+        position = 'right',
+        fillchars = 'eob: ',
+        -- TODO remove
+        sidebar_header = {
+            enabled = false, -- true, false to enable/disable the header
+            align = 'center', -- left, center, right for title
+            rounded = true,
+        },
+        spinner = {
+            generating = { '·', '✢', '✳', '∗', '✻', '✽' },
+            thinking = { '🤯', '🙄' },
+        },
+        input = {
+            -- used as sign_define
+            -- function H.signs() vim.fn.sign_define("AvanteInputPromptSign", { text = Config.windows.input.prefix }) end
+            prefix = '> ',
+            height = 8, -- Height of the input window in vertical layout
+        },
     },
-	spinner = {
-      generating = { "·", "✢", "✳", "∗", "✻", "✽" },
-      thinking = { "🤯", "🙄" },
 
-	},
-    input = {
-	 -- used as sign_define
-	 -- function H.signs() vim.fn.sign_define("AvanteInputPromptSign", { text = Config.windows.input.prefix }) end
-      prefix = "> ",
-      height = 8, -- Height of the input window in vertical layout
-    }
+    ask = {
+
+        floating = false, -- Open the 'AvanteAsk' prompt in a floating window
+        start_insert = true, -- Start insert mode when opening the ask window
+        border = 'rounded',
+        ---@type "ours" | "theirs"
+        focus_on_apply = 'ours', -- which diff to focus after applying
     },
-
-	 ask = {
-
-		 floating = false, -- Open the 'AvanteAsk' prompt in a floating window
-		 start_insert = true, -- Start insert mode when opening the ask window
-		 border = 'rounded',
-		 ---@type "ours" | "theirs"
-		 focus_on_apply = 'ours', -- which diff to focus after applying
-	 },
     custom_tools = {
         -- {
         --     name = 'run_model_manager_tests', -- Unique name for the tool
-        --     description = 'run the ModelManagerSpec', 
+        --     description = 'run the ModelManagerSpec',
         --     param = { -- Input parameters (optional)
         --         type = 'table',
         --         fields = {
@@ -274,17 +271,17 @@ require('avante').setup({
         },
     },
 
-	prompt_logger = {
-	  enabled = true, -- toggle logging entirely
-	  log_dir = vim.fn.stdpath("cache"), -- directory where logs are saved
-	},
+    prompt_logger = {
+        enabled = true, -- toggle logging entirely
+        log_dir = vim.fn.stdpath('cache'), -- directory where logs are saved
+    },
 
-	-- disabled_tools = { "python" },
-	-- custom_tools
-	-- slash_commands = 
+    -- disabled_tools = { "python" },
+    -- custom_tools
+    -- slash_commands =
 })
 
- -- "AvanteViewBufferUpdated"
+-- "AvanteViewBufferUpdated"
 -- vim.api.nvim_create_user_command('', '!hasktags .', { desc = 'Regenerate tags' })
 
 -- https://github.com/NixOS/nixpkgs/pull/408463

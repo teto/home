@@ -13,8 +13,8 @@
     environmentFile = null; # "/etc/secrets/rmfakecloud.env";
     # storageUrl = "remarkable.${secrets.jakku.hostname}";
     storageUrl = "http://tatooine.local";
-       # services.rmfakecloud.storageUrl
-       #     URL used by the tablet to access the rmfakecloud service.
+    # services.rmfakecloud.storageUrl
+    #     URL used by the tablet to access the rmfakecloud service.
 
     # extraSettings = {
     #

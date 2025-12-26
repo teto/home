@@ -19,12 +19,14 @@ let
     # neotest-haskell
   ];
 
-  treesitterPlugins = let 
+  treesitterPlugins =
+    let
       inherit (pkgs.neovimUtils) grammarToPlugin;
-    in [
-    pkgs.vimPlugins.nvim-treesitter-parsers.nix
-    pkgs.vimPlugins.nvim-treesitter-parsers.hurl
-  ];
+    in
+    [
+      pkgs.vimPlugins.nvim-treesitter-parsers.nix
+      pkgs.vimPlugins.nvim-treesitter-parsers.hurl
+    ];
 
   luaPlugins = with pkgs.vimPlugins; [
     pkgs.vimPlugins.neorg
@@ -109,10 +111,12 @@ in
 {
   programs.neovim = {
 
-    package = lib.mkForce flakeSelf.inputs.neovim-nightly-overlay.packages."${pkgs.stdenv.hostPlatform.system}".neovim-debug;
+    package =
+      lib.mkForce
+        flakeSelf.inputs.neovim-nightly-overlay.packages."${pkgs.stdenv.hostPlatform.system}".neovim-debug;
 
     plugins =
-        luaPlugins
+      luaPlugins
       ++ filetypePlugins
       ++ treesitterPlugins
       # ++ telescopePlugins

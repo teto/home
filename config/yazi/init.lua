@@ -1,7 +1,6 @@
 local has_sshfs, sshfs = pcall(require, 'sshfs')
 if has_sshfs then
-
- require("sshfs"):setup()
+    require('sshfs'):setup()
 end
 -- inspired by https://yazi-rs.github.io/docs/tips/
 Status:children_add(function(self)
@@ -54,15 +53,12 @@ if has_bunny then
     })
 end
 
-
-
-
 -- show symlink
 Status:children_add(function(self)
-	local h = self._current.hovered
-	if h and h.link_to then
-		return " -> " .. tostring(h.link_to)
-	else
-		return ""
-	end
+    local h = self._current.hovered
+    if h and h.link_to then
+        return ' -> ' .. tostring(h.link_to)
+    else
+        return ''
+    end
 end, 3300, Status.LEFT)

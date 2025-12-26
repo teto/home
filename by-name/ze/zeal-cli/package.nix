@@ -5,12 +5,12 @@
   lib,
   python3,
   fetchFromGitLab,
-  # , zeal
-  # , lynx
-  # , python3Packages
-  # , sqlite
-  # , writePython3
-  # xdg,
+# , zeal
+# , lynx
+# , python3Packages
+# , sqlite
+# , writePython3
+# xdg,
 }:
 let
 

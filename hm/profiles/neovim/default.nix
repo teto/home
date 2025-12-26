@@ -1,7 +1,7 @@
+# just a very basic neovim profile to avoid putting a too big closure
 {
   pkgs,
   lib,
-  config,
   flakeSelf,
   ...
 }:
@@ -12,6 +12,20 @@ let
     genBlockLua
     ;
 
+  luaRcBlocks = {
+    appearance = ''
+      -- draw a line on 80th column
+      vim.o.colorcolumn='80,100'
+    '';
+
+    # hi MsgSeparator ctermbg=black ctermfg=white
+    # TODO equivalent of       set fillchars+=
+    foldBlock = ''
+      vim.o.fillchars='foldopen:▾,foldclose:▸,msgsep:‾'
+      vim.o.foldcolumn='auto:2'
+    '';
+  };
+
   pluginsMap = pkgs.callPackage ./plugins.nix { inherit flakeSelf lib; };
 
   myNeovimUnwrapped =
@@ -20,11 +34,11 @@ let
 
   rawPlugins =
     # add grepper
-    pluginsMap.basePlugins ++ pluginsMap.luaPlugins ++ pluginsMap.colorschemePlugins
+    pluginsMap.basePlugins
+  # ++ pluginsMap.luaPlugins
   # ++ pluginsMap.filetypePlugins
   ;
 
-  vimPlugins = pkgs.vimPlugins;
 in
 {
 
@@ -42,120 +56,31 @@ in
     # take the one from the flake
     package = myNeovimUnwrapped;
 
-    treesitter = {
-      enable = true;
-
-      plugins = [
-        vimPlugins.nvim-surround
-      ];
-    };
-
     extraLuaConfig = lib.mkBefore (
       ''
         vim.g.mapleader = ' '
-
         vim.opt.hidden = true -- you can open a new buffer even if current is unsaved (error E37) =
       ''
-      + (lib.strings.concatStrings (lib.mapAttrsToList genBlockLua (import ./options.nix).luaRcBlocks))
+      + (lib.strings.concatStrings (lib.mapAttrsToList genBlockLua luaRcBlocks))
       + ''
         vim.opt.number = true
         vim.opt.relativenumber = true
       ''
     );
 
-    # TODO this should disappear in the future
-    extraLuaPackages = ps: [
-      ps.nvim-nio
-      ps.fzy
-    ];
+    extraConfig = ''
+      set shiftwidth=4
+      set expandtab
+      set autoindent
+      filetype plugin indent on
 
-    extraPackages = with pkgs; [
-      shellcheck
-    ];
+      autocmd FileType tex setlocal shiftwidth=2 textwidth=79
+      autocmd FileType nix setlocal shiftwidth=2
+    '';
+
+    extraPackages = [ ];
 
     plugins = map (x: builtins.removeAttrs x [ "after" ]) rawPlugins;
   };
 
-  # workarounds:
-  # - for treesitter (provide compiler such that nvim-treesitter can install grammars
-  # - for rocks.nvim: give him a tree to luarocks
-  xdg.configFile = {
-    "nvim/lua/generated-by-nix.lua" =
-      let
-        # hitting this limit https://github.com/luarocks/luarocks/issues/1797
-        # luaInterpreter = config.programs.neovim.package.lua;
-        luaInterpreter = pkgs.lua51Packages.lua;
-        # -- vim.g.sqlite_clib_path" 'path = vim.g.sqlite_clib_path or  "${sqlite.out}/lib/libsqlite3${stdenv.hostPlatform.extensions.sharedLibrary}"'
-
-      in
-      {
-        enable = true;
-        # TODO add sqlite_clib_path to the wrapper ?
-        text =
-          let
-            ghcEnv4Tidal = (pkgs.ghc.withPackages (hs: [ hs.tidal ]));
-          in
-          ''
-            local M = {}
-            M.gcc_path = "${pkgs.gcc}/bin/gcc"
-            M.lua_interpreter = "${luaInterpreter}"
-            M.luarocks_executable = "${luaInterpreter.pkgs.luarocks_bootstrap}/bin/luarocks"
-            M.sqlite_clib_path = "${pkgs.sqlite.out}/lib/libsqlite3${pkgs.stdenv.hostPlatform.extensions.sharedLibrary}"
-            M.edict_kanjidb = "${flakeSelf.inputs.edict-kanji-db}/kanji.db"
-            M.edict_expressiondb = "${flakeSelf.inputs.edict-expression-db}/expression.db"
-            M.tidal_boot = "${ghcEnv4Tidal}/tidal-1.10.1/BootTidal.hs"
-            return M
-          '';
-      };
-
-    # could use toLua or buildLuarocksConfig
-    # pkgs.lua.pkgs.luaLib.generateLuarocksConfig
-    "nvim/luarocks-config-generated.lua" =
-      let
-        luaInterpreter = config.programs.neovim.package.lua;
-        luarocksStore = luaInterpreter.pkgs.luarocks;
-        luacurlPkg = luaInterpreter.pkgs.lua-curl;
-
-        luarocksConfigAttr =
-          pkgs.lua.pkgs.luaLib.generateLuarocksConfig ({ externalDeps = [ pkgs.curl.dev ]; })
-          // {
-            lua_version = "5.1";
-          };
-
-        luarocksConfigAttr2 = lib.recursiveUpdate luarocksConfigAttr {
-          rocks_trees = [
-            ({
-              name = "rocks.nvim";
-              root = "/home/teto/.local/share/nvim/rocks";
-            })
-            ({
-              name = "rocks-generated.nvim";
-              root = "${luarocksStore}";
-            })
-            ({
-              name = "lua-curl";
-              root = "${luacurlPkg}";
-            })
-            # ${sqlite.out}/lib/libsqlite3${stdenv.hostPlatform.extensions.sharedLibrary}
-            ({
-              name = "sqlite.lua";
-              root = "${luaInterpreter.pkgs.sqlite}";
-            })
-          ];
-
-          # we need variables for lib-curl.lua to be installable
-          variables = {
-
-          };
-
-        };
-
-        luarocksConfigStr = (lib.generators.toLua { asBindings = false; } luarocksConfigAttr2);
-
-      in
-      {
-        enable = true;
-        text = "return ${luarocksConfigStr}";
-      };
-  };
 }

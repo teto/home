@@ -1,6 +1,11 @@
-{ config, lib, pkgs, ... }:
 {
-  
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+
   enable = true;
 
   user = "transmission";
@@ -13,8 +18,7 @@
   #     The directory where Transmission will create ‘.config/transmission-daemon’. as well as ‘Downloads/’ unless services.transmission.settings.download-dir[1] is changed, and
   #     ‘.incomplete/’ unless services.transmission.settings.incomplete-dir[2] is changed.
 
-
-  # credentialsFile = 
+  # credentialsFile =
   # downloadDirPermissions = "750";
   # home = "/var/lib/transmission";
   # openPeerPorts

@@ -89,12 +89,12 @@ in
         Type = "idle";
         KillSignal = "SIGINT";
         # need to restore:
-        # 
+        #
         # but how to import utils ? see nixos/modules/misc/extra-arguments.nix
         # --log-disable
         ExecStart = "${cfg.package}/bin/llama-server --host ${cfg.host} --port ${builtins.toString cfg.port} -m ${cfg.model} ${utils.escapeSystemdExecArgs cfg.extraFlags}";
         # Restart = "on-failure";
-        Restart = "always"; 
+        Restart = "always";
 
         RestartSec = 300;
 

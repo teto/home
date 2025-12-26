@@ -1,7 +1,7 @@
 # stolen from https://github.com/jj-vcs/jj/discussions/5388
 [aliases]
-track-github-PR = ["util", "exec", "--", 'sh', '-euxc', '''
-  PR=$1
+track-github-pr = ["util", "exec", "--", 'sh', '-euxc', '''
+  PR="$1"
   gh pr view --json headRepository,headRefName,headRepositoryOwner $PR --jq '"
     set_remote() {
       jj 2>/dev/null git remote add \"$1\" \"$2\" ||
@@ -17,8 +17,8 @@ track-github-PR = ["util", "exec", "--", 'sh', '-euxc', '''
   sh -euxs
 ''', "jj-track-github-PR"]
 
-untrack-github-PR = ["util", "exec", "--", 'sh', '-euxc', '''
-  PR=$1
+untrack-github-pr = ["util", "exec", "--", 'sh', '-euxc', '''
+  PR="$1"
   gh pr view --json headRepository,headRefName,headRepositoryOwner $PR --jq '"
     jj bookmark forget \(.headRefName) || true
     origin=$(gh repo view --json owner,name --jq .owner.login)

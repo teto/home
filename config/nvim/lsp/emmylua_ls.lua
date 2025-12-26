@@ -1,13 +1,13 @@
 return {
-  cmd = { 'emmylua_ls' , '--log-level=info'},
-  filetypes = { 'lua' },
-  root_markers = {
-    '.luarc.json',
-    '.emmyrc.json',
-    '.luacheckrc',
-    '.git',
-  },
-  workspace_required = false,
+    cmd = { 'emmylua_ls', '--log-level=info' },
+    filetypes = { 'lua' },
+    root_markers = {
+        '.luarc.json',
+        '.emmyrc.json',
+        '.luacheckrc',
+        '.git',
+    },
+    workspace_required = false,
     settings = {
         Lua = {
             diagnostics = {
@@ -58,7 +58,6 @@ return {
                     'undefined-field', -- Disable undefined-field diagnostic
                 },
             },
- }
- }
-
+        },
+    },
 }

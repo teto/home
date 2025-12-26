@@ -1,4 +1,3 @@
-
 # help:
 #  echo <<EOF
 #     Welcome to neotokyo, dear master.
@@ -12,20 +11,20 @@
 #     - to check the backups: systemctl status restic-backups-immich-db-to-backblaze.service
 #   EOF
 
-# might as well be 
+# might as well be
 immich-stop:
-  systemctl stop immich-server.service
-
+    systemctl stop immich-server.service
 
 # restore-immich
+
 # https://docs.immich.app/administration/backup-and-restore/
 immich-restore backup:
-  gunzip --stdout {{backup}}\
-  | sed "s/SELECT pg_catalog.set_config('search_path', '', false);/SELECT pg_catalog.set_config('search_path', 'public, pg_catalog', true);/g" \
-  | sudo -u immich psql --dbname=immich
-  # might have to delete the table if it already existed: DROP DATABASE immich;
-  # CREATE DATABASE immich OWNER immich;
+    gunzip --stdout {{ backup }}\
+    | sed "s/SELECT pg_catalog.set_config('search_path', '', false);/SELECT pg_catalog.set_config('search_path', 'public, pg_catalog', true);/g" \
+    | sudo -u immich psql --dbname=immich
+    # might have to delete the table if it already existed: DROP DATABASE immich;
+    # CREATE DATABASE immich OWNER immich;
 
 # TODO generate email
 test-msmtp-send-mail:
-  cat contrib/2025-05-04-21.38.53.mail | msmtp --read-envelope-from --read-recipients 
+    cat contrib/2025-05-04-21.38.53.mail | msmtp --read-envelope-from --read-recipients 

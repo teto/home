@@ -105,11 +105,11 @@ let
       };
     };
 
-    mbsync = mbsyncConfig // {
-      enable = false; # mujmap is better at it
-      remove = "both";
-      # sync = true;
-    };
+    # mbsync = mbsyncConfig // {
+    #   enable = false; # mujmap is better at it
+    #   remove = "both";
+    #   # sync = true;
+    # };
 
     # folders.sent = "[Gmail]/Sent Mail";
 
@@ -225,10 +225,8 @@ let
     # };
 
     msmtp.enable = true;
-
     notmuch.enable = true;
 
-    primary = true;
     userName = secrets.accounts.mail.gmail_perso.address;
     realName = "Matt";
     address = secrets.accounts.mail.gmail_perso.address;

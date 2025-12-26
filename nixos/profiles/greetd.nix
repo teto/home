@@ -117,9 +117,9 @@
           # services.displayManager.sessionPackages
           # builtins.trace "home.path: ${config.home-manager.users.teto.home.path}/share/wayland-sessions"
           # config.services.xserver.displayManager.session.desktops
-            tuigreetCmd;
+          tuigreetCmd;
 
-          # regreetCmd;
+        # regreetCmd;
 
         # user = "greeter"; # it's the default already
       };
@@ -135,8 +135,6 @@
     };
 
   };
-
-  
 
   programs.regreet.enable = false;
 

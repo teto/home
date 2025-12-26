@@ -82,23 +82,23 @@ require('lualine').setup({
         -- Disable winbar for these filetypes
         disabled_filetypes = {
             winbar = {
-			 -- 'Avante',
-			 'help',
-			 'markdown',
-			 'qf',
-			 'AvanteInput',
-			 'AvanteSelectedFiles',
-			 -- 'AvanteConfirm',
-			 'Avante',
+                -- 'Avante',
+                'help',
+                'markdown',
+                'qf',
+                'AvanteInput',
+                'AvanteSelectedFiles',
+                -- 'AvanteConfirm',
+                'Avante',
             },
 
-			statusline = {
-			 'AvanteInput',
-			 'AvanteSelectedFiles',
-			 'AvanteTodos',
-			 -- 'AvanteConfirm',
-			 'Avante',
-			}
+            statusline = {
+                'AvanteInput',
+                'AvanteSelectedFiles',
+                'AvanteTodos',
+                -- 'AvanteConfirm',
+                'Avante',
+            },
         },
         -- disabled_filetypes = {}
     },

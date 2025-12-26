@@ -6,9 +6,7 @@
 }:
 {
   # call with
-  mk_builder_from_deployrs_node =
-    nodes:
-    [ ];
+  mk_builder_from_deployrs_node = nodes: [ ];
 
   deployrsNodeToBuilderAttr =
     node:
