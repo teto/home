@@ -7,12 +7,6 @@ local lspconfig = require('lspconfig')
 --     vim.notify('Called formatting')
 --     temp(...)
 -- end
---
--- override defaults for all servers
--- done via autocmd now ?
--- lspconfig.util.default_config = vim.tbl_extend('force', lspconfig.util.default_config, {
---  on_attach = attach_cb.on_attach,
--- })
 
 -- lspconfig.bashls.setup({})
 
@@ -176,18 +170,3 @@ local lspconfig = require('lspconfig')
 --         },
 --     },
 -- })
-
--- see https://github.com/oxalica/nil/blob/main/docs/configuration.md for config
--- https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion
--- https://github.com/hrsh7th/cmp-nvim-lsp/issues/42#issuecomment-1283825572
--- local caps = vim.tbl_deep_extend(
---  'force',
---  vim.lsp.protocol.make_client_capabilities(),
---  -- require('cmp_nvim_lsp').default_capabilities(),
---  -- File watching is disabled by default for neovim.
---  -- See: https://github.com/neovim/neovim/pull/22405
---  { workspace = { didChangeWatchedFiles = { dynamicRegistration = true } } }
--- );
---  capabilities = caps,
-
--- lspconfig.gitlab_ci_ls.setup({})

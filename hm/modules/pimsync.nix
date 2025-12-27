@@ -1,5 +1,6 @@
 # explains how to go from vdirsyncer to pimsync format
 # https://git.sr.ht/~whynothugo/pimsync/tree/main/item/pimsync-migration.7.scd
+# TODO can be removed ?
 {
   config,
   lib,

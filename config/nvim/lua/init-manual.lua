@@ -210,19 +210,6 @@ vim.g.rocks_nvim = {
     },
 }
 
--- local has_avante, avante_mod = pcall(require, 'avante')
--- if has_avante then
---     require('avante_lib').load()
---     avante_mod.setup({
---         -- Your config here!
---     })
--- end
-
--- TODO prefix with gp_defaults.
--- local defaults = require('gp.defaults')
---
--- local chat_system_prompt = defaults.chat_system_prompt
-
 vim.g.loaded_matchit = 1
 
 vim.opt.shortmess:append('I')
@@ -231,8 +218,12 @@ vim.opt.mousemoveevent = true
 
 vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
 
+local on_attach = require('teto.on_attach')
+
 -- this in nightly
 vim.lsp.config('*', {
+    -- https://github.com/neovim/nvim-lspconfig/issues/3827
+    on_attach = on_attach.on_attach,
     capabilities = {
         textDocument = {
             semanticTokens = {
@@ -443,6 +434,7 @@ vim.opt.wildmenu = true
 
 -- sh -c "lua -e 'dofile [[%]] print(description.homepage)' | xdg-open"
 
+-- https://github.com/neovim/nvim-lspconfig/issues/3827
 vim.api.nvim_create_autocmd('LspAttach', {
     desc = 'Attach lsp_signature on new client',
     callback = function(args)
@@ -451,17 +443,18 @@ vim.api.nvim_create_autocmd('LspAttach', {
             return
         end
         local client = vim.lsp.get_client_by_id(args.data.client_id)
-        local bufnr = args.buf
-        local on_attach = require('teto.on_attach')
+        -- local bufnr = args.buf
+        -- local on_attach = require('teto.on_attach')
 
         -- dont attach in diffmode
         if vim.wo.diff then
             vim.schedule(function()
-                vim.lsp.stop_client(client.id)
+                -- client.id
+                vim.lsp.Client:stop()
             end)
             return
         end
-        on_attach.on_attach(client, bufnr)
+        -- on_attach.on_attach(client, bufnr)
 
         -- if client:supports_method('textDocument/implementation') then
         --   -- Create a keymap for vim.lsp.buf.implementation
@@ -471,16 +464,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
             -- Enable auto-completion
             vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
         end
-
-        -- require'lsp_signature'.on_attach(client, bufnr)
     end,
 })
 
--- vim.api.nvim_create_autocmd('VimLeave', {
---     desc = 'test to fix stacktrace',
---     callback = function(_args) end,
--- })
---
 function string:endswith(ending)
     return ending == '' or self:sub(-#ending) == ending
 end
@@ -497,10 +483,6 @@ end
 --     end,
 -- })
 
--- fugitive-gitlab {{{
--- also add our token for private repos
--- }}}
--- set guicursor="n-v-c:block-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor,sm:block-Cursor"
 vim.opt.guicursor =
     'n-v-c:block-blinkon250-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-blinkon250-Cursor/lCursor,r-cr:hor20-Cursor/lCursor'
 
@@ -518,9 +500,6 @@ vim.opt.guicursor =
 
 -- f3 to show tree
 vim.keymap.set('n', '<Leader><Leader>', '<Cmd>b#<CR>')
-
--- customizations for rest
--- require('teto.rest')
 
 -- Snippets are separated from the engine. Add this if you want them:
 
@@ -558,6 +537,8 @@ vim.api.nvim_create_autocmd('ColorScheme', {
         vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextError', { fg = 'red' })
         vim.api.nvim_set_hl(0, 'DiagnosticVirtualTextDebug', { fg = 'green' })
 
+        vim.api.nvim_set_hl(0, 'LspReferenceTarget', {})
+
         -- autocmd ColorScheme *
         --       \ highlight Comment gui=italic
         --       \ | highlight Search gui=underline
@@ -571,7 +552,7 @@ vim.keymap.set('n', '<Leader><Leader>', '<Cmd>b#<CR>', { desc = 'Focus alternate
 
 vim.keymap.set('n', '<Leader>ev', '<Cmd>e $MYVIMRC<CR>', { desc = "Edit home-manager's generated neovim config" })
 vim.keymap.set('n', '<Leader>sv', '<Cmd>source $MYVIMRC<CR>', { desc = 'Reload my neovim config' })
-vim.keymap.set('n', '<Leader>el', '<Cmd>e ~/.config/nvim/lua/init-manual.lua<CR>')
+vim.keymap.set('n', '<Leader>el', '<Cmd>e ' .. vim.fn.stdpath('config') .. '/lua/init-manual.lua<CR>')
 vim.keymap.set('n', '<F6>', '<Cmd>ASToggle<CR>', { desc = 'Toggle autosave' })
 
 vim.g.autosave_disable_inside_paths = { vim.fn.stdpath('config') }
@@ -611,25 +592,11 @@ vim.api.nvim_create_autocmd('BufReadPost', {
     end,
 })
 
--- vim.api.nvim_create_autocmd('BufReadPost', {
---     pattern = '*.jsonzlib',
---     callback = function()
---         -- " autocmd BufReadPre *.jsonzlib %!pigz -dc "%" - | jq '.'
---         print('MATCHED JSONZLIB PATTERN')
---     end,
--- })
-
--- local verbose_output = false
--- require("tealmaker").build_all(verbose_output)
-
-local has_sniprun, _sniprun = pcall(require, 'sniprun')
-
-if has_sniprun then
-    require('plugins.sniprun')
-end
-
--- add description
--- vim.api.nvim_set_keymap('n', '<f5>', '<cmd>!make build', { desc = 'Run make build' })
+-- local has_sniprun, _sniprun = pcall(require, 'sniprun')
+--
+-- if has_sniprun then
+--     require('plugins.sniprun')
+-- end
 
 vim.g.indicator_errors = ''
 vim.g.indicator_warnings = ''
@@ -678,13 +645,6 @@ vim.opt.showbreak = '↳ ' -- displayed in front of wrapped lines
 
 -- TODO add a command to select a ref  and call Gitsigns change_base afterwards
 
--- vim.cmd([[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]])
--- vim.cmd([[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]])
--- vim.cmd([[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]])
--- vim.cmd([[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]])
--- vim.cmd([[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]])
--- vim.cmd([[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]])
-
 vim.opt.listchars = 'tab:•·,trail:·,extends:❯,precedes:❮,nbsp:×'
 -- set listchars+=conceal:X
 -- conceal is used by deefault if cchar does not exit
@@ -730,9 +690,6 @@ vim.keymap.set('n', '<leader>rg', '<Cmd>Grepper -tool git -open -switch<CR>', { 
 vim.keymap.set('n', '<leader>rgb', '<Cmd>Grepper -tool rg -open -switch -buffer<CR>', { remap = true })
 vim.keymap.set('n', '<leader>rg', '<Cmd>Grepper -tool rg -open -switch<CR>', { remap = true })
 
--- vim.keymap.set("n", "<Plug>HelloWorld", function() print("Hello World!") end)
--- vim.keymap.set("n", "gs", "<Plug>HelloWorld")
-
 -- vim.api.nvim_set_keymap(
 --	 'n',
 --	 '<F1>',
@@ -750,14 +707,6 @@ local teto_notify = require('teto.notify')
 if teto_notify.should_use_provider() then
     teto_notify.override_vim_notify()
 end
-
--- same for e ?
--- vim.keymap.set('n', '[w', function()
---     vim.diagnostic.goto_prev({ wrap = true, severity = vim.diagnostic.severity.WARN })
--- end, {})
--- vim.keymap.set('n', ']w', function()
---     vim.diagnostic.goto_next({ wrap = true, severity = vim.diagnostic.severity.WARN })
--- end, {})
 
 -- TODO add a set E for across buffers moved to on_attach
 -- vim.keymap.set('n', '[e', function()
@@ -793,11 +742,6 @@ require('plugins.blink-cmp')
 vim.keymap.set('v', '<leader>b', function() end)
 vim.keymap.set('v', '<leader>B', '<Plug>(ToBase64)')
 
--- vim.keymap.set('c', '<c-a>', '<c-y>', { })
-
--- used to avoid ftetect on those
--- :let g:ft_ignore_pat = '\.\(Z\|gz\|bz2\|zip\|tgz\)$'
-
 -- Key mapping to apply Base64 encoding to selected text
 vim.api.nvim_set_keymap(
     'v',
@@ -805,12 +749,6 @@ vim.api.nvim_set_keymap(
     [[:lua apply_function_to_selection(base64_encode)<CR>]],
     { noremap = true, silent = true }
 )
-
-vim.api.nvim_create_autocmd('ColorScheme', {
-    callback = function()
-        vim.api.nvim_set_hl(0, 'LspReferenceTarget', {})
-    end,
-})
 
 -- 0 is kinda buggy with confirm and so on
 vim.opt.cmdheight = 1
@@ -840,9 +778,11 @@ vim.pack.add({
     'https://github.com/nvim-neorocks/rocks.nvim',
     -- 'https://github.com/elanmed/fzf-lua-frecency.nvim', -- to rocks
 
-    -- 'https://github.com/neovim/nvim-lspconfig',
+    'https://github.com/neovim/nvim-lspconfig',
     'https://github.com/teto/vim-listchars',
     'https://github.com/yutkat/git-rebase-auto-diff.nvim',
+
+    'https://github.com/gbprod/none-ls-shellcheck.nvim',
 
     -- themes
     'https://github.com/adlawson/vim-sorcerer',
@@ -951,7 +891,6 @@ vim.keymap.set('n', ']]', function()
 end, { buffer = false })
 
 vim.keymap.set('n', ',jl', function()
-    -- vim.diagnostic.goto_next({ wrap = true})
     vim.cmd([[ Rikai lookup ]])
 end, { buffer = false, desc = 'Japanese lookup' })
 

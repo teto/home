@@ -69,13 +69,13 @@ friendly-snippets = "scm"
 vim-startuptime= "4.5.0"
 menu= "scm"
 # "snacks.nvim" = "2.6.0"
-fzf-lua = "0.0.2383"
+fzf-lua = "0.0.2385"
 # "lz.n" = "2.12.0"
 "indent-blankline.nvim" = "3.9.0"
 # "llm.nvim"= "scm"
 # volt is a UI library
 volt= "scm"
-"grug-far.nvim"= "1.6.53"
+"grug-far.nvim"= "1.6.56"
 # orgmode = "0.7.1"
 # neogit = "2.0.0"
 # "diffview.nvim" = "scm"
@@ -88,7 +88,7 @@ volt= "scm"
 # tree-sitter-hurl = "0.0.31"
 # "telescope.nvim" = "0.1.6"
 # neotest-busted = "1.2.1"
-tree-sitter-haskell = "0.0.35"
+tree-sitter-haskell = "0.0.38"
 "rest.nvim" = "3.13.0"
 tree-sitter-html = "0.0.40"
 tree-sitter-xml = "0.0.42"
@@ -96,11 +96,9 @@ tree-sitter-xml = "0.0.42"
 # "rocks-treesitter.nvim" = "1.0.3"
 
 
-#
 # [plugins.neotest-haskell]
 # version = "2.0.0"
 # dir = "/home/teto/neotest-haskell"
-#
 
 # guy said he is going to deprecate it
 # [plugins."auto-save.nvim"]
@@ -112,7 +110,6 @@ tree-sitter-xml = "0.0.42"
 
 
 [plugins."rikai.nvim"]
-# rev = "scm"
 dev = true
 # dir = "/home/teto/neovim/rikai.nvim"
 
@@ -131,9 +128,9 @@ dev = true
 git = "gbprod/none-ls-luacheck.nvim"
 rev = "v0.0.1"
 
-[plugins."none-ls-shellcheck.nvim"]
-git = "gbprod/none-ls-shellcheck.nvim"
-rev = "0f84461241e76e376a95fb7391deac82dc3efdbf"
+# [plugins."none-ls-shellcheck.nvim"]
+# git = "gbprod/none-ls-shellcheck.nvim"
+# rev = "0f84461241e76e376a95fb7391deac82dc3efdbf"
 
 [plugins."better-digraphs.nvim"]
 git = "protex/better-digraphs.nvim"
@@ -202,12 +199,11 @@ rev = "fa4673e181e18fd1719ae17a1d4f4ecce2de37aa"
 
 [plugins."codecompanion.nvim"]
 git = "olimorris/codecompanion.nvim"
-rev = "v18.1.1"
+rev = "v18.3.0"
 
 [plugins."fzf-lua-frecency.nvim"]
 git = "elanmed/fzf-lua-frecency.nvim"
 rev = "4c37d8d967a51f718af5d9556b72f16c5185c05b"
-
 # [plugins."jj.nvim"]
 # git = "nicolasgb/jj.nvim"
 # rev = "v0.1.0"

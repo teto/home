@@ -75,11 +75,15 @@ in
   };
 
   # TODO add onFailure template to send a mail
-  systemd.services.restic-backups-immich-db-to-backblaze.serviceConfig =
+  systemd.services.restic-backups-immich-db-to-backblaze =
     lib.mkIf (config.services.restic.backups ? immich-db-to-backblaze)
       {
-        Group = "immich"; # such that it can read the files
-        OnSuccess = "send-mail-to-teto@";
+        serviceConfig = {
+          Group = "immich"; # such that it can read the files (but can not write to it)
+        };
+        unitConfig = {
+          OnSuccess = "send-mail-to-teto@";
+        };
       };
 
   # services.restic.server.enable

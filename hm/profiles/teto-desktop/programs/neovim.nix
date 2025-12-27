@@ -267,6 +267,7 @@ in
   ++ filetypePlugins
   ++ treesitterPlugins
   ++ pluginsMap.colorschemePlugins
+  ++ pluginsMap.luaPlugins
   # ++ telescopePlugins
   ++ neotestPlugins;
 

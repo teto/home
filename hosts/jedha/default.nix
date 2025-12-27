@@ -41,6 +41,7 @@ let
         exclude = [
           # "teto"
           # "users"
+          "default.nix"
           "home-manager" # exclude home-manager because intputs are not the same: it must be imported differently
           # "root"
         ];
@@ -72,9 +73,9 @@ in
     flakeSelf.nixosProfiles.steam
     flakeSelf.nixosProfiles.universal
 
-    flakeSelf.nixosProfiles.pixiecore
+    # flakeSelf.nixosProfiles.pixiecore
+    # flakeSelf.nixosProfiles.podman
     # flakeSelf.nixosProfiles.opensnitch
-    # ../../nixos/profiles/podman.nix
   ]
   ++ lib.optionals withSecrets [
     # TODO restore
@@ -83,12 +84,6 @@ in
     # TODO moved from their
     # ../../nixos/profiles/localai.nix
   ];
-
-  # TODO check how it interacts with less
-  # environment.etc."inputrc".source = ../../config/inputrc;
-
-  # just for fun ?
-  # services.desktopManager.plasma6.enable = true;
 
   home-manager.users = {
     # TODO use from flake or from unstable
@@ -188,78 +183,8 @@ in
     # "net.core.wmem_max" = 1048576;
   };
 
-  # List services that you want to enable:
-  services = {
-    # gnome = {
-    #   gnome-keyring.enable = true;
-    #   at-spi2-core.enable = true; # for keyring it seems
-    # };
-
-    # Enable CUPS to print documents.
-    # https://nixos.wiki/wiki/Printing
-    printing = {
-      drivers = [
-        pkgs.gutenprint
-        pkgs.gutenprintBin
-        # See https://discourse.nixos.org/t/install-cups-driver-for-brother-printer/7169
-        pkgs.brlaser
-      ];
-    };
-
-    # just locate
-    locate.enable = true;
-    dbus.packages = [
-      # pkgs.deadd-notification-center # installed by systemd
-      pkgs.gcr # for pinentry
-      # pkgs.gnome.gdm
-      # pkgs.gnome.gnome-control-center
-    ];
-  };
-
-  services.xserver = {
-    videoDrivers = [
-      # "nouveau"
-      "nvidia"
-    ];
-  };
-
-  # rtkit is optional but recommended {{{
-  security.rtkit.enable = true;
-
-  # }}}
-
-  # set on shell initialisation (e.g. in /etc/profile
-  environment.variables = {
-    # TODO move to sway/wayland
-    # WLR_NO_HARDWARE_CURSORS = "1";
-
-    # see if it is correctly interpolated
-    # TODO remove ?
-    ZDOTDIR = "$HOME/.config/zsh";
-  };
-
-  # variables set by PAM early in the process
-  #   Also, these variables are merged into environment.variables[
-  environment.sessionVariables = {
-    # WLR_NO_HARDWARE_CURSORS = "1";
-    # TODO move it
-    LIBVA_DRIVER_NAME = "nvidia";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-  };
-
   # system.replaceRuntimeDependencies
   #     List of packages to override without doing a full rebuild. The original derivation and replacement derivation must have the same name length, and ideally should have close-to-identical directory layout.
-
-  # for moonloader keyboard
-  hardware = {
-    keyboard.zsa.enable = true;
-    bluetooth = {
-      enable = true;
-      powerOnBoot = false;
-      # hsphfpd.enable = false; # conflicts with pipewire
-    };
-
-  };
 
   powerManagement = {
     enable = true;
@@ -273,53 +198,18 @@ in
     };
   };
 
-  # try giving stable ids to our GPUs
-  services.udev.packages = [
-    (pkgs.writeTextDir "etc/udev/rules.d/42-static-gpu-naming.rules"
-      # lib.concatLines (
-      #   ))
-      # pci-0000:0e:00.0
-      # ID_PATH=pci-0000:0e:00.0
-      # ID_PATH_TAG=pci-0000_0e_00_0
-      ''
-        KERNEL=="card*", SUBSYSTEM=="drm", ATTRS{vendor}=="0x10de", ATTRS{device}=="0x13c0", SYMLINK+="dri/by-name/igpu"
-        KERNEL=="card*", SUBSYSTEM=="drm", ATTRS{vendor}=="0x1022", ATTRS{device}=="0x2504", SYMLINK+="dri/by-name/egpu"
-      ''
-    )
-  ];
-
-  environment.systemPackages = [
-    pkgs.gpu-viewer
-  ];
-
   # $out here is the profile generation
   # system.systemBuilderCommands = ''
   #   ln -s ${config.boot.kernelPackages.kernel.dev}/vmlinux $out/vmlinux
   # '';
 
-  # use systemd program to set permissions instead of a nixpkgs script
-  # might break some permissions see https://github.com/NixOS/nixpkgs/pull/353659
-  # systemd.sysusers.enable = true;
-
-  # just to test
-  # https://www.freedesktop.org/software/systemd/man/latest/systemd-sysupdate.html
-  systemd.sysupdate.enable = false;
-
   # SHould be a level instead ?
   # systemd.enableStrictShellChecks = true;
 
-  users = {
-    groups.nginx.gid = config.ids.gids.nginx;
-
-    users = {
-      nginx = {
-        group = "nginx";
-        # cfg.group;
-        isSystemUser = true;
-        uid = config.ids.uids.nginx;
-      };
-    };
-  };
+  # users = {
+  #   groups.nginx.gid = config.ids.gids.nginx;
+  #
+  # };
 
   system.stateVersion = "25.05";
 }

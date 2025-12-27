@@ -258,12 +258,13 @@ in
   config = lib.mkMerge [
     # TODO add orgmode-babel and emacs to neovim
     (mkIf cfg.highlightOnYank {
+
+      # -- TODO higroup should be its own ? a darker version of CursorLine
+      # -- if it doesnt exist
       programs.neovim.extraLuaConfig = ''
         vim.api.nvim_create_autocmd('TextYankPost', {
             callback = function()
-                -- TODO higroup should be its own ? a darker version of CursorLine
-                -- if it doesnt exist
-                vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 1000 })
+                vim.hl.on_yank({ higroup = 'IncSearch', timeout = 1000 })
             end,
         })
       '';

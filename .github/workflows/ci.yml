@@ -22,12 +22,12 @@ jobs:
     # - run: nixos-rebuild --flake .#laptop --show-trace build
     - name: eval desktop config
       run: |
-       nix eval .#nixosConfigurations.desktop.config.system.build.toplevel
+       nix eval .#nixosConfigurations.jedha-no-secrets.config.system.build.toplevel
 
     - name: eval laptop config
       run: |
-       nix eval .#nixosConfigurations.laptop.config.system.build.toplevel
-       nix build --dry-run .#nixosConfigurations.laptop.config.system.build.toplevel
+       nix eval .#nixosConfigurations.tatooine-no-secrets.config.system.build.toplevel
+       nix build --dry-run .#nixosConfigurations.tatooine-no-secrets.config.system.build.toplevel
 
     - name: nix flake show
       run: |

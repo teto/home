@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  secrets,
   ...
 }:
 {
@@ -19,9 +20,11 @@
       # exit 1
 
       # writeShellScript ?
+      # TODO add destination
+      # --from secrets.jakku.email
       ExecStart = pkgs.writeShellScript "mail-success" ''
         ADDRESS=$1
-        msmtp --serverinfo
+        msmtp -afastmail "${secrets.users.teto.email}"
       '';
     };
   };

@@ -199,6 +199,7 @@
     nix-filter.url = "github:numtide/nix-filter";
 
     # waybar.url = "github:Alexays/Waybar";
+    # todo update for ci ?
     nixpkgs = {
       url = "github:teto/nixpkgs/scratch";
     };
@@ -552,7 +553,7 @@
               export RESTIC_PASSWORD_FILE=
               source config/bash/aliases.sh
 
-              ln -s ${generatedJustfile} justfile.generated
+              ln -sf ${generatedJustfile} justfile.generated
               echo "Run just ..."
             '';
         };
@@ -629,16 +630,20 @@
         let
           disableSecrets =
             name: val:
-            val.extendModules {
-              specialArgs = {
-                withSecrets = false;
-              };
-            };
+            lib.nameValuePair "${name}-no-secrets" (
+              val.extendModules {
+                specialArgs = {
+                  withSecrets = false;
+                };
+              }
+            );
           nixosConfigs = lib.importDirectories ./hosts;
+          nixosConfigsWithoutSecrets = lib.mapAttrs' disableSecrets nixosConfigs;
         in
         # mapAttrs' / genAttrs
         nixosConfigs
-        // rec {
+        // (nixosConfigsWithoutSecrets)
+        // {
           # TODO generate those from the hosts folder ?
           # with aliases ?
           # router = lib.mkNixosSystem {
@@ -681,15 +686,15 @@
           # };
 
           # desktop is a
-          desktop = lib.mkNixosSystem {
-            withSecrets = false;
-            hostname = "jedha";
-            modules = [
-              ./hosts/jedha/_nixos.nix
-            ];
-          };
-
-          # nix build .#nixosConfigurations.teapot.config.system.build.toplevel
+          # desktop = lib.mkNixosSystem {
+          #   withSecrets = false;
+          #   hostname = "jedha";
+          #   modules = [
+          #     ./hosts/jedha/default.nix
+          #   ];
+          # };
+          #
+          # # nix build .#nixosConfigurations.teapot.config.system.build.toplevel
           # jedha = desktop.extendModules ({
           #   specialArgs = {
           #     pkgs = myPkgsCuda;

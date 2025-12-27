@@ -5,7 +5,6 @@
   ...
 }:
 let
-  # libNeovim = import ../../../tetos/lib/default.nix { inherit lib; };
   inherit (lib.neovim) luaPlugin;
 in
 {

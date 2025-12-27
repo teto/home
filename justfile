@@ -20,8 +20,6 @@ default:
 
 set dotenv-load := true
 
-switch-remote: (nixos-rebuild "switch")
-
 # deploy a brand new nixos install
 bootstrap-desktop target="root@bootstrap.local":
     nixos-anywhere --target-host {{ target }} --flake '.#laptop' \
@@ -52,6 +50,9 @@ build: (nixos-rebuild "build")
 
 switch: (nixos-rebuild "switch" "")
 
+# builds everything on remote
+switch-remote: (nixos-rebuild "switch" "--option builders \"$TETOS_0\" -j0")
+
 rollback: (nixos-rebuild "switch" "--rollback")
 
 repl:
@@ -64,15 +65,15 @@ repl:
 # |& nom
 # env('HOST')       -j 1 \
 
-# builders --option builders \"$NOVA_OVH1\" -j0
+# builders
 [private]
-nixos-rebuild command builders="":
+nixos-rebuild command extra_args="":
     nixos-rebuild \
       --flake ~/home \
       --sudo \
       --override-input nixpkgs {{ NIXPKGS_REPO }} \
       --override-input hm {{ HM_REPO }} \
-       {{ builders }} \
+       {{ extra_args }} \
        {{ command }}
 
 build-nom hostname:

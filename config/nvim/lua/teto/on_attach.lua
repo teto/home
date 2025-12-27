@@ -10,36 +10,35 @@ local function default_mappings()
     -- this could be global
     -- local
     vim.keymap.set('n', '[e', function()
-        vim.diagnostic.goto_prev({ wrap = true, severity = vim.diagnostic.severity.ERROR })
+        vim.diagnostic.jump({ wrap = true, count = -1, severity = vim.diagnostic.severity.ERROR })
     end, { buffer = true })
     vim.keymap.set('n', ']e', function()
-        vim.diagnostic.goto_next({ wrap = true, severity = vim.diagnostic.severity.ERROR })
+        vim.diagnostic.jump({ wrap = true, count = 1, severity = vim.diagnostic.severity.ERROR })
     end, { buffer = true })
 
     vim.keymap.set('n', '[w', function()
-        vim.diagnostic.goto_prev({ wrap = true, severity = vim.diagnostic.severity.WARN })
+        vim.diagnostic.jump({ wrap = true, count = -1, severity = vim.diagnostic.severity.WARN })
     end, { buffer = true })
     vim.keymap.set('n', ']w', function()
-        vim.diagnostic.goto_next({ wrap = true, severity = vim.diagnostic.severity.WARN })
+        vim.diagnostic.jump({ wrap = true, count = 1, severity = vim.diagnostic.severity.WARN })
     end, { buffer = true })
 
     -- vim.keymap.set('n', '<c-k>', function()
     --     vim.diagnostic.goto_prev({ wrap = true })
     -- end, { buffer = true })
     vim.keymap.set('n', '<c-j>', function()
-        vim.diagnostic.goto_next({ wrap = true })
+        vim.diagnostic.jump({ count = 1, wrap = true })
     end, { buffer = true })
     vim.keymap.set('n', ']l', function()
-        vim.diagnostic.goto_next({ wrap = true })
+        vim.diagnostic.jump({ count = 1, wrap = true })
     end, { buffer = true })
     vim.keymap.set('n', '[l', function()
-        vim.diagnostic.goto_prev({ wrap = true })
+        vim.diagnostic.jump({ count = -1, wrap = true })
     end, { buffer = true })
 end
 
-M.on_attach = function(client, _bufnr)
+M.on_attach = function(_client, _bufnr)
     default_mappings()
-    -- client.server_capabilities.semanticTokensProvider = nil
 
     -- vim.bo.omnifunc = vim.lsp.omnifunc
     vim.opt.omnifunc = 'v:lua.vim.lsp.omnifunc'
