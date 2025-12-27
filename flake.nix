@@ -625,77 +625,82 @@
       # autoload from hosts
       # todo map over the attributes to regenerate them without secrets
       # adjust the hostnames accordingly ?
-      nixosConfigurations = lib.importDirectories ./hosts // rec {
-        # TODO generate those from the hosts folder ?
-        # with aliases ?
-        router = lib.mkNixosSystem {
-          withSecrets = true;
-          hostname = "router";
+      nixosConfigurations =
+        let
+          disableSecrets =
+            name: val:
+            val.extendModules {
+              specialArgs = {
+                withSecrets = false;
+              };
+            };
+          nixosConfigs = lib.importDirectories ./hosts;
+        in
+        # mapAttrs' / genAttrs
+        nixosConfigs
+        // rec {
+          # TODO generate those from the hosts folder ?
+          # with aliases ?
+          # router = lib.mkNixosSystem {
+          #   withSecrets = true;
+          #   hostname = "router";
+          #
+          #   modules = [
+          #     ./hosts/router
+          #   ];
+          # };
 
-          modules = [
-            ./hosts/router
-          ];
-        };
-
-        # it doesn't have to be called like that !
-        # TODO use lib.mkNixosSystem
-        laptop = lib.mkNixosSystem {
-          withSecrets = false;
-          hostname = "laptop";
-          modules = [
-            ./hosts/tatooine
-          ];
-        };
-
-        # see https://determinate.systems/posts/extending-nixos-configurations
-        # tatooine = laptop.extendModules {
-        #   # TODO retain existing specialArgs and inject mine ?!
-        #   specialArgs = {
-        #     hostname = "tatooine";
-        #     inherit secrets dotfilesPath;
-        #
-        #     withSecrets = true;
-        #   };
-        # };
-
-        neptune = lib.mkNixosSystem {
-          pkgs = myPkgs;
-          modules = [
-            ./hosts/neptune/configuration.nix
-          ];
-          hostname = "neptune";
-          withSecrets = true;
-        };
-
-        # neotokyo = lib.mkNixosSystem {
-        #   modules = [
-        #     ./hosts/neotokyo/default.nix
-        #   ];
-        #   hostname = "neotokyo";
-        #   withSecrets = true;
-        # };
-
-        # desktop is a
-        desktop = lib.mkNixosSystem {
-          withSecrets = false;
-          hostname = "jedha";
-          modules = [
-            ./hosts/jedha/_nixos.nix
-          ];
-        };
-
-        # nix build .#nixosConfigurations.teapot.config.system.build.toplevel
-        jedha = desktop.extendModules ({
-          specialArgs = {
-            pkgs = myPkgsCuda;
-            withSecrets = true;
-            inherit lib;
-            # pkgs = myPkgs.extend(
-            #     );
+          # it doesn't have to be called like that !
+          # TODO use lib.mkNixosSystem
+          laptop = lib.mkNixosSystem {
+            withSecrets = false;
+            hostname = "laptop";
+            modules = [
+              ./hosts/tatooine
+            ];
           };
-          modules = [ ];
-        });
-      };
+
+          # see https://determinate.systems/posts/extending-nixos-configurations
+          # tatooine = laptop.extendModules {
+          #   # TODO retain existing specialArgs and inject mine ?!
+          #   specialArgs = {
+          #     hostname = "tatooine";
+          #     inherit secrets dotfilesPath;
+          #
+          #     withSecrets = true;
+          #   };
+          # };
+
+          # neptune = lib.mkNixosSystem {
+          #   pkgs = myPkgs;
+          #   modules = [
+          #     ./hosts/neptune/configuration.nix
+          #   ];
+          #   hostname = "neptune";
+          #   withSecrets = true;
+          # };
+
+          # desktop is a
+          desktop = lib.mkNixosSystem {
+            withSecrets = false;
+            hostname = "jedha";
+            modules = [
+              ./hosts/jedha/_nixos.nix
+            ];
+          };
+
+          # nix build .#nixosConfigurations.teapot.config.system.build.toplevel
+          # jedha = desktop.extendModules ({
+          #   specialArgs = {
+          #     pkgs = myPkgsCuda;
+          #     withSecrets = true;
+          #     inherit lib;
+          #     # pkgs = myPkgs.extend(
+          #     #     );
+          #   };
+          #   modules = [ ];
+          # });
+        };
 
       # TODO scan hm/{modules, profiles} folder
       homeProfiles = lib.importFiles ./hm/profiles // {

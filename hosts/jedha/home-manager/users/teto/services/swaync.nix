@@ -9,7 +9,7 @@
 {
 
   imports = [
-    flakeSelf.homeProfiles.swaync
+    flakeSelf.homeProfiles.sway-notification-center
   ];
 
   services.swaync = {

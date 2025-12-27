@@ -1,1 +1,1 @@
-treefmt .
+treefmt --fail-on-change .
