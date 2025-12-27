@@ -94,21 +94,24 @@ let
         checkPhase = ":";
       };
 
+      volumeScript = pkgs.writeShellApplication {
+        name = "brightness-mgr";
+        runtimeInputs = [
+          pkgs.libnotify # for notify-send
+        ];
+        # pass up
+        text = builtins.readFile ../../bin/set-volume.sh;
+
+        checkPhase = ":";
+      };
     in
-    # { name = "get-volume-as-integer";
-    #   runtimeInputs = [ pkgs.wireplumber ];
-    #   text = ''
-    #   out=$(${wpctl} get-volume @DEFAULT_AUDIO_SINK@ | cut -f2 -d' ')
-    #   echo $(( 100 * $out ))
-    #   '';
-    #   checkPhase = ":";
-    # };
     {
       # wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%+
       # wpctl get-volume @DEFAULT_AUDIO_SINK@
       # -l to limit max volume
       # -t is timeout in ms
       # -e to avoid keeping notif in history
+      # TODO move to script like for brightness
       XF86AudioRaiseVolume = "exec --no-startup-id ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.2;exec ${notify-send} -a Audio --icon=audio-volume-high -u low -t 1000 -h int:value:$(${getIntegerVolume}) -e -h string:synchronous:audio-volume 'Audio volume' 'Audio Raised volume'";
       XF86AudioLowerVolume = "exec --no-startup-id ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%-;exec ${notify-send} -a Audio --icon=audio-volume-low-symbolic -u low -t 1000 -h int:value:$(${getIntegerVolume}) -e -h string:synchronous:audio-volume 'Audio volume' 'Lower audio volume'";
 
@@ -116,13 +119,9 @@ let
       # XF86AudioLowerVolume = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%;exec ${notify-send} --icon=audio-volume-low-symbolic -u low 'Audio lowered'";
       # XF86AudioMute = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle;exec ${notify-send} --icon=speaker_no_sound -u low 'test'";
 
-      # brightnessctl brightness-low
-      # XF86MonBrightnessUp = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +10%; exec ${notify-send} --icon=brightness -u low -t 1000 -h int:value:$(${getBrightness}) -e -h string:synchronous:brightness-level 'Brightness' 'Raised brightness'";
       # TODO reference brightnessctl
       XF86MonBrightnessUp = "exec ${brightnessScript}/bin/brightness-mgr up 10%";
       XF86MonBrightnessDown = "exec ${brightnessScript}/bin/brightness-mgr down 10%-";
-      # XF86MonBrightnessDown = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 10%-; exec ${notify-send} --icon=brightness-low -u low -t 1000 -h int:value:$(${getBrightness}) -e -h string:synchronous:brightness-level 'Brightness' 'Lowered brightness'";
-      # XF86MonBrightnessDown = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 10%-";
 
       # "XF86Display" = "exec " + ../../rofi-scripts/monitor_layout.sh ;
 

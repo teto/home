@@ -2,6 +2,7 @@
   flakeSelf,
   lib,
   secrets,
+  withSecrets,
   ...
 }:
 {
@@ -12,7 +13,7 @@
   services.openssh = {
 
     enable = true;
-    ports = [ secrets.jakku.sshPort ];
+    ports = lib.mkIf withSecrets [ secrets.jakku.sshPort ];
 
     # authorizedKeysFiles = [
     #   "~/.ssh/id_rsa.pub"

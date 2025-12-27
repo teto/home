@@ -503,6 +503,7 @@
               pkgs.bitwarden-cli # to sync passwords
               dmidecode
               deploy-rs.packages.${system}.deploy-rs
+              expect # to pipe into deploy-rs
               fzf # for just's "--select"
               git-crypt # to run `git-crypt export-key`
               just # to run justfiles

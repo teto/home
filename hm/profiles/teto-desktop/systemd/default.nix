@@ -36,16 +36,8 @@
     # needs DBUS_SESSION_BUS_ADDRESS
     "desktop-notification@" = {
       Service = {
-        # /run/wrappers/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" \
-        #   ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning "Interrupted" "Scan interrupted. Don't forget to have it run to completion at least once a week!"
-        # exit 1
-
         ExecStart =
           let
-            # ${pkgs.coreutils}/bin/timeout 60s
-            # result=$(/run/wrappers/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" \
-            # ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning -A "interrupt=service $1 failed" -A "continue=OK, start now" "hum scan" "Daily scan will start in one minute")
-
             myScript = pkgs.writeScript "notify-and-wait" ''
               #!${pkgs.stdenv.shell}
 
@@ -69,8 +61,6 @@
           in
           "${myScript} %n";
       };
-
-      # User = "...";
     };
 
     # "base-unit@".serviceConfig = {

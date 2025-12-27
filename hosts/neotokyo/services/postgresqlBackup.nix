@@ -5,63 +5,15 @@
 */
 {
   config,
-  pkgs,
-  secrets,
+  # pkgs,
+  # secrets,
   lib,
   ...
 }:
-let
-  dbName = config.services.immich.database.name;
-in
+# let
+# dbName = config.services.immich.database.name;
+# in
 {
-  # official service from nixpkgs
-  services.postgresqlBackup = {
-    # we dont need it now that immich generates backups by itself
-    enable = false;
-    # every day everyhour
-    startAt = "*-*-* *:15:00";
-    pgdumpOptions = "--no-owner -v";
-
-    # generate systemd services called "postgresqlBackup-${db}"
-    databases = [
-      # https://immich.app/docs/administration/backup-and-restore
-      dbName
-    ];
-
-    # Path of directory where the PostgreSQL database dumps will be placed.
-    # Default: "/var/backup/postgresql"
-  };
-
-  # see TMPFILES.D(5)
-  systemd.tmpfiles.rules = [
-    # "d '${cfg.location}' 0700 postgres - - -"
-
-    # 'backup' group hasread access only
-    # 0740 would be better but for now just make it work
-    # TODO check if this takes precedence over postgresqlBackup tmpfiles
-    "d '/var/backup/postgresql' 0750 postgres backup - -"
-  ];
-  # TODO immich now generates its own backups we could use
-  # /var/lib/immich/backups/
-
-  # mv ${encBackupFileLocation} ${backupDir}/ && \
-
-  systemd.services."postgresqlBackup-${dbName}".serviceConfig = {
-    # change the owner so that the restic job can read the file and back it up
-    ExecStartPost = pkgs.writeShellScript "pg-db-archive" ''
-      ## Define the backup directory path:
-      set -x
-      _dirBackup="${config.services.postgresqlBackup.location}"
-
-      echo "assigning group to $_dirBackup"
-      # does it have the right ? immich.sql.gz
-      chgrp -R "backup" "/var/backup/postgresql"
-      echo "Changing permissions"
-    '';
-    # # TODO ideally we could change it to 440 ?
-    # chmod -R 640 "/var/backup/postgresql"
-  };
-
   # systemd.tmpfiles.rules = [
   #   "z ${syncthingCfg.dataDir} 0750 ${syncthingCfg.user} ${syncthingCfg.group}"
   #   "d ${backupDir} 0775 ${syncthingCfg.user} ${syncthingCfg.group}"
@@ -80,13 +32,14 @@ in
       {
         serviceConfig = {
           Group = "immich"; # such that it can read the files (but can not write to it)
+          # Type = "exec"; # restic sets it to "oneshot"
+          RemainAfterExit = "yes";
         };
         unitConfig = {
-          OnSuccess = "send-mail-to-teto@";
+          PartOf = "restic-backups-immich-db-to-backblaze.timer";
+          # todo pass failure
+          OnSuccess = "send-mail-to-teto@success.service";
+          OnFailure = "send-mail-to-teto@failure.service";
         };
       };
-
-  # services.restic.server.enable
-  #      Whether to enable Restic REST Server.
-
 }

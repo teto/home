@@ -19,7 +19,6 @@ jobs:
     - name: Lint
       run: |
         nix fmt -- --fail-on-change
-    # - run: nixos-rebuild --flake .#laptop --show-trace build
     - name: eval desktop config
       run: |
        nix eval .#nixosConfigurations.jedha-no-secrets.config.system.build.toplevel

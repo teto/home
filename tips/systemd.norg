@@ -5,10 +5,22 @@ systemctl show-environment --user ?
 loginctl show-session $XDG_SESSION_ID --value --property=Type
 tty
 
+* service types
+
+  - Type=simple - Process doesn't fork, ready immediately (default)
+  - Type=exec - Like simple, but waits for exec to complete
+  - Type=forking - Process forks, parent exits
+  - Type=oneshot - Short-lived process, completes and exits
+  - Type=notify - Process sends readiness via sd_notify()
+  - Type=dbus - Process registers a DBus name
+
 * notify on failure
 
   Unit terminating by `@` => template.
   Call it with on OnFailure
+
+
+ https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html#Specifiers
 
 systemd.user.settings.Manager.DefaultEnvironment
 

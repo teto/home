@@ -19,6 +19,7 @@
         let
           # TODO see if we cant retreive it from the service configuration
           # depends on "IMMICH_MEDIA_LOCATION=/var/lib/immich"
+          # config.services.immich.dataDir;
           UPLOAD_LOCATION = "/var/lib/immich";
         in
         [
@@ -38,17 +39,12 @@
       #   "--keep-yearly 0"
       # ];
 
-      # repository = "sftp:backup@host:/backups/home";
-      # s3 ?
-
       # backupPrepareCommand = "${pkgs.restic}/bin/restic unlock";
       createWrapper = true;
       initialize = true; # create restic repo if it doesn't exist
       # could we check the service at buildtime ?
-      repository = "${secrets.backblaze.immich-backup-bucket}";
+      repository = secrets.backblaze.immich-backup-bucket;
 
-      # outdated it seems ?
-      # repository = "b2:backup-immich-matt";
       # repositoryFile
       timerConfig = {
         # daily

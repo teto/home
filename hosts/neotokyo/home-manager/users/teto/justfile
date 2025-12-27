@@ -27,4 +27,6 @@ immich-restore backup:
 
 # TODO generate email
 test-msmtp-send-mail:
+    #   printf "To: recipient@example.com\nSubject: Test\n\nTest body\n"
+    # load from justfile.generated
     cat contrib/2025-05-04-21.38.53.mail | msmtp --read-envelope-from --read-recipients 

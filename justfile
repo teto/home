@@ -321,3 +321,6 @@ refresh-ssh-public-keys:
 # list firewall rules
 firewall-list:
     sudo iptables -n -L
+
+eval-jedha-no-secrets:
+    nix eval .#nixosConfigurations.jedha-no-secrets.config.system.build.toplevel

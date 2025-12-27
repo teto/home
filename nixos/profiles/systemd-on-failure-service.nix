@@ -12,19 +12,23 @@
     # };
     description = "Log success for %i";
 
+    # requires
+    # wantedBy
+    unitConfig = {
+      # StartLimitIntervalSec = 0;
+      PropagatesStopTo = "";
+      PropagatesReloadTo = "";
+    };
+
     serviceConfig = {
+      User = "teto"; # to access teto's msmtp config
       Type = "notify";
 
-      # /run/wrappers/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" \
-      #   ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning "Interrupted" "Scan interrupted. Don't forget to have it run to completion at least once a week!"
-      # exit 1
-
-      # writeShellScript ?
-      # TODO add destination
-      # --from secrets.jakku.email
-      ExecStart = pkgs.writeShellScript "mail-success" ''
-        ADDRESS=$1
-        msmtp -afastmail "${secrets.users.teto.email}"
+      # --read-envelope-from
+      # TODO should be able to qualify service + result
+      ExecStart = pkgs.writeShellScript "notify-service-result" ''
+        echo "Result: %i"
+        printf "Subject: Test %i\n\nTest body\n" | ${pkgs.msmtp}/bin/msmtp -afastmail "${secrets.users.teto.email}"
       '';
     };
   };

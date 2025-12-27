@@ -7,7 +7,6 @@
     postInstall = ''
       wrapProgram $out/bin/ikhal --set LC_ALL ja_JP.utf8
     '';
-
   });
 
   # need a locale to be set
@@ -30,7 +29,8 @@
   settings = {
 
     default = {
-      default_calendar = "Perso";
+      # should be validated ?
+      # default_calendar = "Perso";
       default_event_duration = "30m";
       # enable_mouse = true; # unknown key
       highlight_event_days = true;

@@ -12,6 +12,7 @@ let
     A few tips:
     - just help
     - tremc
+    ${banner}
   '';
   # - sudo systemctl start redis-nextcloud.service
   # - sudo systemctl status phppfm.service
@@ -27,9 +28,12 @@ in
     jctl = "journalctl -b0 -r";
   };
 
-  programs.bash.initExtra = ''
-    cat "${pkgs.writeText "welcome-message" banner}";
-  '';
+  # only on login shell
+  # initExtra => interactive shell
+  # profileExtra => login shell
+  # programs.bash.initExtra = ''
+  #   cat "${pkgs.writeText "welcome-message" banner}";
+  # '';
 
   programs.msmtp.enable = true;
 
