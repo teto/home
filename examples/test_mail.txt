@@ -1,5 +1,0 @@
-From: Matt <XX@gmail.com>
-To: Matt <XX@gmail.com>
-Subject: Hello World
-
-Email sent using MSMTP

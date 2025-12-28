@@ -1,3 +1,0 @@
-machine imap.gmail.com login <login> password <password>
-machine smtp.gmail.com login <login> password <password>
-machine api.github.com login <login> password <token>

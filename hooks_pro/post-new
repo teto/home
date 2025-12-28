@@ -1,6 +1,0 @@
-#!/bin/sh
-echo "Starting my post-new hook"
-echo "$NOTMUCH_CONFIG"
-notmuch tag --batch --input="$XDG_CONFIG_HOME/notmuch/ietf"
-notmuch tag --batch --input="$XDG_CONFIG_HOME/notmuch/foss"
-#notmuch tag --batch --input="$XDG_CONFIG_HOME/notmuch/security"
