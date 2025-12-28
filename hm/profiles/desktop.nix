@@ -16,8 +16,10 @@ let
   autoloadedModule =
     { pkgs, ... }@args:
     haumea.lib.load {
-      # flakeSelf.inputs.nix-filter {
-      src = ./teto-desktop;
+
+      src = flakeSelf.inputs.nix-filter {
+        root = ./teto-desktop;
+      };
       inputs = args // {
         inputs = flakeSelf.inputs;
       };

@@ -19,13 +19,11 @@
     ./services/blueman-applet.nix
     ./services/wpaperd.nix
     # ./services/swayidle.nix
-
     # ../desktop/teto/default.nix  # Track for regressions
 
     # neovim should come from the nixos profile
     flakeSelf.homeModules.nextcloud-client
     flakeSelf.homeModules.llama-cpp
-    # ../../../../jedha/home-manager/users/teto/services/nextcloud-client.nix
 
     # flakeSelf.homeProfiles.llama-cpp
     flakeSelf.homeProfiles.wezterm

@@ -16,19 +16,19 @@ let
 
   defaultSendMailCommand = "${pkgs.msmtp}/bin/msmtpq --debug --read-envelope-from --read-recipients";
 
-  mbsyncConfig = {
-    enable = true;
-    extraConfig.channel = {
-      # unlimited
-      # when setting MaxMessages, set ExpireUnread
-      MaxMessages = 20000;
-      # size[k|m][b]
-      MaxSize = "1m";
-      CopyArrivalDate = "yes"; # Keeps the time stamp based message sorting intact.
-    };
-    create = "maildir"; # create missing mailboxes
-    expunge = "both";
-  };
+  # mbsyncConfig = {
+  #   enable = true;
+  #   extraConfig.channel = {
+  #     # unlimited
+  #     # when setting MaxMessages, set ExpireUnread
+  #     MaxMessages = 20000;
+  #     # size[k|m][b]
+  #     MaxSize = "1m";
+  #     CopyArrivalDate = "yes"; # Keeps the time stamp based message sorting intact.
+  #   };
+  #   create = "maildir"; # create missing mailboxes
+  #   expunge = "both";
+  # };
 
   accountExtra = {
     # set new_mail_command = ""
@@ -101,6 +101,7 @@ let
     meli = {
       enable = true;
       settings = {
+        toto = "tata";
         listing.index_style = "compact";
       };
     };
@@ -238,14 +239,14 @@ let
 
 in
 {
-  email = {
-    maildirBasePath = mailDirBasePath;
-    accounts = lib.optionalAttrs withSecrets {
-      inherit
-        gmail
-        fastmail
-        ;
-    };
+  # accounts.email = {
+  maildirBasePath = mailDirBasePath;
+  accounts = lib.optionalAttrs withSecrets {
+    inherit
+      gmail
+      fastmail
+      ;
   };
+  # };
 
 }

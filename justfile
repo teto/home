@@ -5,7 +5,7 @@
 HOSTNAME := `hostname`
 NIXPKGS_REPO := env_var('HOME') / 'nixpkgs'
 BLOG_FOLDER := "${HOME}/blog"
-HM_REPO := "/home/teto/hm"
+HM_REPO := env_var('HOME') / "hm"
 
 # not versioned, where we store secrets
 

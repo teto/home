@@ -8,6 +8,7 @@
   ...
 }:
 let
+  # TODO filter out the configurations ending with -no-secret ?
   hostsConfigs = lib.mapAttrs lib.genSshClientConfig flakeSelf.nixosConfigurations;
 in
 {

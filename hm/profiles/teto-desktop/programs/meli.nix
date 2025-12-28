@@ -3,8 +3,7 @@
   secrets,
   withSecrets,
   config,
-
-  flakeSelf,
+  # flakeSelf,
   ...
 }:
 {
@@ -19,15 +18,13 @@
   ];
 
   settings = {
-    # includes = [
-    #   "manual.toml"
-    #   # "fastmail.toml"
-    # ];
 
     notifications = {
       script = "notify-send";
     };
 
+    # this overrides the hm user accounts
+    # the module should warn the user about this
     accounts.notmuch = {
       # todo use ${home.
       # TODO use {config.accounts.email.maildirBasePath}

@@ -1,3 +1,5 @@
+# this completes programs.mujmap by generating the necessary timers
+# todo upstream
 {
   config,
   lib,

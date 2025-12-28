@@ -8,21 +8,109 @@
 let
   inherit (lib)
     genBlockLua
+    luaPlugin
     ;
 
-  pluginsMap = pkgs.callPackage ../../neovim/plugins.nix { inherit flakeSelf lib; };
+  pluginsMap = {
+    telescopePlugins = [
+      # { plugin = telescope-nvim; }
+      # pkgs.vimPlugins.telescope-fzf-native-nvim # for use with smart-open + fzf algo
+      # telescope-fzf-native-nvim # needed by smart-open.nvim
+    ];
+
+    filetypePlugins = [
+      # TODO package neomutt.vim
+      # { plugin = wmgraphviz-vim; }
+      # { plugin = vim-toml; }
+    ];
+
+    colorschemePlugins = with pkgs.vimPlugins; [
+      { plugin = sonokai; }
+      { plugin = tokyonight-nvim; }
+      { plugin = molokai; }
+      { plugin = onedark-nvim; }
+      { plugin = dracula-vim; }
+      # monkai-pro
+      { plugin = vim-monokai; }
+      { plugin = vim-janah; }
+      { plugin = tokyonight-nvim; }
+      (luaPlugin {
+        # required by some colorscheme
+        plugin = colorbuddy-nvim;
+      })
+    ];
+
+    luaPlugins = with pkgs.vimPlugins; [
+
+      # { plugin = modicator-nvim; }
+      # testing my fork
+      # { plugin = diffview-nvim; }
+
+      (luaPlugin {
+        plugin = marks-nvim;
+        config = # lua
+          ''
+            require'marks'.setup {
+                -- whether to map keybinds or not. default true
+                default_mappings = true,
+                -- whether movements cycle back to the beginning/end of buffer. default true
+                cyclic = true,
+                -- whether the shada file is updated after modifying uppercase marks. default false
+                force_write_shada = false,
+                -- how often (in ms) to redraw signs/recompute mark positions.
+                -- higher values will have better performance but may cause visual lag,
+                -- while lower values may cause performance penalties. default 150.
+                refresh_interval = 1000,
+                -- sign priorities for each type of mark - builtin marks, uppercase marks, lowercase
+                -- marks, and bookmarks.
+                -- can be either a table with all/none of the keys, or a single number, in which case
+                -- the priority applies to all marks.
+                -- default 10.
+                sign_priority = { lower=10, upper=15, builtin=8, bookmark=20 },
+                -- marks.nvim allows you to up to 10 bookmark groups, each with its own
+                -- sign/virttext. Bookmarks can be used to group together positions and quickly move
+                -- across multiple buffers. default sign is '!@#$%^&*()' (from 0 to 9), and
+                -- default virt_text is "".
+                bookmark_0 = {
+                  sign = "⚑",
+                  virt_text = "hello world"
+                },
+                mappings = {}
+            }
+          '';
+      })
+
+      # install via rocks
+      # vim-lion # Use with gl/L<text object><character to align to
+
+      # (luaPlugin {
+      #   # prettier quickfix
+      #   plugin = nvim-bqf;
+      #   config = ''
+      #     require'bqf'.setup({
+      #      preview = {
+      #       delay_syntax = 0
+      #      }
+      #     })
+      #   '';
+      # })
+
+      # move to Rocks
+      # (luaPlugin { plugin = fugitive-gitlab-vim; })
+    ];
+  };
 
   # mcp-hub = flakeSelf.inputs.mcp-hub.packages.${pkgs.stdenv.hostPlatform.system}.mcp-hub;
 
-  luaPlugin =
-    attrs:
-    attrs
-    // {
-      type = "lua";
-      config = lib.optionalString (attrs ? config && attrs.config != null) (
-        genBlockLua attrs.plugin.pname attrs.config
-      );
-    };
+  # luaPlugin =
+  #   attrs:
+  #   attrs
+  #   // {
+  #     type = "lua";
+  #     config = lib.optionalString (attrs ? config && attrs.config != null) (
+  #       genBlockLua attrs.plugin.pname attrs.config
+  #     );
+  #   };
 
   blinkPlugins = [
     pkgs.vimPlugins.blink-cmp # nixpkgs' one

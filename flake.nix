@@ -90,7 +90,9 @@
     };
 
     deploy-rs = {
-      url = "github:serokell/deploy-rs";
+      # url = "github:serokell/deploy-rs";
+      url = "github:apoloqize/deploy-rs?rev=b48c508f1e8c9f0c82a9baeffa014e86d716a546";
+
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -202,6 +204,7 @@
     # todo update for ci ?
     nixpkgs = {
       url = "github:teto/nixpkgs/scratch";
+      # url = /home/teto/nixpkgs;
     };
 
     nix = {

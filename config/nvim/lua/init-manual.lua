@@ -58,6 +58,8 @@ vim.g.rikai = {
 
 -- new option
 vim.o.winborder = 'rounded'
+vim.opt.guicursor =
+    'n-v-c:block-blinkon250-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-blinkon250-Cursor/lCursor,r-cr:hor20-Cursor/lCursor'
 
 -- that's where treesitter installs grammars
 -- vim.opt.rtp:prepend('/home/teto/parsers')
@@ -125,32 +127,12 @@ vim.g.rest_nvim = {
     },
 }
 
--- 	-- Open request results in a horizontal split
--- 	-- Skip SSL verification, useful for unknown certificates
--- 	-- engine = 'classic',
--- 	-- parser = 'treesitter',
--- 	-- Highlight request on run
--- 	highlight = {
--- 		-- enabled = true,
--- 		timeout = 150,
--- 	},
--- })
---
---
 -- -- TODO remove once it's merged upstream
 -- vim.api.nvim_create_user_command('RestLog', function()
 --   vim.cmd(string.format('tabnew %s', vim.fn.stdpath('cache')..'/rest.nvim.log'))
 -- end, {
 --   desc = 'Opens the rest.nvim log.',
 -- })
-
--- this should not be needed anymore
--- vim.cmd([[sign define DiagnosticSignError text=✘ texthl=LspDiagnosticsSignError linehl= numhl=]])
--- vim.cmd([[sign define DiagnosticSignWarning text=！ texthl=LspDiagnosticsSignWarning linehl= numhl=CustomLineWarn]])
--- vim.cmd(
---     [[sign define DiagnosticSignInformation text=I texthl=LspDiagnosticsSignInformation linehl= numhl=CustomLineWarn]]
--- )
--- vim.cmd([[sign define DiagnosticSignHint text=H texthl=LspDiagnosticsSignHint linehl= numhl=]])
 
 -- vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
 vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
@@ -449,16 +431,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
         -- dont attach in diffmode
         if vim.wo.diff then
             vim.schedule(function()
-                -- client.id
-                vim.lsp.Client:stop()
+                -- vim.lsp.client:stop({id = client.id})
             end)
             return
         end
         -- on_attach.on_attach(client, bufnr)
-
-        -- if client:supports_method('textDocument/implementation') then
-        --   -- Create a keymap for vim.lsp.buf.implementation
-        -- end
 
         if client:supports_method('textDocument/completion') then
             -- Enable auto-completion
@@ -470,33 +447,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 function string:endswith(ending)
     return ending == '' or self:sub(-#ending) == ending
 end
-
--- vim.api.nvim_create_autocmd('BufRead', {
---     desc = 'Disable syntax on big files',
---     callback = function(args)
---         -- print("autocmd BufRead cb", args.file)
---         if args.file:endswith('pkgs/development/haskell-modules/hackage-packages.nix') then
---             -- print("autocmd BufRead cb", args.file)
---             -- print("DISABLING syntax")
---             vim.cmd([[setlocal syntax=off]])
---         end
---     end,
--- })
-
-vim.opt.guicursor =
-    'n-v-c:block-blinkon250-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-blinkon250-Cursor/lCursor,r-cr:hor20-Cursor/lCursor'
-
--- highl Cursor ctermfg=16 ctermbg=253 guifg=#000000 guibg=#00FF00
--- vim.api.nvim_set_hl(0, 'Cursor', { ctermfg = 16, ctermbg = 253, fg = '#000000', bg = '#00FF00' })
--- vim.api.nvim_set_hl(0, 'CursorLine', { fg = 'None', bg = '#293739' })
--- vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'grey' })
-
--- local my_image = require('hologram.image'):new({
---	   source = '/home/teto/doctor.png',
---	   row = 11,
---	   col = 0,
--- })
--- my_image:transmit() -- send image data to terminal
 
 -- f3 to show tree
 vim.keymap.set('n', '<Leader><Leader>', '<Cmd>b#<CR>')
@@ -575,12 +525,6 @@ vim.g.fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %
 -- "   au!
 -- "   au BufWritePost $MYVIMRC,.vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc,init.vim so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
 -- " augroup END
-
--- moved to nix ?
--- vim.keymap.set('n', '<leader>rg', '<Cmd>Grepper -tool rg -open -switch<CR>')
--- vim.keymap.set("n", "<leader>rgb", "<Cmd>Grepper -tool rgb -open -switch -buffer<CR>")
-
--- vim.api.nvim_create_augroup('bufcheck', {clear = true})
 
 -- autocmd BufReadPost *.pdf silent %!pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
 -- " convert all kinds of files (but pdf) to plain text
@@ -839,9 +783,10 @@ vim.api.nvim_create_user_command('LlmChat', function()
     require('avante.api').ask({ without_selection = true })
 end, { desc = 'Ask without selecting anything' })
 
-require('plugins.diffview')
+-- require('plugins.diffview')
 require('lsp-progress').setup()
-require('teto.cursorline')
+-- todo restore
+-- require('teto.cursorline')
 
 local mclipboard = require('teto.clipboard')
 
@@ -909,7 +854,8 @@ end, { buffer = false, desc = 'Diagnostics' })
 --     callback = highlight_current_word,
 -- })
 
-require('teto.lsp').ignore_simwork_extended_warnings()
+-- require('teto.lsp').ignore_simwork_extended_warnings()
+
 -- vim.g.tidal_ghci = "ghci"
 vim.g.tidal_target = 'terminal'
 vim.g.tidal_sc_enable = 1
