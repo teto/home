@@ -1,3 +1,5 @@
+hx --health elixir
+
 <space>f to pick file
 
 d to delete

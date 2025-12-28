@@ -39,8 +39,8 @@ let
     # (luaPlugin {
     #   plugin = flakeSelf.inputs.rocks-nvim.packages.${pkgs.stdenv.hostPlatform.system}.rocks-nvim;
     # })
-    # (luaPlugin { plugin = rocks-nvim; })
 
+    # (luaPlugin { plugin = rocks-nvim; })
     # (luaPlugin { plugin = rocks-git-nvim; })
 
     highlight-undo-nvim

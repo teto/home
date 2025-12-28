@@ -373,16 +373,16 @@
       byNamePkgsOverlay = import "${nixpkgs}/pkgs/top-level/by-name-overlay.nix" ./by-name;
 
       # loads packages in pkgs/
-      autoloadedPkgsOverlay =
-        final: _prev:
-        nixpkgs.legacyPackages.${system}.lib.packagesFromDirectoryRecursive {
-          # inherit (self) callPackage;
-          # callPackage = callPackage
-          # TODO could be renamed to self ?
-          # nixpkgs.legacyPackages.${system}
-          callPackage = final.newScope { flakeSelf = self; };
-          directory = ./pkgs;
-        };
+      # autoloadedPkgsOverlay =
+      #   final: _prev:
+      #   nixpkgs.legacyPackages.${system}.lib.packagesFromDirectoryRecursive {
+      #     # inherit (self) callPackage;
+      #     # callPackage = callPackage
+      #     # TODO could be renamed to self ?
+      #     # nixpkgs.legacyPackages.${system}
+      #     callPackage = final.newScope { flakeSelf = self; };
+      #     directory = ./pkgs;
+      #   };
 
       pkgImport =
         src: cudaSupport:
@@ -394,7 +394,7 @@
               inherit treefmt-nix;
             })
             byNamePkgsOverlay
-            autoloadedPkgsOverlay
+            # autoloadedPkgsOverlay
           ];
 
           config = {
@@ -578,7 +578,7 @@
         self.inputs.neovim-nightly-overlay.packages.${system}
         # strip of
         // (builtins.removeAttrs (byNamePkgsOverlay myPkgs { }) [ "_internalCallByNamePackageFile" ])
-        // (autoloadedPkgsOverlay myPkgs { })
+        # // (autoloadedPkgsOverlay myPkgs { })
         // {
           /*
             my own nvim with
@@ -621,6 +621,8 @@
 
     })
     // ({
+      inherit (self) inputs;
+
       # Tell Nix what schemas to use.
       schemas = self.inputs.flake-schemas.schemas
       # // other-schemas.schemas

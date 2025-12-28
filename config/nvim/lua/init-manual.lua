@@ -37,6 +37,8 @@
 
 -- print(package.cpath)
 
+-- vim.env.PATH = "/nix/store/wy6pg4liq14r08vbn7cr4ksqdh0ayavn-wl-clipboard-2.2.1/bin:"..vim.env.PATH
+
 local has_fzf_lua, _fzf_lua = pcall(require, 'fzf-lua')
 
 -- set to true to enable it

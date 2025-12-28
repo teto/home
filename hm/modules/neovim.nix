@@ -179,13 +179,20 @@ in
 
       enableRocks = mkEnableOption "The awesome rocks-nvim plugin manager";
 
+      # pendant de extraPackages, inline as vim.env.PATH plutot que comme des
+      # wrapper flags, ce qui permet de garder les extraPackages pour tous les wrappers
+      extraInitLuaPackages = mkOption {
+        type = types.listOf types.package;
+        default = [ ];
+        example = literalExpression "[ pkgs.shfmt ]";
+        description = "Extra packages available to nvim.";
+      };
+
+
       lsp = mkOption {
         type = types.submodule {
           options = {
-
             mapOnAttach = mkEnableOption "Mappings on LspAttach";
-
-            # todo add
           };
         };
 
@@ -272,8 +279,6 @@ in
     (mkIf cfg.enableMyDefaults {
       programs.neovim.extraLuaConfig = ''
         vim.opt.title = true -- vim will change terminal title
-        -- look at :h statusline to see the available 'items'
-        -- let &titlestring=" %t %{len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) } - NVIM"
         vim.opt.titlestring = "%{getpid().':'.getcwd()}"
         vim.opt.smoothscroll = true
         vim.opt.termguicolors = true
@@ -368,6 +373,10 @@ in
 
     (mkIf cfg.fennel.enable { programs.neovim.plugins = cfg.fennel.plugins; })
 
+
+    ({
+      programs.neovim.extraLuaConfig = lib.mkOrder 0 ''vim.env.PATH = "${lib.makeBinPath config.programs.neovim.extraInitLuaPackages}:"..vim.env.PATH'';
+    })
   ];
 
 }

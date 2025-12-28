@@ -11,14 +11,14 @@
 # refresh_command = "just -g mail-fetch"
 # listing.index_style = "compact"
 # listing.index_style = ""
-[accounts.notmuch.listing]
-index_style = "compact"
+# [accounts.notmuch.listing]
+# index_style = "compact"
 
   # notmuch mailboxes are virtual, they are defined by their alias and the notmuch query that corresponds to their content.
-  [accounts.notmuch.mailboxes]
-  "INBOX" = {  query="tag:inbox and not tag:killed", subscribe = true }
-  "Drafts" = {  query="tag:draft", subscribe = true }
-  "Sent" = {  query="from:username@server.tld from:username2@server.tld", subscribe = true }
+  # [accounts.notmuch.mailboxes]
+  # "INBOX" = {  query="tag:inbox and not tag:killed", subscribe = true }
+  # "Drafts" = {  query="tag:draft", subscribe = true }
+  # "Sent" = {  query="from:username@server.tld from:username2@server.tld", subscribe = true }
 
 
 [log]

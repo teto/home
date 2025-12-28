@@ -101,7 +101,7 @@ let
     meli = {
       enable = true;
       settings = {
-        toto = "tata";
+        # toto = "tata";
         listing.index_style = "compact";
       };
     };
