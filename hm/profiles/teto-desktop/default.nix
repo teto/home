@@ -57,6 +57,11 @@ in
     # flakeSelf.inputs.git-repo-manager.packages.${pkgs.stdenv.hostPlatform.system}.git-repo-manager
   ];
 
+  home.shell = {
+
+    enableFishIntegration = true;
+  };
+
   home.shellAliases = {
     lg = "lazygit";
     st = "systemctl-tui";

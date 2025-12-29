@@ -10,6 +10,7 @@
   enable = lib.mkForce true;
   enableZshIntegration = true;
   enableBashIntegration = lib.mkForce true;
+  enableFishIntegration = true;
   package = pkgs.starship.overrideAttrs (oa: {
     patches = (oa.patches or [ ]) ++ [
       # flakeSelf.inputs.starship-jj-patch

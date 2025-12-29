@@ -331,10 +331,9 @@ in
     # TODO move to default ones
     (luaPlugin {
       plugin = pkgs.vimPlugins.unicode-vim;
+      # -- since the autoadd was disabled/doesn't seem to work
       # ${pkgs.vimPlugins.unicode-vim.passthru.initLua}
       config = ''
-        -- since the autoadd was disabled/doesn't seem to work
-        ${pkgs.vimPlugins.unicode-vim.passthru.initLua}
         -- overrides ga
         vim.keymap.set ( "n", "ga",  "<Plug>(UnicodeGA)", { remap = true, } )
       '';
