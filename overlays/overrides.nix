@@ -29,16 +29,6 @@ in
     '';
   };
 
-  llama-cpp-matt = (
-    final.llama-cpp-with-curl.override {
-      cudaSupport = true;
-      blasSupport = false;
-      rocmSupport = false;
-      openclSupport = false;
-      # stdenv = prev.gcc11Stdenv;
-    }
-  );
-
   meli-git = final.meli.overrideAttrs (drv: rec {
     name = "meli-${version}";
     version = "g${flakeSelf.inputs.meli-src.shortRev}";
@@ -160,22 +150,10 @@ in
   );
 
   # see https://github.com/NixOS/nixpkgs/pull/257760
-  ollamagpu = final.ollama.override { llama-cpp = final.llama-cpp-matt; };
+  # ollamagpu = final.ollama.override { llama-cpp = final.llama-cpp-matt; };
 
   protocol-local = prev.protocol.overrideAttrs (oldAttrs: {
     src = builtins.fetchGit { url = "https://github.com/teto/protocol"; };
-  });
-
-  llama-cpp-with-curl = prev.llama-cpp.overrideAttrs (oa: {
-
-    nativeBuildInputs = oa.nativeBuildInputs ++ [
-      final.curl.dev
-    ];
-
-    cmakeFlags = oa.cmakeFlags ++ [
-
-      (prev.lib.cmakeBool "LLAMA_CURL" true)
-    ];
   });
 
   termscp-matt = prev.termscp.overrideAttrs (oa: {

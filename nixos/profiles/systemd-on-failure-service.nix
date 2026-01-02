@@ -1,3 +1,4 @@
+# TODO rename
 {
   config,
   lib,
@@ -6,6 +7,7 @@
   ...
 }:
 {
+  # systemd template
   systemd.services."send-mail-to-teto@" = {
     # unitConfig = {
     #   Description = "Log success for %i";
@@ -27,7 +29,9 @@
       # --read-envelope-from
       # TODO should be able to qualify service + result
       ExecStart = pkgs.writeShellScript "notify-service-result" ''
-        echo "Result: %i"
+        # echo "Result: %i"
+        SUBJECT=$1
+        MSG=$2
         printf "Subject: Test %i\n\nTest body\n" | ${pkgs.msmtp}/bin/msmtp -afastmail "${secrets.users.teto.email}"
       '';
     };

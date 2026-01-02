@@ -96,7 +96,7 @@ in
     };
   };
 
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_17;
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_18;
 
   # it apparently still is quite an important thing to have
   boot.devSize = "5g";

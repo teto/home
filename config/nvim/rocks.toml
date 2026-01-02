@@ -208,9 +208,11 @@ rev = "4c37d8d967a51f718af5d9556b72f16c5185c05b"
 [plugins."tiny-inline-diagnostic.nvim"]
 git = "rachartier/tiny-inline-diagnostic.nvim"
 rev = "d9d12d4bfb9a4c5b8b8bdf7f612551df6972946c"
-# [plugins."jj.nvim"]
-# git = "nicolasgb/jj.nvim"
-# rev = "v0.1.0"
+
+[plugins."jj.nvim"]
+# provides Jdiff
+git = "nicolasgb/jj.nvim"
+rev = "v0.1.0"
 #
 # [plugins."hunk.nvim"]
 # git = "julienvincent/hunk.nvim"

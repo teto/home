@@ -1,7 +1,7 @@
 {
   enable = true;
   packageNames = [
-    "llama-cpp"
+    # "llama-cpp"
   ];
 }
 # curlMinimal

@@ -415,13 +415,15 @@ in
 
   extraPackages =
     extraPackages
-    ++ pkgs.vimPlugins.llm-nvim.runtimeDeps # temporary workaround
+    # flakeSelf.inputs.rest-nvim.packages.${pkgs.stdenv.hostPlatform.system}.rest-nvim-dev
+    # TODO remove once it's automatic
+    # ++ pkgs.vimPlugins.llm-nvim.runtimeDeps # temporary workaround
     # provides typescript-language-server
     ++ pkgs.vimPlugins.typescript-tools-nvim.runtimeDeps
     ++ [
       pkgs.typescript # for tsserver
       pkgs.stylua # for lua formatting
-      pkgs.gitlab-ci-ls # gitlab lsp
+      # pkgs.gitlab-ci-ls # gitlab lsp
 
       # mcp-hub
     ];

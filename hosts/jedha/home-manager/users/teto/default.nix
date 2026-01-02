@@ -8,9 +8,11 @@
   ...
 }:
 {
+  programs.direnv-instant.enable = true;
 
   imports = [
     # flakeSelf.homeModules.bash
+    flakeSelf.inputs.direnv-instant.homeModules.direnv-instant
 
     # flakeSelf.homeProfiles.qutebrowser # does nothing
     flakeSelf.inputs.nix-index-database.homeModules.nix-index

@@ -101,15 +101,25 @@ in
     })
 
     (mkIf cfg.llms {
-      home.packages = [
+      home.packages = let
+        llama-custom = pkgs.llama-cpp;
+        # llama-custom =   
+        #     pkgs.llama-cpp.override {
+        #       cudaSupport = true;
+        #       blasSupport = false;
+        #       rocmSupport = false;
+        #       openclSupport = false;
+        #       # stdenv = prev.gcc11Stdenv;
+        #     };
+      in
+        [
 
         # these 2 are for claude's /sandbox mode
         pkgs.socat
         pkgs.bubblewrap
 
         # pkgs.koboldcpp
-        # llama-cpp-with-curl
-        pkgs.llama-cpp # for llama-server and benchmarks
+        llama-custom # for llama-server and benchmarks
         # pkgs.llama-swap # allows to switch between models at runtime
         pkgs.claude-code # anthropic agent
 
@@ -357,7 +367,7 @@ in
         [
           argbash # to generate bash parsers
           automake
-          bcal # calculatrice
+          (ignoreBroken bcal) # calculatrice
           # bmm # rust bookmark manager (not package yet)
           bfs # https://github.com/tavianator/bfs
           binutils
@@ -482,7 +492,7 @@ in
         eva # calculette in a REPL
         numbat # fancy calculator, child of 'insect'
         fend # rust unit convertor
-        pcalc # cool calc, see numbat too
+        (ignoreBroken pcalc) # cool calc, see numbat too
 
         graphviz
       ];
@@ -617,7 +627,7 @@ in
           memento-with-ocr
 
           # https://github.com/NixOS/nixpkgs/pull/368909
-          pkgs.kakasi # convert kanjis into kanas etc
+          (ignoreBroken pkgs.kakasi) # convert kanjis into kanas etc
           pkgs.kanji-stroke-order-font # for memento, font that shows strike order (!!) cool when learning
           (tagainijisho) # japanese dict; like zkanji Qt based
           # flakeSelf.inputs.vocage.packages."x86_64-linux".vocage

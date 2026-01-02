@@ -30,6 +30,7 @@
       # url = "github:teto/buildbot-nix?ref=teto/hack-niks3-eval-error";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    direnv-instant.url = "github:Mic92/direnv-instant";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -210,7 +211,7 @@
     nix = {
       url = "github:NixOS/nix?ref=2.33.0";
       # url = "github:teto/nix?ref=teto/remove-assert-outputsSubstitutionTried";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-schemas.url = "github:DeterminateSystems/nix-src/flake-schemas";

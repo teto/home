@@ -11,10 +11,10 @@
 
   # programs.code
 
-  services.secret-service = {
-    enable = true;
-  };
-
+  # services.secret-service = {
+  #   enable = true;
+  # };
+  #
   # programs.chawan.enable = false;
 
   # programs.lapce.enable = true;

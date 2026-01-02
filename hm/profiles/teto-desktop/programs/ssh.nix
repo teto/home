@@ -73,6 +73,23 @@ in
         };
       };
 
+      nix-community-builder = {
+      
+        # https://nix-community.org/community-builders/
+        # ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIElIQ54qAy7Dh63rBudYKdbzJHrrbrrMXLYl7Pkmk88H
+        match = "user teto host ${secrets.jakku.hostname}";
+        hostname = "build-box.nix-community.org";
+        user = "teto";
+        addKeysToAgent = "yes";
+        # le port depend du service
+        # port = secrets.jakku.sshPort;
+        identityFile = "${secretsFolder}/ssh/id_rsa";
+        identitiesOnly = true;
+        # identityAgent =
+        serverAliveCountMax = 3;
+        sendEnv = [ "GITHUB_TOKEN" ];
+      };
+
       # as a user we should be able to override the key
       neotokyo-gitolite-admin = {
         match = "user gitolite host ${secrets.jakku.hostname}";
