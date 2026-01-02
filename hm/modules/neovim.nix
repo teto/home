@@ -188,7 +188,6 @@ in
         description = "Extra packages available to nvim.";
       };
 
-
       lsp = mkOption {
         type = types.submodule {
           options = {
@@ -372,7 +371,6 @@ in
     # (mkIf cfg.teal.enable { programs.neovim.plugins = cfg.teal.plugins; })
 
     (mkIf cfg.fennel.enable { programs.neovim.plugins = cfg.fennel.plugins; })
-
 
     ({
       programs.neovim.extraLuaConfig = lib.mkOrder 0 ''vim.env.PATH = "${lib.makeBinPath config.programs.neovim.extraInitLuaPackages}:"..vim.env.PATH'';

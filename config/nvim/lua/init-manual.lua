@@ -66,26 +66,29 @@ vim.opt.guicursor =
 -- that's where treesitter installs grammars
 -- vim.opt.rtp:prepend('/home/teto/parsers')
 
+-- TODO diagnostics = { virtual_text = false }
 diagnostic_default_config = {
     -- disabled because too big in haskell
-    virtual_lines = {
-        current_line = true,
-        -- Function that can transform the diagnostic
-        -- format = if
-    },
-    virtual_text = {
-        source = 'if_many',
-        -- • {format}?             (`fun(diagnostic:vim.Diagnostic): string?`) If
-        --                       not nil, the return value is the text used to
-        --                       display the diagnostic. Example: >lua
-        --                           function(diagnostic)
-        --                             if diagnostic.severity == vim.diagnostic.severity.ERROR then
-        --                               return string.format("E: %s", diagnostic.message)
-        --                             end
-        --                             return diagnostic.message
-        --                           end
-        --
-    },
+    virtual_lines = false, -- not needed with tiny-inline-diagnostic
+    -- {
+    --        current_line = true,
+    --        -- Function that can transform the diagnostic
+    --        -- format = if
+    --    },
+    virtual_text = false,
+    -- {
+    --        source = 'if_many',
+    --        -- • {format}?             (`fun(diagnostic:vim.Diagnostic): string?`) If
+    --        --                       not nil, the return value is the text used to
+    --        --                       display the diagnostic. Example: >lua
+    --        --                           function(diagnostic)
+    --        --                             if diagnostic.severity == vim.diagnostic.severity.ERROR then
+    --        --                               return string.format("E: %s", diagnostic.message)
+    --        --                             end
+    --        --                             return diagnostic.message
+    --        --                           end
+    --        --
+    --    },
     {
         severity = { min = vim.diagnostic.severity.WARN },
     },
@@ -115,6 +118,7 @@ diagnostic_default_config = {
     update_in_insert = true,
 }
 
+--
 vim.diagnostic.config(diagnostic_default_config)
 
 vim.g.rest_nvim = {

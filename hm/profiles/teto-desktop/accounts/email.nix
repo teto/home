@@ -101,8 +101,8 @@ let
     meli = {
       enable = true;
       settings = {
-        # toto = "tata";
         listing.index_style = "compact";
+        server_password_command = getPasswordCommand "perso/fastmail_mc_jmap";
       };
     };
 

@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   enable = true;
   # binds = {
@@ -11,31 +16,29 @@
   # shellInit
   # shellInitLast
   shellAbbrs = {
-      l = "less";
-      gco = "git checkout";
-      "-C" = {
-        position = "anywhere";
-        expansion = "--color";
-      };
+    l = "less";
+    gco = "git checkout";
+    "-C" = {
+      position = "anywhere";
+      expansion = "--color";
     };
-
-  shellAliases = {
-                 g = "git";
-                 "..." = "cd ../..";
   };
 
+  shellAliases = {
+    g = "git";
+    "..." = "cd ../..";
+  };
 
   completions = {
-                 my-prog = ''
-                   complete -c myprog -s o -l output
-                 '';
+    my-prog = ''
+      complete -c myprog -s o -l output
+    '';
 
-                 my-app = {
-                   body = ''
-                     complete -c myapp -s -v
-                   '';
-                 };
-               };
-
+    my-app = {
+      body = ''
+        complete -c myapp -s -v
+      '';
+    };
+  };
 
 }

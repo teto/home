@@ -300,21 +300,21 @@ in
   extraLuaConfig =
     # let
     # extraInitLuaPackages
-     # luaExtraPackages = config.programs.neovim.extraInitLuaPackages; 
+    # luaExtraPackages = config.programs.neovim.extraInitLuaPackages;
 
-     # 
-     # prependPath = map (x: "${x}") config.programs.neovim.extraInitLuaPackages;
+    #
+    # prependPath = map (x: "${x}") config.programs.neovim.extraInitLuaPackages;
 
-        # -- look at :h statusline to see the available 'items'
-        # -- let &titlestring=" %t %{len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) } - NVIM"
-  # in
+    # -- look at :h statusline to see the available 'items'
+    # -- let &titlestring=" %t %{len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) } - NVIM"
+    # in
     # lua
     lib.mkMerge [
       # -- testing order 700
-       # (lib.mkOrder 0 ''vim.env.PATH = "${lib.makeBinPath config.programs.neovim.extraInitLuaPackages}:"..vim.env.PATH'')
-      (lib.mkOrder 700 '' -- testing order 700 '')
-      (lib.mkAfter '' require('init-manual') '')
-  ];
+      # (lib.mkOrder 0 ''vim.env.PATH = "${lib.makeBinPath config.programs.neovim.extraInitLuaPackages}:"..vim.env.PATH'')
+      (lib.mkOrder 700 ''-- testing order 700 '')
+      (lib.mkAfter ''require('init-manual') '')
+    ];
 
   plugins = [
 

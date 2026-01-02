@@ -35,7 +35,7 @@ path = "/home/teto/neovim"
 
 "bufferline.nvim" = "4.9.1"
 auto-session = "2.5.1"
-"trouble.nvim" = "3.7.1"
+"trouble.nvim" = "scm"
 
 # remove now that it's nix installed
 "lualine.nvim" = "scm"
@@ -204,6 +204,10 @@ rev = "v18.3.0"
 [plugins."fzf-lua-frecency.nvim"]
 git = "elanmed/fzf-lua-frecency.nvim"
 rev = "4c37d8d967a51f718af5d9556b72f16c5185c05b"
+
+[plugins."tiny-inline-diagnostic.nvim"]
+git = "rachartier/tiny-inline-diagnostic.nvim"
+rev = "d9d12d4bfb9a4c5b8b8bdf7f612551df6972946c"
 # [plugins."jj.nvim"]
 # git = "nicolasgb/jj.nvim"
 # rev = "v0.1.0"
