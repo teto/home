@@ -41,6 +41,10 @@ in
   # set it as an activationscript
   config = lib.mkIf cfg.enable {
 
+    home.packages = [
+      pkgs.footswitch
+    ];
+
     # dont need sudo
     system.activationScripts.footswitch-configuration = ''
       PATH=$PATH:${

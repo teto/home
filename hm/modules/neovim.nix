@@ -120,7 +120,7 @@ let
       plugins = mkOption {
         # type = types.listOf types.package;
         default = [
-          (luaPlugin { plugin = vimPlugins.neorg-telescope; })
+          # (luaPlugin { plugin = vimPlugins.neorg-telescope; })
         ];
         description = "toto";
       };

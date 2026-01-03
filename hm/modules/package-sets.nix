@@ -26,6 +26,7 @@ in
       developer = mkEnableOption "Developer packages";
 
       kubernetes = mkEnableOption "Kubernetes packages";
+      subtitleUtils = mkEnableOption "Subtitle edition";
 
       scientificSoftware = mkEnableOption "Scientific packages";
 
@@ -80,6 +81,13 @@ in
       ];
     })
 
+    (mkIf cfg.subtitleUtils {
+      home.packages = [
+      # pgstosrt
+      # subtitleedit # for windows
+      # vobsub2srt
+    ];
+  })
     (mkIf cfg.jujutsu {
       home.packages =
         let

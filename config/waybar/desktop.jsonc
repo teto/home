@@ -26,5 +26,12 @@
 		// click-to-reveal
 		// TODO adjust
 		"hwmon-path": "/sys/class/hwmon/hwmon3/device/hwmon/hwmon3/temp1_input"
-	}
+	},
+    "custom/gpu-usage": {
+      "format": "{} {icon}", /* "{text} {icon}" for nightly users */
+      "exec": "gpu-usage-waybar",
+      "return-type": "json",
+      "format-icons": "󰾲",
+      "on-click": "kitty nvtop",
+    }
 }

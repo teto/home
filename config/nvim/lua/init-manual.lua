@@ -909,3 +909,4 @@ end, { desc = 'Go to file, create if missing' })
 -- vim.loader.enable() -- (optional) before the `bootstrap`s above, it could increase startuptime.
 
 require('teto.avante')
+require('plugins.neorg')

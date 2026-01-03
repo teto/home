@@ -39,7 +39,7 @@ end
 M.setup()
 M.setup_mappings()
 vim.api.nvim_create_user_command('Notes', function()
-    vim.cmd(':Neorg workspace notes')
+    vim.cmd('Neorg workspace notes')
 end, {
     desc = 'Opens my neorg notes.',
 })

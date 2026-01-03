@@ -73,9 +73,10 @@
     # mdp # markdown CLI presenter
     # gthumb # image manager, great to tag pictures
 
-    footswitch # to control foot pedals
+    # footswitch # to control foot pedals (use module instead)
     gnome-control-center
     gnome-maps
+    gpu-usage-waybar
     jaq # jq in rust
 
     lact # GPU controller, needs a daemon
@@ -84,7 +85,7 @@
     moor # test as pager
     presenterm # for presentations from terminal/markdown (in rust, supports images, pretty cool)
 
-    sioyek # pdf reader
+    # sioyek # pdf reader
     tailspin # (broken) a log viewer based on less ("spin" or "tsspin" is the executable)
     # tig
     wally-cli # to flash ergodox keyboards
@@ -97,9 +98,6 @@
     # vifm
     # anyrun
 
-    # pgstosrt
-    subtitleedit # for windows
-    vobsub2srt
 
     # bridge-utils# pour  brctl
   ];
