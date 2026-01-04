@@ -83,11 +83,11 @@ in
 
     (mkIf cfg.subtitleUtils {
       home.packages = [
-      # pgstosrt
-      # subtitleedit # for windows
-      # vobsub2srt
-    ];
-  })
+        # pgstosrt
+        # subtitleedit # for windows
+        # vobsub2srt
+      ];
+    })
     (mkIf cfg.jujutsu {
       home.packages =
         let
@@ -109,44 +109,45 @@ in
     })
 
     (mkIf cfg.llms {
-      home.packages = let
-        llama-custom = pkgs.llama-cpp;
-        # llama-custom =   
-        #     pkgs.llama-cpp.override {
-        #       cudaSupport = true;
-        #       blasSupport = false;
-        #       rocmSupport = false;
-        #       openclSupport = false;
-        #       # stdenv = prev.gcc11Stdenv;
-        #     };
-      in
+      home.packages =
+        let
+          llama-custom = pkgs.llama-cpp;
+          # llama-custom =
+          #     pkgs.llama-cpp.override {
+          #       cudaSupport = true;
+          #       blasSupport = false;
+          #       rocmSupport = false;
+          #       openclSupport = false;
+          #       # stdenv = prev.gcc11Stdenv;
+          #     };
+        in
         [
 
-        # these 2 are for claude's /sandbox mode
-        pkgs.socat
-        pkgs.bubblewrap
+          # these 2 are for claude's /sandbox mode
+          pkgs.socat
+          pkgs.bubblewrap
 
-        # pkgs.koboldcpp
-        llama-custom # for llama-server and benchmarks
-        # pkgs.llama-swap # allows to switch between models at runtime
-        pkgs.claude-code # anthropic agent
+          # pkgs.koboldcpp
+          llama-custom # for llama-server and benchmarks
+          # pkgs.llama-swap # allows to switch between models at runtime
+          pkgs.claude-code # anthropic agent
 
-        # libggml.so conflicts with llama-cpp's
-        # pkgs.whisper-cpp # to test with rikai.nvim and pushtotalk
+          # libggml.so conflicts with llama-cpp's
+          # pkgs.whisper-cpp # to test with rikai.nvim and pushtotalk
 
-        # open-webui # broken
-        # sillytavern
-        # python3Packages.unsloth # broken
+          # open-webui # broken
+          # sillytavern
+          # python3Packages.unsloth # broken
 
-        # pkgs.aider-chat # breaks
-        pkgs.python3Packages.huggingface-hub
+          # pkgs.aider-chat # breaks
+          pkgs.python3Packages.huggingface-hub
 
-        # a competitor of "safetensors_explorer"
-        pkgs.python3Packages.gguf
+          # a competitor of "safetensors_explorer"
+          pkgs.python3Packages.gguf
 
-        # pkgs.python3Packages.vllm
-        # pkgs.repomix # to upload a codebase to llm
-      ];
+          # pkgs.python3Packages.vllm
+          # pkgs.repomix # to upload a codebase to llm
+        ];
     })
 
     (mkIf cfg.desktop {

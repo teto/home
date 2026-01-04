@@ -1,5 +1,13 @@
-{ config, lib, ... }:
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+
+  shell = lib.mkForce pkgs.fish;
+
   extraGroups = [
     "vboxusers" # to avoid Kernel driver not accessible
     "video" # to control brightness

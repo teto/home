@@ -59,6 +59,7 @@ in
 
   home.shell = {
 
+    enableZshIntegration = true;
     enableFishIntegration = true;
   };
 

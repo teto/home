@@ -74,7 +74,7 @@ in
       };
 
       nix-community-builder = {
-      
+
         # https://nix-community.org/community-builders/
         # ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIElIQ54qAy7Dh63rBudYKdbzJHrrbrrMXLYl7Pkmk88H
         match = "user teto host ${secrets.jakku.hostname}";

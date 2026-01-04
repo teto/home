@@ -32,7 +32,6 @@ let
     pkgs.vimPlugins.neorg
     # pkgs.vimPlugins.vim-nixhash # :NixHash
     # TODO check that it brings xxd in scope
-    # pkgs.vimPlugins.hex-nvim
 
     # should bring in scope fzy
     # (luaPlugin { plugin = nvim-ufo; })

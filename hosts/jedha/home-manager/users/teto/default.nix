@@ -98,7 +98,6 @@
     # vifm
     # anyrun
 
-
     # bridge-utils# pour  brctl
   ];
 
