@@ -213,6 +213,10 @@ rev = "d9d12d4bfb9a4c5b8b8bdf7f612551df6972946c"
 # provides Jdiff
 git = "nicolasgb/jj.nvim"
 rev = "v0.1.0"
+
+[plugins."jujutsu.nvim"]
+git = "yannvanhalewyn/jujutsu.nvim"
+rev = "61239312730b3f51441596bdadab7e3578987592"
 #
 # [plugins."hunk.nvim"]
 # git = "julienvincent/hunk.nvim"

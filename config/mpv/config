@@ -1,6 +1,6 @@
 # Write your default config options here!
 #vg=opengl
-# osc=no
+osc=no
 term-status-msg="Time: ${time-pos}"
 
 # yes/always
@@ -12,3 +12,11 @@ force-window=%3%yes
 profile=%6%gpu-hq
 ytdl-format=%19%bestvideo+bestaudio
 
+# Enable secondary subtitles
+secondary-sid=auto
+
+# Or specify a specific track number
+# secondary-sid=2
+
+# Make sure they're visible
+secondary-sub-visibility=yes
