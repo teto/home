@@ -183,6 +183,7 @@ in
       set shiftwidth=4
       set expandtab
       set autoindent
+      set clipboard=unnamed
       filetype plugin indent on
 
       autocmd FileType tex setlocal shiftwidth=2 textwidth=79

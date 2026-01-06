@@ -223,7 +223,7 @@ in
           usbutils
           bandwhich # to monitor per app bandwidth
           desktop-file-utils # to get desktop
-          dogdns # dns solver "dog"
+          doggo # dns solver "dog"
           evince # succeed where zathura/mupdf fail
           font-manager # pretty good font manager
           adwaita-icon-theme # else nothing appears

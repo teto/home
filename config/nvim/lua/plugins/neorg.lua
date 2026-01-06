@@ -8,6 +8,7 @@ end
 
 function M.setup()
     require('neorg').setup({
+	 -- to work around nvim-treesitter fuckup
         load = {
             ['core.defaults'] = {}, -- Loads default behaviour
             ['core.keybinds'] = {

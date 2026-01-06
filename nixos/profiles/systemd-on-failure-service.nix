@@ -32,7 +32,7 @@
         # echo "Result: %i"
         SUBJECT=$1
         MSG=$2
-        printf "Subject: Test %i\n\nTest body\n" | ${pkgs.msmtp}/bin/msmtp -afastmail "${secrets.users.teto.email}"
+        printf "Subject: notify service result %i\n\nTest body\n" | ${pkgs.msmtp}/bin/msmtp -afastmail "${secrets.users.teto.email}"
       '';
     };
   };

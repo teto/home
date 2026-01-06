@@ -704,7 +704,8 @@ vim.api.nvim_set_keymap(
 vim.opt.cmdheight = 1
 
 -- for indentblankline
-require('plugins.nvim-treesitter-textobjects')
+--
+-- require('plugins.nvim-treesitter-textobjects')
 -- autoloaded
 -- require('plugins.nvim-treesitter')
 
@@ -910,3 +911,19 @@ end, { desc = 'Go to file, create if missing' })
 
 require('teto.avante')
 -- require('plugins.neorg')
+
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = { "norg", "neorg" },
+--   callback = function()
+--     if pcall(vim.treesitter.start) then
+--       vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+--       vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+--     end
+--   end,
+-- })
+--
+-- -- https://github.com/nvim-neorg/neorg/issues/1351
+-- -- https://github.com/nvim-neorg/neorg/issues/1342
+-- -- require('plugins.neorg')
+--
+--

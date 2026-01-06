@@ -59,11 +59,13 @@ in
 
   home.shell = {
 
+    enableBashIntegration = true;
     enableZshIntegration = true;
     enableFishIntegration = true;
   };
 
   home.shellAliases = {
+    n = "nix develop";
     lg = "lazygit";
     st = "systemctl-tui";
     v = "nvim";
