@@ -124,6 +124,7 @@
     # TODO create symlink ?
     IPYTHONDIR = "$XDG_CONFIG_HOME/ipython";
     JUPYTER_CONFIG_DIR = "$XDG_CONFIG_HOME/jupyter";
+    LLAMA_MODELS_DIR = "${config.home.homeDirectory}/llama-models";
 
     LLM_LOCAL_PORT = 11111;
 

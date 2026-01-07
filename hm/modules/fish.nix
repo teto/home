@@ -1,9 +1,23 @@
-# Manual fish configuration
-# This file is sourced by the Nix-generated fish config
-# Add your custom fish configuration here that you want to manage outside of Nix
+{ config, lib, pkgs, ... }:
+let
+   cfg = config.programs.fish;
+in {
+  options = {
+    programs.fish = {
+      enableVimMode = lib.mkEnableOption "vim mode";
+      # custom = lib.mkOption {
+      #   default = false;
+      #   type = lib.types.bool;
+      #   description = ''
+      #     Whether to enable Fish integration.
+      #   '';
+      # };
+    };
+  };
+  config = lib.mkIf cfg.enable {
 
-# Enable vim mode
-# fish_vi_key_bindings
+
+  programs.fish.interactiveShellInit = ''
 function fish_user_key_bindings
     # Execute this once per mode that emacs bindings should be used in
     fish_default_key_bindings -M insert
@@ -29,16 +43,6 @@ set fish_cursor_external line
 # The following variable can be used to configure cursor shape in
 # visual mode, but due to fish_cursor_default, is redundant here
 set fish_cursor_visual block
-
-# Example: Custom functions
-# function my_custom_function
-#     echo "Hello from manual.fish"
-# end
-
-# Example: Environment variables
-# set -gx MY_CUSTOM_VAR "value"
-
-# Example: Custom key bindings
-# bind \cf forward-char
-
-
+    '';
+  };
+}

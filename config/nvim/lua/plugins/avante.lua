@@ -14,7 +14,7 @@ local llama_hostname = 'jedha.local'
 
 local provider = 'claude'
 if vim.fn.hostname() == 'jedha' then
-    provider = 'llamacpp'
+    provider = 'llama_devstral'
 end
 
 local xdg_config = vim.env.XDG_CONFIG_HOME or os.getenv('HOME') .. '/.config'
@@ -94,23 +94,41 @@ require('avante').setup({
         -- api_key_name = 'cmd:cat /home/teto/.config/sops-nix/secrets/OPENAI_API_KEY_NOVA',
         -- },
 
-        -- see https://github.com/yetone/avante.nvim/issues/2238
-        llamacpp = {
-            __inherited_from = 'openai',
+
+
+		llama_devstral = {
+            __inherited_from = 'llamacpp',
+			-- hide_in_model_selector
             -- model = 'ministral3-3b-q4',
             model = 'devstral2-24b-iq2',
-            -- model = 'ministral3-14b'
-            -- model = "/home/teto/llama-models/mistral-7b-openorca.Q6_K.gguf",
             endpoint = 'http://' .. llama_hostname .. ':8080/v1',
             timeout = 30000, -- Timeout in milliseconds
-
             use_ReAct_prompt = false,
-            -- parse_curl_args
-
             -- tools send a shitton of tokens
             -- not supported by mistral (but inherited by others so...)
             disable_tools = false,
+            -- empty key is required else avante complains
+            api_key_name = '',
+            extra_request_body = {
+                max_tokens = 1000, -- to avoid infinite loops
+            },
+        },
 
+        -- see https://github.com/yetone/avante.nvim/issues/2238
+        llamacpp_from_openai = {
+            __inherited_from = 'openai',
+			-- hide_in_model_selector
+            -- model = 'ministral3-3b-q4',
+            model = 'devstral2-24b-iq2',
+            -- model = 'ministral3-14b'
+            endpoint = 'http://' .. llama_hostname .. ':8080/v1',
+            timeout = 30000, -- Timeout in milliseconds
+			-- list_models
+            use_ReAct_prompt = false,
+            -- parse_curl_args
+            -- tools send a shitton of tokens
+            -- not supported by mistral (but inherited by others so...)
+            disable_tools = false,
             -- empty key is required else avante complains
             api_key_name = '',
             extra_request_body = {

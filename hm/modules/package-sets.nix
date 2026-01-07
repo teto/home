@@ -385,6 +385,7 @@ in
           backblaze-b2-tetos
           dasht # ~ zeal but in terminal
           difftastic # smart diffs
+          luau # lua server
           lsof # to see open files
           docker-credential-helpers
           flakeSelf.inputs.starship-jj.packages.${system}.default # custom.jj for starship
@@ -398,13 +399,8 @@ in
           libossp_uuid # for the 'libuuid' executable
 
           # TODO pass to vim makeWrapperArgs
-          # nodePackages.bash-language-server
           # just in my branch :'(
-          # luaPackages.lua-lsp
-          # gdb-debug = prev.enableDebgging prev.gdb ;
-          # git-annex # fails on unstable
           # git-remote-hg
-          # nix-prefetch-scripts # broken
           manix # nix doc, might be outdated
           net-tools # for netstat
           nix-output-monitor # 'nom'
