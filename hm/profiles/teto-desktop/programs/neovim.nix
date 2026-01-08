@@ -7,7 +7,6 @@
 }:
 let
   inherit (lib)
-    genBlockLua
     luaPlugin
     ;
 
@@ -257,7 +256,6 @@ let
     marksman # markdown LSP server
 
     # for none-ls
-    nixfmt-rfc-style # -rfc-style #
     # nodePackages.prettier # for none-ls json formatting ?
     nodePackages.prettier
     python3Packages.flake8 # for nvim-lint and some nixpkgs linters

@@ -31,7 +31,7 @@ final: prev: {
         }).outPath;
       src = fetchzip {
         url = "https://lua.sqlite.org/home/zip/lsqlite3_v096.zip?uuid=v0.9.6";
-        sha256 = "060qmdngzmigk4zsjq573a59j7idajlzrj43xj9g7xyp1ps39bij";
+        sha256 = "0p24g17y6s0x1951y9pyndggp71drh4zrzb2a05nb9sk5s3z9dnm";
       };
 
       disabled = luaOlder "5.1" || luaAtLeast "5.5";

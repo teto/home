@@ -193,6 +193,7 @@ in
       postStart = ''
         echo 'on' > '/sys/bus/usb/devices/1-5.4/power/control';
         echo 'on' > '/sys/bus/usb/devices/1-9/power/control';
+        echo 'on' > '/sys/bus/usb/devices/1-6/power/control';
         echo 'enabled' > '/sys/class/net/wlp10s0/device/power/wakeup';
       '';
     };
@@ -211,5 +212,5 @@ in
   #
   # };
 
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
 }

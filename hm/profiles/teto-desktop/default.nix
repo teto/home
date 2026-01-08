@@ -25,6 +25,7 @@ in
     flakeSelf.homeProfiles.teto-zsh
     # flakeSelf.homeProfiles.yt-dlp
 
+    flakeSelf.homeModules.avante
     flakeSelf.homeModules.fzf
     flakeSelf.homeModules.yazi
     flakeSelf.homeModules.services-mujmap
@@ -93,7 +94,7 @@ in
   # https://github.com/davatorium/rofi/blob/next/doc/rofi-theme.5.markdown
   # @theme "gruvbox-light"
   home.file."${config.programs.rofi.configPath}".text = ''
-    ?import "${config.xdg.configHome}/rasi/manual.rasi"
+    ?import "${config.xdg.configHome}/rofi/manual.rasi"
 
     @import "${config.xdg.cacheHome}/wallust/colors.rasi"
 

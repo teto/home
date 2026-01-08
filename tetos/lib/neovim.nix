@@ -4,7 +4,7 @@ let
     -- ${title} {{{
     ${content}
     -- }}}
-  '';
+    '';
 in
 {
 

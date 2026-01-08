@@ -54,6 +54,7 @@
   # theme = "";
 
   # -drun-match-fields
+  # -plugin-path
   extraConfig = {
 
     # If you disable sorting and history is enabled, then the most used should show up more to the top.

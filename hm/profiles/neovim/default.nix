@@ -16,15 +16,15 @@ let
   luaRcBlocks = {
     appearance = ''
       -- draw a line on 80th column
-      vim.o.colorcolumn='80,100'
-    '';
+      vim.o.colorcolumn='80,100' 
+      '';
 
     # hi MsgSeparator ctermbg=black ctermfg=white
     # TODO equivalent of       set fillchars+=
     foldBlock = ''
       vim.o.fillchars='foldopen:▾,foldclose:▸,msgsep:‾'
       vim.o.foldcolumn='auto:2'
-    '';
+      '';
   };
 
   # pluginsMap = pkgs.callPackage ./plugins.nix { inherit flakeSelf lib; };

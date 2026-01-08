@@ -459,7 +459,6 @@ in
           # nix-doc # can generate tags for nix
           nix-update # nix-update <ATTR> to update a software
           # nix-top # (abandoned) to list current builds
-          nixfmt-rfc-style # the official one
           nixpkgs-review # to help review nix packages
           patchutils # for interdiff
           perf-tools # to interpret

@@ -77,7 +77,7 @@ in
 
         # https://nix-community.org/community-builders/
         # ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIElIQ54qAy7Dh63rBudYKdbzJHrrbrrMXLYl7Pkmk88H
-        match = "user teto host ${secrets.jakku.hostname}";
+        match = "user teto host nix-community";
         hostname = "build-box.nix-community.org";
         user = "teto";
         addKeysToAgent = "yes";
@@ -85,7 +85,6 @@ in
         # port = secrets.jakku.sshPort;
         identityFile = "${secretsFolder}/ssh/id_rsa";
         identitiesOnly = true;
-        # identityAgent =
         serverAliveCountMax = 3;
         sendEnv = [ "GITHUB_TOKEN" ];
       };
