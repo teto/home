@@ -21,5 +21,8 @@ in
     };
   };
   config = lib.mkIf cfg.enable {
+
+    programs.rofi.theme = "${config.xdg.cacheHome}/wallust/colors.rasi";
+
   };
 }

@@ -221,6 +221,8 @@ let
     # go # for gitlab.nvim, we can probably ditch it afterwards
     luajitPackages.luacheck
 
+    luau-lsp
+
     # luaformatter # broken
     # nvimLua.pkgs.luarocks # should be brought by rocks config
 

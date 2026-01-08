@@ -1,5 +1,7 @@
 vim.g.feed_debug = true
 
+-- Feed index
+-- `Feed =neovim +read`
 require('feed').setup({
     -- picker = "fzf-lua",
     progress = 'bar',

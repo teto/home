@@ -11,7 +11,6 @@
 let
   cfg = config.programs.fzf;
 
-  # fzf-git-sh = flakeSelf.inputs.fzf-git-sh;
   fzf-git-sh = pkgs.fzf-git-sh;
 
   # copied from hm/modules/programs/fzf.nix

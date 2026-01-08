@@ -143,9 +143,6 @@ vim.g.rest_nvim = {
 -- vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
 vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
--- TODO remove in favor of the generated one
--- vim.g.sqlite_clib_path = nix_deps.sqlite_clib_path
-
 -- set it before loading vim plugins like autosession
 -- ,localoptions
 vim.o.sessionoptions = 'buffers,curdir,help,tabpages,winsize,winpos,localoptions'
@@ -160,20 +157,14 @@ vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks.nvim')
 -- require("vim.lsp._watchfiles")._watchfunc = require("vim._watch").watch
 -- local ffi = require 'ffi'
 local custom_luarocks_config_filename = vim.fn.stdpath('config') .. '/luarocks-config-generated.lua'
--- print("Loading custom luarocks config from: "..custom_luarocks_config_filename)
 local luarocks_config_fn, errmsg = loadfile(custom_luarocks_config_filename)
 
 if luarocks_config_fn == nil then
     print('Could not load ' .. errmsg)
 end
 
--- function
--- print(tostring(luarocks_config_fn))
--- vim.print(tostring(luarocks_config_fn()))
 vim.g.rocks_nvim = {
-    -- TODO reference one from
-    -- use nix_deps.luarocks_executable
-    -- coming from nixpkgs
+    -- use nix_deps.luarocks_executable coming from nixpkgs
     -- TODO removing this generates errors at runtime :'(
     luarocks_binary = nix_deps.luarocks_executable,
     -- /home/teto/.local/share/nvim/rocks/luarocks-config.lua
@@ -257,24 +248,12 @@ vim.filetype.add({
 -- undocumented like --luamod-dev
 -- vim.g.__ts_debug = 10
 
--- vim.cmd([[packloadall ]])
--- HOW TO TEST our fork of plenary
--- vim.opt.rtp:prepend(os.getenv("HOME").."/neovim/plenary.nvim")
--- local reload = require'plenary.reload'
--- reload.reload_module('plenary')
--- require'plenary'
 vim.g.matchparen = 1
 vim.g.mousemoveevent = 1 -- must be setup before calling lazy
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 vim.opt.colorcolumn = { 100 }
-
--- lazy/config.lua sets vim.go.loadplugins = false so I used to run packloadall to restore those plugins
--- but there seems to be a bug somewhere as overriding VIMRUNTIME would then be dismissed and it would used
--- whatever VIMRUNTIME, even an old one ? so there is some cache invalidation issue somewhere ?
--- this is a quickfix that works around lazyplugins issue but I need to find the rootcause
--- vim.go.loadplugins = true
 
 -- main config {{{
 -- vim.opt.splitbelow = true	-- on horizontal splits
@@ -353,12 +332,12 @@ vim.opt.mouse = 'a'
 --[[
 Mouse configuration: 
 https://github.com/neovim/neovim/issues/14921
-
 ]]
---
 
+-- generated from luau via darklua
+-- require('teto.context_menu_generated').setup_rclick_menu_autocommands()
+-- require('teto.context_menu').setup_rclick_menu_autocommands()
 -- vim.api.nvim_set_keymap('n', '<F1>', '<Cmd>lua open_contextual_menu()<CR>', { noremap = true, silent = false })
-require('teto.context_menu').setup_rclick_menu_autocommands()
 
 -- MenuPopup
 vim.opt.signcolumn = 'auto:1-3'
@@ -417,10 +396,6 @@ vim.g.hoogle_fzf_cache_file = vim.fn.stdpath('cache') .. '/hoogle_cache.json'
 
 vim.opt.wildmenu = true
 -- vim.opt.omnifunc='v:lua.vim.lsp.omnifunc'
--- navic counts on documentSymbols
--- %=%m %f
-
--- sh -c "lua -e 'dofile [[%]] print(description.homepage)' | xdg-open"
 
 -- https://github.com/neovim/nvim-lspconfig/issues/3827
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -457,26 +432,6 @@ end
 -- f3 to show tree
 vim.keymap.set('n', '<Leader><Leader>', '<Cmd>b#<CR>')
 
--- Snippets are separated from the engine. Add this if you want them:
-
--- prefix commands :Files become :FzfFiles, etc.
-vim.g.fzf_command_prefix = 'Fzf'
--- disable statusline overwriting
-vim.g.fzf_nvim_statusline = 0
-
--- This is the default extra key bindings
-vim.g.fzf_action = { ['ctrl-t'] = 'tab split', ['ctrl-x'] = 'split', ['ctrl-v'] = 'vsplit' }
-vim.g.fzf_history_dir = vim.fn.stdpath('cache') .. '/fzf-history'
-vim.g.fzf_buffers_jump = 1
--- Empty value to disable preview window altogether
-vim.g.fzf_preview_window = 'right:30%'
-
--- Default fzf layout - down / up / left / right - window (nvim only)
--- vim.g.fzf_layout = { 'down': '~40%' }
-
--- For Commits and BCommits to customize the options used by 'git log':
-vim.g.fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
-
 -- TODO this should depend on theme ! computed via lush
 vim.api.nvim_create_autocmd('ColorScheme', {
     desc = 'Set italic codelens on new colorschemes',
@@ -512,18 +467,6 @@ vim.keymap.set('n', '<Leader>el', '<Cmd>e ' .. vim.fn.stdpath('config') .. '/lua
 vim.keymap.set('n', '<F6>', '<Cmd>ASToggle<CR>', { desc = 'Toggle autosave' })
 
 vim.g.autosave_disable_inside_paths = { vim.fn.stdpath('config') }
-
---  when launching term
---   tnoremap <Esc> <C-\><C-n>
-
--- This is the default extra key bindings
--- vim.g.fzf_action = { ['ctrl-t']: 'tab split', 'ctrl-x': 'split', 'ctrl-v': 'vsplit' }
-
--- Default fzf layout - down / up / left / right - window (nvim only)
-vim.g.fzf_layout = { ['down'] = '~40%' }
-
--- For Commits and BCommits to customize the options used by 'git log':
-vim.g.fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
 
 -- " auto reload vim config on save
 -- " Watch for changes to vimrc
@@ -587,10 +530,10 @@ vim.g.tex_flavor = 'latex'
 -- require('teto.treesitter')
 -- vim.lsp.set_log_level('DEBUG')
 vim.lsp.log.set_level(vim.lsp.log_levels.INFO)
+
 -- setup haskell-tools
 vim.g.haskell_tools = require('teto.haskell-tools').generate_settings()
 
--- vim.opt.background = 'light' -- or "light" for light mode
 vim.opt.showbreak = '↳ ' -- displayed in front of wrapped lines
 
 -- TODO add a command to select a ref  and call Gitsigns change_base afterwards
@@ -860,8 +803,6 @@ end, { buffer = false, desc = 'Diagnostics' })
 --     pattern = "*",
 --     callback = highlight_current_word,
 -- })
-
--- require('teto.lsp').ignore_simwork_extended_warnings()
 
 -- vim.g.tidal_ghci = "ghci"
 vim.g.tidal_target = 'terminal'

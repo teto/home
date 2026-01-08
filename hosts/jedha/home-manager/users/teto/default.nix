@@ -10,9 +10,9 @@
 {
 
   # disabled because fucks up with fish
-# bash: set: -g : option non valable
-# ++++ set -gx __DIRENV_INSTANT_ENV_FILE /home/teto/.cache/direnv-instant/6b72ed9c0367a2e2/env
-# bash: set: -g : option non valable
+  # bash: set: -g : option non valable
+  # ++++ set -gx __DIRENV_INSTANT_ENV_FILE /home/teto/.cache/direnv-instant/6b72ed9c0367a2e2/env
+  # bash: set: -g : option non valable
   programs.direnv-instant.enable = false;
 
   imports = [

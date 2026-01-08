@@ -218,12 +218,17 @@ in
     # alternative is "light"
     # "${mod}+ctrl+v" = "exec ${pkgs.bash}/bin/bash ~/vim-anywhere/bin/run";
 
+    # rofi accepts window cd as well
     "${mod}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'drun,window,ssh' -show drun\"";
     "${mod}+Ctrl+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'window' -show run\"";
     # TODO dwindow exclusively with WIN
 
     "${mad}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
     "${mad}+a" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
+    # "${mad}+Shift+a" = ''exec "${pkgs.rofi}/bin/rofi -modi 'keys' -show keys"'';
+    "${mad}+c" = ''exec "${pkgs.rofi}/bin/rofi -modi 'calc' -show calc"'';
+    # "${mad}+c" = "exec ${pkgs.rofi-calc}/bin/rofi-calc";
+    "${mad}+f" = ''exec "${pkgs.rofi}/bin/rofi -modi filebrowser -show filebrowser"'';
 
     # "${mad}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
 
@@ -231,7 +236,6 @@ in
 
     # broken
     # "${mod}+b" = "exec ${pkgs.buku_run}/bin/buku_run";
-    "${mad}+c" = "exec ${pkgs.rofi-calc}/bin/rofi-calc";
 
     "${mod}+Shift+1" = "exec qutebrowser";
 

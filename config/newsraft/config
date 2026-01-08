@@ -1,0 +1,5 @@
+# Newsraft configuration file
+
+# Open current entry in neovim
+bind e exec nvim "%l"
+

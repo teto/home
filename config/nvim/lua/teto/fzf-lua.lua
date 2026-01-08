@@ -117,7 +117,7 @@ function M.register_keymaps()
         fzf_lua.live_grep()
     end)
 
-	-- removed cos overrode marks.nvim
+    -- removed cos overrode marks.nvim
     -- vim.keymap.set('n', '<Leader>m', function()
     --     fzf_lua.menus()
     -- end, { desc = 'Fuzzy search menu entries' })

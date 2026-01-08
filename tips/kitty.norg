@@ -1,4 +1,9 @@
 
+* print in different font size
+
+printf "\e]66;s=2;Double sized text\a\n\n"
+
+
 * debug fonts
 
 https://sw.kovidgoyal.net/kitty/conf/#fonts
@@ -21,6 +26,7 @@ afficher les liens ctrl + shift + e
 
 
 kitty +kitten icat ~/Nextcloud/images/39950.png
+
 
 
 * Shell integration

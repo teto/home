@@ -104,12 +104,6 @@
 
     flake-utils.url = "github:numtide/flake-utils";
 
-    # in nixpkgs
-    # fzf-git-sh = {
-    #   url = "github:junegunn/fzf-git.sh";
-    #   flake = false;
-    # };
-
     git-repo-manager = {
       url = "github:hakoerber/git-repo-manager";
       inputs.nixpkgs.follows = "nixpkgs";

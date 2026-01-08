@@ -70,6 +70,8 @@ in
     st = "systemctl-tui";
     v = "nvim";
     y = "yazi";
+    js = "just switch";
+    j = "just";
 
     # trans aliases{{{
     fren = "trans -from fr -to en ";
@@ -86,6 +88,16 @@ in
     PASSWORD_STORE_ENABLE_EXTENSIONS = "true"; # it must be "true" and nothing else !
     PASSWORD_STORE_EXTENSIONS_DIR = "${dotfilesPath}/contrib/pass-extensions";
   };
+
+  # rofi module doesn't have extraConfig
+  # https://github.com/davatorium/rofi/blob/next/doc/rofi-theme.5.markdown
+  # @theme "gruvbox-light"
+  home.file."${config.programs.rofi.configPath}".text = ''
+    ?import "${config.xdg.configHome}/rasi/manual.rasi"
+
+    @import "${config.xdg.cacheHome}/wallust/colors.rasi"
+
+  '';
 
   package-sets = {
 

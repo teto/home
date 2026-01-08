@@ -94,11 +94,9 @@ require('avante').setup({
         -- api_key_name = 'cmd:cat /home/teto/.config/sops-nix/secrets/OPENAI_API_KEY_NOVA',
         -- },
 
-
-
-		llama_devstral = {
+        llama_devstral = {
             __inherited_from = 'llamacpp',
-			-- hide_in_model_selector
+            -- hide_in_model_selector
             -- model = 'ministral3-3b-q4',
             model = 'devstral2-24b-iq2',
             endpoint = 'http://' .. llama_hostname .. ':8080/v1',
@@ -117,13 +115,13 @@ require('avante').setup({
         -- see https://github.com/yetone/avante.nvim/issues/2238
         llamacpp_from_openai = {
             __inherited_from = 'openai',
-			-- hide_in_model_selector
+            -- hide_in_model_selector
             -- model = 'ministral3-3b-q4',
             model = 'devstral2-24b-iq2',
             -- model = 'ministral3-14b'
             endpoint = 'http://' .. llama_hostname .. ':8080/v1',
             timeout = 30000, -- Timeout in milliseconds
-			-- list_models
+            -- list_models
             use_ReAct_prompt = false,
             -- parse_curl_args
             -- tools send a shitton of tokens

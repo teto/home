@@ -1,2 +1,0 @@
--- TODO use lush.nvim to compute colors based on current colorscheme
--- it's freaking annoying when hl looks ugly because of colorscheme mismatch
