@@ -83,7 +83,7 @@ in
         addKeysToAgent = "yes";
         # le port depend du service
         # port = secrets.jakku.sshPort;
-        identityFile = "${secretsFolder}/ssh/id_rsa";
+        identityFile = "${secretsFolder}/ssh/nix-community-builder";
         identitiesOnly = true;
         serverAliveCountMax = 3;
         sendEnv = [ "GITHUB_TOKEN" ];

@@ -23,12 +23,11 @@ alias nhs912="nix develop \$HOME/home#nhs912"
 # }}}
 #
 
-alias yr="yazi ./result"
-
 # TODO should use all runners
 # alias nall='nix develop --option builders "$TETOS_0" -j0'
-alias j="just -g"
-alias jg="just -g "
+# alias j="just -g"
+# alias jg="just -g "
+# alias g="git"
 complete -F _complete_alias jg
 complete -F _complete_alias j
 
@@ -36,11 +35,9 @@ alias nr="nix run "
 alias nr1='nix run --option builders "$TETOS_0" -j0'
 alias nr2='nix run --option builders "$TETOS_1" -j0'
 alias nl="nix log "
-alias g="git"
-alias y=yazi
-alias js="just switch"
-alias jr="just build"
-alias jctl="journalctl -b0"
+# alias js="just switch"
+# alias jr="just build"
+# alias jctl="journalctl -b0"
 
 # git aliases
 alias gap="git add -p"

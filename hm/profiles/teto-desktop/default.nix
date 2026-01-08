@@ -71,8 +71,14 @@ in
     st = "systemctl-tui";
     v = "nvim";
     y = "yazi";
+    yr="yazi ./result";
+
     js = "just switch";
     j = "just";
+    jg="just -g ";
+
+    nr1=''nix run --option builders "$TETOS_0" -j0'';
+    nr2=''nix run --option builders "$TETOS_1" -j0'';
 
     # trans aliases{{{
     fren = "trans -from fr -to en ";
