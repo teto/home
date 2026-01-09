@@ -14,6 +14,15 @@ tty
   - Type=notify - Process sends readiness via sd_notify()
   - Type=dbus - Process registers a DBus name
 
+* some directives
+
+  | Directive | Stops together? | Starts together? | Failure propagates? |
+  |-----------|-----------------|------------------|---------------------|
+  | PartOf=   | ✓               | ✗                | ✗                   |
+  | BindsTo=  | ✓               | ✓                | ✓                   |
+  | Requires= | ✗               | ✓                | ✗                   |
+  | Wants=    | ✗               | ✓ (weak)         | ✗                   |
+
 * notify on failure
 
   Unit terminating by `@` => template.

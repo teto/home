@@ -132,4 +132,6 @@ in
     time = "fr_FR.utf8";
   };
 
+
+  # wayland.systemd.target = graphical-session.target
 }
