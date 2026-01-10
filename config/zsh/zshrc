@@ -2,13 +2,6 @@
 # TODO
 # https://unix.stackexchange.com/questions/74184/how-to-save-current-command-on-zsh
 
-# check we are on nixos
-#########################################
-# true if file exists, aka if we are on nixos
-# test ! -f /etc/NIXOS
-# ON_NIXOS=$?
-# prompt off
-
 
 # where was it bound ? native ? we need to remove it before sourcing jj.sh
 # that maps ^j^b
@@ -19,6 +12,7 @@ bindkey -r '^j'
 . "$ZDOTDIR/aliases.zsh"
 
 emulate sh -c "source $XDG_CONFIG_HOME/bash/aliases.sh"
+# source "fif"
 emulate sh -c "source $XDG_CONFIG_HOME/bash/fzf.sh"
 
 # to reload sessionVariables
@@ -27,9 +21,6 @@ source ~/.profile
 # zsh.enableSuggestions right handside color
 # see https://github.com/zsh-users/zsh-autosuggestions for suggestions
 # AUTOSUGGESTION_HIGHLIGHT_COLOR="fg=cyan"
-
-# TODO make it a function cat some.json | python -m json.tool
-
 
 setopt completealiases
 
@@ -311,7 +302,6 @@ SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)es (n)o 
 # this is superslow
 # compdef _gnu_generic qutebrowser
 # compdef _gnu_generic mptcpanalyzer
-# compdef _gnu_generic jcli
 
 
 # https://unix.stackexchange.com/questions/547/make-my-zsh-prompt-show-mode-in-vi-mode?noredirect=1&lq=1
@@ -360,21 +350,17 @@ function merge_hist() {
     builtin fc -W "$hist_file_merged"
 }
 
-autoload jk-env
-
-compdef _jk-env jk-env
-
 compdef _git gch
 
-compdef _pass pass-nova
 compdef _pass pass-pro
 compdef _pass pass-perso
 
-# devrait pas etre polutot dans bash ?
+# devrait pas etre plutot dans bash ?
+# ou contrib ?
 source $XDG_CONFIG_HOME/bash/jj.sh
 
 # Merge that shell history with current one
-fc -R -I "$hist_file_1"
+# fc -R -I "$hist_file_1"
 
 # mostly for mcp-hub
 # adding where "npm -g install" install packages

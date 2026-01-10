@@ -1,7 +1,13 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
-   cfg = config.programs.avante;
-in {
+  cfg = config.programs.avante;
+in
+{
   options = {
     programs.avante = {
       enable = lib.mkEnableOption "avante";
@@ -18,9 +24,9 @@ in {
 
     # wether to add to neovim or not
 
-    # programs.zsh.aliases 
-    home.shellAliases= {
-      avante=''nvim -c "lua vim.defer_fn(function()require(\"avante.api\").zen_mode()end, 100)"'';
+    # programs.zsh.aliases
+    home.shellAliases = {
+      avante = ''nvim -c "lua vim.defer_fn(function()require(\"avante.api\").zen_mode()end, 100)"'';
     };
 
   };

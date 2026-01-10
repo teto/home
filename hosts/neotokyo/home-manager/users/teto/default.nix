@@ -23,10 +23,6 @@ let
   banner = "You can start the nextcloud-add-user.service unit if teto user doesnt exist yet";
 in
 {
-  home.shellAliases = {
-    st = "systemctl-tui";
-    jctl = "journalctl -b0 -r";
-  };
 
   # only on login shell
   # initExtra => interactive shell
@@ -40,10 +36,18 @@ in
   imports = [
     flakeSelf.homeModules.teto-nogui
     flakeSelf.homeProfiles.bash
+    flakeSelf.homeProfiles.teto-aliases
     flakeSelf.homeProfiles.yt-dlp
   ];
 
   programs.yt-dlp.enable = true;
+
+  programs.neovim = {
+
+    enableFzfLua = true;
+    highlightOnYank = true;
+    enableMyDefaults = true;
+  };
 
   # todo set zsh as default
   programs.zsh = {

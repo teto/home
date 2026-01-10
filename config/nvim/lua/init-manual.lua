@@ -58,11 +58,14 @@ vim.g.rikai = {
     popup = {},
 }
 
+vim.o.spelllang = 'en_gb,fr'
+
 -- new option
 vim.o.winborder = 'rounded'
 vim.opt.guicursor =
     'n-v-c:block-blinkon250-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-blinkon250-Cursor/lCursor,r-cr:hor20-Cursor/lCursor'
 
+-- vim.opt.rtp:prepend('/home/teto/.local/share/nvim/rocks/rocks_rtp')
 -- that's where treesitter installs grammars
 -- vim.opt.rtp:prepend('/home/teto/parsers')
 
@@ -174,6 +177,9 @@ vim.g.rocks_nvim = {
 
     -- checkout constants.DEFAULT_DEV_SERVERS
     servers = { 'https://luarocks.org/manifests/neorocks/' },
+
+    auto_sync = 'disable',
+    update_remote_plugins = false,
 
     lazy = true, -- for cleaner logs
     -- rocks.nvim config
@@ -342,7 +348,9 @@ https://github.com/neovim/neovim/issues/14921
 -- MenuPopup
 vim.opt.signcolumn = 'auto:1-3'
 
---set shada=!,'50,<1000,s100,:0,n/home/teto/.cache/nvim/shada
+-- vim.g.grug_far = {startInInsertMode = false }
+
+-- --set shada=!,'50,<1000,s100,:0,n/home/teto/.cache/nvim/shada
 -- added 'n' to defaults to allow wrapping lines to overlap with numbers
 -- n => ? used for wrapped lines as well
 -- vim.opt.matchpairs+=<:>  -- Characters for which % should work
@@ -429,9 +437,6 @@ function string:endswith(ending)
     return ending == '' or self:sub(-#ending) == ending
 end
 
--- f3 to show tree
-vim.keymap.set('n', '<Leader><Leader>', '<Cmd>b#<CR>')
-
 -- TODO this should depend on theme ! computed via lush
 vim.api.nvim_create_autocmd('ColorScheme', {
     desc = 'Set italic codelens on new colorschemes',
@@ -454,7 +459,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
         --       \ highlight Comment gui=italic
         --       \ | highlight Search gui=underline
         --       \ | highlight MatchParen guibg=NONE guifg=NONE gui=underline
-        vim.cmd.packadd('gitsigns.nvim')
+        -- vim.cmd.packadd('gitsigns.nvim')
     end,
 })
 
@@ -528,7 +533,6 @@ vim.g.tex_flavor = 'latex'
 
 -- should not be required anymore since plugins/nvim-treesitter.lua is called
 -- require('teto.treesitter')
--- vim.lsp.set_log_level('DEBUG')
 vim.lsp.log.set_level(vim.lsp.log_levels.INFO)
 
 -- setup haskell-tools
@@ -852,6 +856,8 @@ end, { desc = 'Go to file, create if missing' })
 
 require('teto.avante')
 -- require('plugins.neorg')
+-- todo fix upgraded version
+-- require('plugins.image')
 
 -- vim.api.nvim_create_autocmd("FileType", {
 --   pattern = { "norg", "neorg" },

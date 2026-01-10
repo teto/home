@@ -40,7 +40,7 @@ in
     HISTTIMEFORMAT = "%d.%m.%y %T ";
     # CAREFUL
     # HISTFILE="$XDG_CACHE_HOME/bash_history";
-    CDPATH = "$HOME/neovim:$HOME/nova";
+    CDPATH = "$HOME/neovim";
   };
   historyFile = "${config.xdg.cacheHome}/bash_history";
 

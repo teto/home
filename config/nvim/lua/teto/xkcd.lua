@@ -8,7 +8,7 @@ local open_split_and_paste_image = function(s)
 
     -- TODO add this plugin
     require('image').from_url(s.img, { window = vim.api.nvim_get_current_win() }, function(image)
-        image:render({ x = 0, y = 4 })
+        image:render({ x = 0, y = 2 })
     end)
 end
 

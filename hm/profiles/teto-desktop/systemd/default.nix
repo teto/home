@@ -155,12 +155,11 @@
     };
   };
 
-
-  targets = {
+  user.targets = {
 
     # overriding the default of `Requires = [ "graphical-session-pre.target" ];`
     # seems like tray target never starts ?
-    tray.Unit.Requires = [];
+    tray.Unit.Requires = [ ];
 
   };
 

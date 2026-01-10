@@ -27,7 +27,7 @@ path = "/home/teto/neovim"
 "rocks-git.nvim"= "2.5.7"
 "rocks-config.nvim" = "3.1.2"
 # "diffview.nvim" = "scm"
-"haskell-tools.nvim" = "6.2.0"
+"haskell-tools.nvim" = "6.2.1"
 
 # needed the patch from https://github.com/nvimtools/none-ls.nvim/pull/277/
 "none-ls.nvim" = "scm"
@@ -49,7 +49,7 @@ auto-session = "2.5.1"
 "lsp_signature.nvim" = "0.3.1"
 friendly-snippets = "scm"
 # "haskell-snippets.nvim" = "1.4.4"
-"yazi.nvim" = "13.1.0"
+"yazi.nvim" = "13.1.3"
 # tree-sitter-org = "0.0.1"
 
 # "lspkind.nvim" = "scm"
@@ -69,17 +69,17 @@ friendly-snippets = "scm"
 vim-startuptime= "4.5.0"
 menu= "scm"
 # "snacks.nvim" = "2.6.0"
-fzf-lua = "0.0.2385"
+fzf-lua = "0.0.2410"
 # "lz.n" = "2.12.0"
 "indent-blankline.nvim" = "3.9.0"
 # "llm.nvim"= "scm"
 # volt is a UI library
 volt= "scm"
-"grug-far.nvim"= "1.6.56"
+"grug-far.nvim"= "1.6.58"
 # orgmode = "0.7.1"
 # neogit = "2.0.0"
 # "diffview.nvim" = "scm"
-"gitsigns.nvim"= "1.0.2"
+"gitsigns.nvim"= "2.0.0"
 "feed.nvim" = "2.19.2"
 # "typescript-tools.nvim" = "scm"
 
@@ -91,6 +91,10 @@ tree-sitter-haskell = "0.0.38"
 tree-sitter-html = "0.0.40"
 tree-sitter-xml = "0.0.42"
 tree-sitter-norg = "0.2.6"
+magick = "1.6.0"
+# "image.nvim" = "1.3.0"
+"snacks.nvim" = "2.30.0"
+"telescope.nvim" = "0.1.6"
 # nvim-treesitter-textobjects = "scm"
 # "rocks-treesitter.nvim" = "1.0.3"
 
@@ -104,8 +108,8 @@ tree-sitter-norg = "0.2.6"
 # version = "scm"
 # cmd = "ASToggle" # optional for lazy loading on command
 
-# [plugins.neorg]
-# version = "9.3.0"
+[plugins.neorg]
+version = "9.3.0"
 
 
 [plugins."rikai.nvim"]
@@ -126,10 +130,6 @@ dev = true
 [plugins."none-ls-luacheck.nvim"]
 git = "gbprod/none-ls-luacheck.nvim"
 rev = "v0.0.1"
-
-# [plugins."none-ls-shellcheck.nvim"]
-# git = "gbprod/none-ls-shellcheck.nvim"
-# rev = "0f84461241e76e376a95fb7391deac82dc3efdbf"
 
 [plugins."better-digraphs.nvim"]
 git = "protex/better-digraphs.nvim"
@@ -198,7 +198,7 @@ rev = "fa4673e181e18fd1719ae17a1d4f4ecce2de37aa"
 
 [plugins."codecompanion.nvim"]
 git = "olimorris/codecompanion.nvim"
-rev = "v18.3.0"
+rev = "v18.4.0"
 
 [plugins."fzf-lua-frecency.nvim"]
 git = "elanmed/fzf-lua-frecency.nvim"
@@ -209,9 +209,8 @@ git = "rachartier/tiny-inline-diagnostic.nvim"
 rev = "d9d12d4bfb9a4c5b8b8bdf7f612551df6972946c"
 
 [plugins."jj.nvim"]
-# provides Jdiff
 git = "nicolasgb/jj.nvim"
-rev = "v0.1.0"
+rev = "v0.3.0"
 
 [plugins."jujutsu.nvim"]
 git = "yannvanhalewyn/jujutsu.nvim"

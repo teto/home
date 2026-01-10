@@ -17,14 +17,14 @@ let
     appearance = ''
       -- draw a line on 80th column
       vim.o.colorcolumn='80,100' 
-      '';
+    '';
 
     # hi MsgSeparator ctermbg=black ctermfg=white
     # TODO equivalent of       set fillchars+=
     foldBlock = ''
       vim.o.fillchars='foldopen:▾,foldclose:▸,msgsep:‾'
       vim.o.foldcolumn='auto:2'
-      '';
+    '';
   };
 
   # pluginsMap = pkgs.callPackage ./plugins.nix { inherit flakeSelf lib; };
@@ -46,7 +46,6 @@ let
     highlight-undo-nvim
     lualine-nvim
 
-    (luaPlugin { plugin = fzf-lua; })
     (luaPlugin {
       plugin = oil-nvim;
       config = ''
@@ -174,20 +173,18 @@ in
       + (lib.strings.concatStrings (lib.mapAttrsToList genBlockLua luaRcBlocks))
       + ''
         vim.opt.number = true
+
+        vim.opt.autoindent = true
+        vim.opt.expandtab = true
         vim.opt.relativenumber = true
+        vim.opt.clipboard='unnamedplus'
+
         vim.keymap.set('n', '<Leader><Leader>', '<Cmd>b#<CR>', { desc = 'Focus alternate buffer' })
       ''
     );
 
     extraConfig = ''
-      set shiftwidth=4
-      set expandtab
-      set autoindent
-      set clipboard=unnamed
       filetype plugin indent on
-
-      autocmd FileType tex setlocal shiftwidth=2 textwidth=79
-      autocmd FileType nix setlocal shiftwidth=2
     '';
 
     extraPackages = [ ];

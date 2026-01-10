@@ -16,10 +16,9 @@ if vim.fn.hostname() == 'jedha' then
     provider = 'llamacpp'
 end
 
-
 local xdg_config = vim.env.XDG_CONFIG_HOME or os.getenv('HOME') .. '/.config'
 
-local default_model = "mistral-7b"
+local default_model = 'mistral-7b'
 
 -- TODO load configuration from llm-providers.json
 -- lua vim.json.decode(str, opts)
@@ -96,12 +95,12 @@ require('avante').setup({
         -- api_key_name = 'cmd:cat /home/teto/.config/sops-nix/secrets/OPENAI_API_KEY_NOVA',
         -- },
 
-		llamacpp = {
+        llamacpp = {
             -- __inherited_from = 'llamacpp',
             -- hide_in_model_selector
             -- model = 'ministral3-3b-q4',
-			-- model = "ministral3-14b",
-			model = "mistral-7b",
+            -- model = "ministral3-14b",
+            model = 'mistral-7b',
             -- model = 'devstral2-24b-iq2',
             endpoint = 'http://' .. llama_hostname .. ':8080/v1',
             timeout = 30000, -- Timeout in milliseconds

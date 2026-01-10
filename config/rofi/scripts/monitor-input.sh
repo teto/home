@@ -25,35 +25,35 @@ select_monitor() {
     # current focused output
     CURRENT_CONNECTOR=$(swaymsg -t get_outputs | jq -r '.[] | select(.focused==true).name')
   fi
-  
+
   # print info on each monitor
   for i in ${!DDC_I2C_BUSES[@]}; do
     id=${DDC_I2C_BUSES[$i]}
-    
+
     capabilities=$(ddcutil capabilities -b "$id" -t)
     model="Unknown model"
     # parse the model out of the capabilities string
     if [[ $capabilities =~ $MONITOR_MODEL_RE ]]; then
       model=${BASH_REMATCH[1]}
     fi
-    
+
     # DRM connector
     connector="Unknown connector"
     connector_path=$(find /sys/class/drm/*/ -maxdepth 1 -name "i2c-$id")
     if [ -n "$connector_path" ]; then
       connector=$(basename "$(dirname "$connector_path")" | sed 's/card1-//')
     fi
-    
+
     echo -en "$model ($connector)\0meta\x1f$id\x1finfo\x1f$id"
-    
+
     # activate the current focused display row
     if [ "$CURRENT_CONNECTOR" = "$connector" ]; then
       echo -en "\x1factive\x1ftrue"
     fi
-    
+
     echo
   done
-  
+
   echo -e "\0prompt\x1fSelect monitor"
   echo -e "\0no-custom\x1ftrue"
 }
@@ -69,9 +69,9 @@ select_input() {
     if [[ $active_input_source_raw =~ $INPUT_SOURCE_VCP_RE ]]; then
       active_input_source=${BASH_REMATCH[1]}
     fi
-                          
+
     for source_id in ${source_ids[@]}; do
-      source_name=${INPUT_SOURCE_NAMES[$((16#$source_id))]};
+      source_name=${INPUT_SOURCE_NAMES[$((16#$source_id))]}
       echo -en "$source_name\0meta\x1f$source_id\x1finfo\x1f$source_id"
 
       # activate the current input source row
@@ -101,5 +101,5 @@ elif [ -n "$ROFI_DATA" ]; then
   # monitor id, input id
   set_input $ROFI_DATA $ROFI_INFO
 else
-  select_input $ROFI_INFO     
+  select_input $ROFI_INFO
 fi

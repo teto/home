@@ -32,4 +32,35 @@ function M.apply_function_to_selection(func)
     vim.api.nvim_buf_set_lines(bufnr, start_line, end_line + 1, false, processed_lines)
 end
 
+function M.print_large_toto()
+    -- Kitty font size protocol using OSC 50
+    -- Set font size to 3x (300%)
+    io.write('\027]50;size=300\027\\')
+    print('toto')
+    -- Reset font size to normal (100%)
+    io.write('\027]50;size=100\027\\')
+    io.flush()
+    -- local k = vim.keycode
+    -- vim.g.mapleader = k'<bs>'
+end
+
+-- use altfont
+function M.show_line_large(line_nr)
+    local line = vim.api.nvim_buf_get_lines(0, line_nr - 1, line_nr, false)[1]
+    local buf = vim.api.nvim_create_buf(false, true)
+    vim.api.nvim_buf_set_lines(buf, 0, -1, false, { line })
+
+    local width = math.min(#line + 4, vim.o.columns - 10)
+    local height = 3
+
+    vim.api.nvim_open_win(buf, false, {
+        relative = 'cursor',
+        width = width,
+        height = height,
+        row = 1,
+        col = 0,
+        style = 'minimal',
+        border = 'rounded',
+    })
+end
 return M

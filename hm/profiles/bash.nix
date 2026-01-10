@@ -33,12 +33,6 @@
 
       nix-stray-roots = ''nix-store --gc --print-roots | egrep -v "^(/nix/var|/proc|/run/\w+-system|\{memory)" | less'';
 
-      v = "nvim";
-      c = "cat";
-      y = "yazi";
-
-      n = "nix develop";
-
       # ls aliases {{{
       ld = "eza -lD";
       lf = "eza -lF --color=always | grep -v /";
@@ -57,23 +51,6 @@
       dmesg = "dmesg --color=always|less";
 
       netstat_tcp = "netstat -ltnp";
-
-      # git variables {{{
-      gl = "git log";
-      gs = "git status";
-      gd = "git diff";
-      ga = "git add";
-      gc = "git commit";
-      gcm = "git commit -m";
-      gca = "git commit -a";
-      gb = "git branch";
-      gch = "git checkout";
-      grv = "git remote -v";
-      gpu = "git pull";
-      gcl = "git clone";
-      # gta="git tag -a -m";
-      gbr = "git branch";
-      # }}}
 
       # kitty
       kcat = "kitty +kitten icat";

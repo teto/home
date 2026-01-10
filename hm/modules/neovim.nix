@@ -28,7 +28,7 @@ let
     # pkgs.vimPlugins.blink-cmp-git # autocomplete github issues/PRs
   ];
 
-  orgmodePlugins = with pkgs.vimPlugins; [
+  orgmodePlugins = [
     # TODO add     'mrshmllow/orgmode-babel.nvim',
 
     # (luaPlugin {
@@ -175,6 +175,9 @@ in
 
       enableMyDefaults = mkEnableOption "my favorite defaults";
 
+      enableFzfLua = mkEnableOption "fzf-lua" // {
+        default = true;
+      };
       enableBlink = mkEnableOption "blink-cmp autocompletion";
 
       enableRocks = mkEnableOption "The awesome rocks-nvim plugin manager";
@@ -262,6 +265,17 @@ in
   };
 
   config = lib.mkMerge [
+    (mkIf cfg.enableFzfLua {
+      programs.neovim.plugins = [
+        (luaPlugin { plugin = pkgs.vimPlugins.fzf-lua; })
+
+      ];
+
+      programs.neovim.extraLuaConfig = ''
+        require('fzf-lua').setup({})
+      '';
+    })
+
     # TODO add orgmode-babel and emacs to neovim
     (mkIf cfg.highlightOnYank {
 
@@ -276,6 +290,8 @@ in
       '';
     })
     (mkIf cfg.enableMyDefaults {
+      # programs.neovim.plugins = blinkPlugins;
+
       programs.neovim.extraLuaConfig = ''
         vim.opt.title = true -- vim will change terminal title
         vim.opt.titlestring = "%{getpid().':'.getcwd()}"
@@ -294,11 +310,28 @@ in
     (mkIf cfg.enableRocks {
       programs.neovim.plugins = [
         pkgs.vimPlugins.rocks-nvim
-        pkgs.vimPlugins.rocks-config
-        pkgs.vimPlugins.rocks-git
-        pkgs.vimPlugins.rocks-dev
+        pkgs.vimPlugins.rocks-config-nvim
+        # pkgs.vimPlugins.rocks-dev-nvim
+        # pkgs.vimPlugins.rocks-git-nvim # has no vimPlugins equivalent !
       ];
+
+      # TODO add  vim.g.rocks
+      #         luaInterpreter = pkgs.lua51Packages.lua;
+      # "${luaInterpreter.pkgs.luarocks_bootstrap}/bin/luarocks"
+
+      programs.neovim.extraLuaConfig =
+        let
+          luaInterpreter = pkgs.lua51Packages.lua;
+        in
+        ''
+          vim.g.rocks_nvim = {
+              -- use nix_deps.luarocks_executable coming from nixpkgs
+              -- TODO removing this generates errors at runtime :'(
+              luarocks_binary = "${luaInterpreter.pkgs.luarocks_bootstrap}/bin/luarocks"
+          }
+        '';
     })
+
     # (mkIf cfg.orgmode.enable { programs.neovim.plugins = cfg.orgmode.plugins; })
 
     (mkIf cfg.neorg.enable { programs.neovim.plugins = cfg.neorg.plugins; })

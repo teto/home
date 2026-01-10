@@ -317,6 +317,8 @@ in
     ];
 
   plugins = [
+    # Install with rocks else there is a problem
+    # { plugin = vimPlugins.image-nvim; }
 
     # TODO replaced with https://github.com/yutkat/git-rebase-auto-diff.nvim
     # {
@@ -383,6 +385,10 @@ in
 
   withNodeJs = true; # for tests
 
+  enableRocks = true;
+  highlightOnYank = true;
+  enableFzfLua = true;
+
   # HACK till we fix it
   # or else we need a vim.g.sqlite_clib_path
   extraLuaPackages = lp: [
@@ -412,6 +418,11 @@ in
 
   # attempt
   extraInitLuaPackages = config.programs.neovim.extraPackages;
+
+  # just to test viml nixpkgs example
+  # extraConfig = ''
+  #   let g:grug_far = { 'startInInsertMode': v:false }
+  # '';
 
   extraPackages =
     extraPackages

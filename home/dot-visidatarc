@@ -1,7 +1,7 @@
 # symlink to ~/.visidatarc
 # disp_column_sep
-bindkey('0', 'go-leftmost')   # alias '0' to go to first column, like vim
 options.csv_delimiter = '|'
 options.delimiter = '|'
+options.csv_lineterminator = '\n'
 # disp_column_sep
 

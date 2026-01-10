@@ -4,6 +4,12 @@
   pkgs,
   ...
 }:
+# TODO
+# -restore fancy-ctrl-z from zsh
+# -equivalent of zbell with done. Ideally notify differently for some commands
+# (email ? sound ?)
+# alias -s git="git clone"
+# - rfw
 {
   enable = true;
   # binds = {
@@ -26,6 +32,22 @@
 
   #
   functions = {
+
+    # a way to implement the equivalent of `alias -s git`.
+    # might be easier to create the file myself
+    fish_command_not_found = ''
+      set -l cmd $argv[1]
+
+      # Check if the command ends with .git
+      if string match -qr '\.git$' -- $cmd
+          git clone $cmd
+          return 0
+      end
+
+      # Otherwise, show the default error
+      echo "fish: Unknown command '$cmd'"
+      return 127
+    '';
 
   };
 

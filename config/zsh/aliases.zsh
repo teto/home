@@ -7,7 +7,6 @@
 # todo find a better option relying on xdg-open etc...
 alias -s html=qutebrowser
 alias -s json=nvim
-alias -s Vagrantfile=nvim
 alias -s png=sxiv
 alias -s jpg=xdg-open
 alias -s gif=xdg-open
@@ -25,12 +24,6 @@ alias nd="nix develop"
 alias weather="curl v2.wttr.in"
 
 # alias preview="fzf --preview 'bat --color \"always\" {}'"
-# alias notif-center='kill -s USR1 $(pidof deadd-notification-center)'
-
-# Gestion du 'ls' : couleur & ne touche pas aux accents
-# alias ls='ls --classify --tabsize=0 --literal --color=auto --show-control-chars --human-readable'
-# vim: set et fenc=utf-8 ff=unix sts=0 sw=4 ts=4 fdm=marker :
-# TODO move to home-manager ?
 
 rfw(){
     readlink -f $(which "$1")
@@ -43,15 +36,6 @@ rfw(){
 # see https://nixos.wiki/wiki/Linux_Kernel for xconfig example
 
 alias nvim-dev="nix develop --override-input nixpkgs /home/teto/nixpkgs --no-write-lock-file ./contrib#neovim-developer  --show-trace"
-# alias notif-center='kill -s USR1 $(pidof deadd-notification-center)'
-# --option extra-sandbox-paths "/bin/sh=$(readlink -f $(which bash))"
-# alias local-rebuild="nixos-rebuild --flake ~/home --override-input nixpkgs-teto /home/teto/nixpkgs --override-input hm /home/teto/hm --override-input nova /home/teto/nova/doctor --override-input mptcp-flake /home/teto/mptcp/mptcp-flake --no-write-lock-file switch --show-trace --use-remote-sudo"
-
-# Gitops quick
-# TODO check return type in bw unlock --check 
-# alias bn='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && nix develop'
-# alias bnr='if [ -z ${BW_SESSION} ]; then export BW_SESSION=$(bw unlock --raw); fi && nix develop --option builders "$NOVA_OVH1"'
-alias nfs='nix flake show'
 
 
 # https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz
@@ -63,7 +47,7 @@ function fzd {
   git diff --name-only $@ | fzf -m --ansi --preview "$preview"
 }
 
-# to run
+# to run move to bash
 function nvimdev {
     folder="$1"
     shift
@@ -79,20 +63,13 @@ function nvimdev {
 
 
 # autres players a tester eventuellement
-# alias n="ncmpcpp"
-function n {
-    if [ -f "./contrib/flake.nix" ];
-    then 
-        nix develop ./contrib
-    else 
-        nix develop "$@"
-    fi
-}
-# alias lens="sudo rm -rf /home/teto/.config/Lens/extensions && lens"
-# alias ff="find . -iname" # use fd instead
-function latest {
-    # shellcheck disable=SC2012
-    eza --sort newest "$@"
-}
+# function n {
+#     if [ -f "./contrib/flake.nix" ];
+#     then 
+#         nix develop ./contrib
+#     else 
+#         nix develop "$@"
+#     fi
+# }
 
 #}}}

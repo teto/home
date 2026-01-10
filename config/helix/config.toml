@@ -1,3 +1,30 @@
+# https://docs.helix-editor.com/editor.html
+theme = "rose_pine"
+[editor]
+end-of-line-diagnostics = "disable"
+true-color = true
+cursorline = true
+rulers = [80, 120]
+path-completion = true
+inline-diagnostics.cursor-line = "disable"
+inline-diagnostics.other-lines = "disable"
+trim-trailing-whitespace = true
+gutters = ["diagnostics", "diff"]
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "block"
+
+[editor.soft-wrap]
+enable = true
+
+[editor.auto-save]
+focus-lost = true
+
+[editor.statusline]
+right = ["diagnostics", "position", "file-encoding"]
+
+# https://www.reddit.com/r/HelixEditor/comments/1q7c06j/comment/nyelv91/
   [keys.normal]
   # Change file picker from Space+f to Ctrl+p
   C-p = "file_picker"
@@ -18,3 +45,8 @@
  #  [keys.normal.space]
  #  f = "file_picker"                # Space+f (default)
  #  b = "buffer_picker"              # Space+b (default)
+
+
+[editor.file-picker]
+hidden = false
+git-ignore = true

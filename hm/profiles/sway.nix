@@ -17,6 +17,8 @@ let
 
   rofi = pkgs.rofi-teto; # rofi-wayland;
   sharedConfig = pkgs.callPackage ./wm-config.nix { };
+
+  startNvimNotes = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command 'kitty nvim +Notes'  '';
 in
 {
 
@@ -210,8 +212,9 @@ in
 
           # kitty nvim -c ":Neorg workspace notes"
           # Notes is a custom command
-          "${mod}+F1" =
-            ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command 'kitty nvim +Notes'  '';
+          "${mod}+F1" = startNvimNotes;
+
+          "${mad}+o" = startNvimNotes;
 
           # replace by rmcp
           "${mod}+F2" =

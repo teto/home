@@ -15,6 +15,10 @@
   home-manager.useUserPackages = true;
   # disables the Home Manager option nixpkgs.*
   home-manager.useGlobalPkgs = true;
+  
+  # from PR https://github.com/nix-community/home-manager/pull/6981
+  # home-manager.useUserService = true;
+
 
   # shall we import all modules ?
   home-manager.sharedModules = [
