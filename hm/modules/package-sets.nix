@@ -123,14 +123,11 @@ in
         in
         [
 
-          # these 2 are for claude's /sandbox mode
-          pkgs.socat
-          pkgs.bubblewrap
-
           # pkgs.koboldcpp
           llama-custom # for llama-server and benchmarks
           # pkgs.llama-swap # allows to switch between models at runtime
           pkgs.claude-code # anthropic agent
+          pkgs.mistral-vibe # anthropic agent
 
           # libggml.so conflicts with llama-cpp's
           # pkgs.whisper-cpp # to test with rikai.nvim and pushtotalk

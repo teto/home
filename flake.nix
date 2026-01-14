@@ -432,6 +432,7 @@
                   "Oracle_VirtualBox_Extension_Pack"
                   "codeium"
                   "claude-code"
+                  "mistral-vibe"
 
                   # cuda stuff, mostly for local-ai
                   # "cuda_cudart"

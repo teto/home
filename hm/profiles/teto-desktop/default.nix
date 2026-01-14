@@ -66,7 +66,6 @@ in
   };
 
   home.shellAliases = {
-    n = "nix develop";
     lg = "lazygit";
     st = "systemctl-tui";
     v = "nvim";
@@ -77,8 +76,11 @@ in
     j = "just";
     jg = "just -g ";
 
-    nr1 = ''nix run --option builders "$TETOS_0" -j0'';
-    nr2 = ''nix run --option builders "$TETOS_1" -j0'';
+    n = "nix develop";
+    n1 = ''nix develop --option builders "$TETOS_0" -j0'';
+    n2 = ''nix develop --option builders "$TETOS_1" -j0'';
+    nr1=''nix run --option builders "$TETOS_0" -j0'';
+    nr2=''nix run --option builders "$TETOS_1" -j0'';
 
     # trans aliases{{{
     fren = "trans -from fr -to en ";
@@ -94,6 +96,14 @@ in
     # might be a hack
     PASSWORD_STORE_ENABLE_EXTENSIONS = "true"; # it must be "true" and nothing else !
     PASSWORD_STORE_EXTENSIONS_DIR = "${dotfilesPath}/contrib/pass-extensions";
+  };
+
+  home.sessionSearchVariables = {
+
+    PATH=[ 
+      "$HOME/.cargo/bin"
+      "$HOME/.cache/npm-packages/bin"
+    ];
   };
 
   # rofi module doesn't have extraConfig
