@@ -28,9 +28,9 @@
     NOTMUCH_CONFIG = "${config.xdg.configHome}/notmuch/default/config"; # for vdirsyncer
   };
 
-  user.packages = [
-    pkgs.waybar
-  ];
+  # user.packages = [
+  #   pkgs.waybar
+  # ];
 
   # TODO conditionnally define it
   # lib.mkIf config.mujmap-fastmail.enable

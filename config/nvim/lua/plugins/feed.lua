@@ -4,6 +4,10 @@ vim.g.feed_debug = true
 -- `Feed =neovim +read`
 require('feed').setup({
     -- picker = "fzf-lua",
+	search = {
+	 -- :h feed-search +unread
+	 default_query = "@2-weeks-ago ";
+	},
     progress = 'bar',
     feeds = {
         -- These two styles both work

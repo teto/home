@@ -150,20 +150,27 @@ in
     (mkIf cfg.desktop {
 
       home.packages =
-        with pkgs;
         let
 
           # for 'convert' executable. Can convert PDF too
           myImagemagick = pkgs.imagemagick.override ({ ghostscriptSupport = true; });
+          # emmylua-ls = flakeSelf.inputs.emmylua.packages.${system}.emmylua_ls; # lua LSP written in rust
+          # emmylua-check = flakeSelf.inputs.emmylua.packages.${system}.emmylua_check # lua LSP written in rust
+          inherit (pkgs) 
+            emmylua-ls
+            emmylua-check;
+
         in
-        [
+        with pkgs; [
+          emmylua-ls
+          emmylua-check
           pkgs.brightnessctl # attempt to draw a bigger cursor pointer in sway
 
           pkgs.phinger-cursors # attempt to draw a bigger cursor pointer in sway
 
           pkgs.ffmpeg # to transcribe audio
 
-          acpi # for acpi -V
+          pkgs.acpi # for acpi -V
           pkgs.ani-cli # to watch anime
 
           # anki          # spaced repetition system
@@ -194,8 +201,6 @@ in
           # newsboat #
           # mujmap # to sync notmuch tags across jmap
           pkgs.vlc
-          flakeSelf.inputs.emmylua.packages.${system}.emmylua_ls # lua LSP written in rust
-          flakeSelf.inputs.emmylua.packages.${system}.emmylua_check # lua LSP written in rust
           # element-desktop # TODO this should go into nix profile install
           # mcomix # manga reader
           # TODO
