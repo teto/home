@@ -235,7 +235,7 @@ in
         default = {
           enable = true;
         };
-        description = ''Treesitters settings.'';
+        description = "Treesitters settings.";
       };
 
       teal = mkOption {
@@ -243,7 +243,7 @@ in
         default = {
           enable = false;
         };
-        description = ''Enable support for teal language.'';
+        description = "Enable support for teal language.";
       };
 
       fennel = mkOption {
@@ -251,7 +251,7 @@ in
         default = {
           enable = false;
         };
-        description = ''Enable support for fennel language.'';
+        description = "Enable support for fennel language.";
       };
 
       # snippet = mkOption {

@@ -156,12 +156,14 @@ in
           myImagemagick = pkgs.imagemagick.override ({ ghostscriptSupport = true; });
           # emmylua-ls = flakeSelf.inputs.emmylua.packages.${system}.emmylua_ls; # lua LSP written in rust
           # emmylua-check = flakeSelf.inputs.emmylua.packages.${system}.emmylua_check # lua LSP written in rust
-          inherit (pkgs) 
+          inherit (pkgs)
             emmylua-ls
-            emmylua-check;
+            emmylua-check
+            ;
 
         in
-        with pkgs; [
+        with pkgs;
+        [
           emmylua-ls
           emmylua-check
           pkgs.brightnessctl # attempt to draw a bigger cursor pointer in sway
@@ -627,6 +629,13 @@ in
           # capable to display 2 subtitles at same time
           # like mpv but with a lsit of subtitles
           memento-with-ocr = memento.override ({ withOcr = true; });
+          # sudachi-rs # a japanese tokenizer (can have sudachidict builtins)
+
+          sudachi-rs-full = pkgs.sudachi-rs.override({
+              sudachidict = pkgs.sudachidict.override {
+                dict-type = "full";
+              };
+            });
         in
         [
           hakuneko
@@ -638,8 +647,8 @@ in
           (tagainijisho) # japanese dict; like zkanji Qt based
           # flakeSelf.inputs.vocage.packages."x86_64-linux".vocage
           jiten # unfree, helpful for jap.nvim
-          sudachi-rs # a japanese tokenizer (can have sudachidict builtins)
-          sudachidict # exists in small/medium/large
+          sudachi-rs-full
+          # sudachidict # exists in small/medium/large
         ];
 
       # xdg.dataFile."jmdict".source = pkgs.jmdict;

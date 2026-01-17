@@ -233,7 +233,7 @@ in
     })
     (mkIf cfg.zbell.enable {
       # TODO source zbell
-      programs.zsh.initContent = '''';
+      programs.zsh.initContent = "";
     })
 
     # home.sessionVariables = {

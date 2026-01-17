@@ -18,7 +18,7 @@ let
   rofi = pkgs.rofi-teto; # rofi-wayland;
   sharedConfig = pkgs.callPackage ./wm-config.nix { };
 
-  startNvimNotes = ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command 'kitty nvim +Notes'  '';
+  startNvimNotes = "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command 'kitty nvim +Notes'  ";
 in
 {
 
@@ -218,20 +218,20 @@ in
 
           # replace by rmcp
           "${mod}+F2" =
-            ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty ${lib.getExe' pkgs.rmpc "rmpc"}' '';
+            "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty ${lib.getExe' pkgs.rmpc "rmpc"}' ";
 
           # replace with 'Avante'
           "${mod}+F3" =
             ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 60 --height 50 --mark gp_nvim --command "kitty nvim -cLlmChat" '';
 
           "${mad}+m" =
-            ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command meli '';
+            "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command meli ";
 
           "${mad}+n" =
-            ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command 'kitty nvim +Notes'  '';
+            "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command 'kitty nvim +Notes'  ";
 
           "${mod}+a" =
-            ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty ${lib.getExe' pkgs.rmpc "rmpc"}' '';
+            "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty ${lib.getExe' pkgs.rmpc "rmpc"}' ";
 
           # TODO implement Travis/Pasting Voice recognized text
           # "${mod}+F4" =
@@ -252,7 +252,7 @@ in
         }
         // lib.optionalAttrs config.services.clipcat.enable {
           "${mod}+Ctrl+h" =
-            ''exec ${pkgs.clipcat}/bin/clipcat-menu -f rofi  | ${sharedConfig.notify-send} 'Failed running clipcat' '';
+            "exec ${pkgs.clipcat}/bin/clipcat-menu -f rofi  | ${sharedConfig.notify-send} 'Failed running clipcat' ";
         }
         // lib.optionalAttrs config.services.cliphist.enable {
           "${mod}+Ctrl+h" =
@@ -261,7 +261,7 @@ in
         }
         // lib.optionalAttrs config.services.clipman.enable {
           "${mod}+Ctrl+h" =
-            ''exec ${pkgs.clipman}/bin/clipman pick -t rofi || ${sharedConfig.notify-send} 'Failed running clipman' '';
+            "exec ${pkgs.clipman}/bin/clipman pick -t rofi || ${sharedConfig.notify-send} 'Failed running clipman' ";
         }
 
       ;

@@ -312,8 +312,8 @@ in
     lib.mkMerge [
       # -- testing order 700
       # (lib.mkOrder 0 ''vim.env.PATH = "${lib.makeBinPath config.programs.neovim.extraInitLuaPackages}:"..vim.env.PATH'')
-      (lib.mkOrder 700 ''-- testing order 700 '')
-      (lib.mkAfter ''require('init-manual') '')
+      (lib.mkOrder 700 "-- testing order 700 ")
+      (lib.mkAfter "require('init-manual') ")
     ];
 
   plugins = [
@@ -383,7 +383,8 @@ in
   # extraConfig = ''
   #  '';
 
-  withNodeJs = true; # for tests
+  withNodeJs = false; # for tests
+  withRuby = false; # for tests
 
   enableRocks = true;
   highlightOnYank = true;

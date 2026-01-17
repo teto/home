@@ -65,10 +65,6 @@ vim.o.winborder = 'rounded'
 vim.opt.guicursor =
     'n-v-c:block-blinkon250-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-blinkon250-Cursor/lCursor,r-cr:hor20-Cursor/lCursor'
 
--- vim.opt.rtp:prepend('/home/teto/.local/share/nvim/rocks/rocks_rtp')
--- that's where treesitter installs grammars
--- vim.opt.rtp:prepend('/home/teto/parsers')
-
 -- TODO diagnostics = { virtual_text = false }
 diagnostic_default_config = {
     -- disabled because too big in haskell
@@ -465,6 +461,8 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 
 -- http://stackoverflow.com/questions/28613190/exclude-quickfix-buffer-from-bnext-bprevious
 vim.keymap.set('n', '<Leader><Leader>', '<Cmd>b#<CR>', { desc = 'Focus alternate buffer' })
+
+vim.keymap.set('n', '0', '^', { desc = 'Go to first line' })
 
 vim.keymap.set('n', '<Leader>ev', '<Cmd>e $MYVIMRC<CR>', { desc = "Edit home-manager's generated neovim config" })
 vim.keymap.set('n', '<Leader>sv', '<Cmd>source $MYVIMRC<CR>', { desc = 'Reload my neovim config' })

@@ -8,7 +8,7 @@
 {
   home.sessionVariables = {
     # default in latest hm
-    ZDOTDIR = "$XDG_CONFIG_HOME/zsh"; 
+    ZDOTDIR = "$XDG_CONFIG_HOME/zsh";
   };
 
   programs.zsh = {

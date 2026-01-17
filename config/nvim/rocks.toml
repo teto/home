@@ -96,6 +96,7 @@ magick = "1.6.0"
 "snacks.nvim" = "2.30.0"
 "telescope.nvim" = "0.1.6"
 nvim-treesitter-textobjects = "scm"
+"render-markdown.nvim" = "8.11.0"
 # nvim-treesitter-textobjects = "scm"
 # "rocks-treesitter.nvim" = "1.0.3"
 

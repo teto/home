@@ -13,5 +13,5 @@ stdenv.mkDerivation {
 
   # }
 
-  installPhase = '''';
+  installPhase = "";
 }

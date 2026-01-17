@@ -3,4 +3,4 @@
 --
 -- let b:auto_save = 1
 --
--- vim.lsp.enable('nil_ls')
+vim.lsp.enable('nil_ls')

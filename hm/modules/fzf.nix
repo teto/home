@@ -172,9 +172,9 @@ in
     })
 
     (lib.mkIf cfg.enableFzfGit {
-      programs.zsh.initContent = ''source ${fzf-git-sh}/share/fzf-git-sh/fzf-git.sh'';
+      programs.zsh.initContent = "source ${fzf-git-sh}/share/fzf-git-sh/fzf-git.sh";
 
-      programs.bash.initExtra = ''source ${fzf-git-sh}/share/fzf-git-sh/fzf-git.sh'';
+      programs.bash.initExtra = "source ${fzf-git-sh}/share/fzf-git-sh/fzf-git.sh";
     })
 
     # actually exists already "cliphist-fzf"

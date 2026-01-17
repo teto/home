@@ -79,8 +79,8 @@ in
     n = "nix develop";
     n1 = ''nix develop --option builders "$TETOS_0" -j0'';
     n2 = ''nix develop --option builders "$TETOS_1" -j0'';
-    nr1=''nix run --option builders "$TETOS_0" -j0'';
-    nr2=''nix run --option builders "$TETOS_1" -j0'';
+    nr1 = ''nix run --option builders "$TETOS_0" -j0'';
+    nr2 = ''nix run --option builders "$TETOS_1" -j0'';
 
     # trans aliases{{{
     fren = "trans -from fr -to en ";
@@ -100,7 +100,7 @@ in
 
   home.sessionSearchVariables = {
 
-    PATH=[ 
+    PATH = [
       "$HOME/.cargo/bin"
       "$HOME/.cache/npm-packages/bin"
     ];
