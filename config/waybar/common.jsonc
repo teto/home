@@ -260,12 +260,12 @@
 		// TODO adjust
 		"exec": "waybar-module-pacman-updates  --interval-seconds 5 --network-interval-seconds 300",
 	},
-	"custom/gpu-usage": {
-		"exec":        "gpu-usage",
-		"format":      "GPU: {}%",
-		"return-type": "",
-		"interval":    1,
-	},
+	// "custom/gpu-usage": {
+	// 	"exec":        "gpu-usage",
+	// 	"format":      "GPU: {}%",
+	// 	"return-type": "",
+	// 	"interval":    1,
+	// },
 	"tray": {
 		// "icon-size": 21,
 		"spacing": 10,

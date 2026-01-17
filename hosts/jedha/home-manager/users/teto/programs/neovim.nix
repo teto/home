@@ -122,6 +122,7 @@ in
       ++ neotestPlugins;
 
     extraPackages = [
+      pkgs.libclang # for llama.cpp/neovim dev ?
       # pkgs.taplo # a toml LSP server
     ];
   };

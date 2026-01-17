@@ -366,4 +366,4 @@ source $XDG_CONFIG_HOME/bash/jj.sh
 # adding where "npm -g install" install packages
 # retreivable via npm config get prefix
 # which might very be patched by nix I suspect ?
-PATH="$HOME/.cargo/bin:$HOME/.cache/npm-packages/bin:$PATH"
+# PATH="$HOME/.cargo/bin:$HOME/.cache/npm-packages/bin:$PATH"

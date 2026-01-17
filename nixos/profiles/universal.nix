@@ -51,6 +51,11 @@
     st = "systemctl-tui";
     jctl = "journalctlb -b0 -r";
     # }}}
+
+    # git {{{
+    y = "yazi";
+    g="git";
+# }}}
   };
 
   # variables set by PAM

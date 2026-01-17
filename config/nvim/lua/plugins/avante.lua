@@ -23,7 +23,7 @@ local default_model = 'mistral-7b'
 -- TODO load configuration from llm-providers.json
 -- lua vim.json.decode(str, opts)
 require('avante').setup({
-    debug = true, -- print error messages
+    -- debug = true, -- print error messages
 
     -- can be a function as well
     -- avante is very talkative by default

@@ -183,7 +183,10 @@ in
           # triggers even when there is a window
           # "--whole-window BTN_RIGHT" = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
 
-          "${mod}+grave" = "${pkgs.swaynotificationcenter}/bin/swaync-client -swb";
+          "${mad}+m" = ''exec "${dotfilesPath}/rofi-scripts/monitor-layout.sh ";mode default;'';
+
+          "${mad}+l" = "${pkgs.swaynotificationcenter}/bin/swaync-client -t";
+          "${mod}+grave" = "${pkgs.swaynotificationcenter}/bin/swaync-client -t";
           "${mod}+p" = "exec ${pkgs.tessen}/bin/tessen --dmenu=rofi";
 
           "$GroupFr+$mod+ampersand" = "layout toggle all";
@@ -220,15 +223,15 @@ in
           "${mod}+F2" =
             "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty ${lib.getExe' pkgs.rmpc "rmpc"}' ";
 
-          # replace with 'Avante'
+          # replace with 'avante' alias ?
           "${mod}+F3" =
             ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 60 --height 50 --mark gp_nvim --command "kitty nvim -cLlmChat" '';
 
-          "${mad}+m" =
-            "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command meli ";
-
-          "${mad}+n" =
-            "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command 'kitty nvim +Notes'  ";
+          # "${mad}+m" =
+          #   "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command meli ";
+          #
+          "${mad}+n" = startNvimNotes;
+            # "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command 'kitty nvim +Notes'  ";
 
           "${mod}+a" =
             "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty ${lib.getExe' pkgs.rmpc "rmpc"}' ";
