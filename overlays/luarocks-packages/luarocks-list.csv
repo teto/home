@@ -1,3 +1,3 @@
 name,rockspec,ref,server,version,luaversion,maintainers
 luarocks-tag-release,,,,,,mrcjkb 
-lsqlite3,,,,,,mrcjkb 
+lsqlite3,,,,,,teto

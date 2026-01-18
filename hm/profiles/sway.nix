@@ -183,7 +183,7 @@ in
           # triggers even when there is a window
           # "--whole-window BTN_RIGHT" = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
 
-          "${mad}+m" = ''exec "${dotfilesPath}/rofi-scripts/monitor-layout.sh ";mode default;'';
+          "${mad}+m" = ''exec "${dotfilesPath}/rofi-scripts/monitor_layout.sh"; mode default;'';
 
           "${mad}+l" = "${pkgs.swaynotificationcenter}/bin/swaync-client -t";
           "${mod}+grave" = "${pkgs.swaynotificationcenter}/bin/swaync-client -t";

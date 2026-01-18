@@ -395,7 +395,7 @@ in
   extraLuaPackages = lp: [
 
     # importing dependencies of rikai.nvim
-    lp.sqlite
+    # lp.sqlite
     lp.lsqlite3
     lp.lual
     lp.utf8

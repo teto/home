@@ -109,6 +109,8 @@ let
 in
 {
   programs.neovim = {
+    # broken because needs nvim-treesitter-legacy-api
+    neorg.enable = true;
 
     package =
       lib.mkForce

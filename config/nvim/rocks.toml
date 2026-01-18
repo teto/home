@@ -94,8 +94,12 @@ tree-sitter-norg = "0.2.6"
 magick = "1.6.0"
 # "image.nvim" = "1.3.0"
 "snacks.nvim" = "2.30.0"
+
+# how to get rid of it:
 "telescope.nvim" = "0.1.6"
-nvim-treesitter-textobjects = "scm"
+
+# disabled because of Error was: ....config/nvim/lua/plugins/nvim-treesitter-textobjects.lua:1: module 'nvim-treesitter.configs' not found:No LuaRocks module found for nvim-treesitter.configs
+# nvim-treesitter-textobjects = "scm"
 "render-markdown.nvim" = "8.11.0"
 # nvim-treesitter-textobjects = "scm"
 # "rocks-treesitter.nvim" = "1.0.3"
