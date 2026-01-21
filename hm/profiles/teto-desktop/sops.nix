@@ -51,6 +51,11 @@ lib.optionalAttrs withSecrets {
     mode = "400";
   };
 
+  secrets."mistral_test_api_key" = {
+    mode = "400";
+  };
+
+
   secrets.huggingfaceToken = {
     mode = "0440";
     # TODO only readable by gitlab

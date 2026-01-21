@@ -257,10 +257,6 @@ in
         # networkConfig.DHCP = "ipv4";
         networkConfig.DHCPServer = true;
         networkConfig.IPMasquerade = "ipv4";
-        #   services.resolved= {
-        # enable = true;
-        # dnssec = "false"; # "allow-downgrade";
-        # };
 
         dhcpServerConfig = {
           PoolOffset = 100;
