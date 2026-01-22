@@ -232,6 +232,22 @@ in
         "@hg"
       ];
     };
+
+    "LuaRocks" = {
+      urls = [
+        {
+          template = "https://luarocks.org/search?q={searchTerms}";
+          params = [
+            {
+              name = "q";
+              value = "{searchTerms}";
+            }
+          ];
+        }
+      ];
+      definedAliases = [ "@lr" ];
+    };
+
     "bing".metaData.hidden = true;
     "google".metaData.alias = "@g"; # builtin engines only support specifying one additional alias
   };
