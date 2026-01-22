@@ -5,6 +5,10 @@
 1. just bootstrap-vps
 2. upload its sops secrets
 
+Manual setup:
+
+make /home/teto/media readable by jellyfin ?
+
 * subsequent deploys
 
 * backup procedure

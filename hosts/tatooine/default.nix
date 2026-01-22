@@ -54,6 +54,8 @@ in
 {
   imports = [
     laptopAutoloaded
+    flakeSelf.inputs.disko.nixosModules.disko
+    flakeSelf.inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen5
     # should not ?!
     # desktopAutoloaded
 
@@ -63,15 +65,15 @@ in
     # removed 'cos it clashed with disk-config but these are not the same
     # ./generated.nix
 
-    flakeSelf.inputs.disko.nixosModules.disko
+    # useful for uv
     flakeSelf.nixosProfiles.nix-ld
-    flakeSelf.inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen5
 
     # flakeSelf.nixosProfiles.hedgedoc
     # flakeSelf.nixosProfiles.rmfakecloud # useless without hacking remarkable
     flakeSelf.nixosProfiles.desktop
     flakeSelf.nixosProfiles.laptop
     flakeSelf.nixosProfiles.podman
+    flakeSelf.nixosProfiles.steam
 
     # ../../nixos/profiles/homepage-dashboard.nix
     flakeSelf.nixosProfiles.kanata

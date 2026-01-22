@@ -126,8 +126,6 @@ in
           # pkgs.koboldcpp
           llama-custom # for llama-server and benchmarks
           # pkgs.llama-swap # allows to switch between models at runtime
-          pkgs.claude-code # anthropic agent
-          pkgs.mistral-vibe # anthropic agent
 
           # libggml.so conflicts with llama-cpp's
           # pkgs.whisper-cpp # to test with rikai.nvim and pushtotalk
@@ -382,21 +380,19 @@ in
           automake
           (ignoreBroken bcal) # calculatrice
           # bmm # rust bookmark manager (not package yet)
+          backblaze-b2-tetos
           bfs # https://github.com/tavianator/bfs
           binutils
           btop
           cargo
-          backblaze-b2-tetos
+          claude-code # anthropic agent
           dasht # ~ zeal but in terminal
           difftastic # smart diffs
+          docker-credential-helpers
           luau # lua server
           lsof # to see open files
-          docker-credential-helpers
           flakeSelf.inputs.starship-jj.packages.${system}.default # custom.jj for starship
           gettext # for envsubst (TO NOT CONFOUND with gettext's envsubst)
-          sad # live replace with fzf, use like `fd | sad toto tata`
-          sops # password 'manager'
-          sqlitebrowser # to help debug rikai etc
           glab # gitlab cli
           hexyl # hexcode viewer
 
@@ -406,6 +402,7 @@ in
           # just in my branch :'(
           # git-remote-hg
           manix # nix doc, might be outdated
+          mistral-vibe # anthropic agent
           net-tools # for netstat
           nix-output-monitor # 'nom'
 
@@ -434,6 +431,9 @@ in
           just
           gitFull # to get send-email
           gnumake
+          sad # live replace with fzf, use like `fd | sad toto tata`
+          sops # password 'manager'
+          sqlitebrowser # to help debug rikai etc
 
           # haxe # to test neovim developement
           eza # to list files
@@ -631,11 +631,11 @@ in
           memento-with-ocr = memento.override ({ withOcr = true; });
           # sudachi-rs # a japanese tokenizer (can have sudachidict builtins)
 
-          sudachi-rs-full = pkgs.sudachi-rs.override({
-              sudachidict = pkgs.sudachidict.override {
-                dict-type = "full";
-              };
-            });
+          sudachi-rs-full = pkgs.sudachi-rs.override ({
+            sudachidict = pkgs.sudachidict.override {
+              dict-type = "full";
+            };
+          });
         in
         [
           hakuneko

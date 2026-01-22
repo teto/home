@@ -3,6 +3,8 @@
   home.shellAliases = {
     st = "systemctl-tui";
     jctl = "journalctl -b0 -r";
+    v = "nvim";
+    y = "yazi";
 
     # git variables {{{
     gl = "git log";

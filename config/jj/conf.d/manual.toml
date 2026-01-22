@@ -6,6 +6,7 @@
 # log = 'stack(@)'
 [remotes]
 # jj config set --user remotes.origin.auto-track-bookmarks 'glob:*'
+# TODO ignore backport PRs ?
 gh.auto-track-bookmarks = 'glob:*'
 up.auto-track-bookmarks = 'glob:*'
 
@@ -209,7 +210,12 @@ commit_id = "green"
 # avoided the '/' because it creates issues with gitlab slugifying for components
 # fetch = ["up", "origin"] # ["upstream", "origin"]
 # push = "gh"
-# auto-local-bookmark = true
+# Prevent pushing work in progress or anything explicitly labeled "private"
+private-commits = "description('wip:*') | description('private:*')"
+
+
+[fsmonitor]
+backend = "watchman"
 
 [snapshot]
 max-new-file-size = "10MiB"
@@ -322,3 +328,9 @@ paginate = "never"
 [--scope.ui]
 pager = "delta"
 
+[[--scope]]
+--when.repositories = [ "~/nixpkgs" ]
+# [--scope
+
+[--scope.remotes]
+up.auto-track-bookmarks = 'nixos-unstable | master | nixpkgs-unstable | staging | teto/*'

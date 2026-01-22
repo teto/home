@@ -9,6 +9,10 @@ also set vim.g.__ts_debug to help debug language-tree
 ExternalProject_Add(uncrustify
 https://cmake.org/cmake/help/latest/module/ExternalProject.html#id2
 
+* debug dev version
+
+`:e $NVIM_LOG_FILE`
+
 * load the result of rg --vimgrep in quickfix:
 
 @code.start

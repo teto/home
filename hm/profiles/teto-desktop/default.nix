@@ -15,6 +15,7 @@ in
 {
   imports = [
 
+    flakeSelf.homeProfiles.teto-aliases
     flakeSelf.homeProfiles.common
     flakeSelf.homeProfiles.neovim
     flakeSelf.homeProfiles.sway
@@ -68,8 +69,6 @@ in
   home.shellAliases = {
     lg = "lazygit";
     st = "systemctl-tui";
-    v = "nvim";
-    y = "yazi";
     yr = "yazi ./result";
 
     js = "just switch";
@@ -82,6 +81,8 @@ in
     nr1 = ''nix run --option builders "$TETOS_0" -j0'';
     nr2 = ''nix run --option builders "$TETOS_1" -j0'';
 
+
+
     # trans aliases{{{
     fren = "trans -from fr -to en ";
     enfr = "trans -from en -to fr ";
@@ -93,6 +94,7 @@ in
   };
 
   home.sessionVariables = {
+    VIBE_HOME = "${config.xdg.configHome}/vibe";
     # might be a hack
     PASSWORD_STORE_ENABLE_EXTENSIONS = "true"; # it must be "true" and nothing else !
     PASSWORD_STORE_EXTENSIONS_DIR = "${dotfilesPath}/contrib/pass-extensions";

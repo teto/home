@@ -101,7 +101,6 @@ magick = "1.6.0"
 # disabled because of Error was: ....config/nvim/lua/plugins/nvim-treesitter-textobjects.lua:1: module 'nvim-treesitter.configs' not found:No LuaRocks module found for nvim-treesitter.configs
 # nvim-treesitter-textobjects = "scm"
 "render-markdown.nvim" = "8.11.0"
-# nvim-treesitter-textobjects = "scm"
 # "rocks-treesitter.nvim" = "1.0.3"
 
 
