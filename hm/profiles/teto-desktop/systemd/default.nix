@@ -76,6 +76,8 @@
     #   wantedBy = [ "multi-user.target" ]; # causes NixOS to manage the instance
     # };
 
+
+
     # TODO enable conditionnally on account/services
     mujmap-fastmail = {
       Service = {
@@ -145,6 +147,7 @@
     # user.services.
     pimsync.Service = lib.mkIf config.programs.pimsync-teto.enable {
       Environment = [
+        "GNUPGHOME=${config.programs.gpg.homedir}"
         "PATH=$PATH:${
           pkgs.lib.makeBinPath [
             pkgs.pass-teto

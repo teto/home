@@ -332,7 +332,7 @@ vim.opt.inccommand = 'nosplit'
 
 vim.opt.mouse = 'a'
 --[[
-Mouse configuration: 
+Mouse configuration:
 https://github.com/neovim/neovim/issues/14921
 ]]
 
@@ -799,6 +799,11 @@ vim.keymap.set('n', '<leader>d', function()
     vim.cmd([[ FzfLua diagnostics_document ]])
 end, { buffer = false, desc = 'Diagnostics' })
 
+vim.keymap.set('v', '<D-t>j', function()
+    -- todo replace with selection
+    vim.cmd([[ AvanteAsk what does 見る mean ? ]])
+end, { buffer = false, desc = 'Diagnostics' })
+
 -- Autocommand to highlight the word under the cursor when the cursor moves
 -- vim.api.nvim_create_autocmd({"CursorMoved", "CursorMovedI"}, {
 --     group = highlight_group,
@@ -869,6 +874,5 @@ require('teto.avante')
 --
 -- -- https://github.com/nvim-neorg/neorg/issues/1351
 -- -- https://github.com/nvim-neorg/neorg/issues/1342
--- -- require('plugins.neorg')
---
---
+
+-- require('plugins.neorg')

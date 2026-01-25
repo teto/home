@@ -11,16 +11,17 @@
 
 local llama_hostname = 'jedha.local'
 
-local provider = 'claude'
+-- local provider = 'mistral'
+provider = 'claude'
 if vim.fn.hostname() == 'jedha' then
     provider = 'llamacpp'
 end
 
 -- overrule both 
-provider = "mistral_devstral_2"
+-- provider = "mistral_devstral_2"
+    provider = 'llamacpp'
 
 local xdg_config = vim.env.XDG_CONFIG_HOME or os.getenv('HOME') .. '/.config'
-
 
 -- TODO load configuration from llm-providers.json
 -- lua vim.json.decode(str, opts)
@@ -73,17 +74,17 @@ require('avante').setup({
         provider = 'fzf_lua',
     },
 
-	-- might be interesting
+    -- might be interesting
     input = {
         -- provider =
-		--  -- Example: Using snacks.nvim as input provider
-		provider = "snacks", -- "native" | "dressing" | "snacks"
-		provider_opts = {
-		  -- Snacks input configuration
-		  title = "Avante Input",
-		  icon = " ",
-		  placeholder = "Enter your API key...",
-	   },
+        --  -- Example: Using snacks.nvim as input provider
+        provider = 'snacks', -- "native" | "dressing" | "snacks"
+        provider_opts = {
+            -- Snacks input configuration
+            title = 'Avante Input',
+            icon = ' ',
+            placeholder = 'Enter your API key...',
+        },
     },
     providers = {
         azure = nil,
@@ -126,6 +127,7 @@ require('avante').setup({
         },
 
         -- see https://github.com/yetone/avante.nvim/issues/2238
+        -- legacy
         llamacpp_from_openai = {
             __inherited_from = 'openai',
             -- hide_in_model_selector
@@ -147,22 +149,22 @@ require('avante').setup({
             },
         },
 
-		["mistral_devstral_2"] = {
+        ['mistral_devstral_2'] = {
             __inherited_from = 'openai',
             -- hide_in_model_selector
             -- model = 'ministral3-3b-q4',
             -- model = 'devstral2-24b-iq2',
             -- model = 'ministral3-14b'
-			model = 'devstral-2512',
+            model = 'devstral-2512',
             endpoint = 'https://api.mistral.ai/v1',
             timeout = 30000, -- Timeout in milliseconds
-			api_key_name = 'cmd:cat ' .. (vim.fs.joinpath(xdg_config, 'sops-nix/secrets/mistral_test_api_key')),
-			-- mandatory to make it work with mistral see 
-			-- https://github.com/yetone/avante.nvim/discussions/1570#discussioncomment-12600703
-			extra_request_body = {
-			 max_tokens = 4096, -- to avoid using max_completion_tokens
-			}
-		},
+            api_key_name = 'cmd:cat ' .. (vim.fs.joinpath(xdg_config, 'sops-nix/secrets/mistral_test_api_key')),
+            -- mandatory to make it work with mistral see
+            -- https://github.com/yetone/avante.nvim/discussions/1570#discussioncomment-12600703
+            extra_request_body = {
+                max_tokens = 4096, -- to avoid using max_completion_tokens
+            },
+        },
 
         -- ollama = {
         --     -- model = "qwq:32b",

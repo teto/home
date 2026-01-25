@@ -54,8 +54,8 @@
 
     # git {{{
     y = "yazi";
-    g="git";
-# }}}
+    g = "git";
+    # }}}
   };
 
   # variables set by PAM

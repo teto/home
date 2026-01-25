@@ -112,6 +112,8 @@ in
     # broken because needs nvim-treesitter-legacy-api
     neorg.enable = true;
 
+    orgmode.enable = true;
+
     package =
       lib.mkForce
         flakeSelf.inputs.neovim-nightly-overlay.packages."${pkgs.stdenv.hostPlatform.system}".neovim-debug;

@@ -1,4 +1,8 @@
-{ rustPlatform, lib, pkgs }:
+{
+  rustPlatform,
+  lib,
+  pkgs,
+}:
 
 rustPlatform.buildRustPackage rec {
   pname = "repeater";

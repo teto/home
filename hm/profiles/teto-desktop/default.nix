@@ -81,8 +81,6 @@ in
     nr1 = ''nix run --option builders "$TETOS_0" -j0'';
     nr2 = ''nix run --option builders "$TETOS_1" -j0'';
 
-
-
     # trans aliases{{{
     fren = "trans -from fr -to en ";
     enfr = "trans -from en -to fr ";

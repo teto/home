@@ -31,19 +31,19 @@ let
   orgmodePlugins = [
     # TODO add     'mrshmllow/orgmode-babel.nvim',
 
-    # (luaPlugin {
-    #   # matches nvim-orgmode
-    #   plugin = orgmode;
-    #   config = # lua
-    #     ''
-    #     require('orgmode').setup{
-    #         org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
-    #         org_default_notes_file = '~/orgmode/refile.org',
-    #         -- TODO add templates
-    #         org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
-    #     }
-    #     '';
-    # })
+    (luaPlugin {
+      # matches nvim-orgmode
+      plugin = orgmode;
+      config = # lua
+        ''
+        require('orgmode').setup{
+            org_capture_templates = {'~/nextcloud/org/*', '~/orgmode/**/*'},
+            org_default_notes_file = '~/orgmode/refile.org',
+            -- TODO add templates
+            org_agenda_templates = { t = { description = 'Task', template = '* TODO %?\n  %u' } },
+        }
+        '';
+    })
   ];
 
   fennelPlugins = with pkgs.vimPlugins; [

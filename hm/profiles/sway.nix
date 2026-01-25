@@ -231,7 +231,7 @@ in
           #   "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command meli ";
           #
           "${mad}+n" = startNvimNotes;
-            # "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command 'kitty nvim +Notes'  ";
+          # "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command 'kitty nvim +Notes'  ";
 
           "${mod}+a" =
             "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty ${lib.getExe' pkgs.rmpc "rmpc"}' ";
@@ -313,11 +313,10 @@ in
     #       export XDG_CURRENT_DESKTOP=sway
     # export XDG_SESSION_DESKTOP=sway
     #
+
+    #  # useful for electron based apps: slack / vscode
+    # export NIXOS_OZONE_WL=1
     extraSessionCommands = ''
-
-       # useful for electron based apps: slack / vscode 
-      export NIXOS_OZONE_WL=1
-
       # needs qt5.qtwayland in systemPackages
       export QT_QPA_PLATFORM=wayland
       export SDL_VIDEODRIVER=wayland
