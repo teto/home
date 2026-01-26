@@ -47,10 +47,13 @@ in
     notmuch # needed for waybar-custom-notmuch.sh
     panvimdoc # to generate vim doc from README, for instance in gp.nvim
     pciutils # for lspci
+
+    # slidev-cli # text-based slides generate via npm nice prez
     # only for matt ?
     pass-perso
     # poppler for pdf preview
 
+    rendercv  # yaml-based CV
     stow
     timr-tui # rust clock
     systemctl-tui

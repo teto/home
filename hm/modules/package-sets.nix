@@ -319,7 +319,7 @@ in
         # signal-desktop # installe a la main
         # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail
         vimiv-qt
-        w3m
+        w3m  # there are better now
         # mairix mutt msmtp lbdb contacts spamassassin
         # element-desktop # TODO this should go into nix profile install
 
@@ -668,8 +668,7 @@ in
     })
     (mkIf (cfg.japanese && cfg.llms) {
 
-      home.packages = with pkgs; [
-
+      home.packages = [
         pkgs.mokuro # broken because of manga-ocr
         pkgs.python3Packages.manga-ocr
       ];
