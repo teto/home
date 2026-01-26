@@ -86,11 +86,12 @@ in
         '';
       };
 
+      # todo move to shell module ?
       enableFancyCtrlZ = mkOption {
         default = true;
         type = types.bool;
         description = ''
-          Whether to enable Fish integration.
+          Have Ctrl+z run 'fg'
         '';
       };
 

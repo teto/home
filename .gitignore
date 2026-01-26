@@ -31,9 +31,8 @@
 test*
 export.json
 result
+/local/share/applications/mimeinfo.cache
 
-# jinko
-*.jsongz
 
 # very important not to version those
 secrets/*

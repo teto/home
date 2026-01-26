@@ -17,9 +17,12 @@ if vim.fn.hostname() == 'jedha' then
     provider = 'llamacpp'
 end
 
--- overrule both 
+-- overrule both
 -- provider = "mistral_devstral_2"
-    provider = 'llamacpp'
+provider = 'llamacpp'
+-- overrule both
+-- provider = 'mistral_devstral_2'
+provider = 'llamacpp'
 
 local xdg_config = vim.env.XDG_CONFIG_HOME or os.getenv('HOME') .. '/.config'
 
@@ -114,15 +117,15 @@ require('avante').setup({
             model = 'mistral-7b',
             -- model = 'devstral2-24b-iq2',
             endpoint = 'http://' .. llama_hostname .. ':8080/v1',
-            timeout = 30000, -- Timeout in milliseconds
+            timeout = 10000, -- Timeout in milliseconds
             use_ReAct_prompt = false,
             -- tools send a shitton of tokens
             -- not supported by mistral (but inherited by others so...)
-            disable_tools = false,
+            disable_tools = true,
             -- empty key is required else avante complains
             api_key_name = '',
             extra_request_body = {
-                max_tokens = 1000, -- to avoid infinite loops
+                max_tokens = 4000, -- to avoid infinite loops
             },
         },
 

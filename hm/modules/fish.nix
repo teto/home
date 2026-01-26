@@ -18,6 +18,15 @@ in
       #     Whether to enable Fish integration.
       #   '';
       # };
+
+      enableFancyCtrlZ = lib.mkOption {
+        default = true;
+        type = lib.types.bool;
+        description = ''
+          Have Ctrl+z run 'fg'
+        '';
+      };
+
     };
   };
   config = lib.mkIf cfg.enable {
@@ -49,5 +58,11 @@ in
       # visual mode, but due to fish_cursor_default, is redundant here
       set fish_cursor_visual block
     '';
+
+    programs.fish.binds = lib.mkIf cfg.enableFancyCtrlZ {
+
+      "\cz" = "fg 2>/dev/null; commandline -f repaint";
+    };
+
   };
 }

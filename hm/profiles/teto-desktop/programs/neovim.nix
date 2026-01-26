@@ -394,11 +394,10 @@ in
   # or else we need a vim.g.sqlite_clib_path
   extraLuaPackages = lp: [
 
-    # for neorg until  we fix 
+    # for neorg until  we fix
     lp.lua-utils-nvim
     lp.pathlib-nvim
     # nvim-treesitter-legacy-api == 0.9.2
-
 
     # importing dependencies of rikai.nvim
     # lp.sqlite

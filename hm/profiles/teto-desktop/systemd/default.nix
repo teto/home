@@ -76,8 +76,6 @@
     #   wantedBy = [ "multi-user.target" ]; # causes NixOS to manage the instance
     # };
 
-
-
     # TODO enable conditionnally on account/services
     mujmap-fastmail = {
       Service = {

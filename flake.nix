@@ -506,8 +506,7 @@
             stylua
           ];
 
-          # shellHook = 
-
+          # shellHook =
 
         };
 
