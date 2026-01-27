@@ -59,6 +59,8 @@ in
     systemctl-tui
     viu # a console image viewer
 
+    tarts # fun TUI screensaver, cmatrix-like
+
     # flakeSelf.inputs.git-repo-manager.packages.${pkgs.stdenv.hostPlatform.system}.git-repo-manager
   ];
 

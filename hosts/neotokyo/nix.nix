@@ -1,4 +1,4 @@
-{ secretsFolder, config, ... }:
+{ config, ... }:
 {
 
   settings = {

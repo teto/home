@@ -20,6 +20,7 @@ let
           "home-manager/"
           "users/users/root.nix"
 
+          "nix.nix"
           "services/harmonia.nix"
           "services/jellyfin.nix"
           "services/buildbot-nix.nix"
@@ -98,6 +99,7 @@ in
     flakeSelf.nixosProfiles.ntp
     flakeSelf.nixosProfiles.nix-daemon
 
+    # ./nix.nix
     ./hardware.nix
     ./sops.nix
 

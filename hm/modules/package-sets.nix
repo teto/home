@@ -138,7 +138,7 @@ in
           pkgs.python3Packages.huggingface-hub
 
           # a competitor of "safetensors_explorer"
-          pkgs.python3Packages.gguf
+          pkgs.python3Packages.gguf # gguf-editor-gui
 
           # pkgs.python3Packages.vllm
           # pkgs.repomix # to upload a codebase to llm

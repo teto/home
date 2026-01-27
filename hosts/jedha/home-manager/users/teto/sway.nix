@@ -10,18 +10,27 @@
   ];
 
   # home.sessionVariables = swayEnvVars;
+  # systemd.user.services.sway-session.Service.Environment = [
+  #   "WLR_DRM_DEVICES=/dev/dri/renderD128"
+  # ];
 
   # TODO generate a wrapper ?
   wayland.windowManager.sway = {
     enable = true;
     xwayland = false;
 
-    systemd.variables = [
-      " --all" # hack
-    ];
+    # extraSessionCommands = 
+    # ''
+    # export 
+    # '';
+    systemd = {
+      variables = [
+        " --all" # hack
+      ];
+    };
 
     extraOptions = [
-      "--unsupported-gpu"
+      # "--unsupported-gpu"  # not needed if I use amd's GPU
     ];
 
     config = {

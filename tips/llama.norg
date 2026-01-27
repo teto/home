@@ -3,3 +3,9 @@ You need a GGUF model file in new versions.
 Cache at /home/teto/.cache/llama.cpp
 
 with Llama.cpp you can still load SOME experts on GPU by reducing --n-cpu-moe
+
+
+* host ram stuff
+
+doc at https://github.com/ggml-org/llama.cpp/pull/16391
+llama-server ... --cache-ram 8192

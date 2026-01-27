@@ -52,14 +52,4 @@
     "d ${config.accounts.calendar.basePath}/fastmail 0755 teto users"
   ];
 
-  systemd.user.services.vdirsyncer.Service = lib.mkIf config.programs.vdirsyncer.enable {
-    Environment = [
-      "PATH=$PATH:${
-        pkgs.lib.makeBinPath [
-          pkgs.pass-teto
-          pkgs.bash
-        ]
-      }"
-    ];
-  };
 }

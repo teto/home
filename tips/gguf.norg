@@ -1,0 +1,7 @@
+
+To visualize a gguf:
+
+ # a competitor of "safetensors_explorer"
+ pkgs.python3Packages.gguf
+
+which gives you `gguf-editor-gui`

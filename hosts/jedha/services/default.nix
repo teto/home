@@ -33,7 +33,8 @@
   xserver = {
     videoDrivers = [
       # "nouveau"
-      "nvidia"
+      "amdgpu"
+      "nvidia" # nvidia toolkit complains if not available
     ];
   };
 

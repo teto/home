@@ -30,6 +30,14 @@ lib.optionalAttrs withSecrets {
       pimsync = {
         # enable = withSecrets;
         enable = true;
+          # storage can also contain "read_only"
+        # extraPairDirectives = [
+        #   {
+        #     name = "collections";
+        #     params = [ "all" ];
+        #   }
+        #   #  conflict_resolution keep a
+        # ];
 
         # null doesn't look too interesting :s
         # collections = [
@@ -70,7 +78,7 @@ lib.optionalAttrs withSecrets {
         userName = secrets.accounts.mail.fastmail_perso.email;
 
         # needs to be an app-specific password/token
-        passwordCommand = (lib.getPassword "perso/fastmail_mc/password")
+        passwordCommand = (lib.getPassword "perso/fastmail_mc/caldav_password")
         # "pass-perso show perso/fastmail_mc/password"
         ;
       };

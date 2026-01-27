@@ -19,8 +19,8 @@
 	],
 	"modules-center": [
 		"custom/mic-status",
-        "custom/mail-check",
-        "custom/ollama",
+        "custom/mail-check"
+        // "custom/ollama",
 	],
 	"temperature": {
 		// click-to-reveal
@@ -28,7 +28,7 @@
 		"hwmon-path": "/sys/class/hwmon/hwmon3/device/hwmon/hwmon3/temp1_input"
 	},
     "custom/gpu-usage": {
-      "format": "{} {icon}", /* "{text} {icon}" for nightly users */
+      // "format": "{} {icon}", /* "{text} {icon}" for nightly users */
       "exec": "gpu-usage-waybar",
       "return-type": "json",
       "format-icons": "󰾲",

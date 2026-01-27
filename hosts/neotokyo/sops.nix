@@ -36,6 +36,13 @@
         group = config.users.users.teto.group;
       };
 
+      "nix-signing-key" = {
+        mode = "440";
+        # path = "%r/github_token";
+        owner = config.users.users.root.name;
+        group = config.users.users.root.group;
+      };
+
       "restic/endpoint" = {
         mode = "440";
         # path = "%r/github_token";

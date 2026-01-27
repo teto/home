@@ -96,6 +96,8 @@
     wally-cli # to flash ergodox keyboards
     wine
 
+    nix-sweep # smarter nix-gc
+
     # take the version from stable ?
     nautilus # demande webkit/todo replace by nemo ?
     # hexyl # hex editor

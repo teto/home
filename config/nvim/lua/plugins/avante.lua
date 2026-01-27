@@ -19,10 +19,10 @@ end
 
 -- overrule both
 -- provider = "mistral_devstral_2"
-provider = 'llamacpp'
+-- provider = 'llamacpp'
 -- overrule both
 -- provider = 'mistral_devstral_2'
-provider = 'llamacpp'
+provider = 'llamacpp_from_openai'
 
 local xdg_config = vim.env.XDG_CONFIG_HOME or os.getenv('HOME') .. '/.config'
 
@@ -34,7 +34,13 @@ require('avante').setup({
     -- can be a function as well
     -- avante is very talkative by default
     override_prompt_dir = vim.fn.expand(vim.fn.stdpath('config') .. '/avante_prompts'),
-    -- system_prompt = "";
+    system_prompt = [[
+	You are a highly skilled software engineer with extensive knowledge in many programming languages, frameworks, design patterns, and best practices.
+
+	Respect and use existing conventions, libraries, etc that are already present in the code base.
+
+	Make sure code comments are in English when generating them.
+	]];
     -- rules = {
     --   project_dir = nil, ---@type string | nil (could be relative dirpath)
     --   global_dir = nil, ---@type string | nil (absolute dirpath)
@@ -109,25 +115,27 @@ require('avante').setup({
         -- api_key_name = 'cmd:cat /home/teto/.config/sops-nix/secrets/OPENAI_API_KEY_NOVA',
         -- },
 
-        llamacpp = {
-            -- __inherited_from = 'llamacpp',
-            -- hide_in_model_selector
-            -- model = 'ministral3-3b-q4',
-            -- model = "ministral3-14b",
-            model = 'mistral-7b',
-            -- model = 'devstral2-24b-iq2',
-            endpoint = 'http://' .. llama_hostname .. ':8080/v1',
-            timeout = 10000, -- Timeout in milliseconds
-            use_ReAct_prompt = false,
-            -- tools send a shitton of tokens
-            -- not supported by mistral (but inherited by others so...)
-            disable_tools = true,
-            -- empty key is required else avante complains
-            api_key_name = '',
-            extra_request_body = {
-                max_tokens = 4000, -- to avoid infinite loops
-            },
-        },
+			--      llamacpp = {
+			--          -- __inherited_from = 'llamacpp',
+			--          -- hide_in_model_selector
+			--          -- model = 'ministral3-3b-q4',
+			--          -- model = "ministral3-14b",
+			--          model = 'mistral-7b',
+			--          -- model = 'toto',
+			-- -- TODO set qwen
+			--          -- model = 'devstral2-24b-iq2',
+			--          endpoint = 'http://' .. llama_hostname .. ':8080/v1',
+			--          timeout = 10000, -- Timeout in milliseconds
+			--          use_ReAct_prompt = false,
+			--          -- tools send a shitton of tokens
+			--          -- not supported by mistral (but inherited by others so...)
+			--          disable_tools = true,
+			--          -- empty key is required else avante complains
+			--          api_key_name = '',
+			--          extra_request_body = {
+			--              max_tokens = 4000, -- to avoid infinite loops
+			--          },
+			--      },
 
         -- see https://github.com/yetone/avante.nvim/issues/2238
         -- legacy
@@ -137,6 +145,7 @@ require('avante').setup({
             -- model = 'ministral3-3b-q4',
             -- model = 'devstral2-24b-iq2',
             -- model = 'ministral3-14b'
+			model = 'mistral-7b',
             endpoint = 'http://' .. llama_hostname .. ':8080/v1',
             timeout = 30000, -- Timeout in milliseconds
             -- list_models

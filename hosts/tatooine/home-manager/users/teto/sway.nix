@@ -17,7 +17,6 @@
     extraOptions = [
       # "--verbose"
       # "--debug"
-      # "--unsupported-gpu" # to work with the quadro
     ];
 
     config = {
