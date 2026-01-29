@@ -1,5 +1,4 @@
-# use /model with space to chaneg it
-active_model = "local"
+active_model = "devstral-2"
 textual_theme = "rose-pine-moon"
 vim_keybindings = true
 disable_welcome_banner_animation = false
@@ -110,7 +109,9 @@ codeignore_file = ".vibeignore"
 
 [tools.write_file]
 permission = "ask"
-allowlist = []
+allowlist = [
+    "/tmp/*",
+]
 denylist = []
 max_write_bytes = 64000
 create_parent_dirs = true

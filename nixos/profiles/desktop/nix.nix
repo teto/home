@@ -10,7 +10,7 @@
 
     trusted-substituters =  [
         "https://haskell-language-server.cachix.org"
-    ] ++ lib.optional withSecrets "https://cache.${secrets.jakky.hostname}"
+    ] ++ lib.optional withSecrets "https://cache.${secrets.jakku.hostname}"
 ;
 
     trusted-public-keys = [

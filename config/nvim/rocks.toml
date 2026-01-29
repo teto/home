@@ -117,8 +117,8 @@ magick = "1.6.0"
 # version = "scm"
 # cmd = "ASToggle" # optional for lazy loading on command
 
-[plugins.neorg]
-version = "9.3.0"
+# [plugins.neorg]
+# version = "9.3.0"
 
 
 [plugins."rikai.nvim"]

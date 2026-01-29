@@ -149,8 +149,9 @@ vim.o.sessionoptions = 'buffers,curdir,help,tabpages,winsize,winpos,localoptions
 -- fixing some stuff
 vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/avante.nvim')
 -- doing jj tests
-vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/diffview.nvim')
+-- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/diffview.nvim')
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/rocks-dev.nvim')
+vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks-config.nvim')
 vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks.nvim')
 
 -- require("vim.lsp._watchfiles")._watchfunc = require("vim._watch").watch
@@ -727,13 +728,6 @@ vim.cmd(('colorscheme %s'):format(theme))
 --   end,
 -- })
 
-require('plugins.avante')
-
--- HACK around sway-scratchpad limitation where one can't esapce quotes so alleviate the need for that via a proxy command
-vim.api.nvim_create_user_command('LlmChat', function()
-    -- vim.cmd([[GpChatToggle tab]])
-    require('avante.api').ask({ without_selection = true })
-end, { desc = 'Ask without selecting anything' })
 
 -- require('plugins.diffview')
 require('lsp-progress').setup()
@@ -857,7 +851,26 @@ end, { desc = 'Go to file, create if missing' })
 -- Please test the best place to `vim.loader.enable()` by yourself.
 -- vim.loader.enable() -- (optional) before the `bootstrap`s above, it could increase startuptime.
 
-require('teto.avante')
+
+-- valid in my fork, must appear before the setup call
+-- if vim.g.avante ~= nil then return end
+-- Outside of the fork it kills the plugin so careful
+-- normally overriden by setup call
+vim.g.avante = {
+	log_level = vim.log.levels.DEBUG
+}
+require('plugins.avante')
+
+local avante = require('teto.avante')
+
+avante.setup_autocmd()
+
+-- HACK around sway-scratchpad limitation where one can't esapce quotes so alleviate the need for that via a proxy command
+vim.api.nvim_create_user_command('LlmChat', function()
+    -- vim.cmd([[GpChatToggle tab]])
+    require('avante.api').ask({ without_selection = true })
+end, { desc = 'Ask without selecting anything' })
+
 -- require('plugins.neorg')
 -- todo fix upgraded version
 -- require('plugins.image')

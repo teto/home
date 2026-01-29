@@ -1,0 +1,2 @@
+-- TODO run gguf-dump on it:
+-- gguf-dump /home/teto/llama-models/ggml-org_Qwen2.5-Coder-3B-Q8_0-GGUF_qwen2.5-coder-3b-q8_0.gguf 

@@ -3,9 +3,9 @@
 # Add justfile() function, returning the current justfile, and justfile_directory()
 
 HOSTNAME := `hostname`
-NIXPKGS_REPO := env_var('HOME') / 'nixpkgs'
-BLOG_FOLDER := "${HOME}/blog"
-HM_REPO := env_var('HOME') / "hm"
+NIXPKGS_REPO := env('HOME') / 'nixpkgs'
+# BLOG_FOLDER := "${HOME}/blog"
+HM_REPO := env('HOME') / "hm"
 
 # not versioned, where we store secrets
 

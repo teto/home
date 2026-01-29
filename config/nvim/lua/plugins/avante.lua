@@ -4,9 +4,6 @@
 -- require('copilot').setup ({
 --   -- use recommended settings from above
 -- })
--- require('render-markdown').setup ({
---   -- use recommended settings from above
--- })
 -- require('avante_lib').load()
 
 local llama_hostname = 'jedha.local'
@@ -26,21 +23,27 @@ provider = 'llamacpp_from_openai'
 
 local xdg_config = vim.env.XDG_CONFIG_HOME or os.getenv('HOME') .. '/.config'
 
+-- print("Loading avante")
+
 -- TODO load configuration from llm-providers.json
 -- lua vim.json.decode(str, opts)
 require('avante').setup({
     -- debug = true, -- print error messages
+	-- log_level = 
+	log_level = vim.log.levels.DEBUG,
 
     -- can be a function as well
     -- avante is very talkative by default
     override_prompt_dir = vim.fn.expand(vim.fn.stdpath('config') .. '/avante_prompts'),
+
+	-- can be a function, appended as well
     system_prompt = [[
 	You are a highly skilled software engineer with extensive knowledge in many programming languages, frameworks, design patterns, and best practices.
 
 	Respect and use existing conventions, libraries, etc that are already present in the code base.
 
 	Make sure code comments are in English when generating them.
-	]];
+	]],
     -- rules = {
     --   project_dir = nil, ---@type string | nil (could be relative dirpath)
     --   global_dir = nil, ---@type string | nil (absolute dirpath)
@@ -145,7 +148,8 @@ require('avante').setup({
             -- model = 'ministral3-3b-q4',
             -- model = 'devstral2-24b-iq2',
             -- model = 'ministral3-14b'
-			model = 'mistral-7b',
+			-- model = 'mistral-7b',
+			model = 'qwen2.5-3b-coder',
             endpoint = 'http://' .. llama_hostname .. ':8080/v1',
             timeout = 30000, -- Timeout in milliseconds
             -- list_models
@@ -341,11 +345,3 @@ require('avante').setup({
     -- slash_commands =
 })
 
--- "AvanteViewBufferUpdated"
--- vim.api.nvim_create_user_command('', '!hasktags .', { desc = 'Regenerate tags' })
-
--- https://github.com/NixOS/nixpkgs/pull/408463
--- require("avante.api").ask()
-vim.keymap.set({ 'n', 'v' }, 'F2', function()
-    require('avante.api').ask({ without_selection = true })
-end, { noremap = true })
