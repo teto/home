@@ -148,12 +148,14 @@ require('avante').setup({
             -- model = 'ministral3-3b-q4',
             -- model = 'devstral2-24b-iq2',
             -- model = 'ministral3-14b'
+			-- disable_tools
 			-- model = 'mistral-7b',
-			model = 'qwen2.5-3b-coder',
+			-- model = 'qwen2.5-3b-coder',
+			model = 'ministral3-8b',
             endpoint = 'http://' .. llama_hostname .. ':8080/v1',
-            timeout = 30000, -- Timeout in milliseconds
+            timeout = 180000, -- Timeout in milliseconds
             -- list_models
-            use_ReAct_prompt = false,
+            -- use_ReAct_prompt = false,
             -- parse_curl_args
             -- tools send a shitton of tokens
             -- not supported by mistral (but inherited by others so...)
@@ -161,7 +163,7 @@ require('avante').setup({
             -- empty key is required else avante complains
             api_key_name = '',
             extra_request_body = {
-                max_tokens = 1000, -- to avoid infinite loops
+                max_tokens = 4000, -- to avoid infinite loops
             },
         },
 

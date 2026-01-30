@@ -51,7 +51,7 @@ input_price = 0.1
 output_price = 0.3
 
 [[models]]
-name = "mistral-7b"
+name = "ministral3-8b"
 provider = "llamacpp"
 alias = "local"
 temperature = 0.2

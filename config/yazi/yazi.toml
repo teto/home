@@ -9,7 +9,9 @@ sort_sensitive = false
 sort_reverse   = false
 sort_dir_first = true
 # display information associated with the file on the right side of the file list row.
-linemode       = "size"
+# https://yazi-rs.github.io/docs/configuration/yazi/#mgr.linemode
+# can be customized via a lua function
+linemode       = "size_and_mtime"
 show_hidden    = true  # toggled with .
 show_symlink   = true
 # The number of files to keep above and below the cursor when moving through the file list.
@@ -53,8 +55,7 @@ extract_zlib = [
 	# { run = 'nvim "$1"', desc = "Extract zlib here" },
 ]
 play = [
-	{ run = 'mpv "$@"', orphan = true, for = "unix" },
-	{ run = 'mpv "%1"', orphan = true, for = "windows" },
+	{ run = 'mpv %s', orphan = true, for = "unix" , desc = "Open with mpv"},
 	{ run = '''mediainfo "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show media info", for = "unix" },
 ]
 nix = [
@@ -67,7 +68,7 @@ rules = [
 	# { name = "*/", use = [ "edit", "open", "reveal" ] },
 	{ mime = "text/*",  use = [ "edit", "reveal" ] },
 	# { mime = "image/*", use = [ "open", "reveal" ] },
-	# { mime = "video/*", use = [ "play", "reveal" ] },
+	{ mime = "video/*", use = [ "play", "reveal" ] },
 	# { mime = "audio/*", use = [ "play", "reveal" ] },
 	# { mime = "inode/x-empty", use = [ "edit", "reveal" ] },
 
@@ -149,6 +150,10 @@ prepend_previewers = [
 # ]
 
 [input]
+
+cursor_blink = true
+
+confirm = true
 # cd
 # cd_title  = "Change directory:"
 # cd_origin = "top-center"
