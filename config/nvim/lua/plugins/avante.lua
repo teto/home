@@ -18,8 +18,8 @@ end
 -- provider = "mistral_devstral_2"
 -- provider = 'llamacpp'
 -- overrule both
--- provider = 'mistral_devstral_2'
-provider = 'llamacpp_from_openai'
+provider = 'mistral_devstral_2'
+-- provider = 'llamacpp_from_openai'
 
 local xdg_config = vim.env.XDG_CONFIG_HOME or os.getenv('HOME') .. '/.config'
 
@@ -69,14 +69,18 @@ require('avante').setup({
         -- docker_extra_args = "", -- Extra arguments to pass to the docker command
     },
     behaviour = {
-        auto_set_keymaps = false,
+        auto_set_keymaps = true,
+        auto_suggestions = false, -- Experimental stage
+
         enable_token_counting = false,
         -- auto_approve_tool_permissions = {"bash", "replace_in_file"}, -- Auto-approve specific tools only
-        -- support_paste_from_clipboard
         auto_focus_on_diff_view = true,
         auto_add_current_file = true,
         -- vs 'popup
         confirmation_ui_style = 'inline_buttons',
+        include_generated_by_commit_line = true, -- Controls if 'Generated-by: <provider/model>' line is added to git commit message
+
+        support_paste_from_clipboard = true,
     },
 
     -- provider = 'claude',
@@ -345,5 +349,13 @@ require('avante').setup({
     -- disabled_tools = { "python" },
     -- custom_tools
     -- slash_commands =
+
+    -- mappings = {
+    -- submit = {
+    --   normal = "<CR>",
+    --   insert = "<C-s>",
+    -- },
+    -- }
+
 })
 

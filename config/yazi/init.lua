@@ -1,7 +1,9 @@
+---@diagnostic disable: need-check-nil
 local has_sshfs, sshfs = pcall(require, 'sshfs')
 if has_sshfs then
-    require('sshfs'):setup()
+    sshfs:setup()
 end
+
 -- inspired by https://yazi-rs.github.io/docs/tips/
 Status:children_add(function(self)
     local h = self._current.hovered
@@ -109,3 +111,10 @@ function Linemode:size_and_mtime()
 	local size = self._file:size()
 	return string.format("%s %s", size and ya.readable_size(size) or "-", time)
 end
+
+-- must be called in sync plugin
+-- ps.sub("relay-notify-push", function(args)
+--   ya.async(function()
+--     Command("notify-send"):arg({ args.title, args.content }):status()
+--   end)
+-- end)

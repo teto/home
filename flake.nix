@@ -495,6 +495,17 @@
       devShells = {
         orgmode = myPkgs.callPackage ./devShells/orgmode.nix { };
 
+        rust = unstablePkgs.mkShell {
+          name = "rust-dev";
+          runtimeInputs = with unstablePkgs; [
+            cargo
+            gcc
+          ];
+
+          # shellHook =
+
+        };
+
         # devShell when working on this repo:
         # and also when bootstrapping a new machine which is why I add some basic tooling
         default = myPkgs.callPackage ./devShells/devShell.nix {

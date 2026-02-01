@@ -5,7 +5,7 @@
   # ];
 
   enable = true;
-  # package = flakeSelf.inputs.yazi.packages.${pkgs.stdenv.hostPlatform.system}.yazi;
+  package = flakeSelf.inputs.yazi.packages.${pkgs.stdenv.hostPlatform.system}.yazi;
 
   # NOTE that these can be installed imperatively via
   # ya pack -a GianniBYoung/rsync for instance

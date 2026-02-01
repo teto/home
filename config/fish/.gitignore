@@ -1,1 +1,2 @@
-functions/*
+functions/fish_command_not_found.fish
+functions/yy.fish

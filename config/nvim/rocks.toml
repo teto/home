@@ -25,7 +25,7 @@ path = "/home/teto/neovim"
 # If the plugin name contains a dot then you must add quotes to the key name!
 [plugins]
 "rocks-git.nvim"= "2.5.8"
-"rocks-config.nvim" = "3.1.2"
+"rocks-config.nvim" = "3.2.0"
 # "diffview.nvim" = "scm"
 "haskell-tools.nvim" = "7.0.0"
 
@@ -49,7 +49,7 @@ auto-session = "2.5.1"
 "lsp_signature.nvim" = "0.3.1"
 friendly-snippets = "scm"
 # "haskell-snippets.nvim" = "1.4.4"
-"yazi.nvim" = "13.1.3"
+"yazi.nvim" = "13.1.4"
 
 
 
@@ -82,13 +82,13 @@ friendly-snippets = "scm"
 vim-startuptime= "4.5.0"
 menu= "scm"
 # "snacks.nvim" = "2.6.0"
-fzf-lua = "0.0.2437"
+fzf-lua = "0.0.2453"
 # "lz.n" = "2.12.0"
 "indent-blankline.nvim" = "3.9.0"
 # "llm.nvim"= "scm"
 # volt is a UI library
 volt= "scm"
-"grug-far.nvim"= "1.6.59"
+"grug-far.nvim"= "1.6.60"
 # orgmode = "0.7.1"
 # neogit = "2.0.0"
 # "diffview.nvim" = "scm"
@@ -173,7 +173,6 @@ dir = "/home/teto/neovim/iron.nvim"
 # rev = "v3.0"
 branch = "master"
 
-
 [plugins."nvim-colorizer.lua"]
 git = "norcalli/nvim-colorizer.lua"
 rev = "a065833f35a3a7cc3ef137ac88b5381da2ba302e"
@@ -216,11 +215,15 @@ rev = "d9d12d4bfb9a4c5b8b8bdf7f612551df6972946c"
 
 [plugins."jj.nvim"]
 git = "nicolasgb/jj.nvim"
-rev = "v0.3.0"
+rev = "v0.4.1"
 
 [plugins."jujutsu.nvim"]
 git = "yannvanhalewyn/jujutsu.nvim"
 rev = "61239312730b3f51441596bdadab7e3578987592"
+
+[plugins."jiejie.nvim"]
+git = "jceb/jiejie.nvim"
+rev = "c8758d839745caa55faf11a1c0ab32cb1d95c681"
 
 # [plugins."treewalker.nvim"]
 # git = "aaronik/treewalker.nvim"

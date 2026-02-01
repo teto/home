@@ -86,6 +86,8 @@
           '';
       };
 
+    # "nvim/lua/hm-generated.lua".text = config.programs.neovim.initLua;
+
     # "nvim/lua/generated-by-nix.lua" =
     # could use toLua or buildLuarocksConfig
     # pkgs.lua.pkgs.luaLib.generateLuarocksConfig
