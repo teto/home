@@ -25,7 +25,7 @@ pkgs.mkShell {
       lua5_1 # for tests
       nix-output-monitor
       # nodejs # what for ?
-      termscp-matt
+      # termscp-matt
       treefmt-home # use formatter instead ?
       ripgrep
       rustic # testing against restic

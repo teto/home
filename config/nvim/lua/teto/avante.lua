@@ -22,13 +22,16 @@ function M.setup_autocmd()
 	 pattern = 'AvanteViewBufferUpdated',
 	 desc = 'display provider statistics in statusline',
 	 callback = function(args)
+	  -- todo get if error or not
+	   vim.notify("Got an answer")
 		 -- print("Called matt's on_attach autocmd")
+		 -- todo log, get nbeovim logger
 		 -- if not (args.data and args.data.client_id) then
 		 --     return
 		 -- end
 
-		 vim.print('received args ')
-		 vim.print(args)
+		 -- vim.print('received args ')
+		 -- vim.print(args)
 	 end,
  })
  -- "AvanteViewBufferUpdated"

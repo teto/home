@@ -173,8 +173,7 @@
     # poetry.url = "github:nix-community/poetry2nix";
     neovim-nightly-overlay = {
       # url = "/home/teto/neovim-nightly-overlay";
-      # url = "github:nix-community/neovim-nightly-overlay";
-      url = "github:teto/neovim-nightly-overlay?ref=teto/version-in-store-path";
+      url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
       # inputs.neovim-src.follows = "neovim-src";
     };

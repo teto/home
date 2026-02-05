@@ -26,9 +26,40 @@ local xdg_config = vim.env.XDG_CONFIG_HOME or os.getenv('HOME') .. '/.config'
 
 -- print("Loading avante")
 
+
+local function mk_llama_provider(name) 
+  local opts = {
+            __inherited_from = 'openai',
+            -- hide_in_model_selector
+            -- model = 'ministral3-3b-q4',
+            -- model = 'devstral2-24b-iq2',
+            -- model = 'ministral3-14b'
+			-- disable_tools
+			-- model = 'mistral-7b',
+			-- model = 'qwen2.5-3b-coder',
+			model = name,
+            endpoint = 'http://' .. llama_hostname .. ':8080/v1',
+            timeout = 180000, -- Timeout in milliseconds
+            -- list_models
+            -- use_ReAct_prompt = false,
+            -- parse_curl_args
+            -- tools send a shitton of tokens
+            -- not supported by mistral (but inherited by others so...)
+            disable_tools = false,
+            -- empty key is required else avante complains
+            api_key_name = '',
+            -- extra_request_body = {
+            --     max_tokens = 4000, -- to avoid infinite loops
+            -- },
+        }
+  return opts
+ end
+
+
+
 -- TODO load configuration from llm-providers.json
 -- lua vim.json.decode(str, opts)
-require('avante').setup({
+opts = {
     debug = true, -- print error messages
 	-- log_level = 
 	log_level = vim.log.levels.DEBUG,
@@ -147,31 +178,13 @@ require('avante').setup({
 
         -- see https://github.com/yetone/avante.nvim/issues/2238
         -- legacy
-        llamacpp_from_openai = {
-            __inherited_from = 'openai',
-            -- hide_in_model_selector
-            -- model = 'ministral3-3b-q4',
-            -- model = 'devstral2-24b-iq2',
-            -- model = 'ministral3-14b'
-			-- disable_tools
-			-- model = 'mistral-7b',
-			-- model = 'qwen2.5-3b-coder',
-			model = 'ministral3-8b',
-            endpoint = 'http://' .. llama_hostname .. ':8080/v1',
-            timeout = 180000, -- Timeout in milliseconds
-            -- list_models
-            -- use_ReAct_prompt = false,
-            -- parse_curl_args
-            -- tools send a shitton of tokens
-            -- not supported by mistral (but inherited by others so...)
-            disable_tools = false,
-            -- empty key is required else avante complains
-            api_key_name = '',
-            extra_request_body = {
-                max_tokens = 4000, -- to avoid infinite loops
-            },
-        },
-
+        ['llama_mistral7b'] = mk_llama_provider("mistral-7b"),
+        ['llama_ministral3_3b'] = mk_llama_provider("ministral3-3b"),
+        ['llama_ministral3_8b'] = mk_llama_provider("ministral3-8b"),
+        ['llama_qwen2_5_3b'] = mk_llama_provider("qwen2.5-3b-coder"),
+        ['local:llama_qwen2_5_7b'] = mk_llama_provider("qwen2.5-7b-coder"),
+		-- qwen2.5-coder-7b-instruct-q8
+		-- Ministral-3-3B-Instruct
         ['mistral_devstral_2'] = {
             __inherited_from = 'openai',
             -- hide_in_model_selector
@@ -361,5 +374,27 @@ require('avante').setup({
     -- },
     -- }
 
-})
+}
 
+local hidden_models = {
+ "aihubmix",
+  "copilot",
+  "gemini",
+  "openai",
+  "openai-gpt-4o-mini",
+  "vertex",
+  "vertex_claude",
+  "ollama",
+  "moonshot",
+}
+
+-- hides everything in hidden_models
+for _, model in ipairs(hidden_models) do
+  opts.providers[model] = 
+   { hide_in_model_selector = true ,
+   is_env_set = false,
+  }
+  -- is_env_set
+end
+
+require('avante').setup(opts)
