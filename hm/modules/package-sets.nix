@@ -173,19 +173,20 @@ in
           pkgs.acpi # for acpi -V
           pkgs.ani-cli # to watch anime
 
+          pkgs.qimgv # qt image viewer
+          pkgs.ristretto # gtk image viewer
+
           # anki          # spaced repetition system
           # hopefully we can remove this from the environment
           # it's just that I can't setup latex correctly
           # pkgs.rofi-rbw-wayland
-          pkgs.ddcutil
+          pkgs.ddcutil    # to control external monitor background
           pkgs.timg # to display images in terminal, to compare with imgcat ?
           myImagemagick
 
           # borken cos of pymupdf
           # pkgs.kcc # to convert ebooks to remarkable format
-          pkgs.ncmpcpp # outdated/ replaced by rmpc
-          # pkgs.mpc_cli
-          # pkgs.ymuse # GUI
+          # pkgs.ncmpcpp # outdated/ replaced by rmpc
 
           pkgs.libva-utils
 
@@ -198,7 +199,6 @@ in
           # gnome.california # fails
           # khard # see khal.nix instead ?
           # libsecret  # to consult
-          # newsboat #
           # mujmap # to sync notmuch tags across jmap
           pkgs.vlc
           # element-desktop # TODO this should go into nix profile install
@@ -216,8 +216,7 @@ in
           pkgs.euphonica # nice looking mpd GUI
           s-search # "s" to open web search
           smplayer # GUI around mpv
-          celluloid # GUI around mpv
-          # sxiv # simple image viewer
+          # celluloid # GUI around mpv
           # unstable.transmission_gtk  # bittorrent client
           # vimiv # image viewer
           ytfzf # broken browse youtube
@@ -232,7 +231,7 @@ in
           eog # eye of gnome = image viewer / creates a collision
           file-roller # for GUI archive handling
           hunspellDicts.fr-any
-          imv # image viewer
+          # imv # image viewer
           lazygit # kinda like tig
           libnotify
           (lib.ignoreBroken moc-wrapped) # music player
@@ -546,7 +545,7 @@ in
         wl-clipboard # wl-copy / wl-paste
         wdisplays # to show
         swaybg # to set wallpaper
-        swayimg # imageviewer
+        swayimg # imageviewer (f1 to see help)
         swaynotificationcenter # top cool
         swaynag-battery # https://github.com/NixOS/nixpkgs/pull/175905
         sway-launcher-desktop # fzf-based launcher
@@ -567,10 +566,11 @@ in
 
         # sway overview, draws layouts for each workspace: dope https://github.com/milgra/sov
         # sov
-        nwg-bar # locks nothing
-        nwg-drawer # launcher
-        nwg-menu
-        nwg-dock # a nice dock
+        # nwg-bar # locks nothing
+        # nwg-drawer # launcher
+        # nwg-menu
+        # nwg-dock # a nice dock
+
         swaylock-effects # offers sexier
         sway-contrib.grimshot # contains "grimshot" for instance
         pkgs.sway-scratchpad

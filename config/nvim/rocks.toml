@@ -24,7 +24,7 @@ path = "/home/teto/neovim"
 # List of Neovim plugins to install alongside their versions.
 # If the plugin name contains a dot then you must add quotes to the key name!
 [plugins]
-"rocks-git.nvim"= "2.5.8"
+"rocks-git.nvim"= "2.5.9"
 "rocks-config.nvim" = "3.2.0"
 # "diffview.nvim" = "scm"
 "haskell-tools.nvim" = "7.0.0"
@@ -82,7 +82,7 @@ friendly-snippets = "scm"
 vim-startuptime= "4.5.0"
 menu= "scm"
 # "snacks.nvim" = "2.6.0"
-fzf-lua = "0.0.2453"
+fzf-lua = "0.0.2458"
 # "lz.n" = "2.12.0"
 "indent-blankline.nvim" = "3.9.0"
 # "llm.nvim"= "scm"
@@ -167,11 +167,11 @@ rev = "v1.4.0"
 # git = "arkav/lualine-lsp-progress"
 # rev = "56842d097245a08d77912edf5f2a69ba29f275d7"
 
-[plugins."iron.nvim"]
-# git = "vigemus/iron.nvim"
-dir = "/home/teto/neovim/iron.nvim"
-# rev = "v3.0"
-branch = "master"
+# [plugins."iron.nvim"]
+# # git = "vigemus/iron.nvim"
+# dir = "/home/teto/neovim/iron.nvim"
+# # rev = "v3.0"
+# branch = "master"
 
 [plugins."nvim-colorizer.lua"]
 git = "norcalli/nvim-colorizer.lua"
@@ -183,7 +183,7 @@ rev = "c399884e8f64019ec9bb581251f9710915b7f996"
 
 [plugins."lsp-progress.nvim"]
 git = "linrongbin16/lsp-progress.nvim"
-rev = "v1.0.15"
+rev = "v2.0.0"
 
 [plugins."fcitx.nvim"]
 git = "h-hg/fcitx.nvim"

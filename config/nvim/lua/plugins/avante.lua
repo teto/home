@@ -9,7 +9,7 @@
 local llama_hostname = 'jedha.local'
 
 -- local provider = 'mistral'
-provider = 'claude'
+-- provider = 'claude'
 if vim.fn.hostname() == 'jedha' then
     provider = 'llamacpp'
 end
@@ -19,6 +19,7 @@ end
 -- provider = 'llamacpp'
 -- overrule both
 provider = 'mistral_devstral_2'
+-- provider = 'gemini'
 -- provider = 'llamacpp_from_openai'
 
 local xdg_config = vim.env.XDG_CONFIG_HOME or os.getenv('HOME') .. '/.config'
@@ -28,7 +29,7 @@ local xdg_config = vim.env.XDG_CONFIG_HOME or os.getenv('HOME') .. '/.config'
 -- TODO load configuration from llm-providers.json
 -- lua vim.json.decode(str, opts)
 require('avante').setup({
-    -- debug = true, -- print error messages
+    debug = true, -- print error messages
 	-- log_level = 
 	log_level = vim.log.levels.DEBUG,
 
@@ -180,11 +181,14 @@ require('avante').setup({
             model = 'devstral-2512',
             endpoint = 'https://api.mistral.ai/v1',
             timeout = 30000, -- Timeout in milliseconds
+
+			-- use_response_api = true,
             api_key_name = 'cmd:cat ' .. (vim.fs.joinpath(xdg_config, 'sops-nix/secrets/mistral_test_api_key')),
             -- mandatory to make it work with mistral see
             -- https://github.com/yetone/avante.nvim/discussions/1570#discussioncomment-12600703
             extra_request_body = {
-                max_tokens = 4096, -- to avoid using max_completion_tokens
+			 -- 16384
+                max_tokens = 16383 , -- to avoid using max_completion_tokens
             },
         },
 

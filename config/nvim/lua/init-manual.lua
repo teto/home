@@ -466,7 +466,6 @@ vim.keymap.set('n', '<Leader><Leader>', '<Cmd>b#<CR>', { desc = 'Focus alternate
 vim.keymap.set('n', '0', '^', { desc = 'Go to first line' })
 
 vim.keymap.set('n', '<Leader>ev', '<Cmd>e $MYVIMRC<CR>', { desc = "Edit home-manager's generated neovim config" })
-vim.keymap.set('n', '<Leader>sv', '<Cmd>source $MYVIMRC<CR>', { desc = 'Reload my neovim config' })
 vim.keymap.set('n', '<Leader>el', '<Cmd>e ' .. vim.fn.stdpath('config') .. '/lua/init-manual.lua<CR>')
 vim.keymap.set('n', '<F6>', '<Cmd>ASToggle<CR>', { desc = 'Toggle autosave' })
 
@@ -887,5 +886,11 @@ end, { desc = 'Ask without selecting anything' })
 --
 -- -- https://github.com/nvim-neorg/neorg/issues/1351
 -- -- https://github.com/nvim-neorg/neorg/issues/1342
+
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
+
+-- todo add api to list remote models
+vim.api.nvim_create_user_command('AvanteLogs', ':e ~/.cache/nvim/avante.log', { desc = 'read avante logs' })
 
 -- require('plugins.neorg')

@@ -21,6 +21,8 @@ pkgs.mkShell {
       fzf # for just's "--select"
       git-crypt # to run `git-crypt export-key`
       just # to run justfiles
+
+      lua5_1 # for tests
       nix-output-monitor
       # nodejs # what for ?
       termscp-matt
