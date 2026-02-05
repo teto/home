@@ -55,7 +55,26 @@ vim.g.rikai = {
     jmdictdb = nix_deps.edict_expressiondb,
     log_level = vim.log.levels.DEBUG,
     separator = '===>>>',
-    popup = {},
+    popup_options = {
+        use_images = true,
+        image_cmd = function(token)
+            -- get the Normal color
+
+            return {
+                'magick',
+                '-background',
+                'transparent',
+                '-fill',
+                'white',
+                '-pointsize',
+                '24',
+                'label:"' .. token .. '"',
+                'output.png',
+            }
+        end,
+        image_font_size = 40,
+        max_height = 20,
+    },
 }
 
 vim.o.spelllang = 'en_gb,fr'
@@ -853,9 +872,9 @@ end, { desc = 'Go to file, create if missing' })
 -- if vim.g.avante ~= nil then return end
 -- Outside of the fork it kills the plugin so careful
 -- normally overriden by setup call
-vim.g.avante = {
-    log_level = vim.log.levels.DEBUG,
-}
+-- vim.g.avante = {
+--     log_level = vim.log.levels.DEBUG,
+-- }
 require('plugins.avante')
 
 local avante = require('teto.avante')

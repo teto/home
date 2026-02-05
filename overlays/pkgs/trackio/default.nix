@@ -3,15 +3,15 @@
   buildPythonPackage,
   fetchFromGitHub,
   hatchling,
-    pandas,
-    huggingface-hub,
-    gradio,
-    numpy,
-    pillow,
-    orjson,
-    pydub,
-    plotly,
-    tomli,
+  pandas,
+  huggingface-hub,
+  gradio,
+  numpy,
+  pillow,
+  orjson,
+  pydub,
+  plotly,
+  tomli,
 
 }:
 
@@ -30,7 +30,6 @@ buildPythonPackage rec {
   build-system = [
     hatchling
   ];
-
 
   propagatedBuildInputs = [
     pandas

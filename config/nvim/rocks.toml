@@ -229,9 +229,17 @@ rev = "c8758d839745caa55faf11a1c0ab32cb1d95c681"
 git = "nickjvandyke/opencode.nvim"
 rev = "v0.1.0"
 
-[plugins."blink.compat"]
-git = "saghen/blink.compat"
-rev = "v2.5.0"
+[plugins.blink-cmp-git]
+git = "kaiser-yang/blink-cmp-git"
+rev = "v3.0.0"
+
+[plugins.blink-cmp-avante]
+git = "kaiser-yang/blink-cmp-avante"
+rev = "v0.1.0"
+
+# [plugins."blink.compat"]
+# git = "saghen/blink.compat"
+# rev = "v2.5.0"
 
 # [plugins."treewalker.nvim"]
 # git = "aaronik/treewalker.nvim"

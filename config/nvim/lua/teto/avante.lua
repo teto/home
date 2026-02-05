@@ -2,6 +2,9 @@
 -- return the Sidebar
 -- local s = require'avante.sidebar'
 local s = require('avante').get()
+local Highlights = require('avante.highlights')
+local Utils = require('avante.utils')
+local Config = require('avante.config')
 -- if not sidebar then return nil, "No sidebar" end
 
 -- if not Utils.is_valid_container(self.containers.result, true) then return end
@@ -40,6 +43,49 @@ function M.setup_autocmd()
     vim.keymap.set({ 'n', 'v' }, 'F2', function()
         require('avante.api').ask({ without_selection = true })
     end, { noremap = true })
+end
+
+-- custom renderer for input prompt, to show the currently selected provider !
+-- inspired by Sidebar:render_header
+function M.render_header()
+    -- if not bufnr or not api.nvim_buf_is_valid(bufnr) then return end
+
+    local function format_segment(text, highlight)
+        return '%#' .. highlight .. '#' .. text
+    end
+
+    -- if Config.windows.sidebar_header.rounded then
+    --   header_text = format_segment(Utils.icon("", "『"), reverse_hl)
+    --     .. format_segment(header_text, hl)
+    --     .. format_segment(Utils.icon("", "』"), reverse_hl)
+    -- else
+    --   header_text = format_segment(" " .. header_text .. " ", hl)
+    -- end
+    local header_text = string.format(
+        '%s%s (%s)',
+        Utils.icon('󱜸 '),
+        'Ask' or 'Chat with',
+        Config.provider
+        -- Config.mappings.sidebar.switch_windows
+    )
+
+    local winbar_text
+    -- if Config.windows.sidebar_header.align == "left" then
+    --   winbar_text = header_text .. "%=" .. format_segment("", Highlights.AVANTE_SIDEBAR_WIN_HORIZONTAL_SEPARATOR)
+    -- elseif Config.windows.sidebar_header.align == "center" then
+    winbar_text = format_segment('%=', Highlights.AVANTE_SIDEBAR_WIN_HORIZONTAL_SEPARATOR)
+        .. header_text
+        .. format_segment('%=', Highlights.AVANTE_SIDEBAR_WIN_HORIZONTAL_SEPARATOR)
+    -- elseif Config.windows.sidebar_header.align == "right" then
+    --   winbar_text = format_segment("%=", Highlights.AVANTE_SIDEBAR_WIN_HORIZONTAL_SEPARATOR) .. header_text
+    -- end
+
+    -- print(winbar_text)
+    -- winbar_text = "tOTO"
+    return winbar_text
+    --  api.nvim_set_option_value("winbar", winbar_text, {
+    -- win = winid
+    --  })
 end
 
 return M

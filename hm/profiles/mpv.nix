@@ -48,7 +48,9 @@
       pkgs.mpvScripts.manga-reader
       pkgs.mpvScripts.mpris
       pkgs.mpvScripts.thumbnail # show thumbnail on hover
-      pkgs.mpvScripts.modernz # new UI ? https://github.com/Samillion/ModernZ
+      # pkgs.mpvScripts.modernz # new UI ? https://github.com/Samillion/ModernZ
+      pkgs.mpvScripts.uosc # new UI ? https://github.com/Samillion/ModernZ
+      pkgs.mpvScripts.thumbfast # works with uosc to show thumbnails
       # pkgs.mpvScripts.mpv-notify-send # does not work ?
     ];
 

@@ -257,7 +257,7 @@ let
 
     # for none-ls
     # nodePackages.prettier # for none-ls json formatting ?
-    nodePackages.prettier
+    # nodePackages.prettier
     python3Packages.flake8 # for nvim-lint and some nixpkgs linters
     # soxWithMp3 = final.sox.override { llama-cpp = llama-cpp-matt; };
 
@@ -408,7 +408,7 @@ in
     lp.mega-cmdparse
     lp.mega-logging # should not be needed ?
 
-    lp.nvim-nio
+    lp.nvim-nio # for rocks.nvim
     # lp.fzy
 
   ]

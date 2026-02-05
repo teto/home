@@ -189,44 +189,64 @@ local opts = {
             'buffer',
             -- 'git',
             --  avante ones
-            'avante_commands',
-            'avante_mentions',
-            'avante_shortcuts',
-            'avante_files',
+            -- "avante_commands",
+            --    "avante_mentions",
+            --    "avante_shortcuts",
+            --    "avante_files",
         },
         providers = {
             -- ve:
-            -- git = {
-            --     module = 'blink-cmp-git',
-            --     name = 'Git',
-            --     opts = {
-            --         -- options for the blink-cmp-git
-            --     },
-            -- },
-            avante_commands = {
-                name = 'avante_commands',
-                module = 'blink.compat.source',
-                score_offset = 90, -- show at a higher priority than lsp
-                opts = {},
+
+            git = {
+                module = 'blink-cmp-git',
+                name = 'Git',
+                opts = {
+                    -- options for the blink-cmp-git
+                },
             },
-            avante_files = {
-                name = 'avante_files',
-                module = 'blink.compat.source',
-                score_offset = 100, -- show at a higher priority than lsp
-                opts = {},
+            -- avante_commands = {
+            -- enabled = function()
+            --  return vim.tbl_contains({ 'octo', 'gitcommit', 'markdown' }, vim.bo.filetype)
+            -- end,
+            --             opts = {
+            --          commit = {
+            --         -- You may want to customize when it should be enabled
+            --         -- The default will enable this when `git` is found and `cwd` is in a git repository
+            --         -- enable = function() end
+            --         -- You may want to change the triggers
+            --         -- triggers = { ':' },
+            --                 -- options for the blink-cmp-git
+            --             score_offset = 90, -- show at a higher priority than lsp
+            --  },
+            --         },
+            avante = {
+                module = 'blink-cmp-avante',
+                name = 'Avante',
             },
-            avante_mentions = {
-                name = 'avante_mentions',
-                module = 'blink.compat.source',
-                score_offset = 1000, -- show at a higher priority than lsp
-                opts = {},
-            },
-            avante_shortcuts = {
-                name = 'avante_shortcuts',
-                module = 'blink.compat.source',
-                score_offset = 1000, -- show at a higher priority than lsp
-                opts = {},
-            },
+            --  avante_commands = {
+            -- name = "avante_commands",
+            -- module = "blink.compat.source",
+            -- score_offset = 90, -- show at a higher priority than lsp
+            -- opts = {},
+            --  },
+            --  avante_files = {
+            -- name = "avante_files",
+            -- module = "blink.compat.source",
+            -- score_offset = 100, -- show at a higher priority than lsp
+            -- opts = {},
+            --  },
+            --  avante_mentions = {
+            -- name = "avante_mentions",
+            -- module = "blink.compat.source",
+            -- score_offset = 1000, -- show at a higher priority than lsp
+            -- opts = {},
+            --  },
+            --  avante_shortcuts = {
+            -- name = "avante_shortcuts",
+            -- module = "blink.compat.source",
+            -- score_offset = 1000, -- show at a higher priority than lsp
+            -- opts = {},
+            --  },
             snippets = {
                 opts = {
                     search_path = '',
