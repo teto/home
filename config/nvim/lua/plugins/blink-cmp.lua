@@ -1,5 +1,5 @@
 local b = require('blink.cmp')
-b.setup({
+local opts = {
     -- 'default' for mappings similar to built-in completion
     -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
     -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
@@ -188,6 +188,11 @@ b.setup({
             'snippets',
             'buffer',
             -- 'git',
+			--  avante ones
+	    "avante_commands",
+        "avante_mentions",
+        "avante_shortcuts",
+        "avante_files",
         },
         providers = {
             -- ve:
@@ -198,6 +203,30 @@ b.setup({
             --         -- options for the blink-cmp-git
             --     },
             -- },
+		   avante_commands = {
+			 name = "avante_commands",
+			 module = "blink.compat.source",
+			 score_offset = 90, -- show at a higher priority than lsp
+			 opts = {},
+		   },
+		   avante_files = {
+			 name = "avante_files",
+			 module = "blink.compat.source",
+			 score_offset = 100, -- show at a higher priority than lsp
+			 opts = {},
+		   },
+		   avante_mentions = {
+			 name = "avante_mentions",
+			 module = "blink.compat.source",
+			 score_offset = 1000, -- show at a higher priority than lsp
+			 opts = {},
+		   },
+		   avante_shortcuts = {
+			 name = "avante_shortcuts",
+			 module = "blink.compat.source",
+			 score_offset = 1000, -- show at a higher priority than lsp
+			 opts = {},
+		   },
             snippets = {
                 opts = {
                     search_path = '',
@@ -209,7 +238,14 @@ b.setup({
     --      -- Don't automatically show the completion menu
     --      auto_show = false,
     -- }
-})
+}
+
+b.setup(opts)
+
+-- local has_avante, avante = pcall(require, 'avante')
+-- if has_avante then
+--   avante.
+-- end
 
 -- example calling setup directly for each LSP
 config = function()

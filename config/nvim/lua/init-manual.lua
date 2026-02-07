@@ -870,6 +870,7 @@ vim.api.nvim_create_user_command('LlmChat', function()
     require('avante.api').ask({ without_selection = true })
 end, { desc = 'Ask without selecting anything' })
 
+-- "module 'nvim-treesitter.parsers' not found:"
 -- require('plugins.neorg')
 -- todo fix upgraded version
 -- require('plugins.image')

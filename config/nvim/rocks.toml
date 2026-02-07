@@ -225,6 +225,14 @@ rev = "61239312730b3f51441596bdadab7e3578987592"
 git = "jceb/jiejie.nvim"
 rev = "c8758d839745caa55faf11a1c0ab32cb1d95c681"
 
+[plugins."opencode.nvim"]
+git = "nickjvandyke/opencode.nvim"
+rev = "v0.1.0"
+
+[plugins."blink.compat"]
+git = "saghen/blink.compat"
+rev = "v2.5.0"
+
 # [plugins."treewalker.nvim"]
 # git = "aaronik/treewalker.nvim"
 # rev = "4992fa9d27792b7a573e4545c9b2c4e61aba4f44"

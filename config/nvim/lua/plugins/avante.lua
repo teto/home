@@ -51,6 +51,10 @@ local function mk_llama_provider(name)
             -- extra_request_body = {
             --     max_tokens = 4000, -- to avoid infinite loops
             -- },
+            prompt_opts = {
+
+             system_prompt = "you are zulu"
+            },
         }
   return opts
  end
@@ -76,6 +80,7 @@ opts = {
 
 	Make sure code comments are in English when generating them.
 	]],
+
     -- rules = {
     --   project_dir = nil, ---@type string | nil (could be relative dirpath)
     --   global_dir = nil, ---@type string | nil (absolute dirpath)
@@ -183,6 +188,7 @@ opts = {
         ['llama_ministral3_8b'] = mk_llama_provider("ministral3-8b"),
         ['llama_qwen2_5_3b'] = mk_llama_provider("qwen2.5-3b-coder"),
         ['local:llama_qwen2_5_7b'] = mk_llama_provider("qwen2.5-7b-coder"),
+        ['local:smol-3b'] = mk_llama_provider("smol-3b"),
 		-- qwen2.5-coder-7b-instruct-q8
 		-- Ministral-3-3B-Instruct
         ['mistral_devstral_2'] = {
