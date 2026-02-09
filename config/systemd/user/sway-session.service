@@ -14,6 +14,7 @@ After=graphical-session-pre.target
 [Service]
 ; Type=Notify
 Type=simple
+Environment=WLR_SCENE_DISABLE_DIRECT_SCANOUT=1
 ; EnvironmentFile=-%h/.config/sway/env
 ; todo it cant find sway in PATH , PATH looks empty
 ; line make you able to logout to dm and login into sway again
