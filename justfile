@@ -4,7 +4,9 @@
 
 HOSTNAME := `hostname`
 NIXPKGS_REPO := env('HOME') / 'nixpkgs'
+
 # BLOG_FOLDER := "${HOME}/blog"
+
 HM_REPO := env('HOME') / "hm"
 
 # not versioned, where we store secrets

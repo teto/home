@@ -1,10 +1,11 @@
-
 -- conflicts with iron.repl
 
-require'snacks'.setup {
+require('snacks').setup({
 
- image = {
-  enabled = true;
- }
-}
-vim.keymap.set("n", "s", function() require'snacks'.scratch() end, { desc = "Toggle Scratch Buffer" })
+    image = {
+        enabled = true,
+    },
+})
+vim.keymap.set('n', 's', function()
+    require('snacks').scratch()
+end, { desc = 'Toggle Scratch Buffer' })

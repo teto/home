@@ -53,7 +53,7 @@ in
     pass-perso
     # poppler for pdf preview
 
-    rendercv  # yaml-based CV
+    rendercv # yaml-based CV
     stow
     timr-tui # rust clock
     systemctl-tui

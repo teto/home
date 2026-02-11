@@ -92,8 +92,8 @@
     };
 
     deploy-rs = {
-      # url = "github:serokell/deploy-rs";
-      url = "github:apoloqize/deploy-rs?rev=b48c508f1e8c9f0c82a9baeffa014e86d716a546";
+      url = "github:serokell/deploy-rs";
+      # url = "github:apoloqize/deploy-rs?rev=b48c508f1e8c9f0c82a9baeffa014e86d716a546";
 
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -388,6 +388,8 @@
             (final: prev: {
               # expose it for byNamePkgsOverlay
               inherit treefmt-nix;
+              # for pimsync-dev to see flakeSelf
+              flakeSelf = self;
             })
             byNamePkgsOverlay
             # autoloadedPkgsOverlay
@@ -491,45 +493,43 @@
       # todo create a bootstrap devShell
       # https://github.com/numtide/blueprint/blob/0ed984d51a3031065925ab08812a5434f40b93d4/lib/default.nix#L547
       # lib.importFiles ./devShells //
-      devShells = {
-        orgmode = myPkgs.callPackage ./devShells/orgmode.nix { };
 
-        rust = unstablePkgs.mkShell {
-          name = "rust-dev";
-          runtimeInputs = with unstablePkgs; [
-            cargo
-            gcc
-          ];
+      devShells =
+        let
+          # Load all devShells from the devShells/ directory
+          devShellFiles = builtins.attrNames (
+            lib.filterAttrs (n: _: lib.hasSuffix ".nix" n) (builtins.readDir ./devShells)
+          );
 
-          # shellHook =
+          # Function to load and combine devShells
+          loadDevShells = lib.genAttrs' devShellFiles (
+            file:
+            let
+              path = ./devShells/${file};
+              shell = myPkgs.callPackage path {
+                # inherit myPkgs unstablePkgs secrets self;
+              };
+            in
+            {
+              name = builtins.replaceStrings [ ".nix" ] [ "" ] (lib.traceVal file);
+              value = shell;
+            }
+          );
+        in
 
+        loadDevShells
+        // {
+          devShell = null;
+          default = myPkgs.callPackage ./devShells/devShell.nix {
+            inherit secrets self;
+          };
+          inherit (unstablePkgs)
+            nhs96
+            nhs98
+            nhs910
+            nhs912
+            ;
         };
-
-        # devShell when working on this repo:
-        # and also when bootstrapping a new machine which is why I add some basic tooling
-        default = myPkgs.callPackage ./devShells/devShell.nix {
-          inherit secrets self;
-        };
-
-        avante = unstablePkgs.mkShell {
-          name = "avante.nvim";
-          runtimeInputs = with unstablePkgs; [
-            luajit.pkgs.luacheck
-            stylua
-          ];
-
-          # shellHook =
-
-        };
-
-        inherit (unstablePkgs)
-          nhs96
-          nhs98
-          nhs910
-          nhs912
-          ;
-
-      };
 
       formatter = treefmtEval.config.build.wrapper;
       # formatter = self.packages.${system}.treefmt-home;
@@ -546,7 +546,8 @@
           */
 
           # generates a infinite trace right now
-          nvim = self.nixosConfigurations.desktop.config.home-manager.users.teto.programs.neovim.finalPackage;
+          nvim =
+            self.nixosConfigurations.tatooine.config.home-manager.users.teto.programs.neovim.finalPackage;
 
           inherit (myPkgs)
             pass-import-high-password-length
@@ -560,7 +561,7 @@
             gpt4all
             gpt4all-cuda
             termscp-matt
-            # pimsync-dev
+            pimsync-dev
             # rsync-yazi
             ;
 
@@ -749,7 +750,7 @@
           inherit secretsFolder lib;
           flakeSelf = self;
         };
-        # python = import ./overlays/python.nix;
+        python = import ./overlays/python.nix;
         lua = import ./overlays/lua.nix;
       };
 
@@ -800,7 +801,8 @@
 
         # for now
         # sshOpts = [ "-F" "ssh_config" ];
-        # TODO go through all nixosConfigurations actually
+        # TODO go through all nixosConfigurations actually ?
+        #
         nodes =
           let
             # system = "x86_64-linux";

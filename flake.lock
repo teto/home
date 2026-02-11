@@ -231,17 +231,16 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1766853465,
-        "narHash": "sha256-gpQynlctGt24o0Lmjwm9b6WbjUhgXl1/5ZbJZpZ8NrU=",
-        "owner": "apoloqize",
+        "lastModified": 1770019181,
+        "narHash": "sha256-hwsYgDnby50JNVpTRYlF3UR/Rrpt01OrxVuryF40CFY=",
+        "owner": "serokell",
         "repo": "deploy-rs",
-        "rev": "b48c508f1e8c9f0c82a9baeffa014e86d716a546",
+        "rev": "77c906c0ba56aabdbc72041bf9111b565cdd6171",
         "type": "github"
       },
       "original": {
-        "owner": "apoloqize",
+        "owner": "serokell",
         "repo": "deploy-rs",
-        "rev": "b48c508f1e8c9f0c82a9baeffa014e86d716a546",
         "type": "github"
       }
     },
@@ -3213,11 +3212,11 @@
     "pimsync-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1768615341,
-        "narHash": "sha256-kstHnXZEx+KsRBpxu26TIJWugMdQ9sjIUw55edINDjM=",
+        "lastModified": 1770818791,
+        "narHash": "sha256-wOuBDBeTUFJvZ+k4nj4a7892Lj7aTlj2lELdnF5gJSM=",
         "ref": "refs/heads/main",
-        "rev": "fae56f4706c133cd5abc30973169b66fd446fdf5",
-        "revCount": 1475,
+        "rev": "d749852c6f11ceb59c1c0d20b658b8122ae4e9ab",
+        "revCount": 1486,
         "type": "git",
         "url": "https://git.sr.ht/~whynothugo/pimsync"
       },

@@ -1,6 +1,8 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   enable = true;
+
+  # package = pkgs.pimsync-dev;
 
   settings = [
     {

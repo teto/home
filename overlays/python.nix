@@ -1,14 +1,17 @@
-final: prev:
+tfinal: tprev:
 
 rec {
-  python3 = prev.python3.override {
+  python3 = tprev.python3.override {
     # Careful, we're using a different self and super here!
-    packageOverrides = pythonself: pythonsuper: {
+    packageOverrides = final: prev: {
 
-      kergen = prev.callPackage ./pkgs/kergen.nix { };
+      kergen = final.callPackage ./pkgs/kergen.nix { };
 
-      mininet-with-man = pythonsuper.mininet.override ({ withManpage = true; });
+      mininet-with-man = final.mininet.override ({ withManpage = true; });
 
+      trackio = final.callPackage ./pkgs/trackio/default.nix { };
+
+      # https://github.com/gradio-app/trackio
     };
   };
 

@@ -10,39 +10,36 @@ local s = require('avante').get()
 
 local M = {}
 
-function M.provider_list_available_models()
-end
-
+function M.provider_list_available_models() end
 
 function M.setup_autocmd()
- -- the prompt is long with tools, look at get_ReAct_system_prompt()
- -- add_text_message
- -- look for base_body.tools
- vim.api.nvim_create_autocmd({ 'User' }, {
-	 pattern = 'AvanteViewBufferUpdated',
-	 desc = 'display provider statistics in statusline',
-	 callback = function(args)
-	  -- todo get if error or not
-	   vim.notify("Got an answer")
-		 -- print("Called matt's on_attach autocmd")
-		 -- todo log, get nbeovim logger
-		 -- if not (args.data and args.data.client_id) then
-		 --     return
-		 -- end
+    -- the prompt is long with tools, look at get_ReAct_system_prompt()
+    -- add_text_message
+    -- look for base_body.tools
+    vim.api.nvim_create_autocmd({ 'User' }, {
+        pattern = 'AvanteViewBufferUpdated',
+        desc = 'display provider statistics in statusline',
+        callback = function(args)
+            -- todo get if error or not
+            vim.notify('Got an answer')
+            -- print("Called matt's on_attach autocmd")
+            -- todo log, get nbeovim logger
+            -- if not (args.data and args.data.client_id) then
+            --     return
+            -- end
 
-		 -- vim.print('received args ')
-		 -- vim.print(args)
-	 end,
- })
- -- "AvanteViewBufferUpdated"
- -- vim.api.nvim_create_user_command('', '!hasktags .', { desc = 'Regenerate tags' })
+            -- vim.print('received args ')
+            -- vim.print(args)
+        end,
+    })
+    -- "AvanteViewBufferUpdated"
+    -- vim.api.nvim_create_user_command('', '!hasktags .', { desc = 'Regenerate tags' })
 
- -- https://github.com/NixOS/nixpkgs/pull/408463
- -- require("avante.api").ask()
- vim.keymap.set({ 'n', 'v' }, 'F2', function()
-	 require('avante.api').ask({ without_selection = true })
- end, { noremap = true })
-
+    -- https://github.com/NixOS/nixpkgs/pull/408463
+    -- require("avante.api").ask()
+    vim.keymap.set({ 'n', 'v' }, 'F2', function()
+        require('avante.api').ask({ without_selection = true })
+    end, { noremap = true })
 end
 
 return M

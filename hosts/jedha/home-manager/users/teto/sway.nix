@@ -19,9 +19,9 @@
     enable = true;
     xwayland = false;
 
-    # extraSessionCommands = 
+    # extraSessionCommands =
     # ''
-    # export 
+    # export
     # '';
     systemd = {
       variables = [

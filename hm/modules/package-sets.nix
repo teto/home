@@ -180,7 +180,7 @@ in
           # hopefully we can remove this from the environment
           # it's just that I can't setup latex correctly
           # pkgs.rofi-rbw-wayland
-          pkgs.ddcutil    # to control external monitor background
+          pkgs.ddcutil # to control external monitor background
           pkgs.timg # to display images in terminal, to compare with imgcat ?
           myImagemagick
 
@@ -318,7 +318,7 @@ in
         # signal-desktop # installe a la main
         # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail
         vimiv-qt
-        w3m  # there are better now
+        w3m # there are better now
         # mairix mutt msmtp lbdb contacts spamassassin
         # element-desktop # TODO this should go into nix profile install
 

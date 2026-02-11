@@ -30,7 +30,7 @@ lib.optionalAttrs withSecrets {
       pimsync = {
         # enable = withSecrets;
         enable = true;
-          # storage can also contain "read_only"
+        # storage can also contain "read_only"
         # extraPairDirectives = [
         #   {
         #     name = "collections";

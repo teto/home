@@ -727,7 +727,6 @@ vim.cmd(('colorscheme %s'):format(theme))
 --   end,
 -- })
 
-
 -- require('plugins.diffview')
 require('lsp-progress').setup()
 -- todo restore
@@ -850,13 +849,12 @@ end, { desc = 'Go to file, create if missing' })
 -- Please test the best place to `vim.loader.enable()` by yourself.
 -- vim.loader.enable() -- (optional) before the `bootstrap`s above, it could increase startuptime.
 
-
 -- valid in my fork, must appear before the setup call
 -- if vim.g.avante ~= nil then return end
 -- Outside of the fork it kills the plugin so careful
 -- normally overriden by setup call
 vim.g.avante = {
-	log_level = vim.log.levels.DEBUG
+    log_level = vim.log.levels.DEBUG,
 }
 require('plugins.avante')
 
@@ -888,8 +886,7 @@ end, { desc = 'Ask without selecting anything' })
 -- -- https://github.com/nvim-neorg/neorg/issues/1351
 -- -- https://github.com/nvim-neorg/neorg/issues/1342
 
-vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
-
+vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 
 -- todo add api to list remote models
 vim.api.nvim_create_user_command('AvanteLogs', ':e ~/.cache/nvim/avante.log', { desc = 'read avante logs' })

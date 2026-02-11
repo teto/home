@@ -16,9 +16,11 @@ pimsync.overrideAttrs (
     PIMSYNC_VERSION = "${version}";
 
     useFetchCargoVendor = true;
+
+    # failed to get vstorage
     cargoDeps = rustPlatform.fetchCargoVendor {
       inherit src;
-      hash = "sha256-vnBk0uojWDM9PS8v5Qda2UflmIFZ09Qp9l25qTTWGMc=";
+      hash = "sha256-0KNdgHigHJN9gKsDfC0aQUWkSYsWABnJrvsK9+Z2dMk=";
     };
 
   }

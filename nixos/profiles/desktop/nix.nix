@@ -1,4 +1,9 @@
-{ secrets, withSecrets, lib, ...}:
+{
+  secrets,
+  withSecrets,
+  lib,
+  ...
+}:
 {
 
   settings = {
@@ -8,10 +13,10 @@
       "https://nix-community.cachix.org"
     ];
 
-    trusted-substituters =  [
-        "https://haskell-language-server.cachix.org"
-    ] ++ lib.optional withSecrets "https://cache.${secrets.jakku.hostname}"
-;
+    trusted-substituters = [
+      "https://haskell-language-server.cachix.org"
+    ]
+    ++ lib.optional withSecrets "https://cache.${secrets.jakku.hostname}";
 
     trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
