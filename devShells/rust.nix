@@ -3,6 +3,8 @@ pkgs.mkShell {
   name = "rust";
   buildInputs = with pkgs; [
     cargo
+    pkg-config
+    openssl
     gcc
   ];
 

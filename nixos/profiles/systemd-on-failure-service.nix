@@ -24,16 +24,24 @@
 
     serviceConfig = {
       User = "teto"; # to access teto's msmtp config
-      Type = "notify";
-
+      Type = "oneshot";
+      Environment = [
+        "SERVICE_NAME=%n"
+        "EXIT_CODE=%e"
+      ];
       # --read-envelope-from
       # TODO should be able to qualify service + result
-      ExecStart = pkgs.writeShellScript "notify-service-result" ''
-        # echo "Result: %i"
-        SUBJECT=$1
-        MSG=$2
-        printf "Subject: notify service result %i\n\nTest body\n" | ${pkgs.msmtp}/bin/msmtp -afastmail "${secrets.users.teto.email}"
-      '';
+      ExecStart =
+        let
+          script = pkgs.writeShellScript "notify-service-result" ''
+            # echo "Result: %i"
+            SUBJECT=$1
+            MSG=$2
+            printf "Subject: notify service result %i: $SUBJECT\n\nSUBJECT: Test body\n" | ${pkgs.msmtp}/bin/msmtp -afastmail "${secrets.users.teto.email}"
+          '';
+        in
+        ''${script} "''${SERVICE_NAME}'';
+
     };
   };
 }

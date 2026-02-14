@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 function candidates() {
   find "$PREFIX" -name '*.gpg' | sed -e "s:$PREFIX/::gi" -e 's:.gpg$::gi'

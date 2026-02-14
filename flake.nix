@@ -363,7 +363,7 @@
       };
 
       # Eval the treefmt modules from ./treefmt.nix
-      treefmtEval = treefmt-nix.lib.evalModule myPkgs ./treefmt.nix;
+      treefmtEval = treefmt-nix.lib.evalModule myPkgs ./tetos/treefmt.nix;
 
       # loads packages in by-name/
       byNamePkgsOverlay = import "${nixpkgs}/pkgs/top-level/by-name-overlay.nix" ./by-name;

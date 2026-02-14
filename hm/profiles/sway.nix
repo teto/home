@@ -151,7 +151,7 @@ in
         #     output "Some Company ABC123 0x00000000" pos 1920 0
         "*" = {
           adaptive_sync = "off";
-          bg = "${dotfilesPath}/wallpapers/nebula.jpg fill";
+          bg = "${dotfilesPath}/data/wallpapers/nebula.jpg fill";
         };
 
       };

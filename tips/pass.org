@@ -7,6 +7,10 @@ pass init your_email@domain.com
 
 Look at .gpg-id
 
+* develop extensions
+
+PASSWORD_STORE_ENABLE_EXTENSIONS
+
 * import from bitwarden
   with https://github.com/roddhjav/pass-import one can import from bitwarden via:
   pass import bitwarden <bitwarden_export_....json>

@@ -107,7 +107,7 @@ in
 
     PATH = [
       "$HOME/.cargo/bin"
-      "$HOME/.cache/npm-packages/bin"
+      # "$HOME/.cache/npm-packages/bin"
       "${dotfilesPath}/rofi-scripts"
     ];
   };

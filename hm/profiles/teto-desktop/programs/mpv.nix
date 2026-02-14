@@ -16,8 +16,8 @@
   enable = true;
 
   includes = [
-    "./manual.conf"
-    "profiles/anime.conf"
+    "~~/manual.conf" # ~~ expands to mpv config dir ?
+    # "~~/profiles/anime.conf"
   ];
 
   # see https://wiki.archlinux.org/title/Mpv
@@ -27,8 +27,9 @@
 
   config = {
     profile = "gpu-hq";
-    force-window = "yes";
+    force-window = true;
     ytdl-format = "bestvideo+bestaudio";
+    input-ipc-server = "/tmp/mpv-socket";
     # cache-default = 4000000;
   };
 
@@ -46,21 +47,18 @@
   #       "${pkgs.vapoursynth-mvtools}/lib/vapoursynth"
   #     ];
   #     # scripts = [
-
   #     #   pkgs.mpvScripts.mpvacious # Adds mpv keybindings to create Anki cards from movies and TV shows
   #     #   pkgs.mpvScripts.manga-reader
-  #     #   # pkgs.mpvScripts.mpv-notify-send # does not work ?
   #     # ];
 
   #   });
 
   scripts = [
+    # pkgs.mpvScripts.mpvacious # Adds mpv keybindings to create Anki cards from movies and TV shows
+    # pkgs.mpvScripts.manga-reader
+    pkgs.mpvScripts.mpv-notify-send # does not work ?
     pkgs.mpvScripts.mpris
-
+    pkgs.mpvScripts.mpvacious # Adds mpv keybindings to create Anki cards from movies and TV shows
     # pkgs.mpvScripts.mpv-notify-send # does not work ?
   ];
-
-  # };
-  # profiles
-  # scripts pkgs.mpvScripts.mpris
 }

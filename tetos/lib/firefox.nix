@@ -1,7 +1,7 @@
 { pkgs }:
-let
-  install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-in
+# let
+#   install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+# in
 {
   # copy/pasted from
   # https://gitlab.com/rycee/nur-expressions/-/blob/master/pkgs/firefox-addons/default.nix?ref_type=heads
@@ -82,7 +82,7 @@ in
     # ShowHomeButton = false;
     TranslateEnabled = false;
 
-    DefaultDownloadDirectory = "\${home}/Downloads";
+    DefaultDownloadDirectory = "\${home}/downloads";
 
     # See https://discourse.nixos.org/t/browser-and-browser-wars/70027/21
     # ---- EXTENSIONS ----
@@ -90,6 +90,7 @@ in
     # Valid strings for installation_mode are "allowed", "blocked",
     # "force_installed" and "normal_installed".
     ExtensionSettings = {
+      # what about browser pass ?
       "*" = {
         "blocked_install_message" = "Custom error message.";
         # "install_sources"= ["https://yourwebsite.com/*"];
@@ -108,6 +109,12 @@ in
         private_browsing = true;
       };
 
+      "browserpass@maximbaz.com" = {
+        default_area = "menupanel";
+        installation_mode = "force_installed";
+        private_browsing = false;
+      };
+
       # NihongoTube
 
       # audible tab
@@ -117,6 +124,7 @@ in
       };
 
       # 10ten
+      # yomitan is better integrated with anki
       "{59812185-ea92-4cca-8ab7-cfcacee81281}" = {
         default_area = "menupanel";
         installation_mode = "force_installed";
@@ -129,7 +137,6 @@ in
 
       };
     };
-    # ExtensionSettings
   };
 
   searchEngines = {
@@ -202,12 +209,14 @@ in
       definedAliases = [ "@np" ];
     };
     # it has no search engine yet :'(
-    # "Nixpkgs manual" = {
-    #   urls = [ { template = "https://nixos.org/manual/nixpkgs/stable?search={searchTerms}"; } ];
-    #   icon = "https://nixos.wiki/favicon.png";
-    #   updateInterval = 24 * 60 * 60 * 1000; # every day
-    #   definedAliases = [ "@nm" ];
-    # };
+    "Nixpkgs manual" = {
+      urls = [
+        { template = "https://nixos.org/manual/nixpkgs/stable?search={searchTerms}"; }
+      ];
+      icon = "https://nixos.wiki/favicon.png";
+      updateInterval = 24 * 60 * 60 * 1000; # every day
+      definedAliases = [ "@nm" ];
+    };
     "NixOS Wiki" = {
       urls = [ { template = "https://nixos.wiki/index.php?search={searchTerms}"; } ];
       icon = "https://nixos.wiki/favicon.png";
@@ -355,7 +364,7 @@ in
   commonExtensions = with pkgs; [
     firefox-addons.bitwarden
     firefox-addons.ublock-origin
-    firefox-addons.tree-style-tab
+    # firefox-addons.tree-style-tab # using native way now
   ];
 
 }

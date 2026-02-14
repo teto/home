@@ -18,5 +18,10 @@ use = "boydaihungst/mediainfo"
 rev = "af8bdf4"
 hash = "43fa632820cc91919c4e713652140b48"
 
+[[plugin.deps]]
+use = "ndtoan96/ouch"
+rev = "594b8a2"
+hash = "c9e628fc0312d198db22ae2fa74883b"
+
 [flavor]
 deps = []

@@ -34,7 +34,7 @@ in
         # 5840
       ];
 
-      policies = {
+      policies = lib.firefox.commonPolicies // {
         BlockAboutConfig = false;
         AppAutoUpdate = true;
 

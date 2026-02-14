@@ -12,28 +12,23 @@
     config = {
       ytdl-raw-options = "write-auto-sub=,write-sub=,sub-lang=en";
       sub-auto = "fuzzy";
-      osc = "no"; # mandatory  with the modernz plugin
+      osc = false; # mandatory  with the modernz plugin
       profile = "gpu-hq";
-      force-window = "yes";
+      force-window = true;
       # ytdl-format = "bestvideo+bestaudio";
       # cache-default = 4000000;
     };
 
+    # this is weird
+    # scriptOpts = {
+    #     osc = {
+    #       scalewindowed = 2.0;
+    #       vidscale = false;
+    #       visibility = "always";
+    #     };
+    # };
+
     # Scripts:  'mpvacious'
-    # package = (pkgs.wrapMpv
-    #   (pkgs.mpv-unwrapped.override {
-    #     vapoursynthSupport = true;
-
-    #   })
-    #   {
-    #     extraMakeWrapperArgs = [
-    #       "--prefix"
-    #       "LD_LIBRARY_PATH"
-    #       ":"
-    #       "${pkgs.vapoursynth-mvtools}/lib/vapoursynth"
-    #     ];
-    #     # scripts = [
-
     #     #   pkgs.mpvScripts.mpvacious # Adds mpv keybindings to create Anki cards from movies and TV shows
     #     #   pkgs.mpvScripts.manga-reader
     #     #   # pkgs.mpvScripts.mpv-notify-send # does not work ?
@@ -44,10 +39,7 @@
     scripts = [
       (pkgs.mpvScripts.autosub) # works with subliminal
 
-      pkgs.mpvScripts.mpvacious # Adds mpv keybindings to create Anki cards from movies and TV shows
-      pkgs.mpvScripts.manga-reader
-      pkgs.mpvScripts.mpris
-      pkgs.mpvScripts.thumbnail # show thumbnail on hover
+      # pkgs.mpvScripts.thumbnail # show thumbnail on hover, thumbnail ENABLES osc contrary to what we want so let's keep it removed
       # pkgs.mpvScripts.modernz # new UI ? https://github.com/Samillion/ModernZ
       pkgs.mpvScripts.uosc # new UI ? https://github.com/Samillion/ModernZ
       pkgs.mpvScripts.thumbfast # works with uosc to show thumbnails

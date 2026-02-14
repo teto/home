@@ -50,28 +50,34 @@ local valid_file, nix_deps = pcall(require, 'generated-by-nix')
 if not valid_file then
     vim.notify('Invalid generated-by-nix')
 end
+
+local normal_hl = vim.api.nvim_get_hl(0, { name = 'Normal' })
+
 vim.g.rikai = {
-    kanjidb = nix_deps.edict_kanjidb,
-    jmdictdb = nix_deps.edict_expressiondb,
+    dictionaries = {
+        kanjidb = nix_deps.edict_kanjidb,
+        jmdictdb = nix_deps.edict_expressiondb,
+    },
     log_level = vim.log.levels.DEBUG,
     separator = '===>>>',
     popup_options = {
         use_images = true,
-        image_cmd = function(token)
-            -- get the Normal color
-
-            return {
-                'magick',
-                '-background',
-                'transparent',
-                '-fill',
-                'white',
-                '-pointsize',
-                '24',
-                'label:"' .. token .. '"',
-                'output.png',
-            }
-        end,
+        --      generate_image_cmd = function(token)
+        -- local out =                 'output.png'
+        --          -- get the Normal color
+        --
+        --          return out, {
+        --              'magick',
+        --              '-background',
+        --              'transparent',
+        --              '-fill',
+        -- 	normal_hl.fg,
+        --              '-pointsize',
+        --              '24',
+        --              'label:"' .. token .. '"',
+        -- 	out,
+        --          }
+        --      end,
         image_font_size = 40,
         max_height = 20,
     },

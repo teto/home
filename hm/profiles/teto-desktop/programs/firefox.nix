@@ -5,17 +5,13 @@
   ...
 }:
 let
-
   ffLib = lib.firefox;
-  # pkgs.callPackage ../../../../nixpkgs/lib/firefox.nix { };
-
 in
 {
 
   # TODO prefix with stable
   # look at firefox/wrapper to add policies
   # https://github.com/mozilla/policy-templates#enterprisepoliciesenabled
-  # programs.firefox = {
   enable = true;
 
   # this is from my module
@@ -91,9 +87,8 @@ in
       # Not accepted. we should find another way to enable it
       # pass package for instance
       # with pkgs.nur.repos.rycee.firefox-addons;
-      # with pkgs;
-
       # pkgs.open-in-mpv
+
       # TODO install via policy instead
       # extensions = {
       #   packages =
@@ -144,7 +139,6 @@ in
     # for dangerous stuff
     sketchy = lib.mkForce {
       extensions.packages = with pkgs; [
-        # firefox-addons.browserpass
         # firefox-addons.argent-x # renamed to "ready wallet" ? has disappeared from mozilla store...
         firefox-addons.metamask
       ];
