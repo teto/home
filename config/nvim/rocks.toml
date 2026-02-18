@@ -140,10 +140,10 @@ dev = true
 git = "gbprod/none-ls-luacheck.nvim"
 rev = "v0.0.1"
 
-[plugins."better-digraphs.nvim"]
-git = "protex/better-digraphs.nvim"
-rev = "5b2c63418d1e2c91d17f6d4e966bdafc5072a8d9"
-opt = true
+# [plugins."better-digraphs.nvim"]
+# git = "protex/better-digraphs.nvim"
+# rev = "5b2c63418d1e2c91d17f6d4e966bdafc5072a8d9"
+# opt = true
 
 [plugins."hacker.nvim"]
 git = "letieu/hacker.nvim"

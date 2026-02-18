@@ -63,22 +63,7 @@ vim.g.rikai = {
     popup_options = {
         use_images = true,
         --      generate_image_cmd = function(token)
-        -- local out =                 'output.png'
-        --          -- get the Normal color
-        --
-        --          return out, {
-        --              'magick',
-        --              '-background',
-        --              'transparent',
-        --              '-fill',
-        -- 	normal_hl.fg,
-        --              '-pointsize',
-        --              '24',
-        --              'label:"' .. token .. '"',
-        -- 	out,
-        --          }
-        --      end,
-        image_font_size = 40,
+        -- image_font_size = 40,
         max_height = 20,
     },
 }
@@ -907,9 +892,9 @@ end, { desc = 'Ask without selecting anything' })
 --     end
 --   end,
 -- })
---
--- -- https://github.com/nvim-neorg/neorg/issues/1351
--- -- https://github.com/nvim-neorg/neorg/issues/1342
+
+-- https://github.com/nvim-neorg/neorg/issues/1351
+-- https://github.com/nvim-neorg/neorg/issues/1342
 
 vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 

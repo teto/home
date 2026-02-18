@@ -70,7 +70,7 @@ let
     # #        '';
     #       })
 
-    { plugin = bigfile-nvim; }
+    # { plugin = bigfile-nvim; }  # replaced by snacks bigfile ?
 
     pkgs.vimPlugins.direnv-vim # to get syntax coloring ?
 
@@ -91,9 +91,8 @@ let
     # I am replacing vim-fugitive  with diffview-nvim because it's lua and easier to change probably to support jujutsu
     { plugin = vim-fugitive; }
 
-    vim-scriptease # create commans like :Messages
+    vim-scriptease # create commands like :Messages
 
-    # test with hop ?
     (luaPlugin {
       plugin = vim-sneak;
       config = ''

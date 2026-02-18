@@ -176,6 +176,10 @@ in
           pkgs.qimgv # qt image viewer
           pkgs.ristretto # gtk image viewer
 
+          # pkgs.termpdfpy # pdf in terminal , kinda broken
+          # pkgs.fancy-cat  # zig pdf viewer in terminal (broken(
+          pkgs.meowpdf # rust pdf viewer in terminal
+
           # anki          # spaced repetition system
           # hopefully we can remove this from the environment
           # it's just that I can't setup latex correctly

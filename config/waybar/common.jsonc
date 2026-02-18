@@ -20,26 +20,6 @@
 		// #    "3" = "ï¡";
 		// # };
 	},
-	// se as a drawer to expand format
-	"clock": {
-		// "timezone": "America/New_York",
-		// TODO look how to display timezone
-		"timezones": [
-			"Europe/Paris",
-			// "Europe/London",
-			"Asia/Tokyo",
-		],
-		"tooltip-format": "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>",
-		"format-alt":     "{:%Y-%m-%d}",
-		// TODO launch ikhal instead
-		// or a terminal
-		"on-click-right": "kitty sh -c ikhal",
-		"on-click-left": "kitty sh -c world-wall-clock",
-		"actions": {
-			"on-scroll-up":   "tz_up",
-			"on-scroll-down": "tz_down",
-		},
-	},
 	"custom/nix-updates": {
 		"exec":        "waybar-nixpkgs-update-check", // <--- path to script
 		"on-click":    "waybar-nixpkgs-update-check && notify-send 'The system has been updated'", // refresh on click
@@ -279,6 +259,25 @@
 		},
 		"modules": ["clock", "clock#2"],
 	},
+	// se as a drawer to expand format
+	"clock": {
+		// "timezone": "America/New_York",
+		// TODO look how to display timezone
+		"timezones": [
+			"Europe/Paris",
+			// "Europe/London",
+			"Asia/Tokyo",
+		],
+		"tooltip-format": "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>",
+		"format-alt":     "{:%Y-%m-%d}",
+		// TODO launch ikhal instead
+		// or a terminal
+                              
+		"actions": {
+			"on-scroll-up":   "tz_up",
+			"on-scroll-down": "tz_down",
+		},
+	},
 	"clock#2": {
 		// "timezone": "America/New_York",
 		// TODO look how to display timezone
@@ -288,9 +287,24 @@
 		],
 		"tooltip-format": "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>",
 		"format":         "{:%d %B %Y}",
+		// "on-click-left": "kitty sh -c world-wall-clock",
+        "calendar": {
+           "mode"          : "month",
+           "mode-mon-col"  : 3,
+           "weeks-pos"     : "right",
+           "on-scroll"     : 1,
+           "format": {
+                     "months":     "<span color='#ffead3'><b>{}</b></span>",
+                     "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+                     "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+                     "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+                     "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+            }
+        },
+
 		// TODO launch ikhal instead
 		// or a terminal
-		"on-click-right": "kitty sh -c ikhal",
+		"on-click-right": "kitty ikhal",
 		// "actions": {
 		//   "on-scroll-up": "shift_up",
 		//   "on-scroll-down": "shift_down"

@@ -1,0 +1,1 @@
+/home/teto/mpv-subtitleminer/mpv/mpv-subtitleminer.lua

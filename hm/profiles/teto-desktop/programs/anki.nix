@@ -4,10 +4,7 @@ let
   # found in comment from https://ankiweb.net/shared/info/2055492159
   # https://ankiweb.net/shared/info/734459859
   anki-connect-fixed =
-    #   pkgs.anki-utils.buildAnkiAddon (finalAttrs: {
-    # pname = "anki-connect-fixed";
-    # version = "25.11.9.0";
-    #
+
     pkgs.ankiAddons.anki-connect.overrideAttrs (oa: {
       src = pkgs.fetchzip {
         url = "https://ankiweb.net/shared/info/734459859";
@@ -16,6 +13,11 @@ let
       };
       sourceRoot = "source/plugin";
     });
+
+    #   pkgs.anki-utils.buildAnkiAddon (finalAttrs: {
+    # pname = "anki-connect-fixed";
+    # version = "25.11.9.0";
+    #
   #   # src = pkgs.fetchFromSourcehut {
   #   #   owner = "~foosoft";
   #   #   repo = "anki-connect";
@@ -44,7 +46,8 @@ in
   videoDriver = "software";
   addons =
     let
-      anki-connect-teto = anki-connect-fixed.withConfig (
+      # anki-connect-fixed
+      anki-connect-teto = pkgs.ankiAddons.anki-connect.withConfig (
         # as recommended at https://github.com/friedrich-de/mpv-subtitleminer
         {
           config = {
@@ -65,7 +68,7 @@ in
     [
       # addons can be configured with .withConfig
       # pkgs.ankiAddons.anki-connect
-      # anki-connect-teto
+      anki-connect-teto
 
       # fixed one is at 734459859
 
