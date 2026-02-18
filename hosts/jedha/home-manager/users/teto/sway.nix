@@ -41,7 +41,7 @@
         #         Some outputs may have different names when disconnecting and reconnecting. To identify these, the name can be substituted for a string consisting of the make, model and serial which you can get from swaymsg -t get_outputs. Each value must be  sepa‐ rated by one space. For example:
         #     output "Some Company ABC123 0x00000000" pos 1920 0
         "HDMI-A-1" = {
-          bg = "${dotfilesPath}/wallpapers/toureiffel.jpg fill";
+          bg = "${dotfilesPath}/data/wallpapers/toureiffel.jpg fill";
 
         };
         # "HDMI-A-2" = {

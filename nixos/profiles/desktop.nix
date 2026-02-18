@@ -56,6 +56,9 @@ in
     # ./desktop/sops.nix
   ];
 
+  # 
+  services.voxinput.enable = true;
+
   # attempt to print japanese characters
   services.kmscon = {
     enable = false; # disabled because it's ugly

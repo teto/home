@@ -481,7 +481,7 @@
           };
         };
 
-      myPkgs = pkgImport self.inputs.nixpkgs false;
+      myPkgs = pkgImport self.inputs.nixpkgs true;
       # myPkgs = myPkgsCuda ;
       # myPkgsCuda = pkgImport self.inputs.nixpkgs true;
       unstablePkgs = pkgImport self.inputs.nixos-unstable false;

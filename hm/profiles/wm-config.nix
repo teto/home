@@ -17,6 +17,32 @@ let
   mod = "Mod1";
   notify-send = "${pkgs.libnotify}/bin/notify-send";
 
+      wpctl = "${pkgs.wireplumber}/bin/wpctl";
+
+      mpc = "${pkgs.mpc}/bin/mpc";
+
+      # pkgs.writeShellApplication
+      getIntegerVolume = pkgs.writeShellScript "get-volume-as-integer" ''
+        volume=$(${wpctl} get-volume @DEFAULT_AUDIO_SINK@ | cut -f2 -d' ')
+        ${pkgs.perl}/bin/perl -e "print 100 * $volume"
+      '';
+      # getBrightness = pkgs.writeShellScript "get-brightness-as-integer" ''
+      #   # -m => machine
+      #   brightness=$(${pkgs.brightnessctl}/bin/brightnessctl -m info | cut -f4 -d, )
+      #   echo $brightness
+      # '';
+      brightnessScript = pkgs.writeShellApplication {
+        name = "brightness-mgr";
+        runtimeInputs = [
+          # final.pass-teto
+          pkgs.brightnessctl
+          pkgs.libnotify # for notify-send
+        ];
+        # pass up
+        text = builtins.readFile ../../bin/set-brightness.sh;
+
+        checkPhase = ":";
+      };
   # note that you can assign a workspace to a specific monitor !
   bind_ws =
     layout: workspace_id: fr:
@@ -65,46 +91,18 @@ let
   # ❯ wpctl get-volume @DEFAULT_AUDIO_SINK@
   # Volume: 0.40
   audioKeybindings =
-    let
-      notify-send = "${pkgs.libnotify}/bin/notify-send";
-      wpctl = "${pkgs.wireplumber}/bin/wpctl";
-
-      mpc = "${pkgs.mpc}/bin/mpc";
-
-      # pkgs.writeShellApplication
-      getIntegerVolume = pkgs.writeShellScript "get-volume-as-integer" ''
-        volume=$(${wpctl} get-volume @DEFAULT_AUDIO_SINK@ | cut -f2 -d' ')
-        ${pkgs.perl}/bin/perl -e "print 100 * $volume"
-      '';
-      # getBrightness = pkgs.writeShellScript "get-brightness-as-integer" ''
-      #   # -m => machine
-      #   brightness=$(${pkgs.brightnessctl}/bin/brightnessctl -m info | cut -f4 -d, )
-      #   echo $brightness
-      # '';
-      brightnessScript = pkgs.writeShellApplication {
-        name = "brightness-mgr";
-        runtimeInputs = [
-          # final.pass-teto
-          pkgs.brightnessctl
-          pkgs.libnotify # for notify-send
-        ];
-        # pass up
-        text = builtins.readFile ../../bin/set-brightness.sh;
-
-        checkPhase = ":";
-      };
-
-      volumeScript = pkgs.writeShellApplication {
-        name = "brightness-mgr";
-        runtimeInputs = [
-          pkgs.libnotify # for notify-send
-        ];
-        # pass up
-        text = builtins.readFile ../../bin/set-volume.sh;
-
-        checkPhase = ":";
-      };
-    in
+    # let
+      # volumeScript = pkgs.writeShellApplication {
+      #   name = "brightness-mgr";
+      #   runtimeInputs = [
+      #     pkgs.libnotify # for notify-send
+      #   ];
+      #   # pass up
+      #   text = builtins.readFile ../../bin/set-volume.sh;
+      #
+      #   checkPhase = ":";
+      # };
+    # in
     {
       # wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%+
       # wpctl get-volume @DEFAULT_AUDIO_SINK@
@@ -246,8 +244,12 @@ in
     "$GroupFr+$mod+apostrophe" = "kill";
     "$GroupUs+$mod+4" = "kill";
 
-    "$mod+t" = "floating toggle";
+    "$mad+t" = "floating toggle";
     "$mod+y" = "sticky toggle; exec ${notify-send}";
+# exec ${notify-send} -a Audio --icon=audio-volume-high -u low -t 1000 -h int:value:$(${getIntegerVolume}) -e -h string:synchronous:audio-volume 'Audio volume' 'Audio Raised volume'";
+    # -a Audio --icon=audio-volume-high -u low -t 1000 -h int:value:$(${getIntegerVolume}) -e -h string:synchronous:audio-volume
+    "$mod+t" = "exec ${lib.getExe pkgs.voxinput} write; exec ${notify-send} 'voxinput write'";
+    "$mod+Shift+t" =  "exec ${lib.getExe pkgs.voxinput} record; exec ${notify-send} 'voxinput record'";
 
     # split in vertical orientation
     # needs i3next

@@ -11,7 +11,7 @@
 # _passwd=password
 # exec socat STDIO PROXY:$_proxy:$1:$2,proxyport=$_proxyport,proxyauth=_user:_passwd
 # TODO make it depend from
-_proxy=proxy.iiji.jp
+_proxy=proxy.toto.jp
 _proxyport=8080
 
 exec socat STDIO PROXY:$_proxy:$1:$2,proxyport=$_proxyport
