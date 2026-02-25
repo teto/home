@@ -10,6 +10,8 @@
 {
 
   imports = [
+    flakeSelf.homeProfiles.teto-desktop
+
     # flakeSelf.homeModules.experimental
     ./sway.nix
     ./programs/waybar.nix

@@ -2,6 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
+#
 {
   config,
   lib,
@@ -11,10 +12,15 @@
 }:
 {
   imports = [
+    # no disko ?
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    flakeSelf.nixosProfiles.desktop
+    # flakeSelf.nixosProfiles.desktop
+    flakeSelf.nixosProfiles.gnome
     flakeSelf.nixosProfiles.avahi
+    flakeSelf.nixosProfiles.nix-daemon
+    flakeSelf.nixosProfiles.openssh
+    flakeSelf.nixosProfiles.universal
     flakeSelf.nixosModules.default-hm
     ../../nixos/accounts/teto/teto.nix
   ];
@@ -55,7 +61,7 @@
   # Enable CUPS to print documents.
   services.printing = {
     enable = true;
-    browsing = false;
+    # browsing = false; # Specifies whether shared printers are advertised.
     drivers = [
       pkgs.gutenprint
       pkgs.gutenprintBin
@@ -79,6 +85,7 @@
   users.users = {
     mama = {
       isNormalUser = true;
+      uid = 1000;
       extraGroups = [
         "audio"
         "wheel"
@@ -96,17 +103,42 @@
 
   home-manager.users = {
     mama = {
+      imports = [
+        flakeSelf.homeProfiles.yazi
+
+      ];
       package-sets.enableOfficePackages = true;
 
     };
     teto = {
 
+      imports = [
+        flakeSelf.homeProfiles.teto-aliases
+        flakeSelf.homeProfiles.common
+        flakeSelf.homeProfiles.neovim
+        flakeSelf.homeProfiles.yazi
+        flakeSelf.homeProfiles.teto-zsh
+
+        # flakeSelf.homeProfiles.teto-desktop
+      ];
       package-sets.enableOfficePackages = true;
+      services.mpd = {
+        enable = lib.mkForce false;
+        # musicDirectory = "/mnt/ext/music";
+
+      };
+
     };
   };
 
   # xserver disappears in recent one
   services.desktopManager.gnome.enable = true;
+  services.displayManager.lemurs.enable = lib.mkForce false;
+  services.displayManager.autoLogin = {
+    enable = true;
+    user = config.users.users.mama.name;
+  };
+
   services.gnome.games.enable = true;
 
   programs.firefox.enable = true;
@@ -118,6 +150,7 @@
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wine
     wget
+    zoom-us # for
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -133,8 +166,10 @@
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
+    # TODO configure ssh more
     settings = {
       PasswordAuthentication = false;
+      # AcceptEnv = [ "NIXOS_NO_CHECK"];
     };
   };
 

@@ -41,7 +41,6 @@ in
 
     flakeSelf.nixosProfiles.universal
     flakeSelf.nixosProfiles.avahi
-    flakeSelf.nixosProfiles.gnome
     flakeSelf.nixosProfiles.nix-daemon
     flakeSelf.nixosModules.sudo
 
@@ -55,9 +54,6 @@ in
     # TODO autoload it ?
     # ./desktop/sops.nix
   ];
-
-  # 
-  services.voxinput.enable = true;
 
   # attempt to print japanese characters
   services.kmscon = {

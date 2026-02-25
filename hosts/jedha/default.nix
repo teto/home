@@ -69,6 +69,7 @@ in
     flakeSelf.nixosProfiles.greetd
     flakeSelf.nixosProfiles.desktop
     flakeSelf.nixosProfiles.nix-daemon
+    flakeSelf.nixosProfiles.gnome
 
     flakeSelf.nixosProfiles.steam
     flakeSelf.nixosProfiles.universal

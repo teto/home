@@ -14,10 +14,10 @@ let
       sourceRoot = "source/plugin";
     });
 
-    #   pkgs.anki-utils.buildAnkiAddon (finalAttrs: {
-    # pname = "anki-connect-fixed";
-    # version = "25.11.9.0";
-    #
+  #   pkgs.anki-utils.buildAnkiAddon (finalAttrs: {
+  # pname = "anki-connect-fixed";
+  # version = "25.11.9.0";
+  #
   #   # src = pkgs.fetchFromSourcehut {
   #   #   owner = "~foosoft";
   #   #   repo = "anki-connect";

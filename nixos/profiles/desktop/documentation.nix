@@ -11,6 +11,8 @@
 
   # on master it is disabled
   man.enable = true; # temp
+  # man.cache.enable = true;
+  # man.cache.generateAtRuntime = true;
   doc.enable = false; # builds html doc, slow
   info.enable = false;
 }

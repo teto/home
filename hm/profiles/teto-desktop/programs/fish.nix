@@ -48,54 +48,54 @@
       echo "fish: Unknown command '$cmd'"
       return 127
     '';
-      # normal-function = "";
-      event-handler = {
-        body = "";
-        onEvent = "test";
-      };
-      variable-handler = {
-        body = "echo 'hello variable-handler: PATH god modified'";
-        onVariable = "PATH";
-      };
-      job-handler = {
-        body = "echo 'hello jobhander'";
-        onJobExit = "10";
-      };
-      signal-handler = {
-        body = ''
+    # normal-function = "";
+    event-handler = {
+      body = "";
+      onEvent = "test";
+    };
+    variable-handler = {
+      body = "echo 'hello variable-handler: PATH god modified'";
+      onVariable = "PATH";
+    };
+    job-handler = {
+      body = "echo 'hello jobhander'";
+      onJobExit = "10";
+    };
+    signal-handler = {
+      body = ''
         echo "SIGNAL RECEIVED";
-          '';
-        onSignal = "HUP";
-      };
-# # Register the handler
-# functions -c my_process_handler
+      '';
+      onSignal = "HUP";
+    };
+    # # Register the handler
+    # functions -c my_process_handler
 
-      process-handler = {
-        body = ''
-    # This function is called when a process changes state
+    process-handler = {
+      body = ''
+        # This function is called when a process changes state
 
-    set -l job_id $argv[1]
-    set -l pid $argv[2]
-    set -l job_name $argv[3]
-    set -l job_state $argv[4]
-          echo "PROCCESS CAQLLLED"
+        set -l job_id $argv[1]
+        set -l pid $argv[2]
+        set -l job_name $argv[3]
+        set -l job_state $argv[4]
+              echo "PROCCESS CAQLLLED"
 
-    switch $job_state
-        case running
-            echo "Job $job_id ($job_name) is now running with PID $pid"
-        case done
-            echo "Job $job_id ($job_name) completed successfully"
-        case stopped
-            echo "Job $job_id ($job_name) has stopped"
-        case continued
-            echo "Job $job_id ($job_name) has continued"
-    end
+        switch $job_state
+            case running
+                echo "Job $job_id ($job_name) is now running with PID $pid"
+            case done
+                echo "Job $job_id ($job_name) completed successfully"
+            case stopped
+                echo "Job $job_id ($job_name) has stopped"
+            case continued
+                echo "Job $job_id ($job_name) has continued"
+        end
 
 
 
-        '';
-        onProcessExit = 10;
-      };
+      '';
+      onProcessExit = 10;
+    };
 
   };
 

@@ -1,5 +1,5 @@
 {
-  enable = true;
+  enable = false;
   # bindings = [
   #   {
   #

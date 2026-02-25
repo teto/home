@@ -7,7 +7,7 @@
 }:
 {
   imports = [
-    flakeSelf.homeProfiles.teto-desktop
+    # flakeSelf.homeProfiles.teto-desktop
   ];
 
   home.packages = [

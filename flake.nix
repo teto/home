@@ -95,7 +95,7 @@
       url = "github:serokell/deploy-rs";
       # url = "github:apoloqize/deploy-rs?rev=b48c508f1e8c9f0c82a9baeffa014e86d716a546";
 
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # https://github.com/DeterminateSystems/nix-src/pull/217
@@ -505,10 +505,13 @@
           loadDevShells = lib.genAttrs' devShellFiles (
             file:
             let
-              path = ./devShells/${file};
-              shell = myPkgs.callPackage path {
-                # inherit myPkgs unstablePkgs secrets self;
-              };
+              path = lib.traceValFn (x: file) ./devShells/${file};
+              shell = myPkgs.callPackage path (
+                { }
+                // lib.optionalAttrs (file == "devShell.nix") {
+                  inherit secrets self;
+                }
+              );
             in
             {
               name = builtins.replaceStrings [ ".nix" ] [ "" ] (lib.traceVal file);
@@ -519,7 +522,6 @@
 
         loadDevShells
         // {
-          devShell = null;
           default = myPkgs.callPackage ./devShells/devShell.nix {
             inherit secrets self;
           };
@@ -577,7 +579,9 @@
       # TODO run evals and treefmt checks
       checks = {
         # formatting = treefmtEval.${myPkgs.system}.config.build.check self;
-        formatting = (treefmt-nix.lib.evalModule myPkgs ./treefmt.nix).config.build.check;
+
+        # not a derivation
+        formatting = (treefmt-nix.lib.evalModule myPkgs ./tetos/treefmt.nix).config.build.check self;
       };
 
     })
@@ -611,16 +615,6 @@
         nixosConfigs
         // (nixosConfigsWithoutSecrets)
         // {
-          # TODO generate those from the hosts folder ?
-          # with aliases ?
-          # router = lib.mkNixosSystem {
-          #   withSecrets = true;
-          #   hostname = "router";
-          #
-          #   modules = [
-          #     ./hosts/router
-          #   ];
-          # };
 
           # it doesn't have to be called like that !
           # TODO use lib.mkNixosSystem
@@ -633,15 +627,6 @@
           };
 
           # see https://determinate.systems/posts/extending-nixos-configurations
-          # tatooine = laptop.extendModules {
-          #   # TODO retain existing specialArgs and inject mine ?!
-          #   specialArgs = {
-          #     hostname = "tatooine";
-          #     inherit secrets dotfilesPath;
-          #
-          #     withSecrets = true;
-          #   };
-          # };
 
           # neptune = lib.mkNixosSystem {
           #   pkgs = myPkgs;
@@ -652,26 +637,6 @@
           #   withSecrets = true;
           # };
 
-          # desktop is a
-          # desktop = lib.mkNixosSystem {
-          #   withSecrets = false;
-          #   hostname = "jedha";
-          #   modules = [
-          #     ./hosts/jedha/default.nix
-          #   ];
-          # };
-          #
-          # # nix build .#nixosConfigurations.teapot.config.system.build.toplevel
-          # jedha = desktop.extendModules ({
-          #   specialArgs = {
-          #     pkgs = myPkgsCuda;
-          #     withSecrets = true;
-          #     inherit lib;
-          #     # pkgs = myPkgs.extend(
-          #     #     );
-          #   };
-          #   modules = [ ];
-          # });
         };
 
       # TODO scan hm/{modules, profiles} folder
@@ -718,21 +683,22 @@
 
       # autoload via lib.importDirectories
       templates = {
-        default = {
-          path = ./nixpkgs/templates/default;
-          description = "Unopiniated ";
-        };
+        # default = {
+        #   path = ./nixpkgs/templates/default;
+        #   description = "Unopiniated ";
+        # };
 
         haskell = {
-          path = ./nixpkgs/templates/haskell;
+          path = ./templates/haskell;
           description = "A flake to help develop haskell libraries.";
         };
         lua = {
-          path = ./nixpkgs/templates/lua;
+          path = ./templates/lua;
           description = "A flake to help develop lua libraries.";
         };
         python = {
-          path = ./nixpkgs/poetry/haskell;
+          # now it's u
+          path = ./templates/python;
           description = "A flake to help develop poetry-based python packages";
         };
       };
@@ -816,19 +782,28 @@
             };
           in
           {
-            neptune =
+            neptune-no-secrets =
               genNode ({
                 name = "neptune";
-                # local-facing address
+                # local-facing address neptune.local
+                # hostname = "neptune.local"; # temporary
                 hostname = "192.168.1.21"; # temporary
               })
               // {
-                # sshOpts = [ "-F" "ssh_config" ];
-                sshUser = "mama";
+                # while working around require-sigs issue
+                # remoteBuild = true;
+
                 sshOpts = [
+                  # "-p12666"
+                  #NIXOS_NO_CHECK=1
+                  # "-oSendEnv=NIXOS_NO_CHECK"
+                  "-p22"
+                  # "-F" "ssh_config"
                   # "-i/home/teto/.ssh/id_rsa"
                   # "-p${toString secrets.router.sshPort}"
                 ];
+                user = "teto";
+                sshUser = "teto";
               };
 
             router =

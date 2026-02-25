@@ -26,6 +26,14 @@
   "systemd-failed-units"
 	],
 
+  "wireplumber#source": {
+      "node-type": "Audio/Source",
+      "format": "{volume}% 󰍬",
+      "format-muted": "󰍭",
+      "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+      "scroll-step": 5,
+  },
+
   "modules-right": [ 
    // "cpu",
    "temperature",
@@ -42,7 +50,10 @@
    "custom/github",
    "custom/notmuch",
    "custom/weather" ,
+
+   "wireplumber#source",
    "wireplumber",
+
    "tray",
    // "custom/power-menu",
    "sway/language",

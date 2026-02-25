@@ -16,6 +16,8 @@
   programs.direnv-instant.enable = false;
 
   imports = [
+    flakeSelf.homeProfiles.teto-desktop
+
     # flakeSelf.homeModules.bash
     flakeSelf.inputs.direnv-instant.homeModules.direnv-instant
 

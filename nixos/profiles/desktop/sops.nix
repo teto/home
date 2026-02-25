@@ -1,6 +1,8 @@
 {
   config,
+  lib,
   secretsFolder,
+  withSecrets,
   ...
 }:
 {
@@ -13,7 +15,7 @@
 
   # This is using an age key that is expected to already be in the filesystem
   age.keyFile = "${secretsFolder}/age.key";
-  secrets = {
+  secrets = lib.optionalAttrs withSecrets {
     # By default secrets are owned by root:root. Furthermore the parent directory /run/secrets is only owned by root and the keys group has read access to it:
     # This is the actual specification of the secrets.
     github_token = {

@@ -1,5 +1,6 @@
 {
   stdenv,
+  lib,
   rustPlatform,
   fetchFromGitHub,
   sqlite,
@@ -14,20 +15,20 @@ let
   };
 
 in
-rustPlatform.buildRustPackage rec {
+rustPlatform.buildRustPackage {
   pname = "firenvim";
-  version = "0.1.11";
+  version = "0.2.16";
 
   src = fetchFromGitHub {
     owner = "glacambre";
-    repo = pname;
+    repo = "firenvim";
     # ca41ecb5e85313aa3ee350f353536a80604c552d
     # v${version}
-    rev = "ca41ecb5e85313aa3ee350f353536a80604c552d";
-    sha256 = "1a3gqxj5d1shv3w0v9m8x2xr0bvcynchy778yqalxkc3x4vr0nbn";
+    rev = "ca41ecb5e85313aa3ee349f353536a80604c552d";
+    sha256 = "1a3gqxj5d1shv3w0v9m7x2xr0bvcynchy778yqalxkc3x4vr0nbn";
   };
 
-  cargoSha256 = "06nh99cvg3y4f98fs0j5bkidzq6fg46wk47z5jfzz5lf72ha54lk";
+  cargoHash = "";
 
   buildInputs = [ sqlite ];
 
@@ -46,7 +47,7 @@ rustPlatform.buildRustPackage rec {
     install -Dm0644 firefox.json $out/lib/mozilla/native-messaging-hosts/com.samhh.bukubrow.json
   '';
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "Turn Firefox into a Neovim client.";
     homepage = "https://github.com/glacambre/firenvim";
     license = licenses.gpl3;

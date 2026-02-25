@@ -69,10 +69,10 @@
     # lib = lib.extend (_: _: flakeSelf.inputs.hm.lib // builtins.trace "${lib.neovim.toto}" lib);
   };
 
-  home-manager.users = {
-    teto = {
-      imports = [
-      ];
-    };
-  };
+  # home-manager.users = {
+  #   teto = {
+  #     imports = [
+  #     ];
+  #   };
+  # };
 }

@@ -12,7 +12,7 @@
   castxml ? null,
   # hidden dependency of waf
   ncurses,
-  python,
+  python3,
   lib,
   fetchurl,
   withManual ? false,
@@ -43,8 +43,13 @@ let
   ++ lib.optionals withQuagga [ "internet-apps" ];
 
   # TODO this is not possible anymore
-  ns3forDce = ns-3.override ({ inherit modules python; });
-  pythonEnv = python.withPackages (
+  #
+  ns3forDce = ns-3.override ({
+    inherit python3;
+    # modules seems to have disappeared form ns-3 config
+    # inherit modules;
+  });
+  pythonEnv = python3.withPackages (
     ps:
     lib.optional withManual ps.sphinx
     ++ lib.optionals pythonSupport (
