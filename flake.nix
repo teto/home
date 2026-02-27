@@ -201,7 +201,7 @@
     # todo update for ci ?
     nixpkgs = {
       url = "github:teto/nixpkgs/scratch";
-      # url = /home/teto/nixpkgs;
+      # url = "/home/teto/nixpkgs";
     };
 
     nix = {
@@ -588,6 +588,8 @@
     // ({
       inherit (self) inputs;
 
+      inherit myPkgs;
+
       # Tell Nix what schemas to use.
       schemas = self.inputs.flake-schemas.schemas
       # // other-schemas.schemas
@@ -618,25 +620,14 @@
 
           # it doesn't have to be called like that !
           # TODO use lib.mkNixosSystem
-          laptop = lib.mkNixosSystem {
-            withSecrets = false;
-            hostname = "laptop";
-            modules = [
-              ./hosts/tatooine
-            ];
-          };
-
           # see https://determinate.systems/posts/extending-nixos-configurations
-
-          # neptune = lib.mkNixosSystem {
-          #   pkgs = myPkgs;
+          # laptop = lib.mkNixosSystem {
+          #   withSecrets = false;
+          #   hostname = "laptop";
           #   modules = [
-          #     ./hosts/neptune/configuration.nix
+          #     ./hosts/tatooine
           #   ];
-          #   hostname = "neptune";
-          #   withSecrets = true;
           # };
-
         };
 
       # TODO scan hm/{modules, profiles} folder

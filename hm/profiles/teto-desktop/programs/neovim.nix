@@ -2,7 +2,7 @@
   config,
   pkgs,
   lib,
-  flakeSelf,
+  # flakeSelf,
   ...
 }:
 let
@@ -279,8 +279,6 @@ let
   vimPlugins = pkgs.vimPlugins;
 in
 {
-  # _imports = [
-  # ];
   enableBlink = true;
   enableMyDefaults = true;
   useAsManViewer = true;
@@ -298,12 +296,6 @@ in
 
   # TODO generate code that prepends to PATH from extraPackages
   extraLuaConfig =
-    # let
-    # extraInitLuaPackages
-    # luaExtraPackages = config.programs.neovim.extraInitLuaPackages;
-
-    #
-    # prependPath = map (x: "${x}") config.programs.neovim.extraInitLuaPackages;
 
     # -- look at :h statusline to see the available 'items'
     # -- let &titlestring=" %t %{len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) } - NVIM"
@@ -312,7 +304,7 @@ in
     lib.mkMerge [
       # -- testing order 700
       # (lib.mkOrder 0 ''vim.env.PATH = "${lib.makeBinPath config.programs.neovim.extraInitLuaPackages}:"..vim.env.PATH'')
-      (lib.mkOrder 700 "-- testing order 700 ")
+      # (lib.mkOrder 700 "-- testing order 700 ")
       (lib.mkAfter "require('init-manual') ")
     ];
 
@@ -390,8 +382,8 @@ in
   highlightOnYank = true;
   enableFzfLua = true;
 
-  # HACK till we fix it
-  # or else we need a vim.g.sqlite_clib_path
+  # Some of these packages are only available in my lua overlay. Since those are used
+  # 
   extraLuaPackages = lp: [
 
     # for neorg until  we fix
@@ -400,9 +392,10 @@ in
     # nvim-treesitter-legacy-api == 0.9.2
 
     # importing dependencies of rikai.nvim
+    # TODO: do it from overlay or look at the plugin itself
     # lp.sqlite
     lp.lsqlite3
-    lp.lual
+    # lp.lual
     lp.utf8
     lp.alogger
     lp.mega-cmdparse

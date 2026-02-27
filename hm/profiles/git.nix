@@ -21,11 +21,11 @@
 
     # lots inspired by https://blog.gitbutler.com/how-git-core-devs-configure-git/
     settings = {
-      user = {
-        # mkForce due to nova
-        name = "Matthieu C.";
-        email = lib.mkForce "886074+teto@users.noreply.github.com";
-      };
+      # user = {
+      #   # mkForce due to nova
+      #   name = "Matthieu C.";
+      #   email = lib.mkForce "886074+teto@users.noreply.github.com";
+      # };
       alias = {
         s = "status";
         st = "status";

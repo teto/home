@@ -27,10 +27,13 @@ let
     '';
   };
 
-  # pluginsMap = pkgs.callPackage ./plugins.nix { inherit flakeSelf lib; };
-
   myNeovimUnwrapped =
-    flakeSelf.inputs.neovim-nightly-overlay.packages."${pkgs.stdenv.hostPlatform.system}".neovim;
+    # "neovim-debug" / "neovim-developer"
+    flakeSelf.inputs.neovim-nightly-overlay.packages."${pkgs.stdenv.hostPlatform.system}".neovim.override({
+
+      # we want to take the luajit with our overlay of lua packages
+      luajit = pkgs.luajit;
+    });
   # nvimLua = config.programs.neovim.finalPackage.passthru.unwrapped.lua;
 
   basePlugins = with pkgs.vimPlugins; [
@@ -164,7 +167,7 @@ in
     # take the one from the flake
     package = myNeovimUnwrapped;
 
-    extraLuaConfig = lib.mkBefore (
+    initLua = lib.mkBefore (
       ''
         vim.g.mapleader = ' '
         vim.opt.hidden = true -- you can open a new buffer even if current is unsaved (error E37) =
@@ -182,9 +185,9 @@ in
       ''
     );
 
-    extraConfig = ''
-      filetype plugin indent on
-    '';
+    # extraConfig = ''
+    #   filetype plugin indent on
+    # '';
 
     extraPackages = [ ];
 

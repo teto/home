@@ -20,9 +20,9 @@ let
   ];
 
   treesitterPlugins =
-    let
-      inherit (pkgs.neovimUtils) grammarToPlugin;
-    in
+    # let
+    #   inherit (pkgs.neovimUtils) grammarToPlugin;
+    # in
     [
       pkgs.vimPlugins.nvim-treesitter-parsers.nix
       pkgs.vimPlugins.nvim-treesitter-parsers.hurl
@@ -105,7 +105,7 @@ let
   # (luaPlugin { plugin = telescope-nvim; })
 
   # TODO get lua interpreter to select the good lua packages
-  nvimLua = config.programs.neovim.finalPackage.passthru.unwrapped.lua;
+  # nvimLua = config.programs.neovim.finalPackage.passthru.unwrapped.lua;
 in
 {
   programs.neovim = {
@@ -114,9 +114,9 @@ in
 
     orgmode.enable = true;
 
-    package =
-      lib.mkForce
-        flakeSelf.inputs.neovim-nightly-overlay.packages."${pkgs.stdenv.hostPlatform.system}".neovim-debug;
+    # package =
+    #   lib.mkForce
+    #     flakeSelf.inputs.neovim-nightly-overlay.packages."${pkgs.stdenv.hostPlatform.system}".neovim-debug;
 
     plugins =
       luaPlugins

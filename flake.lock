@@ -1913,11 +1913,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1769104287,
-        "narHash": "sha256-ggmeJDrgh1bXFO/0bHYxcr66/Ckg0FygnlELz8GhxOE=",
+        "lastModified": 1771412021,
+        "narHash": "sha256-7WSwuAXaIKKHwFETFEcC0kDsUYv94smEiIGtjUGC8FM=",
         "owner": "teto",
         "repo": "home-manager",
-        "rev": "7f004d74446ecb6a158cba7e9c46a1d779de60ad",
+        "rev": "a50ba312efcfc028047977e9ba1c290623008fd1",
         "type": "github"
       },
       "original": {
