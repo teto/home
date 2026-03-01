@@ -4,9 +4,15 @@
   package = pkgs.gitFull; # to get send-email
 
   settings = {
+    # user = {
+    #   email = lib.mkForce "886074+teto@users.noreply.github.com";
+    # };
     user = {
+      # mkForce due to nova
+      name = "Matthieu C.";
       email = lib.mkForce "886074+teto@users.noreply.github.com";
     };
+
   };
 
   signing = {

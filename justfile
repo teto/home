@@ -72,7 +72,7 @@ repl:
 nixos-rebuild command extra_args="":
     nixos-rebuild \
       --flake ~/home \
-      --sudo \
+      --sudo --keep-going \
       --override-input nixpkgs {{ NIXPKGS_REPO }} \
       --override-input hm {{ HM_REPO }} \
        {{ extra_args }} \
