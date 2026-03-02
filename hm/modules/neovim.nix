@@ -271,7 +271,7 @@ in
 
       ];
 
-      programs.neovim.extraLuaConfig = ''
+      programs.neovim.initLua = ''
         require('fzf-lua').setup({})
       '';
     })
@@ -281,7 +281,7 @@ in
 
       # -- TODO higroup should be its own ? a darker version of CursorLine
       # -- if it doesnt exist
-      programs.neovim.extraLuaConfig = ''
+      programs.neovim.initLua = ''
         vim.api.nvim_create_autocmd('TextYankPost', {
             callback = function()
                 vim.hl.on_yank({ higroup = 'IncSearch', timeout = 1000 })
@@ -292,7 +292,7 @@ in
     (mkIf cfg.enableMyDefaults {
       # programs.neovim.plugins = blinkPlugins;
 
-      programs.neovim.extraLuaConfig = ''
+      programs.neovim.initLua = ''
         vim.opt.title = true -- vim will change terminal title
         vim.opt.titlestring = "%{getpid().':'.getcwd()}"
         vim.opt.smoothscroll = true
@@ -319,7 +319,7 @@ in
       #         luaInterpreter = pkgs.lua51Packages.lua;
       # "${luaInterpreter.pkgs.luarocks_bootstrap}/bin/luarocks"
 
-      programs.neovim.extraLuaConfig =
+      programs.neovim.initLua =
         let
           luaInterpreter = pkgs.lua51Packages.lua;
         in
@@ -338,7 +338,7 @@ in
 
     (mkIf cfg.lsp.mapOnAttach {
       # TODO enable treesitter multilanguage
-      programs.neovim.extraLuaConfig = # lua
+      programs.neovim.initLua = # lua
         ''
           vim.api.nvim_create_autocmd('LspAttach', {
               desc = 'Attach lsp_signature on new client',
@@ -390,7 +390,7 @@ in
 
     (mkIf cfg.treesitter.enable {
       programs.neovim.plugins = treesitterPlugins;
-      # programs.neovim.extraLuaConfig = lib.mkBefore (
+      # programs.neovim.initLua = lib.mkBefore (
       # "--toto"
       # lib.strings.concatStrings (
       #  lib.mapAttrsToList genBlockLua luaRcBlocks
@@ -406,7 +406,7 @@ in
     (mkIf cfg.fennel.enable { programs.neovim.plugins = cfg.fennel.plugins; })
 
     ({
-      programs.neovim.extraLuaConfig = lib.mkOrder 0 ''vim.env.PATH = "${lib.makeBinPath config.programs.neovim.extraInitLuaPackages}:"..vim.env.PATH'';
+      programs.neovim.initLua = lib.mkOrder 0 ''vim.env.PATH = "${lib.makeBinPath config.programs.neovim.extraInitLuaPackages}:"..vim.env.PATH'';
     })
   ];
 

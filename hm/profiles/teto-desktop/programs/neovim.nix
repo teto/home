@@ -295,7 +295,7 @@ in
   };
 
   # TODO generate code that prepends to PATH from extraPackages
-  extraLuaConfig =
+  initLua =
 
     # -- look at :h statusline to see the available 'items'
     # -- let &titlestring=" %t %{len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) } - NVIM"
@@ -383,7 +383,7 @@ in
   enableFzfLua = true;
 
   # Some of these packages are only available in my lua overlay. Since those are used
-  # 
+  #
   extraLuaPackages = lp: [
 
     # for neorg until  we fix

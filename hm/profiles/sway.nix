@@ -201,7 +201,8 @@ in
           "Ctrl+f1" = "record-myself";
 
           Menu = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
-          "${mod}+Tab" = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
+          "${mod}+Tab" = "exec ${pkgs.vicinae}/bin/vicinae toggle";
+          # "${mod}+Tab" = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
           # TODO dwindow exclusively with WIN
           "${mad}+Tab" = "exec ${pkgs.swayr}/bin/swayr switch-window";
           "${mad}+p" = "exec ${lib.getExe pkgs.wofi-pass} ";

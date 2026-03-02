@@ -96,7 +96,7 @@ rustPlatform.buildRustPackage rec {
     '';
     homepage = "https://github.com/TheAlexDev23/power-options";
     license = licenses.gpl3Only;
-    maintainers = with maintainers; [ ];
+    maintainers = [ ];
     mainProgram = "power-options-gtk";
     platforms = platforms.linux;
   };

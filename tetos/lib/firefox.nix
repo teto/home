@@ -185,6 +185,7 @@
           ];
         }
       ];
+      icon = "https://www.youtube.com/s/desktop/18bfd1c0/img/favicon_144x144.png";
       # icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
       definedAliases = [ "@yt" ];
     };
@@ -213,7 +214,8 @@
       urls = [
         { template = "https://nixos.org/manual/nixpkgs/stable?search={searchTerms}"; }
       ];
-      icon = "https://nixos.wiki/favicon.png";
+      # icon = "https://nixos.wiki/favicon.png";
+      icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
       updateInterval = 24 * 60 * 60 * 1000; # every day
       definedAliases = [ "@nm" ];
     };

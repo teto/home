@@ -448,7 +448,7 @@ in
           git-recent # check recently touched branches
           gitbatch # to fetch form several repos at once
           # lab # to interact with gitlab
-          (ignoreBroken gitu) # like lazygit
+          gitu # like lazygit
 
           haskellPackages.fast-tags # generate TAGS file for vim
           hurl # http tester (broken)

@@ -29,11 +29,13 @@ let
 
   myNeovimUnwrapped =
     # "neovim-debug" / "neovim-developer"
-    flakeSelf.inputs.neovim-nightly-overlay.packages."${pkgs.stdenv.hostPlatform.system}".neovim.override({
+    flakeSelf.inputs.neovim-nightly-overlay.packages."${pkgs.stdenv.hostPlatform.system
+    }".neovim.override
+      ({
 
-      # we want to take the luajit with our overlay of lua packages
-      luajit = pkgs.luajit;
-    });
+        # we want to take the luajit with our overlay of lua packages
+        luajit = pkgs.luajit;
+      });
   # nvimLua = config.programs.neovim.finalPackage.passthru.unwrapped.lua;
 
   basePlugins = with pkgs.vimPlugins; [

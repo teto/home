@@ -43,6 +43,10 @@ lib.optionalAttrs withSecrets {
   #   mode = "400";
   # };
 
+  secrets."anki_keyFile" = {
+    mode = "400";
+  };
+
   secrets."claude_api_key" = {
     mode = "400";
   };

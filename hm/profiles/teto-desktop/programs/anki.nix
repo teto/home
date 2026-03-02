@@ -1,18 +1,25 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  withSecrets,
+  secrets,
+  ...
+}:
 let
 
   # found in comment from https://ankiweb.net/shared/info/2055492159
   # https://ankiweb.net/shared/info/734459859
-  anki-connect-fixed =
-
-    pkgs.ankiAddons.anki-connect.overrideAttrs (oa: {
-      src = pkgs.fetchzip {
-        url = "https://ankiweb.net/shared/info/734459859";
-        sha256 = "03wi7hz0ffh1ailvs68lj3gnvpx38jqpc2aghapfmym90pmsx2cn";
-
-      };
-      sourceRoot = "source/plugin";
-    });
+  # anki-connect-fixed =
+  #
+  #   pkgs.ankiAddons.anki-connect.overrideAttrs (oa: {
+  #     src = pkgs.fetchzip {
+  #       url = "https://ankiweb.net/shared/info/734459859";
+  #       sha256 = "03wi7hz0ffh1ailvs68lj3gnvpx38jqpc2aghapfmym90pmsx2cn";
+  #
+  #     };
+  #     sourceRoot = "source/plugin";
+  #   });
 
   #   pkgs.anki-utils.buildAnkiAddon (finalAttrs: {
   # pname = "anki-connect-fixed";
@@ -75,6 +82,10 @@ in
       # 1845663485
     ];
 
+  style = "native";
+  # spacebarRatesCard = true;
+  # language = "ja_JP";
+  # hideBottomBar
   answerKeys = [
     {
       ease = 1;
@@ -85,5 +96,18 @@ in
       key = "up";
     }
   ];
+
+}
+// lib.optionalAttrs withSecrets {
+
+  profiles."User 1".sync = {
+
+    autoSync = true;
+    username = secrets.users.teto.anki.username;
+    # usernameFile =
+    # url = "";
+    # syncMedia  = true;
+    keyFile = config.sops.secrets."anki_keyFile".path;
+  };
 
 }

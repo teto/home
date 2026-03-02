@@ -7,7 +7,10 @@ final: prev:
 {
   # TODO we should not need this if it's in Repo ?
   luajit = prev.luajit.override {
-    packageOverrides = import ./lua-overrides.nix { pkgs = final; lib = final.lib; };
+    packageOverrides = import ./lua-overrides.nix {
+      pkgs = final;
+      lib = final.lib;
+    };
   };
 
   # lua5_1 = gprev.lua5_1.override {
