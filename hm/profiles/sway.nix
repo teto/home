@@ -292,12 +292,15 @@ in
     # timeout in ms
     extraConfig = ''
       include ~/.config/sway/manual.config
+      # as per https://github.com/swaywm/sway/wiki/Systemd-integration
+      exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
     '';
+    # exec swaymsg -t subscribe '["shutdown"]' && systemctl --user stop sway-session.target
     # include ~/.config/sway/swayfx.txt
 
     extraOptions = [
-      "--verbose"
-      "--debug"
+      # "--verbose"
+      # "--debug"
     ];
 
     # eventually start foot --server
