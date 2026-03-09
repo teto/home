@@ -1,6 +1,11 @@
-{ ... }:
+{ pkgs, ... }:
 {
   enable = true;
+
+  package = pkgs.neomutt.override ( {
+
+    enableLua = true;
+  });
 
   # checkStatsInterval  = 60; # null by default
   # editor

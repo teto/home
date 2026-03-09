@@ -1,4 +1,7 @@
 {
+ "launcher": {
+    "width": 1000
+  },
  "pop_to_root_on_close": false,
     "theme": {
       "dark": {

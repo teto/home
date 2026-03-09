@@ -30,6 +30,8 @@
       };
     in
     # "bluetooth" / "nix" / "wifi-commander" / "ssh"
+    # https://www.raycast.com/capipo/pass
+    # https://www.raycast.com/afok/password-store
     [
         (config.lib.vicinae.mkRayCastExtension {
           name = "dad-jokes";
