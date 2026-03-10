@@ -15,6 +15,7 @@
     # flakeSelf.homeModules.experimental
     ./sway.nix
     ./programs/waybar.nix
+    flakeSelf.homeProfiles.neovim
     ./programs/neovim.nix
     ./programs/zsh.nix
     ./services/mpd.nix

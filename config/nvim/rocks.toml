@@ -93,7 +93,9 @@ volt= "scm"
 # neogit = "2.0.0"
 # "diffview.nvim" = "scm"
 "gitsigns.nvim"= "2.0.0"
-"feed.nvim" = "2.19.2"
+
+# there is a bug where it creates home/teto folders everywhere
+# "feed.nvim" = "2.19.2"
 # "typescript-tools.nvim" = "scm"
 
 # "telescope.nvim" = "0.1.6"
@@ -236,6 +238,11 @@ rev = "v3.0.0"
 [plugins.blink-cmp-avante]
 git = "kaiser-yang/blink-cmp-avante"
 rev = "v0.1.0"
+
+[plugins."kitty-scrollback.nvim"]
+git = "mikesmithgh/kitty-scrollback.nvim"
+rev = "v9.0.0"
+config.options = {}
 
 # [plugins."blink.compat"]
 # git = "saghen/blink.compat"

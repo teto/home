@@ -98,16 +98,19 @@ in
   ];
 
 }
-// lib.optionalAttrs withSecrets {
-
-  profiles."User 1".sync = {
-
-    autoSync = true;
-    username = secrets.users.teto.anki.username;
-    # usernameFile =
-    # url = "";
-    # syncMedia  = true;
-    keyFile = config.sops.secrets."anki_keyFile".path;
-  };
-
-}
+# // lib.optionalAttrs withSecrets {
+#
+#   profiles."User 1" = {
+#     default = true;
+#     sync = {
+#
+#       autoSync = true;
+#       username = secrets.users.teto.anki.username;
+#       # usernameFile =
+#       # url = "";
+#       # syncMedia  = true;
+#       keyFile = config.sops.secrets."anki_keyFile".path;
+#     };
+#   };
+#
+# }

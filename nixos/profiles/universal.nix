@@ -59,8 +59,7 @@
 
   # variables set by PAM
   # https://wiki.archlinux.org/index.php/Environment_variables#Using_pam_env
-  environment.sessionVariables = {
-  };
+  environment.sessionVariables = { };
 
   environment.extraOutputsToInstall = [ "man" ];
 
@@ -87,7 +86,7 @@
 
   # todo might not be necessary on server ?
   programs.zsh = {
-    enable = true;
+    # enable = true;
 
     # autosuggestions.async
     interactiveShellInit = ''

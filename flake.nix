@@ -482,7 +482,6 @@
         };
 
       myPkgs = pkgImport self.inputs.nixpkgs true;
-      # myPkgs = myPkgsCuda ;
       # myPkgsCuda = pkgImport self.inputs.nixpkgs true;
       unstablePkgs = pkgImport self.inputs.nixos-unstable false;
       # stablePkgs = pkgImport self.inputs.nixos-stable;
@@ -567,7 +566,16 @@
             # rsync-yazi
             ;
 
-          nvim-unwrapped = myPkgs.neovim-unwrapped;
+          # myPkgs.neovim-unwrapped;
+          neovim-unwrapped =
+            # "neovim-debug" / "neovim-developer"
+            self.inputs.neovim-nightly-overlay.packages."${system}".neovim.override ({
+              baseNeovimUnwrapped = myPkgs.neovim-unwrapped.override ({
+
+                # we want to take the luajit with our overlay of lua packages
+                luajit = myPkgs.luajit;
+              });
+            });
 
           inherit (unstablePkgs)
             # nhs96
@@ -581,7 +589,7 @@
         # formatting = treefmtEval.${myPkgs.system}.config.build.check self;
 
         # not a derivation
-        formatting = (treefmt-nix.lib.evalModule myPkgs ./tetos/treefmt.nix).config.build.check self;
+        formatting = treefmtEval.config.build.check self;
       };
 
     })

@@ -28,9 +28,6 @@ alias nhs912="nix develop \$HOME/home#nhs912"
 # alias j="just -g"
 # alias jg="just -g "
 # alias g="git"
-complete -F _complete_alias jg
-complete -F _complete_alias j
-
 alias nr="nix run "
 alias nr1='nix run --option builders "$TETOS_0" -j0'
 alias nr2='nix run --option builders "$TETOS_1" -j0'
@@ -97,6 +94,11 @@ alias q="qutebrowser"
 alias makej="make -j4"
 alias nm="nm -l"
 alias ts="tailscale"
+# }}}
+
+# kitty aliases {{{
+alias ks="kitten ssh"
+alias kcat="kitten icat"
 # }}}
 
 # test atuin instead or histdb ?

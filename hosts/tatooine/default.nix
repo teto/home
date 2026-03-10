@@ -46,7 +46,6 @@ let
     };
 
   # nixosConfigurations
-  # .nodes
   # builder_jedha = (tetosLib.nixosConfToBuilderAttr {} flakeSelf.nixosConfigurations.jedha);
   # builder_neotokyo = (tetosLib.nixosConfToBuilderAttr {} flakeSelf.nixosConfigurations.neotokyo);
 
@@ -56,8 +55,6 @@ in
     laptopAutoloaded
     flakeSelf.inputs.disko.nixosModules.disko
     flakeSelf.inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen5
-    # should not ?!
-    # desktopAutoloaded
 
     # flakeSelf.nixosProfiles.pixiecore
 
@@ -91,14 +88,14 @@ in
 
   services.pipewire.wireplumber.configPackages = [
     # pkgs.hello
-    (pkgs.writeTextDir "share/wireplumber/wireplumber.conf.d/10-bluez.conf" ''
-      monitor.bluez.properties = {
-        bluez5.roles = [ a2dp_sink a2dp_source bap_sink bap_source hsp_hs hsp_ag hfp_hf hfp_ag ]
-        bluez5.codecs = [ sbc sbc_xq aac ]
-        bluez5.enable-sbc-xq = true
-        bluez5.hfphsp-backend = "native"
-      }
-    '')
+    # (pkgs.writeTextDir "share/wireplumber/wireplumber.conf.d/10-bluez.conf" ''
+    #   monitor.bluez.properties = {
+    #     bluez5.roles = [ a2dp_sink a2dp_source bap_sink bap_source hsp_hs hsp_ag hfp_hf hfp_ag ]
+    #     bluez5.codecs = [ sbc sbc_xq aac ]
+    #     bluez5.enable-sbc-xq = true
+    #     bluez5.hfphsp-backend = "native"
+    #   }
+    # '')
   ];
 
   systemd.user.services.pipewire.environment = {

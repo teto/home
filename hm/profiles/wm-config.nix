@@ -334,7 +334,6 @@ in
 
   ''
 
-
   # https://faq.i3wm.org/question/5942/using-modifer-key-as-a-binding/
   # https://faq.i3wm.org/question/5429/stay-in-mode-only-while-key-is-pressed/
   # set $set_mark  /home/teto/.i3/set_marks.py

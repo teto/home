@@ -42,6 +42,7 @@ in
   # '';
 
   home.packages = with pkgs; [
+    bottles
     (ignoreBroken pkgs.aider-chat) # breaks
     mdcat # markdown viewer
     notmuch # needed for waybar-custom-notmuch.sh
@@ -58,6 +59,10 @@ in
     timr-tui # rust clock
     systemctl-tui
     viu # a console image viewer
+
+    # cups-pk-helper # to add printer through gnome control center
+    pkgs.lm_sensors # to see CPU temperature (command 'sensors')
+    pkgs.vlc # to see it in popcorn
 
     tarts # fun TUI screensaver, cmatrix-like
 

@@ -5,7 +5,7 @@
   anki ? null,
 }:
 
-python3Packages.buildPythonPackage rec {
+python3Packages.buildPythonPackage {
   pname = "clanki";
   version = "0.1.0";
   format = "pyproject";
@@ -13,8 +13,8 @@ python3Packages.buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "alvenw";
     repo = "clanki";
-    rev = "15c9847a05a4a6db25d4abc1e99a7da3dacb073b";
-    sha256 = "sha256-QnG5kOOKFwV8KMVwGjrrsf7hJXzTmrc/gw14vGKExEI=";
+    rev = "86d428e7a28c77d0971e18872605e4a373da676e";
+    sha256 = "sha256-5BQXyVO4Y1RnEeyK/MQzIswGQQcU3EMnjyHMSSHIOnY=";
   };
 
   propagatedBuildInputs = with python3Packages; [

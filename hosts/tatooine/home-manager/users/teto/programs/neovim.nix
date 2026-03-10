@@ -1,7 +1,15 @@
-{ pkgs, flakeSelf, ... }:
+{
+  pkgs,
+  flakeSelf,
+  lib,
+  ...
+}:
 {
 
-  programs.neovim.plugins = [
-    # pkgs.vimPlugins.hex-nvim # to test runtimeDeps
-  ];
+  programs.neovim = {
+
+    plugins = [
+      # pkgs.vimPlugins.hex-nvim # to test runtimeDeps
+    ];
+  };
 }

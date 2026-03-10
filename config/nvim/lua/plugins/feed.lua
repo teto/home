@@ -1,4 +1,4 @@
-vim.g.feed_debug = true
+-- vim.g.feed_debug = true
 
 -- Feed index
 -- `Feed =neovim +read`

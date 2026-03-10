@@ -3,6 +3,7 @@
 
 printf "\e]66;s=2;Double sized text\a\n\n"
 
+kitten @ --help to see all kittens
 
 * debug fonts
 

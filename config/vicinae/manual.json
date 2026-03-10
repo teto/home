@@ -1,4 +1,9 @@
 {
+ "font": {
+  "normal": {
+    "size": 20
+  }
+ },
  "launcher": {
     "width": 1000
   },

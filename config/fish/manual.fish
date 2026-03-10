@@ -2,6 +2,9 @@
 # This file is sourced by the Nix-generated fish config
 # Add your custom fish configuration here that you want to manage outside of Nix
 
+# TODO source
+source ~/.config/bash/aliases.sh
+
 # Enable vim mode
 # fish_vi_key_bindings
 function fish_user_key_bindings

@@ -42,14 +42,6 @@ let
     #  plugin = molten-nvim;
     # })
 
-    # I've not been using it so far
-    # (luaPlugin { plugin = nvim-dap; })
-
-    # (luaPlugin {
-    #   # TODO move config hee
-    #   plugin = bufferline-nvim;
-    # })
-
     # (luaPlugin { plugin = nvim-peekup; })  # deno-based markdown preview
 
     # TODO look at peek.nvim too
@@ -86,14 +78,6 @@ let
     # { plugin = kui-nvim; }
     # FIX https://github.com/NixOS/nixpkgs/issues/169293 first
 
-    # (luaPlugin {
-    #   plugin = fzf-hoogle-vim;
-    #   config = ''
-    #    vim.g.hoogle_path = "hoogle"
-    #    vim.g.hoogle_fzf_cache_file = vim.fn.stdpath('cache')..'/hoogle_cache.json'
-    #    '';
-    # })
-
     # cool but I dont use it
     # (luaPlugin { plugin = stylish-nvim; })
 
@@ -102,21 +86,18 @@ let
   filetypePlugins = with pkgs.vimPlugins; [
   ];
 
-  # (luaPlugin { plugin = telescope-nvim; })
-
   # TODO get lua interpreter to select the good lua packages
   # nvimLua = config.programs.neovim.finalPackage.passthru.unwrapped.lua;
 in
 {
   programs.neovim = {
+
+    # package = flakeSelf.packages.${pkgs.stdenv.hostPlatform.system}.neovim-unwrapped;
+
     # broken because needs nvim-treesitter-legacy-api
     neorg.enable = true;
 
     orgmode.enable = true;
-
-    # package =
-    #   lib.mkForce
-    #     flakeSelf.inputs.neovim-nightly-overlay.packages."${pkgs.stdenv.hostPlatform.system}".neovim-debug;
 
     plugins =
       luaPlugins

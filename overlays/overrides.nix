@@ -8,9 +8,9 @@ let
   # see https://github.com/NixOS/nixpkgs/issues/29605#issuecomment-332474682
   # In lib/sources.nix we have "cleanSource = builtins.filterSource cleanSourceFilter;"
   # TODO builtins.filterSource (p: t: lib.cleanSourceFilter p t && baseNameOf p != "build")
-  filter-cmake = builtins.filterSource (
-    p: t: prev.lib.cleanSourceFilter p t && baseNameOf p != "build"
-  );
+  # filter-cmake = builtins.filterSource (
+  #   p: t: prev.lib.cleanSourceFilter p t && baseNameOf p != "build"
+  # );
 
   notify-send = "${final.libnotify}/bin/notify-send";
 
@@ -169,28 +169,6 @@ in
 
   # # TODO get lua interpreter to select the good lua packages
   # nvimLua = config.programs.neovim.finalPackage.passthru.unwrapped.lua;
-
-  # luajit = prev.luajit.override {
-  #   packageOverrides = self.inputs.rikai-nvim.overlays.luaOverlay;
-  # };
-  #
-  # lua5_1 = prev.lua5_1.override {
-  #   packageOverrides = self.inputs.rikai-nvim.overlays.luaOverlay;
-  # };
-
-  # overrideAttrs (oldAttrs: {
-  #   src = prev.fetchFromGitHub {
-  #     owner = "flameshot-org";
-  #     repo = "flameshot";
-  #     rev = "3d21e4967b68e9ce80fb2238857aa1bf12c7b905";
-  #     sha256 = "sha256-OLRtF/yjHDN+sIbgilBZ6sBZ3FO6K533kFC1L2peugc=";
-  #   };
-  #   cmakeFlags = [
-  #     "-DUSE_WAYLAND_CLIPBOARD=1"
-  #     "-DUSE_WAYLAND_GRIM=1"
-  #   ];
-  #   buildInputs = oldAttrs.buildInputs ++ [ final.libsForQt5.kguiaddons ];
-  # });
 
   # xdg-utils = prev.xdg-utils.overrideAttrs(oa: {
   #   pname = "xdg-utils-custom";

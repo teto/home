@@ -2,7 +2,7 @@
 {
   enable = true;
 
-  package = pkgs.neomutt.override ( {
+  package = pkgs.neomutt.override ({
 
     enableLua = true;
   });

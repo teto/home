@@ -866,6 +866,9 @@ end, { desc = 'Go to file, create if missing' })
 -- vim.g.avante = {
 --     log_level = vim.log.levels.DEBUG,
 -- }
+
+require('plugins.kitty-scrollback')
+
 require('plugins.avante')
 
 local avante = require('teto.avante')

@@ -1,10 +1,5 @@
 # tOP prev
-final: prev:
-# let
-# generated =  ./luarocks-packages/generated.nix;
-
-# in
-{
+final: prev: {
   # TODO we should not need this if it's in Repo ?
   luajit = prev.luajit.override {
     packageOverrides = import ./lua-overrides.nix {

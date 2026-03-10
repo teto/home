@@ -2,7 +2,7 @@
   config,
   pkgs,
   lib,
-  # flakeSelf,
+  flakeSelf,
   ...
 }:
 let
@@ -282,6 +282,8 @@ in
   enableBlink = true;
   enableMyDefaults = true;
   useAsManViewer = true;
+
+  package = flakeSelf.packages.${pkgs.stdenv.hostPlatform.system}.neovim-unwrapped;
 
   lsp.mapOnAttach = true;
   lualsAddons = true;

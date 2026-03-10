@@ -644,6 +644,7 @@ in
         [
           hakuneko
           memento-with-ocr
+          pkgs.clanki
 
           # https://github.com/NixOS/nixpkgs/pull/368909
           (ignoreBroken pkgs.kakasi) # convert kanjis into kanas etc

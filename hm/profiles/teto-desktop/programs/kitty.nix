@@ -6,6 +6,9 @@
 }:
 {
   enable = true;
+
+  enableNeovimScrollback = true;
+
   # we need a monospace font
   # check that it supports italic with font-manager or
   # printf '\e[3mAB'
@@ -29,8 +32,9 @@
     font_size = 12;
     url_style = "curly";
     enable_audio_bell = false;
+    include = "./manual.conf";
   };
-  extraConfig = ''
-    include ./manual.conf
-  '';
+  # extraConfig = ''
+  #   include ./manual.conf
+  # '';
 }

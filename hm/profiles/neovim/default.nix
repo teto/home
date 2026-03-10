@@ -36,6 +36,7 @@ let
         # we want to take the luajit with our overlay of lua packages
         luajit = pkgs.luajit;
       });
+
   # nvimLua = config.programs.neovim.finalPackage.passthru.unwrapped.lua;
 
   basePlugins = with pkgs.vimPlugins; [
@@ -165,9 +166,6 @@ in
     # autocompletion.enable = true;
     # TODO ?
     # snippets.enable = true;
-
-    # take the one from the flake
-    package = myNeovimUnwrapped;
 
     initLua = lib.mkBefore (
       ''
