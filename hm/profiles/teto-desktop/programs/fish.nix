@@ -142,15 +142,15 @@
 
   # TODO restore some manual comple
   completions = {
-    my-prog = ''
-      complete -c myprog -s o -l output
-    '';
+    # my-prog = ''
+    #   complete -c myprog -s o -l output
+    # '';
 
-    my-app = {
-      body = ''
-        complete -c myapp -s -v
-      '';
-    };
+    # my-app = {
+    #   body = ''
+    #     complete -c myapp -s -v
+    #   '';
+    # };
   };
 
   # Source manual configuration file
