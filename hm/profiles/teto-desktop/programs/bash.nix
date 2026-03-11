@@ -11,7 +11,7 @@ let
     if lib ? mkRemoteBuilderDesc then
       lib.mkRemoteBuilderDesc
     else
-      lib.warn "Using noop 'mkRemoteBuilderDesc' switch to 'scratch' branch" (_a: _b: null);
+      lib.warn "Using noop 'mkRemoteBuilderDesc' switch to 'scratch' branch" (_a: _b: "PLACEHOLDER");
   builder_neotokyo = mkRemoteBuilderDesc "3.0" (
     lib.nixosConfToBuilderAttr {
       sshKey = "${secretsFolder}/ssh/id_rsa";

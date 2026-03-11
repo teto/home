@@ -19,15 +19,35 @@ width_increment_percentage = 5.0
 auto_refresh_interval=4
 tracer.enabled = true
 
-[custom_commands]
-# duplicate 
-"duplicate" = { key = ["d"], args = ["duplicate", "-B", "@",  "$change_id"] }
-"show diff" = { key = ["U"], args = ["diff", "-r", "$change_id", "--color", "always"], show = "diff" }
-"show oplog diff" = { key = ["ctrl+o"], args = ["op", "show",  "$operation_id", "--color", "always"], show = "diff" }
-# "resolve vscode" = { key = ["R"], args = ["resolve", "--tool", "vscode"], show = "interactive" }
-"new main" = { args = ["new", "main"] }
-"revert" = { key = [ "R" ] , args = [ "revert", "-r", "$change_id" ] }
-"tug" = { key = ["ctrl+t"], args = ["bookmark", "move", "--from", "closest_bookmark($change_id)", "--to", "closest_pushable($change_id)"] }
+[[actions]]
+name = "duplicate"
+desc = "duplicate on top of current branch"
+lua = '''
+local diff = jj("duplicate", "-B", "@", "-r", context.change_id())
+flash("ran a duplicate")
+'''
+
+[[actions]]
+name = "my-action"
+lua = 'flash("hello")'
+
+# [custom_commands]
+# # duplicate 
+# # "resolve vscode" = { key = ["R"], args = ["resolve", "--tool", "vscode"], show = "interactive" }
+# "revert" = { key = [ "R" ] , args = [ "revert", "-r", "$change_id" ] }
+# "tug" = { key = ["ctrl+t"], args = ["bookmark", "move", "--from", "closest_bookmark($change_id)", "--to", "closest_pushable($change_id)"] }
+# [[bindings]]
+# action = "my-action"
+# key = "H"
+# scope = "revisions"
+
+[[bindings]]
+action = "duplicate"
+key = "H"
+# desc = "Duplicate"
+# scope => where the bindings are active
+scope = "revisions"
+
 
 [revisions]
 # log_batching = false

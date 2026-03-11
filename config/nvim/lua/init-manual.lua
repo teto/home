@@ -679,6 +679,8 @@ vim.lsp.enable('emmylua_ls')
 -- vim.lsp.enable('just')
 
 -- testing packadd
+if vim.fn.has('nvim-0.12') ~= 0 then
+	-- we will miss a bunch of things :s
 vim.pack.add({
     -- my real neovim package manager (with nix)
     'https://github.com/nvim-neorocks/rocks.nvim',
@@ -707,6 +709,7 @@ vim.pack.add({
     'https://github.com/calvinchengx/vim-aftercolors',
     'https://github.com/raddari/last-color.nvim',
 })
+end
 
 -- wont work if last-color is not installed
 local theme = require('last-color').recall() or 'sonokai'
@@ -867,7 +870,11 @@ end, { desc = 'Go to file, create if missing' })
 --     log_level = vim.log.levels.DEBUG,
 -- }
 
-require('plugins.kitty-scrollback')
+local has_kitty_scrollback, _kitty_scrollback = pcall(require, 'kitty-scrollback')
+if has_kitty_scrollback then
+	require('plugins.kitty-scrollback')
+	-- log a warn
+end
 
 require('plugins.avante')
 
