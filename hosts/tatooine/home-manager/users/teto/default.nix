@@ -53,7 +53,8 @@
 
   home.packages = [
     # pkgs.claude-code
-    pkgs.llama-cpp
+    # pkgs.llama-cpp
+    pkgs.batctl # to control battery thresholds
   ];
 
   package-sets = {

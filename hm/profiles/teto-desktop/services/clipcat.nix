@@ -5,7 +5,8 @@
   # clipcat-menu
   # why there is no grpc.sock ?
 
-  enable = true;
+  # replaced by vicinae, fragile
+  enable = false;
   enableZshIntegration = true;
   # menuSettings = {};
   # ctlSettings

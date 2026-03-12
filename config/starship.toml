@@ -126,13 +126,13 @@ disabled = true
 # TODO show changeset
 # 
 #     surround("\"", "\"", truncate_end(24, description.first_line(), "…")),
+#     if(divergent, "divergent"),
 command = '''
 jj log -r ::@ -n2 --ignore-working-copy --no-graph --color always  -T '
   separate(" ",
-    bookmarks.map(|x| truncate_end(30, x.name(), "…")).join(" "),
+    bookmarks.map(|x| truncate_end(50, x.name(), "…")).join(" "),
     tags.map(|x| truncate_end(10, x.name(), "…")).join(" "),
     if(conflict, "conflict"),
-    if(divergent, "divergent"),
     if(hidden, "hidden"),
     " "
   )

@@ -12,9 +12,22 @@
 
   enable = true;
   settings = {
+    aliases = {
+      n = [ "new" ];
+      nt = [
+        "new"
+        "trunk()"
+      ];
+    };
     user = {
       email = config.programs.git.settings.user.email;
       name = "teto";
+    };
+    ui = {
+      default-command = "status";
+      merge-editor = "nvim";
+      # Enable pagination for commands that support it (default)
+      paginate = "auto";
     };
 
     # # this generates what looks like an ok config but jj doesn't seem to care for it

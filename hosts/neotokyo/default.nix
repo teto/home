@@ -57,17 +57,6 @@ in
 
   system.stateVersion = "25.05";
 
-  # imported from gandhi ?
-  # boot.initrd.kernelModules = [
-  #   "xen-blkfront"
-  #   "xen-tpmfront"
-  #   "xen-kbdfront"
-  #   "xen-fbfront"
-  #   "xen-netfront"
-  #   "xen-pcifront"
-  #   "xen-scsifront"
-  # ];
-
   boot.kernel.sysctl = {
     "fs.protected_fifos" = 2;
     "fs.protected_regular" = 2;
@@ -96,6 +85,8 @@ in
     flakeSelf.inputs.disko.nixosModules.disko
     flakeSelf.nixosModules.teto-nogui
     flakeSelf.nixosModules.default-hm
+
+    flakeSelf.nixosProfiles.server
     flakeSelf.nixosProfiles.ntp
     flakeSelf.nixosProfiles.nix-daemon
 

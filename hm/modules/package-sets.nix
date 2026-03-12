@@ -467,6 +467,7 @@ in
           nix-update # nix-update <ATTR> to update a software
           # nix-top # (abandoned) to list current builds
           nixpkgs-review # to help review nix packages
+          nvimpager
           patchutils # for interdiff
           perf-tools # to interpret
 

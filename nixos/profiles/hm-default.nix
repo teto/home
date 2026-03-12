@@ -31,19 +31,20 @@
     # flakeSelf.homeProfiles.neovim # takes too much space for router
 
     # TODO it should autoload those
-    flakeSelf.homeModules.nvimpager
     flakeSelf.homeModules.bash
-    flakeSelf.homeModules.memento
-    flakeSelf.homeModules.kitty
-    flakeSelf.homeModules.zsh
+    flakeSelf.homeModules.fish
     flakeSelf.homeModules.fre
-    # flakeSelf.homeModules.cliphist
     flakeSelf.homeModules.fzf
+    flakeSelf.homeModules.memento
+    flakeSelf.homeModules.nvimpager
+    flakeSelf.homeModules.kitty
+    # flakeSelf.homeModules.cliphist
     flakeSelf.homeModules.neovim
     flakeSelf.homeModules.pimsync
     flakeSelf.homeModules.package-sets
     flakeSelf.homeModules.tig
     flakeSelf.homeModules.yazi
+    flakeSelf.homeModules.zsh
 
     (
       { ... }:

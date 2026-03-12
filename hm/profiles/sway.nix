@@ -254,6 +254,9 @@ in
           # TODO bind
           # XF86Copy
         }
+        // lib.optionalAttrs config.programs.vicinae.enable {
+          "${mod}+Ctrl+h" = "exec ${pkgs.vicinae}/bin/vicinae vicinae://extensions/vicinae/clipboard/history";
+        }
         // lib.optionalAttrs config.services.clipcat.enable {
           "${mod}+Ctrl+h" =
             "exec ${pkgs.clipcat}/bin/clipcat-menu -f rofi  | ${sharedConfig.notify-send} 'Failed running clipcat' ";

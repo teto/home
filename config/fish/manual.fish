@@ -2,6 +2,11 @@
 # This file is sourced by the Nix-generated fish config
 # Add your custom fish configuration here that you want to manage outside of Nix
 
+# Save all commands to history, including failed ones 
+set -g fish_history_merge_behavior save 
+set -U fish_history_preserve_failed_commands yes
+
+
 # TODO source
 source ~/.config/bash/aliases.sh
 

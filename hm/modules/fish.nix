@@ -65,7 +65,7 @@ in
 
     programs.fish.binds = lib.mkIf cfg.enableFancyCtrlZ {
 
-      "\cz" = "fg 2>/dev/null; commandline -f repaint";
+      "\cz".command = "fg 2>/dev/null; commandline -f repaint";
     };
 
   };
