@@ -24,10 +24,10 @@ path = "/home/teto/neovim"
 # List of Neovim plugins to install alongside their versions.
 # If the plugin name contains a dot then you must add quotes to the key name!
 [plugins]
-"rocks-git.nvim"= "2.5.9"
+"rocks-git.nvim"= "2.5.10"
 "rocks-config.nvim" = "3.2.0"
 # "diffview.nvim" = "scm"
-"haskell-tools.nvim" = "7.0.0"
+"haskell-tools.nvim" = "7.0.3"
 
 # needed the patch from https://github.com/nvimtools/none-ls.nvim/pull/277/
 "none-ls.nvim" = "scm"
@@ -49,7 +49,7 @@ auto-session = "2.5.1"
 "lsp_signature.nvim" = "0.3.1"
 friendly-snippets = "scm"
 # "haskell-snippets.nvim" = "1.4.4"
-"yazi.nvim" = "13.1.4"
+"yazi.nvim" = "13.1.5"
 
 
 
@@ -82,13 +82,13 @@ friendly-snippets = "scm"
 vim-startuptime= "4.5.0"
 menu= "scm"
 # "snacks.nvim" = "2.6.0"
-fzf-lua = "0.0.2458"
+fzf-lua = "0.0.2539"
 # "lz.n" = "2.12.0"
-"indent-blankline.nvim" = "3.9.0"
+"indent-blankline.nvim" = "3.9.1"
 # "llm.nvim"= "scm"
 # volt is a UI library
 volt= "scm"
-"grug-far.nvim"= "1.6.60"
+"grug-far.nvim"= "1.6.63"
 # orgmode = "0.7.1"
 # neogit = "2.0.0"
 # "diffview.nvim" = "scm"
@@ -108,7 +108,7 @@ magick = "1.6.0"
 # how to get rid of it:
 "telescope.nvim" = "scm"
 
-"render-markdown.nvim" = "8.11.0"
+"render-markdown.nvim" = "8.12.0"
 
 # [plugins.neotest-haskell]
 # version = "2.0.0"
@@ -142,11 +142,6 @@ dev = true
 git = "gbprod/none-ls-luacheck.nvim"
 rev = "v0.0.1"
 
-# [plugins."better-digraphs.nvim"]
-# git = "protex/better-digraphs.nvim"
-# rev = "5b2c63418d1e2c91d17f6d4e966bdafc5072a8d9"
-# opt = true
-
 [plugins."hacker.nvim"]
 git = "letieu/hacker.nvim"
 rev = "6818e75c076beb05ffcad2be6a78e0e0f800416d"
@@ -155,25 +150,6 @@ opt = true
 [plugins."baleia.nvim"]
 git = "m00qek/baleia.nvim"
 rev = "v1.4.0"
-
-# [plugins."ansify.nvim"]
-# git = "tmccombs/ansify.nvim"
-# rev = "v1.0.0"
-
-# [plugins.vim-aftercolors]
-# git = "calvinchengx/vim-aftercolors"
-# rev = "89b7c45a48a661da88a3a574ef9fa90b936064a4"
-#
-
-# [plugins.lualine-lsp-progress]
-# git = "arkav/lualine-lsp-progress"
-# rev = "56842d097245a08d77912edf5f2a69ba29f275d7"
-
-# [plugins."iron.nvim"]
-# # git = "vigemus/iron.nvim"
-# dir = "/home/teto/neovim/iron.nvim"
-# # rev = "v3.0"
-# branch = "master"
 
 [plugins."nvim-colorizer.lua"]
 git = "norcalli/nvim-colorizer.lua"
@@ -205,7 +181,7 @@ rev = "fa4673e181e18fd1719ae17a1d4f4ecce2de37aa"
 
 [plugins."codecompanion.nvim"]
 git = "olimorris/codecompanion.nvim"
-rev = "v18.5.1"
+rev = "v19.3.0"
 
 [plugins."fzf-lua-frecency.nvim"]
 git = "elanmed/fzf-lua-frecency.nvim"
@@ -217,7 +193,7 @@ rev = "d9d12d4bfb9a4c5b8b8bdf7f612551df6972946c"
 
 [plugins."jj.nvim"]
 git = "nicolasgb/jj.nvim"
-rev = "v0.4.1"
+rev = "v0.5.0"
 
 [plugins."jujutsu.nvim"]
 git = "yannvanhalewyn/jujutsu.nvim"
@@ -229,7 +205,7 @@ rev = "c8758d839745caa55faf11a1c0ab32cb1d95c681"
 
 [plugins."opencode.nvim"]
 git = "nickjvandyke/opencode.nvim"
-rev = "v0.1.0"
+rev = "v0.5.2"
 
 [plugins.blink-cmp-git]
 git = "kaiser-yang/blink-cmp-git"
