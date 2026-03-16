@@ -3,6 +3,7 @@
   python3Packages,
   fetchFromGitHub,
   anki ? null,
+  flakeSelf,
 }:
 
 python3Packages.buildPythonPackage {
@@ -10,6 +11,7 @@ python3Packages.buildPythonPackage {
   version = "0.1.0";
   format = "pyproject";
 
+  # flakeSelf feature/deck-filtering
   src = fetchFromGitHub {
     owner = "alvenw";
     repo = "clanki";

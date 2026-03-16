@@ -1935,11 +1935,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1770570663,
-        "narHash": "sha256-wyjnic9peRNArSScgCM4loGFKBDB/ud6pPu2EpXsHJM=",
+        "lastModified": 1773476721,
+        "narHash": "sha256-24V4U94ch+gCJ+2TahLoSOUTZVPteg0JLtFrxxqYWmE=",
         "owner": "idursun",
         "repo": "jjui",
-        "rev": "0ee745c0577b089f68b61ca74f654be0981e47b3",
+        "rev": "6c6f195c32c429ee438bb74596a476c9ef0e6058",
         "type": "github"
       },
       "original": {

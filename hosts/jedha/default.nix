@@ -73,6 +73,7 @@ in
 
     flakeSelf.nixosProfiles.steam
     flakeSelf.nixosProfiles.universal
+    flakeSelf.nixosProfiles.experimental
 
     # flakeSelf.nixosProfiles.pixiecore
     # flakeSelf.nixosProfiles.podman
@@ -97,10 +98,17 @@ in
     };
   };
 
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_18;
+  boot = {
+    kernelPackages = pkgs.linuxKernel.packages.linux_6_18;
+    extraModulePackages = [ 
 
-  # it apparently still is quite an important thing to have
-  boot.devSize = "5g";
+      # pkgs.linuxKernel.packages.linux_6_18.r8125
+      pkgs.linuxKernel.packages.linux_6_18.r8125
+    ];
+
+    # it apparently still is quite an important thing to have
+    devSize = "5g";
+  };
 
   boot.blacklistedKernelModules = [ "nouveau" ];
 

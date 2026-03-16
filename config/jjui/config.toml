@@ -10,9 +10,9 @@ width_increment_percentage = 5.0
 # cancel = ["q"]
 # escape = ["esc"]
 
-  [keys.preview]
-    scroll_up = ["ctrl+b"]
-    scroll_down = ["ctrl+f"]
+  # [keys.preview]
+  #   scroll_up = ["ctrl+b"]
+  #   scroll_down = ["ctrl+f"]
 
 
 [ui]
@@ -22,11 +22,23 @@ tracer.enabled = true
 [[actions]]
 name = "duplicate"
 desc = "duplicate on top of current branch"
+# 
 lua = '''
-local diff = jj("duplicate", "-B", "@", "-r", context.change_id())
-flash("ran a duplicate")
+local change_id = context.change_id()
+local diff = jj("duplicate", "-B", "@", "-r", change_id)
+flash("Duplicated ".. change_id .. " over "..revisions.current())
+
 '''
 
+# [[actions]]
+# name = "bookmark-create-modal"
+#   config.action("create bookmark", function()
+#     jj("bookmark", "create", input())
+#     revisions.refresh()
+#   end, {
+#     seq = { "\\", "c" },
+#     scope = "revisions",
+#   })
 [[actions]]
 name = "my-action"
 lua = 'flash("hello")'
@@ -43,11 +55,25 @@ lua = 'flash("hello")'
 
 [[bindings]]
 action = "duplicate"
-key = "H"
+# key = "d"
+seq = [ "d", "u"]
 # desc = "Duplicate"
 # scope => where the bindings are active
 scope = "revisions"
 
+
+[[bindings]]
+key = "ctrl+f"
+action = "ui.preview_scroll_down"
+scope = "ui.preview"
+desc = "scroll down" 
+# { key = "ctrl+f", action = "file_search.preview_half_page_down", scope = "file_search", desc = "preview half down" },
+
+[[bindings]]
+key = "ctrl+b"
+action = "ui.preview_scroll_up"
+scope = "ui.preview"
+desc = "scroll up" 
 
 [revisions]
 # log_batching = false
