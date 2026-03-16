@@ -70,6 +70,7 @@ in
     flakeSelf.nixosProfiles.desktop
     flakeSelf.nixosProfiles.laptop
     flakeSelf.nixosProfiles.podman
+    flakeSelf.nixosProfiles.experimental
     flakeSelf.nixosProfiles.steam
 
     # ../../nixos/profiles/homepage-dashboard.nix
@@ -80,6 +81,10 @@ in
     # usually inactive, just to test some stuff
     # ../../nixos/modules/libvirtd.nix
 
+  ];
+
+  environment.systemPackages = [
+    pkgs.hyprwhspr-rs
   ];
 
   # services.vaultwarden = {
