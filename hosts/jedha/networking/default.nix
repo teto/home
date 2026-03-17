@@ -3,6 +3,21 @@
   hostName = "jedha";
   domain = "jedha.local"; # Define your hostname.
 
+
+  networkmanager = {
+    enable = true;
+    unmanaged = [
+      # we prefer to configure it with networkd
+      "interface-name:enp11s0"
+    #   "interface-name:r?-*"
+    #   "interface-name:client-*"
+    #   "interface-name:server-*"
+    ];
+  };
+
+  useNetworkd = true;
+
+
   # hosts = [];
 
   # creates problem with buffalo check if it blocks requests or what
@@ -25,14 +40,14 @@
   firewall.allowedUDPPorts = [ ];
 
   # dedicated to printer
-  interfaces.enp11s0.ipv4 = {
-    addresses = [
-      {
-        # apipa system
-        address = "169.254.1.10";
-        prefixLength = 16;
-        # metric = "800";
-      }
+  # interfaces.enp11s0.ipv4 = {
+  #   addresses = [
+  #                {
+  #                  # apipa system
+  #                  address = "169.254.1.10";
+  #                  prefixLength = 16;
+  #                  # metric = "800";
+  #                }
     ];
     # routes = [
     #   { options.scope = "global"; }

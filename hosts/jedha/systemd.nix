@@ -1,4 +1,6 @@
-{ lib, ... }:
+{ lib
+, secrets
+, ... }:
 {
 
   services.pixiecore.wantedBy = lib.mkForce [ ];
@@ -13,4 +15,84 @@
   # https://www.freedesktop.org/software/systemd/man/latest/systemd-sysupdate.html
   sysupdate.enable = false;
 
+
+  network = {
+
+    # links = {
+    #   wired = {
+    #     matchConfig = {  
+    #              Name = "enp11s0";
+    #            };
+    #   };
+    #
+    #   # wlp10s0
+    #
+    # };
+
+    # netdevs = {
+    #
+    #   # wlp10s0
+    #    wireless = {
+    #      # add it to secrets
+    #
+    #      # security = 
+    #      netdevConfig = {
+    #              # Kind = "bridge";
+    #              # Name = "mybridge";
+    #
+    #        # Description = "toto";
+    #       # SSID = "neotokyo";
+    #       # KeyManagement = "wpa-psk";
+    #      };
+    #
+    #       # wlanConfig = {
+    #       #
+    #       # };
+    #       # Security = {
+    #       #   Passphrase = secrets.router.password;
+    #       # };
+    #
+    #       extraConfig = ''
+    #
+    #         [Security]
+    #         Passphrase = toto
+    #
+    #         '';
+    #
+    #   };
+    # };
+
+    # enable = true;
+    
+    networks =  {
+    wired = {
+      matchConfig = {
+        Name = "enp11s0";
+      };
+      dhcpServerConfig = {
+
+        EmitDNS = false;
+        PoolOffset = 50;
+
+      };
+    dhcpServerStaticLeases = [
+                {
+                  Address = "10.0.0.1";
+                  MACAddress = "65:43:4a:5b:d8:5f";
+                }
+              ];
+    };
+
+    # wlan = {
+    #   name = "wlp10s0";
+    #   # matchConfig = {
+    #   #   Name = "wlp10s0";
+    #   # };
+    #   DHCP = "yes"; # "ipv4"
+    #   networkConfig = {
+    #              Description = "My Network";
+    #            };
+    # };
+  };
+  };
 }

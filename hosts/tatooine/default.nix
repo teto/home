@@ -59,6 +59,8 @@ in
     # flakeSelf.nixosProfiles.pixiecore
 
     flakeSelf.nixosProfiles.disko-desktop
+    flakeSelf.nixosProfiles.networkmanager
+
     # removed 'cos it clashed with disk-config but these are not the same
     # ./generated.nix
 

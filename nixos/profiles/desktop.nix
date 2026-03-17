@@ -46,7 +46,6 @@ in
 
     # ./greetd.nix
     ./ntp.nix
-    ../modules/network-manager.nix
     # ../../nixos/profiles/librenms.nix
 
     ./pipewire.nix

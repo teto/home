@@ -11,7 +11,6 @@
   # networking.nameservers = [ "9.9.9.9" ];
 
   networking.networkmanager = {
-    enable = true;
     # enableStrongSwan = true;
     # one of "OFF", "ERR", "WARN", "INFO", "DEBUG", "TRACE"
     # logLevel = "TRACE";
