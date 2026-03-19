@@ -1,12 +1,35 @@
 {
- "font": {
+"font": {
   "normal": {
-    "size": 20
+    "family": "auto",
+    "size": 14
   }
- },
- "launcher": {
-    "width": 1000
+},
+"launcher_window": {
+  "opacity": 0.95,
+  "blur": {
+    "enabled": true
   },
+  "dim_around": true,
+  "client_side_decorations": {
+    "enabled": true,
+    "rounding": 10,
+    "border_width": 1
+  },
+  "compact_mode": {
+    "enabled": false
+  },
+  "size": {
+    "width": 1000,
+    "height": 600
+  },
+  "screen": "auto",
+  "layer_shell": {
+    "enabled": true,
+    "keyboard_interactivity": "exclusive",
+    "layer": "top"
+  }
+},
  "pop_to_root_on_close": false,
     "theme": {
       "dark": {

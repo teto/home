@@ -27,18 +27,17 @@
   # dedicated to printer
   interfaces.enp11s0.ipv4 = {
     addresses = [
-                 {
-                   # apipa system
-                   address = "169.254.1.10";
-                   prefixLength = 16;
-                   # metric = "800";
-                 }
-               ];
-               # routes = [
-               #   { options.scope = "global"; }
-               # ];
+      {
+        # apipa system
+        address = "169.254.1.10";
+        prefixLength = 16;
+        # metric = "800";
+      }
+    ];
+    # routes = [
+    #   { options.scope = "global"; }
+    # ];
   };
-
 
   # to allow wireshark to capture from netlink
   # networking.localCommands = ''
@@ -49,8 +48,7 @@
   #   fi
   # '';
 
-
-   # 192.168.1.254
+  # 192.168.1.254
   # defaultGateway = {
   #   address = "131.211.84.1";
   #   interface = "enp3s0";

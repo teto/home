@@ -100,7 +100,7 @@ in
 
   boot = {
     kernelPackages = pkgs.linuxKernel.packages.linux_6_18;
-    extraModulePackages = [ 
+    extraModulePackages = [
 
       # pkgs.linuxKernel.packages.linux_6_18.r8125
       pkgs.linuxKernel.packages.linux_6_18.r8125

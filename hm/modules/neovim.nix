@@ -335,7 +335,7 @@ in
     # (mkIf cfg.orgmode.enable { programs.neovim.plugins = cfg.orgmode.plugins; })
 
     (mkIf cfg.neorg.enable {
-      programs.neovim.plugins = cfg.neorg.plugins; 
+      programs.neovim.plugins = cfg.neorg.plugins;
       # TODO add extraLuaPackages until this is fixed
       # programs.neovim.extraLuaPackages = [ ];
     })

@@ -2,3 +2,17 @@ just `networkctl` will list
 o
 
 networkctl up br0
+
+networkctl status <INTERFACE>
+
+networkctl edit @wlan0 --drop-in mdns
+
+* networkd
+
+https://wiki.archlinux.org/title/Systemd-networkd
+.network files
+    They will apply a network configuration for a matching device. See the systemd.network(5) man page.
+.netdev files
+    They will create a virtual network device for a matching environment. See the systemd.netdev(5) man page.
+.link files
+    When a network device appears, udev will look for the first matching .link file. See the systemd.link(5) man page.
