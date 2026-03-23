@@ -99,6 +99,7 @@ in
     # sway creates systemd.user.targets.sway-session
     # for now we import everything
     # /nix/store/rxzvps8zldnz4sgphbw6893n6ikai6gn-dbus-1.14.10/bin/dbus-update-activation-environment --systemd  --all
+    # is this the one ?
     text = ''
       #! /bin/sh
       ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd --all;

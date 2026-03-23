@@ -3,20 +3,18 @@
   hostName = "jedha";
   domain = "jedha.local"; # Define your hostname.
 
-
   networkmanager = {
     enable = true;
     unmanaged = [
       # we prefer to configure it with networkd
       "interface-name:enp11s0"
-    #   "interface-name:r?-*"
-    #   "interface-name:client-*"
-    #   "interface-name:server-*"
+      #   "interface-name:r?-*"
+      #   "interface-name:client-*"
+      #   "interface-name:server-*"
     ];
   };
 
   useNetworkd = true;
-
 
   # hosts = [];
 
@@ -48,11 +46,6 @@
   #                  prefixLength = 16;
   #                  # metric = "800";
   #                }
-    ];
-    # routes = [
-    #   { options.scope = "global"; }
-    # ];
-  };
 
   # to allow wireshark to capture from netlink
   # networking.localCommands = ''

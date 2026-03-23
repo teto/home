@@ -1,2 +1,3 @@
 g,Git,
 gs,Status,git status
+n,interface check,networkctl status enp11s0

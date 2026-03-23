@@ -8,6 +8,7 @@
 {
   # ~/.config/environment.d/10-home-manager.conf
   user.sessionVariables = {
+    # TODO this should go elsewhere/be set by sway
     QT_QPA_PLATFORM = "wayland";
     XDG_SESSION_TYPE = "wayland";
     # in/dbus-update-activation-environment --systemd --all

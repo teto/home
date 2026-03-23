@@ -4,11 +4,11 @@
 
     settings = {
       HDMI-A-3 = {
-        path = "/home/teto/home/wallpapers/Hummingbird.jpg";
+        path = "/home/teto/home/data/wallpapers/Hummingbird.jpg";
         apply-shadow = true;
       };
       HDMI-A-2 = {
-        path = "/home/teto/home/wallpapers";
+        path = "/home/teto/home/data/wallpapers";
         sorting = "descending";
       };
     };

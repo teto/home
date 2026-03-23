@@ -14,6 +14,9 @@ width_increment_percentage = 5.0
   #   scroll_up = ["ctrl+b"]
   #   scroll_down = ["ctrl+f"]
 
+[ssh] 
+hijack_askpass= true
+
 
 [ui]
 auto_refresh_interval=4

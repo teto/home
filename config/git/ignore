@@ -2,6 +2,7 @@
 /.direnv
 *.env
 /.envrc
+.nvimlog
 
 # remove core files
 /core

@@ -383,7 +383,7 @@ in
           automake
           (ignoreBroken bcal) # calculatrice
           # bmm # rust bookmark manager (not package yet)
-          backblaze-b2-tetos
+          # backblaze-b2-tetos
           bfs # https://github.com/tavianator/bfs
           binutils
           btop
