@@ -43,6 +43,7 @@ in
 
   home.packages = with pkgs; [
     bottles
+    python3Packages.kaggle
     (ignoreBroken pkgs.aider-chat) # breaks
     mdcat # markdown viewer
     notmuch # needed for waybar-custom-notmuch.sh
