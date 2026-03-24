@@ -5,6 +5,7 @@
   ...
 }:
 {
+  enable = false;
 
   interfaces = {
     wg = {

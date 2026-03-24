@@ -15,7 +15,6 @@
       "manual.json"
    ],
    "close_on_focus_loss": true,
-
    "theme": {
       "dark": {
          "name": "zenwritten-light",

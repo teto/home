@@ -19,6 +19,7 @@ let
           "environment.nix"
           # UNCOMMENTING this will break everything since its content is not adapted
           # "home-manager/"
+          "networking/"
           "users/"
           "services/"
           "security/"
@@ -72,7 +73,7 @@ in
     flakeSelf.nixosProfiles.desktop
     flakeSelf.nixosProfiles.laptop
     flakeSelf.nixosProfiles.podman
-    flakeSelf.nixosProfiles.experimental
+    # flakeSelf.nixosProfiles.experimental
     flakeSelf.nixosProfiles.steam
 
     # ../../nixos/profiles/homepage-dashboard.nix

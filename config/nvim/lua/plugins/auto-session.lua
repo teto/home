@@ -4,7 +4,7 @@ require('auto-session').setup({
     session_root_dir = '.', -- vim.fn.stdpath('data').."/sessions/",
     use_git_branch = false,
     lazy_support = false,
-    log_level = 'error', -- debug hijacks cmdline
+    log_level = 'debug', -- debug hijacks cmdline
     bypass_save_filetypes = nil, -- List of filetypes to bypass auto save when the only buffer open is one of the file types listed, useful to ignore dashboards
     close_filetypes_on_save = { 'checkhealth' }, -- Buffers with matching filetypes will be closed before saving
 

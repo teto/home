@@ -55,6 +55,8 @@ in
     pass-perso
     # poppler for pdf preview
 
+    kaggle # kaggle interface
+
     # rendercv # yaml-based CV
     stow
     timr-tui # rust clock

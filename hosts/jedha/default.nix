@@ -73,7 +73,7 @@ in
 
     flakeSelf.nixosProfiles.steam
     flakeSelf.nixosProfiles.universal
-    flakeSelf.nixosProfiles.experimental
+    # flakeSelf.nixosProfiles.experimental
 
     # flakeSelf.nixosProfiles.pixiecore
     # flakeSelf.nixosProfiles.podman

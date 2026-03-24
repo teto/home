@@ -104,11 +104,11 @@
         rev = "238052eeb0e2fb9acb1f9418dd7178eafac5e5cf";
         sha256 = "sha256-WjikX+a0h7Z65jhwclpjHLweEuPulG4wptGJiJfMT+0=";
       })
-      (config.lib.vicinae.mkRayCastExtension {
-        name = "base64";
-        rev = "9befbb8bad621365a0f2896a13f6fb26fecb8d55";
-        sha256 = "sha256-T/utRy3ptNlC+v3X9ebnzRuCLVlSkZnm7sRwikIVeAk=";
-      })
+      # (config.lib.vicinae.mkRayCastExtension {
+      #   name = "base64";
+      #   rev = "9befbb8bad621365a0f2896a13f6fb26fecb8d55";
+      #   sha256 = "sha256-T/utRy3ptNlC+v3X9ebnzRuCLVlSkZnm7sRwikIVeAk=";
+      # })
       # FIXME: broken build
       # pm error code 1, tries to contact github
       # > npm error path /build/bitwarden/node_modules/electron

@@ -52,7 +52,7 @@ in
         action_alias kitty_scrollback_nvim kitten ${pkgs.vimPlugins.kitty-scrollback-nvim}/python/kitty_scrollback_nvim.py
 
         # Browse scrollback buffer in nvim
-        map kitty_mod+h kitty_scrollback_nvim
+        map kitty_mod+h kitty_scrollback_nvim ./tmp
         # Browse output of the last shell command in nvim
         # map kitty_mod+g kitty_scrollback_nvim --config ksb_builtin_last_cmd_output
         # Show clicked command output in nvim
