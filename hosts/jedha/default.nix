@@ -100,21 +100,21 @@ in
 
   boot = {
     kernelPackages = pkgs.linuxKernel.packages.linux_6_18;
+    blacklistedKernelModules = [ "nouveau" ];
     extraModulePackages = [
 
       # pkgs.linuxKernel.packages.linux_6_18.r8125
       pkgs.linuxKernel.packages.linux_6_18.r8125
     ];
 
+    # necessary for qemu  to prevent
+    # NOTE: this doesn't change the size of /run/user see https://nixos.org/nix-dev/2015-July/017657.html
+    runSize = "10g";
+    resumeDevice = "/dev/nvme0n1p2"; # resumeDevice = "/dev/disk/by-uuid/febbd1a4-c36a-489d-ab5c-b4e9281ab892";
+
     # it apparently still is quite an important thing to have
     devSize = "5g";
   };
-
-  boot.blacklistedKernelModules = [ "nouveau" ];
-
-  # necessary for qemu  to prevent
-  # NOTE: this doesn't change the size of /run/user see https://nixos.org/nix-dev/2015-July/017657.html
-  boot.runSize = "10g";
 
   swapDevices = [
     {

@@ -13,7 +13,7 @@
   "notification-body-image-width": 200,
   "timeout": 10,
   "timeout-low": 5,
-  "timeout-critical": 6,
+  "timeout-critical": 0,
   "fit-to-screen": true,
   "control-center-width": 500,
   "control-center-height": 600,
@@ -25,7 +25,7 @@
   "hide-on-action": true,
   "script-fail-notify": true,
   "scripts": {
-    "example-action-script": {
+    "copy-notif-content": {
       "exec": "bash -c 'wl-copy \"$SWAYNC_BODY\"'",
       "run-on": "action"
     }

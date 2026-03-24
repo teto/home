@@ -11,6 +11,10 @@
         path = "/home/teto/home/data/wallpapers";
         sorting = "descending";
       };
+      HDMI-A-1 = {
+        path = "/home/teto/home/data/wallpapers";
+        sorting = "descending";
+      };
     };
 
   };

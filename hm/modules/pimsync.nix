@@ -207,7 +207,7 @@ in
 
   options = {
     programs.pimsync-teto = {
-      enable = mkEnableOption "vdirsyncer";
+      enable = mkEnableOption "pimsync-teto";
 
       package = mkOption {
         type = types.package;

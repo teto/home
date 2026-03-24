@@ -34,8 +34,10 @@ use_mouse = true
 progress_spinner_sequence = { frames = [] }
 #theme = "dark" # or "light"
 
-# [notifications]
-# script = "notify-send"
+[notifications]
+# with title as 1st arg and body as 2nd
+# https://meli-email.org/documentation.html#meli.conf.5_new_mail_script
+script = "meli-notif"
 
 #[pager]
 #filter = "COLUMNS=72 /usr/local/bin/pygmentize -l email"

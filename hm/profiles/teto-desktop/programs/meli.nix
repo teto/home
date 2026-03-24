@@ -9,6 +9,7 @@
 {
   enable = withSecrets;
 
+  # there is meli-teto as well
   # package = pkgs.meli-git;
   package = pkgs.meli;
 
@@ -19,9 +20,9 @@
 
   settings = {
 
-    notifications = {
-      script = "notify-send";
-    };
+    # notifications = {
+    #   script = "notify-send";
+    # };
 
     # this overrides the hm user accounts
     # the module should warn the user about this

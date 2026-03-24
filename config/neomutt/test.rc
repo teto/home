@@ -369,6 +369,8 @@ set nm_query_window_timebase = "year"
 # shifts virtual folder time window backwards
 # bind index < vfolder-window-backward
 # bind index > vfolder-window-forward
+
+# setting this creates a mess
 set virtual_spoolfile = yes
 
 # >/dev/null 2>&1 
@@ -378,6 +380,7 @@ macro index @ "<shell-escape>just -g mail-sync >/dev/null 2>&1 &<enter>" "Sync m
 # macro index c "<change-vfolder>?" "Change to vfolder overview"
 # macro index \\\\ "<vfolder-from-query>" "Search mailbox"
 
+# 
 virtual-mailboxes "sent" "notmuch://?query=tag:sent"
 virtual-mailboxes "ietf" "notmuch://?query=tag:ietf"
 virtual-mailboxes "unread" "notmuch://?query=tag:unread and not tag:spam"
@@ -403,4 +406,5 @@ tag-formats "attachment" "GA" \
             "github"  "MATTATOR" \
             "signed"     "GS"
 
+set spoolfile = "notmuch://?query=tag:inbox" 
 # }}}

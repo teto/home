@@ -143,20 +143,22 @@
       ];
     };
 
-    # user.services.
-    pimsync.Service = lib.mkIf config.programs.pimsync-teto.enable {
-      Environment = [
-        "GNUPGHOME=${config.programs.gpg.homedir}"
-        "PATH=$PATH:${
-          pkgs.lib.makeBinPath [
-            pkgs.pass-teto
-            pkgs.bash
-          ]
-        }"
-      ];
+    # check we ported over everything from config.programs.pimsync-teto.enable  ?
+    pimsync = lib.mkIf config.programs.pimsync.enable {
+      Service = {
+        Environment = [
+          "GNUPGHOME=${config.programs.gpg.homedir}"
+          "PATH=$PATH:${
+            pkgs.lib.makeBinPath [
+              pkgs.pass-teto
+              pkgs.bash
+            ]
+          }"
+        ];
+      };
 
       # The [Unit] section accepts an OnFailure option. This is a space-separated list of one or more units that are activated when this unit enters the “failed” state.
-      OnFailure = "desktop-notification@%i.service";
+      Unit.OnFailure = "desktop-notification@%i.service";
       # PrivateTmp=true
     };
   };

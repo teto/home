@@ -10,6 +10,18 @@
 --
 -- https://www.reddit.com/r/neovim/comments/1kcz8un/great_improvements_to_the_cmdline_in_nightly/
 -- require('vim._extui').enable({})
+-- require('vim._core.ui2').enable({
+--      enable = true, -- Whether to enable or disable the UI.
+--      msg = { -- Options related to the message module.
+--        ---@type 'cmd'|'msg' Default message target, either in the
+--        ---cmdline or in a separate ephemeral message window.
+--        ---@type string|table<string, 'cmd'|'msg'|'pager'> Default message target
+--        -- or table mapping |ui-messages| kinds to a target.
+-- 	targets = 'cmd',
+-- 	timeout = 4000, -- Time a message is visible in the message window.
+-- 	},
+-- })
+
 -- vim.g.visual_whitespace = {
 --   enabled = true,
 --   highlight = { link = "Visual", default = true },

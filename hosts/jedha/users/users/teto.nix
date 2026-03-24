@@ -10,6 +10,8 @@
     "jupyter"
     "hass" # home-assistant
     "adbusers" # for android tools
+
+    "power" # to avoid having to "sudo" when rebooting
   ]
   ++ lib.optional (config.services.kanata.enable) [
 
