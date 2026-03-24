@@ -1,0 +1,28 @@
+To filter DHCP answers in Wireshark, use the following display filter:
+dhcp.option.dhcp == 2
+This filter shows only DHCP ACK (offer) packets, which are the responses from the DHCP server to clients.
+Additional Useful Filters:
+• 
+DHCP Discover (client request):
+dhcp.option.dhcp == 1
+• 
+DHCP Offer (server response):
+dhcp.option.dhcp == 2
+• 
+DHCP Request (client acceptance):
+dhcp.option.dhcp == 3
+• 
+DHCP ACK (server confirmation):
+dhcp.option.dhcp == 5
+• 
+Filter by IP range (e.g., 192.168.1.0/24):
+dhcp && ip.addr == 192.168.1.0/24
+Steps:
+ 1. 
+Open Wireshark.
+ 2. 
+Start capturing on the relevant interface.
+ 3. 
+Apply the filter in the display filter bar.
+ 4. 
+Analyze the DHCP traffic.
