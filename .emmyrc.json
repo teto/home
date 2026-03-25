@@ -1,6 +1,5 @@
 {
 	"$schema":     "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
-	"hint.enable": false,
 	"workspace": {
 		"useGitIgnore": true,
         "library": [
@@ -12,8 +11,7 @@
 		]
 	},
     "diagnostics.severity": {
-      "redefined-local": "Warning",
-      "missing-fields": "Hint"
+      "redefined-local": "warning"
     },
   "diagnostics": {
     "disable": [

@@ -3,4 +3,5 @@ pid
 database
 state
 log
-
+# HM generated
+mpd.conf
