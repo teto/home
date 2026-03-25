@@ -4,6 +4,10 @@
 
 `requireFile`
 
+* get public key from private
+
+ cat secret-key | nix key convert-secret-to-public
+
 * how to develop 2 programs in pair
 nix develop --redirect <flake> <directory>
 

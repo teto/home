@@ -46,7 +46,6 @@ let
       ];
     };
 
-  # nixosConfigurations
   # builder_jedha = (tetosLib.nixosConfToBuilderAttr {} flakeSelf.nixosConfigurations.jedha);
   # builder_neotokyo = (tetosLib.nixosConfToBuilderAttr {} flakeSelf.nixosConfigurations.neotokyo);
 

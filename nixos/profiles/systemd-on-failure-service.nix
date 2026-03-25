@@ -27,7 +27,7 @@
       Type = "oneshot";
       Environment = [
         "SERVICE_NAME=%n"
-        "EXIT_CODE=%e"
+        # "EXIT_CODE=%e" # this doesn't seem to exist
       ];
       # --read-envelope-from
       # TODO should be able to qualify service + result
@@ -40,7 +40,7 @@
             printf "Subject: notify service result %i: $SUBJECT\n\nSUBJECT: Test body\n" | ${pkgs.msmtp}/bin/msmtp -afastmail "${secrets.users.teto.email}"
           '';
         in
-        ''${script} "''${SERVICE_NAME}'';
+        ''${script} "''${SERVICE_NAME}"'';
 
     };
   };

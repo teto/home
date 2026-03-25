@@ -36,7 +36,7 @@ in
     };
   };
 
-  systemd.services.kanata-foo.serviceConfig = {
+  systemd.services.kanata-foo.serviceConfig = lib.mkIf config.services.kanata.enable {
     ProtectHome = lib.mkForce "tmpfs";
     DynamicUser = false;
     BindReadOnlyPaths = mainConfig;

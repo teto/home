@@ -134,6 +134,7 @@ deploy-router:
 # [confirm("prompt")]
 deploy-neotokyo:
     # --magic-rollback false --auto-rollback=false
+    echo "add --remote-build if you meet signature issues"
     deploy '.#neotokyo' -s --interactive-sudo=true -- --override-input nixpkgs {{ NIXPKGS_REPO }}
 
 # regenerate my email contacts

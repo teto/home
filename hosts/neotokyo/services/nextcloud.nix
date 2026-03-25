@@ -16,12 +16,12 @@
   services.nextcloud = {
     enable = true;
 
-    # TODO disable ?
-    # previewGenerator = true;
-    #       description = "FQDN for the nextcloud instance.";
+    #  description = "FQDN for the nextcloud instance.";
     hostName = "nextcloud.${secrets.jakku.hostname}";
     # true ?
     https = false;
+
+    # TODO update to 33
     package = pkgs.nextcloud32;
 
     # so I used to have

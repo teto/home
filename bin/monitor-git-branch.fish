@@ -1,4 +1,4 @@
-#!/usr/bin/fish
+#!/etc/profiles/per-user/teto/bin/fish
 
 # Path to store the last known advancement date
 set -l xdg_cache_home $XDG_CACHE_HOME

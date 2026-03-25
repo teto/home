@@ -13,7 +13,7 @@ pimsync.overrideAttrs (
     version = "g${pimsync-src.shortRev}";
     src = pimsync-src;
 
-    PIMSYNC_VERSION = "${version}";
+    env.PIMSYNC_VERSION = "${version}";
 
     useFetchCargoVendor = true;
 

@@ -15,8 +15,8 @@ pkgs.mkShell {
       age
       pkgs.bitwarden-cli # to sync passwords
       dmidecode
-      # stdenv.hostPlatform.system
-      self.inputs.deploy-rs.packages.${system}.deploy-rs
+      #
+      self.inputs.deploy-rs.packages.${stdenv.hostPlatform.system}.deploy-rs
       expect # to pipe into deploy-rs
       fzf # for just's "--select"
       git-crypt # to run `git-crypt export-key`
@@ -32,7 +32,7 @@ pkgs.mkShell {
       sops # to decrypt secrets
       ssh-to-age
 
-      self.inputs.nixos-anywhere.packages.${system}.nixos-anywhere
+      self.inputs.nixos-anywhere.packages.${stdenv.hostPlatform.system}.nixos-anywhere
       disko
 
       # boot debug

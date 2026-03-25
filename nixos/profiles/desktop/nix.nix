@@ -2,9 +2,14 @@
   secrets,
   withSecrets,
   lib,
+  pkgs,
+  flakeSelf,
   ...
 }:
 {
+
+  # to benefit from https://github.com/NixOS/nix/pull/15449
+  package = flakeSelf.inputs.nix.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
   settings = {
     substituters = [

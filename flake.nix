@@ -205,7 +205,7 @@
     };
 
     nix = {
-      url = "github:NixOS/nix?ref=2.33.0";
+      url = "github:NixOS/nix?ref=2.34.3";
       # url = "github:teto/nix?ref=teto/remove-assert-outputsSubstitutionTried";
       # inputs.nixpkgs.follows = "nixpkgs";
     };

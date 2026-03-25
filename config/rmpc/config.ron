@@ -5,7 +5,7 @@
     address: "127.0.0.1:6600",
     password: None,
     theme: None,
-    cache_dir: None,
+    cache_dir: Some("/home/teto/.cache/rmpc"),
     on_song_change: None,
     volume_step: 5,
     max_fps: 30,

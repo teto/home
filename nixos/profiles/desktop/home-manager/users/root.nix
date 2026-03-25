@@ -13,7 +13,7 @@ in
 {
   # to generate ssh config file for the nix builder
   programs.ssh = {
-    enable = true;
+    enable = withSecrets;
     enableDefaultConfig = false;
     # todo add publickey for my server
 
