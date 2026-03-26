@@ -44,14 +44,17 @@ in
     HISTTIMEFORMAT = "%d.%m.%y %T ";
     # CAREFUL
     # HISTFILE="$XDG_CACHE_HOME/bash_history";
+
+    # TODO set it globally ?
     CDPATH = "$HOME/neovim";
   };
+
+  # remove ?
   historyFile = "${config.xdg.cacheHome}/bash_history";
 
   shellAliases = {
 
     # nixpaste = "curl -F \"text=<-\" http://nixpaste.lbr.uno";
-
     m = "neomutt";
     ns = "nix-shell";
   };

@@ -17,6 +17,7 @@ let
         include = [
           "boot.nix"
           "environment.nix"
+          "nix.nix"
           # UNCOMMENTING this will break everything since its content is not adapted
           # "home-manager/"
           "networking/"

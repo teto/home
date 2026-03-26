@@ -41,6 +41,7 @@ let
         exclude = [
           # "teto"
           # "users"
+          # "tatooine-signing-key.pub"
           "default.nix"
           "home-manager" # exclude home-manager because intputs are not the same: it must be imported differently
           # "root"
@@ -206,6 +207,14 @@ in
         echo 'enabled' > '/sys/class/net/wlp10s0/device/power/wakeup';
       '';
     };
+  };
+
+  nix.settings = {
+
+    trusted-public-keys = [
+      # (builtins.readFile ./tatooine-signing-key.pub)
+      "tatooine-signing-key:T2TGDnv8CCFbIVd75Y+5oriAknm7FXJTLfdC3MOuMyg="
+    ];
   };
 
   # $out here is the profile generation
