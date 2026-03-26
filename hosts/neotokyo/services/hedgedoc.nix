@@ -30,7 +30,7 @@ in
     };
   };
 
-  services.nginx.virtualHosts."${hedgedocDomain}" = {
+  services.nginx.virtualHosts."${hedgedocDomain}" = lib.mkIf config.services.hedgedoc.enable {
     forceSSL = true;
     enableACME = true;
     # useACMEHost = "${secrets.jakku.hostname}";

@@ -22,7 +22,7 @@
     https = false;
 
     # TODO update to 33
-    package = pkgs.nextcloud32;
+    package = pkgs.nextcloud33;
 
     # so I used to have
     # ✗ PHP opcache: The PHP OPcache module is not properly configured. OPcache is not working as it should, opcache_get_status() returns false, please check configuration.
@@ -69,7 +69,7 @@
     extraApps = with config.services.nextcloud.package.packages.apps; {
       # inherit news; # removed 'cos gives a wrong error
       inherit
-        memories
+        # memories # not supported
         previewgenerator
         # maps
         # calendar
