@@ -95,7 +95,6 @@ volt= "scm"
 "gitsigns.nvim"= "2.0.0"
 
 # there is a bug where it creates home/teto folders everywhere
-# "feed.nvim" = "2.19.2"
 # "typescript-tools.nvim" = "scm"
 
 # "telescope.nvim" = "0.1.6"
@@ -109,6 +108,12 @@ magick = "1.6.0"
 "telescope.nvim" = "scm"
 
 "render-markdown.nvim" = "8.12.0"
+
+# [plugins."feed.nvim"]
+# # version = "2.19.2"
+# dev = true
+# dir = "/home/teto/neovim/feed.nvim"
+
 
 # [plugins.neotest-haskell]
 # version = "2.0.0"
