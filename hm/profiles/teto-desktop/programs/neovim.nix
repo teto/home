@@ -419,7 +419,7 @@ in
     p.pynvim
   ];
 
-  # attempt
+  # custom option: they are added to vim.env.PATH instead
   extraInitLuaPackages = config.programs.neovim.extraPackages;
 
   # just to test viml nixpkgs example

@@ -41,6 +41,10 @@ in
   #   ${pkgs.notmuch}/bin/notmuch address --format=json --output=recipients  date:3Y.. > ${mailLib.addressBookFilename}
   # '';
 
+
+  # to avoid cluttering $HOME
+  # home.preferXdgDirectories = true;
+
   home.packages = with pkgs; [
     bottles
     python3Packages.kaggle
