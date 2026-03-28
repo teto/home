@@ -14,7 +14,11 @@
   # You can still refer to its generated content via:
   configFile."vicinae/generated.json".source = config.xdg.configFile."vicinae/settings.json".source;
 
-  configFile."mpd/mpd.conf".text = config.services.mpd.generatedConfig;
+  configFile."mpd/mpd.conf" = {
+    # until it gets merged
+    enable = config.services.mpd ? generatedConfig;
+    text = config.services.mpd.generatedConfig;
+  };
 
   desktopEntries = {
 

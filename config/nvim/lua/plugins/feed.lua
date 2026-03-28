@@ -21,7 +21,7 @@ require('feed').setup({
             'https://nhkeasier.com/feed/?no-furiganas',
             -- 'https://nhkeasier.com/feed/',
             name = 'NHK News Web easy',
-            tags = { 'japanese' },
+            tags = { 'japanese', "nhk" },
         },
         {
             'https://neovim.io/news.xml',

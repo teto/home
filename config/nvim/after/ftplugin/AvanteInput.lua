@@ -16,9 +16,9 @@ local win_id = vim.api.nvim_get_current_win()
 
 -- print("winid", win_id)
 -- function () winbar_text end
-local result = render_header()
--- print("result:", result)
--- setting 'nil' crashes neovim
-vim.api.nvim_set_option_value('winbar', result, {
-    win = win_id,
-})
+-- local result = render_header()
+-- -- print("result:", result)
+-- -- setting 'nil' crashes neovim
+-- vim.api.nvim_set_option_value('winbar', result, {
+--     win = win_id,
+-- })
