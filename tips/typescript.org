@@ -1,7 +1,7 @@
 
 * install via nixpkgs
 
-compiler is called "tsc" available in nodePackages.typescript
+compiler is called "tsc" available in typescript
 
 compilation goes through
 

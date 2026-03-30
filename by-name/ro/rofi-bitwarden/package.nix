@@ -9,7 +9,6 @@
   makeWrapper,
   jq,
   keyutils,
-  # , nodePackages bw-cli
   # TODO needs ydotools on wayland
 }:
 

@@ -50,13 +50,12 @@ final: prev: {
   };
 
   # nvim-markdown-preview = prev.nvim-markdown-preview.overrideAttrs(old: {
-  #   buildInputs = [ pkgs.nodePackages.live-server pkgs.pandoc ];
+  #   buildInputs = [ pkgs.pandoc ];
   #   preFixup = ''
   #     substituteInPlace $out/share/vim-plugins/nvim-markdown-preview/ftplugin/markdown.vim --replace "executable('live-server')" \
-  #         "executable('${pkgs.nodePackages.live-server}/bin/live-server')"
 
   #     substituteInPlace $out/share/vim-plugins/nvim-markdown-preview/autoload/markdown.vim --replace "live-server" \
-  #         "${pkgs.nodePackages.live-server}/bin/live-server"
+  #         "${pkgs.live-server}/bin/live-server"
   #     '';
   # });
 }

@@ -232,12 +232,9 @@ let
     haskellPackages.fast-tags
 
     manix # should be no need, telescope-manix should take care of it
-    nodePackages.vscode-langservers-extracted # needed for jsonls aka "vscode-json-language-server"
+    vscode-langservers-extracted # needed for jsonls aka "vscode-json-language-server"
     # prettier sadly can't use buildNpmPackage because no lockfile https://github.com/NixOS/nixpkgs/issues/229475
     # dockerfile-language-server
-
-    # TODO map it to a plugin instead
-    # nodePackages.typescript-language-server
 
     # pandoc is used by a bunch of plugins, including feed.nvim
     # while I wish feed.nvim would be packaged with it
@@ -256,8 +253,6 @@ let
     marksman # markdown LSP server
 
     # for none-ls
-    # nodePackages.prettier # for none-ls json formatting ?
-    # nodePackages.prettier
     python3Packages.flake8 # for nvim-lint and some nixpkgs linters
     # soxWithMp3 = final.sox.override { llama-cpp = llama-cpp-matt; };
 
