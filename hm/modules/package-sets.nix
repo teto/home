@@ -391,13 +391,26 @@ in
           claude-code # anthropic agent
           dasht # ~ zeal but in terminal
           difftastic # smart diffs
+          diff-so-fancy
           docker-credential-helpers
-          luau # lua server
-          lsof # to see open files
-          flakeSelf.inputs.starship-jj.packages.${system}.default # custom.jj for starship
+
+          fswatch # fileevent watcher
+          fx # json reader
+
+          gdb
+          gnupg
+          gnum4 # hum
           gettext # for envsubst (TO NOT CONFOUND with gettext's envsubst)
           glab # gitlab cli
+
           hexyl # hexcode viewer
+
+          jq
+
+          luau # lua server
+          lurk # a rust strace
+          lsof # to see open files
+          flakeSelf.inputs.starship-jj.packages.${system}.default # custom.jj for starship
 
           libossp_uuid # for the 'libuuid' executable
 
@@ -414,20 +427,13 @@ in
           nix-tree
           nix-melt
           netcat-gnu # plain 'netcat' is the bsd one
-          diff-so-fancy
-          jq
+          nurl # generate nix code
 
           pwgen
 
           # editorconfig-core-c
           # for fuser, useful when can't umount a directory
           # https://unix.stackexchange.com/questions/107885/busy-device-on-umount
-          lurk # a rust strace
-          fswatch # fileevent watcher
-          fx # json reader
-          gdb
-          gnupg
-          gnum4 # hum
           # psmisc # ps -a for python ?
           rbw
           util-linux # for lsns (namespace listing)
