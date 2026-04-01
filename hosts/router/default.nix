@@ -67,6 +67,8 @@ in
     # imports = [
     #   flakeSelf.homeProfiles.neovim-minimal
     # ];
+    home.stateVersion = "26.04";
+
   };
 
   # TODO use from flake or from unstable

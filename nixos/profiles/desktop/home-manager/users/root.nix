@@ -11,6 +11,12 @@ let
 in
 
 {
+  imports = [
+    # flakeSelf.homeModules.neovim
+  ];
+
+  home.stateVersion = "26.05";
+
   # to generate ssh config file for the nix builder
   programs.ssh = {
     enable = withSecrets;
@@ -31,7 +37,4 @@ in
 
   };
 
-  imports = [
-    flakeSelf.homeModules.neovim
-  ];
 }

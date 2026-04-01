@@ -49,8 +49,6 @@
     (
       { ... }:
       {
-        home.stateVersion = "25.11";
-
         # to avoid warnings about incompatible stateVersions
         home.enableNixpkgsReleaseCheck = false;
       }
