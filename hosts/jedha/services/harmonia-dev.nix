@@ -8,11 +8,11 @@
     enable = true;
     settings = {
       # seems to bind on ipv6 by default
-    #       bind = "[::]:5000";
-    #       workers = 4;
-    #       max_connection_rate = 256;
-    #       priority = 50;
-    #
+      #       bind = "[::]:5000";
+      #       workers = 4;
+      #       max_connection_rate = 256;
+      #       priority = 50;
+      #
     };
 
     # TODO write one

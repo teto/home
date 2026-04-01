@@ -1,5 +1,4 @@
-return {
-}
+return {}
 --     cmd = {
 --         'clangd',
 --         '--background-index',
