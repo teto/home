@@ -31,13 +31,13 @@ lib.optionalAttrs withSecrets {
         # enable = withSecrets;
         enable = true;
         # storage can also contain "read_only"
-        # extraPairDirectives = [
-        #   {
-        #     name = "collections";
-        #     params = [ "all" ];
-        #   }
-        #   #  conflict_resolution keep a
-        # ];
+        extraPairDirectives = [
+          {
+            name = "collections";
+            params = [ "all" ];
+          }
+          #  conflict_resolution keep a
+        ];
 
         # null doesn't look too interesting :s
         # collections = [
@@ -84,72 +84,72 @@ lib.optionalAttrs withSecrets {
       };
     };
 
-    nova_gmail = {
-      # need locale to be set apparently
-      khal = {
-        enable = false;
-        # type can be: calendar, birthdays and discover
-        type = "discover";
-        # primary = true;
-        priority = 1000;
-        # #b3e1f7
-        color = "#ff0000";
-        # does not seem to be valid
-        # extraConfig = ''
-        # addresses = ${secrets.users.teto.email}
-        #  '';
-      };
-
-      pimsync = {
-        # enable = withSecrets;
-        enable = false;
-        # null doesn't look too interesting :s
-        # collections = "all";
-        # [
-        #   "from a"
-        #   "from b"
-        # ];
-        # metadata = [
-        #   "color"
-        #   "displayname"
-        # ];
-      };
-
-      vdirsyncer = {
-        enable = false;
-        # null doesn't look too interesting :s
-        # collections = [
-        #   "from a"
-        #   "from b"
-        # ];
-        # metadata = [
-        #   "color"
-        #   "displayname"
-        # ];
-      };
-
-      local = {
-        # type = "filesystem";
-        fileExt = "ics"; # .ics for vdirsyncer
-      };
-
-      remote = {
-        type = "caldav";
-        # url = "http://efss.qloud.my/remote.php/dav/calendars/root/personal/";
-        url = "https://caldav.fastmail.com/";
-        # url = "https://efss.qloud.my/remote.php/dav/";
-        # userName = "m";
-        userName = secrets.accounts.mail.nova.email;
-
-        # needs to be an app-specific password/token
-        # getPasswordCommand = account: lib.strings.escapeShellArgs (pkgs.tetosLib.getPassword account);
-
-        passwordCommand = lib.getPassword "nova/mail";
-        # passwordCommand = (tetosLib.getPassword "perso/fastmail_mc");
-        # "~/dotfiles/bin/pass-show" "iij/nextcloud"
-        # ];
-      };
-    };
+    # nova_gmail = {
+    #   # need locale to be set apparently
+    #   khal = {
+    #     enable = false;
+    #     # type can be: calendar, birthdays and discover
+    #     type = "discover";
+    #     # primary = true;
+    #     priority = 1000;
+    #     # #b3e1f7
+    #     color = "#ff0000";
+    #     # does not seem to be valid
+    #     # extraConfig = ''
+    #     # addresses = ${secrets.users.teto.email}
+    #     #  '';
+    #   };
+    #
+    #   pimsync = {
+    #     # enable = withSecrets;
+    #     enable = true;
+    #     # null doesn't look too interesting :s
+    #     collections = "all";
+    #     # [
+    #     #   "from a"
+    #     #   "from b"
+    #     # ];
+    #     # metadata = [
+    #     #   "color"
+    #     #   "displayname"
+    #     # ];
+    #   };
+    #
+    #   vdirsyncer = {
+    #     enable = false;
+    #     # null doesn't look too interesting :s
+    #     # collections = [
+    #     #   "from a"
+    #     #   "from b"
+    #     # ];
+    #     # metadata = [
+    #     #   "color"
+    #     #   "displayname"
+    #     # ];
+    #   };
+    #
+    #   local = {
+    #     # type = "filesystem";
+    #     fileExt = "ics"; # .ics for vdirsyncer
+    #   };
+    #
+    #   remote = {
+    #     type = "caldav";
+    #     # url = "http://efss.qloud.my/remote.php/dav/calendars/root/personal/";
+    #     url = "https://caldav.fastmail.com/";
+    #     # url = "https://efss.qloud.my/remote.php/dav/";
+    #     # userName = "m";
+    #     userName = secrets.accounts.mail.nova.email;
+    #
+    #     # needs to be an app-specific password/token
+    #     # getPasswordCommand = account: lib.strings.escapeShellArgs (pkgs.tetosLib.getPassword account);
+    #
+    #     passwordCommand = lib.getPassword "nova/mail";
+    #     # passwordCommand = (tetosLib.getPassword "perso/fastmail_mc");
+    #     # "~/dotfiles/bin/pass-show" "iij/nextcloud"
+    #     # ];
+    #   };
+    # };
   };
 
 }

@@ -228,11 +228,9 @@ let
     # luaPackages.lua-lsp
     # lua53Packages.teal-language-server
     # codeium # ideally not needed and referenced by codeium-vim directly
-    haskellPackages.hasktags
+    # haskellPackages.hasktags
     haskellPackages.fast-tags
 
-    manix # should be no need, telescope-manix should take care of it
-    vscode-langservers-extracted # needed for jsonls aka "vscode-json-language-server"
     # prettier sadly can't use buildNpmPackage because no lockfile https://github.com/NixOS/nixpkgs/issues/229475
     # dockerfile-language-server
 
@@ -241,7 +239,7 @@ let
     # for markdown preview, should be in the package closure instead
     pandoc
     # pythonPackages.pdftotext  # should appear only in RC ? broken
-    nil # a nix lsp, can be debugged with NIL_LOG_PATH and NIL_LOG=nil=debug
+    # nil # a nix lsp, can be debugged with NIL_LOG_PATH and NIL_LOG=nil=debug
     nixd # another nix LSP
 
     just-lsp
@@ -253,7 +251,6 @@ let
     marksman # markdown LSP server
 
     # for none-ls
-    python3Packages.flake8 # for nvim-lint and some nixpkgs linters
     # soxWithMp3 = final.sox.override { llama-cpp = llama-cpp-matt; };
 
     pyright # python lsp
@@ -263,9 +260,6 @@ let
     yamllint # for none-ls json formatting
     yamlfmt
   ];
-
-  # TODO get lua interpreter to select the good lua packages
-  # nvimLua = config.programs.neovim.finalPackage.passthru.unwrapped.lua;
 
   # finalLua = nvimLua.override {
   #   packageOverrides = flakeSelf.inputs.rikai-nvim.overlays.luaOverlay;
@@ -386,8 +380,10 @@ in
   extraLuaPackages = lp: [
 
     # for neorg until  we fix
-    lp.lua-utils-nvim
-    lp.pathlib-nvim
+    # TODO should work with latest HM
+    # lp.lua-utils-nvim
+    # lp.pathlib-nvim
+
     # nvim-treesitter-legacy-api == 0.9.2
 
     # importing dependencies of rikai.nvim
@@ -400,7 +396,7 @@ in
     lp.mega-cmdparse
     lp.mega-logging # should not be needed ?
 
-    lp.nvim-nio # for rocks.nvim
+    lp.nvim-nio # for rocks.nvim (installed via vim.pack so required)
     # lp.fzy
 
   ]
@@ -422,6 +418,7 @@ in
   #   let g:grug_far = { 'startInInsertMode': v:false }
   # '';
 
+  # ignored ?
   extraPackages =
     extraPackages
     # flakeSelf.inputs.rest-nvim.packages.${pkgs.stdenv.hostPlatform.system}.rest-nvim-dev

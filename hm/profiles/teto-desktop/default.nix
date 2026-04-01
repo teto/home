@@ -30,7 +30,6 @@ in
     flakeSelf.homeModules.fzf
     flakeSelf.homeModules.yazi
     flakeSelf.homeModules.services-mujmap
-    flakeSelf.homeModules.pimsync
     flakeSelf.homeModules.package-sets
   ];
 

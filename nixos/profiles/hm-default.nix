@@ -40,7 +40,7 @@
     flakeSelf.homeModules.kitty
     # flakeSelf.homeModules.cliphist
     flakeSelf.homeModules.neovim
-    flakeSelf.homeModules.pimsync
+    # flakeSelf.homeModules.pimsync
     flakeSelf.homeModules.package-sets
     flakeSelf.homeModules.tig
     flakeSelf.homeModules.yazi

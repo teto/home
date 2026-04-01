@@ -381,14 +381,18 @@ in
         [
           argbash # to generate bash parsers
           automake
+
+          bat
           (ignoreBroken bcal) # calculatrice
           # bmm # rust bookmark manager (not package yet)
           # backblaze-b2-tetos
           bfs # https://github.com/tavianator/bfs
           binutils
           btop
+
           cargo
           claude-code # anthropic agent
+
           dasht # ~ zeal but in terminal
           difftastic # smart diffs
           diff-so-fancy

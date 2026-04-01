@@ -925,6 +925,9 @@ end, { desc = 'Ask without selecting anything' })
 -- https://github.com/nvim-neorg/neorg/issues/1351
 -- https://github.com/nvim-neorg/neorg/issues/1342
 
+vim.cmd("packadd nvim.undotree")
+vim.keymap.set("n", "<leader>u", require("undotree").open)
+
 vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 
 -- todo add api to list remote models

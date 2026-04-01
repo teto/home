@@ -82,7 +82,7 @@ friendly-snippets = "scm"
 vim-startuptime= "4.5.0"
 menu= "scm"
 # "snacks.nvim" = "2.6.0"
-fzf-lua = "0.0.2539"
+fzf-lua = "0.0.2554"
 # "lz.n" = "2.12.0"
 "indent-blankline.nvim" = "3.9.1"
 # "llm.nvim"= "scm"
@@ -92,7 +92,7 @@ volt= "scm"
 # orgmode = "0.7.1"
 # neogit = "2.0.0"
 # "diffview.nvim" = "scm"
-"gitsigns.nvim"= "2.0.0"
+"gitsigns.nvim"= "2.1.0"
 
 # there is a bug where it creates home/teto folders everywhere
 # "typescript-tools.nvim" = "scm"
@@ -102,7 +102,7 @@ volt= "scm"
 "rest.nvim" = "3.13.0"
 magick = "1.6.0"
 # "image.nvim" = "1.3.0"
-"snacks.nvim" = "2.30.0"
+"snacks.nvim" = "2.31.0"
 
 # how to get rid of it:
 "telescope.nvim" = "scm"
@@ -186,7 +186,7 @@ rev = "fa4673e181e18fd1719ae17a1d4f4ecce2de37aa"
 
 [plugins."codecompanion.nvim"]
 git = "olimorris/codecompanion.nvim"
-rev = "v19.3.0"
+rev = "v19.7.0"
 
 [plugins."fzf-lua-frecency.nvim"]
 git = "elanmed/fzf-lua-frecency.nvim"
@@ -210,7 +210,7 @@ rev = "c8758d839745caa55faf11a1c0ab32cb1d95c681"
 
 [plugins."opencode.nvim"]
 git = "nickjvandyke/opencode.nvim"
-rev = "v0.5.2"
+rev = "v0.6.0"
 
 [plugins.blink-cmp-git]
 git = "kaiser-yang/blink-cmp-git"
@@ -222,8 +222,7 @@ rev = "v0.1.0"
 
 [plugins."kitty-scrollback.nvim"]
 git = "mikesmithgh/kitty-scrollback.nvim"
-rev = "v9.0.0"
-config.options = {}
+rev = "v9.0.1"
 
 # [plugins."git-rebase-auto-diff.nvim"]
 # git = "yutkat/git-rebase-auto-diff.nvim"
