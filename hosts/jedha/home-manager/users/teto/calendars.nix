@@ -46,6 +46,7 @@
   # trick to create a directory with proper ownership
   # note that tmpfiles are not necesserarly temporary if you don't
   # set an expire time. Trick given on irc by someone I forgot the name..
+  # check but possibly done by
   systemd.user.tmpfiles.rules = [
     # Type Path                      Mode User Group Age         Argument
     # todo loop over the different calendars ? move it to the module generator ?

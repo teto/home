@@ -24,15 +24,15 @@ let
     ];
 
     colorschemePlugins = with pkgs.vimPlugins; [
-      { plugin = sonokai; }
-      { plugin = tokyonight-nvim; }
-      { plugin = molokai; }
-      { plugin = onedark-nvim; }
-      { plugin = dracula-vim; }
+      { plugin = sonokai; type = "viml"; } 
+      { plugin = tokyonight-nvim; type = "viml";}
+      { plugin = molokai; type = "viml";}
+      { plugin = onedark-nvim; type = "viml";}
+      { plugin = dracula-vim; type = "viml";}
       # monkai-pro
-      { plugin = vim-monokai; }
-      { plugin = vim-janah; }
-      { plugin = tokyonight-nvim; }
+      { plugin = vim-monokai; type = "viml";}
+      { plugin = vim-janah; type = "viml";}
+      { plugin = tokyonight-nvim; type = "viml";}
       (luaPlugin {
         # required by some colorscheme
         plugin = colorbuddy-nvim;

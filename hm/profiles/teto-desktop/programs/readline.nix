@@ -15,17 +15,18 @@
   includeSystemConfig = true;
   # $include /etc/inputrc
   extraConfig = ''
-        $include "${dotfilesPath}/home/dot-inputrc"
-    "\e[1~": beginning-of-line
-    "\e[4~": end-of-line
-    "\e[5~": beginning-of-history
-    "\e[6~": end-of-history
-    "\e[3~": delete-char
-    "\e[2~": quoted-insert
-    "\e[5C": forward-word
-    "\e[5D": backward-word
-    "\e[1;5C": forward-word
-    "\e[1;5D": backward-word
-
-  '';
+    $include ${dotfilesPath}/home/dot-inputrc
+    '';
+  #   "\e[1~": beginning-of-line
+  #   "\e[4~": end-of-line
+  #   "\e[5~": beginning-of-history
+  #   "\e[6~": end-of-history
+  #   "\e[3~": delete-char
+  #   "\e[2~": quoted-insert
+  #   "\e[5C": forward-word
+  #   "\e[5D": backward-word
+  #   "\e[1;5C": forward-word
+  #   "\e[1;5D": backward-word
+  #
+  # '';
 }
