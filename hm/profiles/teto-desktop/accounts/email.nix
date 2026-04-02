@@ -100,7 +100,11 @@ let
     # TODO restore
     meli = {
       enable = true;
+      # ""jmap
       settings = {
+        format = "notmuch"; # HM generates "jmap" by default
+        # must hint at folder with .notmuch DB
+        root_mailbox = config.accounts.email.maildirBasePath;
         listing.index_style = "compact";
         server_password_command = getPasswordCommand "perso/fastmail_mc_jmap";
       };

@@ -38,6 +38,7 @@
   };
 
   # programs.memento.enable = true;
+  home.stateVersion = "26.05";
 
   home.sessionPath = [
     # "$HOME/.local/bin"
@@ -71,10 +72,10 @@
   };
 
   # tow-config / stow-home ?
-  home.file.".inputrc" = {
-    # dotfilesPath
-    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/home/home/dot-inputrc";
-  };
+  # home.file.".inputrc" = {
+  #   # dotfilesPath
+  #   source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/home/home/dot-inputrc";
+  # };
 
   # xdg.configFile = {
   #   "zsh" = {
@@ -83,7 +84,5 @@
   #   };
   #   # ...
   # };
-
-  # TODO move upper ?
 
 }
