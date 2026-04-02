@@ -526,7 +526,7 @@ vim.g.indicator_ok = '✅'
 vim.g.spinner_frames = { '⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷' }
 
 if use_fzf_lua then
-    require('plugins.fzf-lua')
+    -- require('plugins.fzf-lua')
     require('teto.fzf-lua').register_keymaps()
 else
     vim.notify('fzf-lua is MISSING !?')

@@ -8,7 +8,6 @@ alias n1='nix develop --option builders "$TETOS_0" -j0'
 alias n2='nix develop --option builders "$TETOS_1" -j0'
 #
 alias nrc="nix repl --expr 'import <nixpkgs> { config.cudaSupport = true; config.allowUnfree = true; }'"
-# alias n3='nix develop --option builders "$NOVA_CAMPUS2" -j0'
 
 alias st="systemctl-tui"
 

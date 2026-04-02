@@ -37,6 +37,7 @@ xdg-mime default qutebrowser.desktop text/html
 xdg-settings set default-web-browser toto.desktop
 which can live in  ~/.local/share/applications/surf.desktop 
 xdg-settings set default-url-scheme-handler mailto evolution.desktop
+xdg-settings set default-url-scheme-handler http firefox.desktop
 
 be careful about returned value since nothing is printed in case of error.
 

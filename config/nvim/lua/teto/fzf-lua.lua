@@ -5,7 +5,8 @@ local M = {}
 
 local fzf_jj = require('teto.fzf-lua.providers.jj')
 
-FzfLua.register_extension('jj_files', fzf_jj.jj_files, vim.tbl_deep_extend('keep', {}, {}))
+-- native now 
+-- FzfLua.register_extension('jj_files', fzf_jj.jj_files, vim.tbl_deep_extend('keep', {}, {}))
 
 -- FzfLua is a global from fzf_lua
 -- FzfLua.register_extension("jj_files", M.frecency, vim.tbl_deep_extend("keep", opts, {

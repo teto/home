@@ -106,7 +106,10 @@ let
         # must hint at folder with .notmuch DB
         root_mailbox = config.accounts.email.maildirBasePath;
         listing.index_style = "compact";
-        server_password_command = getPasswordCommand "perso/fastmail_mc_jmap";
+        # server_password_command = getPasswordCommand "perso/fastmail_mc_jmap";
+        # server_username = null;
+        # server_url = null;
+        # server_password_command = null;
       };
     };
 

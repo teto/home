@@ -78,7 +78,17 @@ let
 
     # { plugin = bigfile-nvim; }  # replaced by snacks bigfile ?
 
-    pkgs.vimPlugins.direnv-vim # to get syntax coloring ?
+    {
+      plugin = pkgs.vimPlugins.direnv-vim; # to get syntax coloring ?
+      type = "viml";
+      config = ''
+                let g:sneak#s_next = 1 
+        let g:sneak#prompt = 'Sneak>'
+
+        let g:sneak#streak = 0
+
+      '';
+    }
 
     # { plugin = jbyuki/venn.nvim; }
 

@@ -40,7 +40,7 @@ ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub
 cat ~/.ssh/id_rsa.pub | ssh username@server.address.com 'cat &gt;&gt; ~/.ssh/authorized_keys'
 
 # 
-mkdir -p $HOME/.ssh && ssh-keyscan git.novadiscovery.net >> $HOME/.ssh/known_hosts &&  chmod 600 $HOME/.ssh/known_hosts
+mkdir -p $HOME/.ssh && ssh-keyscan git.toto.net >> $HOME/.ssh/known_hosts &&  chmod 600 $HOME/.ssh/known_hosts
 
 # to get a list of finger prints
 ssh-keygen -lv -f ~/.ssh/known_hosts

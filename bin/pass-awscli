@@ -1,4 +1,4 @@
-read -r -d '\n' username password _ <<<$(pass-nova show $1)
+read -r -d '\n' username password _ <<<$(pass-pro show $1)
 
 cat << EOJ
 {

@@ -25,5 +25,5 @@ hurl.setup({
     },
     -- to avoid unauthorized access to file
     -- vim.fn.getcwd(),
-    file_root = '/home/teto/nova',
+    file_root = '/home/teto/Nextcloud/tests',
 })

@@ -12,8 +12,8 @@ if [ $# -lt 1 ]; then
 fi
 
 dbpath="$1"
-username=$(pass-nova show "$dbpath"/username)
-password=$(pass-nova show "$dbpath"/password)
-host=$(pass-nova show "$dbpath"/host)
+username=$(pass-pro show "$dbpath"/username)
+password=$(pass-pro show "$dbpath"/password)
+host=$(pass-pro show "$dbpath"/host)
 
 echo "$username:$password@$host/core"

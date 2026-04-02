@@ -40,7 +40,7 @@ avahi-discover:
 
 # install neovim dev files
 neovim-direnv:
-    # ln -sf {{ justfile_directory() }}/../../nova/justfile justfile.local
+    # ln -sf {{ justfile_directory() }}/../../justfile justfile.local
     ln -sf $HOME/home/contrib/neovim-envrc .envrc
 
 # Merge some hardcoded shell commands in shell history

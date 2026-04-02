@@ -153,7 +153,7 @@ opts = {
             api_key_name = 'cmd:cat ' .. os.getenv('HOME') .. '/.config/sops-nix/secrets/gemini_matt_key',
         },
         -- openai = {
-        -- api_key_name = 'cmd:cat /home/teto/.config/sops-nix/secrets/OPENAI_API_KEY_NOVA',
+        -- api_key_name = 'cmd:cat /home/teto/.config/sops-nix/secrets/OPENAI_API_KEY',
         -- },
 
         --      llamacpp = {

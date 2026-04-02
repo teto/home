@@ -391,7 +391,7 @@ in
           btop
 
           cargo
-          claude-code # anthropic agent
+          (ignoreBroken claude-code) # anthropic agent
 
           dasht # ~ zeal but in terminal
           difftastic # smart diffs
