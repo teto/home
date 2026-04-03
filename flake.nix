@@ -556,11 +556,11 @@
           neovim-unwrapped =
             # "neovim-debug" / "neovim-developer"
             self.inputs.neovim-nightly-overlay.packages."${system}".neovim.override ({
-              baseNeovimUnwrapped = myPkgs.neovim-unwrapped.override ({
+              # neovim-unwrapped = myPkgs.neovim-unwrapped.override ({
 
                 # we want to take the luajit with our overlay of lua packages
                 luajit = myPkgs.luajit;
-              });
+              # });
             });
 
           inherit (unstablePkgs)
