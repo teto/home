@@ -26,7 +26,7 @@ require('diffview').setup({
         -- },
     },
     hooks = {
-        diff_buf_read = function(bufnr)
+        diff_buf_read = function(_bufnr)
             vim.cmd('setlocal wrap')
         end,
         -- test my fork to see if it can disable the panel

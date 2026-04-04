@@ -1,6 +1,7 @@
 -- else frecency doesnt appear
 local _has_fzf_lua_frecency, fzf_lua_frecency = pcall(require, 'fzf-lua-frecency')
 
+---@diagnostic disable-next-line: need-check-nil
 -- if has_fzf_lua_frecency then
 fzf_lua_frecency.setup({
     cwd_only = true,

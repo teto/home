@@ -52,6 +52,7 @@ return {
             local ok, conform = pcall(require, 'conform')
 
             if ok then
+                ---@diagnostic disable-next-line: discard-returns, param-type-mismatch
                 conform.format({ lsp_fallback = true })
             else
                 vim.lsp.buf.format()

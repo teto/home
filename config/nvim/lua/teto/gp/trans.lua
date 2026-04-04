@@ -1,5 +1,3 @@
-local gp = require('gp')
-
 local M = {}
 
 -- example of adding command which opens new chat dedicated for translation

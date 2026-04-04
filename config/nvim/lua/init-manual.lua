@@ -63,7 +63,7 @@ if not valid_file then
     vim.notify('Invalid generated-by-nix')
 end
 
-local normal_hl = vim.api.nvim_get_hl(0, { name = 'Normal' })
+local _normal_hl = vim.api.nvim_get_hl(0, { name = 'Normal' })
 
 vim.g.rikai = {
     dictionaries = {
@@ -820,8 +820,11 @@ vim.keymap.set({ 'n', 'v' }, '<D-j>', function()
 end, { buffer = false, desc = 'Japanese lookup' })
 
 vim.keymap.set('n', '<leader>d', function()
+    vim.cmd([[ FzfLua diagnostics_workspace ]])
+end, { buffer = false, desc = 'Diagnostics workspace' })
+vim.keymap.set('n', '<leader>D', function()
     vim.cmd([[ FzfLua diagnostics_document ]])
-end, { buffer = false, desc = 'Diagnostics' })
+end, { buffer = false, desc = 'Diagnostics for document (~ buffer)' })
 
 vim.keymap.set('v', '<D-t>j', function()
     -- todo replace with selection

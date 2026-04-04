@@ -6,7 +6,7 @@
 -- ft_to_parser.json = 'json' -- the someft filetype will use the python parser and queries.
 -- ft_to_parser.httpResult = 'http'
 
-local available, ts_config = pcall(require, 'nvim-treesitter.configs')
+local available, _ts_config = pcall(require, 'nvim-treesitter.configs')
 if not available then
     return
 end

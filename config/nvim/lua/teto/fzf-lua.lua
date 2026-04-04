@@ -3,9 +3,9 @@ local _, fzf_lua = pcall(require, 'fzf-lua')
 
 local M = {}
 
-local fzf_jj = require('teto.fzf-lua.providers.jj')
+-- local fzf_jj = require('teto.fzf-lua.providers.jj')
 
--- native now 
+-- native now
 -- FzfLua.register_extension('jj_files', fzf_jj.jj_files, vim.tbl_deep_extend('keep', {}, {}))
 
 -- FzfLua is a global from fzf_lua
@@ -52,6 +52,12 @@ function M.register_keymaps()
     end)
     -- local file_dir = vim.fn.expand('%:p:h')
 
+    vim.keymap.set('n', '<Leader>/', function()
+        -- global picker accepts various prefixes such as $ for buffers , @ for lsp
+		-- todo do smart version
+        fzf_lua.jj_files()
+    end)
+
     --   vim.keymap.set('n', '<Leader>G', function()
     --       -- fzf_lua.files()
     -- fzf_lua_enchanted.files({
@@ -64,14 +70,14 @@ function M.register_keymaps()
     vim.keymap.set('n', '<Leader>o', function()
         -- first check if we are
         local files_picker_name = 'files'
-        if fzf_jj.is_jj_repo() then
-            files_picker_name = 'jj_files'
-            -- fzf_jj.jj_files({
-            --     -- fzf_lua.git_files({
-            --     --     -- entry_maker = entry_maker
-            --     fzf_opts = { ['--scheme'] = 'path' },
-            -- })
-        end
+        -- if fzf_jj.is_jj_repo() then
+        --     files_picker_name = 'jj_files'
+        --     -- fzf_jj.jj_files({
+        --     --     -- fzf_lua.git_files({
+        --     --     --     -- entry_maker = entry_maker
+        --     --     fzf_opts = { ['--scheme'] = 'path' },
+        --     -- })
+        -- end
 
         -- TODO combine or use global
         -- (currently the first picker options apply to all).

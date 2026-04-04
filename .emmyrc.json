@@ -15,6 +15,7 @@
     },
   "diagnostics": {
     "disable": [
+     "need-check-nil"
     ],
      "globals": [
       "ya",

@@ -7,6 +7,7 @@ function M.setup_mappings()
 end
 
 function M.setup()
+    ---@diagnostic disable-next-line: redundant-parameter
     require('neorg').setup({
         -- to work around nvim-treesitter fuckup
         load = {

@@ -558,8 +558,8 @@
             self.inputs.neovim-nightly-overlay.packages."${system}".neovim.override ({
               # neovim-unwrapped = myPkgs.neovim-unwrapped.override ({
 
-                # we want to take the luajit with our overlay of lua packages
-                luajit = myPkgs.luajit;
+              # we want to take the luajit with our overlay of lua packages
+              luajit = myPkgs.luajit;
               # });
             });
 

@@ -1,7 +1,7 @@
 # tOP prev
 final: prev: {
   # TODO we should not need this if it's in Repo ?
-  luajit = prev.luajit.override {
+  luajit-tetos = prev.luajit.override {
     packageOverrides = import ./lua-overrides.nix {
       pkgs = final;
       lib = final.lib;

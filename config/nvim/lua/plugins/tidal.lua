@@ -36,7 +36,6 @@ require('tidal').setup({
     selection_highlight = {
         --- Highlight definition table
         --- see ':h nvim_set_hl' for details
-        --- @type vim.api.keyset.highlight
         highlight = { link = 'IncSearch' },
         --- Duration to apply the highlight for
         timeout = 150,

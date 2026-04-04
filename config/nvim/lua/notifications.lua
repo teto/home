@@ -1,6 +1,5 @@
 local a = vim.api
 local popup = require('popup')
-local uv = require('luv')
 
 -- lua require('plenary.reload').reload_module('notifications')
 local M = {}
@@ -40,8 +39,8 @@ end
 
 function M.notify_internal(msg)
     -- https://vimhelp.org/popup.txt.html#popup_create-arguments
-    local prompt_win, prompt_opts = popup.create('content', popup_opts)
-    local prompt_bufnr = a.nvim_win_get_buf(prompt_win)
+    local prompt_win, _prompt_opts = popup.create('content', popup_opts)
+    local _prompt_bufnr = a.nvim_win_get_buf(prompt_win)
     -- a.nvim_win_set_option(prompt_win, 'winhl', 'Normal:TelescopeNormal')
     -- self.window.winblend)
     -- a.nvim_win_set_option(prompt_win, 'winblend', 100)

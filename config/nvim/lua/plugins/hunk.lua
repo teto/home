@@ -43,6 +43,7 @@ hunk.setup({
 
     -- Called right after each window and buffer are created.
     hooks = {
+        ---@diagnostic disable-next-line: type-not-found
         ---@param _context { buf: number, tree: NuiTree, opts: table }
         on_tree_mount = function(_context) end,
         ---@param _context { buf: number, win: number }

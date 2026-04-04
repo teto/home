@@ -86,12 +86,12 @@ end
 M.set_level = function(severity)
     -- Disable virtual_text since it's redundant due to lsp_lines.
     -- { min = }
-    local opts = {
+    local _opts = {
         signs = {
             severity = severity,
         },
     }
-    local opts_global = {
+    local _opts_global = {
         severity = { min = severity },
     }
     local diags = vim.diagnostic.get(0)

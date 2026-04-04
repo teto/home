@@ -1,3 +1,4 @@
+---@diagnostic disable: unused
 -- reimplement Sidebar:render_header for the input provider such that we can display
 -- the current provider/model
 -- ideally this would autoupdate after https://github.com/neovim/neovim/pull/31280

@@ -1,3 +1,4 @@
+-- outdated
 local M = {}
 
 -- lua print(vim.inspect(vim.lsp.get_active_clients()))
@@ -19,12 +20,12 @@ function M.lsp_diagnose_active_client(name)
     -- function lsp.start_client(config)
 end
 
-local report_error = vim.fn['health#report_error']
+local _report_error = vim.fn['health#report_error']
 local report_info = vim.fn['health#report_info']
 
 function M.check_health()
     print('active clients')
-    for key, client in pairs(vim.lsp.get_clients()) do
+    for _key, client in pairs(vim.lsp.get_clients()) do
         -- print("loading key "..key)
         M.lsp_dump_active_client(client)
     end

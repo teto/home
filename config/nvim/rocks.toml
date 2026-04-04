@@ -42,7 +42,6 @@ auto-session = "2.5.1"
 # stopped working
 # "rocks-lazy.nvim" = "scm"
 "nui.nvim" = "0.4.0"
-# neotest = "5.13.4"
 "rocks-dev.nvim" = "1.8.1"
 # nvim-lint = "scm"
 # "telescope.nvim" = "scm"
@@ -98,7 +97,6 @@ volt= "scm"
 # "typescript-tools.nvim" = "scm"
 
 # "telescope.nvim" = "0.1.6"
-# neotest-busted = "1.2.1"
 "rest.nvim" = "3.13.0"
 magick = "1.6.0"
 # "image.nvim" = "1.3.0"
@@ -110,6 +108,9 @@ magick = "1.6.0"
 "render-markdown.nvim" = "8.12.0"
 "dropbar.nvim" = "14.2.1"
 nvim-treesitter-context = "1.0.0"
+nvim-dap = "0.10.0"
+neotest = "5.15.0"
+neotest-busted = "1.3.1"
 
 # [plugins."feed.nvim"]
 # # version = "2.19.2"
@@ -210,9 +211,9 @@ rev = "61239312730b3f51441596bdadab7e3578987592"
 git = "jceb/jiejie.nvim"
 rev = "c8758d839745caa55faf11a1c0ab32cb1d95c681"
 
-[plugins."opencode.nvim"]
-git = "nickjvandyke/opencode.nvim"
-rev = "v0.6.0"
+# [plugins."opencode.nvim"]
+# git = "nickjvandyke/opencode.nvim"
+# rev = "v0.6.0"
 
 [plugins.blink-cmp-git]
 git = "kaiser-yang/blink-cmp-git"

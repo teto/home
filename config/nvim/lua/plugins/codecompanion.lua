@@ -3,8 +3,9 @@ require('codecompanion').setup({
     secret = { 'bash', '-c', 'cat $XDG_CONFIG_HOME/sops-nix/secrets/claude_api_key' },
     strategies = {
         chat = {
-            adapter = 'anthropic',
-            model = 'claude-sonnet-4-20250514',
+            -- adapter = 'anthropic',
+            -- model = 'claude-sonnet-4-20250514',
+            adapter = 'mistral',
         },
         inline = {
             adapter = 'anthropic',
@@ -12,6 +13,16 @@ require('codecompanion').setup({
     },
     adapters = {
         http = {
+            --         mistral_cloud = function()
+            -- -- openai ?
+            --             return require('codecompanion.adapters').extend('mistral', {
+            --                 env = {
+            --
+            --                     api_key = 'cmd:cat ' .. (vim.fs.joinpath(xdg_config, 'sops-nix/secrets/mistral_test_api_key')),
+            --                 },
+            --             })
+            --         end,
+
             openai = function()
                 return require('codecompanion.adapters').extend('openai', {
                     env = {

@@ -32,9 +32,8 @@ let
     flakeSelf.inputs.neovim-nightly-overlay.packages."${pkgs.stdenv.hostPlatform.system
     }".neovim.override
       ({
-
         # we want to take the luajit with our overlay of lua packages
-        luajit = pkgs.luajit;
+        luajit = pkgs.luajit-tetos;
       });
 
   # nvimLua = config.programs.neovim.finalPackage.passthru.unwrapped.lua;

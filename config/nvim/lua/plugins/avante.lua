@@ -51,7 +51,6 @@ local function mk_llama_provider(name)
         --     max_tokens = 4000, -- to avoid infinite loops
         -- },
         prompt_opts = {
-
             system_prompt = 'you are zulu',
         },
     }
