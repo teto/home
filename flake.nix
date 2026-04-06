@@ -158,8 +158,9 @@
 
     # poetry.url = "github:nix-community/poetry2nix";
     neovim-nightly-overlay = {
-      # url = "/home/teto/neovim-nightly-overlay";
-      url = "github:nix-community/neovim-nightly-overlay";
+      # url = "path:/home/teto/neovim-nightly-overlay";
+      url = "github:teto/neovim-nightly-overlay?ref=teto/test-overriding-neovim-debug-luajit";
+      # url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
       # inputs.neovim-src.follows = "neovim-src";
     };
@@ -195,6 +196,7 @@
       # url = "github:teto/nix?ref=teto/remove-assert-outputsSubstitutionTried";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
+    noctalia.url = "github:noctalia-dev/noctalia-shell";
 
     nix-schemas.url = "github:DeterminateSystems/nix-src/flake-schemas";
 
@@ -244,6 +246,8 @@
       url = "github:purebred-mua/purebred";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+
 
     rippkgs.url = "github:replit/rippkgs";
     # rippkgs.inputs.nixpkgs.follows = "nixpkgs";

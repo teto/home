@@ -2,7 +2,6 @@
 # luajit = tprev.luajit.override {
 #   packageOverrides = final: prev: ;
 # };
-{ pkgs, lib }:
 final: prev: {
 
   alogger = final.callPackage (

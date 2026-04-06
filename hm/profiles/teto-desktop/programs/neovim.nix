@@ -297,19 +297,19 @@ in
   useAsManViewer = true;
 
   package = flakeSelf.packages.${pkgs.stdenv.hostPlatform.system}.neovim-debug.override
-      ({
+      {
 
         # we want to take the luajit with our overlay of lua packages
-        luajit = pkgs.luajit;
+        luajit = pkgs.luajit-tetos;
         # luajit = prev.luajit.override {
-        # give access to lua overlay by flakeSelf ?
+        # # give access to lua overlay by flakeSelf ?
         #   packageOverrides = import ./lua-overrides.nix {
         #     pkgs = final;
         #     lib = final.lib;
         #   };
         # };
 
-      });
+      };
 
   lsp.mapOnAttach = true;
   lualsAddons = true;

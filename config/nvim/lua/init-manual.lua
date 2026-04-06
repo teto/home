@@ -683,12 +683,10 @@ vim.lsp.enable('clangd')
 vim.lsp.enable('pyright')
 vim.lsp.enable('yamlls')
 vim.lsp.enable('just')
+vim.lsp.enable('nixd')
 
 -- used by `lx check`
 vim.lsp.enable('emmylua_ls')
-
--- todo luau_lsp + luacheck ?
--- vim.lsp.enable('just')
 
 -- testing packadd
 if vim.fn.has('nvim-0.12') ~= 0 then

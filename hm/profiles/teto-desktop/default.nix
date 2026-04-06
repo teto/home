@@ -49,6 +49,7 @@ in
     (ignoreBroken pkgs.aider-chat) # breaks
     mdcat # markdown viewer
     notmuch # needed for waybar-custom-notmuch.sh
+    noctalia-shell # sleek fancy wayland shell/ waybar like
     panvimdoc # to generate vim doc from README, for instance in gp.nvim
     pciutils # for lspci
 

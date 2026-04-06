@@ -49,7 +49,7 @@
     # // that you preserve a similar aspect ratio.
     "size" = {
       # TODO can I use pourcentage ?
-      "width" = 1000;
+      "width" = "0.5";
       "height" = 480;
     };
 
@@ -120,11 +120,17 @@
       #   rev = "d7f68ce8eb9759f2c3a9c1bdfe5991b14f55c6f7";
       #   sha256 = "sha256-YcjrBdqeNgC116LKzfPdz1AmupxwvkmwFBbzBDK7wCI=";
       # })
-      # (config.lib.vicinae.mkExtension {
-      #   name = "bluetooth";
-      #   src =
-      #   "${ext_src}/bluetooth";
-      #   })
+      (config.lib.vicinae.mkExtension {
+        name = "bluetooth";
+        src =
+        "${ext_src}/bluetooth";
+        })
+
+      (config.lib.vicinae.mkExtension {
+        name = "pass";
+        src =
+        "${ext_src}/pass";
+        })
       # (config.lib.vicinae.mkRayCastExtension {
       #
       #   name = "gif-search";
