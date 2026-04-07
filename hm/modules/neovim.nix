@@ -180,6 +180,8 @@ in
       };
       enableBlink = mkEnableOption "blink-cmp autocompletion";
 
+      # enableDebugVersion = mkEnableOption "Enable debug build";
+
       enableRocks = mkEnableOption "The awesome rocks-nvim plugin manager";
 
       # pendant de extraPackages, inline as vim.env.PATH plutot que comme des

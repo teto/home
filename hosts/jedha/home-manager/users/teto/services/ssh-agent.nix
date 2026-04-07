@@ -1,6 +1,6 @@
 {
 
   services.ssh-agent = {
-    enable = true;
+    enable = false;
   };
 }

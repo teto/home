@@ -123,13 +123,13 @@
       (config.lib.vicinae.mkExtension {
         name = "bluetooth";
         src =
-        "${ext_src}/bluetooth";
+        "${ext_src}/extensions/bluetooth";
         })
 
       (config.lib.vicinae.mkExtension {
         name = "pass";
         src =
-        "${ext_src}/pass";
+        "${ext_src}/extensions/pass";
         })
       # (config.lib.vicinae.mkRayCastExtension {
       #

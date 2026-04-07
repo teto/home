@@ -296,7 +296,9 @@ in
   enableMyDefaults = true;
   useAsManViewer = true;
 
-  package = flakeSelf.packages.${pkgs.stdenv.hostPlatform.system}.neovim-debug.override
+  # neovim-debug is too slow we should try to build it and rename executable to nvim-debug
+  # so it can still help debugging
+  package = flakeSelf.packages.${pkgs.stdenv.hostPlatform.system}.neovim.override
       {
 
         # we want to take the luajit with our overlay of lua packages

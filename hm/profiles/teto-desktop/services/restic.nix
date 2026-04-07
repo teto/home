@@ -8,7 +8,10 @@
       ];
       # todo retreive path from sops-nix module
       #
-      passwordFile = "~/.config/sops-nix/secrets/b2-restic-password";
+
+      # cant use $HOME here because modules/services/restic.nix quotes the path with ''
+      # passwordFile = "$HOME/.config/sops-nix/secrets/b2-restic-password";
+      passwordFile = "${config.xdg.configHome}/sops-nix/secrets/b2-restic-password";
       paths = [
         "${config.home.homeDirectory}/Nextcloud"
       ];
