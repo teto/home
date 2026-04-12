@@ -5,10 +5,10 @@ require('codecompanion').setup({
         chat = {
             -- adapter = 'anthropic',
             -- model = 'claude-sonnet-4-20250514',
-            adapter = 'mistral',
+            adapter = 'mistral_cloud',
         },
         inline = {
-            adapter = 'anthropic',
+            adapter = 'mistral_cloud',
         },
     },
     adapters = {
@@ -21,7 +21,17 @@ require('codecompanion').setup({
             --                     api_key = 'cmd:cat ' .. (vim.fs.joinpath(xdg_config, 'sops-nix/secrets/mistral_test_api_key')),
             --                 },
             --             })
-            --         end,
+            --         end,      
+			--
+			--
+			mistral_cloud = {
+            -- model = 'devstral-2512',
+            endpoint = 'https://api.mistral.ai/v1',
+            -- timeout = 30000, -- Timeout in milliseconds
+
+			  -- endpoint = "http://localhost:8000/v1", -- Replace with your endpoint                                                     
+			  model = "mistral-vibe", -- Or the specific model name   
+			};
 
             openai = function()
                 return require('codecompanion.adapters').extend('openai', {

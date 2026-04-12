@@ -20,6 +20,10 @@ require('vim._core.ui2').enable({
 -- 	targets = 'cmd',
 -- 	timeout = 4000, -- Time a message is visible in the message window.
 -- 	},
+        pager = { -- Options related to message window.
+          height = 0, -- Maximum height.
+        },
+
 })
 
 -- vim.g.visual_whitespace = {
