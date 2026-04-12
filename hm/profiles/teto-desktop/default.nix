@@ -43,13 +43,28 @@ in
   # to avoid cluttering $HOME
   # home.preferXdgDirectories = true;
 
-  home.packages = with pkgs; [
+  home.packages = with pkgs; 
+    let
+      nvim-dbg = (flakeSelf.inputs.neovim-nightly-overlay.packages.${stdenv.hostPlatform.system}).neovim-debug.overrideAttrs{
+      postFixup = ''
+        mv $out/bin/nvim $out/bin/nvim-debug
+        # where does that come from ? points at "nvim" executable
+        rm -rf $out/lib/debug/.build-id
+        '';
+    };
+
+    in [
     bottles
     python3Packages.kaggle
     (ignoreBroken pkgs.aider-chat) # breaks
     mdcat # markdown viewer
     notmuch # needed for waybar-custom-notmuch.sh
-    noctalia-shell # sleek fancy wayland shell/ waybar like
+
+    # nvim-dbg
+
+    # TODO provide debug package under different executable "nvim-debug"
+
+    # noctalia-shell # sleek fancy wayland shell/ waybar like
     panvimdoc # to generate vim doc from README, for instance in gp.nvim
     pciutils # for lspci
 

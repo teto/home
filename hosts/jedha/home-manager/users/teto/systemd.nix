@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
-  systemd.user.services = {
+  systemd.user = {
+    services = {
     xwayland-satellite = {
       Service = {
         # TODO need DBUS_SESSION_BUS_ADDRESS
@@ -20,4 +21,13 @@
       };
     };
   };
+
+  targets = {
+    # TODO condition on sway.systemd.enable
+    sway-session = {
+      Unit.Wants= [ "wayland-session-waitenv.service" ];
+    };
+  };
+  };
+
 }

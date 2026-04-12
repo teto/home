@@ -196,7 +196,7 @@
       # url = "github:teto/nix?ref=teto/remove-assert-outputsSubstitutionTried";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
-    noctalia.url = "github:noctalia-dev/noctalia-shell";
+    noctalia-shell.url = "github:noctalia-dev/noctalia-shell";
 
     nix-schemas.url = "github:DeterminateSystems/nix-src/flake-schemas";
 
@@ -583,9 +583,9 @@
       };
 
     })
-    // ({
+    // {
+      # those help debug in repl
       inherit (self) inputs;
-
       inherit myPkgs;
 
       # Tell Nix what schemas to use.
@@ -611,22 +611,9 @@
           nixosConfigs = lib.importDirectories ./hosts;
           nixosConfigsWithoutSecrets = lib.mapAttrs' disableSecrets nixosConfigs;
         in
-        # mapAttrs' / genAttrs
         nixosConfigs
-        // (nixosConfigsWithoutSecrets)
-        // {
-
-          # it doesn't have to be called like that !
-          # TODO use lib.mkNixosSystem
-          # see https://determinate.systems/posts/extending-nixos-configurations
-          # laptop = lib.mkNixosSystem {
-          #   withSecrets = false;
-          #   hostname = "laptop";
-          #   modules = [
-          #     ./hosts/tatooine
-          #   ];
-          # };
-        };
+        // nixosConfigsWithoutSecrets
+        ;
 
       # TODO scan hm/{modules, profiles} folder
       homeProfiles = lib.importFiles ./hm/profiles // {
@@ -845,6 +832,6 @@
           };
       };
 
-    });
+    };
 }
 #+END_SRC nix

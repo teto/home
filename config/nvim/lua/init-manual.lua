@@ -10,7 +10,7 @@
 --
 -- https://www.reddit.com/r/neovim/comments/1kcz8un/great_improvements_to_the_cmdline_in_nightly/
 -- require('vim._extui').enable({})
--- require('vim._core.ui2').enable({
+require('vim._core.ui2').enable({
 --      enable = true, -- Whether to enable or disable the UI.
 --      msg = { -- Options related to the message module.
 --        ---@type 'cmd'|'msg' Default message target, either in the
@@ -20,7 +20,7 @@
 -- 	targets = 'cmd',
 -- 	timeout = 4000, -- Time a message is visible in the message window.
 -- 	},
--- })
+})
 
 -- vim.g.visual_whitespace = {
 --   enabled = true,
@@ -78,6 +78,26 @@ vim.g.rikai = {
         -- image_font_size = 40,
         max_height = 20,
     },
+}
+
+vim.g.tiny_cmdline = {
+    width = {
+        value = "80%",  -- "N%" = fraction of editor columns, integer = absolute columns
+        min = 40,       -- minimum width in columns
+        max = 80,       -- maximum width in columns
+    },
+    -- Border style for the floating window
+    -- nil inherits vim.o.winborder at setup() time, falling back to "rounded"
+    -- Set to "none" to disable the border
+    border = nil,
+
+    -- Horizontal offset of the completion menu anchor from the window's left inner edge
+    -- Used to align blink.cmp / nvim-cmp menus with the cmdline window
+    menu_col_offset = 3,
+
+    -- Cmdline types rendered at the bottom of the screen instead of centered
+    -- "/" and "?" (search) are kept native by default
+    -- native_types = { "/", "?" },
 }
 
 vim.o.spelllang = 'en_gb,fr'

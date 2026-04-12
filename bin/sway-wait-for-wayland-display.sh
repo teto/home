@@ -9,7 +9,7 @@ while [ "$i" -ne 100 ]; do
 
   # Break loop to skip sleep if found on first try
   if [ $status -eq 0 ]; then
-    echo Display has been found.
+    echo "Display has been found."
     break
   fi
 

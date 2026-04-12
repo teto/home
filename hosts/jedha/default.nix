@@ -108,10 +108,13 @@ in
       pkgs.linuxKernel.packages.linux_6_18.r8125
     ];
 
+    # Ensure initrd has resume support
+    # initrd.luks.devices."crypted".allowDiscards = true;
+
     # necessary for qemu  to prevent
     # NOTE: this doesn't change the size of /run/user see https://nixos.org/nix-dev/2015-July/017657.html
     runSize = "10g";
-    resumeDevice = "/dev/nvme0n1p2"; # resumeDevice = "/dev/disk/by-uuid/febbd1a4-c36a-489d-ab5c-b4e9281ab892";
+    resumeDevice = "/dev/nvme0n1p1"; # resumeDevice = "/dev/disk/by-uuid/febbd1a4-c36a-489d-ab5c-b4e9281ab892";
 
     # it apparently still is quite an important thing to have
     devSize = "5g";
@@ -156,6 +159,10 @@ in
 
   # hide messages !
   boot.kernelParams = [
+    # used with resumeDevice. computed by filefrag -v /fucking_swap
+    # "resume_offset=692224"
+    "resume_offset=55296"
+
     # "earlycon=ttyS0"
     # "console=ttyS0"
     # NECESSARY !! https://discourse.nixos.org/t/browsers-unbearably-slow-after-update/9414/30

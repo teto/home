@@ -37,6 +37,7 @@
     ./systemd.nix
 
     ./programs/neovim.nix
+    ./programs/noctalia-shell.nix
     ./programs/waybar.nix # TODO resotre ?
     ./programs/zsh.nix
 

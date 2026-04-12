@@ -227,6 +227,10 @@ rev = "v0.1.0"
 git = "mikesmithgh/kitty-scrollback.nvim"
 rev = "v9.0.1"
 
+[plugins."tiny-cmdline.nvim"]
+git = "rachartier/tiny-cmdline.nvim"
+rev = "ad58747b955d0743ccfd56e97da1a4c1fac89f58"
+
 # [plugins."git-rebase-auto-diff.nvim"]
 # git = "yutkat/git-rebase-auto-diff.nvim"
 # rev = "6fd2f5ba63828e5c4fd59bb1b75ef7525a5ce39f"

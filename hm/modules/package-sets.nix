@@ -534,7 +534,6 @@ in
               ];
           };
         in
-        with pkgs;
         [
           my_lutris
         ];
@@ -561,7 +560,7 @@ in
         wdisplays # to show
         swaybg # to set wallpaper
         swayimg # imageviewer (f1 to see help)
-        swaynotificationcenter # top cool
+        swaynotificationcenter # top cool depend de noctalia-shell ?
         swaynag-battery # https://github.com/NixOS/nixpkgs/pull/175905
         sway-launcher-desktop # fzf-based launcher
         # waypaper # sets wallpapers
