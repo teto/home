@@ -1,7 +1,9 @@
+ -- https://codecompanion.olimorris.dev/getting-started#interactions
 require('codecompanion').setup({
+	  log_level = "DEBUG",
 
     secret = { 'bash', '-c', 'cat $XDG_CONFIG_HOME/sops-nix/secrets/claude_api_key' },
-    strategies = {
+    interactions = {
         chat = {
             -- adapter = 'anthropic',
             -- model = 'claude-sonnet-4-20250514',
@@ -10,6 +12,7 @@ require('codecompanion').setup({
         inline = {
             adapter = 'mistral_cloud',
         },
+
     },
     adapters = {
         http = {

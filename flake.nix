@@ -21,6 +21,7 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     edict-kanji-db = {
       url = "https://github.com/odrevet/edict_database/releases/download/v0.0.5/kanji.zip";
       flake = false;
@@ -130,10 +131,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    mcp-hub = {
-      url = "github:ravitemer/mcp-hub";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # mcp-hub = {
+    #   url = "github:ravitemer/mcp-hub";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     # peerix.url = "github:cid-chan/peerix";
     # mptcp-flake.url = "github:teto/mptcp-flake/fix-flake";
@@ -292,9 +293,6 @@
 
     treefmt-nix.url = "github:numtide/treefmt-nix";
     # treefmt-nix.url = "github:teto/treefmt-nix?ref=teto/add-hujsonfmt";
-
-    # doesnt have a nixpkgs input
-    vocage.url = "git+https://git.sr.ht/~teto/vocage?ref=flake";
 
     # AModules/fix-expand-fill-no-center
     # https://github.com/Alexays/Waybar/pull/3881

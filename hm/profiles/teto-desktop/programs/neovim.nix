@@ -151,6 +151,7 @@ let
     pkgs.vimPlugins.nvim-treesitter-parsers.nix
     pkgs.vimPlugins.nvim-treesitter-parsers.hurl
     pkgs.vimPlugins.nvim-treesitter-parsers.python
+    pkgs.vimPlugins.nvim-treesitter-parsers.yaml # required by codecompanion ?
     # pkgs.vimPlugins.nvim-treesitter-parsers.norg
   ];
 
@@ -425,9 +426,8 @@ in
     # importing dependencies of rikai.nvim
     # TODO: do it from overlay or look at the plugin itself
     # lp.sqlite
-    lp.lsqlite3
+    lp.utf8 lp.lsqlite3 # should be taken care of automatically
     # lp.lual
-    lp.utf8
     lp.alogger
     lp.mega-cmdparse
     lp.mega-logging # should not be needed ?
