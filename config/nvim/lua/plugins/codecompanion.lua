@@ -1,6 +1,23 @@
  -- https://codecompanion.olimorris.dev/getting-started#interactions
+ -- look in tests/config.lua for example
 require('codecompanion').setup({
-	  log_level = "DEBUG",
+	log_level = "DEBUG",
+      -- prompt_library = {
+      --   ["Test Cursor"] = {
+      --     strategy = "chat",
+      --     description = "Test cursor position",
+      --     opts = {
+      --       alias = "test_cursor",
+      --       auto_submit = false,
+      --     },
+      --     prompts = {
+      --       {
+      --         role = "user",
+      --         content = "Test",
+      --       },
+      --     },
+      --   },
+      -- },
 
     secret = { 'bash', '-c', 'cat $XDG_CONFIG_HOME/sops-nix/secrets/claude_api_key' },
     interactions = {

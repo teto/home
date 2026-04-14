@@ -11,11 +11,6 @@ let
     ;
 
   pluginsMap = {
-    telescopePlugins = [
-      # { plugin = telescope-nvim; }
-      # pkgs.vimPlugins.telescope-fzf-native-nvim # for use with smart-open + fzf algo
-      # telescope-fzf-native-nvim # needed by smart-open.nvim
-    ];
 
     filetypePlugins = [
       # TODO package neomutt.vim
@@ -394,7 +389,6 @@ in
   ++ treesitterPlugins
   ++ pluginsMap.colorschemePlugins
   ++ pluginsMap.luaPlugins
-  # ++ telescopePlugins
   ++ neotestPlugins;
 
   # plugins = with pkgs.vimPlugins; [
@@ -404,6 +398,8 @@ in
   # viml config, to test home-manager setup
   # extraConfig = ''
   #  '';
+
+  teal.enable = true;
 
   withNodeJs = false; # for tests
   withRuby = false; # for tests
@@ -416,12 +412,9 @@ in
   #
   extraLuaPackages = lp: [
 
-    # for neorg until  we fix
     # TODO should work with latest HM
     # lp.lua-utils-nvim
     # lp.pathlib-nvim
-
-    # nvim-treesitter-legacy-api == 0.9.2
 
     # importing dependencies of rikai.nvim
     # TODO: do it from overlay or look at the plugin itself

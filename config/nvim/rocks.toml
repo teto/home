@@ -27,14 +27,14 @@ path = "/home/teto/neovim"
 "rocks-git.nvim"= "2.5.10"
 "rocks-config.nvim" = "3.2.0"
 # "diffview.nvim" = "scm"
-"haskell-tools.nvim" = "7.0.3"
+"haskell-tools.nvim" = "9.0.0"
 
 # needed the patch from https://github.com/nvimtools/none-ls.nvim/pull/277/
 "none-ls.nvim" = "scm"
 "none-ls-extras.nvim" = "scm"
 
 "bufferline.nvim" = "4.9.1"
-auto-session = "2.5.1"
+# auto-session = "2.5.1"
 "trouble.nvim" = "scm"
 
 # remove now that it's nix installed
@@ -44,7 +44,6 @@ auto-session = "2.5.1"
 "nui.nvim" = "0.4.0"
 "rocks-dev.nvim" = "1.8.1"
 # nvim-lint = "scm"
-# "telescope.nvim" = "scm"
 "lsp_signature.nvim" = "0.3.1"
 friendly-snippets = "scm"
 # "haskell-snippets.nvim" = "1.4.4"
@@ -78,16 +77,16 @@ friendly-snippets = "scm"
 
 # TODO marks-nvim ?
 
-vim-startuptime= "4.5.0"
+vim-startuptime= "4.6.0"
 menu= "scm"
 # "snacks.nvim" = "2.6.0"
-fzf-lua = "0.0.2554"
+fzf-lua = "0.0.2571"
 # "lz.n" = "2.12.0"
 "indent-blankline.nvim" = "3.9.1"
 # "llm.nvim"= "scm"
 # volt is a UI library
 volt= "scm"
-"grug-far.nvim"= "1.6.63"
+"grug-far.nvim"= "1.6.67"
 # orgmode = "0.7.1"
 # neogit = "2.0.0"
 # "diffview.nvim" = "scm"
@@ -96,14 +95,12 @@ volt= "scm"
 # there is a bug where it creates home/teto folders everywhere
 # "typescript-tools.nvim" = "scm"
 
-# "telescope.nvim" = "0.1.6"
 "rest.nvim" = "3.13.0"
 magick = "1.6.0"
 # "image.nvim" = "1.3.0"
 "snacks.nvim" = "2.31.0"
 
 # how to get rid of it:
-"telescope.nvim" = "scm"
 
 "render-markdown.nvim" = "8.12.0"
 "dropbar.nvim" = "14.2.1"
@@ -111,6 +108,7 @@ nvim-treesitter-context = "1.0.0"
 nvim-dap = "0.10.0"
 neotest = "5.15.0"
 neotest-busted = "1.3.1"
+# "mini.sessions" = "0.17.0"
 
 # [plugins."feed.nvim"]
 # # version = "2.19.2"
@@ -189,11 +187,11 @@ rev = "fa4673e181e18fd1719ae17a1d4f4ecce2de37aa"
 
 [plugins."codecompanion.nvim"]
 git = "olimorris/codecompanion.nvim"
-rev = "v19.7.0"
+rev = "v19.11.0"
 
 [plugins."fzf-lua-frecency.nvim"]
 git = "elanmed/fzf-lua-frecency.nvim"
-rev = "4c37d8d967a51f718af5d9556b72f16c5185c05b"
+rev = "392bcd1f5053e5a6bb0d77e8f81d56712f362343"
 
 [plugins."tiny-inline-diagnostic.nvim"]
 git = "rachartier/tiny-inline-diagnostic.nvim"

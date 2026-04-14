@@ -72,6 +72,10 @@
       "rev": "c9839537f8a6a32726a504cc34113719a7dcd8fc",
       "src": "https://github.com/teto/vim-listchars"
     },
+    "vim-obsession": {
+      "rev": "ed9dfc7c2cc917ace8b24f4f9f80a91e05614b63",
+      "src": "https://github.com/tpope/vim-obsession"
+    },
     "vim-sorcerer": {
       "rev": "3fd08a5d6e9eebff5bdce68a01f0f5bb0532cc2d",
       "src": "https://github.com/adlawson/vim-sorcerer"

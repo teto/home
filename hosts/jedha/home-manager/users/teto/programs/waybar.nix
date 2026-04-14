@@ -1,6 +1,7 @@
 {
-  flakeSelf,
-  ...
+  flakeSelf
+, lib
+, ...
 }:
 {
 
@@ -9,7 +10,7 @@
   ];
 
   programs.waybar = {
-    enable = true;
+    enable = lib.mkForce false;
     settings = {
       mainBar = {
         include = [

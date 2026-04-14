@@ -9,6 +9,8 @@
 with lib;
 
 let
+  inherit (pkgs) vimPlugins;
+
   cfg = config.programs.neovim;
 
   luaPlugin =
@@ -104,7 +106,7 @@ let
     options = {
       enable = mkEnableOption "Treesitter";
 
-      plugins = mkOption {
+      plugins = lib.mkOption {
         # type = types.listOf types.package;
         default = treesitterPlugins;
         # [];
@@ -117,10 +119,10 @@ let
 
       enable = mkEnableOption "Neorg";
 
-      plugins = mkOption {
+      plugins = lib.mkOption {
         # type = types.listOf types.package;
         default = [
-          # (luaPlugin { plugin = vimPlugins.neorg-telescope; })
+          (luaPlugin { plugin = pkgs.vimPlugins.neorg; })
         ];
         description = "toto";
       };
@@ -132,7 +134,7 @@ let
 
       enable = mkEnableOption "Orgmode";
 
-      plugins = mkOption {
+      plugins = lib.mkOption {
         # type = types.listOf types.package;
         default = orgmodePlugins;
         description = "The file extension to use.";
@@ -143,7 +145,7 @@ let
   fennelModule = types.submodule {
     options = {
       enable = mkEnableOption "Fennel";
-      plugins = mkOption {
+      plugins = lib.mkOption {
         # type = types.listOf types.package;
         default = fennelPlugins;
         description = "The file extension to use.";
@@ -154,9 +156,12 @@ let
   tealModule = types.submodule {
     options = {
       enable = mkEnableOption "Teal";
-      plugins = mkOption {
+      plugins = lib.mkOption {
         # type = types.listOf types.package;
-        default = with pkgs.vimPlugins; [ (luaPlugin { plugin = nvim-teal-maker; }) ];
+        default = [ 
+          # (luaPlugin { plugin = nvim-teal-maker; }) 
+          vimPlugins.vim-teal
+        ];
         description = "Teal associated plugins";
       };
     };
@@ -186,17 +191,17 @@ in
 
       # pendant de extraPackages, inline as vim.env.PATH plutot que comme des
       # wrapper flags, ce qui permet de garder les extraPackages pour tous les wrappers
-      extraInitLuaPackages = mkOption {
+      extraInitLuaPackages = lib.mkOption {
         type = types.listOf types.package;
         default = [ ];
         example = literalExpression "[ pkgs.shfmt ]";
         description = "Extra packages available to nvim.";
       };
 
-      lsp = mkOption {
+      lsp = lib.mkOption {
         type = types.submodule {
           options = {
-            mapOnAttach = mkEnableOption "Mappings on LspAttach";
+            mapOnAttach = lib.mkEnableOption "Mappings on LspAttach";
           };
         };
 
@@ -208,7 +213,7 @@ in
 
       # enableYazi = mkEnableOption "The file manager yazi";
 
-      orgmode = mkOption {
+      orgmode = lib.mkOption {
         type = orgmodeModule;
         default = {
           enable = false;
@@ -216,7 +221,7 @@ in
         description = "Enable orgmode support";
       };
 
-      neorg = mkOption {
+      neorg = lib.mkOption {
         type = neorgModule;
         default = {
           enable = false;
@@ -224,7 +229,7 @@ in
         description = "Enable neorg support";
       };
 
-      # autocompletion = mkOption {
+      # autocompletion = lib.mkOption {
       #   type = autocompletionModule;
       #   default = {
       #     enable = false;
@@ -232,7 +237,7 @@ in
       #   description = "Autocompletion configuration";
       # };
 
-      treesitter = mkOption {
+      treesitter = lib.mkOption {
         type = treesitterModule;
         default = {
           enable = true;
@@ -240,7 +245,7 @@ in
         description = "Treesitters settings.";
       };
 
-      teal = mkOption {
+      teal = lib.mkOption {
         type = tealModule;
         default = {
           enable = false;
@@ -248,7 +253,7 @@ in
         description = "Enable support for teal language.";
       };
 
-      fennel = mkOption {
+      fennel = lib.mkOption {
         type = fennelModule;
         default = {
           enable = false;
@@ -256,7 +261,7 @@ in
         description = "Enable support for fennel language.";
       };
 
-      # snippet = mkOption {
+      # snippet = lib.mkOption {
       #   type = fennelModule;
       #   default = {
       #     enable = false;
@@ -267,7 +272,7 @@ in
   };
 
   config = lib.mkMerge [
-    (mkIf cfg.enableFzfLua {
+    (lib.mkIf cfg.enableFzfLua {
       programs.neovim.plugins = [
         (luaPlugin { plugin = pkgs.vimPlugins.fzf-lua; })
 
@@ -279,7 +284,7 @@ in
     })
 
     # TODO add orgmode-babel and emacs to neovim
-    (mkIf cfg.highlightOnYank {
+    (lib.mkIf cfg.highlightOnYank {
 
       # -- TODO higroup should be its own ? a darker version of CursorLine
       # -- if it doesnt exist
@@ -291,7 +296,7 @@ in
         })
       '';
     })
-    (mkIf cfg.enableMyDefaults {
+    (lib.mkIf cfg.enableMyDefaults {
       # programs.neovim.plugins = blinkPlugins;
 
       programs.neovim.initLua = ''
@@ -305,11 +310,11 @@ in
       '';
     })
 
-    (mkIf cfg.enableBlink {
+    (lib.mkIf cfg.enableBlink {
       programs.neovim.plugins = blinkPlugins;
     })
 
-    (mkIf cfg.enableRocks {
+    (lib.mkIf cfg.enableRocks {
       programs.neovim.plugins = [
         pkgs.vimPlugins.rocks-nvim
         pkgs.vimPlugins.rocks-config-nvim
@@ -336,13 +341,13 @@ in
 
     # (mkIf cfg.orgmode.enable { programs.neovim.plugins = cfg.orgmode.plugins; })
 
-    (mkIf cfg.neorg.enable {
+    (lib.mkIf cfg.neorg.enable {
       programs.neovim.plugins = cfg.neorg.plugins;
       # TODO add extraLuaPackages until this is fixed
       # programs.neovim.extraLuaPackages = [ ];
     })
 
-    (mkIf cfg.lsp.mapOnAttach {
+    (lib.mkIf cfg.lsp.mapOnAttach {
       # TODO enable treesitter multilanguage
       programs.neovim.initLua = # lua
         ''
@@ -378,13 +383,13 @@ in
 
     })
 
-    (mkIf cfg.useAsManViewer {
+    (lib.mkIf cfg.useAsManViewer {
       home.sessionVariables = {
         MANPAGER = "nvim +Man!";
       };
     })
 
-    (mkIf cfg.lualsAddons {
+    (lib.mkIf cfg.lualsAddons {
       # maybe those addons should be added to "pkgs" instead
       xdg.configFile."nvim/luals-addons.lua".text = ''
         {
@@ -394,7 +399,7 @@ in
       '';
     })
 
-    (mkIf cfg.treesitter.enable {
+    (lib.mkIf cfg.treesitter.enable {
       programs.neovim.plugins = treesitterPlugins;
       # programs.neovim.initLua = lib.mkBefore (
       # "--toto"
@@ -409,11 +414,11 @@ in
 
     # (mkIf cfg.teal.enable { programs.neovim.plugins = cfg.teal.plugins; })
 
-    (mkIf cfg.fennel.enable { programs.neovim.plugins = cfg.fennel.plugins; })
+    (lib.mkIf cfg.fennel.enable { programs.neovim.plugins = cfg.fennel.plugins; })
 
-    ({
+    {
       programs.neovim.initLua = lib.mkOrder 0 ''vim.env.PATH = "${lib.makeBinPath config.programs.neovim.extraInitLuaPackages}:"..vim.env.PATH'';
-    })
+    }
   ];
 
 }

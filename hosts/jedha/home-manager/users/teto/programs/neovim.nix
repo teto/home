@@ -29,7 +29,6 @@ let
     ];
 
   luaPlugins = with pkgs.vimPlugins; [
-    pkgs.vimPlugins.neorg
     # pkgs.vimPlugins.vim-nixhash # :NixHash
     # TODO check that it brings xxd in scope
 
@@ -104,7 +103,6 @@ in
       luaPlugins
       ++ filetypePlugins
       ++ treesitterPlugins
-      # ++ telescopePlugins
       ++ neotestPlugins;
 
     extraPackages = [

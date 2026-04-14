@@ -11,6 +11,10 @@ require('auto-session').setup({
     -- Not clear wether those work
     args_allow_single_directory = true, -- boolean Follow normal session save/load logic if launched with a single directory as the only argument
     args_allow_files_auto_save = false, -- boolean|function Allow saving a session even when launched with a file argument (or multiple files/dirs). It does not load any existing session first. While you can just set this to true, you probably want to set it to a function that decides when to save a session when launched with file args. See documentation for more detail
+
+	session_lens = {
+	  load_on_setup = false -- to avoid the nagging message at startup
+	 }
 })
 
 -- used to be obsession
