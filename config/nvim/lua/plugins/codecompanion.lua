@@ -1,33 +1,42 @@
  -- https://codecompanion.olimorris.dev/getting-started#interactions
  -- look in tests/config.lua for example
 require('codecompanion').setup({
+ opts = {
 	log_level = "DEBUG",
-      -- prompt_library = {
-      --   ["Test Cursor"] = {
-      --     strategy = "chat",
-      --     description = "Test cursor position",
-      --     opts = {
-      --       alias = "test_cursor",
-      --       auto_submit = false,
-      --     },
-      --     prompts = {
-      --       {
-      --         role = "user",
-      --         content = "Test",
-      --       },
-      --     },
-      --   },
-      -- },
+   },
+      prompt_library = {
+
+    -- markdown = {
+    --   dirs = {},
+    -- },
+
+        ["Test Cursor"] = {
+          strategy = "chat",
+          description = "Test cursor position",
+          opts = {
+            alias = "test_cursor",
+            auto_submit = false,
+          },
+          prompts = {
+            {
+              role = "user",
+              content = "Test",
+            },
+          },
+        },
+      },
+	  display = { action_palette = { opts = { show_preset_prompts = false } } },
 
     secret = { 'bash', '-c', 'cat $XDG_CONFIG_HOME/sops-nix/secrets/claude_api_key' },
     interactions = {
         chat = {
             -- adapter = 'anthropic',
             -- model = 'claude-sonnet-4-20250514',
-            adapter = 'mistral_cloud',
+            -- adapter = 'mistral_cloud',
+            adapter = 'mistral_vibe',
         },
         inline = {
-            adapter = 'mistral_cloud',
+            adapter = 'mistral_vibe',
         },
 
     },
@@ -50,7 +59,7 @@ require('codecompanion').setup({
             -- timeout = 30000, -- Timeout in milliseconds
 
 			  -- endpoint = "http://localhost:8000/v1", -- Replace with your endpoint                                                     
-			  model = "mistral-vibe", -- Or the specific model name   
+			  -- model = "mistral-vibe", -- Or the specific model name   
 			};
 
             openai = function()

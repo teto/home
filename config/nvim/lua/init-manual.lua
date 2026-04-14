@@ -718,7 +718,9 @@ if vim.fn.has('nvim-0.12') ~= 0 then
     vim.pack.add({
         -- my real neovim package manager (with nix)
         'https://github.com/nvim-neorocks/rocks.nvim',
-		'https://github.com/tpope/vim-obsession',
+		-- 'https://github.com/tpope/vim-obsession',
+		-- 'https://github.com/tpope/vim-obsession',
+		-- 'https://github.com/nvim-mini/mini.sessions',
 
         -- bug in rocks.nvim when trying to debug feed.nvim
         -- so I install it here https://github.com/lumen-oss/rocks.nvim/issues/706
@@ -934,7 +936,7 @@ vim.api.nvim_create_user_command('LlmChat', function()
 end, { desc = 'Ask without selecting anything' })
 
 -- "module 'nvim-treesitter.parsers' not found:"
--- require('plugins.neorg')
+require('plugins.neorg')
 -- todo fix upgraded version
 -- require('plugins.image')
 
@@ -947,6 +949,9 @@ end, { desc = 'Ask without selecting anything' })
 --     end
 --   end,
 -- })
+
+
+-- require('plugins.mini-sessions')
 
 -- https://github.com/nvim-neorg/neorg/issues/1351
 -- https://github.com/nvim-neorg/neorg/issues/1342

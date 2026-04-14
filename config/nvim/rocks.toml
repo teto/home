@@ -34,7 +34,7 @@ path = "/home/teto/neovim"
 "none-ls-extras.nvim" = "scm"
 
 "bufferline.nvim" = "4.9.1"
-# auto-session = "2.5.1"
+auto-session = "2.5.1"
 "trouble.nvim" = "scm"
 
 # remove now that it's nix installed
