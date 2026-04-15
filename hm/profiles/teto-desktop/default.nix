@@ -60,7 +60,7 @@ in
     mdcat # markdown viewer
     notmuch # needed for waybar-custom-notmuch.sh
 
-    nvim-dbg
+    nvim-dbg # when neovim crashes, launch "nvim-debug" to debug
 
     # TODO provide debug package under different executable "nvim-debug"
 
