@@ -44,23 +44,15 @@ in
   # home.preferXdgDirectories = true;
 
   home.packages = with pkgs; 
-    let
-      nvim-dbg = (flakeSelf.inputs.neovim-nightly-overlay.packages.${stdenv.hostPlatform.system}).neovim-debug.overrideAttrs{
-      postFixup = ''
-        mv $out/bin/nvim $out/bin/nvim-debug
-        # where does that come from ? points at "nvim" executable
-        rm -rf $out/lib/debug/.build-id
-        '';
-    };
 
-    in [
+    [
     bottles
     python3Packages.kaggle
     (ignoreBroken pkgs.aider-chat) # breaks
     mdcat # markdown viewer
     notmuch # needed for waybar-custom-notmuch.sh
 
-    nvim-dbg # when neovim crashes, launch "nvim-debug" to debug
+    neovim-dbg # when neovim crashes, launch "nvim-debug" to debug
 
     # TODO provide debug package under different executable "nvim-debug"
 

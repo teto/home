@@ -718,6 +718,9 @@ if vim.fn.has('nvim-0.12') ~= 0 then
     vim.pack.add({
         -- my real neovim package manager (with nix)
         'https://github.com/nvim-neorocks/rocks.nvim',
+
+		-- 'https://github.com/Olical/nfnl',
+
 		-- 'https://github.com/tpope/vim-obsession',
 		-- 'https://github.com/tpope/vim-obsession',
 		-- 'https://github.com/nvim-mini/mini.sessions',
@@ -746,6 +749,7 @@ if vim.fn.has('nvim-0.12') ~= 0 then
         -- filetypes
         'https://github.com/PotatoesMaster/i3-vim-syntax',
         'https://github.com/overleaf/vim-env-syntax',
+		'https://git.sr.ht/~m15a/vim-fennel-syntax',
 
         -- fennel testing
         -- 'https://github.com/aileot/nvim-thyme'

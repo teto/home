@@ -48,49 +48,6 @@ let
     })
   ];
 
-  fennelPlugins = with pkgs.vimPlugins; [
-    # {  plugin = aniseed;
-    # runtime = {
-    #      "ftplugin/c.vim".text = "setlocal omnifunc=v:lua.vim.lsp.omnifunc";
-    # # "zaz".text = ''
-    # # -- test fennel
-    # #  '';
-    # };
-    # # " let g:aniseed#env = v:true
-    # # " lua require('aniseed.env').init()
-    #  # }
-    # }
-
-    # (luaPlugin {
-    #   plugin = hotpot-nvim;
-    #   # type = "lua";
-    #   config = ''
-    #    require("hotpot").setup({
-    #      -- allows you to call `(require :fennel)`.
-    #      -- recommended you enable this unless you have another fennel in your path.
-    #      -- you can always call `(require :hotpot.fennel)`.
-    #      provide_require_fennel = false,
-    #      -- show fennel compiler results in when editing fennel files
-    #      enable_hotpot_diagnostics = true,
-    #      -- compiler options are passed directly to the fennel compiler, see
-    #      -- fennels own documentation for details.
-    #      compiler = {
-    #        -- options passed to fennel.compile for modules, defaults to {}
-    #        modules = {
-    #          -- not default but recommended, align lua lines with fnl source
-    #          -- for more debuggable errors, but less readable lua.
-    g
-    #          -- correlate = true
-    #        },
-    #        -- options passed to fennel.compile for macros, defaults as shown
-    #        macros = {
-    #          env = "_COMPILER" -- MUST be set along with any other options
-    #        }
-    #      }
-    #    })
-    #    '';
-    # })
-  ];
 
   treesitterPlugins = [
     # pkgs.vimPlugins.nvim-treesitter-pairs
@@ -414,7 +371,66 @@ in
 
     # (mkIf cfg.teal.enable { programs.neovim.plugins = cfg.teal.plugins; })
 
-    (lib.mkIf cfg.fennel.enable { programs.neovim.plugins = cfg.fennel.plugins; })
+    (lib.mkIf cfg.fennel.enable {
+      programs.neovim.plugins = with pkgs.vimPlugins; [
+
+        # https://github.com/Olical/nfnl
+        vimPlugins.nfnl
+        vimPlugins.nvim-treesitter-parsers.fennel
+        fennel-ls
+
+        # {  plugin = aniseed;
+        # runtime = {
+        #      "ftplugin/c.vim".text = "setlocal omnifunc=v:lua.vim.lsp.omnifunc";
+        # # "zaz".text = ''
+        # # -- test fennel
+        # #  '';
+        # };
+        # # " let g:aniseed#env = v:true
+        # # " lua require('aniseed.env').init()
+        #  # }
+        # }
+
+        # (luaPlugin {
+        #   plugin = hotpot-nvim;
+        #   # type = "lua";
+        #   config = ''
+        #    require("hotpot").setup({
+        #      -- allows you to call `(require :fennel)`.
+        #      -- recommended you enable this unless you have another fennel in your path.
+        #      -- you can always call `(require :hotpot.fennel)`.
+        #      provide_require_fennel = false,
+        #      -- show fennel compiler results in when editing fennel files
+        #      enable_hotpot_diagnostics = true,
+        #      -- compiler options are passed directly to the fennel compiler, see
+        #      -- fennels own documentation for details.
+        #      compiler = {
+        #        -- options passed to fennel.compile for modules, defaults to {}
+        #        modules = {
+        #          -- not default but recommended, align lua lines with fnl source
+        #          -- for more debuggable errors, but less readable lua.
+        g
+        #          -- correlate = true
+        #        },
+        #        -- options passed to fennel.compile for macros, defaults as shown
+        #        macros = {
+        #          env = "_COMPILER" -- MUST be set along with any other options
+        #        }
+        #      }
+        #    })
+        #    '';
+        # })
+      ];
+
+      programs.neovim.initLua = ''
+        vim.lsp.enable("fennel-ls")
+        '';
+
+      home.packages = [
+        cfg.package.unwrapped.lua.pkgs.fennel
+        # pkgs.fennel
+      ];
+    })
 
     {
       programs.neovim.initLua = lib.mkOrder 0 ''vim.env.PATH = "${lib.makeBinPath config.programs.neovim.extraInitLuaPackages}:"..vim.env.PATH'';

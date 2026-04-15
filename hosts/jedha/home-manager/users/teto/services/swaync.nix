@@ -13,7 +13,7 @@
   ];
 
   services.swaync = {
-    enable = true;
+    enable = false;
   };
 
 }

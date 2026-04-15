@@ -5,7 +5,7 @@
       "src": "https://github.com/vim-scripts/Solarized"
     },
     "feed.nvim": {
-      "rev": "d1f8cee9df8ea4c7e319db701fb0ece0eca9a005",
+      "rev": "4e0903343c47b13aa5355ed267dbd58300bff8be",
       "src": "https://github.com/neo451/feed.nvim"
     },
     "fzf-lua-enchanted-files": {
@@ -33,19 +33,23 @@
       "src": "https://github.com/marko-cerovac/material.nvim"
     },
     "mini.sessions": {
-      "rev": "2e419949f6846871b3b87bcd7c418b0d1f0ad68a",
+      "rev": "c96a1d1284b37ba2431092981a9d58f8c71a4fc3",
       "src": "https://github.com/nvim-mini/mini.sessions"
     },
     "neovim": {
-      "rev": "cf2a288696b03d0934da713d66c6d71557b5c997",
+      "rev": "9504524e5ed0e326534698f637f9d038ba4cd0ee",
       "src": "https://github.com/rose-pine/neovim"
+    },
+    "nfnl": {
+      "rev": "ac0177c5549df7abba7a19554c18a7765386c894",
+      "src": "https://github.com/Olical/nfnl"
     },
     "none-ls-shellcheck.nvim": {
       "rev": "0f84461241e76e376a95fb7391deac82dc3efdbf",
       "src": "https://github.com/gbprod/none-ls-shellcheck.nvim"
     },
     "nvim-lspconfig": {
-      "rev": "97774019cb17697f35872b28bc020a72b4ca1b51",
+      "rev": "4b7fbaa239c5db6b36f424a4521ca9f1a401be33",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-thyme": {
@@ -71,6 +75,10 @@
     "vim-env-syntax": {
       "rev": "2137f77840fe6e5e67dc0422f1759ab1ddc86d60",
       "src": "https://github.com/overleaf/vim-env-syntax"
+    },
+    "vim-fennel-syntax": {
+      "rev": "4698050d46e80c25d968a91a8d050049aae85d9e",
+      "src": "https://git.sr.ht/~m15a/vim-fennel-syntax"
     },
     "vim-listchars": {
       "rev": "c9839537f8a6a32726a504cc34113719a7dcd8fc",

@@ -1,2 +1,4 @@
 ;; put your fennel code in fnl/
-(fn [what] (print what "is neat!"))
+(print "Hello, World! From my nfnl configuration!")
+
+{:fennel-path "..."}
