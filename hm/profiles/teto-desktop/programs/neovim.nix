@@ -118,18 +118,6 @@ let
     ];
   };
 
-  # mcp-hub = flakeSelf.inputs.mcp-hub.packages.${pkgs.stdenv.hostPlatform.system}.mcp-hub;
-
-  # luaPlugin =
-  #   attrs:
-  #   attrs
-  #   // {
-  #     type = "lua";
-  #     config = lib.optionalString (attrs ? config && attrs.config != null) (
-  #       genBlockLua attrs.plugin.pname attrs.config
-  #     );
-  #   };
-
   blinkPlugins = [
     pkgs.vimPlugins.blink-cmp # nixpkgs' one
     # pkgs.vimPlugins.blink-cmp-git # autocomplete github issues/PRs
@@ -141,13 +129,11 @@ let
   ];
 
   treesitterPlugins = [
-    # pkgs.vimPlugins.nvim-treesitter-pairs
     # pkgs.vimPlugins.nvim-treesitter-textobjects
     pkgs.vimPlugins.nvim-treesitter-parsers.nix
     pkgs.vimPlugins.nvim-treesitter-parsers.hurl
     pkgs.vimPlugins.nvim-treesitter-parsers.python
     pkgs.vimPlugins.nvim-treesitter-parsers.yaml # required by codecompanion ?
-    # pkgs.vimPlugins.nvim-treesitter-parsers.norg
   ];
 
   filetypePlugins = with pkgs.vimPlugins; [
@@ -381,7 +367,6 @@ in
     #   plugin = sql-nvim;
     #   # config = "let g:sql_clib_path = '${pkgs.sqlite.out}/lib/libsqlite3.so'";
     # }
-
   ]
   ++ luaPlugins
   ++ blinkPlugins

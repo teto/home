@@ -197,8 +197,8 @@ vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/avante.nvim')
 -- doing jj tests
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/diffview.nvim')
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/rocks-dev.nvim')
-vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks-config.nvim')
-vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks.nvim')
+-- vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks-config.nvim')
+-- vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks.nvim')
 
 -- require("vim.lsp._watchfiles")._watchfunc = require("vim._watch").watch
 -- local ffi = require 'ffi'
@@ -719,7 +719,7 @@ if vim.fn.has('nvim-0.12') ~= 0 then
         -- my real neovim package manager (with nix)
         'https://github.com/nvim-neorocks/rocks.nvim',
 
-		-- 'https://github.com/Olical/nfnl',
+		'https://github.com/Olical/nfnl',
 
 		-- 'https://github.com/tpope/vim-obsession',
 		-- 'https://github.com/tpope/vim-obsession',

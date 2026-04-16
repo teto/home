@@ -32,10 +32,6 @@ let
     # pkgs.vimPlugins.vim-nixhash # :NixHash
     # TODO check that it brings xxd in scope
 
-    # should bring in scope fzy
-    # (luaPlugin { plugin = nvim-ufo; })
-    # (luaPlugin { plugin = nvim-dbee; })
-
     # (luaPlugin {
     #  # this is a peculiarly complex one that needs pynvim, image.nvim
     #  plugin = molten-nvim;
@@ -73,6 +69,7 @@ let
       # let g:vim_markdown_preview_github=1
       # let g:vim_markdown_preview_use_xdg_open=1
     }
+
     (luaPlugin { plugin = minimap-vim; })
 
     # { plugin = kui-nvim; }
@@ -81,9 +78,6 @@ let
     # cool but I dont use it
     # (luaPlugin { plugin = stylish-nvim; })
 
-  ];
-
-  filetypePlugins = with pkgs.vimPlugins; [
   ];
 
   # TODO get lua interpreter to select the good lua packages
@@ -97,11 +91,11 @@ in
     # broken because needs nvim-treesitter-legacy-api
     neorg.enable = true;
 
+    fennel.enable = true;
     orgmode.enable = true;
 
     plugins =
       luaPlugins
-      ++ filetypePlugins
       ++ treesitterPlugins
       ++ neotestPlugins;
 

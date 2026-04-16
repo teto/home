@@ -275,8 +275,8 @@ in
       programs.neovim.plugins = [
         pkgs.vimPlugins.rocks-nvim
         pkgs.vimPlugins.rocks-config-nvim
-        # pkgs.vimPlugins.rocks-dev-nvim
-        # pkgs.vimPlugins.rocks-git-nvim # has no vimPlugins equivalent !
+        pkgs.vimPlugins.rocks-dev-nvim
+        pkgs.vimPlugins.rocks-git-nvim # has no vimPlugins equivalent !
       ];
 
       # TODO add  vim.g.rocks
@@ -375,10 +375,8 @@ in
       programs.neovim.plugins = with pkgs.vimPlugins; [
 
         # https://github.com/Olical/nfnl
-        vimPlugins.nfnl
+        # vimPlugins.nfnl
         vimPlugins.nvim-treesitter-parsers.fennel
-        fennel-ls
-
         # {  plugin = aniseed;
         # runtime = {
         #      "ftplugin/c.vim".text = "setlocal omnifunc=v:lua.vim.lsp.omnifunc";
@@ -409,7 +407,7 @@ in
         #        modules = {
         #          -- not default but recommended, align lua lines with fnl source
         #          -- for more debuggable errors, but less readable lua.
-        g
+        #
         #          -- correlate = true
         #        },
         #        -- options passed to fennel.compile for macros, defaults as shown
@@ -427,8 +425,8 @@ in
         '';
 
       home.packages = [
-        cfg.package.unwrapped.lua.pkgs.fennel
-        # pkgs.fennel
+        cfg.package.lua.pkgs.fennel
+        pkgs.fennel-ls
       ];
     })
 
