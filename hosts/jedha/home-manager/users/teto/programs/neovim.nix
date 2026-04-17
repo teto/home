@@ -89,6 +89,7 @@ in
     # package = flakeSelf.packages.${pkgs.stdenv.hostPlatform.system}.neovim-unwrapped;
 
     # broken because needs nvim-treesitter-legacy-api
+    dap.enable = true;
     neorg.enable = true;
 
     fennel.enable = true;

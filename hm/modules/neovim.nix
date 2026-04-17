@@ -193,11 +193,23 @@ in
       #   };
       #   description = "Autocompletion configuration";
       # };
+      dap = lib.mkOption {
+        type = types.submodule {
+          options = {
+            enable = mkEnableOption "DAP (Debug Adapter Protocol)";
+          };
+
+          };
+        default = {
+          enable = false;
+        };
+        description = "Dap settings.";
+      };
 
       treesitter = lib.mkOption {
         type = treesitterModule;
         default = {
-          enable = true;
+          enable = false;
         };
         description = "Treesitters settings.";
       };
@@ -354,6 +366,14 @@ in
         "${flakeSelf.inputs.luals-luassert-addon}"
         }
       '';
+    })
+
+    (lib.mkIf cfg.dap.enable {
+      programs.neovim.plugins = [
+        vimPlugins.nvim-dap
+        vimPlugins.nvim-dap-ui
+      ];
+
     })
 
     (lib.mkIf cfg.treesitter.enable {

@@ -968,4 +968,4 @@ vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 -- todo add api to list remote models
 vim.api.nvim_create_user_command('AvanteLogs', ':e ~/.cache/nvim/avante.log', { desc = 'read avante logs' })
 
--- require('plugins.neorg')
+require('teto.dap')
