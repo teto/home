@@ -1,1 +1,25 @@
 fish_trace <-> set -x
+
+# load alternate history
+set -x fish_history "session_name"
+
+# Merge 2 different histories
+history merge
+
+# fish_should_add_to_history
+
+    function fish_should_add_to_history
+        for cmd in vault mysql ls
+             string match -qr "^$cmd" -- $argv; and return 1
+        end
+        return 0
+    end
+
+# conf.d
+
+   if status --is-interactive
+   	function sync_history --on-event fish_preexec
+   		history --save
+   		history --merge
+   	end
+   end

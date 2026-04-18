@@ -47,8 +47,6 @@ in
 
     [
     bottles
-    python3Packages.kaggle
-    (ignoreBroken pkgs.aider-chat) # breaks
     mdcat # markdown viewer
     notmuch # needed for waybar-custom-notmuch.sh
 
@@ -66,11 +64,12 @@ in
     # poppler for pdf preview
 
     kaggle # kaggle interface
+    python3Packages.kaggle
 
     # rendercv # yaml-based CV
     stow
-    timr-tui # rust clock
     systemctl-tui
+    timr-tui # rust clock
     viu # a console image viewer
 
     # cups-pk-helper # to add printer through gnome control center

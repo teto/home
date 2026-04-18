@@ -383,20 +383,23 @@ in
           automake
 
           bat
-          (ignoreBroken bcal) # calculatrice
+          bcal # calculatrice
           # bmm # rust bookmark manager (not package yet)
           # backblaze-b2-tetos
           bfs # https://github.com/tavianator/bfs
           binutils
           btop
+          bubblewrap # sandboxing
 
           cargo
-          (ignoreBroken claude-code) # anthropic agent
+          # (ignoreBroken claude-code) # anthropic agent
 
-          dasht # ~ zeal but in terminal
-          difftastic # smart diffs
-          diff-so-fancy
-          docker-credential-helpers
+          # dasht # ~ zeal but in terminal
+
+          # defalt via hm
+          # difftastic # smart diffs
+          # diff-so-fancy 
+          # docker-credential-helpers
 
           fswatch # fileevent watcher
           fx # json reader
@@ -405,15 +408,16 @@ in
           gnupg
           gnum4 # hum
           gettext # for envsubst (TO NOT CONFOUND with gettext's envsubst)
-          glab # gitlab cli
+          # glab # gitlab cli
 
-          hexyl # hexcode viewer
+          # hexyl # hexcode viewer
 
           jq
 
-          luau # lua server
+          # luau # lua server
           lurk # a rust strace
           lsof # to see open files
+
           flakeSelf.inputs.starship-jj.packages.${system}.default # custom.jj for starship
 
           libossp_uuid # for the 'libuuid' executable
@@ -432,6 +436,7 @@ in
           nix-melt
           netcat-gnu # plain 'netcat' is the bsd one
           nurl # generate nix code
+          numbat # fancy calculator
 
           pwgen
 
@@ -652,7 +657,8 @@ in
           });
         in
         [
-          hakuneko
+          # hakuneko # X only
+          clanki # SRS in cli
           memento-with-ocr
           pkgs.clanki
 
@@ -660,7 +666,6 @@ in
           pkgs.kakasi # convert kanjis into kanas etc
           pkgs.kanji-stroke-order-font # for memento, font that shows strike order (!!) cool when learning
           tagainijisho # japanese dict; like zkanji Qt based
-          # flakeSelf.inputs.vocage.packages."x86_64-linux".vocage
           jiten # unfree, helpful for jap.nvim
           sudachi-rs-full
           # sudachidict # exists in small/medium/large
@@ -684,7 +689,7 @@ in
     (mkIf (cfg.japanese && cfg.llms) {
 
       home.packages = [
-        pkgs.mokuro # broken because of manga-ocr
+        pkgs.mokuro
         pkgs.python3Packages.manga-ocr
       ];
 
