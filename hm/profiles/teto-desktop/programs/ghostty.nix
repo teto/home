@@ -1,10 +1,14 @@
 {
 
   enable = true;
+  systemd.enable = true;
 
   installVimSyntax = true;
 
-  # settings = {
-  #
-  # };
+  settings = {
+    config-file = [
+      "manual.cfg"
+    ];
+
+  };
 }

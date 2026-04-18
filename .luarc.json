@@ -4,7 +4,8 @@
 	"workspace": {
 		"useGitIgnore": true,
         "library": [
-          "/home/teto/home/contrib/jjui-types.lua"
+          "$VIMRUNTIME",
+           "/home/teto/home/contrib/jjui-types.lua"
         ],
 		"ignoreDir": [
 			"config/wireshark",
@@ -20,13 +21,13 @@
     ],
      "globals": [
       "ya",
-                    "vim",
-                    "describe",
-                    "it",
-                    "before_each",
-                    "after_each",
-                    "pending",
-                    "teardown"
+      "vim",
+      "describe",
+      "it",
+      "before_each",
+      "after_each",
+      "pending",
+      "teardown"
 
      ]
    }

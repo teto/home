@@ -657,9 +657,9 @@ in
           pkgs.clanki
 
           # https://github.com/NixOS/nixpkgs/pull/368909
-          (ignoreBroken pkgs.kakasi) # convert kanjis into kanas etc
+          pkgs.kakasi # convert kanjis into kanas etc
           pkgs.kanji-stroke-order-font # for memento, font that shows strike order (!!) cool when learning
-          (tagainijisho) # japanese dict; like zkanji Qt based
+          tagainijisho # japanese dict; like zkanji Qt based
           # flakeSelf.inputs.vocage.packages."x86_64-linux".vocage
           jiten # unfree, helpful for jap.nvim
           sudachi-rs-full

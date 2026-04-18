@@ -248,7 +248,6 @@ vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
 
 local on_attach = require('teto.on_attach')
 
--- this in nightly
 vim.lsp.config('*', {
     -- https://github.com/neovim/nvim-lspconfig/issues/3827
     on_attach = on_attach.on_attach,

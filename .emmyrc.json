@@ -3,6 +3,7 @@
 	"workspace": {
 		"useGitIgnore": true,
         "library": [
+          "$VIMRUNTIME",
           "/home/teto/home/contrib/jjui-types.lua"
         ],
 		"ignoreDir": [
