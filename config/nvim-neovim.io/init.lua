@@ -6,7 +6,8 @@ vim.pack.add {
  'https://github.com/rachartier/tiny-cmdline.nvim.git',
  'https://github.com/luukvbaal/statuscol.nvim',
  'https://github.com/mfussenegger/nvim-dap',
- 'https://github.com/lewis6991/gitsigns.nvim'
+ 'https://github.com/lewis6991/gitsigns.nvim',
+ 'https://github.com/neovim/nvim-lspconfig'
 }
 
 vim.g.tiny_cmdline = {
@@ -58,6 +59,7 @@ vim.lsp.enable('emmylua_ls')
 
 
 
+-- gitsigns {{{
 vim.api.nvim_set_hl(0, 'GitSignsAdd', {
     bg = '#00FF00', -- Green background
 })
@@ -66,3 +68,18 @@ vim.api.nvim_set_hl(0, 'GitSignsChangeLn', {
 })
 
 
+require('gitsigns').setup({
+ -- '│' passe mais '▎' non :s
+ -- signs = {},
+ signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
+ signs_staged_enable = false,
+ -- it doesn't work properly, sometimes it takes only
+ numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
+ linehl = true, -- Toggle with `:Gitsigns toggle_linehl`
+ word_diff = true, -- Toggle with `:Gitsigns toggle_word_diff`
+ watch_gitdir = {
+  follow_files = true,
+ },
+
+})
+-- }}}
