@@ -127,10 +127,12 @@
       name = "git-abbr";
       src = pkgs.fishPlugins.git-abbr.src;
     }
-    {
-      name = "sponge";
-      src = pkgs.fishPlugins.sponge.src;
-    }
+    # {
+    #   name = "sponge";
+    #  sponge filters history ! 
+    # https://github.com/meaningful-ooo/sponge
+    #   src = pkgs.fishPlugins.sponge.src;
+    # }
     # https://github.com/franciscolourenco/done
     {
       name = "done";

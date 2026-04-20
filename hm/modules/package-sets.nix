@@ -313,12 +313,12 @@ in
         # libsecret  # to consult
         # newsboat #
         bmm # bookmark manager
-        carl # not upstreamed yet. cargo cal
+        carl # cargo cal
         python3Packages.subliminal # to download subtitles
         immich-cli
         mujmap-unstable # to sync notmuch tags across jmap
-        (lib.ignoreBroken oculante) # image viewer
-        (lib.ignoreBroken calcure)
+        # (lib.ignoreBroken oculante) # image viewer
+        # (lib.ignoreBroken calcure)
         # signal-desktop # installe a la main
         # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail
         vimiv-qt
