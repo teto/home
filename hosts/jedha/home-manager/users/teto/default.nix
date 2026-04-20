@@ -84,7 +84,7 @@
     # footswitch # to control foot pedals (use module instead)
     gnome-control-center
     gnome-maps
-    gpu-usage-waybar
+    # gpu-usage-waybar
     jaq # jq in rust
 
     lact # GPU controller, needs a daemon
@@ -113,7 +113,7 @@
 
   package-sets = {
 
-    audio = false;
+    livecoding = false;
     enableOfficePackages = true;
     kubernetes = true;
     developer = true;
@@ -121,6 +121,8 @@
     enableIMPackages = true;
     japanese = true;
     enableGaming = true;
+
+    music-processing = true;
   };
 
   # package-sets.enableDesktopGUIPackages = true;

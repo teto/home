@@ -17,13 +17,15 @@ in
   options = {
     package-sets = {
 
-      audio = mkEnableOption "live audio writing";
+      livecoding = mkEnableOption "live livecoding writing";
       fonts = mkEnableOption "extra fonts";
       desktop = mkEnableOption "desktop packages";
       yubikey = mkEnableOption "yubikey packages";
       server = mkEnableOption "server packages";
 
       developer = mkEnableOption "Developer packages";
+
+      music-processing = mkEnableOption "Music processing, e.g. guitar recording";
 
       kubernetes = mkEnableOption "Kubernetes packages";
       subtitleUtils = mkEnableOption "Subtitle edition";
@@ -674,7 +676,16 @@ in
       # xdg.dataFile."jmdict".source = pkgs.jmdict;
     })
 
-    (mkIf cfg.audio {
+    (mkIf cfg.music-processing {
+      home.packages = [
+
+        pkgs.ardour # works only with X
+        # pkgs.guitarix # amp
+        # pkgs.lmms # still doesnt support recording
+      ];
+    })
+
+    (mkIf cfg.livecoding {
 
       home.packages = [
 

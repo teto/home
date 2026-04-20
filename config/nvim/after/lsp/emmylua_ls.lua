@@ -9,7 +9,7 @@ return {
         '.emmyrc.json',
         '.git',
     },
-    workspace_required = false,
+    -- workspace_required = false,
     -- settings = {
     --     Lua = {
     --         diagnostics = {

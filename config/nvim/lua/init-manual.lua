@@ -711,51 +711,48 @@ vim.lsp.enable('nixd')
 -- used by `lx check`
 vim.lsp.enable('emmylua_ls')
 
--- testing packadd
-if vim.fn.has('nvim-0.12') ~= 0 then
     -- we will miss a bunch of things :s
-    vim.pack.add({
-        -- my real neovim package manager (with nix)
-        'https://github.com/nvim-neorocks/rocks.nvim',
+vim.pack.add({
+	-- my real neovim package manager (with nix)
+	'https://github.com/nvim-neorocks/rocks.nvim',
 
-		'https://github.com/Olical/nfnl',
+	'https://github.com/Olical/nfnl',
 
-		-- 'https://github.com/tpope/vim-obsession',
-		-- 'https://github.com/tpope/vim-obsession',
-		-- 'https://github.com/nvim-mini/mini.sessions',
+	-- 'https://github.com/tpope/vim-obsession',
+	-- 'https://github.com/tpope/vim-obsession',
+	-- 'https://github.com/nvim-mini/mini.sessions',
 
-        -- bug in rocks.nvim when trying to debug feed.nvim
-        -- so I install it here https://github.com/lumen-oss/rocks.nvim/issues/706
-        -- lua deps gotten via nix
-        -- 'https://github.com/neo451/feed.nvim',
+	-- bug in rocks.nvim when trying to debug feed.nvim
+	-- so I install it here https://github.com/lumen-oss/rocks.nvim/issues/706
+	-- lua deps gotten via nix
+	-- 'https://github.com/neo451/feed.nvim',
 
-        -- 'https://github.com/elanmed/fzf-lua-frecency.nvim', -- to rocks
+	-- 'https://github.com/elanmed/fzf-lua-frecency.nvim', -- to rocks
 
-        'https://github.com/neovim/nvim-lspconfig',
-        'https://github.com/teto/vim-listchars',
-        'https://github.com/yutkat/git-rebase-auto-diff.nvim',
+	'https://github.com/neovim/nvim-lspconfig',
+	'https://github.com/teto/vim-listchars',
+	'https://github.com/yutkat/git-rebase-auto-diff.nvim',
 
-        'https://github.com/gbprod/none-ls-shellcheck.nvim',
+	'https://github.com/gbprod/none-ls-shellcheck.nvim',
 
-        -- themes
-        'https://github.com/adlawson/vim-sorcerer',
-        'https://github.com/Matsuuu/pinkmare',
-        'https://github.com/rose-pine/neovim',
-        'https://github.com/marko-cerovac/material.nvim',
-        'https://github.com/NLKNguyen/papercolor-theme',
-        'https://github.com/vim-scripts/Solarized',
+	-- themes
+	'https://github.com/adlawson/vim-sorcerer',
+	'https://github.com/Matsuuu/pinkmare',
+	'https://github.com/rose-pine/neovim',
+	'https://github.com/marko-cerovac/material.nvim',
+	'https://github.com/NLKNguyen/papercolor-theme',
+	'https://github.com/vim-scripts/Solarized',
 
-        -- filetypes
-        'https://github.com/PotatoesMaster/i3-vim-syntax',
-        'https://github.com/overleaf/vim-env-syntax',
-		'https://git.sr.ht/~m15a/vim-fennel-syntax',
+	-- filetypes
+	'https://github.com/PotatoesMaster/i3-vim-syntax',
+	'https://github.com/overleaf/vim-env-syntax',
+	'https://git.sr.ht/~m15a/vim-fennel-syntax',
 
-        -- fennel testing
-        -- 'https://github.com/aileot/nvim-thyme'
-        'https://github.com/calvinchengx/vim-aftercolors',
-        'https://github.com/raddari/last-color.nvim',
-    })
-end
+	-- fennel testing
+	-- 'https://github.com/aileot/nvim-thyme'
+	'https://github.com/calvinchengx/vim-aftercolors',
+	'https://github.com/raddari/last-color.nvim',
+})
 
 -- wont work if last-color is not installed
 local theme = require('last-color').recall() or 'sonokai'

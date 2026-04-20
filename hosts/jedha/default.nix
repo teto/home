@@ -224,6 +224,10 @@ in
     ];
   };
 
+  # to test bitwig
+  xdg.portal.enable = true;
+  services.flatpak.enable = true;
+
   # $out here is the profile generation
   # system.systemBuilderCommands = ''
   #   ln -s ${config.boot.kernelPackages.kernel.dev}/vmlinux $out/vmlinux

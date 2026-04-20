@@ -1,8 +1,12 @@
+-- vim: fdm=marker
 require('vim._core.ui2').enable({})
 
 vim.pack.add {
- "github.com/rachartier/tiny-cmdline.nvim"
-
+ -- "github.com/rachartier/tiny-cmdline.nvim"
+ 'https://github.com/rachartier/tiny-cmdline.nvim.git',
+ 'https://github.com/luukvbaal/statuscol.nvim',
+ 'https://github.com/mfussenegger/nvim-dap',
+ 'https://github.com/lewis6991/gitsigns.nvim'
 }
 
 vim.g.tiny_cmdline = {
@@ -35,11 +39,30 @@ vim.opt.guicursor =
 
 vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
+vim.opt.number = true
+vim.opt.relativenumber = true
 vim.opt.foldlevel = 99
-vim.lsp.config('*', {
+vim.opt.foldmethod = 'manual'
+-- vim.lsp.config('*', {
 
 
 -- dap config
 vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
 
 require('statuscol').setup({})
+
+
+-- enable
+vim.lsp.enable('clangd')
+vim.lsp.enable('emmylua_ls')
+
+
+
+vim.api.nvim_set_hl(0, 'GitSignsAdd', {
+    bg = '#00FF00', -- Green background
+})
+vim.api.nvim_set_hl(0, 'GitSignsChangeLn', {
+    bg = '#00FF00', -- Green background
+})
+
+
