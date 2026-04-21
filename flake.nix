@@ -52,7 +52,8 @@
     };
 
     nixos-anywhere = {
-      url = "github:teto/nixos-anywhere?ref=teto/keep-tempDir";
+      url = "github:nix-community/nixos-anywhere";
+      # url = "github:teto/nixos-anywhere?ref=teto/keep-tempDir";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -160,7 +161,8 @@
     # poetry.url = "github:nix-community/poetry2nix";
     neovim-nightly-overlay = {
       # url = "path:/home/teto/neovim-nightly-overlay";
-      url = "github:teto/neovim-nightly-overlay?ref=teto/test-overriding-neovim-debug-luajit";
+      # teto/test-overriding-neovim-debug-luajit
+      url = "github:teto/neovim-nightly-overlay?ref=teto/add-wrapper";
       # url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
       # inputs.neovim-src.follows = "neovim-src";

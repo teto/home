@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   ...
@@ -92,7 +93,7 @@
 
   # systemd.user.services.flameshot.Service
   # lib.mkIf config.services.swaync.enable [
-  systemd.user.services.swaync.Service = {
+  systemd.user.services.swaync.Service = lib.mkIf config.services.swaync.enable {
     Environment = [
       # helpful to debug but quite verbose
       # "G_MESSAGES_DEBUG=all"

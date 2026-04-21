@@ -2,7 +2,9 @@
 
   programs.noctalia-shell = {
     enable = true;
-    systemd.enable = true;
+
+    # deprecated
+    # systemd.enable = true;
 
     # removed while waiting for
     # https://github.com/noctalia-dev/noctalia-shell/issues/2458

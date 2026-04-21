@@ -935,7 +935,7 @@ vim.api.nvim_create_user_command('LlmChat', function()
 end, { desc = 'Ask without selecting anything' })
 
 -- "module 'nvim-treesitter.parsers' not found:"
--- require('plugins.neorg')
+require('plugins.neorg')
 -- todo fix upgraded version
 -- require('plugins.image')
 

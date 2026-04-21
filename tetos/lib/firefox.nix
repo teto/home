@@ -140,7 +140,7 @@
   };
 
   searchEngines = {
-    "boardgamegeek" = {
+    boardgamegeek = {
       urls = [
         {
           template = "https://boardgamegeek.org/search/{searchTerms}";
@@ -156,7 +156,7 @@
       definedAliases = [ "@bgg" ];
     };
 
-    "Jisho" = {
+    Jisho = {
       urls = [
         {
           template = "https://jisho.org/search/{searchTerms}";
@@ -172,7 +172,7 @@
       definedAliases = [ "@ji" ];
     };
 
-    "youtube" = {
+    youtube = {
       urls = [
         {
           #
@@ -244,7 +244,22 @@
       ];
     };
 
-    "LuaRocks" = {
+    github = {
+      urls = [
+        {
+          template = "https://github.com/{searchTerms}";
+          params = [
+            {
+              name = "q";
+              value = "{searchTerms}";
+            }
+          ];
+        }
+      ];
+      definedAliases = [ "@gh" "@lr" ];
+    };
+
+    LuaRocks = {
       urls = [
         {
           template = "https://luarocks.org/search?q={searchTerms}";
@@ -259,8 +274,8 @@
       definedAliases = [ "@lr" ];
     };
 
-    "bing".metaData.hidden = true;
-    "google".metaData.alias = "@g"; # builtin engines only support specifying one additional alias
+    bing.metaData.hidden = true;
+    google.metaData.alias = "@g"; # builtin engines only support specifying one additional alias
   };
 
   # https://discourse.nixos.org/t/how-do-you-pin-a-firefox-extensions-add-on-to-the-firefox-toolbar/36081

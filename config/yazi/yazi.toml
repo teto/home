@@ -89,7 +89,7 @@ rules = [
 	# , "reveal"
 	# { mime = "application/octet-stream",     use = [ "extract_zlib" ] },
 	# https://yazi-rs.github.io/docs/configuration/yazi/#open
-  { name = "*.jsonzlib", use = [ "extract_zlib", "open" ] },
+  # { name = "*.jsonzlib", use = [ "extract_zlib", "open" ] },
    { mime = "*", use = [ "open", "reveal" ] }
 
 ]
@@ -117,8 +117,6 @@ preloaders = [
 
 prepend_previewers = [
   # sync = true
-  { name = "*.chunks", run = "chunks" },
-  { name = "*.jsonzlib", run = "jsonzlib" },
   { mime = "message/rfc822", run = "code" },
   { mime = "audio/*", run = "zaz" },
   # Archive previewer

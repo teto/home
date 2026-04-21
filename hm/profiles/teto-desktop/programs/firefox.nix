@@ -14,9 +14,6 @@ in
   # https://github.com/mozilla/policy-templates#enterprisepoliciesenabled
   enable = true;
 
-  # this is from my module
-  # addMySearchEngines = true;
-
   # import the one in pkgs/
   # package = myFirefox;
   languagePacks = [
