@@ -129,7 +129,7 @@
     }
     # {
     #   name = "sponge";
-    #  sponge filters history ! 
+    #  sponge filters history !
     # https://github.com/meaningful-ooo/sponge
     #   src = pkgs.fishPlugins.sponge.src;
     # }

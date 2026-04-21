@@ -43,43 +43,44 @@ in
   # to avoid cluttering $HOME
   # home.preferXdgDirectories = true;
 
-  home.packages = with pkgs; 
+  home.packages =
+    with pkgs;
 
     [
-    bottles
-    mdcat # markdown viewer
-    notmuch # needed for waybar-custom-notmuch.sh
+      bottles
+      mdcat # markdown viewer
+      notmuch # needed for waybar-custom-notmuch.sh
 
-    neovim-dbg # when neovim crashes, launch "nvim-debug" to debug
+      neovim-dbg # when neovim crashes, launch "nvim-debug" to debug
 
-    # TODO provide debug package under different executable "nvim-debug"
+      # TODO provide debug package under different executable "nvim-debug"
 
-    # noctalia-shell # sleek fancy wayland shell/ waybar like
-    panvimdoc # to generate vim doc from README, for instance in gp.nvim
-    pciutils # for lspci
+      # noctalia-shell # sleek fancy wayland shell/ waybar like
+      panvimdoc # to generate vim doc from README, for instance in gp.nvim
+      pciutils # for lspci
 
-    # slidev-cli # text-based slides generate via npm nice prez
-    # only for matt ?
-    pass-perso
-    # poppler for pdf preview
+      # slidev-cli # text-based slides generate via npm nice prez
+      # only for matt ?
+      pass-perso
+      # poppler for pdf preview
 
-    kaggle # kaggle interface
-    python3Packages.kaggle
+      kaggle # kaggle interface
+      python3Packages.kaggle
 
-    # rendercv # yaml-based CV
-    stow
-    systemctl-tui
-    timr-tui # rust clock
-    viu # a console image viewer
+      # rendercv # yaml-based CV
+      stow
+      systemctl-tui
+      timr-tui # rust clock
+      viu # a console image viewer
 
-    # cups-pk-helper # to add printer through gnome control center
-    pkgs.lm_sensors # to see CPU temperature (command 'sensors')
-    pkgs.vlc # to see it in popcorn
+      # cups-pk-helper # to add printer through gnome control center
+      pkgs.lm_sensors # to see CPU temperature (command 'sensors')
+      pkgs.vlc # to see it in popcorn
 
-    tarts # fun TUI screensaver, cmatrix-like
+      tarts # fun TUI screensaver, cmatrix-like
 
-    # flakeSelf.inputs.git-repo-manager.packages.${pkgs.stdenv.hostPlatform.system}.git-repo-manager
-  ];
+      # flakeSelf.inputs.git-repo-manager.packages.${pkgs.stdenv.hostPlatform.system}.git-repo-manager
+    ];
 
   home.shell = {
 

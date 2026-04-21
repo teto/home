@@ -178,6 +178,8 @@ in
           pkgs.qimgv # qt image viewer
           pkgs.ristretto # gtk image viewer
 
+          pkgs.kooha # screen recorder
+
           # pkgs.termpdfpy # pdf in terminal , kinda broken
           # pkgs.fancy-cat  # zig pdf viewer in terminal (broken(
           pkgs.meowpdf # rust pdf viewer in terminal
@@ -400,7 +402,7 @@ in
 
           # defalt via hm
           # difftastic # smart diffs
-          # diff-so-fancy 
+          # diff-so-fancy
           # docker-credential-helpers
 
           fswatch # fileevent watcher

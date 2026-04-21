@@ -1,8 +1,8 @@
 return {
-    cmd = { 
-	 'emmylua_ls',
-	 '--log-level=info'
-	},
+    cmd = {
+        'emmylua_ls',
+        '--log-level=info',
+    },
     filetypes = { 'lua' },
     root_markers = {
         '.luarc.json',

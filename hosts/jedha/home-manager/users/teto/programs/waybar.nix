@@ -1,7 +1,7 @@
 {
-  flakeSelf
-, lib
-, ...
+  flakeSelf,
+  lib,
+  ...
 }:
 {
 

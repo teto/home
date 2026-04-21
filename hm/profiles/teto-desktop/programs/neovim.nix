@@ -280,19 +280,18 @@ in
 
   # neovim-debug is too slow we should try to build it and rename executable to nvim-debug
   # so it can still help debugging
-  package = flakeSelf.packages.${pkgs.stdenv.hostPlatform.system}.neovim.override
-      {
+  package = flakeSelf.packages.${pkgs.stdenv.hostPlatform.system}.neovim.override {
 
-        # we want to take the luajit with our overlay of lua packages
-        luajit = pkgs.luajit-tetos;
-        # luajit = prev.luajit.override {
-        # # give access to lua overlay by flakeSelf ?
-        #   packageOverrides = import ./lua-overrides.nix {
-        #     pkgs = final;
-        #     lib = final.lib;
-        #   };
-        # };
-      };
+    # we want to take the luajit with our overlay of lua packages
+    luajit = pkgs.luajit-tetos;
+    # luajit = prev.luajit.override {
+    # # give access to lua overlay by flakeSelf ?
+    #   packageOverrides = import ./lua-overrides.nix {
+    #     pkgs = final;
+    #     lib = final.lib;
+    #   };
+    # };
+  };
 
   lsp.mapOnAttach = true;
   lualsAddons = true;
@@ -404,7 +403,8 @@ in
     # importing dependencies of rikai.nvim
     # TODO: do it from overlay or look at the plugin itself
     # lp.sqlite
-    lp.utf8 lp.lsqlite3 # should be taken care of automatically
+    lp.utf8
+    lp.lsqlite3 # should be taken care of automatically
     # lp.lual
     lp.alogger
     lp.mega-cmdparse

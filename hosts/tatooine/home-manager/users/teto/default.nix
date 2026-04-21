@@ -13,9 +13,10 @@
     flakeSelf.homeProfiles.teto-desktop
 
     # flakeSelf.homeModules.experimental
-    ./sway.nix
-    ./programs/waybar.nix
     flakeSelf.homeProfiles.neovim
+
+    ./wayland.nix
+    ./programs/waybar.nix
     ./programs/neovim.nix
     ./programs/zsh.nix
     ./services/mpd.nix
@@ -47,10 +48,10 @@
   # broken on unstable because python2
   # services.opensnitch-ui.enable = false;
 
-  programs.nh.enable = false;
+  programs.nh.enable = true;
 
   # TODO enable sandboxing
-  programs.claude-code.enable = true;
+  programs.claude-code.enable = false;
 
   home.packages = [
     # pkgs.claude-code
@@ -59,8 +60,7 @@
   ];
 
   package-sets = {
-    # livecoding
-    audio = false;
+    livecoding = false;
     bluetooth = true;
     enableDesktopGUIPackages = true;
     enableIMPackages = true;

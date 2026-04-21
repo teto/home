@@ -54,7 +54,7 @@ function M.register_keymaps()
 
     vim.keymap.set('n', '<Leader>/', function()
         -- global picker accepts various prefixes such as $ for buffers , @ for lsp
-		-- todo do smart version
+        -- todo do smart version
         fzf_lua.jj_files()
     end)
 

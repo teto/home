@@ -11,19 +11,18 @@
 -- https://www.reddit.com/r/neovim/comments/1kcz8un/great_improvements_to_the_cmdline_in_nightly/
 -- require('vim._extui').enable({})
 require('vim._core.ui2').enable({
---      enable = true, -- Whether to enable or disable the UI.
---      msg = { -- Options related to the message module.
---        ---@type 'cmd'|'msg' Default message target, either in the
---        ---cmdline or in a separate ephemeral message window.
---        ---@type string|table<string, 'cmd'|'msg'|'pager'> Default message target
---        -- or table mapping |ui-messages| kinds to a target.
--- 	targets = 'cmd',
--- 	timeout = 4000, -- Time a message is visible in the message window.
--- 	},
-        pager = { -- Options related to message window.
-          height = 0, -- Maximum height.
-        },
-
+    --      enable = true, -- Whether to enable or disable the UI.
+    --      msg = { -- Options related to the message module.
+    --        ---@type 'cmd'|'msg' Default message target, either in the
+    --        ---cmdline or in a separate ephemeral message window.
+    --        ---@type string|table<string, 'cmd'|'msg'|'pager'> Default message target
+    --        -- or table mapping |ui-messages| kinds to a target.
+    -- 	targets = 'cmd',
+    -- 	timeout = 4000, -- Time a message is visible in the message window.
+    -- 	},
+    pager = { -- Options related to message window.
+        height = 0, -- Maximum height.
+    },
 })
 
 -- vim.g.visual_whitespace = {
@@ -86,9 +85,9 @@ vim.g.rikai = {
 
 vim.g.tiny_cmdline = {
     width = {
-        value = "80%",  -- "N%" = fraction of editor columns, integer = absolute columns
-        min = 40,       -- minimum width in columns
-        max = 80,       -- maximum width in columns
+        value = '80%', -- "N%" = fraction of editor columns, integer = absolute columns
+        min = 40, -- minimum width in columns
+        max = 80, -- maximum width in columns
     },
     -- Border style for the floating window
     -- nil inherits vim.o.winborder at setup() time, falling back to "rounded"
@@ -711,47 +710,47 @@ vim.lsp.enable('nixd')
 -- used by `lx check`
 vim.lsp.enable('emmylua_ls')
 
-    -- we will miss a bunch of things :s
+-- we will miss a bunch of things :s
 vim.pack.add({
-	-- my real neovim package manager (with nix)
-	'https://github.com/nvim-neorocks/rocks.nvim',
+    -- my real neovim package manager (with nix)
+    'https://github.com/nvim-neorocks/rocks.nvim',
 
-	'https://github.com/Olical/nfnl',
+    'https://github.com/Olical/nfnl',
 
-	-- 'https://github.com/tpope/vim-obsession',
-	-- 'https://github.com/tpope/vim-obsession',
-	-- 'https://github.com/nvim-mini/mini.sessions',
+    -- 'https://github.com/tpope/vim-obsession',
+    -- 'https://github.com/tpope/vim-obsession',
+    -- 'https://github.com/nvim-mini/mini.sessions',
 
-	-- bug in rocks.nvim when trying to debug feed.nvim
-	-- so I install it here https://github.com/lumen-oss/rocks.nvim/issues/706
-	-- lua deps gotten via nix
-	-- 'https://github.com/neo451/feed.nvim',
+    -- bug in rocks.nvim when trying to debug feed.nvim
+    -- so I install it here https://github.com/lumen-oss/rocks.nvim/issues/706
+    -- lua deps gotten via nix
+    -- 'https://github.com/neo451/feed.nvim',
 
-	-- 'https://github.com/elanmed/fzf-lua-frecency.nvim', -- to rocks
+    -- 'https://github.com/elanmed/fzf-lua-frecency.nvim', -- to rocks
 
-	'https://github.com/neovim/nvim-lspconfig',
-	'https://github.com/teto/vim-listchars',
-	'https://github.com/yutkat/git-rebase-auto-diff.nvim',
+    'https://github.com/neovim/nvim-lspconfig',
+    'https://github.com/teto/vim-listchars',
+    'https://github.com/yutkat/git-rebase-auto-diff.nvim',
 
-	'https://github.com/gbprod/none-ls-shellcheck.nvim',
+    'https://github.com/gbprod/none-ls-shellcheck.nvim',
 
-	-- themes
-	'https://github.com/adlawson/vim-sorcerer',
-	'https://github.com/Matsuuu/pinkmare',
-	'https://github.com/rose-pine/neovim',
-	'https://github.com/marko-cerovac/material.nvim',
-	'https://github.com/NLKNguyen/papercolor-theme',
-	'https://github.com/vim-scripts/Solarized',
+    -- themes
+    'https://github.com/adlawson/vim-sorcerer',
+    'https://github.com/Matsuuu/pinkmare',
+    'https://github.com/rose-pine/neovim',
+    'https://github.com/marko-cerovac/material.nvim',
+    'https://github.com/NLKNguyen/papercolor-theme',
+    'https://github.com/vim-scripts/Solarized',
 
-	-- filetypes
-	'https://github.com/PotatoesMaster/i3-vim-syntax',
-	'https://github.com/overleaf/vim-env-syntax',
-	'https://git.sr.ht/~m15a/vim-fennel-syntax',
+    -- filetypes
+    'https://github.com/PotatoesMaster/i3-vim-syntax',
+    'https://github.com/overleaf/vim-env-syntax',
+    'https://git.sr.ht/~m15a/vim-fennel-syntax',
 
-	-- fennel testing
-	-- 'https://github.com/aileot/nvim-thyme'
-	'https://github.com/calvinchengx/vim-aftercolors',
-	'https://github.com/raddari/last-color.nvim',
+    -- fennel testing
+    -- 'https://github.com/aileot/nvim-thyme'
+    'https://github.com/calvinchengx/vim-aftercolors',
+    'https://github.com/raddari/last-color.nvim',
 })
 
 -- wont work if last-color is not installed
@@ -936,7 +935,7 @@ vim.api.nvim_create_user_command('LlmChat', function()
 end, { desc = 'Ask without selecting anything' })
 
 -- "module 'nvim-treesitter.parsers' not found:"
-require('plugins.neorg')
+-- require('plugins.neorg')
 -- todo fix upgraded version
 -- require('plugins.image')
 
@@ -949,7 +948,6 @@ require('plugins.neorg')
 --     end
 --   end,
 -- })
-
 
 -- require('plugins.mini-sessions')
 
@@ -964,4 +962,7 @@ vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 -- todo add api to list remote models
 vim.api.nvim_create_user_command('AvanteLogs', ':e ~/.cache/nvim/avante.log', { desc = 'read avante logs' })
 
-require('teto.dap')
+local has_dap, _dap = pcall(require, 'dap')
+if has_dap then
+    require('teto.dap')
+end

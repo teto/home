@@ -193,7 +193,7 @@
     };
 
     nix = {
-      url = "github:NixOS/nix?ref=2.34.3";
+      url = "github:NixOS/nix";
       # url = "github:teto/nix?ref=teto/remove-assert-outputsSubstitutionTried";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -247,8 +247,6 @@
       url = "github:purebred-mua/purebred";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-
 
     rippkgs.url = "github:replit/rippkgs";
     # rippkgs.inputs.nixpkgs.follows = "nixpkgs";
@@ -609,9 +607,7 @@
           nixosConfigs = lib.importDirectories ./hosts;
           nixosConfigsWithoutSecrets = lib.mapAttrs' disableSecrets nixosConfigs;
         in
-        nixosConfigs
-        // nixosConfigsWithoutSecrets
-        ;
+        nixosConfigs // nixosConfigsWithoutSecrets;
 
       # TODO scan hm/{modules, profiles} folder
       homeProfiles = lib.importFiles ./hm/profiles // {

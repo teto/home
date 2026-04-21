@@ -48,7 +48,6 @@ let
     })
   ];
 
-
   treesitterPlugins = [
     # pkgs.vimPlugins.nvim-treesitter-pairs
     # pkgs.vimPlugins.nvim-treesitter-textobjects
@@ -115,8 +114,8 @@ let
       enable = mkEnableOption "Teal";
       plugins = lib.mkOption {
         # type = types.listOf types.package;
-        default = [ 
-          # (luaPlugin { plugin = nvim-teal-maker; }) 
+        default = [
+          # (luaPlugin { plugin = nvim-teal-maker; })
           vimPlugins.vim-teal
         ];
         description = "Teal associated plugins";
@@ -199,7 +198,7 @@ in
             enable = mkEnableOption "DAP (Debug Adapter Protocol)";
           };
 
-          };
+        };
         default = {
           enable = false;
         };
@@ -442,7 +441,7 @@ in
 
       programs.neovim.initLua = ''
         vim.lsp.enable("fennel-ls")
-        '';
+      '';
 
       home.packages = [
         cfg.package.lua.pkgs.fennel

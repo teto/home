@@ -48,14 +48,13 @@ local cfg = {
         {
             text = { builtin.lnumfunc },
             condition = { true, builtin.not_empty },
-			-- lnum_click
-			-- line action
+            -- lnum_click
+            -- line action
             click = 'v:lua.ScLa',
-
         },
         {
             sign = { namespace = { 'gitsigns' }, colwidth = 1, wrap = true },
-			-- Sign action
+            -- Sign action
             click = 'v:lua.ScSa',
         },
         {
@@ -67,28 +66,28 @@ local cfg = {
                     return builtin.foldfunc(args)
                 end,
             },
-			-- Fa => Fold action
+            -- Fa => Fold action
             click = 'v:lua.ScFa',
         },
     },
     clickmod = 'c', -- modifier used for certain actions in the builtin clickhandlers:
     -- "a" for Alt, "c" for Ctrl and "m" for Meta.
     clickhandlers = { -- builtin click handlers, keys are pattern matched
-	  -- lnum_click adds breakpoints with sign "B"
-	  -- :lua require'dap'.list_breakpoints()  lists breakpoints in quickfix
-	  Lnum = builtin.lnum_click,
-	  -- Lnum = function ()
-	   -- 	  vim.notify("line click")
-	   -- 	 end,
+        -- lnum_click adds breakpoints with sign "B"
+        -- :lua require'dap'.list_breakpoints()  lists breakpoints in quickfix
+        Lnum = builtin.lnum_click,
+        -- Lnum = function ()
+        -- 	  vim.notify("line click")
+        -- 	 end,
 
-	   FoldClose = builtin.foldclose_click,
-	   FoldOpen = builtin.foldopen_click,
-	   FoldOther = builtin.foldother_click,
-	   DapBreakpointRejected = builtin.toggle_breakpoint,
-	   DapBreakpoint = builtin.toggle_breakpoint,
-	   DapBreakpointCondition = builtin.toggle_breakpoint,
-	   ['diagnostic/signs'] = builtin.diagnostic_click,
-	   gitsigns = builtin.gitsigns_click,
+        FoldClose = builtin.foldclose_click,
+        FoldOpen = builtin.foldopen_click,
+        FoldOther = builtin.foldother_click,
+        DapBreakpointRejected = builtin.toggle_breakpoint,
+        DapBreakpoint = builtin.toggle_breakpoint,
+        DapBreakpointCondition = builtin.toggle_breakpoint,
+        ['diagnostic/signs'] = builtin.diagnostic_click,
+        gitsigns = builtin.gitsigns_click,
     },
 }
 require('statuscol').setup(cfg)

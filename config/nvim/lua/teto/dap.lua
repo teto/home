@@ -1,5 +1,5 @@
 --
-local dap = require'dap'
+local dap = require('dap')
 
 -- Contains code to running
 dap.adapters.haskell = {
@@ -27,5 +27,4 @@ dap.adapters.haskell = {
 -- }
 
 -- look doc right before *dap-completion*
-vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
-
+vim.fn.sign_define('DapBreakpoint', { text = '🛑', texthl = '', linehl = '', numhl = '' })

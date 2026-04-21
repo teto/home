@@ -60,7 +60,7 @@ end
 -- TODO load configuration from llm-providers.json
 -- lua vim.json.decode(str, opts)
 opts = {
-    debug = true, -- print error messages
+    -- debug = true, -- print error messages
     -- log_level =
     log_level = vim.log.levels.DEBUG,
 

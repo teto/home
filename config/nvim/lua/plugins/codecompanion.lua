@@ -1,31 +1,31 @@
- -- https://codecompanion.olimorris.dev/getting-started#interactions
- -- look in tests/config.lua for example
+-- https://codecompanion.olimorris.dev/getting-started#interactions
+-- look in tests/config.lua for example
 require('codecompanion').setup({
- opts = {
-	log_level = "DEBUG",
-   },
-      prompt_library = {
+    opts = {
+        log_level = 'DEBUG',
+    },
+    prompt_library = {
 
-    -- markdown = {
-    --   dirs = {},
-    -- },
+        -- markdown = {
+        --   dirs = {},
+        -- },
 
-        ["Test Cursor"] = {
-          strategy = "chat",
-          description = "Test cursor position",
-          opts = {
-            alias = "test_cursor",
-            auto_submit = false,
-          },
-          prompts = {
-            {
-              role = "user",
-              content = "Test",
+        ['Test Cursor'] = {
+            strategy = 'chat',
+            description = 'Test cursor position',
+            opts = {
+                alias = 'test_cursor',
+                auto_submit = false,
             },
-          },
+            prompts = {
+                {
+                    role = 'user',
+                    content = 'Test',
+                },
+            },
         },
-      },
-	  display = { action_palette = { opts = { show_preset_prompts = false } } },
+    },
+    display = { action_palette = { opts = { show_preset_prompts = false } } },
 
     secret = { 'bash', '-c', 'cat $XDG_CONFIG_HOME/sops-nix/secrets/claude_api_key' },
     interactions = {
@@ -38,7 +38,6 @@ require('codecompanion').setup({
         inline = {
             adapter = 'mistral_vibe',
         },
-
     },
     adapters = {
         http = {
@@ -50,17 +49,17 @@ require('codecompanion').setup({
             --                     api_key = 'cmd:cat ' .. (vim.fs.joinpath(xdg_config, 'sops-nix/secrets/mistral_test_api_key')),
             --                 },
             --             })
-            --         end,      
-			--
-			--
-			mistral_cloud = {
-            -- model = 'devstral-2512',
-            endpoint = 'https://api.mistral.ai/v1',
-            -- timeout = 30000, -- Timeout in milliseconds
+            --         end,
+            --
+            --
+            mistral_cloud = {
+                -- model = 'devstral-2512',
+                endpoint = 'https://api.mistral.ai/v1',
+                -- timeout = 30000, -- Timeout in milliseconds
 
-			  -- endpoint = "http://localhost:8000/v1", -- Replace with your endpoint                                                     
-			  -- model = "mistral-vibe", -- Or the specific model name   
-			};
+                -- endpoint = "http://localhost:8000/v1", -- Replace with your endpoint
+                -- model = "mistral-vibe", -- Or the specific model name
+            },
 
             openai = function()
                 return require('codecompanion.adapters').extend('openai', {

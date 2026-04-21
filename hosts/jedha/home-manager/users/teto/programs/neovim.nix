@@ -95,10 +95,7 @@ in
     fennel.enable = true;
     orgmode.enable = true;
 
-    plugins =
-      luaPlugins
-      ++ treesitterPlugins
-      ++ neotestPlugins;
+    plugins = luaPlugins ++ treesitterPlugins ++ neotestPlugins;
 
     extraPackages = [
       # pkgs.taplo # a toml LSP server
