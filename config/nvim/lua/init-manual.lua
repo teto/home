@@ -25,6 +25,8 @@ require('vim._core.ui2').enable({
     },
 })
 
+vim.g.health = { style = 'float' }
+
 -- vim.g.visual_whitespace = {
 --   enabled = true,
 --   highlight = { link = "Visual", default = true },
@@ -935,7 +937,12 @@ vim.api.nvim_create_user_command('LlmChat', function()
 end, { desc = 'Ask without selecting anything' })
 
 -- "module 'nvim-treesitter.parsers' not found:"
-require('plugins.neorg')
+local has_norg, _norg = pcall(require, 'neorg')
+
+if has_norg then
+    require('plugins.neorg')
+end
+
 -- todo fix upgraded version
 -- require('plugins.image')
 

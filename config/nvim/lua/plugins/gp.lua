@@ -144,14 +144,13 @@ local final_config = vim.tbl_extend('error', vim.g.gp_nvim, {
 -- TODO merge here
 require('gp').setup(final_config)
 
-
-
-vim.keymap.set("n", "[c", function()
-  require("treesitter-context").go_to_context(vim.v.count1)
+vim.keymap.set('n', '[c', function()
+    require('treesitter-context').go_to_context(vim.v.count1)
 end, { silent = true })
 
 vim.api.nvim_set_hl(0, 'TreesitterContextBottom', {
- gui="underline", guisp= "Grey"
+    gui = 'underline',
+    guisp = 'Grey',
 })
 
 -- hi TreesitterContextBottom gui=underline guisp=Grey
