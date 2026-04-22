@@ -256,7 +256,10 @@
           ];
         }
       ];
-      definedAliases = [ "@gh" "@lr" ];
+      definedAliases = [
+        "@gh"
+        "@lr"
+      ];
     };
 
     LuaRocks = {

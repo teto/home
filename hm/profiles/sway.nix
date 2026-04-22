@@ -277,14 +277,10 @@ in
         # { command = "env RUST_BACKTRACE=1 RUST_LOG=swayr=debug swayrd > /tmp/swayrd.log 2>&1"; }
         { command = "env RUST_BACKTRACE=1 swaycons"; }
 
-
       ]
-        # https://docs.noctalia.dev/getting-started/nixos/#running-the-shell
-      ++ lib.optional config.programs.noctalia-shell.enable 
-              { command = "noctalia-shell"; }
-      ++ lib.optional config.services.cliphist.enable 
-        { command = "wl-paste --watch cliphist store"; }
-      ;
+      # https://docs.noctalia.dev/getting-started/nixos/#running-the-shell
+      ++ lib.optional config.programs.noctalia-shell.enable { command = "noctalia-shell"; }
+      ++ lib.optional config.services.cliphist.enable { command = "wl-paste --watch cliphist store"; };
     };
 
     extraConfigEarly = sharedConfig.sharedExtraConfig;

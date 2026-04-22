@@ -25,6 +25,8 @@ require('vim._core.ui2').enable({
     },
 })
 
+vim.g.health = { style = 'float' }
+
 -- vim.g.visual_whitespace = {
 --   enabled = true,
 --   highlight = { link = "Visual", default = true },
@@ -76,7 +78,7 @@ vim.g.rikai = {
     log_level = vim.log.levels.DEBUG,
     separator = '===>>>',
     popup_options = {
-        use_images = true,
+        render_images = true,
         --      generate_image_cmd = function(token)
         -- image_font_size = 40,
         max_height = 20,
@@ -935,7 +937,12 @@ vim.api.nvim_create_user_command('LlmChat', function()
 end, { desc = 'Ask without selecting anything' })
 
 -- "module 'nvim-treesitter.parsers' not found:"
-require('plugins.neorg')
+local has_norg, _norg = pcall(require, 'neorg')
+
+if has_norg then
+    require('plugins.neorg')
+end
+
 -- todo fix upgraded version
 -- require('plugins.image')
 

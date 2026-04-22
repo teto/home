@@ -18,7 +18,8 @@
     enableBashIntegration = true;
     enableZshIntegration = true;
     package = flakeSelf.inputs.yazi.packages.${pkgs.stdenv.hostPlatform.system}.yazi;
-    shellWrapperName = "y";
+
+    shellWrapperName = "yy"; # exits in same folder
     plugins = {
 
       ouch = pkgs.yaziPlugins.ouch;

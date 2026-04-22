@@ -1,7 +1,7 @@
-vim.wo.statusline = 'TOTO'
+-- vim.wo.statusline = 'TOTO'
 
 -- during testing
-vim.o.laststatus = 2
+-- vim.o.laststatus = 2
 -- see avante's self.containers.result =
 -- sidebar_post_render
 -- we have a User "AvanteInputSubmitted" event
