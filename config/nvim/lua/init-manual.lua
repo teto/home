@@ -78,7 +78,7 @@ vim.g.rikai = {
     log_level = vim.log.levels.DEBUG,
     separator = '===>>>',
     popup_options = {
-        use_images = true,
+        render_images = true,
         --      generate_image_cmd = function(token)
         -- image_font_size = 40,
         max_height = 20,
