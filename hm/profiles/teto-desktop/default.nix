@@ -47,7 +47,7 @@ in
     with pkgs;
 
     [
-      bottles
+      # bottles  # to install games
       mdcat # markdown viewer
       notmuch # needed for waybar-custom-notmuch.sh
 
@@ -66,6 +66,11 @@ in
 
       kaggle # kaggle interface
       python3Packages.kaggle
+
+      lux-cli
+      # flakeSelf.inputs.lux.packages.${pkgs.stdenv.hostPlatform.system}.lux-cli
+
+      # rendercv # yaml-based CV
 
       # rendercv # yaml-based CV
       stow

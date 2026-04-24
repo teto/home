@@ -1,6 +1,6 @@
 {
 
-  # enable = true;
+  enable = true;
   #
   # # necessary for headscale
   # useRoutingFeatures = "client";

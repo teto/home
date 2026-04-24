@@ -20,7 +20,7 @@ default:
 
 # loads variables from .env
 
-set dotenv-load := true
+set dotenv-load
 
 # deploy a brand new nixos install
 bootstrap-desktop target="root@bootstrap.local":

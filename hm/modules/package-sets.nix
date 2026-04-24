@@ -396,6 +396,7 @@ in
           bubblewrap # sandboxing
 
           cargo
+          codex # openai agent
           # (ignoreBroken claude-code) # anthropic agent
 
           # dasht # ~ zeal but in terminal
@@ -480,7 +481,7 @@ in
           inotify-info # to debug filewatching issues, very nice
           inotify-tools # for inotify-wait notably
           ncurses.dev # for infocmp
-          # neovide
+          neovide
           # neovim-remote # broken for latex etc
           # nix-doc # can generate tags for nix
           nix-update # nix-update <ATTR> to update a software
@@ -544,7 +545,7 @@ in
           };
         in
         [
-          my_lutris
+          (ignoreBroken my_lutris)
         ];
 
     })

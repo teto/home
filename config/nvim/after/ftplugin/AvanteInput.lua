@@ -15,6 +15,9 @@ local Highlights = require('avante.highlights')
 
 local win_id = vim.api.nvim_get_current_win()
 
+-- todo upstream this ?
+-- vim.wo.statusline=''
+
 -- print("winid", win_id)
 -- function () winbar_text end
 -- local result = render_header()

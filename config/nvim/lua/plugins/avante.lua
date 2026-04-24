@@ -18,7 +18,10 @@ end
 -- provider = "mistral_devstral_2"
 -- provider = 'llamacpp'
 -- overrule both
-provider = 'mistral_devstral_2'
+-- provider = 'mistral_devstral_2'
+-- provider = 'codex' -- use acp
+-- provider = 'mistral_devstral_2'
+provider = 'mistral-vibe' -- default acp provider (not upstreamyed yet, might wanna add it there)
 -- provider = 'gemini'
 -- provider = 'llamacpp_from_openai'
 
@@ -133,6 +136,14 @@ opts = {
             title = 'Avante Input',
             icon = ' ',
             placeholder = 'Enter your API key...',
+        },
+    },
+    acp_providers = {
+        ['mistral-vibe'] = {
+            command = 'vibe-acp',
+            env = {
+                MISTRAL_API_KEY = os.getenv('MISTRAL_API_KEY'), -- necessary if you setup Mistral Vibe manually
+            },
         },
     },
     providers = {

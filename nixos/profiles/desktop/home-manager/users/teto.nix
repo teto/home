@@ -11,7 +11,5 @@
   ];
 
   home.packages = [
-
-    flakeSelf.inputs.lux.packages.${pkgs.stdenv.hostPlatform.system}.lux-cli
   ];
 }

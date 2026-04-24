@@ -6,6 +6,10 @@
 set -g fish_history_merge_behavior save 
 set -U fish_history_preserve_failed_commands yes
 
+# see https://github.com/franciscolourenco/done
+set -U __done_min_cmd_duration 5000  # default: 5000 ms
+# default: all git commands, except push and pull. accepts a regex.
+set -U __done_exclude '^git (?!push|pull|fetch)'  
 
 # TODO source
 source ~/.config/bash/aliases.sh

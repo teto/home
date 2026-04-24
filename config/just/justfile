@@ -4,7 +4,7 @@ NIXPKGS := "/home/teto/nixpkgs"
 
 # set dotenv-load := ".env.local"
 
-set dotenv-load := true
+set dotenv-load
 
 # LLAMA_MODELS_DIR loadeed from .env
 # LLAMA_MODELS_DIR := env('HOME') / 'llama-models'
