@@ -8,7 +8,7 @@ vim.pack.add({
     'https://github.com/mfussenegger/nvim-dap',
     'https://github.com/lewis6991/gitsigns.nvim',
     'https://github.com/neovim/nvim-lspconfig',
-	'https://github.com/ibhagwan/fzf-lua',
+    'https://github.com/ibhagwan/fzf-lua',
 })
 
 vim.g.tiny_cmdline = {
@@ -54,7 +54,7 @@ vim.fn.sign_define('DapBreakpoint', { text = '🛑', texthl = '', linehl = '', n
 
 local builtin = require('statuscol.builtin')
 require('statuscol').setup({
-  setopt = true,
+    setopt = true,
     thousands = false, -- or line number thousands separator string ("." / ",")
     relculright = false, -- whether to right-align the cursor line number with 'relativenumber' set
     -- Builtin 'statuscolumn' options
@@ -94,15 +94,13 @@ require('statuscol').setup({
             click = 'v:lua.ScFa',
         },
     },
-
 })
-
 
 vim.diagnostic.config({
     signs = {
         severity = { min = vim.diagnostic.severity.WARN },
         text = {
-		 -- ⚡
+            -- ⚡
             [vim.diagnostic.severity.ERROR] = '⛔',
             [vim.diagnostic.severity.WARN] = '⚠',
             [vim.diagnostic.severity.INFO] = '',
@@ -122,7 +120,6 @@ vim.diagnostic.config({
         severity_sort = true,
         border = 'rounded',
     },
-
 })
 
 vim.lsp.enable('clangd')
@@ -145,25 +142,22 @@ require('gitsigns').setup({
     numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
     linehl = true, -- Toggle with `:Gitsigns toggle_linehl`
     word_diff = true, -- Toggle with `:Gitsigns toggle_word_diff`
-    watch_gitdir = {
-        follow_files = true,
-    },
 })
 -- }}}
 
 vim.go.showtabline = 2
-require'tabline'
-vim.cmd "tabnew"
+require('tabline')
+vim.cmd('tabnew')
 
-
-vim.api.nvim_set_hl(0, 'TablineMore', { bg = '#00FF00', })
-vim.api.nvim_set_hl(0, 'TablineSel', { bg = 'red', })
-vim.api.nvim_set_hl(0, 'TablineModeInsert', { bg = 'red', })
-vim.api.nvim_set_hl(0, 'TablineModeNormal', { bg = 'blue', })
-vim.api.nvim_set_hl(0, 'TablineModeReplace', { bg = 'green', })
-vim.api.nvim_set_hl(0, 'TablineModeVisual', { bg = 'yellow', })
+vim.api.nvim_set_hl(0, 'TablineMore', { bg = '#00FF00' })
+vim.api.nvim_set_hl(0, 'TablineSel', { link = 'Statusline' })
+vim.api.nvim_set_hl(0, 'TablineModeInsert', { bg = 'red' })
+vim.api.nvim_set_hl(0, 'TablineModeNormal', { bg = 'blue' })
+vim.api.nvim_set_hl(0, 'TablineModeReplace', { bg = 'green' })
+vim.api.nvim_set_hl(0, 'TablineModeVisual', { bg = 'yellow' })
 
 -- to showcase customized cases
-vim.cmd [[
-e src/nvim/fold.c | tabn | help 'tabline' | tabn | checkhealth | tabn | term
-]]
+-- checkhealth | 
+vim.cmd([[
+e src/nvim/fold.c | tabn | help 'tabline' | tabn | tabn | term
+]])

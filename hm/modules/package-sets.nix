@@ -544,7 +544,7 @@ in
           };
         in
         [
-          my_lutris
+          (ignoreBroken my_lutris)
         ];
 
     })

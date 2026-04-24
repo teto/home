@@ -10,4 +10,3 @@ pkgs.mkShell {
     echo "bun run dev"
   '';
 }
-

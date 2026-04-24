@@ -8,25 +8,24 @@ local len = function(str)
     return vim.fn.strdisplaywidth(str)
 end
 
-
 M.get_mode_hl = function()
     local mode = api.nvim_get_mode().mode
-    local mini_mode = "Mode"
+    local mini_mode = 'Mode'
 
     -- These groups are enabled because catppuccin detects mini.ai and enables all of mini's hl groups
 
-    if vim.startswith(mode, "i") or mode == "t" then
-        return mini_mode .. "Insert"
-    elseif vim.startswith(mode, "n") then
-        return mini_mode .. "Normal"
-    elseif vim.startswith(mode, "R") then
-        return mini_mode .. "Replace"
-    elseif vim.startswith(mode:lower(), "v") then
-        return mini_mode .. "Visual"
-    elseif mode == "c" then
-        return mini_mode .. "Command"
+    if vim.startswith(mode, 'i') or mode == 't' then
+        return mini_mode .. 'Insert'
+    elseif vim.startswith(mode, 'n') then
+        return mini_mode .. 'Normal'
+    elseif vim.startswith(mode, 'R') then
+        return mini_mode .. 'Replace'
+    elseif vim.startswith(mode:lower(), 'v') then
+        return mini_mode .. 'Visual'
+    elseif mode == 'c' then
+        return mini_mode .. 'Command'
     else
-        return mini_mode .. "Other"
+        return mini_mode .. 'Other'
     end
 end
 
@@ -46,7 +45,7 @@ local truncate_by_display_width = function(str, max_width, from_end)
     local full_chars = {}
 
     -- This ungodly regex catches UTF-8 characters
-    for char in string.gmatch(str, "([%z\1-\127\194-\244][\128-\191]*)") do
+    for char in string.gmatch(str, '([%z\1-\127\194-\244][\128-\191]*)') do
         table.insert(full_chars, char)
     end
 
@@ -78,17 +77,17 @@ local truncate_by_display_width = function(str, max_width, from_end)
 end
 
 local hl_groups = {
-    SEL = "TablineSel",
-    BASE = "Tabline",
-    FILL = "TabLineFill",
-    MORE = "TabLineMore",
+    SEL = 'TablineSel',
+    BASE = 'Tabline',
+    FILL = 'TabLineFill',
+    MORE = 'TabLineMore',
 }
 
-local MORE = "   "
+local MORE = '   '
 
 local LEN_PAD = len(MORE)
 
-local hl_more = "%#" .. hl_groups.MORE .. "#" .. MORE
+local hl_more = '%#' .. hl_groups.MORE .. '#' .. MORE
 
 ---@class igorlfs.TabData
 ---@field name string
@@ -114,61 +113,61 @@ local fetch_buf_name = function(bufnr)
 
     local buf_name = api.nvim_buf_get_name(bufnr)
 
-    if filetype == "fzf" then
-        return "  FZF"
-    elseif buftype == "terminal" then
+    if filetype == 'fzf' then
+        return '  FZF'
+    elseif buftype == 'terminal' then
         local title = vim.b[bufnr].term_title
         -- Replace path with tail
-        return "  " .. title:gsub("~/.*/", "")
-    elseif filetype == "checkhealth" then
-        return "Checkhealth"
-    elseif filetype == "qf" then
-        return "QuickFix"
-    elseif filetype == "pager" then
-        return "Pager"
-    elseif filetype == "NvimTree" then
-        return "NvimTree"
-    elseif filetype == "mason" then
-        return "Mason"
-    elseif filetype == "lazy" then
-        return "Lazy"
-    elseif buftype == "help" then
-        return " " .. vim.fn.fnamemodify(buf_name, ":t")
-    elseif filetype == "nvim-pack" then
-        return "Pack"
-    elseif filetype == "query" and buftype == "nofile" then
+        return '  ' .. title:gsub('~/.*/', '')
+    elseif filetype == 'checkhealth' then
+        return 'Checkhealth'
+    elseif filetype == 'qf' then
+        return 'QuickFix'
+    elseif filetype == 'pager' then
+        return 'Pager'
+    elseif filetype == 'NvimTree' then
+        return 'NvimTree'
+    elseif filetype == 'mason' then
+        return 'Mason'
+    elseif filetype == 'lazy' then
+        return 'Lazy'
+    elseif buftype == 'help' then
+        return ' ' .. vim.fn.fnamemodify(buf_name, ':t')
+    elseif filetype == 'nvim-pack' then
+        return 'Pack'
+    elseif filetype == 'query' and buftype == 'nofile' then
         -- Probably a treesitter buffer or whatever
-        return vim.fn.expand("%:p:.")
-    elseif filetype == "dap-view" then
-        return "DAP View"
-    elseif filetype == "dap-repl" then
-        return "DAP REPL"
-    elseif filetype == "dap-float" then
-        return "DAP"
-    elseif filetype == "octo_panel" then
-        return "Octo Panel"
-    elseif string.match(buf_name, "^octo://") then
+        return vim.fn.expand('%:p:.')
+    elseif filetype == 'dap-view' then
+        return 'DAP View'
+    elseif filetype == 'dap-repl' then
+        return 'DAP REPL'
+    elseif filetype == 'dap-float' then
+        return 'DAP'
+    elseif filetype == 'octo_panel' then
+        return 'Octo Panel'
+    elseif string.match(buf_name, '^octo://') then
         ---@type string?
-        local is_pr = string.match(buf_name, "pull/%d+")
+        local is_pr = string.match(buf_name, 'pull/%d+')
         if is_pr then
-            return "  PR " .. is_pr:sub(6)
+            return '  PR ' .. is_pr:sub(6)
         else
-            return "  " .. buf_name:gsub("octo:/.*/", "")
+            return '  ' .. buf_name:gsub('octo:/.*/', '')
         end
-    elseif string.match(filetype, "^Neogit") then
+    elseif string.match(filetype, '^Neogit') then
         return filetype
-    elseif string.match(filetype, "^codediff") then
-        return vim.fn.fnamemodify(buf_name, ":t")
-    elseif buf_name == "kulala://ui" then
-        return "Kulala"
-    elseif string.match(buf_name, "^codediff://") then
+    elseif string.match(filetype, '^codediff') then
+        return vim.fn.fnamemodify(buf_name, ':t')
+    elseif buf_name == 'kulala://ui' then
+        return 'Kulala'
+    elseif string.match(buf_name, '^codediff://') then
         -- Diff buffers are handled especially
-        return vim.fn.fnamemodify(buf_name, ":t")
-    elseif buf_name == "" then
+        return vim.fn.fnamemodify(buf_name, ':t')
+    elseif buf_name == '' then
         -- Avoid empty bufs
-        return "[No Name]"
-    elseif buftype == "" then
-        local relative_path = vim.fn.fnamemodify(buf_name, ":.")
+        return '[No Name]'
+    elseif buftype == '' then
+        local relative_path = vim.fn.fnamemodify(buf_name, ':.')
 
         return relative_path
     else
@@ -194,7 +193,7 @@ local calculate_unambiguous_paths = function(paths)
     ---@type table<string, string[]>
     local path_parts = {}
     for _, path in ipairs(unique_paths) do
-        path_parts[path] = vim.split(path, "/")
+        path_parts[path] = vim.split(path, '/')
     end
 
     local max_iterations = 0
@@ -231,7 +230,7 @@ local calculate_unambiguous_paths = function(paths)
                 alias_parts[#alias_parts + 1] = parts[i]
             end
 
-            aliases[path] = table.concat(alias_parts, "/")
+            aliases[path] = table.concat(alias_parts, '/')
         end
 
         -- Count aliases occurrences among the ambiguous set
@@ -282,8 +281,8 @@ local cleanup_bufs = function(base_bufs)
 
             local buf_name = api.nvim_buf_get_name(buf)
 
-            if string.match(buf_name, "^/") and vim.bo[buf].buftype == "" then
-                local relative_buf_name = vim.fn.fnamemodify(buf_name, ":.")
+            if string.match(buf_name, '^/') and vim.bo[buf].buftype == '' then
+                local relative_buf_name = vim.fn.fnamemodify(buf_name, ':.')
 
                 base_file_names[#base_file_names + 1] = relative_buf_name
             end
@@ -300,16 +299,16 @@ local cleanup_bufs = function(base_bufs)
             base.name = path_aliases[base.name]
         end
 
-        if vim.wo[base.winnr].diff or api.nvim_buf_get_name(base.bufnr):match("^codediff") then
-            base.name = " " .. base.name
+        if vim.wo[base.winnr].diff or api.nvim_buf_get_name(base.bufnr):match('^codediff') then
+            base.name = ' ' .. base.name
         end
 
         if vim.bo[base.bufnr].modified then
-            base.name = base.name .. " ●"
+            base.name = base.name .. ' ●'
         end
 
         -- Embed padding
-        base.name = " " .. base.name .. " "
+        base.name = ' ' .. base.name .. ' '
     end
 
     return processed_bufs
@@ -345,19 +344,20 @@ M.render = function()
 
     local mode_hl = M.get_mode_hl()
 
+	-- if limited by width
     if len(cur_tab_data.name) + padding >= cols then
-        local CUT = "…  "
+        local CUT = '…  '
         local LEN_CUT = len(CUT)
 
         local trunc = truncate_by_display_width(cur_tab_data.name, cols - padding - LEN_CUT)
 
-        local line = ""
+        local line = ''
 
         if not is_init then
             line = line .. hl_more
         end
 
-        line = line .. "%#" .. mode_hl .. "#" .. trunc .. CUT
+        line = line .. '%#' .. mode_hl .. '#' .. trunc .. CUT
 
         if not is_last then
             line = line .. hl_more
@@ -381,22 +381,22 @@ M.render = function()
         end
 
         if content_len <= cols then
-            local line = ""
+            local line = ''
 
             for _, buf in ipairs(processed_bufs) do
-                local hl = (buf.page == cur_idx and mode_hl or hl_groups.SEL)
+                local hl = (buf.page == cur_idx and hl_groups.SEL or hl_groups.BASE)
 
-                line = line .. "%#" .. hl .. "#%" .. buf.page .. "T" .. buf.name .. "%T"
+                line = line .. '%#' .. hl .. '#%' .. buf.page .. 'T' .. buf.name .. '%T'
             end
 
-            return line .. "%#" .. hl_groups.FILL .. "#"
+            return line .. '%#' .. hl_groups.FILL .. '#'
         end
 
         local cur_is_start = cur_mid < cols / 2
         local cur_is_end = content_len - cur_mid < cols / 2
 
         if cur_is_start or cur_is_end then
-            local line = ""
+            local line = ''
             local actual_content_len = 0
 
             local loop_start = cur_is_start and 1 or num_tabs
@@ -421,7 +421,7 @@ M.render = function()
                         end
 
                         local hl = (buf.page == cur_idx and mode_hl or hl_groups.BASE)
-                        local this_tab = "%#" .. hl .. "#%" .. buf.page .. "T" .. buf_alias .. "%T"
+                        local this_tab = '%#' .. hl .. '#%' .. buf.page .. 'T' .. buf_alias .. '%T'
 
                         if cur_is_start then
                             line = line .. this_tab
@@ -435,7 +435,7 @@ M.render = function()
                     actual_content_len = actual_content_len + len(buf_alias)
 
                     local hl = (buf.page == cur_idx and mode_hl or hl_groups.BASE)
-                    local this_tab = "%#" .. hl .. "#%" .. buf.page .. "T" .. buf_alias .. "%T"
+                    local this_tab = '%#' .. hl .. '#%' .. buf.page .. 'T' .. buf_alias .. '%T'
 
                     if cur_is_start then
                         line = line .. this_tab
@@ -458,7 +458,7 @@ M.render = function()
             local l_space = math.floor(space_for_other_tabs / 2)
             local r_space = math.ceil(space_for_other_tabs / 2)
 
-            local r_line = ""
+            local r_line = ''
             local r_content_len = 0
             for i = cur_idx + 1, num_tabs do
                 local buf = processed_bufs[i]
@@ -470,18 +470,18 @@ M.render = function()
                     if truncate_to_len > 0 then
                         buf_alias = truncate_by_display_width(buf_alias, truncate_to_len, false)
 
-                        r_line = r_line .. "%#" .. hl_groups.BASE .. "#%" .. buf.page .. "T" .. buf_alias .. "%T"
+                        r_line = r_line .. '%#' .. hl_groups.BASE .. '#%' .. buf.page .. 'T' .. buf_alias .. '%T'
                     end
 
                     break
                 else
                     r_content_len = r_content_len + len(buf_alias)
 
-                    r_line = r_line .. "%#" .. hl_groups.BASE .. "#%" .. buf.page .. "T" .. buf_alias .. "%T"
+                    r_line = r_line .. '%#' .. hl_groups.BASE .. '#%' .. buf.page .. 'T' .. buf_alias .. '%T'
                 end
             end
 
-            local l_line = ""
+            local l_line = ''
             local l_content_len = 0
             for i = cur_idx - 1, 1, -1 do
                 local buf = processed_bufs[i]
@@ -493,20 +493,20 @@ M.render = function()
                     if truncate_to_len > 0 then
                         buf_alias = truncate_by_display_width(buf_alias, truncate_to_len, true)
 
-                        l_line = "%#" .. hl_groups.BASE .. "#%" .. buf.page .. "T" .. buf_alias .. "%T" .. l_line
+                        l_line = '%#' .. hl_groups.BASE .. '#%' .. buf.page .. 'T' .. buf_alias .. '%T' .. l_line
                     end
 
                     break
                 else
                     l_content_len = l_content_len + len(buf_alias)
 
-                    l_line = "%#" .. hl_groups.BASE .. "#%" .. buf.page .. "T" .. buf_alias .. "%T" .. l_line
+                    l_line = '%#' .. hl_groups.BASE .. '#%' .. buf.page .. 'T' .. buf_alias .. '%T' .. l_line
                 end
             end
 
             local line = hl_more .. l_line
 
-            line = line .. "%#" .. mode_hl .. "#%" .. cur_tab_data.page .. "T" .. cur_tab_data.name .. "%T"
+            line = line .. '%#' .. mode_hl .. '#%' .. cur_tab_data.page .. 'T' .. cur_tab_data.name .. '%T'
 
             return line .. r_line .. hl_more
         end
