@@ -3,6 +3,9 @@ fish_trace <-> set -x
 # load alternate history
 set -x fish_history "session_name"
 
+
+fzf-history-widget
+
 # Merge 2 different histories
 history merge
 

@@ -8,6 +8,7 @@ vim.pack.add({
     'https://github.com/mfussenegger/nvim-dap',
     'https://github.com/lewis6991/gitsigns.nvim',
     'https://github.com/neovim/nvim-lspconfig',
+	'https://github.com/ibhagwan/fzf-lua',
 })
 
 vim.g.tiny_cmdline = {
@@ -39,18 +40,91 @@ vim.opt.guicursor =
 
 vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
+-- makes more readable screenshots
+vim.opt.background = 'light'
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.foldlevel = 99
+vim.opt.foldcolumn = 'auto'
 vim.opt.foldmethod = 'manual'
--- vim.lsp.config('*', {
 
 -- dap config
 vim.fn.sign_define('DapBreakpoint', { text = '🛑', texthl = '', linehl = '', numhl = '' })
 
-require('statuscol').setup({})
+local builtin = require('statuscol.builtin')
+require('statuscol').setup({
+  setopt = true,
+    thousands = false, -- or line number thousands separator string ("." / ",")
+    relculright = false, -- whether to right-align the cursor line number with 'relativenumber' set
+    -- Builtin 'statuscolumn' options
+    ft_ignore = nil, -- Lua table with 'filetype' values for which 'statuscolumn' will be unset
+    bt_ignore = nil, -- Lua table with 'buftype' values for which 'statuscolumn' will be unset
 
--- enable
+    segments = {
+        {
+            sign = {
+                name = { '.*' },
+                text = { '.*' },
+            },
+            click = 'v:lua.ScSa',
+        },
+        {
+            text = { builtin.lnumfunc },
+            condition = { true, builtin.not_empty },
+            -- lnum_click
+            -- line action
+            click = 'v:lua.ScLa',
+        },
+        {
+            sign = { namespace = { 'gitsigns' }, colwidth = 1, wrap = true },
+            -- Sign action
+            click = 'v:lua.ScSa',
+        },
+        {
+            text = {
+                function(args)
+                    args.fold.close = ''
+                    args.fold.open = ''
+                    args.fold.sep = '▕'
+                    return builtin.foldfunc(args)
+                end,
+            },
+            -- Fa => Fold action
+            click = 'v:lua.ScFa',
+        },
+    },
+
+})
+
+
+vim.diagnostic.config({
+    signs = {
+        severity = { min = vim.diagnostic.severity.WARN },
+        text = {
+		 -- ⚡
+            [vim.diagnostic.severity.ERROR] = '⛔',
+            [vim.diagnostic.severity.WARN] = '⚠',
+            [vim.diagnostic.severity.INFO] = '',
+            [vim.diagnostic.severity.HINT] = '',
+        },
+        numhl = {
+            [vim.diagnostic.severity.WARN] = 'WarningMsg',
+            [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
+            [vim.diagnostic.severity.INFO] = 'DiagnosticInfo',
+            [vim.diagnostic.severity.HINT] = 'DiagnosticHint',
+        },
+    },
+    severity_sort = true,
+
+    float = {
+        source = true,
+        severity_sort = true,
+        border = 'rounded',
+    },
+
+})
+
 vim.lsp.enable('clangd')
 vim.lsp.enable('emmylua_ls')
 
@@ -76,3 +150,20 @@ require('gitsigns').setup({
     },
 })
 -- }}}
+
+vim.go.showtabline = 2
+require'tabline'
+vim.cmd "tabnew"
+
+
+vim.api.nvim_set_hl(0, 'TablineMore', { bg = '#00FF00', })
+vim.api.nvim_set_hl(0, 'TablineSel', { bg = 'red', })
+vim.api.nvim_set_hl(0, 'TablineModeInsert', { bg = 'red', })
+vim.api.nvim_set_hl(0, 'TablineModeNormal', { bg = 'blue', })
+vim.api.nvim_set_hl(0, 'TablineModeReplace', { bg = 'green', })
+vim.api.nvim_set_hl(0, 'TablineModeVisual', { bg = 'yellow', })
+
+-- to showcase customized cases
+vim.cmd [[
+e src/nvim/fold.c | tabn | help 'tabline' | tabn | checkhealth | tabn | term
+]]

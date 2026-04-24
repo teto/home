@@ -16,7 +16,7 @@ let
   # term = "${pkgs.wezterm}/bin/wezterm";
 
   rofi = pkgs.rofi-teto; # rofi-wayland;
-  sharedConfig = pkgs.callPackage ./wm-config.nix { };
+  sharedConfig = pkgs.callPackage ./wm-config.nix { inherit config; };
 
   startNvimNotes = "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command 'kitty nvim +Notes'  ";
 in
@@ -165,7 +165,6 @@ in
           # to swap altwin:swap_lalt_lwin
         };
       };
-      # terminal = term;
       bars = [ ];
       # menu =
 
