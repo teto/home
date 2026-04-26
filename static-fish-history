@@ -1,0 +1,4 @@
+- cmd: jj new main@up 
+- cmd: jj rebase -d nixos-unstable@up
+- cmd: ZINZIN
+

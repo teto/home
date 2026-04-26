@@ -100,12 +100,12 @@ in
   };
 
   boot = {
-    kernelPackages = pkgs.linuxKernel.packages.linux_6_18;
+    kernelPackages = pkgs.linuxKernel.packages.linux_7_0;
     blacklistedKernelModules = [ "nouveau" ];
     extraModulePackages = [
 
       # pkgs.linuxKernel.packages.linux_6_18.r8125
-      pkgs.linuxKernel.packages.linux_6_18.r8125
+      pkgs.linuxKernel.packages.linux_7_0.r8125
     ];
 
     # Ensure initrd has resume support
@@ -206,7 +206,7 @@ in
   powerManagement = {
     enable = true;
     powertop = {
-      enable = true;
+      enable = false;
       postStart = ''
         echo 'on' > '/sys/bus/usb/devices/1-5.4/power/control';
         echo 'on' > '/sys/bus/usb/devices/1-6/power/control';

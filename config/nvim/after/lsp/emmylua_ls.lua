@@ -1,7 +1,7 @@
 return {
     cmd = {
         'emmylua_ls',
-        '--log-level=info',
+        '--log-level=debug',
     },
     filetypes = { 'lua' },
     root_markers = {
@@ -18,12 +18,14 @@ return {
     --             globals = {
     --                 -- nvim and its tests
     --                 'vim',
-    --                 'describe',
-    --                 'it',
-    --                 'before_each',
-    --                 'after_each',
-    --                 'pending',
-    --                 'teardown',
+    --
+    -- 	-- busted can be find in 3rd
+    --                 -- 'describe',
+    --                 -- 'it',
+    --                 -- 'before_each',
+    --                 -- 'after_each',
+    --                 -- 'pending',
+    --                 -- 'teardown',
     --
     --                 -- for uv
     --                 'os_name',
@@ -50,14 +52,14 @@ return {
     --             unusedLocalExclude = { '_*' },
     --
     --             disable = {
-    --                 'lowercase-global',
-    --                 'unused-function',
-    --                 -- these are buggy
-    --                 'duplicate-doc-field',
-    --                 'duplicate-set-field',
-    --                 --
-    --                 'missing-fields', -- to silence vim.uv.os_name warnings for instance
-    --                 'undefined-field', -- Disable undefined-field diagnostic
+    --                 -- 'lowercase-global',
+    --                 -- 'unused-function',
+    --                 -- -- these are buggy
+    --                 -- 'duplicate-doc-field',
+    --                 -- 'duplicate-set-field',
+    --                 -- --
+    --                 -- 'missing-fields', -- to silence vim.uv.os_name warnings for instance
+    --                 -- 'undefined-field', -- Disable undefined-field diagnostic
     --             },
     --         },
     --     },
