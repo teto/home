@@ -320,9 +320,21 @@ in
       (lib.mkAfter "require('init-manual') ")
     ];
 
+
   plugins = [
     # Install with rocks else there is a problem
     # { plugin = vimPlugins.image-nvim; }
+
+
+    {
+      # just to test the fennel PR
+      plugin = pkgs.vimPlugins.unicode-vim;
+      type = "fennel";
+      config = ''
+        (set vim.o.exrc true)
+      '';
+
+    }
 
     # TODO replaced with https://github.com/yutkat/git-rebase-auto-diff.nvim
     # {

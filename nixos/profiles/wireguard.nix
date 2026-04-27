@@ -7,7 +7,7 @@
 }:
 let
   # 52.28.201.89
-  endpoint = "${secrets.nova.relay.prod.hostname}:51820";
+  endpoint = "${secrets.relay.prod.hostname}:51820";
 in
 {
   networking.firewall = {
@@ -31,19 +31,19 @@ in
       # Note: The private key can also be included inline via the privateKey option,
       # but this makes the private key world-readable; thus, using privateKeyFile is
       # recommended.
-      privateKeyFile = "${secrets.secretsFolder}/nova-wg.key";
+      privateKeyFile = "${secrets.secretsFolder}/wg.key";
 
       peers = [
         # For a client configuration, one peer entry for the server will suffice.
 
         {
           # Public key of the server (not a file path).
-          publicKey = secrets.nova.relay.prod.wireguardPublicKey;
+          publicKey = secrets.relay.prod.wireguardPublicKey;
 
           # set to 0.0.0.0 to forward all the traffic via VPN.
           # allowedIPs = [ "10.100.0.0/0" ];
           # Or forward only particular subnets
-          allowedIPs = secrets.nova.wireguard.allowedIPs;
+          allowedIPs = secrets.wireguard.allowedIPs;
 
           # Set this to the server IP and port.
 

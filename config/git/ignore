@@ -4,8 +4,12 @@
 /.envrc
 .nvimlog
 
+# ia-related files
+.codex/
+
 # remove core files
 /core
+/core.*
 
 # aider-chat workflow files
 /.aider*

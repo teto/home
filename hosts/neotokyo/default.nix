@@ -25,6 +25,7 @@ let
           "services/jellyfin.nix"
           "services/buildbot-nix.nix"
           "services/transmission.nix"
+          "services/headscale.nix"
         ];
         exclude = [
           # "teto"

@@ -396,6 +396,7 @@ in
           bubblewrap # sandboxing
 
           cargo
+          codex # openai agent
           # (ignoreBroken claude-code) # anthropic agent
 
           # dasht # ~ zeal but in terminal
