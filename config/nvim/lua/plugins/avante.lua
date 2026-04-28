@@ -18,7 +18,8 @@ end
 -- provider = "mistral_devstral_2"
 -- provider = 'llamacpp'
 -- overrule both
-provider = 'mistral_devstral_2'
+-- provider = 'mistral_devstral_2'
+provider = 'codex' -- use acp
 -- provider = 'gemini'
 -- provider = 'llamacpp_from_openai'
 

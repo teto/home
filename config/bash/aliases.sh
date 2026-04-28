@@ -100,12 +100,15 @@ alias ks="kitten ssh"
 alias kcat="kitten icat"
 # }}}
 
+# use jedha.local instead ?
+alias llama-jedha="llama-server --host 0.0.0.0 --port 8080 --jinja -v --log-prefix --models-preset ~/home/contrib/llama-presets.ini"
+#
 # test atuin instead or histdb ?
-export MCFLY_KEY_SCHEME=vim
-
-# defaults to 'RANK'
-export MCFLY_RESULTS_SORT=LAST_RUN
-export MCFLY_RESULTS=200
+# export MCFLY_KEY_SCHEME=vim
+#
+# # defaults to 'RANK'
+# export MCFLY_RESULTS_SORT=LAST_RUN
+# export MCFLY_RESULTS=200
 # export MCFLY_INTERFACE_VIEW=BOTTOM
 # MCFLY_DISABLE_MENU
 # export MCFLY_PROMPT="❯"
