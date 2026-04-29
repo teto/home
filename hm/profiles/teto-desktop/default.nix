@@ -67,6 +67,11 @@ in
       kaggle # kaggle interface
       python3Packages.kaggle
 
+      lux-cli
+      # flakeSelf.inputs.lux.packages.${pkgs.stdenv.hostPlatform.system}.lux-cli
+
+      # rendercv # yaml-based CV
+
       # rendercv # yaml-based CV
       stow
       systemctl-tui

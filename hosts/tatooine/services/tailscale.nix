@@ -1,4 +1,4 @@
 {
-  enable = false;
+  enable = true;
   useRoutingFeatures = "client";
 }

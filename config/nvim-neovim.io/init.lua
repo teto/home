@@ -156,13 +156,12 @@ vim.api.nvim_set_hl(0, 'TablineModeNormal', { bg = 'blue' })
 vim.api.nvim_set_hl(0, 'TablineModeReplace', { bg = 'green' })
 vim.api.nvim_set_hl(0, 'TablineModeVisual', { bg = 'yellow' })
 
-
-vim.cmd [[
+vim.cmd([[
 amenu PopUp.Custom\ Entry :echo 'hello world'
-]]
+]])
 
 -- to showcase customized cases
--- checkhealth | 
+-- checkhealth |
 vim.cmd([[
 e src/nvim/fold.c | tabn | help 'tabline' | tabn | tabn | term
 ]])

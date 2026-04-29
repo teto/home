@@ -70,7 +70,12 @@
     show-icons = true;
     # ! cd window
     # modi = "run,drun,window,ssh";
-    modi = ["run" "drun" "window" "ssh"];
+    modi = [
+      "run"
+      "drun"
+      "window"
+      "ssh"
+    ];
     # broken in afd5607108220437abc9d9568538fdda5347a6f8
     # combi-modes = [
     #   "window"

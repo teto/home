@@ -344,7 +344,7 @@ M.render = function()
 
     local mode_hl = M.get_mode_hl()
 
-	-- if limited by width
+    -- if limited by width
     if len(cur_tab_data.name) + padding >= cols then
         local CUT = '…  '
         local LEN_CUT = len(CUT)

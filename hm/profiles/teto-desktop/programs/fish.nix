@@ -114,7 +114,7 @@
   # to install plugins on nixos do
   # environment.systemPackages = with pkgs; [
   #   fishPlugins.done
-  #   fishPlugins.fzf-fish
+  #   fishPlugins.fzf-fish  # to compare with fzf-git-sh
   #   fishPlugins.forgit
   #   fishPlugins.hydro
   #   fishPlugins.grc
@@ -157,14 +157,14 @@
 
   # Source manual configuration file
   interactiveShellInit = ''
+    # 'done' plugin config
+    set -U __done_min_cmd_duration 5000  # default: 5000 ms
+
     # Source manual fish configuration if it exists
     set -l manual_config ${config.xdg.configHome}/fish/manual.fish
     if test -f $manual_config
       source $manual_config
     end
-
-    # 'done' plugin config
-    set -U __done_min_cmd_duration 5000  # default: 5000 ms
 
     source ${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.fish
   '';

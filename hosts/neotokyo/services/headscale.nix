@@ -1,12 +1,9 @@
 {
-  services.headscale = 
-  {
-    enable = true;
+  enable = true;
 
-    # listening on
-    address = "0.0.0.0";
+  # listening on
+  address = "0.0.0.0";
 
-    # needs a postgres DB
-    # settings 
-  };
+  # needs a postgres DB
+  # settings
 }

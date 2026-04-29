@@ -2,11 +2,13 @@
   config,
   lib,
   pkgs,
+  flakeSelf,
   ...
 }:
 {
   # _imports = [
-  #   ../../nixos/profiles/postgresql.nix
+  #   # ../../nixos/profiles/postgresql.nix
+  #   flakeSelf.nixosProfiles.postgresql
   # ];
 
   enable = false;

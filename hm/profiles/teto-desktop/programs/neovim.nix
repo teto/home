@@ -320,11 +320,9 @@ in
       (lib.mkAfter "require('init-manual') ")
     ];
 
-
   plugins = [
     # Install with rocks else there is a problem
     # { plugin = vimPlugins.image-nvim; }
-
 
     {
       # just to test the fennel PR

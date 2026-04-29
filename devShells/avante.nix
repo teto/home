@@ -5,6 +5,10 @@ pkgs.mkShell {
     lua5_1.pkgs.luacheck
     lua-language-server # not using emmy yet
     yq
+    # needed for 'luatest'
+    pkgs.silver-searcher
+    pkgs.python3
+    pkgs.docker
   ];
 
   shellHook = ''
