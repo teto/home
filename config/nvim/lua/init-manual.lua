@@ -193,16 +193,9 @@ vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 -- ,localoptions
 vim.o.sessionoptions = 'buffers,curdir,help,tabpages,winsize,winpos,localoptions'
 
--- fixing some stuff
-vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/avante.nvim')
--- doing jj tests
--- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/diffview.nvim')
--- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/rocks-dev.nvim')
--- vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks-config.nvim')
--- vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks.nvim')
-
 -- require("vim.lsp._watchfiles")._watchfunc = require("vim._watch").watch
 -- local ffi = require 'ffi'
+-- todo it should work out of the box now ?
 local custom_luarocks_config_filename = vim.fn.stdpath('config') .. '/luarocks-config-generated.lua'
 local luarocks_config_fn, errmsg = loadfile(custom_luarocks_config_filename)
 
@@ -217,7 +210,7 @@ vim.g.rocks_nvim = {
     -- /home/teto/.local/share/nvim/rocks/luarocks-config.lua
     ---@diagnostic disable-next-line: need-check-nil
     luarocks_config = luarocks_config_fn(),
-    -- _log_level = vim.log.levels.TRACE,
+    _log_level = vim.log.levels.TRACE,
 
     -- checkout constants.DEFAULT_DEV_SERVERS
     servers = { 'https://luarocks.org/manifests/neorocks/' },
@@ -238,6 +231,15 @@ vim.g.rocks_nvim = {
         },
     },
 }
+
+-- fixing some stuff
+vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/avante.nvim')
+-- doing jj tests
+-- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/diffview.nvim')
+-- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/rocks-dev.nvim')
+-- vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks-config.nvim')
+vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/rocks-git.nvim')
+vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/rocks.nvim')
 
 vim.g.loaded_matchit = 1
 
@@ -973,3 +975,7 @@ local has_dap, _dap = pcall(require, 'dap')
 if has_dap then
     require('teto.dap')
 end
+
+local launch_argv = vim.fn.argv()
+vim.print(launch_argv)
+vim.print(launch_argv)

@@ -1,12 +1,22 @@
 require('auto-session').setup({
-    suppress_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
+    log_level = 'debug', -- debug hijacks cmdline
+    suppress_dirs = {
+        '~/',
+        '~/Projects',
+        '~/Downloads',
+        '/',
+    },
     root_dir = vim.fn.stdpath('data') .. '/sessions/', -- Root dir where sessions will be stored
     session_root_dir = '.', -- vim.fn.stdpath('data').."/sessions/",
     use_git_branch = false,
     lazy_support = false,
-    log_level = 'debug', -- debug hijacks cmdline
     bypass_save_filetypes = nil, -- List of filetypes to bypass auto save when the only buffer open is one of the file types listed, useful to ignore dashboards
-    close_filetypes_on_save = { 'checkhealth' }, -- Buffers with matching filetypes will be closed before saving
+    close_filetypes_on_save = {
+        -- Buffers with matching filetypes will be closed before saving
+        'checkhealth',
+    },
+
+    continue_restore_on_error = true,
 
     -- Not clear wether those work
     args_allow_single_directory = true, -- boolean Follow normal session save/load logic if launched with a single directory as the only argument

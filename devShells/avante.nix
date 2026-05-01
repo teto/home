@@ -9,6 +9,8 @@ pkgs.mkShell {
     pkgs.silver-searcher
     pkgs.python3
     pkgs.docker
+    pkgs.stylua
+    # missing 'ruststylecheck'
   ];
 
   shellHook = ''

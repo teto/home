@@ -5,7 +5,9 @@
 .nvimlog
 
 # ia-related files
-.codex/
+/.codex
+**/.codex
+**/.claude/settings.local.json
 
 # remove core files
 /core
@@ -126,4 +128,3 @@ ehthumbs.db
 Thumbs.db
 # }}}
 
-**/.claude/settings.local.json

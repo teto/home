@@ -37,11 +37,11 @@ lib.optionalAttrs withSecrets {
   };
 
   # removed from secrets
-  # secrets."OPENAI_API_KEY" = {
-  #   # Key used to lookup in the sops file.
-  #   key = "OPENAI_API_KEY_NOVA";
-  #   mode = "400";
-  # };
+  secrets."OPENAI_API_KEY_PERSO" = {
+    # Key used to lookup in the sops file.
+    key = "OPENAI_API_KEY_PERSO";
+    mode = "400";
+  };
 
   secrets."anki_keyFile" = {
     mode = "400";
