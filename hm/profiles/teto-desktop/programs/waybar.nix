@@ -1,7 +1,5 @@
 { flakeSelf, pkgs, ... }:
 {
-  enable = true;
-
   # fix for "no fixed center_"
   # package = flakeSelf.inputs.waybar.packages.${pkgs.stdenv.hostPlatform.system}.waybar;
   systemd.enable = true;

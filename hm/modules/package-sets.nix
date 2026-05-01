@@ -404,7 +404,7 @@ in
           # defalt via hm
           # difftastic # smart diffs
           # diff-so-fancy
-          # docker-credential-helpers
+          docker-credential-helpers # gives 'docker-credential-pass' for instance
 
           fswatch # fileevent watcher
           fx # json reader

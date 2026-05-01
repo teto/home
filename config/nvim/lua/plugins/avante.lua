@@ -19,14 +19,15 @@ end
 -- provider = 'llamacpp'
 -- overrule both
 -- provider = 'mistral_devstral_2'
--- provider = 'codex' -- use acp
+provider = 'codex' -- use acp
 -- provider = 'mistral_devstral_2'
-provider = 'mistral-vibe' -- default acp provider (not upstreamyed yet, might wanna add it there)
+-- provider = 'mistral-vibe' -- default acp provider (not upstreamyed yet, might wanna add it there)
 -- provider = 'gemini'
 -- provider = 'llamacpp_from_openai'
 
 local xdg_config = vim.env.XDG_CONFIG_HOME or os.getenv('HOME') .. '/.config'
 
+local sops_folder = vim.fs.joinpath(xdg_config, 'sops-nix/secrets')
 -- print("Loading avante")
 
 local function mk_llama_provider(name)
@@ -156,15 +157,15 @@ opts = {
             --   max_tokens = 4096,
             -- },
             -- should use XDG_CONFIG_HOME or
-            api_key_name = 'cmd:cat ' .. (vim.fs.joinpath(xdg_config, 'sops-nix/secrets/claude_api_key')),
+            api_key_name = 'cmd:cat ' .. sops_folder .. '/claude_api_key',
         },
 
         gemini = {
-            api_key_name = 'cmd:cat ' .. os.getenv('HOME') .. '/.config/sops-nix/secrets/gemini_matt_key',
+            api_key_name = 'cmd:cat ' .. sops_folder .. '/gemini_matt_key',
         },
-        -- openai = {
-        -- api_key_name = 'cmd:cat /home/teto/.config/sops-nix/secrets/OPENAI_API_KEY',
-        -- },
+        openai = {
+            api_key_name = 'cmd:cat ' .. sops_folder .. '/OPENAI_API_KEY_PERSO',
+        },
 
         --      llamacpp = {
         --          -- __inherited_from = 'llamacpp',
@@ -209,7 +210,7 @@ opts = {
             timeout = 30000, -- Timeout in milliseconds
 
             -- use_response_api = true,
-            api_key_name = 'cmd:cat ' .. (vim.fs.joinpath(xdg_config, 'sops-nix/secrets/mistral_test_api_key')),
+            api_key_name = 'cmd:cat ' .. sops_folder .. '/mistral_test_api_key',
             -- mandatory to make it work with mistral see
             -- https://github.com/yetone/avante.nvim/discussions/1570#discussioncomment-12600703
             extra_request_body = {

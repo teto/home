@@ -17,6 +17,10 @@ plugins_dir = "plugins/"
 [dev]
 path = "/home/teto/neovim"
 
+
+# [rocks-git]
+# path = "/home/teto/.local/share/nvim/site/pack/rocks"
+
 # List of non-Neovim rocks.
 # This includes things like `toml` or other lua packages.
 [rocks]
@@ -27,7 +31,7 @@ path = "/home/teto/neovim"
 "rocks-git.nvim"= "2.5.10"
 "rocks-config.nvim" = "3.2.0"
 # "diffview.nvim" = "scm"
-"haskell-tools.nvim" = "9.0.0"
+"haskell-tools.nvim" = "9.0.1"
 
 # needed the patch from https://github.com/nvimtools/none-ls.nvim/pull/277/
 "none-ls.nvim" = "scm"
@@ -80,13 +84,13 @@ friendly-snippets = "scm"
 vim-startuptime= "4.6.0"
 menu= "scm"
 # "snacks.nvim" = "2.6.0"
-fzf-lua = "0.0.2626"
+fzf-lua = "0.0.2632"
 # "lz.n" = "2.12.0"
 "indent-blankline.nvim" = "3.9.1"
 # "llm.nvim"= "scm"
 # volt is a UI library
 volt= "scm"
-"grug-far.nvim"= "1.6.67"
+"grug-far.nvim"= "1.6.68"
 # orgmode = "0.7.1"
 # neogit = "2.0.0"
 # "diffview.nvim" = "scm"
@@ -106,7 +110,7 @@ magick = "1.6.0"
 "dropbar.nvim" = "14.2.1"
 nvim-treesitter-context = "1.0.0"
 # nvim-dap = "0.10.0"
-neotest = "5.15.0"
+neotest = "5.18.0"
 neotest-busted = "1.3.1"
 # "mini.sessions" = "0.17.0"
 
@@ -187,7 +191,7 @@ rev = "fa4673e181e18fd1719ae17a1d4f4ecce2de37aa"
 
 [plugins."codecompanion.nvim"]
 git = "olimorris/codecompanion.nvim"
-rev = "v19.11.0"
+rev = "v19.12.0"
 
 [plugins."fzf-lua-frecency.nvim"]
 git = "elanmed/fzf-lua-frecency.nvim"
@@ -199,7 +203,7 @@ rev = "d9d12d4bfb9a4c5b8b8bdf7f612551df6972946c"
 
 [plugins."jj.nvim"]
 git = "nicolasgb/jj.nvim"
-rev = "v0.5.0"
+rev = "v0.6.0"
 
 [plugins."jujutsu.nvim"]
 git = "yannvanhalewyn/jujutsu.nvim"

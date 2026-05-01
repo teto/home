@@ -184,8 +184,6 @@ in
 
           "${mad}+m" = ''exec "${dotfilesPath}/rofi-scripts/monitor_layout.sh"; mode default;'';
 
-          "${mad}+l" = "${pkgs.swaynotificationcenter}/bin/swaync-client -t";
-          "${mod}+grave" = "${pkgs.swaynotificationcenter}/bin/swaync-client -t";
           "${mod}+p" = "exec ${pkgs.tessen}/bin/tessen --dmenu=rofi";
 
           "$GroupFr+$mod+ampersand" = "layout toggle all";
@@ -269,8 +267,11 @@ in
           "${mod}+Ctrl+h" =
             "exec ${pkgs.clipman}/bin/clipman pick -t rofi || ${sharedConfig.notify-send} 'Failed running clipman' ";
         }
-
-      ;
+        # todo bind
+        // lib.optionalAttrs config.services.swaync.enable {
+          "${mad}+l" = "${pkgs.swaynotificationcenter}/bin/swaync-client -t";
+          "${mod}+grave" = "${pkgs.swaynotificationcenter}/bin/swaync-client -t";
+        };
 
       startup = [
         # { command = "env RUST_BACKTRACE=1 RUST_LOG=swayr=debug swayrd > /tmp/swayrd.log 2>&1"; }
