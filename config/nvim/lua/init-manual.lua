@@ -976,6 +976,6 @@ if has_dap then
     require('teto.dap')
 end
 
-local launch_argv = vim.fn.argv()
-vim.print(launch_argv)
-vim.print(launch_argv)
+-- local launch_argv = vim.fn.argv()
+-- vim.print(launch_argv)
+vim.print(vim.v.argv)
