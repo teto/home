@@ -569,17 +569,14 @@ in
         kickoff # transparent launcher for wlr-root
         # fuzzel # rofi-like
         # wofi # rofi-like
-        slurp # capture tool
+        # slurp # capture tool
         # lavalauncher # TODO a tester
         # wf-recorder # (broken) for screencasts
         wl-clipboard # wl-copy / wl-paste
         wdisplays # to show
-        swaybg # to set wallpaper
+        # swaybg # to set wallpaper
         swayimg # imageviewer (f1 to see help)
         # swaynotificationcenter # top cool depend de noctalia-shell ?
-        # swaynag-battery # https://github.com/NixOS/nixpkgs/pull/175905
-
-        # see bolt instead ?
         sway-launcher-desktop # fzf-based launcher
         # waypaper # sets wallpapers
         wlprop # like xprop, determines window parameters

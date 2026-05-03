@@ -68,6 +68,9 @@ opts = {
     -- log_level =
     log_level = vim.log.levels.DEBUG,
 
+	-- g
+	-- instructions_file = 
+
     -- can be a function as well
     -- avante is very talkative by default
     override_prompt_dir = vim.fn.expand(vim.fn.stdpath('config') .. '/avante_prompts'),
