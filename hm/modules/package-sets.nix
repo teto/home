@@ -380,6 +380,12 @@ in
             '';
 
           });
+
+          # anthropic agent
+          mistral-vibe-custom = pkgs.mistral-vibe.overrideAttrs ({
+            doCheck = false;
+            doInstallCheck = false;
+          });
         in
         # mcp-servers
         [
@@ -432,7 +438,7 @@ in
           # just in my branch :'(
           # git-remote-hg
           manix # nix doc, might be outdated
-          mistral-vibe # anthropic agent
+          mistral-vibe-custom
           net-tools # for netstat
           nix-output-monitor # 'nom'
 
