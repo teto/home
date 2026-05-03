@@ -232,14 +232,16 @@ vim.g.rocks_nvim = {
     },
 }
 
+local pluginDir = os.getenv('HOME') .. '/neovim'
 -- fixing some stuff
-vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/avante.nvim')
+vim.opt.rtp:prepend(pluginDir .. '/avante.nvim')
 -- doing jj tests
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/diffview.nvim')
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/rocks-dev.nvim')
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks-config.nvim')
-vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/rocks-git.nvim')
-vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/rocks.nvim')
+vim.opt.rtp:prepend(pluginDir .. '/rocks-git.nvim')
+vim.opt.rtp:prepend(pluginDir .. '/rocks.nvim')
+vim.opt.rtp:prepend(pluginDir .. '/auto-session')
 
 vim.g.loaded_matchit = 1
 
