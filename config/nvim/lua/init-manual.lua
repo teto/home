@@ -232,14 +232,16 @@ vim.g.rocks_nvim = {
     },
 }
 
+local pluginDir = os.getenv('HOME') .. '/neovim'
 -- fixing some stuff
-vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/avante.nvim')
+vim.opt.rtp:prepend(pluginDir .. '/avante.nvim')
 -- doing jj tests
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/diffview.nvim')
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/rocks-dev.nvim')
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks-config.nvim')
-vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/rocks-git.nvim')
-vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/rocks.nvim')
+vim.opt.rtp:prepend(pluginDir .. '/rocks-git.nvim')
+vim.opt.rtp:prepend(pluginDir .. '/rocks.nvim')
+vim.opt.rtp:prepend(pluginDir .. '/auto-session')
 
 vim.g.loaded_matchit = 1
 
@@ -971,11 +973,11 @@ vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 -- todo add api to list remote models
 vim.api.nvim_create_user_command('AvanteLogs', ':e ~/.cache/nvim/avante.log', { desc = 'read avante logs' })
 
+vim.lsp.document_color.enable()
+
 local has_dap, _dap = pcall(require, 'dap')
 if has_dap then
     require('teto.dap')
 end
 
-local launch_argv = vim.fn.argv()
-vim.print(launch_argv)
-vim.print(launch_argv)
+vim.print(vim.v.argv)

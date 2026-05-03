@@ -265,9 +265,10 @@ opts = {
         fillchars = 'eob: ',
         -- TODO remove
         sidebar_header = {
-            enabled = false, -- true, false to enable/disable the header
+            enabled = true, -- true, false to enable/disable the header
             align = 'center', -- left, center, right for title
             rounded = true,
+            include_model = true,
         },
         spinner = {
             generating = { '·', '✢', '✳', '∗', '✻', '✽' },

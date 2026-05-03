@@ -124,6 +124,9 @@ vim.diagnostic.config({
 
 vim.lsp.enable('clangd')
 vim.lsp.enable('emmylua_ls')
+vim.lsp.enable('tailwindcss')
+
+vim.lsp.document_color.enable()
 
 -- gitsigns {{{
 vim.api.nvim_set_hl(0, 'GitSignsAdd', {
@@ -160,8 +163,8 @@ vim.cmd([[
 amenu PopUp.Custom\ Entry :echo 'hello world'
 ]])
 
--- to showcase customized cases
+-- uncomment to showcase customized tabline
 -- checkhealth |
-vim.cmd([[
-e src/nvim/fold.c | tabn | help 'tabline' | tabn | tabn | term
-]])
+-- vim.cmd([[
+-- e src/nvim/fold.c | tabn | help 'tabline' | tabn | tabn | term
+-- ]])

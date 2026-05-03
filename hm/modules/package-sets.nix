@@ -397,6 +397,7 @@ in
 
           cargo
           codex # openai agent
+          codex-acp # originated from zed-industries, used in avante
           # (ignoreBroken claude-code) # anthropic agent
 
           # dasht # ~ zeal but in terminal
