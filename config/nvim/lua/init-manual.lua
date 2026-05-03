@@ -973,11 +973,11 @@ vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 -- todo add api to list remote models
 vim.api.nvim_create_user_command('AvanteLogs', ':e ~/.cache/nvim/avante.log', { desc = 'read avante logs' })
 
+vim.lsp.document_color.enable()
+
 local has_dap, _dap = pcall(require, 'dap')
 if has_dap then
     require('teto.dap')
 end
 
--- local launch_argv = vim.fn.argv()
--- vim.print(launch_argv)
 vim.print(vim.v.argv)
