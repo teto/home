@@ -7,7 +7,6 @@
 }:
 
 let
-
   inherit (lib)
     genBlockLua
     luaPlugin
@@ -51,7 +50,7 @@ let
     highlight-undo-nvim
     lualine-nvim
 
-    (luaPlugin {
+    {
       plugin = oil-nvim;
       config = ''
         require("oil").setup({
@@ -60,45 +59,19 @@ let
           default_file_explorer = true,
         })
       '';
-    })
+    }
 
     {
       # use ctrl a/xto cycle between different words
       plugin = vim-CtrlXA;
     }
 
-    # TODO add tests
-    #       (luaPlugin { plugin = grug-far-nvim;
-    # # hpefuly not needed in the next iteration
-    # #        config = ''
-    # #          require('grug-far').setup({ })
-    # #        '';
-    #       })
-
     # { plugin = bigfile-nvim; }  # replaced by snacks bigfile ?
 
-    {
-      plugin = pkgs.vimPlugins.direnv-vim; # to get syntax coloring ?
-      type = "viml";
-      config = ''
-                let g:sneak#s_next = 1 
-        let g:sneak#prompt = 'Sneak>'
+    # {
+    #   plugin = pkgs.vimPlugins.direnv-vim; # to get syntax coloring ?
+    # }
 
-        let g:sneak#streak = 0
-
-      '';
-    }
-
-    # { plugin = jbyuki/venn.nvim; }
-
-    # (luaPlugin {
-    #   plugin = fzf-vim;
-    #   # " mostly fzf mappings, use TAB to mark several files at the same time
-    #   # " https://github.com/neovim/neovim/issues/4487
-    #   config = ''
-    #     vim.g.fzf_command_prefix = 'Fzf' -- prefix commands :Files become :FzfFiles, etc.
-    #     vim.g.fzf_nvim_statusline = 0 -- disable statusline overwriting'';
-    # })
 
     #  nvim-colorizer
     # (luaPlugin { plugin = nvim-terminal-lua; config = "require('terminal').setup()"; })
@@ -108,7 +81,7 @@ let
 
     vim-scriptease # create commands like :Messages
 
-    (luaPlugin {
+    ({
       plugin = vim-sneak;
       config = ''
         -- can press 's' again to go to next result, like ';'
@@ -130,7 +103,9 @@ let
       plugin = vim-grepper;
       # careful these mappings are not applied as they arrive before the plug declaration
       config = ''
+        -- use :grep otherwise with :cfdo
         vim.keymap.set('n', '<leader>rg', '<Cmd>Grepper -tool rg -open -switch<CR>')
+        vim.keymap.set('n', '<leader>rgb', '<Cmd>Grepper -tool rg -open -switch -buffer<CR>', { remap = true })
       '';
     })
 
@@ -138,8 +113,9 @@ let
     vim-rsi # the goat
 
     visual-whitespace-nvim # shows spaces/tabs upon visual selection. Lovely
+
     # ' " syntax file for neomutt
-    (luaPlugin {
+    {
       plugin = vim-sayonara;
       config = ''
         vim.g.sayonara_confirm_quit = 0
@@ -152,14 +128,14 @@ let
         )
 
       '';
-    })
+    }
   ];
 
   rawPlugins =
-    # add grepper
     basePlugins
-  # ++ pluginsMap.luaPlugins
-  # ++ pluginsMap.filetypePlugins
+    ++ [ 
+      pkgs.vimPlugins.nvim-treesitter-parsers.nix
+    ]
   ;
 
 in
@@ -200,7 +176,8 @@ in
 
     extraPackages = [ ];
 
-    plugins = map (x: builtins.removeAttrs x [ "after" ]) rawPlugins;
+    # still necessary ?
+    plugins = map (x: removeAttrs x [ "after" ]) rawPlugins;
   };
 
 }

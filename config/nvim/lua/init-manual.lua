@@ -631,9 +631,6 @@ vim.api.nvim_set_keymap('n', ',a', '<Plug>(Luadev-Run)', { noremap = false, sile
 vim.api.nvim_set_keymap('v', ',,', '<Plug>(Luadev-Run)', { noremap = false, silent = false })
 vim.api.nvim_set_keymap('n', ',,', '<Plug>(Luadev-RunLine)', { noremap = false, silent = false })
 
-vim.keymap.set('n', '<leader>rg', '<Cmd>Grepper -tool git -open -switch<CR>', { remap = true })
-vim.keymap.set('n', '<leader>rgb', '<Cmd>Grepper -tool rg -open -switch -buffer<CR>', { remap = true })
-vim.keymap.set('n', '<leader>rg', '<Cmd>Grepper -tool rg -open -switch<CR>', { remap = true })
 
 -- vim.api.nvim_set_keymap(
 --	 'n',
@@ -682,11 +679,6 @@ end, { desc = 'Highlights ANSI termcodes in curbuf' })
 -- because it's installed via nix due to its rust dependencies, we have to call it manually
 require('plugins.blink-cmp')
 
--- local b64 = require('teto.b64')
-
-vim.keymap.set('v', '<leader>b', function() end)
-vim.keymap.set('v', '<leader>B', '<Plug>(ToBase64)')
-
 -- Key mapping to apply Base64 encoding to selected text
 vim.api.nvim_set_keymap(
     'v',
@@ -712,6 +704,8 @@ vim.lsp.enable('pyright')
 vim.lsp.enable('yamlls')
 vim.lsp.enable('just')
 vim.lsp.enable('nixd')
+-- vim.lsp.enable('tailwindcss')
+vim.lsp.enable('cssls')
 
 -- used by `lx check`
 vim.lsp.enable('emmylua_ls')
@@ -841,6 +835,7 @@ vim.keymap.set('n', ']]', function()
     vim.diagnostic.jump({ count = 1, wrap = true })
 end, { buffer = false })
 
+-- rikai {{{
 vim.keymap.set('n', ',jl', function()
     vim.cmd([[ Rikai lookup ]])
 end, { buffer = false, desc = 'Japanese lookup' })
@@ -867,6 +862,10 @@ end, { buffer = false, desc = 'Diagnostics' })
 --     pattern = "*",
 --     callback = highlight_current_word,
 -- })
+
+
+
+-- }}}
 
 -- vim.g.tidal_ghci = "ghci"
 vim.g.tidal_target = 'terminal'
@@ -928,6 +927,7 @@ if has_kitty_scrollback then
     -- log a warn
 end
 
+-- avante {{{
 require('plugins.avante')
 
 local avante = require('teto.avante')
@@ -936,9 +936,9 @@ avante.setup_autocmd()
 
 -- HACK around sway-scratchpad limitation where one can't esapce quotes so alleviate the need for that via a proxy command
 vim.api.nvim_create_user_command('LlmChat', function()
-    -- vim.cmd([[GpChatToggle tab]])
     require('avante.api').ask({ without_selection = true })
 end, { desc = 'Ask without selecting anything' })
+-- }}}
 
 -- "module 'nvim-treesitter.parsers' not found:"
 local has_norg, _norg = pcall(require, 'neorg')
@@ -971,13 +971,14 @@ vim.keymap.set('n', '<leader>u', require('undotree').open)
 vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 
 -- todo add api to list remote models
-vim.api.nvim_create_user_command('AvanteLogs', ':e ~/.cache/nvim/avante.log', { desc = 'read avante logs' })
 
 vim.lsp.document_color.enable()
-
+-- dap {{{
 local has_dap, _dap = pcall(require, 'dap')
 if has_dap then
     require('teto.dap')
 end
+-- }}}
 
-vim.print(vim.v.argv)
+-- prints --embed which is not listed
+-- vim.print(vim.v.argv)

@@ -29,7 +29,6 @@ let
     ];
 
   luaPlugins = with pkgs.vimPlugins; [
-    # pkgs.vimPlugins.vim-nixhash # :NixHash
     # TODO check that it brings xxd in scope
 
     # (luaPlugin {
@@ -39,26 +38,6 @@ let
 
     # (luaPlugin { plugin = nvim-peekup; })  # deno-based markdown preview
 
-    # TODO look at peek.nvim too
-    # (luaPlugin {
-    #   # euclio/vim-markdown-composer
-    #   # https://github.com/euclio/vim-markdown-composer/issues/69#issuecomment-1103440076
-    #   # see https://github.com/euclio/vim-markdown-composer/commit/910fd4321b7f25fbab5fdf84e68222cbc226d8b1
-    #   # https://github.com/euclio/vim-markdown-composer/issues/69#event-6528328732
-    #   # ComposerUpdate / ComposerStart
-    #   # we can now set g:markdown_composer_binary
-    #   # " is that the correct plugin ?
-    #   # " let $NVIM_MKDP_LOG_LEVEL = 'debug'
-    #   # " let $VIM_MKDP_RPC_LOG_FILE = expand('~/mkdp-rpc-log.log')
-    #   # " let g:mkdp_browser = 'firefox'
-    #   plugin = vim-markdown-composer;
-    #   config = ''
-    #     -- use with :ComposerStart
-    #     vim.g.markdown_composer_autostart = 0
-    #     vim.g.markdown_composer_binary = '${vim-markdown-composer.vimMarkdownComposerBin}/bin/markdown-composer'
-    #   '';
-    # })
-
     # disabled because of https://github.com/rktjmp/lush.nvim/issues/89
     # (luaPlugin { plugin = lush-nvim; }) # dependency of some colorschemes
 
@@ -66,11 +45,9 @@ let
       # node-based :MarkdownPreview
       plugin = markdown-preview-nvim;
       type = "viml";
-      # let g:vim_markdown_preview_github=1
-      # let g:vim_markdown_preview_use_xdg_open=1
     }
 
-    (luaPlugin { plugin = minimap-vim; })
+    # (luaPlugin { plugin = minimap-vim; })
 
     # { plugin = kui-nvim; }
     # FIX https://github.com/NixOS/nixpkgs/issues/169293 first
