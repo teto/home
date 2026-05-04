@@ -23,6 +23,19 @@ let
   banner = "You can start the nextcloud-add-user.service unit if teto user doesnt exist yet";
 in
 {
+imports = [
+    flakeSelf.homeModules.teto-nogui
+    flakeSelf.homeProfiles.bash
+    flakeSelf.homeProfiles.teto-aliases
+    flakeSelf.homeProfiles.yazi
+    flakeSelf.homeProfiles.yt-dlp
+  ];
+
+  home.packages = [
+    pkgs.nix-diff
+  ];
+
+  home.stateVersion = "26.05";
 
   # only on login shell
   # initExtra => interactive shell
@@ -32,13 +45,6 @@ in
   # '';
 
   programs.msmtp.enable = true;
-
-  imports = [
-    flakeSelf.homeModules.teto-nogui
-    flakeSelf.homeProfiles.bash
-    flakeSelf.homeProfiles.teto-aliases
-    flakeSelf.homeProfiles.yt-dlp
-  ];
 
   programs.yt-dlp.enable = true;
 

@@ -6,7 +6,7 @@
 -- })
 -- require('avante_lib').load()
 
-local llama_hostname = 'jedha.local'
+-- local llama_hostname = 
 
 -- local provider = 'mistral'
 -- provider = 'claude'
@@ -15,45 +15,69 @@ if vim.fn.hostname() == 'jedha' then
 end
 
 -- overrule both
--- provider = "mistral_devstral_2"
 -- provider = 'llamacpp'
--- overrule both
--- provider = 'mistral_devstral_2'
 provider = 'codex' -- use acp
+-- provider = 'unsloth/gemma-4-E4B-it-GGUF'
 -- provider = 'mistral_devstral_2'
 -- provider = 'mistral-vibe' -- default acp provider (not upstreamyed yet, might wanna add it there)
--- provider = 'gemini'
--- provider = 'llamacpp_from_openai'
 
 local xdg_config = vim.env.XDG_CONFIG_HOME or os.getenv('HOME') .. '/.config'
 
 local sops_folder = vim.fs.joinpath(xdg_config, 'sops-nix/secrets')
 -- print("Loading avante")
 
-local function mk_llama_provider(name)
+local function read_secret(filename)
+    local file = io.open(filename, 'r')
+    if file == nil then
+        return nil
+    end
+
+    local value = file:read('*a')
+    file:close()
+
+    return vim.trim(value)
+end
+
+-- providers in the gp.nvim sense,
+-- not to confuse with agents
+local providers = {
+ openai = {
+	-- endpoint = 'http://' .. llama_host .. ':8080/v1',
+ },
+ claude = {
+            endpoint = 'https://api.anthropic.com',
+            model = 'claude-sonnet-4-5-20250929',
+            -- extra_request_body = {
+            --   temperature = 0.75,
+            --   max_tokens = 4096,
+            -- },
+            -- should use XDG_CONFIG_HOME or
+            api_key_name = 'cmd:cat ' .. sops_folder .. '/claude_api_key',
+
+            -- disabled_tools = { "python" },
+        },
+
+}
+
+local function mk_llama_provider(llama_host, name)
     local opts = {
         __inherited_from = 'openai',
-        -- hide_in_model_selector
-        -- model = 'ministral3-3b-q4',
-        -- model = 'devstral2-24b-iq2',
-        -- model = 'ministral3-14b'
-        -- disable_tools
-        -- model = 'mistral-7b',
-        -- model = 'qwen2.5-3b-coder',
         model = name,
-        endpoint = 'http://' .. llama_hostname .. ':8080/v1',
-        timeout = 180000, -- Timeout in milliseconds
-        -- list_models
-        -- use_ReAct_prompt = false,
+        -- hide_in_model_selector
+        endpoint = 'http://' .. llama_host .. ':8080/v1',
+        -- Timeout in milliseconds. Make it long as server is "slow"
+        timeout = 180000, 
         -- parse_curl_args
-        -- tools send a shitton of tokens
-        -- not supported by mistral (but inherited by others so...)
-        disable_tools = false,
         -- empty key is required else avante complains
         api_key_name = '',
         -- extra_request_body = {
         --     max_tokens = 4000, -- to avoid infinite loops
         -- },
+
+        -- tools send a shitton of tokens
+        -- not supported by mistral (but inherited by others so...)
+        disable_tools = false,
+        -- trying to tweak prompt so we can send fewer tokens !
         prompt_opts = {
             system_prompt = 'you are zulu',
         },
@@ -64,9 +88,15 @@ end
 -- TODO load configuration from llm-providers.json
 -- lua vim.json.decode(str, opts)
 opts = {
-    -- debug = true, -- print error messages
+    debug = true, -- print error messages
     -- log_level =
     log_level = vim.log.levels.DEBUG,
+
+    -- seems ignored by acp ?
+    mode = 'legacy', -- Switch from "agentic" to "legacy"
+
+    -- g
+    -- instructions_file =
 
     -- can be a function as well
     -- avante is very talkative by default
@@ -146,6 +176,19 @@ opts = {
                 MISTRAL_API_KEY = os.getenv('MISTRAL_API_KEY'), -- necessary if you setup Mistral Vibe manually
             },
         },
+        -- override the default one because it was missing USER
+        ['codex'] = {
+            command = 'codex-acp',
+            args = {},
+            env = {
+                USER = os.getenv('USER'),
+                -- useful for
+                -- lua print(vim.inspect(require("avante.providers").openai:list_models()))
+                -- (in fork only)
+                OPENAI_API_KEY = read_secret(sops_folder .. '/OPENAI_API_KEY_PERSO'),
+                -- OPENAI_API_KEY = 'cmd:cat ' .. sops_folder .. '/OPENAI_API_KEY_PERSO',
+            },
+        },
     },
     providers = {
         azure = nil,
@@ -158,6 +201,8 @@ opts = {
             -- },
             -- should use XDG_CONFIG_HOME or
             api_key_name = 'cmd:cat ' .. sops_folder .. '/claude_api_key',
+
+            -- disabled_tools = { "python" },
         },
 
         gemini = {
@@ -191,12 +236,6 @@ opts = {
 
         -- see https://github.com/yetone/avante.nvim/issues/2238
         -- legacy
-        ['llama_mistral7b'] = mk_llama_provider('mistral-7b'),
-        ['llama_ministral3_3b'] = mk_llama_provider('ministral3-3b'),
-        ['llama_ministral3_8b'] = mk_llama_provider('ministral3-8b'),
-        ['llama_qwen2_5_3b'] = mk_llama_provider('qwen2.5-3b-coder'),
-        ['local:llama_qwen2_5_7b'] = mk_llama_provider('qwen2.5-7b-coder'),
-        ['local:smol-3b'] = mk_llama_provider('smol-3b'),
         -- qwen2.5-coder-7b-instruct-q8
         -- Ministral-3-3B-Instruct
         ['mistral_devstral_2'] = {
@@ -240,19 +279,11 @@ opts = {
             model = 'devstral',
             __inherited_from = 'ollama',
         },
-        ['ollama:devstral'] = {
-            model = 'devstral',
-            __inherited_from = 'ollama',
-        },
-        ['ollama/codegemma'] = {
-            model = 'codegemma',
-            -- doesn't support tools apparently ?
-            __inherited_from = 'ollama',
-        },
-        ['ollama/qwen'] = {
-            model = 'qwen2.5-coder',
-            __inherited_from = 'ollama',
-        },
+    },
+    web_search_engine = {
+        -- todo pass key
+        provider = 'tavily', -- tavily, serpapi, google, kagi, brave, or searxng
+        proxy = nil, -- proxy support, e.g., http://127.0.0.1:7890
     },
     -- ollama = {
     --   model = "deepseek-r1:7b"
@@ -378,7 +409,6 @@ opts = {
         log_dir = vim.fn.stdpath('cache'), -- directory where logs are saved
     },
 
-    -- disabled_tools = { "python" },
     -- custom_tools
     -- slash_commands =
 
@@ -406,6 +436,26 @@ local hidden_models = {
 for _, model in ipairs(hidden_models) do
     opts.providers[model] = { hide_in_model_selector = true, is_env_set = false }
     -- is_env_set
+end
+
+-- todo load from contrib/ or from llama api ?
+local jedha_models = {
+    'llama_mistral7b',
+    'llama_ministral3_3b',
+    'llama_ministral3_8b',
+    'llama_qwen2_5_3b',
+}
+
+
+for _, model in ipairs(jedha_models) do
+    opts.providers[model] = mk_llama_provider('jedha.local', jedha_models)
+end
+
+local local_models = {
+  'unsloth/gemma-4-E4B-it-GGUF'
+}
+for _, model in ipairs(local_models) do
+    opts.providers[model] = mk_llama_provider("localhost", model)
 end
 
 require('avante').setup(opts)

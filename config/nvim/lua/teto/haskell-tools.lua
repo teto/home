@@ -1,4 +1,13 @@
 local M = {}
+
+-- This is a hack to test disabling stan works
+M.restart_hls = function()
+    local my_hls_tools = require('teto.haskell-tools')
+    local new_settings = my_hls_tools.toggle_stan()
+    vim.g.settings = new_settings
+    vim.cmd([[ HlsRestart ]])
+end
+
 M.generate_settings = function()
     return {
         tools = { -- haskell-tools options

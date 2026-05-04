@@ -6,9 +6,6 @@
   ...
 }:
 {
-  imports = [
-    # ../../../hm/modules/local-ai.nix
-  ];
 
   home.packages =
     with pkgs;
@@ -23,9 +20,6 @@
       );
     in
     [
-      # my-local-ai
-      # llama-cpp # to test
-      # llama-cpp-matt # simpler than # conflicts with llama-cpp
     ];
 
   # services.local-ai.enable = true;

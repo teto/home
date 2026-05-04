@@ -100,7 +100,6 @@ in
         [
           jj
 
-          # pkgs.ollama # to test huggingface
           # flakeSelf.inputs.jujutsu.packages.${pkgs.stdenv.hostPlatform.system}.jujutsu
           jjui
 
@@ -479,7 +478,7 @@ in
 
           haskellPackages.fast-tags # generate TAGS file for vim
           hurl # http tester (broken)
-          # httpie # for api testing
+          httpie # for api testing
 
           # there is also https://github.com/TaKO8Ki/gobang
           lazysql # SQL editor
@@ -567,18 +566,16 @@ in
         grim # replace scrot/flameshot
         kanshi # autorandr-like
         kickoff # transparent launcher for wlr-root
-        fuzzel # rofi-like
-        wofi # rofi-like
-        slurp # capture tool
+        # fuzzel # rofi-like
+        # wofi # rofi-like
+        # slurp # capture tool
         # lavalauncher # TODO a tester
         # wf-recorder # (broken) for screencasts
-        # bemenu as a dmenu replacement
         wl-clipboard # wl-copy / wl-paste
         wdisplays # to show
-        swaybg # to set wallpaper
+        # swaybg # to set wallpaper
         swayimg # imageviewer (f1 to see help)
-        swaynotificationcenter # top cool depend de noctalia-shell ?
-        swaynag-battery # https://github.com/NixOS/nixpkgs/pull/175905
+        # swaynotificationcenter # top cool depend de noctalia-shell ?
         sway-launcher-desktop # fzf-based launcher
         # waypaper # sets wallpapers
         wlprop # like xprop, determines window parameters

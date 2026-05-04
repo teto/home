@@ -22,7 +22,6 @@
     flakeSelf.inputs.direnv-instant.homeModules.direnv-instant
 
     # flakeSelf.homeProfiles.qutebrowser # does nothing
-    flakeSelf.inputs.nix-index-database.homeModules.nix-index
 
     flakeSelf.homeProfiles.experimental
     flakeSelf.homeProfiles.wezterm
