@@ -199,6 +199,10 @@
       # url = "github:teto/nix?ref=teto/remove-assert-outputsSubstitutionTried";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
+    nh = {
+      url = "github:nix-community/nh";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     noctalia-shell.url = "github:noctalia-dev/noctalia-shell";
 
     nix-schemas.url = "github:DeterminateSystems/nix-src/flake-schemas";
@@ -237,6 +241,11 @@
     # nvd.url = "git+ssh://git@gitlab.com/mattator/nvd?ref=add-module";
 
     nur.url = "github:nix-community/NUR";
+
+    pinix = {
+      url = "github:remi-dupre/pinix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # https://git.sr.ht/~whynothugo/pimsync
     pimsync-src = {
@@ -425,31 +434,6 @@
                   "claude-code"
                   "mistral-vibe"
 
-                  # cuda stuff, mostly for local-ai
-                  # "cuda_cudart"
-                  # "cuda_cccl"
-                  # "cuda_nvcc"
-                  # "cudnn"
-                  # "libcublas"
-                  # "libcufile"
-                  # "cudatoolkit"
-                  # "libcurand"
-                  # "libcusparse"
-                  # "nvidia-x11"
-                  # "nvidia-settings"
-                  # "libnvjitlink"
-                  # "libcufft"
-                  # "cudnn"
-                  # "libnpp"
-                  # "cuda-merged"
-                  # "cuda_cuobjdump"
-                  # "cuda_gdb"
-                  # "cuda_nvdisasm"
-                  # "libcusolver"
-                  # "libXNVCtrl"
-                  # "libcusparse_lt"
-
-                  # "lens-desktop" # kubernetes resource viewer
                   "ec2-api-tools"
                   "jiten" # japanese software recognition tool / use sudachi instead
                   "google-chrome"

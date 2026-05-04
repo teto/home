@@ -62,6 +62,7 @@ in
       # slidev-cli # text-based slides generate via npm nice prez
       # only for matt ?
       pass-perso
+      flakeSelf.inputs.pinix.packages.${pkgs.stdenv.hostPlatform.system}.default
       # poppler for pdf preview
 
       kaggle # kaggle interface

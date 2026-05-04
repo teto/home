@@ -9,7 +9,7 @@
   # TODO add options in fact
   programs.neovim = {
 
-    enable = false;
+    # enable = false;
 
     # source /home/teto/.config/nvim/init.vim
     configure = pkgs.neovimConfigure // {

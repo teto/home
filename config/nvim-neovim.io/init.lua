@@ -125,6 +125,7 @@ vim.diagnostic.config({
 vim.lsp.enable('clangd')
 vim.lsp.enable('emmylua_ls')
 vim.lsp.enable('tailwindcss')
+vim.lsp.document_color.enable()
 
 vim.lsp.document_color.enable()
 
@@ -133,8 +134,13 @@ vim.api.nvim_set_hl(0, 'GitSignsAdd', {
     bg = '#00FF00', -- Green background
 })
 vim.api.nvim_set_hl(0, 'GitSignsChangeLn', {
-    bg = '#00FF00', -- Green background
+    bg = 'black', -- Green background
 })
+
+vim.api.nvim_set_hl(0, 'GitSignsChangeLn', {
+    bg = 'red', -- Green background
+})
+
 
 require('gitsigns').setup({
     -- '│' passe mais '▎' non :s

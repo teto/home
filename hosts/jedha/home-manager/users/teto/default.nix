@@ -54,7 +54,6 @@
   ++ lib.optionals withSecrets [
     ./sops.nix
     ./ia.nix
-    # ../../../../../hm/profiles/nushell.nix
   ];
 
   # services.opensnitch-ui.enable
@@ -76,7 +75,6 @@
   # for programs not merged yet
   home.packages = with pkgs; [
     # llm-ls # needed by the neovim plugin
-
     cointop # bitcoin tracker
     # mdp # markdown CLI presenter
     # gthumb # image manager, great to tag pictures
@@ -109,6 +107,9 @@
     # anyrun
 
     # bridge-utils# pour  brctl
+
+    vscode-css-languageserver # to showcase 'cssls' lsp server
+
   ];
 
   package-sets = {
