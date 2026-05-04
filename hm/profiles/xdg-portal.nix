@@ -17,10 +17,15 @@
     ];
 
     # config.hyprland.default = [ "wlr" "gtk" ];
-    config.common.default = "*";
-    config.sway.default = [
-      "wlr"
-      "gtk"
-    ];
+    config = {
+      common.default = "*";
+      sway= {
+        default = [
+          "wlr"
+          "gtk"
+        ];
+        "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
+      };
+    };
   };
 }
