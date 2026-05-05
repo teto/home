@@ -258,7 +258,6 @@
       ];
       definedAliases = [
         "@gh"
-        "@lr"
       ];
     };
 

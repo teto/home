@@ -100,7 +100,7 @@ in
     st = "systemctl-tui";
     yr = "yazi ./result";
 
-    js = "just switch";
+    js = "just -g switch";
     j = "just";
     jg = "just -g ";
 

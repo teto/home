@@ -24,6 +24,8 @@ let
 in
 {
 
+  home.stateVersion = "26.05";
+
   # only on login shell
   # initExtra => interactive shell
   # profileExtra => login shell

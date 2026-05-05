@@ -37,16 +37,19 @@ path = "/home/teto/neovim"
 "none-ls.nvim" = "scm"
 "none-ls-extras.nvim" = "scm"
 
-"bufferline.nvim" = "4.9.1"
-"trouble.nvim" = "scm"
-
 # remove now that it's nix installed
-"lualine.nvim" = "scm"
+# "lualine.nvim" = "scm"
+
+# i seldomly use it
+# "trouble.nvim" = "scm"
+
 # stopped working
 # "rocks-lazy.nvim" = "scm"
-"nui.nvim" = "0.4.0"
+
+# should be installed via nix as well
+# "nui.nvim" = "0.4.0"
+
 "rocks-dev.nvim" = "1.8.1"
-# nvim-lint = "scm"
 "lsp_signature.nvim" = "0.3.1"
 friendly-snippets = "scm"
 # "haskell-snippets.nvim" = "1.4.4"
@@ -101,6 +104,7 @@ volt= "scm"
 "rest.nvim" = "3.13.0"
 magick = "1.6.0"
 # "image.nvim" = "1.3.0"
+# for the image preview , hopefully we can dot without soon with nvim 0.13
 "snacks.nvim" = "2.31.0"
 
 # how to get rid of it:
@@ -174,10 +178,10 @@ rev = "a065833f35a3a7cc3ef137ac88b5381da2ba302e"
 git = "luukvbaal/statuscol.nvim"
 rev = "c399884e8f64019ec9bb581251f9710915b7f996"
 
-[plugins."lsp-progress.nvim"]
-git = "linrongbin16/lsp-progress.nvim"
-rev = "v2.0.0"
-
+# [plugins."lsp-progress.nvim"]
+# git = "linrongbin16/lsp-progress.nvim"
+# rev = "v2.0.0"
+#
 [plugins."fcitx.nvim"]
 git = "h-hg/fcitx.nvim"
 rev = "dcb6b70888aa893d3d223bb777d4117bbdac06a7"
@@ -194,9 +198,9 @@ rev = "v1.2.0"
 git = "https://github.com/grddavies/tidal.nvim"
 rev = "fa4673e181e18fd1719ae17a1d4f4ecce2de37aa"
 
-[plugins."codecompanion.nvim"]
-git = "olimorris/codecompanion.nvim"
-rev = "v19.12.0"
+# [plugins."codecompanion.nvim"]
+# git = "olimorris/codecompanion.nvim"
+# rev = "v19.12.0"
 
 [plugins."fzf-lua-frecency.nvim"]
 git = "elanmed/fzf-lua-frecency.nvim"
@@ -216,7 +220,7 @@ rev = "61239312730b3f51441596bdadab7e3578987592"
 
 [plugins."jiejie.nvim"]
 git = "jceb/jiejie.nvim"
-rev = "c8758d839745caa55faf11a1c0ab32cb1d95c681"
+rev = "6a3a3598e6e015cfd3f1f447c257314972030e1b"
 
 # [plugins."opencode.nvim"]
 # git = "nickjvandyke/opencode.nvim"

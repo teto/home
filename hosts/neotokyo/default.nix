@@ -74,6 +74,9 @@ in
     "rds"
     "tipc"
   ];
+
+  services.dbus.implementation = "dbus";
+
   imports = [
 
     ./ovh.nix
@@ -106,6 +109,7 @@ in
     ./services/immich.nix
     ./services/restic.nix
     ./services/llama-cpp.nix
+    ./services/n8n.nix
 
     # ./services/jellyfin.nix
 

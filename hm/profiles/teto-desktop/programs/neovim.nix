@@ -345,13 +345,13 @@ in
     # }
 
     # TODO move to default ones
-    (luaPlugin {
+    {
       plugin = pkgs.vimPlugins.unicode-vim;
-      config = ''
+      config = /* lua */ ''
         -- overrides ga
         vim.keymap.set ( "n", "ga",  "<Plug>(UnicodeGA)", { remap = true, } )
       '';
-    })
+    }
 
     # TODO move to rocks
     # {

@@ -11,15 +11,16 @@
 -- https://www.reddit.com/r/neovim/comments/1kcz8un/great_improvements_to_the_cmdline_in_nightly/
 -- require('vim._extui').enable({})
 require('vim._core.ui2').enable({
-    --      enable = true, -- Whether to enable or disable the UI.
-    --      msg = { -- Options related to the message module.
-    --        ---@type 'cmd'|'msg' Default message target, either in the
-    --        ---cmdline or in a separate ephemeral message window.
-    --        ---@type string|table<string, 'cmd'|'msg'|'pager'> Default message target
-    --        -- or table mapping |ui-messages| kinds to a target.
-    -- 	targets = 'cmd',
-    -- 	timeout = 4000, -- Time a message is visible in the message window.
-    -- 	},
+	enable = true, -- Whether to enable or disable the UI.
+	msg = {
+		-- Options related to the message module.
+		---@type 'cmd'|'msg' Default message target, either in the
+		---cmdline or in a separate ephemeral message window.
+		---@type string|table<string, 'cmd'|'msg'|'pager'> Default message target
+		-- or table mapping |ui-messages| kinds to a target.
+    	targets = 'cmd',
+    	timeout = 4000, -- Time a message is visible in the message window.
+    	},
     pager = { -- Options related to message window.
         height = 0, -- Maximum height.
     },
@@ -98,7 +99,7 @@ vim.g.tiny_cmdline = {
 
     -- Horizontal offset of the completion menu anchor from the window's left inner edge
     -- Used to align blink.cmp / nvim-cmp menus with the cmdline window
-    menu_col_offset = 3,
+    menu_col_offset = 2,
 
     -- Cmdline types rendered at the bottom of the screen instead of centered
     -- "/" and "?" (search) are kept native by default
@@ -109,6 +110,7 @@ vim.o.spelllang = 'en_gb,fr'
 
 -- new option
 vim.o.winborder = 'rounded'
+-- todo can now be set as list ?
 vim.opt.guicursor =
     'n-v-c:block-blinkon250-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-blinkon250-Cursor/lCursor,r-cr:hor20-Cursor/lCursor'
 
@@ -387,13 +389,7 @@ Mouse configuration:
 https://github.com/neovim/neovim/issues/14921
 ]]
 
--- generated from luau via darklua
--- require('teto.context_menu_generated').setup_rclick_menu_autocommands()
--- require('teto.context_menu').setup_rclick_menu_autocommands()
--- vim.api.nvim_set_keymap('n', '<F1>', '<Cmd>lua open_contextual_menu()<CR>', { noremap = true, silent = false })
-
--- MenuPopup
-vim.opt.signcolumn = 'auto:1-3'
+-- vim.opt.signcolumn = 'auto:1-3'
 
 -- vim.g.grug_far = {startInInsertMode = false }
 
@@ -548,9 +544,8 @@ vim.g.indicator_errors = ''
 vim.g.indicator_warnings = ''
 vim.g.indicator_info = '🛈'
 vim.g.indicator_hint = '❗'
-vim.g.indicator_ok = '✅'
-
 -- ✓
+vim.g.indicator_ok = '✅'
 vim.g.spinner_frames = { '⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷' }
 
 if use_fzf_lua then
@@ -581,7 +576,7 @@ vim.g.tex_flavor = 'latex'
 
 -- should not be required anymore since plugins/nvim-treesitter.lua is called
 -- require('teto.treesitter')
-vim.lsp.log.set_level(vim.lsp.log_levels.INFO)
+-- vim.lsp.log.set_level(vim.lsp.log_levels.INFO)
 
 -- setup haskell-tools
 vim.g.haskell_tools = require('teto.haskell-tools').generate_settings()
@@ -704,8 +699,8 @@ vim.lsp.enable('pyright')
 vim.lsp.enable('yamlls')
 vim.lsp.enable('just')
 vim.lsp.enable('nixd')
--- vim.lsp.enable('tailwindcss')
-vim.lsp.enable('cssls')
+-- vim.lsp.enable('nil_ls')
+-- vim.lsp.enable('cssls')
 
 -- used by `lx check`
 vim.lsp.enable('emmylua_ls')
@@ -940,13 +935,16 @@ vim.api.nvim_create_user_command('LlmChat', function()
 end, { desc = 'Ask without selecting anything' })
 -- }}}
 
--- "module 'nvim-treesitter.parsers' not found:"
+-- neorgmode {{{
 local has_norg, _norg = pcall(require, 'neorg')
 
 if has_norg then
+-- https://github.com/nvim-neorg/neorg/issues/1351
+-- https://github.com/nvim-neorg/neorg/issues/1342
+
     require('plugins.neorg')
 end
-
+-- }}}
 -- todo fix upgraded version
 -- require('plugins.image')
 
@@ -962,17 +960,19 @@ end
 
 -- require('plugins.mini-sessions')
 
--- https://github.com/nvim-neorg/neorg/issues/1351
--- https://github.com/nvim-neorg/neorg/issues/1342
+vim.keymap.set('n', '<leader>u', function () 
+	vim.cmd('packadd nvim.undotree')
+	require('undotree').open()
+end
+)
 
-vim.cmd('packadd nvim.undotree')
-vim.keymap.set('n', '<leader>u', require('undotree').open)
-
-vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
+vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory in oil' })
 
 -- todo add api to list remote models
 
-vim.lsp.document_color.enable()
+-- enabled by default
+-- vim.lsp.document_color.enable()
+
 -- dap {{{
 local has_dap, _dap = pcall(require, 'dap')
 if has_dap then
@@ -980,5 +980,43 @@ if has_dap then
 end
 -- }}}
 
+
+-- lualine stuff {{{
+local has_lualine, _lualine = pcall(require, 'lualine')
+if has_lualine then 
+	-- when not handled by rocks directly
+	require'plugins.lualine'
+	for i = 1, 9 do
+		vim.keymap.set(
+			'n',
+			'<leader>' .. tostring(i),
+			'<cmd>LualineBuffersJump ' .. tostring(i) .. '<CR>',
+			{ silent = true }
+		)
+	end
+end
+-- }}}
+
+
+-- generated from luau via darklua
+-- require('teto.context_menu_generated').setup_rclick_menu_autocommands()
+-- require('teto.context_menu').setup_rclick_menu_autocommands()
+-- vim.api.nvim_set_keymap('n', '<F1>', '<Cmd>lua open_contextual_menu()<CR>', { noremap = true, silent = false })
+-- MenuPopup
+-- mouse users + nvimtree users!
+vim.keymap.set({ "n", "v" }, "<RightMouse>", function()
+  require('menu.utils').delete_old_menus()
+
+  vim.cmd.exec '"normal! \\<RightMouse>"'
+
+  -- clicked buf
+  local buf = vim.api.nvim_win_get_buf(vim.fn.getmousepos().winid)
+  -- vim.bo[buf].ft == "NvimTree" and "nvimtree" or
+  local options =  "default"
+
+  require("menu").open(options, { mouse = true })
+end, {})
+
 -- prints --embed which is not listed
 -- vim.print(vim.v.argv)
+

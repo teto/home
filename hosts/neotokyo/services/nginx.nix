@@ -140,6 +140,15 @@ in
           proxy_set_header Connection $connection_upgrade;
         '';
       };
+    }
+    // lib.optionalAttrs config.services.n8n.enable {
+      "n8n.${secrets.jakku.hostname}" = {
+        locations."/" = {
+          recommendedProxySettings = true;
+          proxyWebsockets = true;
+          proxyPass = "http://127.0.0.1:${builtins.toString config.services.n8n.environment.N8N_PORT}";
+        };
+      };
     };
 
   };

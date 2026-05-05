@@ -9,7 +9,6 @@
 {
 
   # package = pkgs.nixVersions.nix_2_34;
-  # package = pkgs.nixVersions.nix_2_34;
   package = lib.mkForce flakeSelf.inputs.nix.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
   settings = {

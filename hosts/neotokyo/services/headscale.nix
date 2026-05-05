@@ -1,3 +1,4 @@
+{ secrets, ... }:
 {
   enable = true;
 
@@ -5,5 +6,8 @@
   address = "0.0.0.0";
 
   # needs a postgres DB
-  # settings
+  settings.dns = {
+    base_domain = "tailnet.${secrets.jakku.hostname}";
+    override_local_dns = false;
+  };
 }

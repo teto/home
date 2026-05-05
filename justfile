@@ -2,12 +2,12 @@
 # provide a default
 # Add justfile() function, returning the current justfile, and justfile_directory()
 
+# TODO include global justfile
+
 HOSTNAME := `hostname`
 NIXPKGS_REPO := env('HOME') / 'nixpkgs'
-
-# BLOG_FOLDER := "${HOME}/blog"
-
 HM_REPO := env('HOME') / "hm"
+# BLOG_FOLDER := "${HOME}/blog"
 
 # not versioned, where we store secrets
 
@@ -46,16 +46,9 @@ bootstrap-vps target:
 # just to save the command
 
 # should be loaded into zsh history instead
+# TODO include global justfile
 boot: (nixos-rebuild "boot --install-bootloader" "")
 
-build: (nixos-rebuild "build")
-
-switch: (nixos-rebuild "switch" "")
-
-# builds everything on remote
-switch-remote: (nixos-rebuild "switch" "--option builders \"$TETOS_0\" -j0")
-
-rollback: (nixos-rebuild "switch" "--rollback")
 
 repl:
     nix repl ~/home \
@@ -66,18 +59,6 @@ repl:
 # nom can hide when there is a lock
 # |& nom
 # env('HOST')       -j 1 \
-
-# builders
-[private]
-nixos-rebuild command extra_args="":
-    nixos-rebuild \
-      --flake ~/home \
-      --sudo --keep-going \
-      --override-input nixpkgs {{ NIXPKGS_REPO }} \
-      --override-input hm {{ HM_REPO }} \
-       {{ extra_args }} \
-       {{ command }}
-
 build-nom hostname:
     nom build .#nixosConfigurations.{{ hostname }}.config.system.build.toplevel 
 

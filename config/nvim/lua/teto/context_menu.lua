@@ -139,27 +139,6 @@ M.set_rclick_submenu = function(menu_name, submenu_label, items, bindif)
     M.rclick_context_menu('PopUp', submenu_label, '<cmd>popup ' .. menu_name .. '<cr>')
 end
 
--- vim.diagnostic.config({
---     -- disabled because too big in haskell
---     virtual_lines = false,
---     virtual_text = true,
---     -- {
---     -- severity = { min = vim.diagnostic.severity.WARN }
---     -- },
---     signs = true,
---     severity_sort = true,
--- })
-
--- This is a hack to test disabling stan works
-M.restart_hls = function()
-    local my_hls_tools = require('teto.haskell-tools')
-    local new_settings = my_hls_tools.toggle_stan()
-    vim.g.settings = new_settings
-    vim.cmd([[ HlsRestart ]])
-end
-
--- menu_get({path} [, {modes}])                                        *menu_get()*
--- menu_add('LSP')
 
 M.set_lsp_rclick_menu = function()
     M.set_rclick_submenu('TetoMenuLsp', 'LSP         ', {

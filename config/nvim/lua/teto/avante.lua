@@ -15,6 +15,33 @@ local M = {}
 
 function M.provider_list_available_models() end
 
+-- local on_click_gp = function(_nb_of_clicks, _button, _modifiers)
+--     -- vim.notify("builtins GP.nvim")
+--     local menu_opts = {
+--         mouse = true,
+--         border = false,
+--     }
+--
+--     -- list possible agents from the api
+--     -- one can look at agent_completion
+--     local agents = require('gp')._chat_agents
+--
+--     local entries = {}
+--     for _, ag in ipairs(agents) do
+--         -- print("Adding entry", tostring(ag))
+--         entries[#entries + 1] = {
+--             -- rtxt
+--             name = tostring(ag),
+--             cmd = ':GpAgent ' .. tostring(ag),
+--         }
+--         -- print("Nb of entries", #entries)
+--     end
+--
+--     -- vim.print(entries)
+--     -- entries must be non empty else nvim will complain about 'height' being not positive
+--     require('menu').open(entries, menu_opts)
+-- end
+
 function M.setup_autocmd()
     -- the prompt is long with tools, look at get_ReAct_system_prompt()
     -- add_text_message
@@ -87,5 +114,12 @@ function M.render_header()
     -- win = winid
     --  })
 end
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "ToggleMyPrompt",
+  callback = function() require("avante.config").override({system_prompt = "MY CUSTOM SYSTEM PROMPT"}) end,
+})
+
+vim.keymap.set("n", "<leader>am", function() vim.api.nvim_exec_autocmds("User", { pattern = "ToggleMyPrompt" }) end, { desc = "avante: toggle my prompt" })
 
 return M

@@ -1,6 +1,5 @@
-# NIXPKGS_REPO := env_var('HOME') / 'nixpkgs'
-
-NIXPKGS := "/home/teto/nixpkgs"
+NIXPKGS_REPO := env('HOME') / 'nixpkgs'
+HM_REPO := env('HOME') / "hm"
 
 # set dotenv-load := ".env.local"
 
@@ -73,7 +72,7 @@ mail-sync:
 
 # generate database executable -> nix attributes
 nixpkgs-index:
-    rippkgs-index nixpkgs {{ NIXPKGS }} --index ~/.local/share/rippkgs-index.sqlite
+    rippkgs-index nixpkgs {{ NIXPKGS_REPO }} --index ~/.local/share/rippkgs-index.sqlite
 
 # TODO finish
 nix-index args:
@@ -86,3 +85,32 @@ nix-closure-size derivation:
     # $(nix-build ./shell.nix -A inputDerivation)
     # $(nix build --print-out-paths drv)
     nix path-info -Sh {{ derivation }}
+
+build: (nixos-rebuild "build")
+
+# using nixos-rebuild
+switch-original: (nixos-rebuild "switch" "")
+
+# new version using nh
+switch:
+ nh os switch --ask ~/home -- \
+      --override-input nixpkgs {{ NIXPKGS_REPO }} \
+      --override-input hm {{ HM_REPO }}
+
+# builds everything on remote
+switch-remote: (nixos-rebuild "switch" "--option builders \"$TETOS_0\" -j0")
+
+rollback: (nixos-rebuild "switch" "--rollback")
+
+# builders
+[private]
+nixos-rebuild command extra_args="":
+    nixos-rebuild \
+      --flake ~/home \
+      --sudo --keep-going \
+      --override-input nixpkgs {{ NIXPKGS_REPO }} \
+      --override-input hm {{ HM_REPO }} \
+       {{ extra_args }} \
+       {{ command }}
+
+

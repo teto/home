@@ -1,10 +1,20 @@
 return {
 
     {
-        name = 'Toggling lsp_lines',
+        name = 'Toggle lines',
         cmd = function()
+		  vim.diagnostic.config {
+			virtual_lines = not vim.diagnostic.config().virtual_lines;
+		   }
             vim.notify('Toggling lsp_lines')
-            require('lsp_lines').toggle()
         end,
     },
+	{
+	 name = "just errors",
+	 cmd = function ()
+	   -- severity = { min = vim.diagnostic.severity.WARN },
+	 end
+
+
+	}
 }

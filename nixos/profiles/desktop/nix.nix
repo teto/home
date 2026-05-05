@@ -19,13 +19,12 @@
     }
     // {
       substituters = [
-        # "https://nix-community.cachix.org"
         "https://cache.nixos-cuda.org"
         "https://nix-community.cachix.org"
       ];
 
       trusted-substituters = [
-        "https://haskell-language-server.cachix.org"
+        # "https://haskell-language-server.cachix.org"
       ]
       ++ lib.optional withSecrets "https://cache.${secrets.jakku.hostname}";
 

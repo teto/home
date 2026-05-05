@@ -4,6 +4,11 @@ return {
         hl = 'Exblue',
         items = 'grugfar',
     },
+    {
+        name = 'Avante',
+        hl = 'Exblue',
+        items = 'avante',
+    },
 
     -- {
     --   name = "Format Buffer",
@@ -85,6 +90,17 @@ return {
     },
 
     { name = 'separator' },
+	{
+	 name = "List directory",
+	 cmd = "Oil"
+	},
+    {
+        name = 'undo tree',
+        cmd = function()
+		 	vim.cmd('packadd nvim.undotree')
+			require('undotree').open()
+        end,
+    },
 
     {
         name = '  Color Picker',

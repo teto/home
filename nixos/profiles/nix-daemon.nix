@@ -1,6 +1,6 @@
 {
-  pkgs,
-  flakeSelf,
+  # pkgs,
+  # flakeSelf,
   ...
 }:
 {
@@ -8,14 +8,24 @@
 
     distributedBuilds = true;
 
-    # package = pkgs.nixVersions.nix_2_34;
-
     settings = {
       #   # http-connections = 25 is the default
       #   http2 = true;
       # show-trace = false;
       builders-use-substitutes = true;
       use-xdg-base-directories = true;
+      preallocate-contents = true;
+      warn-large-path-threshold = "10M";
+      log-lines = 20;
+      use-registries = true;
+      warn-dirty = true;
+
+      # was problematic for a while
+      use-cgroups = false;
+
+
+      # starting from nix 2.30
+      trace-import-from-derivation  = true;
 
       keep-outputs = true; # Nice for developers
       keep-derivations = true; # Idem
@@ -25,18 +35,13 @@
       extra-experimental-features = "auto-allocate-uids nix-command flakes cgroups";
 
       substituters = [
-        # "https://nix-community.cachix.org"
       ];
 
       trusted-substituters = [
       ];
       trusted-public-keys = [
         # "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        # "haskell-language-server.cachix.org-1:juFfHrwkOxqIOZShtC4YC1uT1bBcq2RSvC7OMKx0Nz8="
       ];
-      log-lines = 20;
-
-      # trusted-users = [ "teto" ];
     };
   };
 }

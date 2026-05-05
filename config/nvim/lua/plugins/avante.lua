@@ -68,6 +68,9 @@ opts = {
     -- log_level =
     log_level = vim.log.levels.DEBUG,
 
+    -- seems ignored by acp ?
+    mode = "legacy", -- Switch from "agentic" to "legacy"
+
 	-- g
 	-- instructions_file = 
 
@@ -149,6 +152,20 @@ opts = {
                 MISTRAL_API_KEY = os.getenv('MISTRAL_API_KEY'), -- necessary if you setup Mistral Vibe manually
             },
         },
+	   -- override the default one because it was missing USER
+	  ["codex"] = {
+		command = "codex-acp",
+		args = {},
+		env = {
+		  USER = os.getenv("USER"),
+		  -- useful for 
+		  -- lua print(vim.inspect(require("avante.providers").openai:list_models()))
+		  -- (in fork only)
+		  OPENAI_API_KEY =os.getenv("OPENAI_API_KEY"),
+		  -- OPENAI_API_KEY = 'cmd:cat ' .. sops_folder .. '/OPENAI_API_KEY_PERSO',
+		},
+	  },
+
     },
     providers = {
         azure = nil,
@@ -161,6 +178,8 @@ opts = {
             -- },
             -- should use XDG_CONFIG_HOME or
             api_key_name = 'cmd:cat ' .. sops_folder .. '/claude_api_key',
+
+		   -- disabled_tools = { "python" },
         },
 
         gemini = {
@@ -194,12 +213,6 @@ opts = {
 
         -- see https://github.com/yetone/avante.nvim/issues/2238
         -- legacy
-        ['llama_mistral7b'] = mk_llama_provider('mistral-7b'),
-        ['llama_ministral3_3b'] = mk_llama_provider('ministral3-3b'),
-        ['llama_ministral3_8b'] = mk_llama_provider('ministral3-8b'),
-        ['llama_qwen2_5_3b'] = mk_llama_provider('qwen2.5-3b-coder'),
-        ['local:llama_qwen2_5_7b'] = mk_llama_provider('qwen2.5-7b-coder'),
-        ['local:smol-3b'] = mk_llama_provider('smol-3b'),
         -- qwen2.5-coder-7b-instruct-q8
         -- Ministral-3-3B-Instruct
         ['mistral_devstral_2'] = {
@@ -243,20 +256,12 @@ opts = {
             model = 'devstral',
             __inherited_from = 'ollama',
         },
-        ['ollama:devstral'] = {
-            model = 'devstral',
-            __inherited_from = 'ollama',
-        },
-        ['ollama/codegemma'] = {
-            model = 'codegemma',
-            -- doesn't support tools apparently ?
-            __inherited_from = 'ollama',
-        },
-        ['ollama/qwen'] = {
-            model = 'qwen2.5-coder',
-            __inherited_from = 'ollama',
-        },
     },
+	 web_search_engine = {
+	  -- todo pass key
+	   provider = "tavily", -- tavily, serpapi, google, kagi, brave, or searxng
+	   proxy = nil, -- proxy support, e.g., http://127.0.0.1:7890
+	 },
     -- ollama = {
     --   model = "deepseek-r1:7b"
     --   -- model = "qwq:32b",
@@ -381,7 +386,6 @@ opts = {
         log_dir = vim.fn.stdpath('cache'), -- directory where logs are saved
     },
 
-    -- disabled_tools = { "python" },
     -- custom_tools
     -- slash_commands =
 
@@ -410,5 +414,25 @@ for _, model in ipairs(hidden_models) do
     opts.providers[model] = { hide_in_model_selector = true, is_env_set = false }
     -- is_env_set
 end
+
+-- todo load from contrib/ or from llama api ?
+local local_models = {
+'llama_mistral7b',
+'llama_ministral3_3b',
+'llama_ministral3_8b',
+'llama_qwen2_5_3b'
+}
+ -- [] = mk_llama_provider('mistral-7b'),
+ -- ['llama_ministral3_3b'] = mk_llama_provider('ministral3-3b'),
+ -- ['llama_ministral3_8b'] = mk_llama_provider('ministral3-8b'),
+ -- ['llama_qwen2_5_3b'] = mk_llama_provider('qwen2.5-3b-coder'),
+ -- ['local:llama_qwen2_5_7b'] = mk_llama_provider('qwen2.5-7b-coder'),
+
+for _, model in ipairs(local_models) do
+    opts.providers[model] = mk_llama_provider(model)
+     -- { hide_in_model_selector = true, is_env_set = false }
+    -- is_env_set
+end
+
 
 require('avante').setup(opts)

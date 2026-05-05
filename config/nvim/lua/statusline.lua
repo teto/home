@@ -1,21 +1,10 @@
 -- called by airline to disable
+-- todo can be removed
 local function statusline_lsp()
-    -- return 'test'
-    -- vim.g.indicator_errors = ''
-    -- vim.g.indicator_warnings = ''
-    -- vim.g.indicator_info = '🛈'
-    -- vim.g.indicator_hint = '❗'
-    -- vim.g.indicator_ok = ''
-    -- vim.g.spinner_frames = {'⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷'}
 
     -- local base_status = "S"
     local status_symbol = '🇻'
     local indicator_ok = '✅'
-    -- vim.g.indicator_errors = ''
-    -- vim.g.indicator_warnings = ''
-    -- vim.g.indicator_info = '🛈'
-    -- vim.g.indicator_hint = '❗'
-    -- vim.g.indicator_ok = '✅'
 
     -- can we ?
     if #vim.lsp.buf_get_clients() == 0 then
