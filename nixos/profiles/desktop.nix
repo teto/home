@@ -248,7 +248,7 @@ in
   #JournalSizeMax=767M
   #MaxUse=
   #KeepFree=
-  systemd.coredump.extraConfig = ''
+  systemd.coredump.settings.Coredump = ''
     #Storage=external
     #Compress=yes
     ProcessSizeMax=5G
