@@ -13,7 +13,6 @@ let
   neovim = import ./neovim.nix { inherit flakeSelf lib; };
 
   myPkgs = pkgs;
-
 in
 {
   inherit
@@ -84,7 +83,6 @@ in
             withSecrets = true;
             hostname = dirname;
             modules = [
-              # ./hosts/tatooine
               (folder + "/${dirname}")
             ];
           };
@@ -100,7 +98,7 @@ in
   importFiles =
     folder:
     let
-      genKey = str: lib.replaceStrings [ ".nix" ] [ "" ] (builtins.baseNameOf (toString str));
+      genKey = str: lib.replaceStrings [ ".nix" ] [ "" ] (baseNameOf (toString str));
 
       pred = name: val: lib.strings.hasSuffix ".nix" name;
 
@@ -129,7 +127,6 @@ in
     builtins.trace "SSH config for ${name}" (
       lib.optionalAttrs sshCfg.enable
         # lib.warn if "teto" is not in users.users
-        (
           {
             match = ''host="${mcfg.config.networking.hostName},${mcfg.config.networking.domain}"'';
             # assumption ? or check/warn it has it ?
@@ -144,7 +141,6 @@ in
               ) "Missing domaing for ${name}" mcfg.config.networking.domain;
             };
           }
-        )
     );
 
   # temporary solution since it's not portable

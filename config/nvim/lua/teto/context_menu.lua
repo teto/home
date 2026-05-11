@@ -139,7 +139,6 @@ M.set_rclick_submenu = function(menu_name, submenu_label, items, bindif)
     M.rclick_context_menu('PopUp', submenu_label, '<cmd>popup ' .. menu_name .. '<cr>')
 end
 
-
 M.set_lsp_rclick_menu = function()
     M.set_rclick_submenu('TetoMenuLsp', 'LSP         ', {
         { 'Code Actions           <space>ca', '<space>ca' },

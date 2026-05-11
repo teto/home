@@ -45,11 +45,6 @@ bootstrap-vps target:
 
 # just to save the command
 
-# should be loaded into zsh history instead
-# TODO include global justfile
-boot: (nixos-rebuild "boot --install-bootloader" "")
-
-
 repl:
     nix repl ~/home \
         --override-input nixpkgs {{ NIXPKGS_REPO }} \

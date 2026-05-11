@@ -79,22 +79,23 @@
         luaInterpreter = pkgs.lua51Packages.lua;
         # -- vim.g.sqlite_clib_path" 'path = vim.g.sqlite_clib_path or  "${sqlite.out}/lib/libsqlite3${stdenv.hostPlatform.extensions.sharedLibrary}"'
 
+        ghcEnv4Tidal = (pkgs.ghc.withPackages (hs: [ hs.tidal ]));
       in
       {
         enable = true;
         # TODO add sqlite_clib_path to the wrapper ?
+        # M.edict_kanjidb = "${flakeSelf.inputs.edict-kanji-db}/kanji.db"
+        # M.edict_expressiondb = "${flakeSelf.inputs.edict-expression-db}/expression.db"
         text =
-          let
-            ghcEnv4Tidal = (pkgs.ghc.withPackages (hs: [ hs.tidal ]));
-          in
+          # let
+          #   
+          # in
           ''
             local M = {}
             M.gcc_path = "${pkgs.gcc}/bin/gcc"
             M.lua_interpreter = "${luaInterpreter}"
             M.luarocks_executable = "${luaInterpreter.pkgs.luarocks_bootstrap}/bin/luarocks"
             M.sqlite_clib_path = "${pkgs.sqlite.out}/lib/libsqlite3${pkgs.stdenv.hostPlatform.extensions.sharedLibrary}"
-            M.edict_kanjidb = "${flakeSelf.inputs.edict-kanji-db}/kanji.db"
-            M.edict_expressiondb = "${flakeSelf.inputs.edict-expression-db}/expression.db"
             M.tidal_boot = "${ghcEnv4Tidal}/tidal-1.10.1/BootTidal.hs"
             return M
           '';

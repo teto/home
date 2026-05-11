@@ -1,7 +1,6 @@
 -- called by airline to disable
 -- todo can be removed
 local function statusline_lsp()
-
     -- local base_status = "S"
     local status_symbol = '🇻'
     local indicator_ok = '✅'

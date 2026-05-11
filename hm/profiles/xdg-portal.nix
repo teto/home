@@ -19,7 +19,7 @@
     # config.hyprland.default = [ "wlr" "gtk" ];
     config = {
       common.default = "*";
-      sway= {
+      sway = {
         default = [
           "wlr"
           "gtk"

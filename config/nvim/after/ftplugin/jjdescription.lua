@@ -1,1 +1,1 @@
-vim.cmd [[startinsert]]
+vim.cmd([[startinsert]])

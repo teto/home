@@ -1,7 +1,7 @@
 function setup(config)
     config.action('create-bookmark', function()
-	 -- ideally 
-        jj('bookmark', 'create', '-r', revisions.current(), input({ title = 'Create bookmark'; value = "teto/" }))
+        -- ideally
+        jj('bookmark', 'create', '-r', revisions.current(), input({ title = 'Create bookmark', value = 'teto/' }))
         revisions.refresh()
     end, {
         key = 'B',

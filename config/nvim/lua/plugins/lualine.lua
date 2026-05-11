@@ -29,77 +29,78 @@ local clip = require('teto.clipboard')
 -- end
 
 local diagnostic_section = {
-      'diagnostics',
+    'diagnostics',
 
-      -- Table of diagnostic sources, available sources are:
-      --   'nvim_lsp', 'nvim_diagnostic', 'nvim_workspace_diagnostic', 'coc', 'ale', 'vim_lsp'.
-      -- or a function that returns a table as such:
-      --   { error=error_cnt, warn=warn_cnt, info=info_cnt, hint=hint_cnt }
-      sources = { 'nvim_diagnostic', },
+    -- Table of diagnostic sources, available sources are:
+    --   'nvim_lsp', 'nvim_diagnostic', 'nvim_workspace_diagnostic', 'coc', 'ale', 'vim_lsp'.
+    -- or a function that returns a table as such:
+    --   { error=error_cnt, warn=warn_cnt, info=info_cnt, hint=hint_cnt }
+    sources = { 'nvim_diagnostic' },
 
-      -- Displays diagnostics for the defined severity types
-      sections = {
-		'error',
-		'warn',
-		'info',
-		'hint'
-	  },
+    -- Displays diagnostics for the defined severity types
+    sections = {
+        'error',
+        'warn',
+        'info',
+        'hint',
+    },
 
-      diagnostics_color = {
+    diagnostics_color = {
         -- Same values as the general color option can be used here.
         error = 'DiagnosticError', -- Changes diagnostics' error color.
-        warn  = 'DiagnosticWarn',  -- Changes diagnostics' warn color.
-        info  = 'DiagnosticInfo',  -- Changes diagnostics' info color.
-        hint  = 'DiagnosticHint',  -- Changes diagnostics' hint color.
-      },
-      symbols = {
-	   error = vim.g.indicator_errors,
-	   warn = vim.g.indicator_warnings,
-	   info = 'I',
-	   hint = 'H'
-	  },
-      colored = true,           -- Displays diagnostics status in color if set to true.
-      update_in_insert = false, -- Update diagnostics in insert mode.
-      always_visible = false,   -- Show diagnostics even if there are none.
-    }
+        warn = 'DiagnosticWarn', -- Changes diagnostics' warn color.
+        info = 'DiagnosticInfo', -- Changes diagnostics' info color.
+        hint = 'DiagnosticHint', -- Changes diagnostics' hint color.
+    },
+    symbols = {
+        error = vim.g.indicator_errors,
+        warn = vim.g.indicator_warnings,
+        info = 'I',
+        hint = 'H',
+    },
+    colored = true, -- Displays diagnostics status in color if set to true.
+    update_in_insert = false, -- Update diagnostics in insert mode.
+    always_visible = false, -- Show diagnostics even if there are none.
+}
 
 local buffers_section = {
-      'buffers',
-      show_filename_only = true,   -- Shows shortened relative path when set to false.
-      hide_filename_extension = false,   -- Hide filename extension when set to true.
-      show_modified_status = true, -- Shows indicator when the buffer is modified.
+    'buffers',
+    show_filename_only = true, -- Shows shortened relative path when set to false.
+    hide_filename_extension = false, -- Hide filename extension when set to true.
+    show_modified_status = true, -- Shows indicator when the buffer is modified.
 
-      mode = 2, -- 0: Shows buffer name
-                -- 1: Shows buffer index
-                -- 2: Shows buffer name + buffer index
-                -- 3: Shows buffer number
-                -- 4: Shows buffer name + buffer number
+    mode = 2, -- 0: Shows buffer name
+    -- 1: Shows buffer index
+    -- 2: Shows buffer name + buffer index
+    -- 3: Shows buffer number
+    -- 4: Shows buffer name + buffer number
 
-      -- max_length = vim.o.columns * 2 / 3, -- Maximum width of buffers component,
-      --                                     -- it can also be a function that returns
-      --                                     -- the value of `max_length` dynamically.
-      filetype_names = {
+    -- max_length = vim.o.columns * 2 / 3, -- Maximum width of buffers component,
+    --                                     -- it can also be a function that returns
+    --                                     -- the value of `max_length` dynamically.
+    filetype_names = {
         TelescopePrompt = 'Telescope',
         dashboard = 'Dashboard',
         packer = 'Packer',
         fzf = 'FZF',
-        alpha = 'Alpha'
-      }, -- Shows specific buffer name for that filetype ( { `filetype` = `buffer_name`, ... } )
+        alpha = 'Alpha',
+		AvanteInput = "Avante Prompt",
+    }, -- Shows specific buffer name for that filetype ( { `filetype` = `buffer_name`, ... } )
 
-      -- Automatically updates active buffer color to match color of other components (will be overidden if buffers_color is set)
-      use_mode_colors = true,
+    -- Automatically updates active buffer color to match color of other components (will be overidden if buffers_color is set)
+    use_mode_colors = true,
 
-      buffers_color = {
+    buffers_color = {
         -- Same values as the general color option can be used here.
         -- active = 'lualine_{section}_normal',     -- Color for active buffer.
         -- inactive = 'lualine_{section}_inactive', -- Color for inactive buffer.
-      },
+    },
 
-      symbols = {
-        modified = ' ●',      -- Text to show when the buffer is modified
+    symbols = {
+        modified = ' ●', -- Text to show when the buffer is modified
         alternate_file = '#', -- Text to show to identify the alternate file
-        directory =  '',     -- Text to show when the buffer is a directory
-      }
+        directory = '', -- Text to show when the buffer is a directory
+    },
 }
 
 local branch_name = ''
@@ -112,25 +113,25 @@ require('lualine').setup({
         section_separators = { left = '', right = '' },
         separators = { left = '', right = '' },
         globalstatus = true,
-		-- If current filetype is in this list it'll
-		-- always be drawn as inactive statusline
-		-- and the last window will be drawn as active statusline.
-		-- for example if you don't want statusline of
-		-- your file tree / sidebar window to have active
-		-- statusline you can add their filetypes here.
-		--
-		-- Can also be set to a function that takes the
-		-- currently focused window as its only argument
-		-- and returns a boolean representing whether the
-		-- window's statusline should be drawn as inactive.
-		ignore_focus = {
-		 -- todo add avante
-		 'AvanteInput',
-		 'AvanteSelectedFiles',
-		},
-		always_divide_middle = false,
-		-- handled by bufferline
-		always_show_tabline = true,
+        -- If current filetype is in this list it'll
+        -- always be drawn as inactive statusline
+        -- and the last window will be drawn as active statusline.
+        -- for example if you don't want statusline of
+        -- your file tree / sidebar window to have active
+        -- statusline you can add their filetypes here.
+        --
+        -- Can also be set to a function that takes the
+        -- currently focused window as its only argument
+        -- and returns a boolean representing whether the
+        -- window's statusline should be drawn as inactive.
+        ignore_focus = {
+            -- todo add avante
+            'AvanteInput',
+            'AvanteSelectedFiles',
+        },
+        always_divide_middle = false,
+        -- handled by bufferline
+        always_show_tabline = false,
 
         -- Disable winbar for these filetypes
         disabled_filetypes = {
@@ -153,24 +154,24 @@ require('lualine').setup({
                 'Avante',
             },
         },
-	   refresh = {
-		 statusline = 1000,
-		 tabline = 1000,
-		 winbar = 1000,
-		 refresh_time = 16, -- ~60fps
-		 events = {
-		   'WinEnter',
-		   'BufEnter',
-		   'BufWritePost',
-		   'SessionLoadPost',
-		   'FileChangedShellPost',
-		   'VimResized',
-		   'Filetype',
-		   'CursorMoved',
-		   'CursorMovedI',
-		   'ModeChanged',
-		 },
-	   }
+        refresh = {
+            statusline = 1000,
+            tabline = 1000,
+            winbar = 1000,
+            refresh_time = 16, -- ~60fps
+            events = {
+                'WinEnter',
+                'BufEnter',
+                'BufWritePost',
+                'SessionLoadPost',
+                'FileChangedShellPost',
+                'VimResized',
+                'Filetype',
+                'CursorMoved',
+                'CursorMovedI',
+                'ModeChanged',
+            },
+        },
     },
     sections = {
         lualine_a = {
@@ -195,16 +196,16 @@ require('lualine').setup({
             {
                 'filename',
 
-				file_status=true,
-				-- https://github.com/nvim-lualine/lualine.nvim#filename-component-options
+                file_status = true,
+                -- https://github.com/nvim-lualine/lualine.nvim#filename-component-options
 
                 path = 4,
-				symbols = {
-				 modified = '[+]',      -- Text to show when the file is modified.
-				 readonly = '[-]',      -- Text to show when the file is non-modifiable or readonly.
-				 unnamed = '[No Name]', -- Text to show for unnamed buffers.
-				 newfile = '[New]',     -- Text to show for newly created file before first write
-				},
+                symbols = {
+                    modified = '[+]', -- Text to show when the file is modified.
+                    readonly = '[-]', -- Text to show when the file is non-modifiable or readonly.
+                    unnamed = '[No Name]', -- Text to show for unnamed buffers.
+                    newfile = '[New]', -- Text to show for newly created file before first write
+                },
 
                 -- takes a function that is called when component is clicked with mouse.
                 -- button is 'l', 'r'
@@ -228,23 +229,22 @@ require('lualine').setup({
 
         lualine_c = {
             -- 'lsp_progress', -- remove / outdated
-		   {
-			 'lsp_status',
-			 icon = '', -- f013
-			 symbols = {
-			   -- Standard unicode symbols to cycle through for LSP progress:
-			   spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' },
-			   -- Standard unicode symbol for when LSP is done:
-			   done = '✓',
-			   -- Delimiter inserted between LSP names:
-			   separator = ' ',
-			 },
-			 -- List of LSP names to ignore (e.g., `null-ls`):
-			 ignore_lsp = {
-			 },
-			 -- Display the LSP name
-			 show_name = true,
-		   }
+            {
+                'lsp_status',
+                icon = '', -- f013
+                symbols = {
+                    -- Standard unicode symbols to cycle through for LSP progress:
+                    spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' },
+                    -- Standard unicode symbol for when LSP is done:
+                    done = '✓',
+                    -- Delimiter inserted between LSP names:
+                    separator = ' ',
+                },
+                -- List of LSP names to ignore (e.g., `null-ls`):
+                ignore_lsp = {},
+                -- Display the LSP name
+                show_name = true,
+            },
             -- obsession_component,
             -- {'lsp_progress', display_components = { 'lsp_client_name', { 'title', 'percentage', 'message' }}}
             -- ,  gps.get_location, condition = gps.is_available
@@ -262,10 +262,10 @@ require('lualine').setup({
             -- obsession_status
         },
         lualine_y = {
-		   -- diagnostic_section,
-		  -- progress = %progress in file
+            -- diagnostic_section,
+            -- progress = %progress in file
             'progress',
-        }, 
+        },
         lualine_z = {
 
             -- 'obsession',
@@ -282,20 +282,20 @@ require('lualine').setup({
     -- },
     -- tabline is handled by bufferline.nvim
     -- tabline = {},
-   tabline = {
-	 lualine_a = {
-	  buffers_section
-	 },
-	 lualine_b = {
-	  -- 'branch'
-	 },
-	 lualine_c = {
-	  -- 'filename'
-	 },
-	 lualine_x = {},
-	 lualine_y = {},
-	 lualine_z = {}
-   },
+    tabline = {
+        lualine_a = {
+            buffers_section,
+        },
+        lualine_b = {
+            -- 'branch'
+        },
+        lualine_c = {
+            -- 'filename'
+        },
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {},
+    },
     --[[ TODO :
 	- add lock for readonly
 	- also if diffthis is set

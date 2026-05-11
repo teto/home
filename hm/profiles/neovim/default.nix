@@ -72,7 +72,6 @@ let
     #   plugin = pkgs.vimPlugins.direnv-vim; # to get syntax coloring ?
     # }
 
-
     #  nvim-colorizer
     # (luaPlugin { plugin = nvim-terminal-lua; config = "require('terminal').setup()"; })
 
@@ -131,12 +130,9 @@ let
     }
   ];
 
-  rawPlugins =
-    basePlugins
-    ++ [ 
-      pkgs.vimPlugins.nvim-treesitter-parsers.nix
-    ]
-  ;
+  rawPlugins = basePlugins ++ [
+    pkgs.vimPlugins.nvim-treesitter-parsers.nix
+  ];
 
 in
 {

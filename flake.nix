@@ -7,34 +7,34 @@
   description = "Un petit aperçu de l'enfer";
 
   inputs = {
-    # anyrun = {
-    #   url = "github:Kirottu/anyrun";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
     buildbot-nix = {
       url = "github:nix-community/buildbot-nix";
       # url = "github:teto/buildbot-nix?ref=teto/hack-niks3-eval-error";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     direnv-instant.url = "github:Mic92/direnv-instant";
+
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    edict-kanji-db = {
-      url = "https://github.com/odrevet/edict_database/releases/download/v0.0.5/kanji.zip";
-      flake = false;
-    };
-    edict-expression-db = {
-      url = "https://github.com/odrevet/edict_database/releases/download/v0.0.5/expression.zip";
-      flake = false;
-    };
+    # TODO remove
+    # edict-kanji-db = {
+    #   url = "https://github.com/odrevet/edict_database/releases/download/v0.0.5/kanji.zip";
+    #   flake = false;
+    # };
+    # edict-expression-db = {
+    #   url = "https://github.com/odrevet/edict_database/releases/download/v0.0.5/expression.zip";
+    #   flake = false;
+    # };
 
     # emmylua = {
     #   url = "github:EmmyLuaLs/emmylua-analyzer-rust";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
+
     furigana-url = {
       url = "https://github.com/Doublevil/JmdictFurigana/releases/download/2.3.1%2B2024-11-25/JmdictFurigana.json.tar.gz";
       flake = false;
@@ -83,7 +83,7 @@
       url = "github:serokell/deploy-rs";
       # url = "github:apoloqize/deploy-rs?rev=b48c508f1e8c9f0c82a9baeffa014e86d716a546";
 
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # https://github.com/DeterminateSystems/nix-src/pull/217
@@ -215,6 +215,7 @@
 
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-stable.url = "github:nixos/nixpkgs/nixos-25.11";
+
     # nixpkgs-for-hls.url = "github:nixos/nixpkgs?rev=612f97239e2cc474c13c9dafa0df378058c5ad8d";
 
     # nix-search-cli = {
@@ -336,7 +337,7 @@
         // (import ./tetos/lib {
           # inherit (self) inputs;
 
-          pkgs = myPkgs;
+          pkgs = tetosPkgs;
           inherit dotfilesPath secretsFolder secrets;
           flakeSelf = self;
           lib = prev;
@@ -360,7 +361,7 @@
       };
 
       # Eval the treefmt modules from ./treefmt.nix
-      treefmtEval = treefmt-nix.lib.evalModule myPkgs ./tetos/treefmt.nix;
+      treefmtEval = treefmt-nix.lib.evalModule tetosPkgs ./tetos/treefmt.nix;
 
       # loads packages in by-name/
       byNamePkgsOverlay = import "${nixpkgs}/pkgs/top-level/by-name-overlay.nix" ./by-name;
@@ -453,8 +454,8 @@
           };
         };
 
-      myPkgs = pkgImport self.inputs.nixpkgs true;
-      # myPkgsCuda = pkgImport self.inputs.nixpkgs true;
+      tetosPkgs = pkgImport self.inputs.nixpkgs true;
+      # tetosPkgsCuda = pkgImport self.inputs.nixpkgs true;
       unstablePkgs = pkgImport self.inputs.nixos-unstable false;
       # stablePkgs = pkgImport self.inputs.nixos-stable;
 
@@ -477,7 +478,7 @@
             file:
             let
               path = lib.traceValFn (x: file) ./devShells/${file};
-              shell = myPkgs.callPackage path (
+              shell = tetosPkgs.callPackage path (
                 { }
                 // lib.optionalAttrs (file == "devShell.nix") {
                   inherit secrets self;
@@ -493,7 +494,7 @@
 
         loadDevShells
         // {
-          default = myPkgs.callPackage ./devShells/devShell.nix {
+          default = tetosPkgs.callPackage ./devShells/devShell.nix {
             inherit secrets self;
           };
           inherit (unstablePkgs)
@@ -510,8 +511,8 @@
       packages =
         self.inputs.neovim-nightly-overlay.packages.${system}
         # strip of
-        // (builtins.removeAttrs (byNamePkgsOverlay myPkgs { }) [ "_internalCallByNamePackageFile" ])
-        # // (autoloadedPkgsOverlay myPkgs { })
+        // (removeAttrs (byNamePkgsOverlay tetosPkgs { }) [ "_internalCallByNamePackageFile" ])
+        # // (autoloadedPkgsOverlay tetosPkgs { })
         // {
           /*
             my own nvim with
@@ -522,7 +523,7 @@
           nvim =
             self.nixosConfigurations.tatooine.config.home-manager.users.teto.programs.neovim.finalPackage;
 
-          inherit (myPkgs)
+          inherit (tetosPkgs)
             pass-import-high-password-length
             jmdict
             meli-git
@@ -538,16 +539,16 @@
             # rsync-yazi
             ;
 
-          # myPkgs.neovim-unwrapped;
+          # tetosPkgs.neovim-unwrapped;
           neovim-unwrapped =
             # "neovim-debug" / "neovim-developer"
-            self.inputs.neovim-nightly-overlay.packages."${system}".neovim.override ({
-              # neovim-unwrapped = myPkgs.neovim-unwrapped.override ({
+            self.inputs.neovim-nightly-overlay.packages."${system}".neovim.override {
+              # neovim-unwrapped = tetosPkgs.neovim-unwrapped.override ({
 
               # we want to take the luajit with our overlay of lua packages
-              luajit = myPkgs.luajit;
+              luajit = tetosPkgs.luajit;
               # });
-            });
+            };
 
           inherit (unstablePkgs)
             # nhs96
@@ -558,7 +559,7 @@
 
       # TODO run evals and treefmt checks
       checks = {
-        # formatting = treefmtEval.${myPkgs.system}.config.build.check self;
+        # formatting = treefmtEval.${tetosPkgs.system}.config.build.check self;
 
         # not a derivation
         formatting = treefmtEval.config.build.check self;
@@ -568,7 +569,7 @@
     // {
       # those help debug in repl
       inherit (self) inputs;
-      inherit myPkgs;
+      inherit tetosPkgs;
 
       # Tell Nix what schemas to use.
       schemas = self.inputs.flake-schemas.schemas
@@ -610,9 +611,9 @@
 
         teto-nogui = (
           {
-            config,
-            pkgs,
-            lib,
+            # config,
+            # pkgs,
+            # lib,
             ...
           }:
           {
@@ -739,12 +740,12 @@
           in
           {
             neptune-no-secrets =
-              genNode ({
+              genNode {
                 name = "neptune";
                 # local-facing address neptune.local
                 # hostname = "neptune.local"; # temporary
                 hostname = "192.168.1.21"; # temporary
-              })
+              }
               // {
                 # while working around require-sigs issue
                 # remoteBuild = true;
@@ -763,11 +764,11 @@
               };
 
             router =
-              genNode ({
+              genNode {
                 name = "router";
                 # local-facing address
                 hostname = "router";
-              })
+              }
               // {
                 # sshOpts = [ "-F" "ssh_config" ];
                 # sshUser = "root";
@@ -779,20 +780,20 @@
 
             #
             jedha =
-              genNode ({
+              genNode {
                 name = "jedha";
                 hostname = "jedha.local";
-              })
+              }
               // {
                 interactiveSudo = true;
                 sshUser = "teto";
               };
 
             neotokyo =
-              genNode ({
+              genNode {
                 name = "neotokyo";
                 hostname = secrets.jakku.hostname;
-              })
+              }
               // {
                 # sshOpts = [ "-t" ];
                 interactiveSudo = true;

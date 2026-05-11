@@ -140,7 +140,6 @@ vim.api.nvim_set_hl(0, 'GitSignsChangeLn', {
     bg = 'red', -- Green background
 })
 
-
 require('gitsigns').setup({
     -- '│' passe mais '▎' non :s
     -- signs = {},

@@ -11,16 +11,16 @@
 -- https://www.reddit.com/r/neovim/comments/1kcz8un/great_improvements_to_the_cmdline_in_nightly/
 -- require('vim._extui').enable({})
 require('vim._core.ui2').enable({
-	enable = true, -- Whether to enable or disable the UI.
-	msg = {
-		-- Options related to the message module.
-		---@type 'cmd'|'msg' Default message target, either in the
-		---cmdline or in a separate ephemeral message window.
-		---@type string|table<string, 'cmd'|'msg'|'pager'> Default message target
-		-- or table mapping |ui-messages| kinds to a target.
-    	targets = 'cmd',
-    	timeout = 4000, -- Time a message is visible in the message window.
-    	},
+    enable = true, -- Whether to enable or disable the UI.
+    msg = {
+        -- Options related to the message module.
+        ---@type 'cmd'|'msg' Default message target, either in the
+        ---cmdline or in a separate ephemeral message window.
+        ---@type string|table<string, 'cmd'|'msg'|'pager'> Default message target
+        -- or table mapping |ui-messages| kinds to a target.
+        targets = 'cmd',
+        timeout = 4000, -- Time a message is visible in the message window.
+    },
     pager = { -- Options related to message window.
         height = 0, -- Maximum height.
     },
@@ -626,7 +626,6 @@ vim.api.nvim_set_keymap('n', ',a', '<Plug>(Luadev-Run)', { noremap = false, sile
 vim.api.nvim_set_keymap('v', ',,', '<Plug>(Luadev-Run)', { noremap = false, silent = false })
 vim.api.nvim_set_keymap('n', ',,', '<Plug>(Luadev-RunLine)', { noremap = false, silent = false })
 
-
 -- vim.api.nvim_set_keymap(
 --	 'n',
 --	 '<F1>',
@@ -858,8 +857,6 @@ end, { buffer = false, desc = 'Diagnostics' })
 --     callback = highlight_current_word,
 -- })
 
-
-
 -- }}}
 
 -- vim.g.tidal_ghci = "ghci"
@@ -933,14 +930,23 @@ avante.setup_autocmd()
 vim.api.nvim_create_user_command('LlmChat', function()
     require('avante.api').ask({ without_selection = true })
 end, { desc = 'Ask without selecting anything' })
+
+-- waiting for upstream
+vim.api.nvim_create_user_command('AvanteListRemoteModels', function()
+	require'avante.providers'.openai:list_models()
+  -- vim.cmd(string.format('tabnew %s', vim.fn.stdpath('cache')..'/rest.nvim.log'))
+end, {
+  desc = 'List available models on the remote',
+})
+
 -- }}}
 
 -- neorgmode {{{
 local has_norg, _norg = pcall(require, 'neorg')
 
 if has_norg then
--- https://github.com/nvim-neorg/neorg/issues/1351
--- https://github.com/nvim-neorg/neorg/issues/1342
+    -- https://github.com/nvim-neorg/neorg/issues/1351
+    -- https://github.com/nvim-neorg/neorg/issues/1342
 
     require('plugins.neorg')
 end
@@ -960,13 +966,13 @@ end
 
 -- require('plugins.mini-sessions')
 
-vim.keymap.set('n', '<leader>u', function () 
-	vim.cmd('packadd nvim.undotree')
-	require('undotree').open()
-end
-)
+vim.keymap.set('n', '<leader>u', function()
+    vim.cmd('packadd nvim.undotree')
+    require('undotree').open()
+end)
 
-vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory in oil' })
+vim.keymap.set('n', '-', 
+	'<CMD>Oil<CR>', { desc = 'Open parent directory in oil' })
 
 -- todo add api to list remote models
 
@@ -980,23 +986,21 @@ if has_dap then
 end
 -- }}}
 
-
 -- lualine stuff {{{
 local has_lualine, _lualine = pcall(require, 'lualine')
-if has_lualine then 
-	-- when not handled by rocks directly
-	require'plugins.lualine'
-	for i = 1, 9 do
-		vim.keymap.set(
-			'n',
-			'<leader>' .. tostring(i),
-			'<cmd>LualineBuffersJump ' .. tostring(i) .. '<CR>',
-			{ silent = true }
-		)
-	end
+if has_lualine then
+    -- when not handled by rocks directly
+    require('plugins.lualine')
+    for i = 1, 9 do
+        vim.keymap.set(
+            'n',
+            '<leader>' .. tostring(i),
+            '<cmd>LualineBuffersJump ' .. tostring(i) .. '<CR>',
+            { silent = true }
+        )
+    end
 end
 -- }}}
-
 
 -- generated from luau via darklua
 -- require('teto.context_menu_generated').setup_rclick_menu_autocommands()
@@ -1004,19 +1008,18 @@ end
 -- vim.api.nvim_set_keymap('n', '<F1>', '<Cmd>lua open_contextual_menu()<CR>', { noremap = true, silent = false })
 -- MenuPopup
 -- mouse users + nvimtree users!
-vim.keymap.set({ "n", "v" }, "<RightMouse>", function()
-  require('menu.utils').delete_old_menus()
+vim.keymap.set({ 'n', 'v' }, '<RightMouse>', function()
+    require('menu.utils').delete_old_menus()
 
-  vim.cmd.exec '"normal! \\<RightMouse>"'
+    vim.cmd.exec('"normal! \\<RightMouse>"')
 
-  -- clicked buf
-  local buf = vim.api.nvim_win_get_buf(vim.fn.getmousepos().winid)
-  -- vim.bo[buf].ft == "NvimTree" and "nvimtree" or
-  local options =  "default"
+    -- clicked buf
+    local buf = vim.api.nvim_win_get_buf(vim.fn.getmousepos().winid)
+    -- vim.bo[buf].ft == "NvimTree" and "nvimtree" or
+    local options = 'default'
 
-  require("menu").open(options, { mouse = true })
+    require('menu').open(options, { mouse = true })
 end, {})
 
 -- prints --embed which is not listed
 -- vim.print(vim.v.argv)
-

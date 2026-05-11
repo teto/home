@@ -90,15 +90,15 @@ return {
     },
 
     { name = 'separator' },
-	{
-	 name = "List directory",
-	 cmd = "Oil"
-	},
+    {
+        name = 'List directory',
+        cmd = 'Oil',
+    },
     {
         name = 'undo tree',
         cmd = function()
-		 	vim.cmd('packadd nvim.undotree')
-			require('undotree').open()
+            vim.cmd('packadd nvim.undotree')
+            require('undotree').open()
         end,
     },
 

@@ -23,9 +23,8 @@
       # was problematic for a while
       use-cgroups = false;
 
-
       # starting from nix 2.30
-      trace-import-from-derivation  = true;
+      trace-import-from-derivation = true;
 
       keep-outputs = true; # Nice for developers
       keep-derivations = true; # Idem

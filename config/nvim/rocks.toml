@@ -242,6 +242,10 @@ rev = "v9.0.1"
 git = "rachartier/tiny-cmdline.nvim"
 rev = "ad58747b955d0743ccfd56e97da1a4c1fac89f58"
 
+[plugins."zeal.nvim"]
+git = "paradoxical-dev/zeal.nvim"
+rev = "a3aa0c73ad0b30f75e8c77d3ccabefaeabded894"
+
 # [plugins."git-rebase-auto-diff.nvim"]
 # git = "yutkat/git-rebase-auto-diff.nvim"
 # rev = "6fd2f5ba63828e5c4fd59bb1b75ef7525a5ce39f"

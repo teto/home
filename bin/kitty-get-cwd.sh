@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
 pid=$(swaymsg -t get_tree | jq '.. | select(.type?) | select(.type=="con") | select(.focused==true).pid')
-ppid=$(pgrep --newest --parent ${pid})
-readlink /proc/${ppid}/cwd || echo $HOME
+ppid=$(pgrep --newest --parent "${pid}")
+readlink /proc/"${ppid}"/cwd || echo "$HOME"

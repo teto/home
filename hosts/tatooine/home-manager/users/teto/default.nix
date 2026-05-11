@@ -33,11 +33,6 @@
     flakeSelf.homeProfiles.wezterm
   ];
 
-  # testing
-  services.llama-cpp = {
-    enable = false;
-  };
-
   # programs.memento.enable = true;
   home.stateVersion = "26.05";
 
@@ -55,13 +50,14 @@
 
   home.packages = [
     # pkgs.claude-code
-    # pkgs.llama-cpp
+    flakeSelf.inputs.nixos-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.llama-cpp
     pkgs.batctl # to control battery thresholds
   ];
 
   package-sets = {
     livecoding = false;
     bluetooth = true;
+
     enableDesktopGUIPackages = true;
     enableIMPackages = true;
     scientificSoftware = true;
