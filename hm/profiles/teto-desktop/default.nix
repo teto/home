@@ -26,7 +26,6 @@ in
     flakeSelf.homeProfiles.teto-zsh
     # flakeSelf.homeProfiles.yt-dlp
 
-
     flakeSelf.inputs.nix-index-database.homeModules.nix-index
 
     flakeSelf.homeModules.avante

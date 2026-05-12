@@ -4,17 +4,17 @@
 }:
 {
 
-  imports = [
+  _imports = [
     flakeSelf.homeProfiles.waybar
   ];
 
-  programs.waybar = {
+  # programs.waybar = {
 
-    enable = false;
-    settings = {
-      mainBar = {
-        include = [ "~/.config/waybar/laptop.jsonc" ];
-      };
+  enable = false;
+  settings = {
+    mainBar = {
+      include = [ "~/.config/waybar/laptop.jsonc" ];
     };
   };
+  # };
 }

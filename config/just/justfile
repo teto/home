@@ -20,9 +20,9 @@ default:
 neotokyo-help:
     just -f hosts/neotokyo/home-manager/users/teto/justfile
 
-# dump noctalia-shell settings 
+# dump noctalia-shell settings
 noctalia-dump-settings:
-  noctalia-shell ipc call state all | jq .settings
+    noctalia-shell ipc call state all | jq .settings
 
 # Start mistral server
 llama:
@@ -102,7 +102,6 @@ switch-original: (nixos-rebuild "switch" "")
 # should be loaded into zsh history instead
 # TODO include global justfile
 boot: (nixos-rebuild "boot --install-bootloader" "")
-
 
 # new version using nh
 switch:

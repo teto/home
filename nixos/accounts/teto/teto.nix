@@ -10,6 +10,7 @@
 
     # name = "Matt"; # This fucks up everything
 
+    # use fish at some point ?
     shell = pkgs.zsh;
 
     isNormalUser = true; # creates home/ sets default shell
@@ -26,7 +27,7 @@
       "pipewire" # for pipewire
       "plugdev" # for udiskie
       "podman"
-      "postgres"
+      # "postgres" # useful for testing but maybe not the default ?
       "rtkit" # for pipewire
       "seat" # necessary for lemurs
       "wheel" # for sudo

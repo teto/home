@@ -1,7 +1,7 @@
 {
-  config,
-  pkgs,
-  lib,
+  # config,
+  # pkgs,
+  # lib,
   ...
 }:
 {
@@ -10,24 +10,13 @@
   imports = [
     ./bash.nix
     ./git.nix
-    ./teto-zsh.nix
   ];
 
   programs.man.enable = true;
 
-  # useful to prevent some problems with nix
-  # https://github.com/commercialhaskell/stack/issues/2358
-  # home.file.".stack/config.yaml".source = ../home/stack.yaml;
-
   home.shell = {
     enableZshIntegration = true;
     enableBashIntegration = true;
-  };
-
-  home.shellAliases = {
-    v = "nvim";
-    st = "systemctl-tui";
-    jctl = "journalctl -b0 -r";
   };
 
   # you can switch from cli with xkb-switch or xkblayout-state

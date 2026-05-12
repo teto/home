@@ -2,7 +2,7 @@
 pkgs.mkShell {
   name = "koharu";
   buildInputs = with pkgs; [
-    tauri
+    # tauri
     bun
   ];
 

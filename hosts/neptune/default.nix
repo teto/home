@@ -28,6 +28,16 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  # boot.loader.systemd-boot.configurationLimit = 20;
+  # boot.loader.systemd-boot.consoleMode = "auto"; # max / keep
+  boot.loader.systemd-boot.editor = true; # security hole
+  # boot.loader.systemd-boot.netbootxyz.enable = true;
+  # boot.loader.efi.efiSysMountPoint = "/boot/EFI";
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/944E-3629";
+    fsType = "vfat";
+  };
 
   networking.hostName = "neptune"; # Define your hostname.
   networking.domain = "neptune.local"; # Define your hostname.
@@ -90,12 +100,15 @@
         "audio"
         "wheel"
         "ic2"
-      ]; # Enable ‘sudo’ for the user.
-      packages = with pkgs; [
-        tree
       ];
 
+      # Enable ‘sudo’ for the user.
+      packages = with pkgs; [
+        tree
+        btop
+      ];
     };
+
     teto = {
       uid = lib.mkForce 1001;
     };
@@ -105,11 +118,33 @@
     mama = {
       imports = [
         flakeSelf.homeProfiles.yazi
-
+        flakeSelf.homeProfiles.teto-zsh
+        flakeSelf.homeProfiles.teto-aliases
+        flakeSelf.homeProfiles.bash
       ];
       package-sets.enableOfficePackages = true;
 
+      i18n = {
+        # "en_US.UTF-8/UTF-8"
+        glibcLocales = pkgs.glibcLocales.override {
+          allLocales = true;
+          locales = [
+            "fr_FR.UTF-8/UTF-8"
+            "en_US.UTF-8/UTF-8"
+            "ja_JP.utf8"
+            # ja_JP
+            "ja_JP.eucjp"
+            # ja_JP.ujis
+            # ja_JP.utf8
+          ];
+        };
+
+      };
+
+      home.stateVersion = "25.11";
+
     };
+
     teto = {
 
       imports = [
@@ -117,6 +152,8 @@
         flakeSelf.homeProfiles.common
         flakeSelf.homeProfiles.neovim
         flakeSelf.homeProfiles.yazi
+
+        # use teto-fish ?
         flakeSelf.homeProfiles.teto-zsh
 
         # flakeSelf.homeProfiles.teto-desktop
@@ -127,13 +164,15 @@
         # musicDirectory = "/mnt/ext/music";
 
       };
-
+      home.stateVersion = "25.11";
     };
   };
 
   # xserver disappears in recent one
   services.desktopManager.gnome.enable = true;
+
   services.displayManager.lemurs.enable = lib.mkForce false;
+
   services.displayManager.autoLogin = {
     enable = true;
     user = config.users.users.mama.name;
@@ -146,7 +185,7 @@
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
-    libreoffice
+    # libreoffice # achieved via package-sets.enableOfficePackages
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wine
     wget
@@ -162,6 +201,7 @@
   # };
 
   # List services that you want to enable:
+  programs.steam.enable = true;
 
   # Enable the OpenSSH daemon.
   services.openssh = {
@@ -179,25 +219,6 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # DOES NOT WORK with flakes
-  # system.copySystemConfiguration = true;
-
-  # This option defines the first version of NixOS you have installed on this particular machine,
-  # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
-  #
-  # Most users should NEVER change this value after the initial install, for any reason,
-  # even if you've upgraded your system to a new NixOS release.
-  #
-  # This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
-  # so changing it will NOT upgrade your system - see https://nixos.org/manual/nixos/stable/#sec-upgrading for how
-  # to actually do that.
-  #
-  # This value being lower than the current NixOS release does NOT mean your system is
-  # out of date, out of support, or vulnerable.
-  #
   # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
   # and migrated your data accordingly.
   #

@@ -191,8 +191,7 @@ in
 
           # start a terminal
           "${mod}+Return" = "exec --no-startup-id ${term}";
-          "${mod}+Shift+Return" =
-            ''exec --no-startup-id ${term} -d "$(${../../bin/kitty-get-cwd.sh})"'';
+          "${mod}+Shift+Return" = ''exec --no-startup-id ${term} -d "$(${../../bin/kitty-get-cwd.sh})"'';
 
           # Text to speech
           "Ctrl+f1" = "record-myself";

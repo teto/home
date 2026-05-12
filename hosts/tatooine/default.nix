@@ -26,7 +26,15 @@ let
           "security/"
           "programs/"
           "hardware/"
-          "home-manager/user/root/"
+          "home-manager/users/root/"
+          "home-manager/users/teto/default.nix"
+          # "home-manager/users/teto/programs/neovim.nix"
+          # "home-manager/users/teto/programs/noctalia-shell.nix"
+          # "home-manager/users/teto/programs/noctalia-shell-settings.json"
+          # "home-manager/users/teto/wayland.nix"
+          # "home-manager/users/teto/services/blueman-applet.nix"
+          # "home-manager/users/teto/services/mpd.nix"
+          # "home-manager/"
         ];
 
         exclude = [
@@ -43,7 +51,7 @@ let
       };
       transformer = [
         haumea.lib.transformers.liftDefault
-        (haumea.lib.transformers.hoistAttrs "_import" "import")
+        (haumea.lib.transformers.hoistLists "_imports" "imports")
       ];
     };
 

@@ -6,6 +6,7 @@
     v = "nvim";
 
     n = "nix develop";
+    dfh = "df --human-readable";
 
     # git variables {{{
     gl = "git log";

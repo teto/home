@@ -14,7 +14,7 @@
   # };
   #
 
-  services.voxtype.enable = true;
+  # services.voxtype.enable = true;
 
   # programs.lapce.enable = true;
   # programs.mods = {

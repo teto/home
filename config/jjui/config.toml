@@ -22,16 +22,6 @@ hijack_askpass= true
 auto_refresh_interval=4
 tracer.enabled = true
 
-[[actions]]
-name = "duplicate"
-desc = "duplicate on top of current branch"
-# 
-lua = '''
-local change_id = context.change_id()
-local diff = jj("duplicate", "-B", "@", "-r", change_id)
-flash("Duplicated ".. change_id .. " over "..revisions.current())
-
-'''
 
 # [[actions]]
 # name = "bookmark-create-modal"
@@ -56,13 +46,13 @@ lua = 'flash("hello")'
 # key = "H"
 # scope = "revisions"
 
-[[bindings]]
-action = "duplicate"
-# key = "d"
-seq = [ "d", "u"]
-# desc = "Duplicate"
-# scope => where the bindings are active
-scope = "revisions"
+# [[bindings]]
+# action = "duplicate"
+# # key = "d"
+# seq = [ "d", "u"]
+# # desc = "Duplicate"
+# # scope => where the bindings are active
+# scope = "revisions"
 
 
 [[bindings]]
