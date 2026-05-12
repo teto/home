@@ -18,6 +18,7 @@
     ./wayland.nix
     ./programs/waybar.nix
     ./programs/neovim.nix
+    ./programs/noctalia-shell.nix
     ./programs/zsh.nix
     ./services/mpd.nix
     ./services/blueman-applet.nix
@@ -42,8 +43,6 @@
 
   # broken on unstable because python2
   # services.opensnitch-ui.enable = false;
-
-  programs.nh.enable = true;
 
   # TODO enable sandboxing
   programs.claude-code.enable = false;

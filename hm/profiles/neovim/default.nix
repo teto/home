@@ -15,7 +15,7 @@ let
   luaRcBlocks = {
     appearance = ''
       -- draw a line on 80th column
-      vim.o.colorcolumn='80,100' 
+      vim.o.colorcolumn='80,100'
     '';
 
     # hi MsgSeparator ctermbg=black ctermfg=white
@@ -82,17 +82,17 @@ let
     vim-scriptease # create commands like :Messages
 
     ({
-      type = "viml";
+      type = "lua";
       plugin = vim-sneak;
       config = ''
-        -- can press 's' again to go to next result, like ';'
+        -- n press 's' again to go to next result, like ';'
         vim.keymap.set('n', 'f', '<Plug>Sneak_f')
         vim.keymap.set('n', 'F', '<Plug>Sneak_F')
         vim.keymap.set('n', 't', '<Plug>Sneak_t')
         vim.keymap.set('n', 'T', '<Plug>Sneak_T')
 
         vim.cmd [[
-        let g:sneak#s_next = 1 
+        let g:sneak#s_next = 1
         let g:sneak#prompt = 'Sneak>'
 
         let g:sneak#streak = 0
@@ -118,7 +118,7 @@ let
     # ' " syntax file for neomutt
     {
       plugin = vim-sayonara;
-      type = "viml";
+      type = "lua";
       config = ''
         vim.g.sayonara_confirm_quit = 0
         vim.keymap.set('n', '<leader>q', '<Cmd>Sayonara!<cr>', { silent = true, desc = 'Closes current window' })

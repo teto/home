@@ -1,0 +1,21 @@
+
+* "No running instances for "
+
+happens because 
+ env QS_CONFIG_PATH= noctalia-shell list --all
+  env QS_CONFIG_PATH= noctalia-shell list --all
+
+  To talk to the currently running instance by id:
+
+  env QS_CONFIG_PATH= noctalia-shell ipc --id zf2y59vet call state all
+
+  Or point the wrapper at the old config path:
+
+  QS_CONFIG_PATH=/nix/store/9rdr08l6lbinkjpjjwjkikh965bij7vp-noctalia-shell-2026-05-04_6b48834/share/noctalia-shell \
+    noctalia-shell ipc call state all
+
+  The durable fix is to restart Noctalia after the Nix update/rebuild so the running process matches your current noctalia-shell wrapper.
+
+* toggle unicode 
+
+noctalia-shell ipc call plugin:unicode toggle
