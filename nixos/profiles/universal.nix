@@ -20,7 +20,6 @@
     ../accounts/root/root.nix
     ../accounts/teto/teto.nix
     flakeSelf.nixosProfiles.ntp
-    # ../nixos/profiles/neovim.nix
   ];
 
   boot.tmp.cleanOnBoot = true; # to clean /tmp on reboot
@@ -29,7 +28,6 @@
   environment.systemPackages =
     with pkgs;
     [
-      # ssh-to-age # useful everywhere
       man-pages # because man tcp should always be available
       ncurses.dev # for infocmp
       kitty.terminfo # to be able to edit over ssh
@@ -39,8 +37,6 @@
       curl
       fd # replaces 'find'
       file
-      # lsof
-      # sudo
     ]);
 
   # TODO it appears in /etc/bashrc !
@@ -86,8 +82,6 @@
 
   # todo might not be necessary on server ?
   programs.zsh = {
-    # enable = true;
-
     # autosuggestions.async
     interactiveShellInit = ''
       stty -ixon

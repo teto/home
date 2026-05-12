@@ -88,7 +88,7 @@
         # M.edict_expressiondb = "${flakeSelf.inputs.edict-expression-db}/expression.db"
         text =
           # let
-          #   
+          #
           # in
           ''
             local M = {}

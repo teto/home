@@ -84,7 +84,7 @@ local buffers_section = {
         packer = 'Packer',
         fzf = 'FZF',
         alpha = 'Alpha',
-		AvanteInput = "Avante Prompt",
+        AvanteInput = 'Avante Prompt',
     }, -- Shows specific buffer name for that filetype ( { `filetype` = `buffer_name`, ... } )
 
     -- Automatically updates active buffer color to match color of other components (will be overidden if buffers_color is set)

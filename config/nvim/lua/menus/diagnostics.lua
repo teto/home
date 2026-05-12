@@ -15,12 +15,12 @@ return {
             -- severity = { min = vim.diagnostic.severity.WARN },
         end,
     },
-	{
+    {
         name = 'To loclist',
         cmd = function()
             vim.notify('To qflist')
-			vim.diagnostic.setloclist()
-			-- vim.diagnostic.setqflist()
+            vim.diagnostic.setloclist()
+            -- vim.diagnostic.setqflist()
         end,
     },
 }

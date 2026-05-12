@@ -51,6 +51,7 @@ let
     lualine-nvim
 
     {
+      type = "lua";
       plugin = oil-nvim;
       config = ''
         require("oil").setup({
@@ -81,6 +82,7 @@ let
     vim-scriptease # create commands like :Messages
 
     ({
+      type = "viml";
       plugin = vim-sneak;
       config = ''
         -- can press 's' again to go to next result, like ';'
@@ -116,6 +118,7 @@ let
     # ' " syntax file for neomutt
     {
       plugin = vim-sayonara;
+      type = "viml";
       config = ''
         vim.g.sayonara_confirm_quit = 0
         vim.keymap.set('n', '<leader>q', '<Cmd>Sayonara!<cr>', { silent = true, desc = 'Closes current window' })
@@ -142,6 +145,9 @@ in
     defaultEditor = true;
     enableMyDefaults = true;
     highlightOnYank = true;
+
+    withRuby = false;
+    withPython3 = false;
 
     # custom options
     # autocompletion.enable = true;

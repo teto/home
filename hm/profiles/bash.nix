@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   ...
 }:
@@ -28,8 +27,6 @@
     # shellOptions = [ "histappend" "checkwinsize" "extglob" "globstar" "checkjobs" ];
     # historyFile = "$XDG_CACHE_HOME/bash_history";
     shellAliases = {
-      # ".."="cd ..";
-      # "..."="cd ../..";
 
       nix-stray-roots = ''nix-store --gc --print-roots | egrep -v "^(/nix/var|/proc|/run/\w+-system|\{memory)" | less'';
 

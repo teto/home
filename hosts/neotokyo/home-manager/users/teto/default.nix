@@ -23,7 +23,7 @@ let
   banner = "You can start the nextcloud-add-user.service unit if teto user doesnt exist yet";
 in
 {
-imports = [
+  imports = [
     flakeSelf.homeModules.teto-nogui
     flakeSelf.homeProfiles.bash
     flakeSelf.homeProfiles.teto-aliases

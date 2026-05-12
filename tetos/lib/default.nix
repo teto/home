@@ -127,20 +127,20 @@ in
     builtins.trace "SSH config for ${name}" (
       lib.optionalAttrs sshCfg.enable
         # lib.warn if "teto" is not in users.users
-          {
-            match = ''host="${mcfg.config.networking.hostName},${mcfg.config.networking.domain}"'';
-            # assumption ? or check/warn it has it ?
-            user = "teto";
-            identityFile = "${secretsFolder}/ssh/id_rsa";
-            port = builtins.head sshCfg.ports;
-            identitiesOnly = true;
-            extraOptions = {
-              AddKeysToAgent = "yes";
-              HostName = lib.throwIf (
-                mcfg.config.networking.domain == null
-              ) "Missing domaing for ${name}" mcfg.config.networking.domain;
-            };
-          }
+        {
+          match = ''host="${mcfg.config.networking.hostName},${mcfg.config.networking.domain}"'';
+          # assumption ? or check/warn it has it ?
+          user = "teto";
+          identityFile = "${secretsFolder}/ssh/id_rsa";
+          port = builtins.head sshCfg.ports;
+          identitiesOnly = true;
+          extraOptions = {
+            AddKeysToAgent = "yes";
+            HostName = lib.throwIf (
+              mcfg.config.networking.domain == null
+            ) "Missing domaing for ${name}" mcfg.config.networking.domain;
+          };
+        }
     );
 
   # temporary solution since it's not portable

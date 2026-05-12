@@ -933,10 +933,10 @@ end, { desc = 'Ask without selecting anything' })
 
 -- waiting for upstream
 vim.api.nvim_create_user_command('AvanteListRemoteModels', function()
-	require'avante.providers'.openai:list_models()
-  -- vim.cmd(string.format('tabnew %s', vim.fn.stdpath('cache')..'/rest.nvim.log'))
+    require('avante.providers').openai:list_models()
+    -- vim.cmd(string.format('tabnew %s', vim.fn.stdpath('cache')..'/rest.nvim.log'))
 end, {
-  desc = 'List available models on the remote',
+    desc = 'List available models on the remote',
 })
 
 -- }}}
@@ -971,8 +971,7 @@ vim.keymap.set('n', '<leader>u', function()
     require('undotree').open()
 end)
 
-vim.keymap.set('n', '-', 
-	'<CMD>Oil<CR>', { desc = 'Open parent directory in oil' })
+vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory in oil' })
 
 -- todo add api to list remote models
 

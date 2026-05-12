@@ -601,7 +601,7 @@
         # TODO importdir should check for default.nix
         neovim = ./hm/profiles/neovim;
 
-        teto-desktop = ./hm/profiles/desktop.nix;
+        teto-desktop = ./hm/profiles/teto-desktop.nix;
       };
 
       homeModules = lib.importFiles ./hm/modules // {
@@ -660,6 +660,7 @@
         };
       };
 
+      # TODO autoload overlays
       overlays = {
 
         # no sense to reexport those

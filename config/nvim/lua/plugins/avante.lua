@@ -6,7 +6,7 @@
 -- })
 -- require('avante_lib').load()
 
--- local llama_hostname = 
+-- local llama_hostname =
 
 -- local provider = 'mistral'
 -- provider = 'claude'
@@ -41,22 +41,21 @@ end
 -- providers in the gp.nvim sense,
 -- not to confuse with agents
 local providers = {
- openai = {
-	-- endpoint = 'http://' .. llama_host .. ':8080/v1',
- },
- claude = {
-            endpoint = 'https://api.anthropic.com',
-            model = 'claude-sonnet-4-5-20250929',
-            -- extra_request_body = {
-            --   temperature = 0.75,
-            --   max_tokens = 4096,
-            -- },
-            -- should use XDG_CONFIG_HOME or
-            api_key_name = 'cmd:cat ' .. sops_folder .. '/claude_api_key',
+    openai = {
+        -- endpoint = 'http://' .. llama_host .. ':8080/v1',
+    },
+    claude = {
+        endpoint = 'https://api.anthropic.com',
+        model = 'claude-sonnet-4-5-20250929',
+        -- extra_request_body = {
+        --   temperature = 0.75,
+        --   max_tokens = 4096,
+        -- },
+        -- should use XDG_CONFIG_HOME or
+        api_key_name = 'cmd:cat ' .. sops_folder .. '/claude_api_key',
 
-            -- disabled_tools = { "python" },
-        },
-
+        -- disabled_tools = { "python" },
+    },
 }
 
 local function mk_llama_provider(llama_host, name)
@@ -66,7 +65,7 @@ local function mk_llama_provider(llama_host, name)
         -- hide_in_model_selector
         endpoint = 'http://' .. llama_host .. ':8080/v1',
         -- Timeout in milliseconds. Make it long as server is "slow"
-        timeout = 180000, 
+        timeout = 180000,
         -- parse_curl_args
         -- empty key is required else avante complains
         api_key_name = '',
@@ -446,16 +445,15 @@ local jedha_models = {
     'llama_qwen2_5_3b',
 }
 
-
 for _, model in ipairs(jedha_models) do
     opts.providers[model] = mk_llama_provider('jedha.local', jedha_models)
 end
 
 local local_models = {
-  'unsloth/gemma-4-E4B-it-GGUF'
+    'unsloth/gemma-4-E4B-it-GGUF',
 }
 for _, model in ipairs(local_models) do
-    opts.providers[model] = mk_llama_provider("localhost", model)
+    opts.providers[model] = mk_llama_provider('localhost', model)
 end
 
 require('avante').setup(opts)
