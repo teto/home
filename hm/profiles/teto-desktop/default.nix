@@ -26,6 +26,9 @@ in
     flakeSelf.homeProfiles.teto-zsh
     # flakeSelf.homeProfiles.yt-dlp
 
+
+    flakeSelf.inputs.nix-index-database.homeModules.nix-index
+
     flakeSelf.homeModules.avante
     flakeSelf.homeModules.fzf
     flakeSelf.homeModules.yazi
@@ -73,7 +76,6 @@ in
 
       # rendercv # yaml-based CV
 
-      # rendercv # yaml-based CV
       stow
       systemctl-tui
       timr-tui # rust clock
@@ -96,7 +98,7 @@ in
   };
 
   home.shellAliases = {
-    lg = "lazygit";
+    # lg = "lazygit";
     st = "systemctl-tui";
     yr = "yazi ./result";
 

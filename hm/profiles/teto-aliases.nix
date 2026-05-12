@@ -5,6 +5,8 @@
     jctl = "journalctl -b0 -r";
     v = "nvim";
 
+    n = "nix develop";
+
     # git variables {{{
     gl = "git log";
     gs = "git status";

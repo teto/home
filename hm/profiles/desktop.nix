@@ -58,19 +58,6 @@ in
     mime.enable = true;
   };
 
-  i18n.glibcLocales = pkgs.glibcLocales.override {
-    allLocales = true;
-    # 229 fr_FR.UTF-8/UTF-8 \
-    # 230 fr_FR/ISO-8859-1 \
-    # 231 fr_FR@euro/ISO-8859-15 \
-    # pass on japanese one as well ?
-    locales = [
-      "fr_FR.UTF-8/UTF-8"
-      "en_US.UTF-8/UTF-8"
-      # "en_US.UTF-8/UTF-8"
-    ];
-  };
-
   # programs.zoxide = {
   #   enable = true;
   #   enableZshIntegration = true;
@@ -95,13 +82,13 @@ in
       pkgs.alsa-utils # for alsamixer
       pkgs.lm_sensors # for `sensors` executable
       # pinentry-bemenu
-      pinentry-rofi
+      # pinentry-rofi
       pciutils # for lspci
       # gnome3.gnome-font-viewer  # Not very good
 
       timg
       gh-dash
-      wpaperd
+      # wpaperd
     ]
   );
 

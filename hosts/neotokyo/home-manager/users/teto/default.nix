@@ -27,6 +27,7 @@ imports = [
     flakeSelf.homeModules.teto-nogui
     flakeSelf.homeProfiles.bash
     flakeSelf.homeProfiles.teto-aliases
+    flakeSelf.homeProfiles.yazi
     flakeSelf.homeProfiles.yt-dlp
   ];
 
