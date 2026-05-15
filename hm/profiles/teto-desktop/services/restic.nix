@@ -1,6 +1,5 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 {
-  enable = true;
   backups = {
     nextcloud = {
       extraOptions = [

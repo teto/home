@@ -6,11 +6,10 @@
   ...
 }:
 {
-  imports = [
-    flakeSelf.homeProfiles.sway
-  ];
+  # _imports = [
+  # ];
 
-  wayland.windowManager.sway = {
+  windowManager.sway = {
     enable = true;
 
     extraSessionCommands = lib.mkForce "";

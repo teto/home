@@ -7,22 +7,55 @@
   flakeSelf,
   ...
 }:
+let 
+  haumea = flakeSelf.inputs.haumea;
+
+  autoloadedTeto =
+    { pkgs, ... }@args:
+    haumea.lib.load {
+      src = flakeSelf.inputs.nix-filter {
+        name = "laptopAutoloaded";
+        root = ./.;
+        # include = [
+        #   # "home-manager/users/teto/programs/neovim.nix"
+        #   # "home-manager/users/teto/programs/noctalia-shell.nix"
+        #   # "home-manager/users/teto/programs/noctalia-shell-settings.json"
+        #   # "home-manager/users/teto/wayland.nix"
+        #   # "home-manager/users/teto/services/blueman-applet.nix"
+        #   # "home-manager/users/teto/services/mpd.nix"
+        # ];
+
+        exclude = [
+          "default.nix"
+        ];
+      };
+
+      inputs = args // {
+        inputs = flakeSelf.inputs;
+      };
+      transformer = [
+        haumea.lib.transformers.liftDefault
+        (haumea.lib.transformers.hoistLists "_imports" "imports")
+      ];
+    };
+in
 {
 
   imports = [
+    autoloadedTeto
     flakeSelf.homeProfiles.teto-desktop
-
-    # flakeSelf.homeModules.experimental
+    #
+    # # flakeSelf.homeModules.experimental
     flakeSelf.homeProfiles.neovim
+    flakeSelf.homeProfiles.sway
 
-    ./wayland.nix
-    ./programs/waybar.nix
-    ./programs/neovim.nix
-    ./programs/noctalia-shell.nix
-    ./programs/zsh.nix
-    ./services/mpd.nix
-    ./services/blueman-applet.nix
-    ./services/wpaperd.nix
+    # ./wayland.nix
+    # ./programs/neovim.nix
+    # ./programs/noctalia-shell.nix
+    # ./programs/zsh.nix
+    # ./services/mpd.nix
+    # ./services/blueman-applet.nix
+    # ./services/wpaperd.nix
     # ./services/swayidle.nix
     # ../desktop/teto/default.nix  # Track for regressions
 
@@ -30,7 +63,6 @@
     flakeSelf.homeModules.nextcloud-client
     flakeSelf.homeModules.llama-cpp
 
-    # flakeSelf.homeProfiles.llama-cpp
     flakeSelf.homeProfiles.wezterm
   ];
 
@@ -45,7 +77,7 @@
   # services.opensnitch-ui.enable = false;
 
   # TODO enable sandboxing
-  programs.claude-code.enable = false;
+  # programs.claude-code.enable = false;
 
   home.packages = [
     # pkgs.claude-code

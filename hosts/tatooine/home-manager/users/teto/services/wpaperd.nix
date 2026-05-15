@@ -5,7 +5,6 @@
     pause / resume /toggle pause
     *
   */
-  services.wpaperd = {
     settings = {
       default = {
         # mode  = "center";
@@ -18,5 +17,4 @@
         sorting = "descending";
       };
     };
-  };
 }

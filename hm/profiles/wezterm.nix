@@ -25,12 +25,12 @@
     # '';
   };
 
-  home.sessionVariables = {
-
-    # for shell integration to work, https://github.com/wez/wezterm/issues/4406
-    WEZTERM_SHELL_SKIP_ALL = 1;
-  };
-
-  # for now test
-  xdg.configFile."wezterm/wezterm.lua".enable = false;
+  # home.sessionVariables = {
+  #
+  #   # for shell integration to work, https://github.com/wez/wezterm/issues/4406
+  #   WEZTERM_SHELL_SKIP_ALL = 1;
+  # };
+  #
+  # # for now test
+  # xdg.configFile."wezterm/wezterm.lua".enable = false;
 }

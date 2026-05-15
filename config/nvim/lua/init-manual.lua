@@ -234,7 +234,7 @@ vim.g.rocks_nvim = {
     },
 }
 
-local pluginDir = os.getenv('HOME') .. '/neovim'
+local pluginDir = os.getenv('HOME') .. '/plugins'
 -- fixing some stuff
 vim.opt.rtp:prepend(pluginDir .. '/avante.nvim')
 -- doing jj tests

@@ -66,10 +66,11 @@ in
     # }
     # DefaultDownloadDirectory = "\${home}/Downloads";
   };
-  nativeMessagingHosts = [
-    # add it to firefox-addons. ?
-    pkgs.ff2mpv
-  ];
+
+  # nativeMessagingHosts = [
+  #   # add it to firefox-addons. ?
+  #   pkgs.ff2mpv
+  # ];
 
   # Having "profiles.ini" makes firefox -ProfileManager crash with
   # 'An unexpected error has prevented your changes from being saved.'

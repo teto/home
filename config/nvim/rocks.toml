@@ -15,7 +15,7 @@ import = [
 plugins_dir = "plugins/"
 
 [dev]
-path = "/home/teto/neovim"
+path = "/home/teto/plugins"
 
 
 # [rocks-git]
@@ -117,7 +117,7 @@ neotest = "5.18.0"
 neotest-busted = "1.3.1"
 
 [plugins.auto-session ]
-dir = "/home/teto/neovim/auto-session"
+dir = "/home/teto/plugins/auto-session"
 # git = "teto/auto-session"
 # rev = "517228aa153c324e65b8c2d566b55365ad7cc741"
 # branch = "teto/dont-restore-for-at-least-one-arg"
@@ -126,7 +126,7 @@ dir = "/home/teto/neovim/auto-session"
 # [plugins."feed.nvim"]
 # # version = "2.19.2"
 # dev = true
-# dir = "/home/teto/neovim/feed.nvim"
+# dir = "/home/teto/plugins/feed.nvim"
 
 
 # [plugins.neotest-haskell]
@@ -144,7 +144,7 @@ dir = "/home/teto/neovim/auto-session"
 
 [plugins."rikai.nvim"]
 dev = true
-# dir = "/home/teto/neovim/rikai.nvim"
+# dir = "/home/teto/plugins/rikai.nvim"
 
 # seems ineffective ?
 # [plugins."command-and-cursor.nvim"]

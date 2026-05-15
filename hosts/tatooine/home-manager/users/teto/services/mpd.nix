@@ -5,7 +5,5 @@
   ...
 }:
 {
-  services.mpd = {
     musicDirectory = "~/Music";
-  };
 }

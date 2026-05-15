@@ -6,7 +6,6 @@
 }:
 {
 
-  services.swayidle = {
 
     # timeout <timeout> <timeout command> [resume <resume command>]
     # Execute timeout command if there is no activity for <timeout> seconds.
@@ -18,5 +17,4 @@
         command = "${pkgs.tetos.swaylockCmd}";
       }
     ];
-  };
 }
