@@ -1,1 +1,0 @@
-/nix/store/gm164yxg99dq6gyx14mjmszy7x81yybd-home-manager-files/.config/fish/functions/fish_user_key_bindings.fish

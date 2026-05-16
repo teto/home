@@ -1,4 +1,5 @@
 functions/fish_command_not_found.fish
+functions/fish_user_key_bindings.fish
 functions/y.fish
 conf.d/
 /fish_variables

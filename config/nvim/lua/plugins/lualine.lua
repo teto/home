@@ -113,25 +113,25 @@ require('lualine').setup({
         section_separators = { left = '', right = '' },
         separators = { left = '', right = '' },
         globalstatus = true,
-        -- If current filetype is in this list it'll
-        -- always be drawn as inactive statusline
-        -- and the last window will be drawn as active statusline.
-        -- for example if you don't want statusline of
-        -- your file tree / sidebar window to have active
-        -- statusline you can add their filetypes here.
-        --
-        -- Can also be set to a function that takes the
-        -- currently focused window as its only argument
-        -- and returns a boolean representing whether the
-        -- window's statusline should be drawn as inactive.
-        ignore_focus = {
-            -- todo add avante
-            'AvanteInput',
-            'AvanteSelectedFiles',
-        },
-        always_divide_middle = false,
-        -- handled by bufferline
-        always_show_tabline = false,
+		-- If current filetype is in this list it'll
+		-- always be drawn as inactive statusline
+		-- and the last window will be drawn as active statusline.
+		-- for example if you don't want statusline of
+		-- your file tree / sidebar window to have active
+		-- statusline you can add their filetypes here.
+		--
+		-- Can also be set to a function that takes the
+		-- currently focused window as its only argument
+		-- and returns a boolean representing whether the
+		-- window's statusline should be drawn as inactive.
+		ignore_focus = {
+		 -- todo add avante
+		 'AvanteInput',
+		 'AvanteSelectedFiles',
+		},
+		always_divide_middle = false,
+		-- handled by bufferline
+		always_show_tabline = false,
 
         -- Disable winbar for these filetypes
         disabled_filetypes = {
