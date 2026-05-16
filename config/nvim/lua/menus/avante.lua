@@ -12,6 +12,6 @@ return {
     },
     {
         name = 'Talk to model',
-  m      cmd = 'AvanteChat',
+        cmd = 'AvanteChat',
     },
 }

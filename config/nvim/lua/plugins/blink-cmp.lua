@@ -28,8 +28,8 @@ local opts = {
             -- preset = 'super-tab',
         },
     },
-   -- Experimental signature help support
-   signature = { enabled = true },
+    -- Experimental signature help support
+    signature = { enabled = true },
     completion = {
         trigger = {
             show_on_trigger_character = true,
@@ -189,17 +189,17 @@ local opts = {
             'buffer',
             -- 'git',
             --  avante ones
-			'avante',
+            'avante',
             -- "avante_commands",
             --    "avante_mentions",
             --    "avante_shortcuts",
             --    "avante_files",
         },
-		per_filetype = {
-		  -- sql = { 'dadbod' },
-		  -- -- optionally inherit from the `default` sources
-		  -- lua = { inherit_defaults = true, 'lazydev' }
-		},
+        per_filetype = {
+            -- sql = { 'dadbod' },
+            -- -- optionally inherit from the `default` sources
+            -- lua = { inherit_defaults = true, 'lazydev' }
+        },
         providers = {
             -- ve:
 

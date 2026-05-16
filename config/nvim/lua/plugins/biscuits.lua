@@ -4,8 +4,8 @@ require('nvim-biscuits').setup({
         min_distance = 5,
         prefix_string = ' 📎 ',
     },
-	max_file_size = '100kb',
-	cursor_line_only = true,
+    max_file_size = '100kb',
+    cursor_line_only = true,
     language_config = {
         html = {
             prefix_string = ' 🌐 ',
