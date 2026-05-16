@@ -25,7 +25,7 @@ let
     };
 
   blinkPlugins = [
-    pkgs.vimPlugins.blink-cmp # replace cmp-nvim
+    pkgs.vimPlugins.blink-cmp
     # flakeSelf.inputs.blink-cmp.packages.${pkgs.stdenv.hostPlatform.system}.blink-cmp
     # pkgs.vimPlugins.blink-cmp-git # autocomplete github issues/PRs
   ];
@@ -265,7 +265,6 @@ in
       '';
     })
     (lib.mkIf cfg.enableMyDefaults {
-      # programs.neovim.plugins = blinkPlugins;
 
       programs.neovim.initLua = ''
         vim.opt.title = true -- vim will change terminal title

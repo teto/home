@@ -7,7 +7,7 @@
   flakeSelf,
   ...
 }:
-let 
+let
   haumea = flakeSelf.inputs.haumea;
 
   autoloadedTeto =

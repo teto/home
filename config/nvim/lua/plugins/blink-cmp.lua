@@ -6,8 +6,6 @@ local opts = {
     -- see the "default configuration" section below for full documentation on how to define
     fuzzy = {
         implementation = 'rust',
-        -- ~/.local/share/nvim/lazy/blink.cmp/target/release/libblink_cmp_fuzzy.so
-        --
         -- sorts = {
         --   function(a, b)
         --     if a.client_name == nil or b.client_name == nil then return end
@@ -30,7 +28,8 @@ local opts = {
             -- preset = 'super-tab',
         },
     },
-
+   -- Experimental signature help support
+   signature = { enabled = true },
     completion = {
         trigger = {
             show_on_trigger_character = true,
@@ -190,11 +189,17 @@ local opts = {
             'buffer',
             -- 'git',
             --  avante ones
+			'avante',
             -- "avante_commands",
             --    "avante_mentions",
             --    "avante_shortcuts",
             --    "avante_files",
         },
+		per_filetype = {
+		  -- sql = { 'dadbod' },
+		  -- -- optionally inherit from the `default` sources
+		  -- lua = { inherit_defaults = true, 'lazydev' }
+		},
         providers = {
             -- ve:
 

@@ -6,9 +6,9 @@
 }:
 {
 
-    neorg.enable = true;
+  neorg.enable = true;
 
-    plugins = [
-      # pkgs.vimPlugins.hex-nvim # to test runtimeDeps
-    ];
+  plugins = [
+    # pkgs.vimPlugins.hex-nvim # to test runtimeDeps
+  ];
 }

@@ -5,5 +5,5 @@
   ...
 }:
 {
-    musicDirectory = "~/Music";
+  musicDirectory = "~/Music";
 }

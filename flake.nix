@@ -74,10 +74,10 @@
     #   # inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-    blink-cmp = {
-      url = "github:Saghen/blink.cmp";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # blink-cmp = {
+    #   url = "github:Saghen/blink.cmp";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     deploy-rs = {
       url = "github:serokell/deploy-rs";
