@@ -1,13 +1,4 @@
 {
-  config,
-  pkgs,
-  lib,
-  ...
-}@args:
-let
-  secrets = import ./secrets.nix;
-in
-{
   programs.gh = {
     enable = true;
     aliases = {

@@ -46,7 +46,6 @@ avahi-discover:
 firewall-list:
     sudo iptables -n -L
 
-
 # install neovim dev files
 neovim-direnv:
     # ln -sf {{ justfile_directory() }}/../../justfile justfile.local
@@ -136,4 +135,3 @@ satellite:
     #  https://github.com/Supreeeme/xwayland-satellite/issues/154
     export RUST_LOG=xwayland_process=off
     xwayland-satellite
-

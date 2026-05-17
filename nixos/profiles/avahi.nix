@@ -10,8 +10,7 @@
     enable = true;
     allowPointToPoint = false;
     # defaults to 'local'
-      # domainName = "local";
-    ipv6 = false; # bug with multiple hostnames
+    # domainName = "local";
     # allows applications to resolve names in the ‘.local’ domain by transparently querying the Avahi daemon.
     nssmdns4 = true;
     openFirewall = true;
@@ -28,21 +27,23 @@
     # https://linux.die.net/man/5/avahi-daemon.conf
     settings = {
 
-      servers = {
+      server = {
+        use-ipv4 = true; # bug with multiple hostnames
+        use-ipv6 = false; # bug with multiple hostnames
 
         # to avoid:
-        # *** WARNING: Detected another IPv4 mDNS stack running on this host. This makes mDNS unreliable and is thus not recommended. *** 
-        disallow-other-stacks= true;
+        # *** WARNING: Detected another IPv4 mDNS stack running on this host. This makes mDNS unreliable and is thus not recommended. ***
+        disallow-other-stacks = true;
       };
 
       publish = {
-        publish-a-on-ipv6= false;
+        publish-a-on-ipv6 = false;
         # publish-dns-servers
       };
 
     };
 
-    # wideArea = 
+    # wideArea =
     # extraConfig
 
     extraServiceFiles = {
@@ -91,7 +92,7 @@
       # '';
     };
 
-   # List of non-local DNS domains to be browsed.
+    # List of non-local DNS domains to be browsed.
     browseDomains = [
       # "0pointer.de"
       # "zeroconf.org"
