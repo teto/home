@@ -251,7 +251,9 @@ in
           # XF86Copy
         }
         // lib.optionalAttrs config.programs.vicinae.enable {
-          "${mod}+Ctrl+h" = "exec ${pkgs.vicinae}/bin/vicinae vicinae://extensions/vicinae/clipboard/history";
+          # vicinae://launch/clipboard/history
+          # https://docs.vicinae.com/deeplinks
+          "${mod}+Ctrl+h" = "exec ${pkgs.vicinae}/bin/vicinae vicinae://launch/clipboard/history";
         }
         // lib.optionalAttrs config.services.clipcat.enable {
           "${mod}+Ctrl+h" =

@@ -25,7 +25,12 @@
       # userServices
     };
 
+    # https://linux.die.net/man/5/avahi-daemon.conf
     settings = {
+
+      servers = {
+        disallow-other-stacks= true;
+      };
 
       publish = {
         publish-a-on-ipv6= false;

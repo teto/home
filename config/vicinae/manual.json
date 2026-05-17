@@ -1,4 +1,9 @@
 {
+ "close_on_focus_loss": true,
+   "telemetry": {
+      "system_info": false
+   },
+
 "font": {
   "normal": {
     "family": "auto",
@@ -30,7 +35,7 @@
     "layer": "top"
   }
 },
- "pop_to_root_on_close": false,
+ "pop_to_root_on_close": true,
     "theme": {
       "dark": {
          "name": "rose-pine"
