@@ -8,6 +8,9 @@
   services.avahi = {
     # inspired by novos
     enable = true;
+    allowPointToPoint = false;
+    # defaults to 'local'
+      # domainName = "local";
     ipv6 = false; # bug with multiple hostnames
     # allows applications to resolve names in the ‘.local’ domain by transparently querying the Avahi daemon.
     nssmdns4 = true;
@@ -21,6 +24,18 @@
       userServices = true;
       # userServices
     };
+
+    settings = {
+
+      publish = {
+        publish-a-on-ipv6= false;
+        # publish-dns-servers
+      };
+
+    };
+
+    # wideArea = 
+    # extraConfig
 
     extraServiceFiles = {
       # correct port ?
@@ -68,9 +83,10 @@
       # '';
     };
 
+   # List of non-local DNS domains to be browsed.
     browseDomains = [
       # "0pointer.de"
-      "zeroconf.org"
+      # "zeroconf.org"
     ];
   };
 }

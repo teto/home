@@ -19,7 +19,7 @@ let
         exclude = [
           # "teto"
           # "users"
-          "home-manager" # exclude home-manager because intputs are not the same: it must be imported differently
+          # "home-manager" # exclude home-manager because intputs are not the same: it must be imported differently
           # "root"
         ];
       };
