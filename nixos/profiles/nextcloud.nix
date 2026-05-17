@@ -1,14 +1,12 @@
 {
   config,
   lib,
-  pkgs,
-  secrets,
   ...
 }:
 let
-  # secrets = import ../nixpkgs/secrets.nix;
 
   # used to setup sops at the bottom of the file
+  # todo reference sops paths
   nextcloudAdminPasswordSopsPath = "nextcloud/adminPassword";
 in
 {

@@ -45,10 +45,9 @@
     # ./services/ollama.nix
     ./services/kanshi.nix
     ./services/ssh-agent.nix
-    ./services/swaync.nix
     ./services/mpd.nix
     ./services/mpris.nix
-    ./services/wpaperd.nix
+    # ./services/wpaperd.nix
   ]
   ++ lib.optionals withSecrets [
     ./sops.nix
@@ -79,6 +78,8 @@
     # gthumb # image manager, great to tag pictures
 
     # footswitch # to control foot pedals (use module instead)
+    # need gnome-accounts to make it work
+    gnome-calendar
     gnome-control-center
     gnome-maps
     # gpu-usage-waybar
@@ -107,7 +108,7 @@
 
     # bridge-utils# pour  brctl
 
-    vscode-css-languageserver # to showcase 'cssls' lsp server
+    # vscode-css-languageserver # to showcase 'cssls' lsp server
 
   ];
 

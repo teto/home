@@ -99,26 +99,105 @@ in
     };
   };
 
-  boot = {
-    kernelPackages = pkgs.linuxKernel.packages.linux_7_0;
-    blacklistedKernelModules = [ "nouveau" ];
-    extraModulePackages = [
-
+  boot =
+    let
+      # kernelPkgs = pkgs.linuxKernel.packages.linux_7_0;
+      kernelPkgs = pkgs.linuxKernel.packages.linux_6_18;
       # pkgs.linuxKernel.packages.linux_6_18.r8125
-      pkgs.linuxKernel.packages.linux_7_0.r8125
-    ];
+    in
+    {
+      consoleLogLevel = 6;
+      kernelPackages = kernelPkgs;
+      blacklistedKernelModules = [ "nouveau" ];
+      extraModulePackages = [
 
-    # Ensure initrd has resume support
-    # initrd.luks.devices."crypted".allowDiscards = true;
+        kernelPkgs.r8125
+      ];
 
-    # necessary for qemu  to prevent
-    # NOTE: this doesn't change the size of /run/user see https://nixos.org/nix-dev/2015-July/017657.html
-    runSize = "10g";
-    resumeDevice = "/dev/nvme0n1p1"; # resumeDevice = "/dev/disk/by-uuid/febbd1a4-c36a-489d-ab5c-b4e9281ab892";
+      # Ensure initrd has resume support
+      # initrd.luks.devices."crypted".allowDiscards = true;
 
-    # it apparently still is quite an important thing to have
-    devSize = "5g";
-  };
+      # necessary for qemu  to prevent
+      # NOTE: this doesn't change the size of /run/user see https://nixos.org/nix-dev/2015-July/017657.html
+      runSize = "10g";
+      resumeDevice = "/dev/nvme0n1p1"; # resumeDevice = "/dev/disk/by-uuid/febbd1a4-c36a-489d-ab5c-b4e9281ab892";
+
+      # it apparently still is quite an important thing to have
+      devSize = "5g";
+      loader = {
+        systemd-boot.enable = false;
+        # systemd-boot.editor = true; # allow to edit command line
+        # systemd-boot.consoldeMode = "auto";
+
+        # efi.canTouchEfiVariables = true;
+        # defaults to /boot
+        efi.efiSysMountPoint = "/boot";
+        #    systemd-boot.enable = true;
+        # efi.efiSysMountPoint
+        #    timeout = 5;
+        #    # just to generate the entry used by ubuntu's grub
+        grub = {
+          enable = true;
+          efiSupport = true;
+          # If you turn this feature on, GRUB will install itself in a special location within efiSysMountPoint (namely EFI/boot/boot$arch.efi) which the firmwares are hardcoded to try first, regardless of NVRAM EFI variables.
+          efiInstallAsRemovable = true;
+          #
+          useOSProber = true;
+
+          # install to none, we just need the generated config
+          # for ubuntu grub to discover
+          # boot.loader.grub.device has to be set to nodev 465, otherwise the grub installer will assume it has to install the Legacy (MBR) bits too. When doing so, it will either embed itself into
+          # device = "/dev/nvme0n1p3";
+          devices = [ "nodev" ];
+        };
+      };
+
+      # hide messages !
+      kernelParams = [
+        # used with resumeDevice. computed by filefrag -v /fucking_swap
+        # "resume_offset=692224"
+        "resume_offset=55296"
+
+        # "earlycon=ttyS0"
+        # "console=ttyS0"
+        # NECESSARY !! https://discourse.nixos.org/t/browsers-unbearably-slow-after-update/9414/30
+        # "intel_pstate=active"
+
+        # see https://forums.developer.nvidia.com/t/unusable-linux-text-console-with-nvidia-drm-modeset-1-or-if-nvidia-persistenced-is-loaded/184428/14
+        "no-scroll"
+        # fsck.mode=skip
+      ];
+
+      kernelModules = [
+        "af_key" # for ipsec/vpn support
+        "kvm"
+
+        # https://discourse.nixos.org/t/ddcci-kernel-driver/22186/3
+        # hopefully set by ddcontrol module now ?
+        # "i2c-dev"
+        # "ddcci_backlight" # to control external monitors brightness
+      ];
+
+      kernel.sysctl = {
+
+        # max_user_instances limits (roughly) how many applications can watch files (per user);
+        # max_user_watches limits how many filesystem items can be watched, in total across all applications (per user);
+        # max_queued_events limits how many filesystem events will be held in the kernel queue if the application does not read them;
+
+        # to avoid "Bad file descriptor" and "Too many open files" situations
+        "fs.inotify.max_user_watches" = lib.mkForce 1000000;
+        "fs.inotify.max_user_instances" = 600;
+        # "fs.inotify.max_queued_events" = ;
+
+        # to not provoke the kernel into crashing
+        # "net.ipv4.tcp_timestamps" = 0;
+        # "net.ipv4.ipv4.ip_forward" = 1;
+        # "net.ipv4.tcp_keepalive_time" = 60;
+        # "net.core.rmem_max" = 4194304;
+        # "net.core.wmem_max" = 1048576;
+      };
+
+    };
 
   swapDevices = [
     {
@@ -126,79 +205,6 @@ in
       size = 48000; # in MB
     }
   ];
-
-  boot.consoleLogLevel = 6;
-
-  boot.loader = {
-    systemd-boot.enable = false;
-    # systemd-boot.editor = true; # allow to edit command line
-    # systemd-boot.consoldeMode = "auto";
-
-    # efi.canTouchEfiVariables = true;
-    # defaults to /boot
-    efi.efiSysMountPoint = "/boot";
-    #    systemd-boot.enable = true;
-    # efi.efiSysMountPoint
-    #    timeout = 5;
-    #    # just to generate the entry used by ubuntu's grub
-    grub = {
-      enable = true;
-      efiSupport = true;
-      # If you turn this feature on, GRUB will install itself in a special location within efiSysMountPoint (namely EFI/boot/boot$arch.efi) which the firmwares are hardcoded to try first, regardless of NVRAM EFI variables.
-      efiInstallAsRemovable = true;
-      #
-      useOSProber = true;
-
-      # install to none, we just need the generated config
-      # for ubuntu grub to discover
-      # boot.loader.grub.device has to be set to nodev 465, otherwise the grub installer will assume it has to install the Legacy (MBR) bits too. When doing so, it will either embed itself into
-      # device = "/dev/nvme0n1p3";
-      devices = [ "nodev" ];
-    };
-  };
-
-  # hide messages !
-  boot.kernelParams = [
-    # used with resumeDevice. computed by filefrag -v /fucking_swap
-    # "resume_offset=692224"
-    "resume_offset=55296"
-
-    # "earlycon=ttyS0"
-    # "console=ttyS0"
-    # NECESSARY !! https://discourse.nixos.org/t/browsers-unbearably-slow-after-update/9414/30
-    # "intel_pstate=active"
-
-    # see https://forums.developer.nvidia.com/t/unusable-linux-text-console-with-nvidia-drm-modeset-1-or-if-nvidia-persistenced-is-loaded/184428/14
-    "no-scroll"
-    # fsck.mode=skip
-  ];
-
-  boot.kernelModules = [
-    "af_key" # for ipsec/vpn support
-    "kvm"
-    # https://discourse.nixos.org/t/ddcci-kernel-driver/22186/3
-    "i2c-dev"
-    "ddcci_backlight" # to control external monitors brightness
-  ];
-
-  boot.kernel.sysctl = {
-
-    # max_user_instances limits (roughly) how many applications can watch files (per user);
-    # max_user_watches limits how many filesystem items can be watched, in total across all applications (per user);
-    # max_queued_events limits how many filesystem events will be held in the kernel queue if the application does not read them;
-
-    # to avoid "Bad file descriptor" and "Too many open files" situations
-    "fs.inotify.max_user_watches" = lib.mkForce 1000000;
-    "fs.inotify.max_user_instances" = 600;
-    # "fs.inotify.max_queued_events" = ;
-
-    # to not provoke the kernel into crashing
-    # "net.ipv4.tcp_timestamps" = 0;
-    # "net.ipv4.ipv4.ip_forward" = 1;
-    # "net.ipv4.tcp_keepalive_time" = 60;
-    # "net.core.rmem_max" = 4194304;
-    # "net.core.wmem_max" = 1048576;
-  };
 
   # system.replaceRuntimeDependencies
   #     List of packages to override without doing a full rebuild. The original derivation and replacement derivation must have the same name length, and ideally should have close-to-identical directory layout.

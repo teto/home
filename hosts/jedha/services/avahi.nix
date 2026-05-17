@@ -1,19 +1,31 @@
-{ withSecrets, secrets, ...}:
 {
+  flakeSelf,
+  # withSecrets, secrets
+  ...
+}:
+{
+  _imports = [
+    flakeSelf.nixosProfiles.avahi
+  ];
+
   enable = true;
-  # allowInterfaces = [ 
+
+  debug = true;
+
+  # allowInterfaces = [
   #   "wlp10s0"
   # ];
 
   settings = {
 
     server = {
-  # Set the host name avahi-daemon tries to register on the LAN. If omited defaults to the system host name as set with the sethostname() system call. 
-        host-name=
+      # Set the host name avahi-daemon tries to register on the LAN. If omited defaults to the system host name as set with the sethostname() system call.
+      # secrets.jedha.hostname;
+      host-name = "jedha";
+      # enable-dbus = true;
 
     };
   };
-
 
   browseDomains = [ ];
 
@@ -27,5 +39,5 @@
     addresses = true;
     # publish-a-on-ipv6 = false;
   };
-  
+
 }

@@ -296,7 +296,6 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-
     #
     transgression-tui = {
       url = "github:PanAeon/transg-tui";
@@ -358,9 +357,8 @@
       dotfilesPath = "/home/teto/home";
       secretsFolder = "/home/teto/home/secrets";
 
-      secrets = import ./nixpkgs/secrets.nix {
-        inherit secretsFolder dotfilesPath;
-      };
+      secrets = import ./nixpkgs/secrets.nix;
+      # inherit secretsFolder dotfilesPath;
 
       # Eval the treefmt modules from ./treefmt.nix
       treefmtEval = treefmt-nix.lib.evalModule tetosPkgs ./tetos/treefmt.nix;
@@ -785,7 +783,8 @@
             jedha =
               genNode {
                 name = "jedha";
-                hostname = "jedha.local";
+                # fetch from secrets
+                hostname = secrets.jedha.hostname;
               }
               // {
                 interactiveSudo = true;
