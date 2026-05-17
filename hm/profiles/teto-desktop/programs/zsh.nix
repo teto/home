@@ -17,7 +17,7 @@
 
   sessionVariables = {
     # CAREFUL
-    CDPATH = "$HOME/neovim";
+    CDPATH = "$HOME/plugins";
   };
 
   completionInit = ''

@@ -456,4 +456,5 @@ for _, model in ipairs(local_models) do
     opts.providers[model] = mk_llama_provider('localhost', model)
 end
 
-require('avante').setup(opts)
+vim.g.avante = opts
+require('avante').setup()

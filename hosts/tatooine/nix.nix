@@ -14,6 +14,8 @@
   settings = {
     substituters = [
       # https://github.com/NixOS/nix/pull/15449
+    ];
+    extra-substituters = [
       "http://jedha.local?priority=10&retry-attempts=2&retry-max-delay=1000"
     ];
 

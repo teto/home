@@ -46,7 +46,7 @@ in
     # HISTFILE="$XDG_CACHE_HOME/bash_history";
 
     # TODO set it globally ?
-    CDPATH = "$HOME/neovim";
+    CDPATH = "$HOME/plugins";
   };
 
   # remove ?
@@ -55,7 +55,7 @@ in
   shellAliases = {
 
     # nixpaste = "curl -F \"text=<-\" http://nixpaste.lbr.uno";
-    m = "neomutt";
+    m = "neomutt"; # or meli ?
     ns = "nix-shell";
   };
 

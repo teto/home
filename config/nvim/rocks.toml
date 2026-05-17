@@ -232,7 +232,8 @@ rev = "v3.0.0"
 
 [plugins.blink-cmp-avante]
 git = "kaiser-yang/blink-cmp-avante"
-rev = "v0.1.0"
+rev = "4f494c6e124acbe31a8f5d58effa0c14aa38a6d5"
+branch = "master"
 
 [plugins."kitty-scrollback.nvim"]
 git = "mikesmithgh/kitty-scrollback.nvim"
