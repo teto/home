@@ -44,28 +44,39 @@ in
   #   cat "${pkgs.writeText "welcome-message" banner}";
   # '';
 
+  # required for systemd to send emails
   programs.msmtp.enable = true;
 
   programs.yt-dlp.enable = true;
 
   programs.neovim = {
-
     enableFzfLua = true;
     highlightOnYank = true;
     enableMyDefaults = true;
   };
 
-  # todo set zsh as default
-  programs.zsh = {
-    enable = true;
-    loginExtra = ''
-      cat "${pkgs.writeText "login-welcome" welcomeMessage}";
+  programs.bash = {
+    initExtra = ''
+
+      cd nixpkgs
+      echo "export token"
     '';
-    # shellAliases = {
-    #   st = "systemctl-tui";
-    #   jctl = "journalctl -b0";
-    # };
+
   };
+
+  programs.fish.enable = true;
+
+  # todo set zsh as default
+  # programs.zsh = {
+  #   enable = true;
+  #   loginExtra = ''
+  #     cat "${pkgs.writeText "login-welcome" welcomeMessage}";
+  #   '';
+  #   # shellAliases = {
+  #   #   st = "systemctl-tui";
+  #   #   jctl = "journalctl -b0";
+  #   # };
+  # };
 
   home.file."justfile".source = ./justfile;
 }

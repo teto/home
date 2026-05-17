@@ -1,6 +1,7 @@
 {
   # https://github.com/rycee/home-manager/pull/829
-  enable = true;
+  # we use noctalia instead now
+  enable = false;
 
   # TODO write this in config/swayidle/config instead ?
   timeouts = [

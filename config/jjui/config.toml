@@ -20,6 +20,7 @@ hijack_askpass= true
 
 [ui]
 auto_refresh_interval=4
+theme = "wallust"
 tracer.enabled = true
 
 

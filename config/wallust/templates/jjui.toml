@@ -1,0 +1,53 @@
+# jjui theme template for wallust
+# Generated target: ~/.config/jjui/themes/wallust.toml
+
+"text" = { fg = "{{foreground}}", bg = "{{background}}" }
+"dimmed" = { fg = "{{color8}}" }
+"selected" = { fg = "{{background}}", bg = "{{color4}}", bold = true }
+"border" = { fg = "{{color8}}" }
+"title" = { fg = "{{color6}}", bold = true }
+"shortcut" = { fg = "{{color3}}", bold = true }
+"matched" = { fg = "{{color5}}", bold = true, underline = true }
+
+"source_marker" = { fg = "{{background}}", bg = "{{color2}}", bold = true }
+"target_marker" = { fg = "{{background}}", bg = "{{color1}}", bold = true }
+
+"revset title" = { fg = "{{color6}}", bold = true }
+"revset text" = { fg = "{{foreground}}", bg = "{{color0}}", bold = true }
+"revset completion selected" = { fg = "{{background}}", bg = "{{color4}}", bold = true }
+"revset completion matched" = { fg = "{{color5}}", bold = true }
+"revset completion dimmed" = { fg = "{{color8}}" }
+
+"revisions" = { fg = "{{foreground}}", bg = "{{background}}" }
+"revisions selected" = { fg = "{{background}}", bg = "{{color4}}", bold = true }
+"revisions dimmed" = { fg = "{{color8}}" }
+
+"status" = { fg = "{{foreground}}", bg = "{{color0}}" }
+"status title" = { fg = "{{background}}", bg = "{{color6}}", bold = true }
+"status shortcut" = { fg = "{{color3}}", bold = true }
+"status dimmed" = { fg = "{{color8}}" }
+
+"evolog" = { fg = "{{foreground}}", bg = "{{background}}" }
+"evolog selected" = { fg = "{{background}}", bg = "{{color5}}", bold = true }
+
+"menu" = { fg = "{{foreground}}", bg = "{{color0}}" }
+"menu title" = { fg = "{{color6}}", bold = true }
+"menu selected" = { fg = "{{background}}", bg = "{{color4}}", bold = true }
+"menu border" = { fg = "{{color8}}" }
+"menu matched" = { fg = "{{color5}}", bold = true, underline = true }
+"menu shortcut" = { fg = "{{color3}}", bold = true }
+"menu dimmed" = { fg = "{{color8}}" }
+
+"help" = { fg = "{{foreground}}", bg = "{{color0}}" }
+"help title" = { fg = "{{color6}}", bold = true, underline = true }
+"help border" = { fg = "{{color8}}" }
+
+"confirmation" = { fg = "{{foreground}}", bg = "{{color0}}" }
+"confirmation selected" = { fg = "{{background}}", bg = "{{color1}}", bold = true }
+"confirmation border" = { fg = "{{color1}}" }
+
+"preview" = { fg = "{{foreground}}", bg = "{{background}}" }
+"preview border" = { fg = "{{color8}}" }
+
+"undo" = { fg = "{{foreground}}", bg = "{{color0}}" }
+"undo confirmation selected" = { fg = "{{background}}", bg = "{{color5}}", bold = true }

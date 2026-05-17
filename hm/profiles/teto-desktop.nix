@@ -51,7 +51,7 @@ in
   # allows to find fonts enabled through home.packages
   fonts.fontconfig.enable = true;
 
-  programs.delta.enable = true;
+  # programs.delta.enable = true;
 
   xdg = {
     enable = true;

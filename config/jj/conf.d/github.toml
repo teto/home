@@ -1,5 +1,9 @@
 # stolen from https://github.com/jj-vcs/jj/discussions/5388
 [aliases]
+pr = ["util", "exec", "--", "bash", "-c", """
+gh pr create --head $(jj log -r 'closest_bookmark(@)' -T 'bookmarks' --no-graph | cut -d ' ' -f 1)
+"""]
+
 track-github-pr = ["util", "exec", "--", 'sh', '-euxc', '''
   PR="$1"
   gh pr view --json headRepository,headRefName,headRepositoryOwner $PR --jq '"
