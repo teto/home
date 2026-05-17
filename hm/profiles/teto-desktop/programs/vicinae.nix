@@ -10,7 +10,7 @@
   settings = {
     # To do so, you simply need to add the files to import to the imports array. Files imported in this way are merged before the main user configuration file is considered and are never touched by vicinae directly, allowing them to be freely formatted and annotated with custom comments.
     # Imported files are merged with the default config before the main user configuration file, which means that value present in the user configuration file will always override those that were imported.
-    imports = [ "manual.json" ];
+    imports = [ "${config.xdg.configHome}/vicinae/manual.json" ];
     # Supports "navigate_back" or "close_window"
     escape_key_behavior = "navigate_back";
     # Available values are: 'twenty' | 'google' | 'none'
