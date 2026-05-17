@@ -1,5 +1,14 @@
-{ lib, pkgs, ... }:
 {
+  lib,
+  pkgs,
+  config,
+  ...
+}:
+{
+  includes = [
+
+    { path = config.xdg.configHome + "/git/manual.gitconfig"; }
+  ];
 
   package = pkgs.gitFull; # to get send-email
 

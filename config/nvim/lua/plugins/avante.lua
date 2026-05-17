@@ -58,9 +58,10 @@ local providers = {
     },
 }
 
-local function mk_llama_provider(llama_host, name)
-    local opts = {
-        __inherited_from = 'openai',
+local function mk_llama_provider(llama_host, name, custom)
+    local opts = vim.tbl_extend('force', {
+        -- either that or parse_curl_args
+        -- __inherited_from = 'openai',
         model = name,
         -- hide_in_model_selector
         endpoint = 'http://' .. llama_host .. ':8080/v1',
@@ -80,7 +81,7 @@ local function mk_llama_provider(llama_host, name)
         prompt_opts = {
             system_prompt = 'you are zulu',
         },
-    }
+    }, custom)
     return opts
 end
 
@@ -315,7 +316,7 @@ opts = {
     ask = {
 
         floating = false, -- Open the 'AvanteAsk' prompt in a floating window
-        start_insert = true, -- Start insert mode when opening the ask window
+        start_insert = false, -- Start insert mode when opening the ask window
         border = 'rounded',
         ---@type "ours" | "theirs"
         focus_on_apply = 'ours', -- which diff to focus after applying
@@ -422,13 +423,13 @@ opts = {
 local hidden_models = {
     'aihubmix',
     'copilot',
-    'gemini',
-    'openai',
-    'openai-gpt-4o-mini',
-    'vertex',
-    'vertex_claude',
-    'ollama',
-    'moonshot',
+    -- 'gemini',
+    -- 'openai',
+    -- 'openai-gpt-4o-mini',
+    -- 'vertex',
+    -- 'vertex_claude',
+    -- 'ollama',
+    -- 'moonshot',
 }
 
 -- hides everything in hidden_models
@@ -445,16 +446,23 @@ local jedha_models = {
     'llama_qwen2_5_3b',
 }
 
-for _, model in ipairs(jedha_models) do
-    opts.providers[model] = mk_llama_provider('jedha.local', jedha_models)
-end
+-- for _, model in ipairs(jedha_models) do
+local res = mk_llama_provider('jedha.local', nil, {})
+opts.providers['jedha'] = vim.tbl_extend('force', res, {
+    list_models = function()
+        return jedha_models
+    end,
+})
+--     opts.providers[model] =
+-- end
 
-local local_models = {
-    'unsloth/gemma-4-E4B-it-GGUF',
-}
-for _, model in ipairs(local_models) do
-    opts.providers[model] = mk_llama_provider('localhost', model)
-end
+-- local local_models = {
+--     'unsloth/gemma-4-E4B-it-GGUF',
+-- }
+-- for _, model in ipairs(local_models) do
+opts.providers['gemma-4'] =
+    mk_llama_provider('localhost', 'unsloth/gemma-4-E4B-it-GGUF', { __inherited_from = 'openai' })
+-- end
 
 vim.g.avante = opts
 require('avante').setup()

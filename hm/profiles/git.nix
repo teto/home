@@ -14,7 +14,6 @@
     enable = true;
 
     includes = [
-      # { path = config.xdg.configHome + "/git/config.inc"; }
       # everything under ~/yourworkfolder/ is company code, so use the other user/email/gpg key, etc
     ];
     # https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work
@@ -26,6 +25,7 @@
         st = "status";
         br = "branch";
         d = "diff";
+
         mg = "mergetool";
 
         # get top level directory of the repo

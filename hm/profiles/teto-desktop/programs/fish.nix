@@ -166,6 +166,7 @@
       source $manual_config
     end
 
+    # todo upload if not the case yet ?
     source ${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.fish
   '';
 

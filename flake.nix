@@ -162,8 +162,8 @@
     neovim-nightly-overlay = {
       # url = "path:/home/teto/neovim-nightly-overlay";
       # teto/test-overriding-neovim-debug-luajit
-      url = "github:teto/neovim-nightly-overlay?ref=teto/add-wrapper";
-      # url = "github:nix-community/neovim-nightly-overlay";
+      # url = "github:teto/neovim-nightly-overlay?ref=teto/add-wrapper";
+      url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
       # inputs.neovim-src.follows = "neovim-src";
     };
