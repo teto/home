@@ -17,9 +17,6 @@ import? '{{ config_directory() }}'
 default:
     just --choose
 
-neotokyo-help:
-    just -f hosts/neotokyo/home-manager/users/teto/justfile
-
 # dump noctalia-shell settings
 noctalia-dump-settings:
     noctalia-shell ipc call state all | jq .settings
@@ -45,10 +42,19 @@ whisper:
 avahi-discover:
     avahi-browse -d local _workstation._tcp -t --resolve
 
+# list firewall rules
+firewall-list:
+    sudo iptables -n -L
+
+
 # install neovim dev files
 neovim-direnv:
     # ln -sf {{ justfile_directory() }}/../../justfile justfile.local
     ln -sf $HOME/home/contrib/neovim-envrc .envrc
+
+dbus-list-sessions:
+    # org.freedesktop.DBus.ListNames
+    dbus-send --session --dest=org.freedesktop.DBus --type=method_call --print-reply /org/freedesktop/DBus org.freedesktop.DBus.ListNames
 
 # Merge some hardcoded shell commands in shell history
 zsh-load-history:
@@ -124,3 +130,10 @@ nixos-rebuild command extra_args="":
       --override-input hm {{ HM_REPO }} \
        {{ extra_args }} \
        {{ command }}
+satellite:
+    echo "Run export DISPLAY=:0 program"
+    # You can silence all messages from Xwayland by setting the env var RUST_LOG=xwayland_process=off
+    #  https://github.com/Supreeeme/xwayland-satellite/issues/154
+    export RUST_LOG=xwayland_process=off
+    xwayland-satellite
+

@@ -29,6 +29,9 @@
     settings = {
 
       servers = {
+
+        # to avoid:
+        # *** WARNING: Detected another IPv4 mDNS stack running on this host. This makes mDNS unreliable and is thus not recommended. *** 
         disallow-other-stacks= true;
       };
 

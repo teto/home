@@ -252,17 +252,6 @@ notmuch-speedup:
 nix-diff-booted:
     nix store diff-closures /run/*-system
 
-# run a X compatibility layer, you need to export the correct DISPLAY beforehand
-xwayland: satellite
-    xwayland-satellite
-
-satellite:
-    echo "Run export DISPLAY=:0 program"
-    # You can silence all messages from Xwayland by setting the env var RUST_LOG=xwayland_process=off
-    #  https://github.com/Supreeeme/xwayland-satellite/issues/154
-    export RUST_LOG=xwayland_process=off
-    xwayland-satellite
-
 udev-restart:
     sudo udevadm control --reload-rules
     sudo udevadm trigger
@@ -271,14 +260,6 @@ udev-restart:
 
 nix-ping-store:
     nix store info --store http://jedha.local
-
-dbus-list-sessions:
-    # org.freedesktop.DBus.ListNames
-    dbus-send --session --dest=org.freedesktop.DBus --type=method_call --print-reply /org/freedesktop/DBus org.freedesktop.DBus.ListNames
-
-# discover local network
-avahi-discover:
-    avahi-browse --all --ignore-local --resolve --terminate
 
 # you need to bump the flake first since nix-forecast doesn't accept input overrides yet
 nix-forecast:
@@ -296,10 +277,6 @@ bitwarden-sync-to-password-store:
 
 refresh-ssh-public-keys:
     ssh-keyscan -q -p4231 -ted25519 neotokyo.fr | cut -d' ' -f2,3 > host_key.pub
-
-# list firewall rules
-firewall-list:
-    sudo iptables -n -L
 
 eval-jedha-no-secrets:
     nix eval .#nixosConfigurations.jedha-no-secrets.config.system.build.toplevel
