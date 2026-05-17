@@ -291,11 +291,13 @@
       url = "gitlab:lanastara_foss/starship-jj";
     };
 
-    stylix = {
-      url = "github:nix-community/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # stylix = {
+    #   url = "github:nix-community/stylix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
+
+    #
     transgression-tui = {
       url = "github:PanAeon/transg-tui";
       inputs.nixpkgs.follows = "nixpkgs";

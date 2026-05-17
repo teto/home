@@ -244,6 +244,25 @@
       ];
     };
 
+    # todo add https://github.com/NixOS/nixpkgs/pulls?q=sort%3Aupdated-desc+is%3Apr+is%3Aopen+avahi
+    github-nixpkgs-pr = {
+      urls = [
+        {
+          template = "https://github.com/NixOS/nixpkgs/pulls?q=sort%3Aupdated-desc+is%3Apr+is%3Aopen+{searchTerms}";
+          params = [
+            {
+              name = "q";
+              value = "{searchTerms}";
+            }
+          ];
+        }
+      ];
+      definedAliases = [
+        "@pr-nixpkgs"
+      ];
+
+    };
+
     github = {
       urls = [
         {

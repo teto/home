@@ -15,13 +15,28 @@
       "manual.json"
    ],
    "close_on_focus_loss": true,
+   "pop_to_root_on_close": true,
+   "activate_on_single_click": true,
+   "favicon_service": "none",
    "theme": {
       "dark": {
-         "name": "zenwritten-light",
+         "name": "rose-pine-dawn",
          "icon_theme": "Adwaita"
       }
    },
+   "telemetry": {
+      "system_info": false
+   },
    "providers": {
+      "@thomaslombart/github": {
+         "preferences": {
+            "defaultSearchTerms": "author:@me",
+            "includeTeamReviewRequests": true,
+            "isOpenInBrowser": false,
+            "repositoryCloneProtocol": "https",
+            "repositoryFilterMode": "all"
+         }
+      },
       "applications": {
          "enabled": true
       },
