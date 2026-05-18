@@ -37,7 +37,10 @@ fzf_lua.setup({
         git_icons = false,
         file_icons = false,
         color_icons = true,
-
+		-- no_header_i = true, 
+		actions = {
+		 -- ["ctrl-q"] = actions.file_sel_to_qf 
+		},
         -- jj = {
         --   previewer         = M._default_previewer_fn,
         --   cmd               = "git ls-files --exclude-standard",
@@ -87,6 +90,7 @@ fzf_lua.setup({
 
     nvim_options = {
         actions = {
+		 -- todo declare FzfLua as global
             ['enter'] = { fn = FzfLua.actions.nvim_opt_edit_local, reload = true },
             ['shift-enter'] = { fn = FzfLua.actions.nvim_opt_edit_global, reload = true },
         },
@@ -105,6 +109,8 @@ fzf_lua.setup({
         -- ["--no-scrollbar"] = true,
     },
     winopts = {
+	 -- see https://github.com/ibhagwan/fzf-lua/issues/2732
+	 backdrop = false,
         preview = {
             -- default = 'builtin'
             hidden = 'hidden',

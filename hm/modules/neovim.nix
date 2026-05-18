@@ -257,9 +257,10 @@ in
       # -- TODO higroup should be its own ? a darker version of CursorLine
       # -- if it doesnt exist
       programs.neovim.initLua = ''
-        vim.api.nvim_create_autocmd('TextYankPost', {
+        vim.api.nvim_create_autocmd({'TextYankPost', 'TextYankPut'}, {
             callback = function()
-                vim.hl.on_yank({ higroup = 'IncSearch', timeout = 1000 })
+                -- valid starting from 0.13
+                vim.hl.on_op({ higroup = 'IncSearch', timeout = 1000 })
             end,
         })
       '';
