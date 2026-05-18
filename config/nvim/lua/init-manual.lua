@@ -777,7 +777,7 @@ vim.cmd(('colorscheme %s'):format(theme))
 -- })
 
 -- require('plugins.diffview')
-require('lsp-progress').setup()
+-- require('lsp-progress').setup()
 -- todo restore
 -- require('teto.cursorline')
 

@@ -62,15 +62,12 @@ friendly-snippets = "scm"
 # nvim-treesitter-textobjects = "scm"
 # "rocks-treesitter.nvim" = "1.0.3"
 
-# tree-sitter-org = "0.0.1"
-# tree-sitter-http = "0.0.37"
 # works with hop.nvim to jump somewhere in the AST (depends on hop.nvim so not that interesting)
 # nvim-treehopper = "scm"
 # tree-sitter-haskell = "0.0.40"
 # # tree-sitter-hurl = "0.0.31"
 # tree-sitter-html = "0.0.40"
 # tree-sitter-xml = "0.0.43"
-# tree-sitter-norg = "0.2.6"
 
 # "lspkind.nvim" = "scm"
 # "modicator.nvim" = "scm"
@@ -85,8 +82,6 @@ friendly-snippets = "scm"
 
 vim-startuptime= "4.6.0"
 menu= "scm"
-# "snacks.nvim" = "2.6.0"
-fzf-lua = "0.0.2632"
 # "lz.n" = "2.12.0"
 "indent-blankline.nvim" = "3.9.1"
 # "llm.nvim"= "scm"
@@ -110,11 +105,15 @@ magick = "1.6.0"
 # how to get rid of it:
 
 "render-markdown.nvim" = "8.12.0"
-"dropbar.nvim" = "14.2.1"
+
+# disabled because of this bug https://github.com/neovim/neovim/issues/37317
+# possible fix at https://github.com/Bekaboo/dropbar.nvim/pull/280
+# "dropbar.nvim" = "14.2.1"
 nvim-treesitter-context = "1.0.0"
 # nvim-dap = "0.10.0"
 neotest = "5.18.0"
 neotest-busted = "1.3.1"
+
 
 [plugins.auto-session ]
 dir = "/home/teto/plugins/auto-session"
@@ -250,6 +249,11 @@ rev = "a3aa0c73ad0b30f75e8c77d3ccabefaeabded894"
 [plugins.nvim-biscuits]
 git = "code-biscuits/nvim-biscuits"
 rev = "d93dcdee3a3dfd5101785447658e744f153957db"
+
+[plugins.fzf-lua]
+git = "ibhagwan/fzf-lua"
+rev = "3ff77862f6c62f7b850668435ae43aa026de8758"
+branch = "main"
 
 # [plugins."git-rebase-auto-diff.nvim"]
 # git = "yutkat/git-rebase-auto-diff.nvim"
