@@ -241,6 +241,7 @@ vim.opt.rtp:prepend(pluginDir .. '/avante.nvim')
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/diffview.nvim')
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/rocks-dev.nvim')
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks-config.nvim')
+vim.opt.rtp:prepend(pluginDir .. '/neorg')
 vim.opt.rtp:prepend(pluginDir .. '/rocks-git.nvim')
 vim.opt.rtp:prepend(pluginDir .. '/rocks.nvim')
 vim.opt.rtp:prepend(pluginDir .. '/auto-session')
@@ -945,10 +946,14 @@ end, {
 local has_norg, _norg = pcall(require, 'neorg')
 
 if has_norg then
-    -- https://github.com/nvim-neorg/neorg/issues/1351
-    -- https://github.com/nvim-neorg/neorg/issues/1342
+    -- dont load because:
+    -- || E5113: Lua chunk: /home/teto/plugins/neorg/lua/neorg/core/modules.lua:789: attempt to index a nil value
+    -- || stack traceback:
+    -- || 	/home/teto/plugins/neorg/lua/neorg/core/modules.lua:789: in function 'create_event'
+    -- || 	...o/plugins/neorg/lua/neorg/modules/core/dirman/module.lua:215: in function 'set_workspace'
+    -- || 	...o/plugins/neorg/lua/neorg/modules/core/dirman/module.lua:119: in function 'load'
 
-    require('plugins.neorg')
+    -- require('plugins.neorg')
 end
 -- }}}
 -- todo fix upgraded version

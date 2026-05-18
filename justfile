@@ -9,6 +9,9 @@ NIXPKGS_REPO := env('HOME') / 'nixpkgs'
 HM_REPO := env('HOME') / "hm"
 # BLOG_FOLDER := "${HOME}/blog"
 
+# loads variables from .env
+
+set dotenv-load
 # not versioned, where we store secrets
 
 SECRETS_FOLDER := justfile_directory() / "secrets"
@@ -18,9 +21,10 @@ import? 'justfile.generated'
 default:
     just --choose
 
-# loads variables from .env
-
-set dotenv-load
+# update noctalia's config
+noctalia-update-config:
+    noctalia-update-settings "justfile_directory()"
+    # noctalia-shell ipc call state all | jq .settings > hosts/{{ HOSTNAME }}/home-manager/users/teto/programs/noctalia-shell-settings.json
 
 # deploy a brand new nixos install
 bootstrap-desktop target="root@bootstrap.local":

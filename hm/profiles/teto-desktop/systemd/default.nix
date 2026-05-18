@@ -77,6 +77,27 @@
     #   wantedBy = [ "multi-user.target" ]; # causes NixOS to manage the instance
     # };
 
+    monitor-git-branch = {
+      Unit = {
+        Description = "Monitor nixos-unstable channel advancement";
+      };
+
+      Service = {
+        Type = "oneshot";
+        Environment = [
+          "PATH=${
+            lib.makeBinPath [
+              pkgs.coreutils
+              pkgs.curl
+              pkgs.gawk
+              pkgs.libnotify
+            ]
+          }"
+        ];
+        ExecStart = "${dotfilesPath}/bin/monitor-git-branch.fish";
+      };
+    };
+
     # TODO enable conditionnally on account/services
     mujmap-fastmail = {
       Service = {

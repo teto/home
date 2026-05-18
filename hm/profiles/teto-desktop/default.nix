@@ -126,6 +126,9 @@ in
     # might be a hack
     PASSWORD_STORE_ENABLE_EXTENSIONS = "true"; # it must be "true" and nothing else !
     PASSWORD_STORE_EXTENSIONS_DIR = "${dotfilesPath}/contrib/pass-extensions";
+
+    # TODO set it globally ?
+    CDPATH = "$HOME/plugins";
   };
 
   home.sessionSearchVariables = {
@@ -140,12 +143,12 @@ in
   # rofi module doesn't have extraConfig
   # https://github.com/davatorium/rofi/blob/next/doc/rofi-theme.5.markdown
   # @theme "gruvbox-light"
-  home.file."${config.programs.rofi.configPath}".text = ''
-    ?import "${config.xdg.configHome}/rofi/manual.rasi"
-
-    @import "${config.xdg.cacheHome}/wallust/colors.rasi"
-
-  '';
+  # home.file."${config.programs.rofi.configPath}".text = ''
+  #   ?import "${config.xdg.configHome}/rofi/manual.rasi"
+  #
+  #   @import "${config.xdg.cacheHome}/wallust/colors.rasi"
+  #
+  # '';
 
   package-sets = {
 
@@ -158,12 +161,6 @@ in
     waylandPackages = true;
   };
 
-  # neovim workarounds:
-  # - for treesitter (provide compiler such that nvim-treesitter can install grammars
-  # - for rocks.nvim: give him a tree to luarocks
-  # todo should depend on
-  # xdg.
-
   home.language = {
     # monetary =
     # measurement =
@@ -172,6 +169,4 @@ in
     base = "fr_FR.utf8";
     time = "fr_FR.utf8";
   };
-
-  # wayland.systemd.target = graphical-session.target
 }
