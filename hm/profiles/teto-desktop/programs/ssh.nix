@@ -28,7 +28,7 @@ in
   # can I have it per target ?
   # controlPath = "";
   # osConfig.
-  matchBlocks =
+  settings =
     hostsConfigs
     # TODO we could customize them, with sendEnv for instance ?
     // (lib.optionalAttrs withSecrets {
@@ -39,9 +39,10 @@ in
         user = "teto";
         identityFile = "${secretsFolder}/ssh/id_rsa";
         identitiesOnly = true;
-        extraOptions = {
-          AddKeysToAgent = "yes";
-        };
+        AddKeysToAgent = "yes";
+        # extraOptions = {
+          # AddKeysToAgent = "yes";
+        # };
       };
 
       gitlab = {
@@ -49,9 +50,10 @@ in
         user = "mattator";
         identityFile = "${secretsFolder}/ssh/gitlab";
         identitiesOnly = true;
-        extraOptions = {
-          AddKeysToAgent = "yes";
-        };
+        AddKeysToAgent = "yes";
+        # extraOptions = {
+        #   AddKeysToAgent = "yes";
+        # };
       };
 
       # this should be generated already ?

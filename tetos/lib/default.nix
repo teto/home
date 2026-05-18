@@ -134,12 +134,12 @@ in
           identityFile = "${secretsFolder}/ssh/id_rsa";
           port = builtins.head sshCfg.ports;
           identitiesOnly = true;
-          extraOptions = {
+          # extraOptions = {
             AddKeysToAgent = "yes";
             HostName = lib.throwIf (
               mcfg.config.networking.domain == null
             ) "Missing domaing for ${name}" mcfg.config.networking.domain;
-          };
+          # };
         }
     );
 
