@@ -9,7 +9,6 @@ end
 function M.setup()
     ---@diagnostic disable-next-line: redundant-parameter
     require('neorg').setup({
-        -- to work around nvim-treesitter fuckup
         load = {
             ['core.defaults'] = {}, -- Loads default behaviour
             ['core.keybinds'] = {
@@ -20,7 +19,6 @@ function M.setup()
             -- ["external.kanban"] = {},
             ['core.concealer'] = {}, -- Adds pretty icons to your documents
             ['core.ui.calendar'] = {},
-            -- ['core.ui.calendar'] = {}, -- fails on stable nvim
             ['core.dirman'] = { -- Manages Neorg workspaces
                 config = {
                     workspaces = {

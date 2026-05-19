@@ -135,10 +135,10 @@ in
           port = builtins.head sshCfg.ports;
           identitiesOnly = true;
           # extraOptions = {
-            AddKeysToAgent = "yes";
-            HostName = lib.throwIf (
-              mcfg.config.networking.domain == null
-            ) "Missing domaing for ${name}" mcfg.config.networking.domain;
+          AddKeysToAgent = "yes";
+          HostName = lib.throwIf (
+            mcfg.config.networking.domain == null
+          ) "Missing domaing for ${name}" mcfg.config.networking.domain;
           # };
         }
     );

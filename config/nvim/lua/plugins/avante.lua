@@ -16,7 +16,7 @@ end
 
 -- overrule both
 -- provider = 'llamacpp'
-provider = 'codex' -- use acp
+-- provider = 'codex' -- use acp
 -- provider = 'unsloth/gemma-4-E4B-it-GGUF'
 -- provider = 'mistral_devstral_2'
 -- provider = 'mistral-vibe' -- default acp provider (not upstreamyed yet, might wanna add it there)
@@ -150,8 +150,8 @@ opts = {
         support_paste_from_clipboard = true,
     },
 
-    -- provider = 'claude',
-    provider = provider,
+    -- provider loaded from history ?
+    -- provider = provider,
     ui = { border = 'single', background_color = '#FF0000' },
     selector = {
         provider = 'fzf_lua',
@@ -465,4 +465,4 @@ opts.providers['gemma-4'] =
 -- end
 
 vim.g.avante = opts
-require('avante').setup()
+require('avante').setup(opts)

@@ -41,7 +41,7 @@ in
         identitiesOnly = true;
         AddKeysToAgent = "yes";
         # extraOptions = {
-          # AddKeysToAgent = "yes";
+        # AddKeysToAgent = "yes";
         # };
       };
 
