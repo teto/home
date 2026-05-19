@@ -29,12 +29,11 @@ lib.optionalAttrs withSecrets {
     # group = config.users.users.teto.group;
   };
 
-  secrets."gitlab/apiToken" = {
-    mode = "400";
-    # owner = config.users.users.teto.name;
-    # group = config.users.users.teto.group;
-
-  };
+  # secrets."gitlab/apiToken" = {
+  #   mode = "400";
+  #   # owner = config.users.users.teto.name;
+  #   # group = config.users.users.teto.group;
+  # };
 
   # removed from secrets
   secrets."OPENAI_API_KEY_PERSO" = {
@@ -68,16 +67,10 @@ lib.optionalAttrs withSecrets {
 
   # lab_config_file
   # https://github.com/zaquestion/lab
-  secrets."lab/lab.toml" = {
-    key = "lab_config_file";
-    # path = "/home/teto/.config/lab/lab.toml";
-    # alternatively one can use
-    # LAB_CORE_TOKEN
-    # LAB_CORE_HOST
-    mode = "400";
-    # owner = config.users.users.teto.name;
-    # group = config.users.users.teto.group;
-  };
+  # secrets."lab/lab.toml" = {
+  #   key = "lab_config_file";
+  #   mode = "400";
+  # };
 
   secrets.nix_extra_config = {
     mode = "400";
