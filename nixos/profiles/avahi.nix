@@ -33,7 +33,8 @@
 
         # to avoid:
         # *** WARNING: Detected another IPv4 mDNS stack running on this host. This makes mDNS unreliable and is thus not recommended. ***
-        disallow-other-stacks = true;
+        # this prevents the service from starting, maybe it conflicts with networkd
+        # disallow-other-stacks = true;
       };
 
       publish = {

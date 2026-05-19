@@ -1,3 +1,5 @@
 logs/
 instructions.md
 /vibehistory
+/trusted_folders.toml
+/update_cache.json

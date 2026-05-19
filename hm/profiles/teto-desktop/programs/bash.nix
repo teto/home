@@ -45,8 +45,6 @@ in
     # CAREFUL
     # HISTFILE="$XDG_CACHE_HOME/bash_history";
 
-    # TODO set it globally ?
-    CDPATH = "$HOME/plugins";
   };
 
   # remove ?
