@@ -98,7 +98,6 @@ in
 
   home.shellAliases = {
     # lg = "lazygit";
-    st = "systemctl-tui";
     yr = "yazi ./result";
 
     js = "just -g switch";

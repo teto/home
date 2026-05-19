@@ -30,7 +30,7 @@ in
       expat
       # ldd Lixoft/MonolixSuite2024R1/lib/monolix
       nss # libsmime3.so
-      nspr # libplds4.so (kesako ?)
+      # nspr # libplds4.so (kesako ?)
     ]
     # ++ monolixInstallerDeps
     # ++ monolixActualProgramDeps

@@ -18,6 +18,7 @@ let
           "boot.nix"
           "environment.nix"
           "nix.nix"
+          "systemd.nix"
           # UNCOMMENTING this will break everything since its content is not adapted
           # "home-manager/"
           "networking/"
@@ -95,7 +96,7 @@ in
   ];
 
   environment.systemPackages = [
-    pkgs.hyprwhspr-rs
+    # pkgs.hyprwhspr-rs
   ];
 
   # services.vaultwarden = {
@@ -113,14 +114,6 @@ in
     #   }
     # '')
   ];
-
-  systemd.user.services.pipewire.environment = {
-    PIPEWIRE_DEBUG = "5";
-  };
-
-  # systemd.user.services.wireplumber.environment = {
-  #     WIREPLUMBER_DEBUG="5";
-  #   };
 
   nix.buildMachines = [
     # builder_neotokyo

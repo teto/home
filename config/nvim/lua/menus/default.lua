@@ -23,6 +23,11 @@ return {
     --   end,
     --   rtxt = "<leader>fm",
     -- },
+    {
+        name = 'Gitsigns',
+        -- cmd = vim.lsp.buf.code_action,
+        items = 'gitsigns',
+    },
 
     {
         name = 'Code Actions',

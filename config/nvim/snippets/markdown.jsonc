@@ -5,12 +5,12 @@
         ],
         "body": [
          "+++",
-         "description='homepage'",
-         "title='test toto'",
+         "description='${1:desc}'",
+         "title='${2:title}'",
          "tags=neovim",
          "author=Matt",
          "+++"
         ],
-        "description": "New blog post"
+        "description": "New blog post header"
     }
 }

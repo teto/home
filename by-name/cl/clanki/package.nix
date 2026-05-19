@@ -8,15 +8,14 @@
 
 python3Packages.buildPythonPackage {
   pname = "clanki";
-  version = "0.1.0";
+  version = "0.1.4";
   format = "pyproject";
 
-  # flakeSelf feature/deck-filtering
   src = fetchFromGitHub {
     owner = "alvenw";
     repo = "clanki";
-    rev = "86d428e7a28c77d0971e18872605e4a373da676e";
-    sha256 = "sha256-5BQXyVO4Y1RnEeyK/MQzIswGQQcU3EMnjyHMSSHIOnY=";
+    rev = "b9e1d577be693f5876c116cef1eb2384ab0661c0";
+    sha256 = "sha256-05i76U8IFfK9172JNJjj9xlVOv3jccSGzMbR4t8MPLo=";
   };
 
   propagatedBuildInputs = with python3Packages; [

@@ -292,10 +292,14 @@ in
     #       include ~/.config/i3/config.shared
 
     # timeout in ms
+    # include ~/.config/sway/manual.config
     extraConfig = ''
-      include ~/.config/sway/manual.config
-      # as per https://github.com/swaywm/sway/wiki/Systemd-integration
-      exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
+       # as per https://github.com/swaywm/sway/wiki/Systemd-integration
+       exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
+
+      include ~/.config/sway/conf.d/*.conf
+      # host specific
+      include ~/.config/sway/`hostname`/*
     '';
     # exec swaymsg -t subscribe '["shutdown"]' && systemctl --user stop sway-session.target
     # include ~/.config/sway/swayfx.txt
@@ -342,44 +346,12 @@ in
     };
   };
 
-  xdg.configFile."sway/config".text = lib.mkBefore "
-     include ~/.config/sway/config.shared
+  # include ~/.config/sway/config.shared
+  # this seems to be ignored ?!
+  xdg.configFile."sway/config".text =
+    lib.mkBefore "
+    # TOTO TODO # use sharedConfig.sharedExtraConfig; instead
+     include ~/.config/sway/conf.d/*.conf
      ";
-
-  # env RUST_BACKTRACE=1 RUST_LOG=swayr=debug swayrd > /tmp/swayrd.log 2>&1
-  # https://git.sr.ht/~tsdh/swayr/tree/main/item/swayr/etc/swayrd.service
-  # systemd.user.services.swayr = {
-  #   Unit = {
-  #    Type="simple";
-  #    Environment="RUST_BACKTRACE=1";
-  #    Description = "Swayr";
-  #    Documentation="https://sr.ht/~tsdh/swayr/";
-  # # PartOf=sway-session.target
-  # # After=sway-session.target
-  #     # Requires = [ "tray.target" ];
-  #     # sway ?
-  #     After = [ "tray.target" ];
-  #     # PartOf = [ "graphical-session.target" ];
-  #     # X-Restart-Triggers = mkIf (cfg.settings != { }) [ "${iniFile}" ];
-  #   };
-
-  #   Install = { WantedBy = [ "tray.target" ]; };
-
-  #   Service = {
-  #     # Environment = "PATH=${config.home.profileDirectory}/bin:${pkgs.grim}/bin";
-  #     ExecStart = "${pkgs.swayr}/bin/swayr";
-  #     Restart="on-failure";
-  #     # Restart = "on-abort";
-
-  #     # Sandboxing.
-  #     # LockPersonality = true;
-  #     # MemoryDenyWriteExecute = true;
-  #     # NoNewPrivileges = true;
-  #     # PrivateUsers = true;
-  #     # RestrictNamespaces = true;
-  #     # SystemCallArchitectures = "native";
-  #     # SystemCallFilter = "@system-service";
-  #   };
-  # };
 
 }

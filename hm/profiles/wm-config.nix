@@ -257,12 +257,12 @@ in
     "$mod+y" = "sticky toggle; exec ${notify-send}";
     # exec ${notify-send} -a Audio --icon=audio-volume-high -u low -t 1000 -h int:value:$(${getIntegerVolume}) -e -h string:synchronous:audio-volume 'Audio volume' 'Audio Raised volume'";
     # -a Audio --icon=audio-volume-high -u low -t 1000 -h int:value:$(${getIntegerVolume}) -e -h string:synchronous:audio-volume
-    "$mod+t" = "exec ${lib.getExe pkgs.voxinput} write; exec ${notify-send} 'voxinput write'";
+    # "$mod+t" = "exec ${lib.getExe pkgs.voxinput} write; exec ${notify-send} 'voxinput write'";
     # 2. Select a text box you want to speak into and use a global shortcut to run the following
     # 3. Begin speaking, when you pause for a second or two your speach will be transcribed and typed into the active application.
     #
     #
-    "$mod+Shift+t" = "exec ${lib.getExe pkgs.voxinput} record; exec ${notify-send} 'voxinput record'";
+    # "$mod+Shift+t" = "exec ${lib.getExe pkgs.voxinput} record; exec ${notify-send} 'voxinput record'";
 
     # split in vertical orientation
     # needs i3next
@@ -326,9 +326,6 @@ in
 
     set $term ${term}
 
-    workspace_auto_back_and_forth true
-    show_marks yes
-
     set $w1 1:󰖯
     set $w2 2:
     set $w3 3:
@@ -338,9 +335,6 @@ in
     set $w7 7
     set $w8 8
     set $w9 9
-
-    floating_minimum_size 75 x 50
-    floating_maximum_size -1 x -1
 
     # Mod4 => window key
     set $mad Super_L

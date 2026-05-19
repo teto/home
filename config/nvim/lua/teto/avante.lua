@@ -1,7 +1,5 @@
--- AvanteModels
 -- return the Sidebar
--- local s = require'avante.sidebar'
-local s = require('avante').get()
+-- local s = require('avante').get()
 local Highlights = require('avante.highlights')
 local Utils = require('avante.utils')
 local Config = require('avante.config')
@@ -12,8 +10,6 @@ local Config = require('avante.config')
 -- vim.print(s.containers.result.winid)
 
 local M = {}
-
-function M.provider_list_available_models() end
 
 -- local on_click_gp = function(_nb_of_clicks, _button, _modifiers)
 --     -- vim.notify("builtins GP.nvim")
@@ -125,5 +121,7 @@ vim.api.nvim_create_autocmd('User', {
 vim.keymap.set('n', '<leader>am', function()
     vim.api.nvim_exec_autocmds('User', { pattern = 'ToggleMyPrompt' })
 end, { desc = 'avante: toggle my prompt' })
+
+vim.keymap.set('n', '<Leader>lm', '<Plug>AvanteModels', { desc = 'List models' })
 
 return M

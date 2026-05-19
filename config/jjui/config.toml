@@ -47,13 +47,6 @@ lua = 'flash("hello")'
 # key = "H"
 # scope = "revisions"
 
-# [[bindings]]
-# action = "duplicate"
-# # key = "d"
-# seq = [ "d", "u"]
-# # desc = "Duplicate"
-# # scope => where the bindings are active
-# scope = "revisions"
 
 
 [[bindings]]

@@ -42,6 +42,9 @@ in
 
   ];
 
+  home.shellAliases = {
+    nix-stray-roots = ''nix-store --gc --print-roots | egrep -v "^(/nix/var|/proc|/run/\w+-system|\{memory)" | less'';
+  };
   home.file.".password-store".source =
     config.lib.file.mkOutOfStoreSymlink "${secretsFolder}/password-store-perso";
   # TODO link .config
@@ -86,9 +89,13 @@ in
       pciutils # for lspci
       # gnome3.gnome-font-viewer  # Not very good
 
+      pkgs.librsvg # for rikai.nvim
+
       timg
       gh-dash
       # wpaperd
+
+      pi-coding-agent # to test as ACP provider for avante
     ]
   );
 

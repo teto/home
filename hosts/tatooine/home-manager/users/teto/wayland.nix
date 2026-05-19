@@ -6,8 +6,6 @@
   ...
 }:
 {
-  # _imports = [
-  # ];
 
   windowManager.sway = {
     enable = true;

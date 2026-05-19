@@ -47,7 +47,7 @@ return {
     { name = 'separator' },
 
     {
-        name = 'Format Buffer',
+        name = 'Format Buffer (conform or lsp)',
         cmd = function()
             local ok, conform = pcall(require, 'conform')
 

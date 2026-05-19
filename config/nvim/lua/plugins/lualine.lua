@@ -58,6 +58,16 @@ local diagnostic_section = {
         info = 'I',
         hint = 'H',
     },
+	on_click = function(_nb_of_clicks, _button, _modifiers)
+		-- the component should have a 'status' output
+		-- local branch_name = 'BRANCH_PLACEHOLDER'
+		-- status()
+		-- clip.copy(branch_name)
+		-- print('To clipboard: ' .. branch_name)
+		vim.diagnostic.setloclist()
+	end,
+
+
     colored = true, -- Displays diagnostics status in color if set to true.
     update_in_insert = false, -- Update diagnostics in insert mode.
     always_visible = false, -- Show diagnostics even if there are none.
@@ -199,7 +209,7 @@ require('lualine').setup({
                 file_status = true,
                 -- https://github.com/nvim-lualine/lualine.nvim#filename-component-options
 
-                path = 4,
+                path = 3,
                 symbols = {
                     modified = '[+]', -- Text to show when the file is modified.
                     readonly = '[-]', -- Text to show when the file is non-modifiable or readonly.

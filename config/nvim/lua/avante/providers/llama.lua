@@ -336,47 +336,47 @@ local function query_models(opts, timeout)
 end
 
 -- List available models using LlamaCpp's tags API
-function M:list_models()
-    -- Return cached models if available
-    if self._model_list_cache then
-        return self._model_list_cache
-    end
-
-    local result, error = query_models(self)
-    if not result then
-        assert(error)
-        Utils.error(error)
-        return {}
-    end
-
-    -- Helper to format model display string from its details
-    local function format_display_name(details)
-        local parts = {}
-        for _, key in ipairs({ 'family', 'parameter_size', 'quantization_level' }) do
-            if details[key] then
-                table.insert(parts, details[key])
-            end
-        end
-        return table.concat(parts, ', ')
-    end
-
-    -- Format the models list
-    local models = {}
-    for _, model in ipairs(result) do
-        local details = model.details or {}
-        local display = format_display_name(details)
-        table.insert(models, {
-            id = model.name,
-            name = string.format('ollama/%s (%s)', model.name, display),
-            display_name = model.name,
-            provider_name = 'ollama',
-            version = model.digest,
-        })
-    end
-
-    self._model_list_cache = models
-    return models
-end
+-- function M:list_models()
+--     -- Return cached models if available
+--     if self._model_list_cache then
+--         return self._model_list_cache
+--     end
+--
+--     local result, error = query_models(self)
+--     if not result then
+--         assert(error)
+--         Utils.error(error)
+--         return {}
+--     end
+--
+--     -- Helper to format model display string from its details
+--     local function format_display_name(details)
+--         local parts = {}
+--         for _, key in ipairs({ 'family', 'parameter_size', 'quantization_level' }) do
+--             if details[key] then
+--                 table.insert(parts, details[key])
+--             end
+--         end
+--         return table.concat(parts, ', ')
+--     end
+--
+--     -- Format the models list
+--     local models = {}
+--     for _, model in ipairs(result) do
+--         local details = model.details or {}
+--         local display = format_display_name(details)
+--         table.insert(models, {
+--             id = model.name,
+--             name = string.format('ollama/%s (%s)', model.name, display),
+--             display_name = model.name,
+--             provider_name = 'ollama',
+--             version = model.digest,
+--         })
+--     end
+--
+--     self._model_list_cache = models
+--     return models
+-- end
 
 function M.check_endpoint_alive()
     local result = query_models(Providers.ollama, 1000)

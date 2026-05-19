@@ -3,6 +3,29 @@ fish_trace <-> set -x
 # load alternate history
 set -x fish_history "session_name"
 
+# debug loading process
+
+fish --debug-output=/tmp/fish-debug.log --init-command='set fish_trace on'
+ fish --profile-startup /tmp/fish-startup.prof -ic exit
+  sort -nk2 /tmp/fish-startup.prof
+
+  This is usually the best way to find slow config.fish, conf.d/*.fish, plugin manager, nix,
+  direnv, starship, etc. initialization.
+
+  4. Enable debug categories:
+
+  fish --print-debug-categories
+  fish --debug='config,path,warning,*' --debug-output=/tmp/fish-debug.log -ic exit
+
+  For fish 4.7.1 on this machine, --debug, --debug-output, --profile-startup, and --no-config
+  are available.
+
+# how to configure 'tide' 
+    - "tide configure --auto --style=Classic --prompt_colors='True color' --classic_prompt_color=Dark --show_time='24-hour format' --classic_prompt_separators=Angled --powerline_prompt_heads=Sharp --powerline_prompt_tails=Flat --powerline_prompt_style='One line' --prompt_spacing=Compact --icons='Many icons' --transient=Yes"
+
+
+# when nixos's fish is enabled it adds paths to fish_function_path
+fish_function_path
 
 fzf-history-widget
 

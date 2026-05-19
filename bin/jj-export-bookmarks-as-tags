@@ -1,0 +1,122 @@
+#!/usr/bin/env bash
+# taken from https://github.com/osteele/jj-scripts/blob/main/jj-export-bookmarks-as-tags
+set -euo pipefail
+
+usage() {
+    cat <<'USAGE'
+Usage: jj-export-bookmarks-as-tags [options] bookmark [bookmark ...]
+
+Export the specified jj bookmarks as git tags in the local repository.
+This overwrites existing tags with the same name.
+
+Options:
+    -n, --dry-run      Show what tags would be created/updated without executing
+    -h, --help         Show this help message
+USAGE
+    exit 1
+}
+
+escape_revset_string() {
+    local value="$1"
+    value=${value//\\/\\\\}
+    value=${value//\"/\\\"}
+    printf '%s' "$value"
+}
+
+# Ensure required commands exist
+for cmd in jj git; do
+    if ! command -v "$cmd" >/dev/null 2>&1; then
+        echo "Error: $cmd command not found" >&2
+        exit 1
+    fi
+done
+
+if ! jj root >/dev/null 2>&1; then
+    echo "Error: Not in a Jujutsu repository" >&2
+    exit 1
+fi
+
+if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    echo "Error: Not inside a git repository" >&2
+    exit 1
+fi
+
+dry_run=false
+bookmarks=()
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -n|--dry-run)
+            dry_run=true
+            shift
+            ;;
+        -h|--help)
+            usage
+            ;;
+        --)
+            shift
+            while [[ $# -gt 0 ]]; do
+                bookmarks+=("$1")
+                shift
+            done
+            ;;
+        -*)
+            echo "Error: Unknown option $1" >&2
+            usage
+            ;;
+        *)
+            bookmarks+=("$1")
+            shift
+            ;;
+    esac
+done
+
+if [[ ${#bookmarks[@]} -eq 0 ]]; then
+    echo "Error: At least one bookmark name must be provided" >&2
+    usage
+fi
+
+# Ensure git refs are up to date with jj refs
+jj git export >/dev/null
+
+for bookmark in "${bookmarks[@]}"; do
+    revset="bookmarks(\"$(escape_revset_string "$bookmark")\")"
+
+    if ! git_commit=$(jj log --no-pager --no-graph -r "$revset" -T 'commit_id' 2>/dev/null); then
+        echo "Error: Failed to resolve bookmark '$bookmark'" >&2
+        exit 1
+    fi
+
+    git_commit=${git_commit//$'\n'/}
+
+    if [[ -z "$git_commit" ]]; then
+        echo "Error: Unable to resolve git commit id for bookmark '$bookmark'" >&2
+        exit 1
+    fi
+
+    # Check if tag already exists
+    if git rev-parse "refs/tags/$bookmark" >/dev/null 2>&1; then
+        existing_commit=$(git rev-parse "refs/tags/$bookmark")
+        if [[ "$existing_commit" == "$git_commit" ]]; then
+            if [[ "$dry_run" == true ]]; then
+                echo "Would skip tag '$bookmark' (already points to $git_commit)"
+            else
+                echo "Tag '$bookmark' already points to $git_commit"
+            fi
+            continue
+        else
+            action="update"
+            verb="Updating"
+        fi
+    else
+        action="create"
+        verb="Creating"
+    fi
+
+    if [[ "$dry_run" == true ]]; then
+        echo "Would $action tag '$bookmark' -> $git_commit"
+    else
+        echo "$verb tag '$bookmark' -> $git_commit"
+        git tag -f "$bookmark" "$git_commit"
+    fi
+done

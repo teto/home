@@ -18,7 +18,7 @@ Previous revision: $old_revision"
 Timestamp: $timestamp"
     end
 
-    notify-send -a monitor-git-branch "$title" "$message"
+    notify-send --expire-time=0 -a "Nixos-unstable advanced" "$title" "$message"
     set -l notify_status $status
 
     if test $notify_status -ne 0
@@ -37,32 +37,32 @@ end
 set -l last_advancement_file "$xdg_cache_home/monitor-git-branch-last-advancement"
 
 log_progress "using cache file: $last_advancement_file"
-log_progress "fetching latest nixos-unstable channel revision"
+log_progress "fetching latest nixos-unstable branch revision"
 
-# Fetch the latest revision from the NixOS unstable channel
-set -l channel_latest_response (curl --fail --silent --show-error https://channels.nix.gsc.io/nixos-unstable/latest)
+# Fetch the latest revision from the NixOS unstable branch without a local clone.
+set -l branch_latest_response (git ls-remote https://github.com/NixOS/nixpkgs.git refs/heads/nixos-unstable)
 set -l fetch_status $status
 
 if test $fetch_status -ne 0
-    log_progress "failed to fetch latest channel revision: curl exited with $fetch_status"
+    log_progress "failed to fetch latest branch revision: git ls-remote exited with $fetch_status"
     exit 2
 end
 
-set -l channel_latest $channel_latest_response[1]
+set -l branch_latest $branch_latest_response[1]
 
-if test -z "$channel_latest"
-    log_progress "failed to fetch latest channel revision: empty response"
+if test -z "$branch_latest"
+    log_progress "failed to fetch latest branch revision: empty response"
     exit 2
 end
 
-log_progress "latest channel entry: $channel_latest"
+log_progress "latest branch entry: $branch_latest"
 
-# Extract the current channel revision (first column).
-set -l current_advancement_date (echo $channel_latest | awk '{print $1}')
-set -l current_advancement_timestamp (echo $channel_latest | awk '{print $2}')
+# Extract the current branch revision (first column).
+set -l current_advancement_date (echo $branch_latest | awk '{print $1}')
+set -l current_advancement_timestamp ""
 
 if test -z "$current_advancement_date"
-    log_progress "could not extract channel revision from latest channel entry"
+    log_progress "could not extract branch revision from latest branch entry"
     exit 2
 end
 

@@ -58,12 +58,7 @@ in
   services.kmscon = {
     enable = false; # disabled because it's ugly
     hwRender = true;
-    fonts = [
-      {
-        name = "Noto Sans Mono CJK JP";
-        package = pkgs.noto-fonts-cjk-sans;
-      }
-    ];
+    config.font-name = "Noto Sans Mono CJK JP";
   };
 
   console = {
@@ -150,7 +145,9 @@ in
 
   # };
 
-  environment.systemPackages = [ ];
+  environment.systemPackages = [
+    pkgs.noto-fonts-cjk-sans
+  ];
 
   # networking.firewall.checkReversePath = false; # for nixops
   # networking.firewall.allowedUDPPorts = [ 631 ];

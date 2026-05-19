@@ -71,7 +71,13 @@
   '';
 
   # for programs not merged yet
-  home.packages = with pkgs; [
+  home.packages = with pkgs; let 
+    llmDeps = [ 
+      python3Packages.llama-index-cli
+      # python3Packages.llama-index
+    ];
+    in 
+    llmDeps ++ [
     # llm-ls # needed by the neovim plugin
     cointop # bitcoin tracker
     # mdp # markdown CLI presenter
@@ -99,6 +105,7 @@
 
     nix-sweep # smarter nix-gc
 
+
     # take the version from stable ?
     nautilus # demande webkit/todo replace by nemo ?
     # hexyl # hex editor
@@ -114,6 +121,7 @@
 
   package-sets = {
 
+    wifi = true;
     livecoding = false;
     enableOfficePackages = true;
     kubernetes = true;

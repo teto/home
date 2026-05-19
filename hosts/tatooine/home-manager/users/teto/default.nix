@@ -44,20 +44,9 @@ in
   imports = [
     autoloadedTeto
     flakeSelf.homeProfiles.teto-desktop
-    #
-    # # flakeSelf.homeModules.experimental
+    flakeSelf.homeProfiles.experimental # for voxtype
     flakeSelf.homeProfiles.neovim
     flakeSelf.homeProfiles.sway
-
-    # ./wayland.nix
-    # ./programs/neovim.nix
-    # ./programs/noctalia-shell.nix
-    # ./programs/zsh.nix
-    # ./services/mpd.nix
-    # ./services/blueman-applet.nix
-    # ./services/wpaperd.nix
-    # ./services/swayidle.nix
-    # ../desktop/teto/default.nix  # Track for regressions
 
     # neovim should come from the nixos profile
     flakeSelf.homeModules.nextcloud-client

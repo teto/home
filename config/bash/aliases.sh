@@ -9,8 +9,6 @@ alias n2='nix develop --option builders "$TETOS_1" -j0'
 #
 alias nrc="nix repl --expr 'import <nixpkgs> { config.cudaSupport = true; config.allowUnfree = true; }'"
 
-alias st="systemctl-tui"
-
 # systemctl reboot --boot-loader-entry=auto-windows
 # --reboot-argument=3
 alias reboot-windows="systemctl --boot-loader-entry=auto-windows reboot"

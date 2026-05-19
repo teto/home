@@ -27,6 +27,11 @@
    "telemetry": {
       "system_info": false
    },
+   "launcher_window": {
+      "client_side_decorations": {
+         "enabled": false
+      }
+   },
    "providers": {
       "@thomaslombart/github": {
          "preferences": {
@@ -38,7 +43,29 @@
          }
       },
       "applications": {
-         "enabled": true
+         "enabled": true,
+         "preferences": {
+            "defaultAction": "focus",
+            "paths": [
+               "/home/teto/.local/share/applications",
+               "/nix/store/a8nlfbji6mg27j30m83242x8ybc8nq31-vicinae-0.21.0/share/applications",
+               "/nix/store/79yg09y5lg8bg6cin5rpj36p1d5n0c0p-cups-2.4.19/share/applications",
+               "/nix/store/ax8m0gcfw5izxf8nx2qy4nj6vin1qfkj-cups-2.4.19-lib/share/applications",
+               "/nix/store/48krja1dqwpsa0i3yw9v47hbcxn7agrh-fontconfig-2.17.1-lib/share/applications",
+               "/nix/store/gf6i4cbisapj28y2dnqhpk1s95vd2r36-util-linux-2.42-lib/share/applications",
+               "/nix/store/a8avqfxd649rfgfpqldja6v38ljb8fj5-systemd-260.1/share/applications",
+               "/nix/store/jlyahda14aya375lv7k9fsin2zk90nxz-glib-2.88.1/share/applications",
+               "/nix/store/rb8rna9gkhs0ybl6z2p904myslh8llg8-gettext-1.0/share/applications",
+               "/nix/store/79in20n4kskcpjsfzxirai8hn6ry3ngd-libqalculate-5.10.0/share/applications",
+               "/nix/store/w4yjlxkk5rj44cfazl7iljkqkyx1s5l9-syntax-highlighting-6.26.0/share/applications",
+               "/nix/store/7mcwsf48597xzzwqim3zg0jqv6shj575-network-manager-applet-1.36.0/share/applications",
+               "/home/teto/.nix-profile/share/applications",
+               "/home/teto/.local/state/nix/profile/share/applications",
+               "/etc/profiles/per-user/teto/share/applications",
+               "/nix/var/nix/profiles/default/share/applications",
+               "/run/current-system/sw/share/applications"
+            ]
+         }
       },
       "clipboard": {
          "preferences": {

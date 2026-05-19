@@ -1,3 +1,4 @@
+git config core.sshCommand 'ssh -i ~/.ssh/my_key -o IdentitiesOnly=yes'
 
 * check access
 

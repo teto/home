@@ -6,8 +6,7 @@
 }:
 {
   services.avahi = {
-    # inspired by novos
-    enable = true;
+    # enable = false;
     allowPointToPoint = false;
     # defaults to 'local'
     # domainName = "local";

@@ -5,5 +5,6 @@
   ...
 }:
 {
+  enable = true;
   musicDirectory = "~/Music";
 }

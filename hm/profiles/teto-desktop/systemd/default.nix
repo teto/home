@@ -91,6 +91,7 @@
               pkgs.curl
               pkgs.gawk
               pkgs.libnotify
+              pkgs.git
             ]
           }"
         ];

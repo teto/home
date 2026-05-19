@@ -5,6 +5,15 @@ Cache at /home/teto/.cache/llama.cpp
 with Llama.cpp you can still load SOME experts on GPU by reducing --n-cpu-moe
 
 
+# n_keep
+--flash-attn
+o--flash-attn
+# --flash-attn
+-cmoe, --cpu-moe
+--offline avoids dl from hf
+
+timings_per_token -> returns timing in response
+
 * host ram stuff
 
 doc at https://github.com/ggml-org/llama.cpp/pull/16391

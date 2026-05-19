@@ -38,36 +38,17 @@ local function read_secret(filename)
     return vim.trim(value)
 end
 
--- providers in the gp.nvim sense,
--- not to confuse with agents
-local providers = {
-    openai = {
-        -- endpoint = 'http://' .. llama_host .. ':8080/v1',
-    },
-    claude = {
-        endpoint = 'https://api.anthropic.com',
-        model = 'claude-sonnet-4-5-20250929',
-        -- extra_request_body = {
-        --   temperature = 0.75,
-        --   max_tokens = 4096,
-        -- },
-        -- should use XDG_CONFIG_HOME or
-        api_key_name = 'cmd:cat ' .. sops_folder .. '/claude_api_key',
-
-        -- disabled_tools = { "python" },
-    },
-}
+-- providers in the gp.nvim sense, not to confuse with agents
 
 local function mk_llama_provider(llama_host, name, custom)
     local opts = vim.tbl_extend('force', {
         -- either that or parse_curl_args
-        -- __inherited_from = 'openai',
+        __inherited_from = 'openai',
         model = name,
-        -- hide_in_model_selector
+        hide_in_model_selector = false,
         endpoint = 'http://' .. llama_host .. ':8080/v1',
         -- Timeout in milliseconds. Make it long as server is "slow"
         timeout = 180000,
-        -- parse_curl_args
         -- empty key is required else avante complains
         api_key_name = '',
         -- extra_request_body = {
@@ -76,7 +57,7 @@ local function mk_llama_provider(llama_host, name, custom)
 
         -- tools send a shitton of tokens
         -- not supported by mistral (but inherited by others so...)
-        disable_tools = false,
+        disable_tools = true,
         -- trying to tweak prompt so we can send fewer tokens !
         prompt_opts = {
             system_prompt = 'you are zulu',
@@ -88,87 +69,6 @@ end
 -- TODO load configuration from llm-providers.json
 -- lua vim.json.decode(str, opts)
 opts = {
-    debug = true, -- print error messages
-    -- log_level =
-    log_level = vim.log.levels.DEBUG,
-
-    -- seems ignored by acp ?
-    mode = 'legacy', -- Switch from "agentic" to "legacy"
-
-    -- g
-    -- instructions_file =
-
-    -- can be a function as well
-    -- avante is very talkative by default
-    override_prompt_dir = vim.fn.expand(vim.fn.stdpath('config') .. '/avante_prompts'),
-
-    -- can be a function, appended as well
-    system_prompt = [[
-	You are a highly skilled software engineer with extensive knowledge in many programming languages, frameworks, design patterns, and best practices.
-
-	Respect and use existing conventions, libraries, etc that are already present in the code base.
-
-	Make sure code comments are in English when generating them.
-	]],
-
-    -- rules = {
-    --   project_dir = nil, ---@type string | nil (could be relative dirpath)
-    --   global_dir = nil, ---@type string | nil (absolute dirpath)
-    -- },
-    rag_service = { -- RAG service configuration
-        enabled = false, -- Enables the RAG service
-        host_mount = os.getenv('HOME'), -- Host mount path for the RAG service (Docker will mount this path)
-        runner = 'nix', -- The runner for the RAG service (can use docker or nix)
-        llm = { -- Configuration for the Language Model (LLM) used by the RAG service
-            provider = 'claude', -- The LLM provider
-            -- endpoint = "https://api.openai.com/v1", -- The LLM API endpoint
-            api_key = '', -- The environment variable name for the LLM API key
-            -- model = "gpt-4o-mini", -- The LLM model name
-            -- extra = nil, -- Extra configuration options for the LLM
-        },
-        embed = { -- Configuration for the Embedding model used by the RAG service
-            provider = 'claude', -- The embedding provider
-            -- endpoint = "https://api.openai.com/v1", -- The embedding API endpoint
-            api_key = '', -- The environment variable name for the embedding API key
-            -- model = "text-embedding-3-large", -- The embedding model name
-            extra = nil, -- Extra configuration options for the embedding model
-        },
-        -- docker_extra_args = "", -- Extra arguments to pass to the docker command
-    },
-    behaviour = {
-        auto_set_keymaps = true,
-        auto_suggestions = false, -- Experimental stage
-
-        enable_token_counting = false,
-        -- auto_approve_tool_permissions = {"bash", "replace_in_file"}, -- Auto-approve specific tools only
-        auto_focus_on_diff_view = true,
-        auto_add_current_file = true,
-        -- vs 'popup
-        confirmation_ui_style = 'inline_buttons',
-        include_generated_by_commit_line = true, -- Controls if 'Generated-by: <provider/model>' line is added to git commit message
-
-        support_paste_from_clipboard = true,
-    },
-
-    -- provider loaded from history ?
-    -- provider = provider,
-    ui = { border = 'single', background_color = '#FF0000' },
-    selector = {
-        provider = 'fzf_lua',
-    },
-
-    -- might be interesting
-    input = {
-        -- provider =
-        --  -- Example: Using snacks.nvim as input provider
-        provider = 'snacks', -- "native" | "dressing" | "snacks"
-        provider_opts = {
-            -- Snacks input configuration
-            title = 'Avante Input',
-            icon = ' ',
-            placeholder = 'Enter your API key...',
-        },
-    },
     acp_providers = {
         ['mistral-vibe'] = {
             command = 'vibe-acp',
@@ -182,11 +82,8 @@ opts = {
             args = {},
             env = {
                 USER = os.getenv('USER'),
-                -- useful for
                 -- lua print(vim.inspect(require("avante.providers").openai:list_models()))
-                -- (in fork only)
-                OPENAI_API_KEY = read_secret(sops_folder .. '/OPENAI_API_KEY_PERSO'),
-                -- OPENAI_API_KEY = 'cmd:cat ' .. sops_folder .. '/OPENAI_API_KEY_PERSO',
+                -- OPENAI_API_KEY = read_secret(sops_folder .. '/OPENAI_API_KEY_PERSO'),
             },
         },
     },
@@ -285,42 +182,6 @@ opts = {
         provider = 'tavily', -- tavily, serpapi, google, kagi, brave, or searxng
         proxy = nil, -- proxy support, e.g., http://127.0.0.1:7890
     },
-    -- ollama = {
-    --   model = "deepseek-r1:7b"
-    --   -- model = "qwq:32b",
-    -- }
-    -- openai_api_key = os.getenv("OPENAI_API_KEY")
-
-    windows = {
-        position = 'right',
-        fillchars = 'eob: ',
-        -- TODO remove
-        sidebar_header = {
-            enabled = true, -- true, false to enable/disable the header
-            align = 'center', -- left, center, right for title
-            rounded = true,
-            include_model = true,
-        },
-        spinner = {
-            generating = { '·', '✢', '✳', '∗', '✻', '✽' },
-            thinking = { '🤯', '🙄' },
-        },
-        input = {
-            -- used as sign_define
-            -- function H.signs() vim.fn.sign_define("AvanteInputPromptSign", { text = Config.windows.input.prefix }) end
-            prefix = '> ',
-            height = 8, -- Height of the input window in vertical layout
-        },
-    },
-
-    ask = {
-
-        floating = false, -- Open the 'AvanteAsk' prompt in a floating window
-        start_insert = false, -- Start insert mode when opening the ask window
-        border = 'rounded',
-        ---@type "ours" | "theirs"
-        focus_on_apply = 'ours', -- which diff to focus after applying
-    },
     custom_tools = {
         -- {
         --     name = 'run_model_manager_tests', -- Unique name for the tool
@@ -403,26 +264,15 @@ opts = {
             details = 'Nothing more',
         },
     },
-
     prompt_logger = {
         enabled = true, -- toggle logging entirely
         log_dir = vim.fn.stdpath('cache'), -- directory where logs are saved
     },
-
-    -- custom_tools
-    -- slash_commands =
-
-    -- mappings = {
-    -- submit = {
-    --   normal = "<CR>",
-    --   insert = "<C-s>",
-    -- },
-    -- }
 }
 
 local hidden_models = {
     'aihubmix',
-    'copilot',
+    -- 'copilot',
     -- 'gemini',
     -- 'openai',
     -- 'openai-gpt-4o-mini',
@@ -439,30 +289,21 @@ for _, model in ipairs(hidden_models) do
 end
 
 -- todo load from contrib/ or from llama api ?
-local jedha_models = {
-    'llama_mistral7b',
-    'llama_ministral3_3b',
-    'llama_ministral3_8b',
-    'llama_qwen2_5_3b',
-}
+-- local jedha_models = {
+--     'llama_mistral7b',
+--     'ministral3-8b',
+--     'llama_ministral3_8b',
+--     'llama_qwen2_5_3b',
+-- }
 
 -- for _, model in ipairs(jedha_models) do
-local res = mk_llama_provider('jedha.local', nil, {})
-opts.providers['jedha'] = vim.tbl_extend('force', res, {
-    list_models = function()
-        return jedha_models
-    end,
-})
---     opts.providers[model] =
--- end
+-- so it inherited the model
+local res = mk_llama_provider('jedha.local', 'ministral3-8b', {})
+opts.providers['jedha'] = vim.tbl_extend('force', res, {})
 
--- local local_models = {
---     'unsloth/gemma-4-E4B-it-GGUF',
--- }
 -- for _, model in ipairs(local_models) do
-opts.providers['gemma-4'] =
-    mk_llama_provider('localhost', 'unsloth/gemma-4-E4B-it-GGUF', { __inherited_from = 'openai' })
+-- opts.providers['gemma-4'] =
+--     mk_llama_provider('localhost', 'unsloth/gemma-4-E4B-it-GGUF', { __inherited_from = 'openai' })
 -- end
 
-vim.g.avante = opts
 require('avante').setup(opts)

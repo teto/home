@@ -71,6 +71,7 @@ in
     flakeSelf.nixosProfiles.desktop
     flakeSelf.nixosProfiles.nix-daemon
     flakeSelf.nixosProfiles.gnome
+    flakeSelf.nixosProfiles.nix-ld # for avante
 
     flakeSelf.nixosProfiles.steam
     flakeSelf.nixosProfiles.universal
@@ -101,8 +102,8 @@ in
 
   boot =
     let
-      # kernelPkgs = pkgs.linuxKernel.packages.linux_7_0;
-      kernelPkgs = pkgs.linuxKernel.packages.linux_6_18;
+      kernelPkgs = pkgs.linuxKernel.packages.linux_7_0;
+      # kernelPkgs = pkgs.linuxKernel.packages.linux_6_18;
       # pkgs.linuxKernel.packages.linux_6_18.r8125
     in
     {
@@ -111,7 +112,7 @@ in
       blacklistedKernelModules = [ "nouveau" ];
       extraModulePackages = [
 
-        kernelPkgs.r8125
+        # kernelPkgs.r8125
       ];
 
       # Ensure initrd has resume support

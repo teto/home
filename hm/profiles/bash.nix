@@ -1,5 +1,6 @@
 {
   lib,
+  config,
   ...
 }:
 {
@@ -34,9 +35,6 @@
       ld = "eza -lD";
       lf = "eza -lF --color=always | grep -v /";
       lh = "eza -dl .* --group-directories-first";
-      # we have to add -g (--group) else it's hidden by default
-      ll = lib.mkForce "eza -al -g --group-directories-first";
-      lt = "eza -al --sort=modified";
       # }}}
 
       #mostly for testin
@@ -51,6 +49,15 @@
 
       # kitty
       kcat = "kitty +kitten icat";
+
+    }
+    # or rather should depend on eza ?
+    // lib.optionalAttrs (!config.programs.lsd.enable) {
+
+      lt = "eza -al --sort=modified";
+      # we have to add -g (--group) else it's hidden by default
+      ll = lib.mkForce "eza -al -g --group-directories-first";
+
     };
 
     initExtra = ''

@@ -4,7 +4,6 @@
 -- local configs = require'nvim_lsp/configs'
 -- vim.loader.enable(true)
 -- showcmdloc
--- require('avante_lib').load()
 --
 --https://github.com/EmmyLuaLs/emmylua-analyzer-rust/blob/main/docs/config/emmyrc_json_EN.md#-complete-configuration-example
 --
@@ -239,8 +238,6 @@ local pluginDir = os.getenv('HOME') .. '/plugins'
 vim.opt.rtp:prepend(pluginDir .. '/avante.nvim')
 -- doing jj tests
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/diffview.nvim')
--- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/rocks-dev.nvim')
--- vim.opt.rtp:prepend(os.getenv('HOME') .. '/rocks-config.nvim')
 vim.opt.rtp:prepend(pluginDir .. '/neorg')
 vim.opt.rtp:prepend(pluginDir .. '/rocks-git.nvim')
 vim.opt.rtp:prepend(pluginDir .. '/rocks.nvim')
@@ -304,7 +301,9 @@ vim.filetype.add({
 -- undocumented like --luamod-dev
 -- vim.g.__ts_debug = 10
 
-vim.g.matchparen = 1
+-- have % go to the matching element
+-- showmatch
+-- vim.g.matchparen = 1
 vim.g.mousemoveevent = 1 -- must be setup before calling lazy
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -693,6 +692,8 @@ vim.opt.cmdheight = 1
 
 -- one can pass a list as well
 -- vim.lsp.enable('lua_ls')  -- todo remove replaced by emmylua
+-- used by `lx check`
+vim.lsp.enable('emmylua_ls')
 vim.lsp.enable('rust_analyzer')
 vim.lsp.enable('clangd')
 vim.lsp.enable('pyright')
@@ -701,9 +702,6 @@ vim.lsp.enable('just')
 vim.lsp.enable('nixd')
 -- vim.lsp.enable('nil_ls')
 -- vim.lsp.enable('cssls')
-
--- used by `lx check`
-vim.lsp.enable('emmylua_ls')
 
 -- we will miss a bunch of things :s
 vim.pack.add({
@@ -910,9 +908,157 @@ end, { desc = 'Go to file, create if missing' })
 -- if vim.g.avante ~= nil then return end
 -- Outside of the fork it kills the plugin so careful
 -- normally overriden by setup call
--- vim.g.avante = {
---     log_level = vim.log.levels.DEBUG,
--- }
+vim.g.avante = {
+    debug = false, -- print error messages
+    -- log_level =
+    log_level = vim.log.levels.DEBUG,
+
+    -- seems ignored by acp ?
+    mode = 'legacy', -- Switch from "agentic" to "legacy"
+
+    -- instructions_file =
+
+    -- can be a function as well
+    -- avante is very talkative by default
+    override_prompt_dir = vim.fn.expand(vim.fn.stdpath('config') .. '/avante_prompts'),
+
+    -- can be a function, appended as well
+    system_prompt = [[
+	You are a highly skilled software engineer with extensive knowledge in many programming languages, frameworks, design patterns, and best practices.
+
+	Respect and use existing conventions, libraries, etc that are already present in the code base.
+
+	Make sure code comments are in English when generating them.
+	]],
+
+    -- rules = {
+    --   project_dir = nil, ---@type string | nil (could be relative dirpath)
+    --   global_dir = nil, ---@type string | nil (absolute dirpath)
+    -- },
+    rag_service = { -- RAG service configuration
+        enabled = false, -- Enables the RAG service
+        host_mount = os.getenv('HOME'), -- Host mount path for the RAG service (Docker will mount this path)
+        runner = 'nix', -- The runner for the RAG service (can use docker or nix)
+        llm = { -- Configuration for the Language Model (LLM) used by the RAG service
+            provider = 'claude', -- The LLM provider
+            -- endpoint = "https://api.openai.com/v1", -- The LLM API endpoint
+            api_key = '', -- The environment variable name for the LLM API key
+            -- model = "gpt-4o-mini", -- The LLM model name
+            -- extra = nil, -- Extra configuration options for the LLM
+        },
+        embed = { -- Configuration for the Embedding model used by the RAG service
+            provider = 'claude', -- The embedding provider
+            -- endpoint = "https://api.openai.com/v1", -- The embedding API endpoint
+            api_key = '', -- The environment variable name for the embedding API key
+            -- model = "text-embedding-3-large", -- The embedding model name
+            extra = nil, -- Extra configuration options for the embedding model
+        },
+        -- docker_extra_args = "", -- Extra arguments to pass to the docker command
+    },
+    behaviour = {
+        auto_set_keymaps = true,
+        auto_suggestions = false, -- Experimental stage
+
+        enable_token_counting = true,
+        show_inference_timings = true,
+        -- auto_approve_tool_permissions = {"bash", "replace_in_file"}, -- Auto-approve specific tools only
+        auto_focus_on_diff_view = true,
+        auto_add_current_file = true,
+        -- vs 'popup
+        confirmation_ui_style = 'inline_buttons',
+        include_generated_by_commit_line = true, -- Controls if 'Generated-by: <provider/model>' line is added to git commit message
+
+        support_paste_from_clipboard = true,
+    },
+
+    -- provider loaded from history ?
+    -- provider = provider,
+    ui = { border = 'single', background_color = '#FF0000' },
+    selector = {
+        provider = 'fzf_lua',
+    },
+
+    -- might be interesting
+    input = {
+        -- provider =
+        --  -- Example: Using snacks.nvim as input provider
+        provider = 'native', -- "native" | "dressing" | "snacks"
+        provider_opts = {
+            -- Snacks input configuration
+            title = 'Avante Input',
+            icon = ' ',
+            placeholder = 'Enter your API key...',
+        },
+    },
+    windows = {
+        position = 'right',
+        fillchars = 'eob: ',
+        -- TODO remove
+        sidebar_header = {
+            enabled = true, -- true, false to enable/disable the header
+            align = 'center', -- left, center, right for title
+            rounded = true,
+            include_model = true,
+        },
+        spinner = {
+            -- editing
+            -- { '·', '✢', '✳', '∗', '✻', '✽' },
+            generating = {
+                '⡀',
+                '⠄',
+                '⠂',
+                '⠁',
+                '⠈',
+                '⠐',
+                '⠠',
+                '⢀',
+                '⣀',
+                '⢄',
+                '⢂',
+                '⢁',
+                '⢈',
+                '⢐',
+                '⢠',
+                '⣠',
+                '⢤',
+                '⢢',
+                '⢡',
+                '⢨',
+                '⢰',
+                '⣰',
+                '⢴',
+                '⢲',
+                '⢱',
+                '⢸',
+                '⣸',
+                '⢼',
+                '⢺',
+                '⢹',
+                '⣹',
+                '⢽',
+                '⢻',
+                '⣻',
+                '⢿',
+                '⣿',
+            },
+            thinking = { '🤯', '🙄' },
+        },
+        input = {
+            -- used as sign_define
+            -- function H.signs() vim.fn.sign_define("AvanteInputPromptSign", { text = Config.windows.input.prefix }) end
+            prefix = '> ',
+            height = 8, -- Height of the input window in vertical layout
+        },
+    },
+    ask = {
+
+        floating = false, -- Open the 'AvanteAsk' prompt in a floating window
+        start_insert = false, -- Start insert mode when opening the ask window
+        border = 'rounded',
+        ---@type "ours" | "theirs"
+        focus_on_apply = 'ours', -- which diff to focus after applying
+    },
+}
 
 local has_kitty_scrollback, _kitty_scrollback = pcall(require, 'kitty-scrollback')
 if has_kitty_scrollback then
@@ -932,13 +1078,13 @@ vim.api.nvim_create_user_command('LlmChat', function()
     require('avante.api').ask({ without_selection = true })
 end, { desc = 'Ask without selecting anything' })
 
--- waiting for upstream
-vim.api.nvim_create_user_command('AvanteListRemoteModels', function()
-    require('avante.providers').openai:list_models()
-    -- vim.cmd(string.format('tabnew %s', vim.fn.stdpath('cache')..'/rest.nvim.log'))
-end, {
-    desc = 'List available models on the remote',
-})
+-- merged upstream
+-- vim.api.nvim_create_user_command('AvanteListRemoteModels', function()
+--     require('avante.providers').openai:list_models()
+--     -- vim.cmd(string.format('tabnew %s', vim.fn.stdpath('cache')..'/rest.nvim.log'))
+-- end, {
+--     desc = 'List available models on the remote',
+-- })
 
 -- }}}
 
@@ -953,9 +1099,10 @@ if has_norg then
     -- || 	...o/plugins/neorg/lua/neorg/modules/core/dirman/module.lua:215: in function 'set_workspace'
     -- || 	...o/plugins/neorg/lua/neorg/modules/core/dirman/module.lua:119: in function 'load'
 
-    -- require('plugins.neorg')
+    require('plugins.neorg')
 end
 -- }}}
+
 -- todo fix upgraded version
 -- require('plugins.image')
 
@@ -1013,7 +1160,7 @@ end
 -- MenuPopup
 -- mouse users + nvimtree users!
 vim.keymap.set({ 'n', 'v' }, '<RightMouse>', function()
-    require('menu.utils').delete_old_menus()
+    -- require('menu.utils').delete_old_menus()
 
     vim.cmd.exec('"normal! \\<RightMouse>"')
 

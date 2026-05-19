@@ -15,7 +15,9 @@
     substituters = [
       # https://github.com/NixOS/nix/pull/15449
     ];
-    extra-substituters = [
+
+    # dont necessarily want it as default
+    trusted-substituters = [
       "http://jedha.local?priority=10&retry-attempts=2&retry-max-delay=1000"
     ];
 

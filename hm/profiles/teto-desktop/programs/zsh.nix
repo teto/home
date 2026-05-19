@@ -17,7 +17,6 @@
 
   sessionVariables = {
     # CAREFUL
-    CDPATH = "$HOME/plugins";
   };
 
   completionInit = ''

@@ -35,14 +35,12 @@ in
 
       # userKnownHostsFile
       github = {
-        match = "host github.com";
+        header = "match host github.com";
+
         user = "teto";
         identityFile = "${secretsFolder}/ssh/id_rsa";
         identitiesOnly = true;
         AddKeysToAgent = "yes";
-        # extraOptions = {
-        # AddKeysToAgent = "yes";
-        # };
       };
 
       gitlab = {
@@ -51,14 +49,12 @@ in
         identityFile = "${secretsFolder}/ssh/gitlab";
         identitiesOnly = true;
         AddKeysToAgent = "yes";
-        # extraOptions = {
-        #   AddKeysToAgent = "yes";
-        # };
       };
 
       # this should be generated already ?
-      neotokyo-teto = {
-        match = "user teto host ${secrets.jakku.hostname}";
+      jedha = {
+        header = "Match user teto host ${secrets.jakku.hostname}";
+        # match = "user teto host ${secrets.jakku.hostname}";
         hostname = secrets.jakku.hostname;
         user = "teto";
         addKeysToAgent = "yes";
@@ -69,17 +65,27 @@ in
         # identityAgent =
         serverAliveCountMax = 3;
         sendEnv = [ "GITHUB_TOKEN" ];
-        extraOptions = {
-          # KnownHostsCommand is in addition to those listed in UserKnownHostsFile and GlobalKnownHostsFile
-
-        };
+        # extraOptions = {
+        # KnownHostsCommand is in addition to those listed in UserKnownHostsFile and GlobalKnownHostsFile
+        # };
       };
 
-      nix-community-builder = {
+      # match = "user teto host nix-community";
+      # Match Tagged forceTMUX
+      #   # Force start tmux automatically with a session named "RemoteSSH"
+      #   # If that session already exist, connect to it instead of starting a new one
+      #   RemoteCommand tmux new-session -A -s RemoteSSH
+      #   RequestTTY yes
+      "Match Tagged nix-builder" = {
+        RemoteCommand = "teto";
+        sendEnv = [ "GITHUB_TOKEN" ];
+      };
+
+      "Match user teto host nix-community" = {
 
         # https://nix-community.org/community-builders/
         # ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIElIQ54qAy7Dh63rBudYKdbzJHrrbrrMXLYl7Pkmk88H
-        match = "user teto host nix-community";
+        # match = "user teto host nix-community";
         hostname = "build-box.nix-community.org";
         user = "teto";
         addKeysToAgent = "yes";
@@ -89,11 +95,12 @@ in
         identitiesOnly = true;
         serverAliveCountMax = 3;
         sendEnv = [ "GITHUB_TOKEN" ];
+        tag = "nix-builder";
       };
 
       # as a user we should be able to override the key
-      neotokyo-gitolite-admin = {
-        match = "user gitolite host ${secrets.jakku.hostname}";
+      "Match user gitolite host ${secrets.jakku.hostname}" = {
+        # match =;
         hostname = secrets.jakku.hostname;
         # user = "gitolite";
         # le port depend du service

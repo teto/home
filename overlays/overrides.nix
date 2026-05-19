@@ -20,8 +20,13 @@ in
     # TODO pass icon
     muteAudio = prev.writeShellScript "mute-volume" ''
 
-      ${final.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; ${notify-send} --icon=speaker_no_sound -e -h boolean:audio-toggle:1 -h string:synchronous:audio-volume -u low 'Toggling audio';
-    '';
+      ${final.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle;
+    ''
+    # todo conditionalize it
+    #    + ''
+    # ${notify-send} --icon=speaker_no_sound -e -h boolean:audio-toggle:1 -h string:synchronous:audio-volume -u low 'Toggling audio';
+    # ''
+    ;
 
     # -f --image ~/.config/wallpapers/snow_woods.jpg"
     swaylockCmd = prev.writeShellScript "lock-screen" ''

@@ -139,7 +139,9 @@ in
           pkgs.python3Packages.huggingface-hub
 
           # a competitor of "safetensors_explorer"
-          pkgs.python3Packages.gguf # gguf-editor-gui
+          (pkgs.python3Packages.gguf.overridePythonAttrs (oa: {
+            dependencies = oa.dependencies ++ oa.optional-dependencies.gui;
+          }))
 
           # pkgs.python3Packages.vllm
           # pkgs.repomix # to upload a codebase to llm
@@ -498,8 +500,8 @@ in
           patchutils # for interdiff
           perf-tools # to interpret
 
-          rainfrog # database exploration
-          trurl # used to parse url in the firefox-router executable
+          # rainfrog # database exploration
+          # trurl # used to parse url in the firefox-router executable
 
           process-compose # docker-compose - like
           # rpl # to replace strings across files

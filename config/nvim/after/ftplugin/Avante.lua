@@ -10,3 +10,16 @@
 -- - handle_submit
 -- - update_content
 -- - on_state_change
+
+local sidebar = require("avante").get()
+
+vim.api.nvim_create_autocmd("WinEnter", {
+  group = sidebar.augroup,
+  buffer = sidebar.containers.result.bufnr,
+  callback = function()
+    vim.print("token count: ", sidebar.token_count)
+  end,
+})
+
+
+-- vim.o.winbar = vim.b.token

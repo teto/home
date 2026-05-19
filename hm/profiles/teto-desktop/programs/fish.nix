@@ -4,6 +4,39 @@
   pkgs,
   ...
 }:
+let
+  tideItemJj = pkgs.fishPlugins.buildFishPlugin {
+    pname = "tide-item-jj";
+    version = "unstable-2026-05-27";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "lucasadelino";
+      repo = "tide-item-jj";
+      rev = "e1150b7332b85149b468cb10c2844f082f33975b";
+      hash = "sha256-vLSrHPoytZ/kXQh0Bp/4AWe8YLlyufRjepfXUAuWCB8=";
+    };
+  };
+
+  fishPluginFromVendor =
+    plugin:
+    pkgs.runCommand "${plugin.pname or plugin.name}-hm-fish-plugin" { } ''
+      fish_dir="${plugin}/share/fish"
+
+      copy_fish_dir() {
+        from="$1"
+        to="$2"
+
+        if [ -d "$fish_dir/$from" ]; then
+          mkdir -p "$out/$to"
+          cp -R "$fish_dir/$from"/. "$out/$to"/
+        fi
+      }
+
+      copy_fish_dir vendor_conf.d conf.d
+      copy_fish_dir vendor_completions.d completions
+      copy_fish_dir vendor_functions.d functions
+    '';
+in
 # TODO
 # -restore fancy-ctrl-z from zsh
 # -equivalent of zbell with done. Ideally notify differently for some commands
@@ -12,6 +45,21 @@
 # - rfw
 {
   enable = true;
+
+  _imports = [
+
+    # https://github.com/NixOS/nixpkgs/blob/9608ace7009ce5bc3aeb940095e01553e635cbc7/nixos/modules/programs/fish.nix#L285-L291
+    {
+      home.packages = [
+        pkgs.fishPlugins.git-abbr
+        pkgs.fishPlugins.done
+
+        # https://github.com/acomagu/fish-async-prompt
+        # pkgs.fishPlugins.async-prompt # see how I can configure it
+      ];
+    }
+  ];
+
   # binds = {
   #   "alt-shift-b".command = "fish_commandline_append bat";
   #   "alt-s".erase = true;
@@ -120,26 +168,41 @@
   #   fishPlugins.grc
   # ];
 
-  # doesn't work with nixpkgs format ?!
+  # these are added to ~/.config/fish/conf.d
+  # use { name = ... ; src = drv }
   plugins = [
-    #   # { name = ... ; src = ... }
     {
       name = "git-abbr";
-      src = pkgs.fishPlugins.git-abbr.src;
+      src = fishPluginFromVendor pkgs.fishPlugins.git-abbr;
     }
+
     # {
     #   name = "sponge";
     #  sponge filters history !
     # https://github.com/meaningful-ooo/sponge
     #   src = pkgs.fishPlugins.sponge.src;
     # }
+
     # https://github.com/franciscolourenco/done
     {
       name = "done";
-      src = pkgs.fishPlugins.done;
+      src = pkgs.fishPlugins.done.src;
     }
-    #   pkgs.fishPlugins.bass
-    #   pkgs.fishPlugins.sponge
+    {
+      # an async prompt
+      name = "tide";
+      # fishPluginFromVendor
+      src = pkgs.fishPlugins.tide.src;
+    }
+    {
+      name = "tide-item-jj";
+      src = fishPluginFromVendor tideItemJj;
+    }
+    # {
+    #   name = "async-prompt";
+    #   src = fishPluginFromVendor pkgs.fishPlugins.async-prompt;
+    # }
+    #   pkgs.fishPlugins.bass # bash loader
   ];
 
   # TODO restore some manual comple

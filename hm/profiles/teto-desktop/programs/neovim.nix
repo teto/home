@@ -450,6 +450,7 @@ in
     # ++ pkgs.vimPlugins.llm-nvim.runtimeDeps # temporary workaround
     # provides typescript-language-server
     ++ pkgs.vimPlugins.typescript-tools-nvim.runtimeDeps
+    # ++ flakeSelf.packages.${pkgs.stdenv.hostPlatform.system}.pkgs.rikai-nvim.runtimeDeps  # hardcoded here since
     ++ [
       pkgs.typescript # for tsserver
       pkgs.stylua # for lua formatting

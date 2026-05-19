@@ -14,8 +14,6 @@
   # };
   #
 
-  # services.voxtype.enable = true;
-
   # programs.lapce.enable = true;
   # programs.mods = {
   #   # disabled because zsh completion took too long
