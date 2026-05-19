@@ -101,8 +101,8 @@ in
 
   boot =
     let
-      # kernelPkgs = pkgs.linuxKernel.packages.linux_7_0;
-      kernelPkgs = pkgs.linuxKernel.packages.linux_6_18;
+      kernelPkgs = pkgs.linuxKernel.packages.linux_7_0;
+      # kernelPkgs = pkgs.linuxKernel.packages.linux_6_18;
       # pkgs.linuxKernel.packages.linux_6_18.r8125
     in
     {
@@ -111,7 +111,7 @@ in
       blacklistedKernelModules = [ "nouveau" ];
       extraModulePackages = [
 
-        kernelPkgs.r8125
+        # kernelPkgs.r8125
       ];
 
       # Ensure initrd has resume support

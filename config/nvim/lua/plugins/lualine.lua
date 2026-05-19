@@ -199,7 +199,7 @@ require('lualine').setup({
                 file_status = true,
                 -- https://github.com/nvim-lualine/lualine.nvim#filename-component-options
 
-                path = 4,
+                path = 3,
                 symbols = {
                     modified = '[+]', -- Text to show when the file is modified.
                     readonly = '[-]', -- Text to show when the file is non-modifiable or readonly.

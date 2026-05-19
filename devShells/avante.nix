@@ -6,6 +6,8 @@ pkgs.mkShell {
       mylua = pkgs.lua5_1.withPackages (lp: [
         lp.luassert
         lp.busted
+        lp.luarocks
+        lp.nlua
       ]);
     in
     with pkgs;

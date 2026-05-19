@@ -953,7 +953,7 @@ if has_norg then
     -- || 	...o/plugins/neorg/lua/neorg/modules/core/dirman/module.lua:215: in function 'set_workspace'
     -- || 	...o/plugins/neorg/lua/neorg/modules/core/dirman/module.lua:119: in function 'load'
 
-    -- require('plugins.neorg')
+    require('plugins.neorg')
 end
 -- }}}
 -- todo fix upgraded version

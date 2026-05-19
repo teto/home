@@ -89,6 +89,8 @@ in
       timg
       gh-dash
       # wpaperd
+
+      pi-coding-agent # to test as ACP provider for avante
     ]
   );
 

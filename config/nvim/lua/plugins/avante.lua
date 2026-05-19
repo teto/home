@@ -40,28 +40,12 @@ end
 
 -- providers in the gp.nvim sense,
 -- not to confuse with agents
-local providers = {
-    openai = {
-        -- endpoint = 'http://' .. llama_host .. ':8080/v1',
-    },
-    claude = {
-        endpoint = 'https://api.anthropic.com',
-        model = 'claude-sonnet-4-5-20250929',
-        -- extra_request_body = {
-        --   temperature = 0.75,
-        --   max_tokens = 4096,
-        -- },
-        -- should use XDG_CONFIG_HOME or
-        api_key_name = 'cmd:cat ' .. sops_folder .. '/claude_api_key',
 
-        -- disabled_tools = { "python" },
-    },
-}
 
 local function mk_llama_provider(llama_host, name, custom)
     local opts = vim.tbl_extend('force', {
         -- either that or parse_curl_args
-        -- __inherited_from = 'openai',
+        __inherited_from = 'openai',
         model = name,
         -- hide_in_model_selector
         endpoint = 'http://' .. llama_host .. ':8080/v1',
@@ -88,7 +72,7 @@ end
 -- TODO load configuration from llm-providers.json
 -- lua vim.json.decode(str, opts)
 opts = {
-    debug = true, -- print error messages
+    debug = false, -- print error messages
     -- log_level =
     log_level = vim.log.levels.DEBUG,
 
@@ -422,7 +406,7 @@ opts = {
 
 local hidden_models = {
     'aihubmix',
-    'copilot',
+    -- 'copilot',
     -- 'gemini',
     -- 'openai',
     -- 'openai-gpt-4o-mini',
@@ -441,17 +425,18 @@ end
 -- todo load from contrib/ or from llama api ?
 local jedha_models = {
     'llama_mistral7b',
-    'llama_ministral3_3b',
+    'ministral3-8b',
     'llama_ministral3_8b',
     'llama_qwen2_5_3b',
 }
 
 -- for _, model in ipairs(jedha_models) do
-local res = mk_llama_provider('jedha.local', nil, {})
+-- so it inherited the model
+local res = mk_llama_provider('jedha.local', "ministral3-8b", {})
 opts.providers['jedha'] = vim.tbl_extend('force', res, {
-    list_models = function()
-        return jedha_models
-    end,
+    -- list_models = function()
+    --     return jedha_models
+    -- end,
 })
 --     opts.providers[model] =
 -- end

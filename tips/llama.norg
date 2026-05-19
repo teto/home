@@ -4,6 +4,7 @@ Cache at /home/teto/.cache/llama.cpp
 
 with Llama.cpp you can still load SOME experts on GPU by reducing --n-cpu-moe
 
+--offline avoids dl from hf
 
 * host ram stuff
 
