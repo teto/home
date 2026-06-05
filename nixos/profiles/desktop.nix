@@ -150,7 +150,9 @@ in
   ];
 
   # networking.firewall.checkReversePath = false; # for nixops
-  # networking.firewall.allowedUDPPorts = [ 631 ];
+  networking.firewall.allowedUDPPorts = [ 
+    5353 # mdns via resolved or avahi
+  ];
   # networking.firewall.allowedTCPPorts = [ 631 ];
 
   hardware = {
