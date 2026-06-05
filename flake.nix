@@ -285,9 +285,9 @@
 
     # GIT_DIR=.jj/repo/store/git gh issue list
     # provides a package 'starship-jj' used as a custom
-    starship-jj = {
-      url = "gitlab:lanastara_foss/starship-jj";
-    };
+    # starship-jj = {
+    #   url = "gitlab:lanastara_foss/starship-jj";
+    # };
 
     # stylix = {
     #   url = "github:nix-community/stylix";

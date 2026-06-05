@@ -70,6 +70,16 @@ end
 
 local _normal_hl = vim.api.nvim_get_hl(0, { name = 'Normal' })
 
+-- https://github.com/barrettruth/diffs.nvim
+vim.g.diffs = {
+    integrations = {
+        fugitive = true,
+        neogit = true,
+        neojj = true,
+        gitsigns = true,
+    },
+}
+
 vim.g.rikai = {
     dictionaries = {
         kanjidb = nix_deps.edict_kanjidb,

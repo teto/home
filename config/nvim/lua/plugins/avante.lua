@@ -79,7 +79,9 @@ opts = {
         -- override the default one because it was missing USER
         ['codex'] = {
             command = 'codex-acp',
-            args = {},
+            args = {
+                -- "-c model="
+            },
             env = {
                 USER = os.getenv('USER'),
                 -- lua print(vim.inspect(require("avante.providers").openai:list_models()))

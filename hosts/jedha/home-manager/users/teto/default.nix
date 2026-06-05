@@ -71,53 +71,55 @@
   '';
 
   # for programs not merged yet
-  home.packages = with pkgs; let 
-    llmDeps = [ 
-      python3Packages.llama-index-cli
-      # python3Packages.llama-index
+  home.packages =
+    with pkgs;
+    let
+      llmDeps = [
+        python3Packages.llama-index-cli
+        # python3Packages.llama-index
+      ];
+    in
+    llmDeps
+    ++ [
+      # llm-ls # needed by the neovim plugin
+      cointop # bitcoin tracker
+      # mdp # markdown CLI presenter
+      # gthumb # image manager, great to tag pictures
+
+      # footswitch # to control foot pedals (use module instead)
+      # need gnome-accounts to make it work
+      gnome-calendar
+      gnome-control-center
+      gnome-maps
+      # gpu-usage-waybar
+      jaq # jq in rust
+
+      lact # GPU controller, needs a daemon
+
+      # xorg.xwininfo # for stylish
+      moor # test as pager
+      presenterm # for presentations from terminal/markdown (in rust, supports images, pretty cool)
+
+      # sioyek # pdf reader
+      tailspin # (broken) a log viewer based on less ("spin" or "tsspin" is the executable)
+      # tig
+      wally-cli # to flash ergodox keyboards
+      wine
+
+      nix-sweep # smarter nix-gc
+
+      # take the version from stable ?
+      nautilus # demande webkit/todo replace by nemo ?
+      # hexyl # hex editor
+      # simple-scan
+      # vifm
+      # anyrun
+
+      # bridge-utils# pour  brctl
+
+      # vscode-css-languageserver # to showcase 'cssls' lsp server
+
     ];
-    in 
-    llmDeps ++ [
-    # llm-ls # needed by the neovim plugin
-    cointop # bitcoin tracker
-    # mdp # markdown CLI presenter
-    # gthumb # image manager, great to tag pictures
-
-    # footswitch # to control foot pedals (use module instead)
-    # need gnome-accounts to make it work
-    gnome-calendar
-    gnome-control-center
-    gnome-maps
-    # gpu-usage-waybar
-    jaq # jq in rust
-
-    lact # GPU controller, needs a daemon
-
-    # xorg.xwininfo # for stylish
-    moor # test as pager
-    presenterm # for presentations from terminal/markdown (in rust, supports images, pretty cool)
-
-    # sioyek # pdf reader
-    tailspin # (broken) a log viewer based on less ("spin" or "tsspin" is the executable)
-    # tig
-    wally-cli # to flash ergodox keyboards
-    wine
-
-    nix-sweep # smarter nix-gc
-
-
-    # take the version from stable ?
-    nautilus # demande webkit/todo replace by nemo ?
-    # hexyl # hex editor
-    # simple-scan
-    # vifm
-    # anyrun
-
-    # bridge-utils# pour  brctl
-
-    # vscode-css-languageserver # to showcase 'cssls' lsp server
-
-  ];
 
   package-sets = {
 

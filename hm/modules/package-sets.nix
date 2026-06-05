@@ -102,6 +102,7 @@ in
 
           # flakeSelf.inputs.jujutsu.packages.${pkgs.stdenv.hostPlatform.system}.jujutsu
           jjui
+          pkgs.blazingjj
 
           # pkgs.gg-jj
           # pkgs.lazyjj
@@ -432,7 +433,7 @@ in
           lurk # a rust strace
           lsof # to see open files
 
-          flakeSelf.inputs.starship-jj.packages.${system}.default # custom.jj for starship
+          # flakeSelf.inputs.starship-jj.packages.${system}.default # custom.jj for starship
 
           libossp_uuid # for the 'libuuid' executable
 

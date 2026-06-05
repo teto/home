@@ -1,8 +1,7 @@
 /*
-You will notice the difference when trying to add network printers in the CUPS admin webpage. CUPS will auto-detect printers with avahi but not with systemd-resolved.
+  You will notice the difference when trying to add network printers in the CUPS admin webpage. CUPS will auto-detect printers with avahi but not with systemd-resolved.
 
-
-man systemd.dnssd
+  man systemd.dnssd
 */
 { config, ... }:
 {
@@ -19,7 +18,9 @@ man systemd.dnssd
   #   abled, but responding is disabled. Note that systemd-networkd.service(8)  also  main‐
   #   tains  per-link  Multicast DNS settings. Multicast DNS will be enabled on a link only
   # "resolve";
-  settings.Resolve.MulticastDNS = false; # taken care of by avahi
+
+  # conflicts with avahi
+  settings.Resolve.MulticastDNS = true;
 
   # resolved exposes a stub listener at "127.0.0.53"
   # DNSStubListener=

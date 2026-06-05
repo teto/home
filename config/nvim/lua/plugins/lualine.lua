@@ -58,15 +58,14 @@ local diagnostic_section = {
         info = 'I',
         hint = 'H',
     },
-	on_click = function(_nb_of_clicks, _button, _modifiers)
-		-- the component should have a 'status' output
-		-- local branch_name = 'BRANCH_PLACEHOLDER'
-		-- status()
-		-- clip.copy(branch_name)
-		-- print('To clipboard: ' .. branch_name)
-		vim.diagnostic.setloclist()
-	end,
-
+    on_click = function(_nb_of_clicks, _button, _modifiers)
+        -- the component should have a 'status' output
+        -- local branch_name = 'BRANCH_PLACEHOLDER'
+        -- status()
+        -- clip.copy(branch_name)
+        -- print('To clipboard: ' .. branch_name)
+        vim.diagnostic.setloclist()
+    end,
 
     colored = true, -- Displays diagnostics status in color if set to true.
     update_in_insert = false, -- Update diagnostics in insert mode.

@@ -1,5 +1,7 @@
 local b = require('blink.cmp')
 local opts = {
+    -- enabled = function() return not vim.tbl_contains({ "lua", "markdown" }, vim.bo.filetype) end,
+
     -- 'default' for mappings similar to built-in completion
     -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
     -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
@@ -31,13 +33,25 @@ local opts = {
     -- Experimental signature help support
     signature = { enabled = true },
     completion = {
+        -- 'prefix' will fuzzy match on the text before the cursor
+        -- 'full' will fuzzy match on the text before _and_ after the cursor
+        -- example: 'foo_|_bar' will match 'foo_' for 'prefix' and 'foo__bar' for 'full'
+        keyword = { range = 'full' },
+
+        -- Disable auto brackets
+        -- NOTE: some LSPs may add auto brackets themselves anyway
+        accept = { auto_brackets = { enabled = false } },
+
         trigger = {
             show_on_trigger_character = true,
         },
+
+        -- or set via a function
+        -- list = { selection = { preselect = function(ctx) return vim.bo.filetype ~= 'markdown' end } },
         list = {
             selection = {
                 -- annoying when it matches a long one
-                preselect = true,
+                preselect = false,
 
                 -- When `true`, inserts the completion item automatically when selecting it
                 -- You may want to bind a key to the `cancel` command (default <C-e>) when using this option,
@@ -51,11 +65,15 @@ local opts = {
         documentation = {
             -- Controls whether the documentation window will automatically show when selecting a completion item
             auto_show = true,
+            -- auto_show_delay_ms = 500
         },
+        -- Display a preview of the selected item on the current line
+        ghost_text = { enabled = true },
+
         menu = {
             enabled = true,
             min_width = 15,
-            max_height = 20,
+            max_height = 30,
             -- what are possible values ?
             border = 'none',
             -- winblend = 0,
@@ -178,6 +196,8 @@ local opts = {
     -- opts_extend = { "sources.completion.enabled_providers" }
     snippets = {
         -- preset = 'luasnip'
+        -- preset = 'default' | 'luasnip' | 'mini_snippets' | 'vsnip'
+        --
     },
     -- ensure you have the `snippets` source (enabled by default)
     sources = {
