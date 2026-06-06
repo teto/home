@@ -8,7 +8,7 @@
     flakeSelf.nixosProfiles.avahi
   ];
 
-  enable = true;
+  enable = false;
 
   debug = true;
 

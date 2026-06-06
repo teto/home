@@ -99,7 +99,8 @@ alias kcat="kitten icat"
 # }}}
 
 # use jedha.local instead ?
-alias llama-jedha="llama-server --host 0.0.0.0 --port 8080 --jinja -v --log-prefix --models-preset ~/home/contrib/llama-presets.ini"
+# --api-key 
+alias llama-jedha="llama-server --host 0.0.0.0 --port 8080 --jinja -v --log-prefix --models-preset ~/home/contrib/llama-presets.ini --api-key toto"
 #
 # test atuin instead or histdb ?
 # export MCFLY_KEY_SCHEME=vim
