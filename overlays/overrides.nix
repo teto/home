@@ -154,9 +154,6 @@ in
     })
   );
 
-  # see https://github.com/NixOS/nixpkgs/pull/257760
-  # ollamagpu = final.ollama.override { llama-cpp = final.llama-cpp-matt; };
-
   protocol-local = prev.protocol.overrideAttrs (oldAttrs: {
     src = builtins.fetchGit { url = "https://github.com/teto/protocol"; };
   });

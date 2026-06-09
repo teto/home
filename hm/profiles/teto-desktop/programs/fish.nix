@@ -76,6 +76,7 @@ in
       position = "anywhere";
       expansion = "--color";
     };
+    kssh = "kitten ssh";
   };
 
   #

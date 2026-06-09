@@ -6,7 +6,8 @@
 }:
 {
 
-  enable = true;
+  # fix it one day
+  enable = false;
 
   user = "transmission";
   group = "media"; # not secure enough but let's try ?

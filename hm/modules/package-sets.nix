@@ -114,20 +114,11 @@ in
       home.packages =
         let
           llama-custom = pkgs.llama-cpp;
-          # llama-custom =
-          #     pkgs.llama-cpp.override {
-          #       cudaSupport = true;
-          #       blasSupport = false;
-          #       rocmSupport = false;
-          #       openclSupport = false;
-          #       # stdenv = prev.gcc11Stdenv;
-          #     };
         in
         [
 
           # pkgs.koboldcpp
           llama-custom # for llama-server and benchmarks
-          # pkgs.llama-swap # allows to switch between models at runtime
 
           # libggml.so conflicts with llama-cpp's
           # pkgs.whisper-cpp # to test with rikai.nvim and pushtotalk
@@ -138,6 +129,8 @@ in
 
           # pkgs.aider-chat # breaks
           pkgs.python3Packages.huggingface-hub
+
+          pkgs.harbor-cli # for terminal-bench tests on llms
 
           # a competitor of "safetensors_explorer"
           (pkgs.python3Packages.gguf.overridePythonAttrs (oa: {
@@ -225,7 +218,7 @@ in
           rmpc # rust mpd client with synced lyrics and cover display !
           pkgs.euphonica # nice looking mpd GUI
           s-search # "s" to open web search
-          smplayer # GUI around mpv
+          # smplayer # GUI around mpv
           # celluloid # GUI around mpv
           # unstable.transmission_gtk  # bittorrent client
           # vimiv # image viewer
@@ -234,7 +227,7 @@ in
           usbutils
           bandwhich # to monitor per app bandwidth
           desktop-file-utils # to get desktop
-          doge # dns solver "dog"
+          dogedns # dns solver "dog"
           # doggo # dns solver "dog"
           evince # succeed where zathura/mupdf fail
           font-manager # pretty good font manager
@@ -253,7 +246,7 @@ in
           # - pdu
           # - dua
           # ncdu # to see disk usage
-          dua
+          dua # run with dua interactive
           dust # dust binary: rust replacement of du
           duf # better df (rust)
 
@@ -432,6 +425,8 @@ in
           # luau # lua server
           lurk # a rust strace
           lsof # to see open files
+
+          flakeSelf.inputs.jj-gh.packages.${system}.default
 
           # flakeSelf.inputs.starship-jj.packages.${system}.default # custom.jj for starship
 

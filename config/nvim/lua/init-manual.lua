@@ -27,6 +27,10 @@ require('vim._core.ui2').enable({
 
 vim.g.health = { style = 'float' }
 
+
+-- or use secrets.jakku_hostname
+local llama_host = "localhost"
+
 -- vim.g.visual_whitespace = {
 --   enabled = true,
 --   highlight = { link = "Visual", default = true },
@@ -703,7 +707,7 @@ vim.opt.cmdheight = 1
 -- one can pass a list as well
 -- vim.lsp.enable('lua_ls')  -- todo remove replaced by emmylua
 -- used by `lx check`
-vim.lsp.enable('emmylua_ls')
+-- vim.lsp.enable('emmylua_ls')
 vim.lsp.enable('rust_analyzer')
 vim.lsp.enable('clangd')
 vim.lsp.enable('pyright')
@@ -946,18 +950,26 @@ vim.g.avante = {
     --   global_dir = nil, ---@type string | nil (absolute dirpath)
     -- },
     rag_service = { -- RAG service configuration
-        enabled = false, -- Enables the RAG service
-        host_mount = os.getenv('HOME'), -- Host mount path for the RAG service (Docker will mount this path)
-        runner = 'nix', -- The runner for the RAG service (can use docker or nix)
-        llm = { -- Configuration for the Language Model (LLM) used by the RAG service
-            provider = 'claude', -- The LLM provider
+		-- Enables the RAG service
+        enabled = true,  -- make it 
+		-- Host mount path for the RAG service (Docker will mount this path)
+        host_mount = os.getenv('HOME'), 
+		-- The runner for the RAG service (can use docker or nix)
+        runner = 'nix', 
+		-- TODO should inherit the one from provider ?
+        llm = { 
+			-- Configuration for the Language Model (LLM) used by the RAG service
+			-- shouldn't it be the same ?
+            provider = 'jedha',
             -- endpoint = "https://api.openai.com/v1", -- The LLM API endpoint
             api_key = '', -- The environment variable name for the LLM API key
-            -- model = "gpt-4o-mini", -- The LLM model name
+			-- -- The LLM model name
+            -- model = "gpt-4o-mini", 
             -- extra = nil, -- Extra configuration options for the LLM
         },
+		-- do we need a special model for that ?
         embed = { -- Configuration for the Embedding model used by the RAG service
-            provider = 'claude', -- The embedding provider
+            provider = 'jedha', -- The embedding provider
             -- endpoint = "https://api.openai.com/v1", -- The embedding API endpoint
             api_key = '', -- The environment variable name for the embedding API key
             -- model = "text-embedding-3-large", -- The embedding model name
@@ -1181,6 +1193,13 @@ vim.keymap.set({ 'n', 'v' }, '<RightMouse>', function()
 
     require('menu').open(options, { mouse = true })
 end, {})
+
+if vim.g.neovide then
+    vim.opt.winblend = 100
+    vim.opt.pumblend = 100
+    vim.g.neovide_floating_blur_amount_x = 30
+    vim.g.neovide_floating_blur_amount_y = 30
+end
 
 -- prints --embed which is not listed
 -- vim.print(vim.v.argv)

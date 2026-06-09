@@ -18,7 +18,7 @@ let
     haumea.lib.load {
 
       src = flakeSelf.inputs.nix-filter {
-        root = ./teto-desktop;
+        root = lib.cleanSource ./teto-desktop;
       };
       inputs = args // {
         inputs = flakeSelf.inputs;
@@ -41,6 +41,10 @@ in
     flakeSelf.inputs.noctalia-shell.homeModules.default
 
   ];
+
+  home.shell = {
+    enableZshIntegration = true;
+  };
 
   home.shellAliases = {
     nix-stray-roots = ''nix-store --gc --print-roots | egrep -v "^(/nix/var|/proc|/run/\w+-system|\{memory)" | less'';

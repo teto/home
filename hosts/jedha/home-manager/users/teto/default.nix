@@ -7,6 +7,36 @@
   flakeSelf,
   ...
 }:
+let
+  haumea = flakeSelf.inputs.haumea;
+
+  autoloadedProfiles =
+    { pkgs, ... }@args:
+    haumea.lib.load {
+      src = flakeSelf.inputs.nix-filter {
+        root = ./.;
+        include = [
+          # wrong ?
+          "programs/noctalia.nix"
+        ];
+        exclude = [
+          # "teto"
+          # "users"
+          # "home-manager" # exclude home-manager because intputs are not the same: it must be imported differently
+          # "root"
+        ];
+      };
+
+      inputs = args // {
+        osConfig = config;
+        # inputs = flakeSelf.inputs;
+      };
+      transformer = [
+        haumea.lib.transformers.liftDefault
+        (haumea.lib.transformers.hoistLists "_imports" "imports")
+      ];
+    };
+in
 {
 
   # disabled because fucks up with fish
@@ -27,7 +57,7 @@
     flakeSelf.homeProfiles.wezterm
     # flakeSelf.homeModules.gnome-shell
 
-    flakeSelf.homeModules.teto-nogui
+    flakeSelf.homeModules.neovim
     flakeSelf.homeModules.nextcloud-client
     flakeSelf.homeModules.llama-cpp
 
@@ -36,8 +66,8 @@
     ./systemd.nix
 
     ./programs/neovim.nix
-    ./programs/noctalia-shell.nix
-    ./programs/waybar.nix # TODO resotre ?
+    # ./programs/noctalia.nix
+    # ./programs/waybar.nix # TODO resotre ?
     ./programs/zsh.nix
 
     ./services/llama-cpp.nix
@@ -47,7 +77,6 @@
     ./services/ssh-agent.nix
     ./services/mpd.nix
     ./services/mpris.nix
-    # ./services/wpaperd.nix
   ]
   ++ lib.optionals withSecrets [
     ./sops.nix

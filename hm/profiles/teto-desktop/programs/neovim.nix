@@ -256,9 +256,6 @@ let
     gopls # LSP for go
     marksman # markdown LSP server
 
-    # for none-ls
-    # soxWithMp3 = final.sox.override { llama-cpp = llama-cpp-matt; };
-
     pyright # python lsp
 
     tree-sitter # might help install treesitter grammars

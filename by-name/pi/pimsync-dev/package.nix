@@ -20,7 +20,7 @@ pimsync.overrideAttrs (
     # failed to get vstorage
     cargoDeps = rustPlatform.fetchCargoVendor {
       inherit src;
-      hash = "sha256-0KNdgHigHJN9gKsDfC0aQUWkSYsWABnJrvsK9+Z2dMk=";
+      hash = "sha256-utLmQXVi9uyzDojlMvL5iP3zaAb2uHibYT8xnOackgg=";
     };
 
   }

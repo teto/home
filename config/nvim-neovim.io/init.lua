@@ -123,7 +123,8 @@ vim.diagnostic.config({
 })
 
 vim.lsp.enable('clangd')
-vim.lsp.enable('emmylua_ls')
+-- takes 100% cpu
+-- vim.lsp.enable('emmylua_ls')
 vim.lsp.enable('cssls')
 
 -- vim.lsp.document_color.enable() -- this is the default

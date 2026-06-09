@@ -92,7 +92,7 @@ waybar.target= "~/.cache/wallust/waybar.css"
 
 
 # kitty
-kitty = { src='kitty.conf', dst='~/.config/kitty/colors.conf'}
+kitty = { src='kitty.conf', dst='~/.config/kitty/themes/wallust.conf'}
 
 # jjui
 jjui = { src='jjui.toml', dst='~/.config/jjui/themes/wallust.toml'}

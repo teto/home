@@ -3,6 +3,24 @@ fish_trace <-> set -x
 # load alternate history
 set -x fish_history "session_name"
 
+* fish_config 
+
+If you just run `fish_config`, it opens a webserver
+
+Examples:
+
+@code fish
+fish_config theme choose dracula
+fish_config theme save
+fish_config prompt show
+fish_config prompt choose informative
+fish_config prompt save
+@code.end
+
+* prepend/append to array
+
+ set -a (append) or set -p (prepend)
+
 # debug loading process
 
 fish --debug-output=/tmp/fish-debug.log --init-command='set fish_trace on'

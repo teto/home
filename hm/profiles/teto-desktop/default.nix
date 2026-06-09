@@ -57,7 +57,6 @@ in
 
       # TODO provide debug package under different executable "nvim-debug"
 
-      # noctalia-shell # sleek fancy wayland shell/ waybar like
       panvimdoc # to generate vim doc from README, for instance in gp.nvim
       pciutils # for lspci
 

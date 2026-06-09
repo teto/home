@@ -18,6 +18,7 @@ let
           "boot.nix"
           "environment.nix"
           "nix.nix"
+          "sops.nix"
           "systemd.nix"
           # UNCOMMENTING this will break everything since its content is not adapted
           # "home-manager/"
@@ -30,8 +31,6 @@ let
           "home-manager/users/root/"
           "home-manager/users/teto/default.nix"
           # "home-manager/users/teto/programs/neovim.nix"
-          # "home-manager/users/teto/programs/noctalia-shell.nix"
-          # "home-manager/users/teto/programs/noctalia-shell-settings.json"
           # "home-manager/users/teto/wayland.nix"
           # "home-manager/users/teto/services/blueman-applet.nix"
           # "home-manager/users/teto/services/mpd.nix"
@@ -85,18 +84,15 @@ in
     # flakeSelf.nixosProfiles.experimental
     flakeSelf.nixosProfiles.steam
 
-    # ../../nixos/profiles/homepage-dashboard.nix
     flakeSelf.nixosProfiles.kanata
     # ./services/linkwarden.nix
 
-    # ../../nixos/profiles/home-assistant.nix
+    # ./networking/wireguard.nix
+    # flakeSelf.nixosProfiles.home-assistant
     # usually inactive, just to test some stuff
-    # ../../nixos/modules/libvirtd.nix
-
   ];
 
   environment.systemPackages = [
-    # pkgs.hyprwhspr-rs
   ];
 
   # services.vaultwarden = {
@@ -285,7 +281,7 @@ in
 
   # smartcard service for yubikey
   # can conflict with gpg-agent depending on config
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
 
   services.journald.extraConfig = ''
     # alternatively one can run journalctl --vacuum-time=2d

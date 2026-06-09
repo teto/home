@@ -14,8 +14,23 @@
 
   programs.man.enable = true;
 
+  programs.readline = {
+    enable = true;
+    includeSystemConfig = true;
+    variables = {
+      # taken from examples
+      expand-tilde = true;
+      editing-mode = "vi";
+      bell-style = "none";
+      # set blink-matching-paren on
+      # required to change cursor
+      show-mode-in-prompt = true;
+      enable-bracketed-paste = true;
+      # extraConfig = '';
+    };
+  };
+
   home.shell = {
-    enableZshIntegration = true;
     enableBashIntegration = true;
   };
 

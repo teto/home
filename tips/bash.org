@@ -1,3 +1,7 @@
+* checkout readline config ?
+
+bind -v 
+
 
 * How to deal with autocompletion ?
 

@@ -43,6 +43,10 @@ set fish_cursor_external line
 # visual mode, but due to fish_cursor_default, is redundant here
 set fish_cursor_visual block
 
+
+# tide config
+# set tide_cmd_duration_threshold 3000
+
 # Example: Custom functions
 # function my_custom_function
 #     echo "Hello from manual.fish"

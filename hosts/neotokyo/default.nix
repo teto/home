@@ -2,7 +2,7 @@
   config,
   flakeSelf,
   secrets,
-  modulesPath,
+  # modulesPath,
   pkgs,
   lib,
   ...
@@ -20,7 +20,11 @@ let
           "home-manager/"
           "users/users/root.nix"
 
+          "sops.nix"
           "nix.nix"
+          "systemd.nix"
+          "networking.nix"
+          "services/llama-cpp.nix"
           "services/harmonia.nix"
           "services/jellyfin.nix"
           "services/buildbot-nix.nix"
@@ -47,15 +51,8 @@ let
 
 in
 {
-  networking = {
-    hostName = "neotokyo";
-    domain = secrets.jakku.domain;
 
-    firewall = {
-      enable = true;
-    };
-  };
-
+  # bumping to 25.11 broke nextcloyud
   system.stateVersion = "25.05";
 
   boot.kernel.sysctl = {
@@ -65,6 +62,10 @@ in
     "kernel.kptr_restrict" = 2;
     "kernel.sysrq" = false;
     "kernel.unprivileged_bpf_disabled" = true;
+
+    # for wireguard
+    "net.ipv4.conf.all.forwarding" = true;
+
   };
 
   # some hardening
@@ -96,7 +97,8 @@ in
 
     # ./nix.nix
     ./hardware.nix
-    ./sops.nix
+
+    # move to autoloaded
 
     ./programs/msmtp.nix
 
@@ -108,15 +110,14 @@ in
     ./services/nginx.nix
     ./services/immich.nix
     ./services/restic.nix
-    ./services/llama-cpp.nix
-    ./services/n8n.nix
+    # ./services/n8n.nix
 
     # ./services/jellyfin.nix
 
     # testing
     # ./services/vaultwarden.nix
     # ./services/linkwarden.nix
-    ./services/hedgedoc.nix
+    # ./services/hedgedoc.nix
 
     # ../../nixos/modules/hercules-ci-agents.nix
 
@@ -178,9 +179,13 @@ in
       members = [
         # doesnt have a user ?
         # config.users.users.${config.services.jellyfin.user}.name
-        config.users.users.${config.services.transmission.user}.name
         config.users.users.teto.name
-      ];
+      ]
+      ++
+        lib.optional config.services.transmission.enable
+          config.users.users.${config.services.transmission.user}.name
+
+      ;
     };
     groups.backup = { };
     groups.www = { };
@@ -224,6 +229,8 @@ in
     # };
   };
 
+  documentation.enable = false;
+
   # security.sudo.wheelNeedsPassword = true;
   security.sudo.execWheelOnly = true;
 
@@ -239,6 +246,8 @@ in
     pkgs.nixpkgs-review
     pkgs.zola # needed in the post-receive hook of the blog !
     pkgs.yazi
+    pkgs.wireguard-tools # for 'wg'
+
   ];
 
   # create a service to monitor new blog

@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+service_status() {
+  busctl --user get-property \
+    "$1" \
+    /org/mpris/MediaPlayer2 \
+    org.mpris.MediaPlayer2.Player \
+    PlaybackStatus 2>/dev/null |
+    sed -n 's/^s "\([^"]*\)"$/\1/p'
+}
+
+firefox_services() {
+  busctl --user list --no-legend --no-pager |
+    awk '$1 ~ /^org\.mpris\.MediaPlayer2\.firefox/ { print $1 }'
+}
+
+pick_service() {
+  local service fallback=
+
+  while IFS= read -r service; do
+    [[ -n "$service" ]] || continue
+    fallback=${fallback:-$service}
+
+    if [[ "$(service_status "$service")" == "Playing" ]]; then
+      printf '%s\n' "$service"
+      return 0
+    fi
+  done < <(firefox_services)
+
+  [[ -n "$fallback" ]] || return 1
+  printf '%s\n' "$fallback"
+}
+
+focus_firefox_window() {
+  local focused_app
+
+  focused_app=$(
+    swaymsg -t get_tree |
+      jq -r '.. | objects | select(.focused? == true) | .app_id // .window_properties.class // empty' |
+      head -n 1
+  )
+
+  [[ "$focused_app" =~ [Ff]irefox ]] && return 0
+
+  swaymsg '[urgent=latest app_id="firefox"] focus' >/dev/null 2>&1 && return 0
+  swaymsg '[app_id="firefox"] focus' >/dev/null 2>&1 && return 0
+  swaymsg '[class="Firefox"] focus' >/dev/null 2>&1
+}
+
+main() {
+  local service
+
+  service=$(pick_service) || exit 1
+
+  busctl --user call \
+    "$service" \
+    /org/mpris/MediaPlayer2 \
+    org.mpris.MediaPlayer2 \
+    Raise >/dev/null
+
+  sleep 0.15
+  focus_firefox_window
+}
+
+main "$@"

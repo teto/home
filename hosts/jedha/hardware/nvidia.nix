@@ -11,10 +11,12 @@
   # choose between latest, beta, vulkan_beta, stable
   package = config.boot.kernelPackages.nvidiaPackages.stable;
   nvidiaSettings = true;
+  # nvidia-container-toolkit.enable = false;
 
   # open is only ready for data center use
   # It is suggested to use the open source kernel modules on Turing or later GPUs (RTX series, GTX 16xx), and the closed source modules otherwise.
   open = false;
+
   powerManagement = {
     enable = false;
     # set to false 'cos of https://discourse.nixos.org/t/persistend-naming-of-igpu-in-sway-wrapper-script/66437/6

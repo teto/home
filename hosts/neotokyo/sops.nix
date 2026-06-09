@@ -4,28 +4,33 @@
   ...
 }:
 {
-  imports = [
-  ];
 
   # This will add secrets.yml to the nix store
   # You can avoid this by adding a string to the full path instead, i.e.
   # todo use homeDir of users.teto ?
-  sops.defaultSopsFile = "${config.home-manager.users.teto.home.homeDirectory}/neotokyo-secrets.yaml";
+  defaultSopsFile = "${config.home-manager.users.teto.home.homeDirectory}/neotokyo-secrets.yaml";
 
   # to avoid the 'secrets.yaml' is not in the Nix store.
-  sops.validateSopsFiles = false;
+  validateSopsFiles = false;
 
   # Paths to ssh keys added as age keys during sops description.
-  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+  #  ed25519 keys are supported
+  # https://github.com/Mic92/sops-nix/issues/824
+  age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
 
-  # sops.age.keyFile = "/home/teto/home/secrets/age.key";
+  # # might not be needed anymore
+  # environment = {
+  #   SOPS_AGE_SSH_PRIVATE_KEY_FILE = "/etc/ssh/ssh_host_ed25519_key";
+  # };
+
+  # age.keyFile = "/home/teto/home/secrets/age.key";
 
   # %r gets replaced with a runtime directory, use %% to specify a '%'
   # sign. Runtime dir is $XDG_RUNTIME_DIR on linux and $(getconf
   # DARWIN_USER_TEMP_DIR) on darwin.
   # path = "%r/test.txt";
 
-  sops.secrets =
+  secrets =
     # check depending on services.restic. instead
     # lib.optionalAttrs config.services.postgresqlBackup.enable
     {
@@ -61,6 +66,14 @@
         owner = config.users.users.teto.name;
         group = config.users.users.teto.group;
       };
+
+      "wg-private-key" = {
+        # for permission, see man systemd.netdev
+        mode = "640";
+        owner = "systemd-network";
+        group = "systemd-network";
+      };
+
     }
     // lib.optionalAttrs config.services.buildbot-master.enable {
       "buildbot-client-secret" = {

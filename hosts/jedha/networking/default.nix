@@ -5,6 +5,7 @@
 
   networkmanager = {
     enable = true;
+
     unmanaged = [
       # we prefer to configure it with networkd
       "interface-name:enp11s0"
@@ -12,9 +13,19 @@
       #   "interface-name:client-*"
       #   "interface-name:server-*"
     ];
+    wifi = {
+      backend = "iwd";
+      # just testing if that's it
+      powersave = true;
+    };
   };
 
   useNetworkd = true;
+
+  hosts = {
+    # a test, better would be to have nginx recognize another thing
+    "10.100.0.1" = [ "neotokyo.local" ];
+  };
 
   # hosts = [];
 

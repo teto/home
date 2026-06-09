@@ -14,7 +14,7 @@ local launch_menu = {}
 
 -- For example, changing the color scheme:
 -- config.automatically_reload_config = false
-config.color_scheme = 'AdventureTime'
+config.color_scheme = 'Noctalia'
 config.enable_scroll_bar = true
 config.enable_kitty_keyboard = true
 -- config.tab_bar = {

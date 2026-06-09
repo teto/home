@@ -7,7 +7,12 @@
   ...
 }:
 let
-  hostsConfigs = lib.mapAttrs lib.genSshClientConfig flakeSelf.nixosConfigurations;
+  # only do it for builders like jedha / jakku ? get hostname as key ?
+  # aka do they have harmonia enabled ?
+  hostsConfigs = lib.mapAttrs (
+    _: nixosCfg:
+    lib.optionalAttrs nixosCfg.config.services.harmonia.cache.enable (lib.genSshClientConfig nixosCfg)
+  ) flakeSelf.nixosConfigurations;
 in
 
 {

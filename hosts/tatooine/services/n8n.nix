@@ -1,5 +1,5 @@
 {
-  enable = true;
+  enable = false;
   environment = {
     # tatooine.local
     N8N_HOST = "127.0.0.1";

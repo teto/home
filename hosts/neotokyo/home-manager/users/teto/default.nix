@@ -24,7 +24,8 @@ let
 in
 {
   imports = [
-    flakeSelf.homeModules.teto-nogui
+    flakeSelf.homeProfiles.neovim
+    flakeSelf.homeProfiles.common
     flakeSelf.homeProfiles.bash
     flakeSelf.homeProfiles.teto-aliases
     flakeSelf.homeProfiles.yazi
@@ -57,7 +58,6 @@ in
 
   programs.bash = {
     initExtra = ''
-
       cd nixpkgs
       echo "export token"
     '';

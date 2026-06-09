@@ -46,6 +46,7 @@ pkgs.mkShell {
 
       magic-wormhole-rs # to transfer secrets
       wormhole-rs # "wormhole-rs send"
+      wireguard-tools # for 'wg'
     ]
     ++ [
       # removed because it was using IFD and we use firefox policies instead

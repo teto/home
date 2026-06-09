@@ -1,4 +1,9 @@
-{ secrets, pkgs, ... }:
+{
+  secrets,
+  pkgs,
+  config,
+  ...
+}:
 let
   bbSecrets = secrets.jakku.buildbot;
   repoAllowlist = [
@@ -31,7 +36,8 @@ in
 
     github = {
       appId = bbSecrets.appId; # The numeric App ID
-      appSecretKeyFile = "/run/secrets/buildbot-client-secret"; # Path to the downloaded private key
+      appSecretKeyFile = config.sops.secrets.buildbot-client-secret.path;
+      # "/run/secrets/buildbot-client-secret"; # Path to the downloaded private key
 
       # MUST BE SET FOR github
       oauthId = bbSecrets.oauthClientId;

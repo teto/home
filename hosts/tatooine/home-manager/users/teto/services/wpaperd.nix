@@ -1,4 +1,5 @@
 {
+  enable = false;
   /**
     $ wpaperctl next
     $ wpaperctl previous

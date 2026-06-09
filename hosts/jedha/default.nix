@@ -41,15 +41,12 @@ let
         exclude = [
           # "teto"
           # "users"
-          # "tatooine-signing-key.pub"
           "default.nix"
           "home-manager" # exclude home-manager because intputs are not the same: it must be imported differently
-          # "root"
         ];
       };
 
       inputs = args // {
-        # inputs = flakeSelf.inputs;
       };
       transformer = [
         haumea.lib.transformers.liftDefault
@@ -112,7 +109,7 @@ in
       blacklistedKernelModules = [ "nouveau" ];
       extraModulePackages = [
 
-        # kernelPkgs.r8125
+        kernelPkgs.r8125
       ];
 
       # Ensure initrd has resume support

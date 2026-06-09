@@ -329,3 +329,11 @@ up.auto-track-bookmarks = 'nixos-unstable | master | nixpkgs-unstable | staging 
 command = ["treefmt"]
 # patterns = ["word_list.txt"]
 
+
+[jj-gh]
+ # default_base_branch = "main"
+ # # default remote to use
+default_remote = "up" 
+#  # default remote to use for cross-fork PR fetching
+upstream_remote = "up"
+

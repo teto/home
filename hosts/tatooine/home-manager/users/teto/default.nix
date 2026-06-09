@@ -52,6 +52,7 @@ in
     flakeSelf.homeModules.nextcloud-client
     flakeSelf.homeModules.llama-cpp
 
+    flakeSelf.homeProfiles.remarkable
     flakeSelf.homeProfiles.wezterm
   ];
 

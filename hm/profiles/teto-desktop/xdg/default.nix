@@ -4,8 +4,8 @@
   config,
   dotfilesPath,
   # secretsFolder,
-  # secrets,
-  # withSecrets,
+  secrets,
+  withSecrets,
   flakeSelf,
   ...
 }:
@@ -60,10 +60,14 @@
     ];
 
     # config.hyprland.default = [ "wlr" "gtk" ];
-    config.sway.default = [
-      "wlr"
-      "gtk"
-    ];
+    config = {
+
+      common.default = "*";
+      sway.default = [
+        "wlr"
+        "gtk"
+      ];
+    };
   };
 
   configFile = {
@@ -83,22 +87,19 @@
       in
       {
         enable = true;
-        # TODO add sqlite_clib_path to the wrapper ?
-        # M.edict_kanjidb = "${flakeSelf.inputs.edict-kanji-db}/kanji.db"
-        # M.edict_expressiondb = "${flakeSelf.inputs.edict-expression-db}/expression.db"
-        text =
-          # let
-          #
-          # in
-          ''
-            local M = {}
-            M.gcc_path = "${pkgs.gcc}/bin/gcc"
-            M.lua_interpreter = "${luaInterpreter}"
-            M.luarocks_executable = "${luaInterpreter.pkgs.luarocks_bootstrap}/bin/luarocks"
-            M.sqlite_clib_path = "${pkgs.sqlite.out}/lib/libsqlite3${pkgs.stdenv.hostPlatform.extensions.sharedLibrary}"
-            M.tidal_boot = "${ghcEnv4Tidal}/tidal-1.10.1/BootTidal.hs"
-            return M
-          '';
+        text = ''
+          local M = {}
+          M.gcc_path = "${pkgs.gcc}/bin/gcc"
+          M.lua_interpreter = "${luaInterpreter}"
+          M.luarocks_executable = "${luaInterpreter.pkgs.luarocks_bootstrap}/bin/luarocks"
+          M.sqlite_clib_path = "${pkgs.sqlite.out}/lib/libsqlite3${pkgs.stdenv.hostPlatform.extensions.sharedLibrary}"
+          M.tidal_boot = "${ghcEnv4Tidal}/tidal-1.10.1/BootTidal.hs"
+        ''
+        + lib.optionalString withSecrets ''
+          M.jakku_hostname = "${secrets.jakku.hostname}:${toString flakeSelf.nixosConfigurations.neotokyo.config.services.llama-cpp.port}"
+          M.jakku_llama_api_secret = "${secrets.jakku.llama.api-key}"
+          return M
+        '';
       };
 
     # "nvim/lua/hm-generated.lua".text = config.programs.neovim.initLua;

@@ -119,10 +119,11 @@ in
   # generate a client ssh config from the server config
   # https://fmartingr.com/blog/2022/08/12/using-ssh-config-match-to-connect-to-a-host-using-multiple-ip-or-hostnames/
   genSshClientConfig =
-    name: value:
+    value:
     let
       mcfg = value;
       sshCfg = mcfg.config.services.openssh;
+      name = mcfg.config.networking.hostName;
     in
     builtins.trace "SSH config for ${name}" (
       lib.optionalAttrs sshCfg.enable

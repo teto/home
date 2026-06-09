@@ -1,8 +1,8 @@
 {
 
-  programs.noctalia-shell = {
+  programs.noctalia = {
     enable = true;
-    settings = builtins.fromJSON (builtins.readFile ./noctalia-shell-settings.json);
+    # settings = builtins.fromJSON (builtins.readFile ./noctalia-shell-settings.json);
 
     # Additionally, since ~/.config/noctalia/settings.json is now a read-only symlink, you can get the latest (or GUI-modified) settings via:
     # Open Settings Panel -> General -> Copy Settings or by running

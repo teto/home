@@ -114,12 +114,12 @@ let
         "exec --no-startup-id ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.2;"
         # we disable when noctalias is enabled else we get double notifications
         +
-          lib.optionalString (config.programs.noctalia-shell.enable == false)
+          lib.optionalString (config.programs.noctalia.enable == false)
             "exec ${notify-send} -a Audio --icon=audio-volume-high -u low -t 1000 -h int:value:$(${getIntegerVolume}) -e -h string:synchronous:audio-volume 'Audio volume' 'Audio Raised volume'";
       XF86AudioLowerVolume =
         "exec --no-startup-id ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%-;"
         +
-          lib.optionalString (config.programs.noctalia-shell.enable == false)
+          lib.optionalString (config.programs.noctalia.enable == false)
             "exec ${notify-send} -a Audio --icon=audio-volume-low-symbolic -u low -t 1000 -h int:value:$(${getIntegerVolume}) -e -h string:synchronous:audio-volume 'Audio volume' 'Lower audio volume'";
 
       XF86AudioMute = "exec --no-startup-id ${pkgs.tetos.muteAudio}";

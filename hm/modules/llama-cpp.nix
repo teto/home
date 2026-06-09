@@ -27,14 +27,14 @@ in
 
       package = lib.mkPackageOption pkgs "llama-cpp" { };
 
-      model = lib.mkOption {
-        type = lib.types.path;
-        example = "/models/mistral-instruct-7b/ggml-model-q4_0.gguf";
-        # default = "";
-        # default = "/home/teto/llama-models/mistral-7b-openorca.Q6_K.gguf";
-        description = "Model path.";
-      };
-
+      # model = lib.mkOption {
+      #   type = lib.types.path;
+      #   example = "/models/mistral-instruct-7b/ggml-model-q4_0.gguf";
+      #   # default = "";
+      #   # default = "/home/teto/llama-models/mistral-7b-openorca.Q6_K.gguf";
+      #   description = "Model path.";
+      # };
+      #
       extraFlags = lib.mkOption {
         type = lib.types.listOf lib.types.str;
         description = "Extra flags passed to llama-cpp-server.";
@@ -92,7 +92,7 @@ in
         #
         # but how to import utils ? see nixos/modules/misc/extra-arguments.nix
         # --log-disable
-        ExecStart = "${cfg.package}/bin/llama-server --host ${cfg.host} --port ${builtins.toString cfg.port} -m ${cfg.model} ${utils.escapeSystemdExecArgs cfg.extraFlags}";
+        ExecStart = "${cfg.package}/bin/llama-server --host ${cfg.host} --port ${toString cfg.port} ${utils.escapeSystemdExecArgs cfg.extraFlags}";
         # Restart = "on-failure";
         Restart = "always";
 

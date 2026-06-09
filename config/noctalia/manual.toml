@@ -1,0 +1,167 @@
+[audio]
+enable_overdrive = true
+
+[bar.widgets]
+capsule = true
+center = [ "media", "date", "audio_visualizer" ]
+end = [ "temp", "keyboard_layout", "tray", "clipboard", "network", "bluetooth", "volume", "brightness", "notifications" ]
+margin_ends = 10
+scale = 1.350000012665987
+
+[brightness]
+enable_ddcutil = true
+
+[calendar]
+enabled = true
+refresh_minutes = 30
+
+[control_center]
+sidebar = "full"
+sidebar_section = "full"
+
+[desktop_widgets]
+enabled = false
+schema_version = 2
+widget_order = [
+    "desktop-widget-0000000000000001",
+    "desktop-widget-0000000000000002",
+    "desktop-widget-0000000000000003",
+    "desktop-widget-0000000000000004"
+]
+
+    [desktop_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = false
+
+    [desktop_widgets.widget.desktop-widget-0000000000000001]
+    box_height = 64.0
+    box_width = 208.0
+    cx = 64.0
+    cy = 32.0
+    output = "HDMI-A-1"
+    rotation = 0.0
+    type = "audio_visualizer"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000001.settings]
+        aspect_ratio = 2.5
+        bands = 32
+        show_when_idle = true
+
+    [desktop_widgets.widget.desktop-widget-0000000000000002]
+    box_height = 208.4765625
+    box_width = 383.8828125
+    cx = 2056.37890625
+    cy = 212.61328125
+    output = "HDMI-A-1"
+    rotation = 0.0
+    type = "weather"
+
+    [desktop_widgets.widget.desktop-widget-0000000000000003]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 2455.9609375
+    cy = 68.70703125
+    output = "HDMI-A-1"
+    rotation = 0.0
+    type = "clock"
+
+    [desktop_widgets.widget.desktop-widget-0000000000000004]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 2403.55859375
+    cy = 318.296875
+    output = "HDMI-A-1"
+    rotation = 0.0
+    type = "sysmon"
+
+[location]
+address = "Lyon"
+
+[lockscreen_widgets]
+enabled = false
+schema_version = 2
+widget_order = [ "lockscreen-login-box@HDMI-A-2", "lockscreen-login-box@HDMI-A-1" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
+    box_height = 70.0
+    box_width = 400.0
+    cx = 1280.0
+    cy = 1321.0
+    output = "HDMI-A-1"
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        input_opacity = 1.0
+        input_radius = 6.0
+        show_login_button = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-2"]
+    box_height = 70.0
+    box_width = 400.0
+    cx = 960.0
+    cy = 961.0
+    output = "HDMI-A-2"
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-2".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        input_opacity = 1.0
+        input_radius = 6.0
+        show_login_button = true
+
+[notification]
+position = "top_center"
+
+[plugins]
+enabled = []
+
+[shell]
+settings_show_advanced = true
+
+    [shell.panel]
+    control_center_placement = "floating"
+
+[theme]
+builtin = "Rosé Pine"
+community_palette = "Ayu Green"
+mode = "auto"
+source = "builtin"
+wallpaper_scheme = "faithful"
+
+    [theme.templates]
+    builtin_ids = [ "btop", "gtk4", "ghostty", "helix", "kitty", "sway", "wezterm" ]
+    community_ids = [ "pywalfox", "neovim", "rofi", "vicinae", "yazi" ]
+
+[wallpaper.default]
+path = "/home/teto/Pictures/Wallpapers/wallhaven_8xj29k.jpg"
+
+[wallpaper.last]
+path = "/home/teto/Pictures/Wallpapers/wallhaven_8xj29k.jpg"
+
+[wallpaper.monitors.HDMI-A-1]
+path = "/home/teto/Pictures/Wallpapers/wallhaven_8xj29k.jpg"
+
+[wallpaper.monitors.HDMI-A-2]
+path = "/home/teto/Pictures/Wallpapers/wallhaven_8xj29k.jpg"
+
+[[wallpaper.favorite]]
+palette_source = "wallpaper"
+path = "/home/teto/Pictures/Wallpapers/wallhaven_8xj29k.jpg"
+theme_mode = "auto"
+wallpaper_scheme = "m3-monochrome"
+
+[widget.date]
+format = "{:%H:%m %a %d}"

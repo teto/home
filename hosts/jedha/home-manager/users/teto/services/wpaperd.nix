@@ -1,6 +1,6 @@
 {
   services.wpaperd = {
-    enable = true;
+    enable = false;
 
     settings = {
       HDMI-A-3 = {

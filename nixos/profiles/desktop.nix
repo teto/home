@@ -57,8 +57,10 @@ in
   # attempt to print japanese characters
   services.kmscon = {
     enable = false; # disabled because it's ugly
-    hwRender = true;
-    config.font-name = "Noto Sans Mono CJK JP";
+    config = {
+      font-name = "Noto Sans Mono CJK JP";
+      hwaccel = true;
+    };
   };
 
   console = {
@@ -150,7 +152,7 @@ in
   ];
 
   # networking.firewall.checkReversePath = false; # for nixops
-  networking.firewall.allowedUDPPorts = [ 
+  networking.firewall.allowedUDPPorts = [
     5353 # mdns via resolved or avahi
   ];
   # networking.firewall.allowedTCPPorts = [ 631 ];

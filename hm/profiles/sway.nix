@@ -280,7 +280,7 @@ in
 
       ]
       # https://docs.noctalia.dev/getting-started/nixos/#running-the-shell
-      ++ lib.optional config.programs.noctalia-shell.enable { command = "noctalia-shell"; }
+      ++ lib.optional config.programs.noctalia.enable { command = "noctalia"; }
       ++ lib.optional config.services.cliphist.enable { command = "wl-paste --watch cliphist store"; };
     };
 
@@ -352,6 +352,7 @@ in
     lib.mkBefore "
     # TOTO TODO # use sharedConfig.sharedExtraConfig; instead
      include ~/.config/sway/conf.d/*.conf
+     include ~/.config/sway/noctalia
      ";
 
 }

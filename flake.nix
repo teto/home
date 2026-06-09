@@ -205,6 +205,8 @@
 
     nix-schemas.url = "github:DeterminateSystems/nix-src/flake-schemas";
 
+    jj-gh.url = "github:mrjones2014/jj-gh";
+
     rocks-nvim = {
       # url = "/home/teto/neovim/rocks.nvim";
       url = "github:nvim-neorocks/rocks.nvim";
@@ -528,7 +530,6 @@
             # neomutt
             pass-perso
             mujmap-unstable
-            popcorntime-teto
             sway-scratchpad
             gpt4all
             gpt4all-cuda
@@ -606,27 +607,6 @@
 
         # for stuff not in home-manager yet
         # experimental = ./hm/profiles/experimental.nix;
-
-        teto-nogui = (
-          {
-            # config,
-            # pkgs,
-            # lib,
-            ...
-          }:
-          {
-            imports = [
-              # And add the home-manager module
-              self.homeProfiles.neovim
-              self.homeProfiles.common
-
-              # self.homeProfiles.yazi
-              self.homeModules.neovim
-              self.homeModules.bash
-              self.homeModules.zsh
-            ];
-          }
-        );
       };
 
       nixosProfiles = lib.importFiles ./nixos/profiles;
@@ -681,7 +661,8 @@
       deploy = {
         # This is the user that the profile will be deployed to (will use sudo if not the same as above).
         # If `sshUser` is specified, this will be the default (though it will _not_ default to your own username)
-        user = "root";
+        sshUser = "teto";
+        # user = "root";
 
         # Which sudo command to use. Must accept at least two arguments:
         # the user name to execute commands as and the rest is the command to execute

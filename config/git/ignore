@@ -3,6 +3,7 @@
 *.env
 /.envrc
 .nvimlog
+*.log
 
 # ia-related files
 /.codex
@@ -19,7 +20,7 @@
 .ccls-cache/
 /tags
 /TAGS
-/build/
+# /build/
 *.key
 *.qcow2
 .nixos-test-history  # nixos test-driver repl history
@@ -42,7 +43,7 @@ __pad__
 *.py[cod]
 *.symvers
 *.aux
-*.pyc
+**/*.pyc
 __pycache__/
 *.cpp_parameters
 *.mo

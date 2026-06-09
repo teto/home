@@ -1,33 +1,41 @@
 {
-  config,
-  lib,
-  pkgs,
   secrets,
+  pkgs,
+  # flakeSelf,
   ...
 }:
+let
+  configFormat = pkgs.formats.ini { };
+
+in
 {
-  services.llama-cpp = {
-    enable = false;
 
-    #       "--api-key-file"
+  # imports = [
+  # flakeSelf.nixosProfiles.llama-cpp
+  # ];
 
-    extraFlags = [
-      # Load and run the model:
-      # the service doesnt like to be started with `-hf`
-      "-hf unsloth/functiongemma-270m-it-GGUF:BF16"
-      "--api-key ${secrets.jakku.llama-api-key}"
-      "-c"
-      "4096"
-      "-ngl"
-      "32"
-      "--numa"
-      "numactl"
-    ];
+  enable = true;
+  openFirewall = true;
+  host = "0.0.0.0";
 
-    host = "0.0.0.0";
-    # TODO use a hugging-face url
-    # model = "/models/mistral-instruct-7b/ggml-model-q4_0.gguf";
-    openFirewall = true;
+  settings = {
+    port = 8888; # to avoid conflict with headscale
+    models-preset = configFormat.generate "models-preset.ini" {
+      "Qwen3-Coder-Next" = {
+        hf-repo = "unsloth/Qwen3-Coder-Next-GGUF";
+        hf-file = "Qwen3-Coder-Next-UD-Q4_K_XL.gguf";
+        # we can create an alias
+        alias = "unsloth/Qwen3-Coder-Next";
+        # fit = "on";
+        # seed = "3407";
+        # temp = "1.0";
+        # top-p = "0.95";
+        # min-p = "0.01";
+        # top-k = "40";
+        jinja = "on";
+      };
+    };
+    "api-key" = secrets.jakku.llama.api-key;
 
   };
 }

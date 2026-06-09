@@ -1,5 +1,4 @@
 {
-  pkgs,
   config,
   flakeSelf,
   lib,
@@ -55,6 +54,29 @@ in
     # nixpaste = "curl -F \"text=<-\" http://nixpaste.lbr.uno";
     m = "neomutt"; # or meli ?
     ns = "nix-shell";
+
+    # ls aliases {{{
+    ld = "eza -lD";
+    lf = "eza -lF --color=always | grep -v /";
+    lh = "eza -dl .* --group-directories-first";
+    # }}}
+
+    #mostly for testin
+    # dfh="df --human-readable";
+    # duh="du --human-readable";
+    # --reverse|head";
+    latest = "eza --sort newest -l | tail ";
+    # kitty
+    kcat = "kitty +kitten icat";
+
+  }
+  # or rather should depend on eza ?
+  // lib.optionalAttrs (!config.programs.lsd.enable) {
+
+    lt = "eza -al --sort=modified";
+    # we have to add -g (--group) else it's hidden by default
+    ll = lib.mkForce "eza -al -g --group-directories-first";
+
   };
 
   # source_if_exists

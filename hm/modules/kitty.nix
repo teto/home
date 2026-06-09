@@ -47,6 +47,7 @@ in
       # action_alias kitty_scrollback_nvim kitten /path/to/your/install/kitty-scrollback.nvim/python/kitty_scrollback_nvim.py
       # ~/.local/share/nvim/site/pack/hm/start/kitty-scrollback.nvim
       extraConfig = ''
+        include current-theme.conf
         # kitty-scrollback.nvim Kitten alias
         # we could reference ~/.local/share/nvim/site/pack/hm/start/kitty-scrollback.nvim instead
         action_alias kitty_scrollback_nvim kitten ${pkgs.vimPlugins.kitty-scrollback-nvim}/python/kitty_scrollback_nvim.py

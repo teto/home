@@ -9,9 +9,14 @@ let
   # acmeRoot = "/var/lib/acme/";
 
   # config.services.jellyfin.port doesn't exist
+  # toString config.services.jellyfin.port
   defaultJellyfinPort = 8096;
+
+  wgEndpoint = "10.100.0.1";
 in
 {
+
+  #additionalModuleos defaultJellyfinPort
 
   security.acme = {
     acceptTerms = true;
@@ -49,7 +54,7 @@ in
     };
   };
 
-  users.users.nginx.extraGroups = [ "acme" ];
+  # users.users.nginx.extraGroups = [ "acme" ];
 
   systemd.tmpfiles.rules = [
     "d /var/www 0775 nginx www"
@@ -57,9 +62,32 @@ in
   ];
 
   services.nginx = {
+
+    # tailscaleAuth.enable
+    # A list of nginx virtual hosts to put behind tailscale.nginx-auth
+
+    # services.nginx.tailscaleAuth.virtualHosts = []
+
+    additionalModules = [
+      # pkgs.nginxModules
+    ];
+    # commonHttpConfig
+    # appendConfig = ''
+    #   '';
+
+    # Reload nginx when configuration file changes (instead of restart).
+    # The configuration file is exposed at /etc/nginx/nginx.conf
+    enableReload = true;
+
     # Enable status page reachable from localhost on http://127.0.0.1/nginx_status.
     statusPage = true;
     validateConfigFile = true;
+
+    logError = "stderr";
+    # logError = "syslog:debug";
+    # recommendedOptimisation  = true;
+    # recommendedProxySettings = true;
+    # recommendedTlsSettings = true;
 
     virtualHosts = {
       "blog.${secrets.jakku.hostname}" = {
@@ -67,7 +95,8 @@ in
         # I had to manually "chmod a+x /var/lib/gitolite"
         root = "/var/www/blog-generated";
 
-        # default = true; # wtf does this do ?
+        # Makes this vhost the default.
+        default = true;
         forceSSL = true;
         # https://nixos.org/manual/nixos/stable/index.html#module-security-acme
         # enableACME = true; # exclusive with useACMEHost
@@ -109,7 +138,7 @@ in
           recommendedProxySettings = true;
           proxyWebsockets = true;
 
-          proxyPass = "http://127.0.0.1:${builtins.toString defaultJellyfinPort}";
+          proxyPass = "http://127.0.0.1:${toString defaultJellyfinPort}";
         };
 
         # root = pkgs.runCommand "testdir" { } ''
@@ -129,6 +158,11 @@ in
       "cache.${secrets.jakku.hostname}" = {
         enableACME = true;
         forceSSL = true;
+
+        listenAddresses = [
+          wgEndpoint
+        ];
+
         # TODO replace with harmonia's port
         locations."/".extraConfig = ''
           proxy_pass http://127.0.0.1:5000;
@@ -146,7 +180,7 @@ in
         locations."/" = {
           recommendedProxySettings = true;
           proxyWebsockets = true;
-          proxyPass = "http://127.0.0.1:${builtins.toString config.services.n8n.environment.N8N_PORT}";
+          proxyPass = "http://127.0.0.1:${toString config.services.n8n.environment.N8N_PORT}";
         };
       };
     };

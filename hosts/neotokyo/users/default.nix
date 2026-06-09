@@ -1,0 +1,4 @@
+{
+
+  users.nginx.extraGroups = [ "acme" ];
+}

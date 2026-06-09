@@ -124,4 +124,22 @@ end, { desc = 'avante: toggle my prompt' })
 
 vim.keymap.set('n', '<Leader>lm', '<Plug>AvanteModels', { desc = 'List models' })
 
+---@param prompt string
+function M.ask(prompt)
+    -- get file from register
+    local filename = vim.api.nvim_buf_get_name(0)
+    -- print(filename)
+
+    local results, err = rag_service.retrieve(
+        filename,
+        -- "file:///path/to/your/project/",
+        prompt
+        -- "How does function X work?"
+    )
+    if results then
+        print('Answer: ' .. results.response)
+        -- results.sources contains the source files used for the answer
+    end
+end
+
 return M

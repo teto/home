@@ -22,6 +22,8 @@
       email = lib.mkForce "886074+teto@users.noreply.github.com";
     };
 
+    # https://git-scm.com/book/en/v2/Git-Tools-Credential-StoragE
+    credential.helper = "store";
   };
 
   signing = {

@@ -36,6 +36,15 @@ lib.optionalAttrs withSecrets {
             name = "collections";
             params = [ "all" ];
           }
+          {
+
+            name = "conflict_resolution";
+            params = [
+              "cmd"
+              "nvim"
+              "-d"
+            ];
+          }
           #  conflict_resolution keep a
         ];
 

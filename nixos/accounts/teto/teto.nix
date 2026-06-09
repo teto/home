@@ -11,25 +11,16 @@
     # name = "Matt"; # This fucks up everything
 
     # use fish at some point ?
-    shell = pkgs.zsh;
+    # shell = pkgs.zsh;
 
     isNormalUser = true; # creates home/ sets default shell
     uid = 1000;
     extraGroups = [
-      "audio" # for pulseaudio/pipewire
-      "dialout" # to access serial devices like the conbee II
       "docker" # to access docker socket
       "input" # for libinput-gestures
-      "i2c" # to control brightness of the screen
       "keys"
-      "kvm" # needed when using runAsRoot when building dockerImage
-      "networkmanager" # not necessary for nixpos
-      "pipewire" # for pipewire
-      "plugdev" # for udiskie
       "podman"
       # "postgres" # useful for testing but maybe not the default ?
-      "rtkit" # for pipewire
-      "seat" # necessary for lemurs
       "wheel" # for sudo
       "www" # for zola
       # config.users.groups.keys.name
@@ -45,7 +36,6 @@
       # cant read if not in repo so
       # "${secretsFolder}/ssh/id_rsa.pub"
     ];
-
   };
 
   nix.settings.trusted-users = [ "teto" ];

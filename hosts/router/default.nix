@@ -45,7 +45,9 @@ in
     # ./iwd.nix # unused it seems
     ./hardware.nix
     ./services/openssh.nix
-    flakeSelf.nixosProfiles.avahi
+
+    # TODO replace with systemd mdns
+    # flakeSelf.nixosProfiles.avahi
     flakeSelf.nixosProfiles.router
     flakeSelf.nixosProfiles.universal
     flakeSelf.nixosProfiles.home-assistant
@@ -67,7 +69,7 @@ in
     # imports = [
     #   flakeSelf.homeProfiles.neovim-minimal
     # ];
-    home.stateVersion = "26.04";
+    home.stateVersion = "26.05";
 
   };
 
@@ -76,7 +78,8 @@ in
   home-manager.users.teto = {
     # TODO it should load the whole folder
     imports = [
-      flakeSelf.homeModules.teto-nogui
+      # flakeSelf.homeModules.teto-nogui
+      flakeSelf.homeModules.neovim
       # ./teto/nix.nix # done at
     ];
 

@@ -9,13 +9,13 @@
 }:
 let
   # TODO filter out the configurations ending with -no-secret ?
-  hostsConfigs = lib.mapAttrs lib.genSshClientConfig flakeSelf.nixosConfigurations;
+  hostsConfigs = lib.mapAttrs (_: val: lib.genSshClientConfig val) flakeSelf.nixosConfigurations;
 in
 {
 
   # HashKnownHosts no
+  # Match localnetwork
 
-  # mkForce needed to override doctor's config
   enable = true;
 
   # When enabled, a private key that is used during authentication will be added to ssh-agent if it is running (with confirmation enabled if set to ‘confirm’). The argument must be ‘no’ (the default), ‘yes’, ‘confirm’ (optionally followed by a time
@@ -32,6 +32,14 @@ in
     hostsConfigs
     # TODO we could customize them, with sendEnv for instance ?
     // (lib.optionalAttrs withSecrets {
+
+      # we need to override this here so we can push to gitolite repos as simple users
+      # use "gitolite-teto" as the user in the git remote
+      gitolite-as-user = (lib.genSshClientConfig flakeSelf.nixosConfigurations.neotokyo) // {
+        header = "Match user gitolite host ${secrets.jakku.hostname}";
+        user = "gitolite";
+        identityFile = "${secretsFolder}/ssh/id_rsa";
+      };
 
       # userKnownHostsFile
       github = {

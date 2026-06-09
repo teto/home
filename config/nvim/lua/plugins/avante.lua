@@ -40,24 +40,27 @@ end
 
 -- providers in the gp.nvim sense, not to confuse with agents
 
+-- llama_host of the
 local function mk_llama_provider(llama_host, name, custom)
     local opts = vim.tbl_extend('force', {
         -- either that or parse_curl_args
         __inherited_from = 'openai',
         model = name,
         hide_in_model_selector = false,
-        endpoint = 'http://' .. llama_host .. ':8080/v1',
+        endpoint = 'http://' .. llama_host .. '/v1',
         -- Timeout in milliseconds. Make it long as server is "slow"
         timeout = 180000,
         -- empty key is required else avante complains
-        api_key_name = '',
+        -- api_key_name = 'LLAMA_API_KEY',
+        api_key_name = 'cmd:echo "toto"',
+        _shellenv = 'toto',
+
         -- extra_request_body = {
         --     max_tokens = 4000, -- to avoid infinite loops
         -- },
 
         -- tools send a shitton of tokens
         -- not supported by mistral (but inherited by others so...)
-        disable_tools = true,
         -- trying to tweak prompt so we can send fewer tokens !
         prompt_opts = {
             system_prompt = 'you are zulu',
@@ -272,6 +275,7 @@ opts = {
     },
 }
 
+-- todo hide all of them by default ?
 local hidden_models = {
     'aihubmix',
     -- 'copilot',
@@ -298,10 +302,30 @@ end
 --     'llama_qwen2_5_3b',
 -- }
 
--- for _, model in ipairs(jedha_models) do
+local valid_file, nix_deps = pcall(require, 'generated-by-nix')
+
+local jedha_default_model = 'ministral3-8b'
+jedha_default_model = 'qwen3.6-dense'
+
 -- so it inherited the model
-local res = mk_llama_provider('jedha.local', 'ministral3-8b', {})
+local res = mk_llama_provider('jedha.local:8080', jedha_default_model, {
+
+    -- check default prompt w/o
+    disable_tools = true,
+})
 opts.providers['jedha'] = vim.tbl_extend('force', res, {})
+
+-- we can switch jakku_hostname
+if valid_file and nix_deps.jakku_hostname or false then
+    opts.providers['neokyoto'] = mk_llama_provider(nix_deps.jakku_hostname, jedha_default_model, {
+        -- check default prompt w/o
+        -- add tools
+        disable_tools = true,
+        api_key_name = 'cmd:echo "' .. nix_deps.jakku_llama_api_secret .. '"',
+    })
+else
+    -- notify of a failed nix_deps
+end
 
 -- for _, model in ipairs(local_models) do
 -- opts.providers['gemma-4'] =

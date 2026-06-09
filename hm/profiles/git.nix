@@ -44,9 +44,6 @@
         defaultRemote = "up";
       };
 
-      # https://git-scm.com/book/en/v2/Git-Tools-Credential-StoragE
-      credential.helper = "store";
-
       # show the full diff under the commit message
       commit = {
         status = true;
