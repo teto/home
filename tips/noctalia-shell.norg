@@ -1,4 +1,6 @@
 
+Dans la v5 les settings de GUI sont dans ~/.local/state/noctalia/settings.toml
+
 * "No running instances for "
 
 happens because 

@@ -1,3 +1,10 @@
 utiliser `[` pour stopper le scrolling/entrer en copy mode
 
 Ctrl+b et PageUp / PageDown pour defiler
+
+
+* multipane layout
+
+Ctrl + b + % to split the current pane vertically.
+Ctrl + b + " to split the current pane horizontally.
+Ctrl + b + x to close the current pane.

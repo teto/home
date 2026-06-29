@@ -9,6 +9,7 @@
 /config/astroid/poll.sh
 /config/autostart
 /config/clerk
+/config/voxtype
 /config/git/config
 /config/git/allowed-signers
 /config/gtk-3.0/*

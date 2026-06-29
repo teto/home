@@ -1,0 +1,7 @@
+* comment il process ses requets 
+
+V
+In this configuration nginx tests only the request’s header field “Host” to determine which server the request should be routed to.
+
+default_server parameter in the listen directive: 
+https://nginx.org/en/docs/http/request_processing.html

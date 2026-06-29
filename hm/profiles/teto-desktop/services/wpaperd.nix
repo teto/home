@@ -1,3 +1,3 @@
 {
-  enable = true;
+  enable = false; # taken over by noctalia
 }

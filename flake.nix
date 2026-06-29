@@ -127,10 +127,10 @@
 
     };
 
-    lux = {
-      url = "github:nvim-neorocks/lux";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # lux = {
+    #   url = "github:nvim-neorocks/lux";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     # mcp-hub = {
     #   url = "github:ravitemer/mcp-hub";
