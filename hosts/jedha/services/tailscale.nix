@@ -12,7 +12,6 @@
 
   # serve.enable = true;
 
-
   # disableTailDrop = true;
   # disableUpstreamLogging
 }

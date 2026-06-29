@@ -27,9 +27,8 @@ require('vim._core.ui2').enable({
 
 vim.g.health = { style = 'float' }
 
-
 -- or use secrets.jakku_hostname
-local llama_host = "localhost"
+local llama_host = 'localhost'
 
 -- vim.g.visual_whitespace = {
 --   enabled = true,
@@ -950,24 +949,24 @@ vim.g.avante = {
     --   global_dir = nil, ---@type string | nil (absolute dirpath)
     -- },
     rag_service = { -- RAG service configuration
-		-- Enables the RAG service
-        enabled = true,  -- make it 
-		-- Host mount path for the RAG service (Docker will mount this path)
-        host_mount = os.getenv('HOME'), 
-		-- The runner for the RAG service (can use docker or nix)
-        runner = 'nix', 
-		-- TODO should inherit the one from provider ?
-        llm = { 
-			-- Configuration for the Language Model (LLM) used by the RAG service
-			-- shouldn't it be the same ?
+        -- Enables the RAG service
+        enabled = false, -- make it
+        -- Host mount path for the RAG service (Docker will mount this path)
+        host_mount = os.getenv('HOME'),
+        -- The runner for the RAG service (can use docker or nix)
+        runner = 'nix',
+        -- TODO should inherit the one from provider ?
+        llm = {
+            -- Configuration for the Language Model (LLM) used by the RAG service
+            -- shouldn't it be the same ?
             provider = 'jedha',
             -- endpoint = "https://api.openai.com/v1", -- The LLM API endpoint
             api_key = '', -- The environment variable name for the LLM API key
-			-- -- The LLM model name
-            -- model = "gpt-4o-mini", 
+            -- -- The LLM model name
+            -- model = "gpt-4o-mini",
             -- extra = nil, -- Extra configuration options for the LLM
         },
-		-- do we need a special model for that ?
+        -- do we need a special model for that ?
         embed = { -- Configuration for the Embedding model used by the RAG service
             provider = 'jedha', -- The embedding provider
             -- endpoint = "https://api.openai.com/v1", -- The embedding API endpoint
