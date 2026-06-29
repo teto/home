@@ -161,15 +161,13 @@
     # poetry.url = "github:nix-community/poetry2nix";
     neovim-nightly-overlay = {
       # url = "path:/home/teto/neovim-nightly-overlay";
-      url = "github:nix-community/neovim-nightly-overlay";
+      url = "github:nix-community/neovim-nightly-overlay?rev=ff21a18bde28b4c8ca0bc1f9a5b7186a1b89a3d1";
       inputs.nixpkgs.follows = "nixpkgs";
       # inputs.neovim-src.follows = "neovim-src";
     };
 
     neovim-src = {
       url = "github:neovim/neovim";
-      # url = "github:lewis6991/neovim?ref=feat/optfunc";
-      # url = "github:echasnovski/neovim?ref=teto/pack-lockfile-sync";
       flake = false;
     };
 
@@ -498,8 +496,6 @@
             inherit secrets self;
           };
           inherit (unstablePkgs)
-            nhs96
-            nhs98
             nhs910
             nhs912
             ;
@@ -542,16 +538,12 @@
           neovim-unwrapped =
             # "neovim-debug" / "neovim-developer"
             self.inputs.neovim-nightly-overlay.packages."${system}".neovim.override {
-              # neovim-unwrapped = tetosPkgs.neovim-unwrapped.override ({
-
               # we want to take the luajit with our overlay of lua packages
               luajit = tetosPkgs.luajit;
-              # });
             };
 
           inherit (unstablePkgs)
-            # nhs96
-            nhs98
+            nhs912
             ;
 
         };

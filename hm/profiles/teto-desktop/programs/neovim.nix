@@ -278,16 +278,10 @@ in
   # neovim-debug is too slow we should try to build it and rename executable to nvim-debug
   # so it can still help debugging
   package = flakeSelf.packages.${pkgs.stdenv.hostPlatform.system}.neovim.override {
+    # package = pkgs.neovim-unwrapped.override {
 
     # we want to take the luajit with our overlay of lua packages
     luajit = pkgs.luajit-tetos;
-    # luajit = prev.luajit.override {
-    # # give access to lua overlay by flakeSelf ?
-    #   packageOverrides = import ./lua-overrides.nix {
-    #     pkgs = final;
-    #     lib = final.lib;
-    #   };
-    # };
   };
 
   lsp.mapOnAttach = true;
