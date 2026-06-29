@@ -1,21 +1,30 @@
+{ pkgs, ... }:
 {
 
   enable = true;
   aggressiveResize = false;
 
+  shortcut = "a";
+  disableConfirmationPrompt = true;
+  sensibleOnTop = true;
   baseIndex = 1;
+
+  keyMode = "vi";
+  customPaneNavigationAndResize = true;
 
   clock24 = true;
   # Override the hjkl and HJKL bindings for pane navigation and resizing in VI mode.
   # customPaneNavigationAndResize = true;
   # disableConfirmationPrompt
   historyLimit = 10000;
-  focusEvents = false;
+  focusEvents = true;
 
   mouse = true;
 
   # prefix = "C-q";
-  # plugins =;
+  plugins = [
+    pkgs.tmuxPlugins.cpu
+  ];
 
   # mouse on
   extraConfig = ''

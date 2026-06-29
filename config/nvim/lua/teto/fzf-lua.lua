@@ -3,14 +3,6 @@ local _, fzf_lua = pcall(require, 'fzf-lua')
 
 local M = {}
 
--- local fzf_jj = require('teto.fzf-lua.providers.jj')
-
--- native now
--- FzfLua.register_extension('jj_files', fzf_jj.jj_files, vim.tbl_deep_extend('keep', {}, {}))
-
--- FzfLua is a global from fzf_lua
--- FzfLua.register_extension("jj_files", M.frecency, vim.tbl_deep_extend("keep", opts, {
-
 -- local git_files_opts = {
 --
 --     entry_maker = function(entry)
@@ -48,7 +40,17 @@ function M.register_keymaps()
     -- autocomplete :FzfLua to see what's available
     vim.keymap.set('n', '<Leader>g', function()
         -- global picker accepts various prefixes such as $ for buffers , @ for lsp
-        fzf_lua.global()
+        -- fzf_lua.global()
+        fzf_lua.combine({
+            -- can be a table as well
+            -- order matters
+            -- files can appear several times
+            -- uses options from the first picker
+            pickers = {
+                'frecency',
+                'files',
+            },
+        })
     end)
     -- local file_dir = vim.fn.expand('%:p:h')
 
@@ -82,7 +84,6 @@ function M.register_keymaps()
         -- TODO combine or use global
         -- (currently the first picker options apply to all).
         fzf_lua.combine({
-
             -- can be a table as well
             -- order matters
             -- files can appear several times
