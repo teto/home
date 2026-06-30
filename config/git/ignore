@@ -42,6 +42,7 @@ __pad__
 *.so
 *.py[cod]
 *.symvers
+*.cache
 *.aux
 **/*.pyc
 __pycache__/

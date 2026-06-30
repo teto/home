@@ -8,22 +8,21 @@
 --https://github.com/EmmyLuaLs/emmylua-analyzer-rust/blob/main/docs/config/emmyrc_json_EN.md#-complete-configuration-example
 --
 -- https://www.reddit.com/r/neovim/comments/1kcz8un/great_improvements_to_the_cmdline_in_nightly/
--- require('vim._extui').enable({})
--- require('vim._core.ui2').enable({
---     enable = true, -- Whether to enable or disable the UI.
---     msg = {
---         -- Options related to the message module.
---         ---@type 'cmd'|'msg' Default message target, either in the
---         ---cmdline or in a separate ephemeral message window.
---         ---@type string|table<string, 'cmd'|'msg'|'pager'> Default message target
---         -- or table mapping |ui-messages| kinds to a target.
---         targets = 'cmd',
---         timeout = 4000, -- Time a message is visible in the message window.
---     },
---     pager = { -- Options related to message window.
---         height = 0, -- Maximum height.
---     },
--- })
+require('vim._core.ui2').enable({
+    enable = true, -- Whether to enable or disable the UI.
+    msg = {
+        -- Options related to the message module.
+        ---@type 'cmd'|'msg' Default message target, either in the
+        ---cmdline or in a separate ephemeral message window.
+        ---@type string|table<string, 'cmd'|'msg'|'pager'> Default message target
+        -- or table mapping |ui-messages| kinds to a target.
+        targets = 'cmd',
+        timeout = 4000, -- Time a message is visible in the message window.
+    },
+    pager = { -- Options related to message window.
+        height = 0, -- Maximum height.
+    },
+})
 
 vim.g.health = { style = 'float' }
 
@@ -959,8 +958,9 @@ vim.g.avante = {
         llm = {
             -- Configuration for the Language Model (LLM) used by the RAG service
             -- shouldn't it be the same ?
-            provider = 'jedha',
+            provider = 'openai_like',
             -- endpoint = "https://api.openai.com/v1", -- The LLM API endpoint
+            endpoint = 'http://localhost:8080/v1', -- The LLM API endpoint
             api_key = '', -- The environment variable name for the LLM API key
             -- -- The LLM model name
             -- model = "gpt-4o-mini",
@@ -968,8 +968,9 @@ vim.g.avante = {
         },
         -- do we need a special model for that ?
         embed = { -- Configuration for the Embedding model used by the RAG service
-            provider = 'jedha', -- The embedding provider
+            provider = 'openai_like', -- The embedding provider
             -- endpoint = "https://api.openai.com/v1", -- The embedding API endpoint
+            endpoint = 'http://localhost:8080/v1', -- The embedding API endpoint
             api_key = '', -- The environment variable name for the embedding API key
             -- model = "text-embedding-3-large", -- The embedding model name
             extra = nil, -- Extra configuration options for the embedding model

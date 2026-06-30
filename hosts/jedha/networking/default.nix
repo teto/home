@@ -15,8 +15,8 @@
     ];
     wifi = {
       backend = "iwd";
-      # just testing if that's it
-      powersave = true;
+      # accept null/false/true
+      # powersave = false;
     };
   };
 
