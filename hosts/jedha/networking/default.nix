@@ -16,6 +16,7 @@
     wifi = {
       backend = "iwd";
       # accept null/false/true
+      # with `powersave` enabled, the link gets into DORMANT mode and then it becomes impossible to wake it up
       # powersave = false;
     };
   };

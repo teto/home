@@ -20,16 +20,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # TODO remove
-    # edict-kanji-db = {
-    #   url = "https://github.com/odrevet/edict_database/releases/download/v0.0.5/kanji.zip";
-    #   flake = false;
-    # };
-    # edict-expression-db = {
-    #   url = "https://github.com/odrevet/edict_database/releases/download/v0.0.5/expression.zip";
-    #   flake = false;
-    # };
-
     # emmylua = {
     #   url = "github:EmmyLuaLs/emmylua-analyzer-rust";
     #   inputs.nixpkgs.follows = "nixpkgs";
@@ -137,6 +127,12 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
+    llama-cpp = {
+      # url = "github:ggml-org/llama.cpp";
+      url = "github:teto/llama.cpp?ref=teto/fish-completion";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # peerix.url = "github:cid-chan/peerix";
     # mptcp-flake.url = "github:teto/mptcp-flake/fix-flake";
     mujmap = {
@@ -162,7 +158,9 @@
     neovim-nightly-overlay = {
       # url = "path:/home/teto/neovim-nightly-overlay";
       # ff21a18bde28b4c8ca0bc1f9a5b7186a1b89a3d1 ok
-      url = "github:nix-community/neovim-nightly-overlay?rev=2b5cf92633caaf2604e7b78d8d16ad92dbb502c6";
+      url = "github:nix-community/neovim-nightly-overlay?rev=ff21a18bde28b4c8ca0bc1f9a5b7186a1b89a3d1";
+      # not good
+      # url = "github:nix-community/neovim-nightly-overlay?rev=2b5cf92633caaf2604e7b78d8d16ad92dbb502c6";
       inputs.nixpkgs.follows = "nixpkgs";
       # inputs.neovim-src.follows = "neovim-src";
     };
