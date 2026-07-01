@@ -32,6 +32,8 @@
       # PasswordAuthentication = false;
       X11Forwarding = false;
       PermitRootLogin = lib.mkForce "no";
+
+      # could not find it
       HostKey = "/run/secrets/ssh_host_key";
 
       AllowUsers = [

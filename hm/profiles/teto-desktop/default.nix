@@ -28,6 +28,7 @@ in
 
     flakeSelf.inputs.nix-index-database.homeModules.nix-index
 
+    flakeSelf.inputs.jj-gh.homeManagerModules.default
     flakeSelf.homeModules.avante
     flakeSelf.homeModules.fzf
     flakeSelf.homeModules.yazi

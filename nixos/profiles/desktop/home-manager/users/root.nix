@@ -1,9 +1,9 @@
 {
   flakeSelf,
   lib,
-  pkgs,
+  # pkgs,
   withSecrets,
-  secrets,
+  # secrets,
   ...
 }:
 let

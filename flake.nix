@@ -324,6 +324,7 @@
       flake-utils,
       treefmt-nix,
       deploy-rs,
+      haumea,
       ...
     }:
     let
@@ -591,14 +592,18 @@
         # TODO importdir should check for default.nix
         neovim = ./hm/profiles/neovim;
 
-        teto-desktop = ./hm/profiles/teto-desktop.nix;
+        # teto-desktop = ./hm/profiles/teto-desktop.nix;
       };
 
-      homeModules = lib.importFiles ./hm/modules // {
-
-        # for stuff not in home-manager yet
-        # experimental = ./hm/profiles/experimental.nix;
-      };
+      homeModules =
+        let
+          # autoloaded = haumea.lib.load {
+          #   src = ./hm/modules;
+          #   transformer = haumea.transformers.liftDefault;
+          # };
+        in
+        # autoloaded
+        lib.importFiles ./hm/modules // { };
 
       nixosProfiles = lib.importFiles ./nixos/profiles;
 
@@ -609,10 +614,6 @@
 
       # autoload via lib.importDirectories
       templates = {
-        # default = {
-        #   path = ./nixpkgs/templates/default;
-        #   description = "Unopiniated ";
-        # };
 
         haskell = {
           path = ./templates/haskell;

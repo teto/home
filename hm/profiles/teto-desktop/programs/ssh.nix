@@ -9,7 +9,9 @@
 }:
 let
   # TODO filter out the configurations ending with -no-secret ?
-  hostsConfigs = lib.mapAttrs (_: val: lib.genSshClientConfig val) flakeSelf.nixosConfigurations;
+  hostsConfigs = lib.mapAttrs (_: val: lib.genSshClientConfig val) (
+    lib.filterAttrs (name: _val: name != "neotokyo-no-secrets") flakeSelf.nixosConfigurations
+  );
 in
 {
 
@@ -35,10 +37,11 @@ in
 
       # we need to override this here so we can push to gitolite repos as simple users
       # use "gitolite-teto" as the user in the git remote
-      gitolite-as-user = (lib.genSshClientConfig flakeSelf.nixosConfigurations.neotokyo) // {
+      gitolite-as-teto = (lib.genSshClientConfig flakeSelf.nixosConfigurations.neotokyo) // {
         header = "Match user gitolite host ${secrets.jakku.hostname}";
         user = "gitolite";
         identityFile = "${secretsFolder}/ssh/id_rsa";
+        # port = secrets.jakku.sshPort;
       };
 
       # userKnownHostsFile
@@ -60,14 +63,13 @@ in
       };
 
       # this should be generated already ?
-      jedha = {
+      jakku-teto = lib.genSshClientConfig flakeSelf.nixosConfigurations.neotokyo // {
         header = "Match user teto host ${secrets.jakku.hostname}";
         # match = "user teto host ${secrets.jakku.hostname}";
         hostname = secrets.jakku.hostname;
         user = "teto";
         addKeysToAgent = "yes";
         # le port depend du service
-        # port = secrets.jakku.sshPort;
         identityFile = "${secretsFolder}/ssh/id_rsa";
         identitiesOnly = true;
         # identityAgent =
@@ -85,11 +87,13 @@ in
       #   RemoteCommand tmux new-session -A -s RemoteSSH
       #   RequestTTY yes
       "Match Tagged nix-builder" = {
+        header = "Match Tagged nix-builder";
         RemoteCommand = "teto";
         sendEnv = [ "GITHUB_TOKEN" ];
       };
 
-      "Match user teto host nix-community" = {
+      "nix-community-teto" = {
+        header = "Match user teto host nix-community";
 
         # https://nix-community.org/community-builders/
         # ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIElIQ54qAy7Dh63rBudYKdbzJHrrbrrMXLYl7Pkmk88H
@@ -107,16 +111,16 @@ in
       };
 
       # as a user we should be able to override the key
-      "Match user gitolite host ${secrets.jakku.hostname}" = {
-        # match =;
-        hostname = secrets.jakku.hostname;
-        # user = "gitolite";
-        # le port depend du service
-        port = secrets.jakku.sshPort;
-        identityFile = "${secretsFolder}/ssh/neotokyo-gitolite";
-        identitiesOnly = true;
-        # port = 12666;
-      };
+      # neotokyo = {
+      #   header = "Match user gitolite host ${secrets.jakku.hostname}";
+      #   # match =;
+      #   hostname = secrets.jakku.hostname;
+      #   # user = "gitolite";
+      #   # le port depend du service
+      #   port = secrets.jakku.sshPort;
+      #   identityFile = "${secretsFolder}/ssh/neotokyo-gitolite";
+      #   identitiesOnly = true;
+      # };
 
     });
 

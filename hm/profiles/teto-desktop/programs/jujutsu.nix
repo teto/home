@@ -11,6 +11,10 @@
   # package = flakeSelf.inputs.jujutsu.packages.${pkgs.stdenv.hostPlatform.system}.jujutsu;
 
   enable = true;
+
+  # only available when jj-gh module imported
+  gh.enable = true;
+
   settings = {
     aliases = {
       n = [ "new" ];
