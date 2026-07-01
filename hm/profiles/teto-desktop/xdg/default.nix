@@ -32,11 +32,16 @@
       type = "Application";
       exec = "${dotfilesPath}/firefox-router";
       icon = "firefox";
-      comment = "Firefox (nova)";
+      comment = "Firefox proxy that opens firefox with appropriate profile";
       terminal = false;
       name = "Firefox router";
       genericName = "Web Browser";
+      # TODO modify official .desktop ?
       mimeType = [
+        "application/xhtml+xml"
+        "application/vnd.mozilla.xul+xml"
+        "x-scheme-handler/http"
+        "x-scheme-handler/https"
         "text/html"
         "text/xml"
       ];
@@ -44,8 +49,7 @@
         "Network"
         "WebBrowser"
       ];
-      startupNotify = false;
-
+      startupNotify = true;
     };
   };
 
@@ -96,7 +100,7 @@
           M.tidal_boot = "${ghcEnv4Tidal}/tidal-1.10.1/BootTidal.hs"
         ''
         + lib.optionalString withSecrets ''
-          M.jakku_hostname = "${secrets.jakku.hostname}:${toString flakeSelf.nixosConfigurations.neotokyo.config.services.llama-cpp.port}"
+          M.jakku_hostname = "${secrets.jakku.hostname}:${toString flakeSelf.nixosConfigurations.neotokyo.config.services.llama-cpp.settings.port}"
           M.jakku_llama_api_secret = "${secrets.jakku.llama.api-key}"
           return M
         '';

@@ -29,75 +29,47 @@
     NOTMUCH_CONFIG = "${config.xdg.configHome}/notmuch/default/config"; # for vdirsyncer
   };
 
-  # user.packages = [
-  #   pkgs.waybar
-  # ];
-
-  # TODO conditionnally define it
-  # lib.mkIf config.mujmap-fastmail.enable
-  # TODO try an equivalent with mail
   user.services = {
-    # copied from nixos nixos/doc/manual/administration/service-mgmt.chapter.md, hoping it works the same
-    # needs DBUS_SESSION_BUS_ADDRESS
-    "desktop-notification@" = {
-      Service = {
-        ExecStart =
-          let
-            myScript = pkgs.writeScript "notify-and-wait" ''
-              #!${pkgs.stdenv.shell}
+      # "base-unit@".serviceConfig = {
+      #   ExecStart = "...";
+      #   User = "...";
+      # };
+      # "base-unit@instance-a" = {
+      #   overrideStrategy = "asDropin"; # needed for templates to work
+      #   wantedBy = [ "multi-user.target" ]; # causes NixOS to manage the instance
+      # };
 
-              notify_and_wait() {
-                ADDRESS=$1
-                USERID=''${ADDRESS#/run/user/}
-                # gnome-shell doesn't respect the timeout from notify-send,
-                # hence the additional timeout command to make sure we exit
-                # before the end of time
-                if [ "$result" = "interrupt" ]; then
-                  /run/wrappers/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" \
-                    ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning "Interrupted" "Process failed"
-                  exit 1
-                fi
-              }
-              for ADDRESS in /run/user/*; do
-                notify_and_wait "$ADDRESS" &
-              done
-            '';
-            # %n => full unit name
-          in
-          "${myScript} %n";
-      };
-    };
+      # copied from nixos nixos/doc/manual/administration/service-mgmt.chapter.md, hoping it works the same
+      # needs DBUS_SESSION_BUS_ADDRESS
+      "desktop-notification@" = {
+        Service = {
+          ExecStart =
+            let
+              myScript = pkgs.writeScript "notify-and-wait" ''
+                #!${pkgs.stdenv.shell}
 
-    # "base-unit@".serviceConfig = {
-    #   ExecStart = "...";
-    #   User = "...";
-    # };
-    # "base-unit@instance-a" = {
-    #   overrideStrategy = "asDropin"; # needed for templates to work
-    #   wantedBy = [ "multi-user.target" ]; # causes NixOS to manage the instance
-    # };
-
-    monitor-git-branch = {
-      Unit = {
-        Description = "Monitor nixos-unstable channel advancement";
+                notify_and_wait() {
+                  ADDRESS=$1
+                  USERID=''${ADDRESS#/run/user/}
+                  # gnome-shell doesn't respect the timeout from notify-send,
+                  # hence the additional timeout command to make sure we exit
+                  # before the end of time
+                  if [ "$result" = "interrupt" ]; then
+                    /run/wrappers/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" \
+                      ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning "Interrupted" "Process failed"
+                    exit 1
+                  fi
+                }
+                for ADDRESS in /run/user/*; do
+                  notify_and_wait "$ADDRESS" &
+                done
+              '';
+              # %n => full unit name
+            in
+            "${myScript} %n";
+        };
       };
 
-      Service = {
-        Type = "oneshot";
-        Environment = [
-          "PATH=${
-            lib.makeBinPath [
-              pkgs.coreutils
-              pkgs.curl
-              pkgs.gawk
-              pkgs.libnotify
-              pkgs.git
-            ]
-          }"
-        ];
-        ExecStart = "${dotfilesPath}/bin/monitor-git-branch.fish";
-      };
-    };
 
     # TODO enable conditionnally on account/services
     mujmap-fastmail = {

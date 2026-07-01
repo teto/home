@@ -4,4 +4,6 @@
   enable = false;
   # lacks a model anyway
   openFirewall = true;
+
+  # settings = {}
 }

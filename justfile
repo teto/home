@@ -25,7 +25,7 @@ default:
 noctalia-update-config:
     noctalia-update-settings "justfile_directory()"
     # TODO reset nc if needed
-    noctalia-shell ipc call state all | jq .settings > hosts/{{ HOSTNAME }}/home-manager/users/teto/programs/noctalia-shell-settings.json
+    noctalia config export > hosts/{{ HOSTNAME }}/home-manager/users/teto/programs/noctalia-shell-settings.json
 
 # deploy a brand new nixos install
 bootstrap-desktop target="root@bootstrap.local":

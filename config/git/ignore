@@ -44,7 +44,7 @@ __pad__
 *.symvers
 *.cache
 *.aux
-**/*.pyc
+*.pyc
 __pycache__/
 *.cpp_parameters
 *.mo

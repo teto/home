@@ -11,8 +11,8 @@
 declare -A domains
 
 # array prefix -> profile
-domains['git.novadiscovery.net']="nova"
-domains['accounts.google.com']="nova"  # for vault login
+domains['fortuneo.fr']="bank"
+domains['sg.fr']="bank"
 
 
 # argv=("$@")

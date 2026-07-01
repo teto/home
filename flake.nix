@@ -526,8 +526,8 @@
             # neomutt
             pass-perso
             mujmap-unstable
+            memento-whisper
             sway-scratchpad
-            gpt4all
             gpt4all-cuda
             termscp-matt
             pimsync-dev
@@ -602,8 +602,11 @@
           #   transformer = haumea.transformers.liftDefault;
           # };
         in
-        # autoloaded
-        lib.importFiles ./hm/modules // { };
+        # todo autoload
+        lib.importFiles ./hm/modules
+        // {
+          nixpkgs-monitor = import ./hm/modules/services/nixpkgs-monitor.nix;
+        };
 
       nixosProfiles = lib.importFiles ./nixos/profiles;
 

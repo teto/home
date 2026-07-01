@@ -1,0 +1,38 @@
+{
+  "flakes": [
+    {
+      "from": {
+        "id": "mistral",
+        "type": "indirect"
+      },
+      "to": {
+        "owner": "mistralai",
+        "repo": "mistral-vibe",
+        "type": "github"
+      }
+    },
+    {
+      "from": {
+        "id": "opencode",
+        "type": "indirect"
+      },
+      "to": {
+        "owner": "anomalyco",
+        "repo": "opencode",
+        "type": "github"
+      }
+    },
+    {
+      "from": {
+        "id": "nix-evaluator-stats",
+        "type": "indirect"
+      },
+      "to": {
+        "owner": "NotAShelf",
+        "repo": "nix-evaluator-stats",
+        "type": "github"
+      }
+    }
+  ],
+  "version": 2
+}

@@ -13,7 +13,13 @@
   enable = true;
 
   # only available when jj-gh module imported
-  gh.enable = true;
+  gh = {
+    enable = true;
+    settings = {
+      upstream_remote = "up";
+      default_remote = "up";
+    };
+  };
 
   settings = {
     aliases = {

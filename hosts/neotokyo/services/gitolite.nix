@@ -22,12 +22,27 @@
   services.gitolite = {
     enable = true;
     # read
-    adminPubkey = builtins.readFile ./neotokyo-gitolite.pub;
+    # services.gitolite.adminPubkey and declarative configuration (repos/extraConfig) are mutually exclusive.
+    # adminPubkey = builtins.readFile ./neotokyo-gitolite.pub;
     # group = "";
     # user
     # enableGitAnnex = false;
     # by default dataLib -> /var/lib/gitolite
     # dataDir = /home/teto/gitolite;
+
+    # experimental
+    repos = {
+
+      blog = {
+        access = [
+          {
+            perm = "RW+";
+            users = [ "teto" ];
+          }
+        ];
+      };
+
+    };
 
     # perl code
     extraGitoliteRc = ''

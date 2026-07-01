@@ -3,6 +3,7 @@
 local Highlights = require('avante.highlights')
 local Utils = require('avante.utils')
 local Config = require('avante.config')
+local rag_service = require('avante.rag_service')
 -- if not sidebar then return nil, "No sidebar" end
 
 -- if not Utils.is_valid_container(self.containers.result, true) then return end
@@ -126,20 +127,23 @@ vim.keymap.set('n', '<Leader>lm', '<Plug>AvanteModels', { desc = 'List models' }
 
 ---@param prompt string
 function M.ask(prompt)
-    -- get file from register
-    local filename = vim.api.nvim_buf_get_name(0)
-    -- print(filename)
-
-    local results, err = rag_service.retrieve(
-        filename,
-        -- "file:///path/to/your/project/",
-        prompt
-        -- "How does function X work?"
-    )
-    if results then
-        print('Answer: ' .. results.response)
-        -- results.sources contains the source files used for the answer
+    -- resp is a lua value decoded from json ?
+    local on_complete = function(resp, error)
+        if error then
+            vim.print(error)
+        else
+            -- my notify override uses jobstart, which can't be called in fast context so we delay the call
+            vim.schedule(function()
+                vim.print(resp.response)
+                vim.notify('Received RAG answer', vim.log.levels.INFO)
+            end)
+        end
     end
+
+    local filename = vim.api.nvim_buf_get_name(0)
+
+    -- ideally we dont need the filename ?
+    local results, err = rag_service.retrieve(filename, prompt, on_complete)
 end
 
 return M

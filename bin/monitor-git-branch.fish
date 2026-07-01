@@ -1,4 +1,4 @@
-#!/etc/profiles/per-user/teto/bin/fish
+#!/usr/bin/env fish
 
 function log_progress
     printf '%s\n' "monitor-git-branch: $argv" >&2

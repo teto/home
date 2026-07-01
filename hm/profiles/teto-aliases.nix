@@ -4,6 +4,7 @@
     st = "systemctl-tui";
     jctl = "journalctl -b0 -r";
     v = "nvim";
+    y = "yazi";
 
     n = "nix develop";
     dfh = "df --human-readable";

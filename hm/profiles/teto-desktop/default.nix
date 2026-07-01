@@ -34,6 +34,7 @@ in
     flakeSelf.homeModules.yazi
     flakeSelf.homeModules.services-mujmap
     flakeSelf.homeModules.package-sets
+    flakeSelf.homeModules.nixpkgs-monitor
   ];
 
   # TODO restore this
@@ -98,6 +99,7 @@ in
 
   home.shellAliases = {
     # lg = "lazygit";
+    y = "yazi";
     yr = "yazi ./result";
 
     js = "just -g switch";
@@ -105,6 +107,7 @@ in
     jg = "just -g ";
 
     n = "nix develop";
+
     n1 = ''nix develop --option builders "$TETOS_0" -j0'';
     n2 = ''nix develop --option builders "$TETOS_1" -j0'';
     nr1 = ''nix run --option builders "$TETOS_0" -j0'';

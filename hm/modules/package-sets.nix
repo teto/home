@@ -394,7 +394,7 @@ in
           # backblaze-b2-tetos
           bfs # https://github.com/tavianator/bfs
           binutils
-          btop
+          btop-cuda # for jedha
           bubblewrap # sandboxing
 
           cargo

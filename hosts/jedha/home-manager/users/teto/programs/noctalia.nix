@@ -2,7 +2,7 @@
 
   programs.noctalia = {
     enable = true;
-    # settings = builtins.fromJSON (builtins.readFile ./noctalia-shell-settings.json);
+    settings = fromTOML (builtins.readFile ./noctalia-shell-settings.json);
 
     # Additionally, since ~/.config/noctalia/settings.json is now a read-only symlink, you can get the latest (or GUI-modified) settings via:
     # Open Settings Panel -> General -> Copy Settings or by running
@@ -12,45 +12,4 @@
     # removed while waiting for
     # https://github.com/noctalia-dev/noctalia-shell/issues/2458
   };
-  # settings = {
-  #         bar = {
-  #           position = "top";
-  #           floating = true;
-  #           backgroundOpacity = 0.95;
-  #         };
-  #         general = {
-  #           animationSpeed = 1.5;
-  #           radiusRatio = 1.2;
-  #         };
-  #         colorSchemes = {
-  #           # darkMode = true;
-  #           useWallpaperColors = true;
-  #         };
-  #   widgets = {
-  #     center = [
-  #       {
-  #         characterCount = 10;
-  #         colorizeIcons = false;
-  #         emptyColor = "secondary";
-  #         enableScrollWheel = true;
-  #         focusedColor = "primary";
-  #         followFocusedScreen = false;
-  #         fontWeight = "medium";
-  #         groupedBorderOpacity = 1;
-  #         hideUnoccupied = true;
-  #         iconScale = 0.8;
-  #         id = "Workspace";
-  #         labelMode = "name";
-  #         occupiedColor = "secondary";
-  #         pillSize = 0.76;
-  #         showApplications = false;
-  #         showApplicationsHover = false;
-  #         showBadge = true;
-  #         showLabelsOnlyWhenOccupied = true;
-  #         unfocusedIconsOpacity = 1;
-  #       }
-  #     ];
-  #   };
-  #
-  #       };
 }

@@ -164,4 +164,5 @@ theme_mode = "auto"
 wallpaper_scheme = "m3-monochrome"
 
 [widget.date]
-format = "{:%H:%m %a %d}"
+capsule = true
+format = "{:%H:%M} {:%a %d}"
