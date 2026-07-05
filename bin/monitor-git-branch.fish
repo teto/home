@@ -170,8 +170,8 @@ if test "$current_advancement_date" != "$last_advancement_date"
     echo $current_advancement_date > "$last_advancement_file"
     log_progress "updated cache file"
 
-    send_advancement_notification "$branch_name" "$last_advancement_date" "$current_advancement_date" "$current_advancement_timestamp"
-    run_success_command "$success_command"
+    # send_advancement_notification "$branch_name" "$last_advancement_date" "$current_advancement_date" "$current_advancement_timestamp"
+    run_success_command "$success_command" "$branch_name" "$last_advancement_date" "$current_advancement_date" "$current_advancement_timestamp"
     set -l command_status $status
 
     if test $command_status -ne 0

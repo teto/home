@@ -9,7 +9,7 @@ let
   # Sync the runner cache with our official cache
   sync2Cache = pkgs.writeShellScript "sync2Cache" ''
     export AWS_SHARED 
-    ${pkgs.nix}/bin/nix copy  --to 's3://devops-ci-infra-prod-caching-nix?region=eu-central-1&profile=nix-daemon'  --all
+    ${pkgs.nix}/bin/nix copy  --to 's3://somebucket?region=eu-central-1&profile=nix-daemon'  --all
   '';
 in
 {

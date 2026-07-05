@@ -30,46 +30,45 @@
   };
 
   user.services = {
-      # "base-unit@".serviceConfig = {
-      #   ExecStart = "...";
-      #   User = "...";
-      # };
-      # "base-unit@instance-a" = {
-      #   overrideStrategy = "asDropin"; # needed for templates to work
-      #   wantedBy = [ "multi-user.target" ]; # causes NixOS to manage the instance
-      # };
+    # "base-unit@".serviceConfig = {
+    #   ExecStart = "...";
+    #   User = "...";
+    # };
+    # "base-unit@instance-a" = {
+    #   overrideStrategy = "asDropin"; # needed for templates to work
+    #   wantedBy = [ "multi-user.target" ]; # causes NixOS to manage the instance
+    # };
 
-      # copied from nixos nixos/doc/manual/administration/service-mgmt.chapter.md, hoping it works the same
-      # needs DBUS_SESSION_BUS_ADDRESS
-      "desktop-notification@" = {
-        Service = {
-          ExecStart =
-            let
-              myScript = pkgs.writeScript "notify-and-wait" ''
-                #!${pkgs.stdenv.shell}
+    # copied from nixos nixos/doc/manual/administration/service-mgmt.chapter.md, hoping it works the same
+    # needs DBUS_SESSION_BUS_ADDRESS
+    "desktop-notification@" = {
+      Service = {
+        ExecStart =
+          let
+            myScript = pkgs.writeScript "notify-and-wait" ''
+              #!${pkgs.stdenv.shell}
 
-                notify_and_wait() {
-                  ADDRESS=$1
-                  USERID=''${ADDRESS#/run/user/}
-                  # gnome-shell doesn't respect the timeout from notify-send,
-                  # hence the additional timeout command to make sure we exit
-                  # before the end of time
-                  if [ "$result" = "interrupt" ]; then
-                    /run/wrappers/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" \
-                      ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning "Interrupted" "Process failed"
-                    exit 1
-                  fi
-                }
-                for ADDRESS in /run/user/*; do
-                  notify_and_wait "$ADDRESS" &
-                done
-              '';
-              # %n => full unit name
-            in
-            "${myScript} %n";
-        };
+              notify_and_wait() {
+                ADDRESS=$1
+                USERID=''${ADDRESS#/run/user/}
+                # gnome-shell doesn't respect the timeout from notify-send,
+                # hence the additional timeout command to make sure we exit
+                # before the end of time
+                if [ "$result" = "interrupt" ]; then
+                  /run/wrappers/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" \
+                    ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning "Interrupted" "Process failed"
+                  exit 1
+                fi
+              }
+              for ADDRESS in /run/user/*; do
+                notify_and_wait "$ADDRESS" &
+              done
+            '';
+            # %n => full unit name
+          in
+          "${myScript} %n";
       };
-
+    };
 
     # TODO enable conditionnally on account/services
     mujmap-fastmail = {

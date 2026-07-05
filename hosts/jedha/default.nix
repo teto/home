@@ -99,7 +99,7 @@ in
 
   boot =
     let
-      kernelPkgs = pkgs.linuxKernel.packages.linux_7_0;
+      kernelPkgs = pkgs.linuxKernel.packages.linux_7_1;
       # kernelPkgs = pkgs.linuxKernel.packages.linux_6_18;
       # pkgs.linuxKernel.packages.linux_6_18.r8125
     in

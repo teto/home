@@ -712,6 +712,7 @@ vim.lsp.enable('pyright')
 vim.lsp.enable('yamlls')
 vim.lsp.enable('just')
 vim.lsp.enable('nixd')
+vim.lsp.enable('ruff')
 -- vim.lsp.enable('nil_ls')
 -- vim.lsp.enable('cssls')
 
@@ -722,7 +723,6 @@ vim.pack.add({
 
     'https://github.com/Olical/nfnl',
 
-    -- 'https://github.com/tpope/vim-obsession',
     -- 'https://github.com/tpope/vim-obsession',
     -- 'https://github.com/nvim-mini/mini.sessions',
 

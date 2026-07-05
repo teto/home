@@ -104,7 +104,7 @@ in
     with pkgs;
     let
       llmDeps = [
-        python3Packages.llama-index-cli
+        # python3Packages.llama-index-cli
         # python3Packages.llama-index
       ];
     in

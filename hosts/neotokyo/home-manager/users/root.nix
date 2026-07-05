@@ -1,6 +1,6 @@
 {
-  flakeSelf
-, ...
+  flakeSelf,
+  ...
 }:
 {
 
@@ -11,7 +11,7 @@
   programs.ssh.enableDefaultConfig = false;
 
   imports = [
-      flakeSelf.homeModules.nixpkgs-monitor
+    flakeSelf.homeModules.nixpkgs-monitor
   ];
 
   services.nixpkgs-monitor = {
