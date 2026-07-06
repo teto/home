@@ -1,4 +1,4 @@
 {
   enable = true;
-  git.diffToolMode = true;
+  git.mode = true;
 }

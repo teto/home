@@ -115,6 +115,7 @@ in
       # mdp # markdown CLI presenter
       # gthumb # image manager, great to tag pictures
 
+      ethtool # to check wakeonlan capabilities
       # footswitch # to control foot pedals (use module instead)
       # need gnome-accounts to make it work
       gnome-calendar

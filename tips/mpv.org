@@ -1,5 +1,12 @@
 open-in-mpv 
 
+* bindings to go to next subtitles
+
+Seems like the defaults ?
+
+  Ctrl+LEFT  sub-seek -1
+  Ctrl+RIGHT sub-seek 1
+
 * secondary sub title
 
 Mod+j cycle secondary-sid

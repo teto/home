@@ -11,6 +11,11 @@ wont work if the interface is marked "Managed"
 sudo rfkill block 0
 networkctl up wlan0
 
+* DORMANT state
+
+energy saving mode. 
+ip link set wlan0 mode DEFAULT
+
 * iwd:
 
 /etc/iwd/main.conf

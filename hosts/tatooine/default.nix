@@ -14,6 +14,8 @@ let
       src = flakeSelf.inputs.nix-filter {
         name = "laptopAutoloaded";
         root = ./.;
+
+        # TODO exclude instead
         include = [
           "boot.nix"
           "environment.nix"
@@ -65,7 +67,7 @@ in
     flakeSelf.inputs.disko.nixosModules.disko
     flakeSelf.inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen5
 
-    # flakeSelf.nixosProfiles.pixiecore
+    flakeSelf.nixosProfiles.pixiecore
 
     flakeSelf.nixosProfiles.disko-desktop
     flakeSelf.nixosProfiles.networkmanager

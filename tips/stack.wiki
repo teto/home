@@ -1,7 +1,0 @@
-stack ls snapshots remote
-
-# to generate the cabal file via hpack
-
-stack build --dry-run
-
-packages:

@@ -5,10 +5,20 @@
   ...
 }:
 {
+  documentation.enable = false;
+
+  boot.kernelParams = [
+    "copytoram"
+    "console=ttyS0,115200"
+    # "iomem=relaxed" # to be able to flash rom from host !
+  ];
+
+  # TODO add wifi ?
 
   environment.systemPackages = [
     pkgs.bridge-utils
   ];
+
   boot.kernel.sysctl = {
     # if you use ipv4, this is all you need
     "net.ipv4.conf.all.forwarding" = true;

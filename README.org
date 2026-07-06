@@ -6,10 +6,15 @@
 #+LINK: sops-nix-github https://github.com/Mic92/sops-nix
 #+LINK: haumea https://github.com/nix-community/haumea
 
-This is *tetos*, teto's OS, nixos-based, conceived by me for me.
-It contains the configuration for my machines/servers.
-I make it public because I love libre software and this makes sharing snippets easier.
-Dont expect to be able to use this repo as it is a spaghetti of hacks and relies on forks of nixpkgs and home-manager.
+This repository is *tetos*, teto's OS, nixos-based, tailored to my needs.
+This repo contains the configurations for my machines/servers.
+
+I make it public because:
+- I believe in libre software
+- this makes sharing snippets easier
+- as well as bootstrapping, no need for github login
+
+Dont expect to be able to use this repo as is: it is a spaghetti of hacks, commented code and relies on forks of nixpkgs and home-manager.
 
 * a few highlights
 - I rely on [[nixos-anywhere][nixos-anywhere]] + [[disko][disko]] to deploy new machines. For local deployements, I use one machine as a PXE server to bootstrap install from a nicer environment
@@ -74,9 +79,9 @@ This folder contains my customizations for:
 * nixos-anywhere install via PXE
 
 We use [[nixos-anywhere][nixos-anywhere]] + [[disko][disko]], aka we need a SERVER machine in the same LAN as the NEW machine to deploy from. 
-1. SERVER: Enable the pixiecore service
-2. NEW: start via PXE
-3. NEW: echo LUKS_PASSWORD > /tmp/secret.key
+1. SERVER: Enable the pixiecore service (`services.pixiecore.enable = true`)
+2. NEW_MACHINE: select "Boot via PXE" on boot
+3. NEW_MACHINE: echo LUKS_PASSWORD > /tmp/secret.key
 4. SERVER: run `just bootstrap-desktop`
 
 * nixos-anywhere remote/vps install 

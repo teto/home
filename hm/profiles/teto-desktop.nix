@@ -35,7 +35,7 @@ in
   imports = [
     autoloadedModule
     ./common.nix
-    flakeSelf.homeProfiles.teto-zsh
+    # flakeSelf.homeProfiles.teto-zsh
     flakeSelf.homeProfiles.sway
     flakeSelf.homeProfiles.neovim
     flakeSelf.inputs.noctalia-shell.homeModules.default
@@ -47,8 +47,10 @@ in
   };
 
   home.shellAliases = {
+    # use nix-sweep instead ?
     nix-stray-roots = ''nix-store --gc --print-roots | egrep -v "^(/nix/var|/proc|/run/\w+-system|\{memory)" | less'';
   };
+
   home.file.".password-store".source =
     config.lib.file.mkOutOfStoreSymlink "${secretsFolder}/password-store-perso";
   # TODO link .config
@@ -93,7 +95,7 @@ in
       pciutils # for lspci
       # gnome3.gnome-font-viewer  # Not very good
 
-      pkgs.librsvg # for rikai.nvim
+      # pkgs.librsvg # for rikai.nvim
 
       timg
       gh-dash

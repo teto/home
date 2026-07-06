@@ -4,10 +4,10 @@
 
   tig.enable = true;
 
-  fre = {
-    enable = false;
-    enableAsFzfFile = true;
-  };
+  # fre = {
+  #   enable = false;
+  #   enableAsFzfFile = true;
+  # };
 
   # GUI to manage keyrings
   # seahorse.enable = true;

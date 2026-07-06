@@ -20,6 +20,13 @@ o--flash-attn
 
 timings_per_token -> returns timing in response
 
+* deal with MoE
+
+Using -ot, we can manually assign tensors to device using a regular expression:
+-ot "blk\.([0-9]|[1-2][0-9]|30)\.=CUDA0,exps=CPU"
+This translates to "assign all tensors from layers 0-9, 10-29, and 30 to the 1st Nvidia GPU"
+
+
 * host ram stuff
 
 doc at https://github.com/ggml-org/llama.cpp/pull/16391

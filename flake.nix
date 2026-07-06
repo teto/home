@@ -73,7 +73,7 @@
       url = "github:serokell/deploy-rs";
       # url = "github:apoloqize/deploy-rs?rev=b48c508f1e8c9f0c82a9baeffa014e86d716a546";
 
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # https://github.com/DeterminateSystems/nix-src/pull/217
@@ -142,6 +142,11 @@
       # inputs.nixpkgs.follows = "nixpkgs"; # breaks build
     };
 
+    memento-dev = {
+      url = "github:ripose-jp/Memento";
+      flake = false;
+    };
+
     meli-src = {
       url = "git+https://git.meli-email.org/meli/meli.git";
       # url = "github:meli/meli"; # official mirror
@@ -202,7 +207,7 @@
 
     nix-schemas.url = "github:DeterminateSystems/nix-src/flake-schemas";
 
-    jj-gh.url = "github:mrjones2014/jj-gh";
+    jj-gh.url = "github:mrjones2014/jj-gh?ref=pull/232/head";
 
     rocks-nvim = {
       # url = "/home/teto/neovim/rocks.nvim";
@@ -211,7 +216,7 @@
     };
 
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixos-stable.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixos-stable.url = "github:nixos/nixpkgs/nixos-26.05";
 
     # nixpkgs-for-hls.url = "github:nixos/nixpkgs?rev=612f97239e2cc474c13c9dafa0df378058c5ad8d";
 
@@ -299,8 +304,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    treefmt-nix.url = "github:numtide/treefmt-nix";
-    # treefmt-nix.url = "github:teto/treefmt-nix?ref=teto/add-hujsonfmt";
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # AModules/fix-expand-fill-no-center
     # https://github.com/Alexays/Waybar/pull/3881
@@ -700,7 +707,7 @@
         # for now
         # sshOpts = [ "-F" "ssh_config" ];
         # TODO go through all nixosConfigurations actually ?
-        #
+        # If you require a signing key to push closures to your server, specify the path to it in the LOCAL_KEY environment variable.
         nodes =
           let
             # system = "x86_64-linux";
@@ -708,6 +715,7 @@
               inherit (attrs) hostname;
               profiles.system = {
                 # remoteBuild = false;
+                user = "root";
                 hostname = attrs.hostname;
                 path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.${attrs.name};
               };

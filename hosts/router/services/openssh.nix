@@ -2,9 +2,14 @@
   config,
   pkgs,
   lib,
+  flakeSelf,
   ...
 }:
 {
+
+  imports = [
+    flakeSelf.nixosProfiles.openssh
+  ];
 
   services.openssh = {
     enable = true;
@@ -36,7 +41,6 @@
       KbdInteractiveAuthentication = false;
       PasswordAuthentication = false;
       # PermitRootLogin = "no";
-      X11Forwarding = true;
     };
   };
 }

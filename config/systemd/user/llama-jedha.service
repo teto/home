@@ -1,0 +1,13 @@
+[Unit]
+Description=LLaMA C++ server for Jedha
+After=network.target
+ConditionHost=jedha
+
+[Service]
+Type=simple
+Environment=GGML_CUDA_ENABLE_UNIFIED_MEMORY=1
+WorkingDirectory=/home/teto/home
+ExecStart=/etc/profiles/per-user/teto/bin/llama-server --host 0.0.0.0 --port 8080 --jinja -v --log-prefix --models-preset /home/teto/home/contrib/llama-presets.ini
+KillSignal=SIGINT
+Restart=on-failure
+RestartSec=30

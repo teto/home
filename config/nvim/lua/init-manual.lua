@@ -981,6 +981,9 @@ vim.g.avante = {
         auto_set_keymaps = true,
         auto_suggestions = false, -- Experimental stage
 
+        -- check https://github.com/yetone/avante.nvim/pull/3141
+        acp_follow_agent_locations = true,
+
         enable_token_counting = true,
         show_inference_timings = true,
         -- auto_approve_tool_permissions = {"bash", "replace_in_file"}, -- Auto-approve specific tools only

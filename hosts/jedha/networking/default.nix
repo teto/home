@@ -3,6 +3,10 @@
   hostName = "jedha";
   domain = "jedha.local"; # Define your hostname.
 
+  wireless = {
+    scanOnLowSignal = false; # consume less energy and we dont roam anyway
+  };
+
   networkmanager = {
     enable = true;
 
@@ -39,7 +43,12 @@
   #   allowedTCPPorts = [ cfg.port ];
   # };
 
-  # interfaces.enp11s0.ipv4 = {
+  interfaces.enp11s0 = {
+    #wakeOnLan.policy
+    wakeOnLan.enable = true;
+  };
+
+  # .ipv4 = {
   #   addresses = [
   #                {
   #                  # apipa system

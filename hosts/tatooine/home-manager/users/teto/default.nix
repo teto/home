@@ -16,14 +16,6 @@ let
       src = flakeSelf.inputs.nix-filter {
         name = "laptopAutoloaded";
         root = ./.;
-        # include = [
-        #   # "home-manager/users/teto/programs/neovim.nix"
-        #   # "home-manager/users/teto/programs/noctalia-shell.nix"
-        #   # "home-manager/users/teto/programs/noctalia-shell-settings.json"
-        #   # "home-manager/users/teto/wayland.nix"
-        #   # "home-manager/users/teto/services/blueman-applet.nix"
-        #   # "home-manager/users/teto/services/mpd.nix"
-        # ];
 
         exclude = [
           "default.nix"

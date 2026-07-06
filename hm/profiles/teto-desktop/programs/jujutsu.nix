@@ -57,7 +57,7 @@
     # ];
 
     # "--scope.user" = {
-    #     email = secrets.accounts.mail.nova.email;
+    #     email = secrets.accounts.mail.pro.email;
     # };
 
     # "--scope" = [

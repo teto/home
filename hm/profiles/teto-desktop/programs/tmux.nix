@@ -1,5 +1,12 @@
-{ pkgs, ... }:
 {
+  pkgs,
+  flakeSelf,
+  ...
+}:
+{
+  _imports = [
+    flakeSelf.homeProfiles.tmux
+  ];
 
   enable = true;
   aggressiveResize = false;

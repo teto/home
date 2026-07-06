@@ -3,9 +3,14 @@
   secrets,
   dotfilesPath,
   pkgs,
+  flakeSelf,
   ...
 }:
 {
+  imports = [
+    flakeSelf.homeModules.zsh
+  ];
+
   home.sessionVariables = {
     # default in latest hm
     ZDOTDIR = "$XDG_CONFIG_HOME/zsh";

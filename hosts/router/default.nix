@@ -16,8 +16,8 @@
    After installing, you want to make sure that the PCEngine APU entry from the NixOS hardware repo is present, as it enables the console port.
 */
 {
-  config,
-  lib,
+  # config,
+  # lib,
   pkgs,
   secrets,
   flakeSelf,
@@ -41,8 +41,10 @@ in
   imports = [
     flakeSelf.inputs.nixos-hardware.nixosModules.pcengines-apu
     flakeSelf.nixosModules.default-hm
+    flakeSelf.inputs.disko.nixosModules.disko
 
     # ./iwd.nix # unused it seems
+    ./disko-config.nix
     ./hardware.nix
     ./services/openssh.nix
 
@@ -63,6 +65,13 @@ in
     # pkgs.wirelesstools # to get iwconfig
     # pkgs.tshark too heavy
     # pkgs.wget
+
+    # to wake up desktop
+    # pkgs.wakeonlan
+    pkgs.ethtool
+    pkgs.just
+    pkgs.python3Packages.wakeonlan
+    pkgs.wolli
   ];
 
   home-manager.users.root = {
@@ -76,6 +85,7 @@ in
   # TODO use from flake or from unstable
   # services.opensnitch-ui.enable
   home-manager.users.teto = {
+    home.stateVersion = "26.05";
     # TODO it should load the whole folder
     imports = [
       # flakeSelf.homeModules.teto-nogui
@@ -83,7 +93,15 @@ in
       # ./teto/nix.nix # done at
     ];
 
-    package-sets.wifi = true;
+    home.packages = [
+      pkgs.systemctl-tui
+    ];
+    # package-sets.wifi = true;
+
+    home.file."justfile".text = ''
+      wakejedha:
+        wakeonlan ${secrets.jedha.ethernetMac}
+    '';
   };
 
   services.journald.extraConfig = ''
@@ -92,11 +110,10 @@ in
   '';
 
   # Use the GRUB 2 boot loader.
+  # You cannot have duplicated devices in mirroredBoots
   boot.loader.grub.enable = true;
-  # boot.loader.grub.version = 2;
-  # boot.loader.efi.efiSysMountPoint = "/boot/efi";
   # Define on which hard drive you want to install Grub.
-  boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
+  # boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
 
   # for the live cd
   # isoImage.squashfsCompression = "zstd -Xcompression-level 5";
@@ -104,11 +121,16 @@ in
   users = {
     mutableUsers = false;
 
-    users.teto.packages = [
-      # pciutils # for lspci
-      # bridge-utils # pour  brctl
-      # aircrack-ng
-    ];
+    users.teto = {
+      packages = [
+        # pciutils # for lspci
+        # bridge-utils # pour  brctl
+        # aircrack-ng
+      ];
+      extraGroups = [
+        "wpa_supplicant"
+      ];
+    };
   };
 
   # boot.kernel.sysctl = {
@@ -129,6 +151,7 @@ in
 
   # TODO why copy solene's blog explanation
   # boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelParams = [
     "copytoram"
     "console=ttyS0,115200"
@@ -142,6 +165,7 @@ in
 
   nix = {
 
+    # trusted-users = [ "teto" ];
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
@@ -182,8 +206,12 @@ in
   # };
 
   # following the guide https://nixos.wiki/wiki/Systemd-networkd
+
   systemd.network = {
     enable = true;
+
+    wait-online.enable = false;
+
     # SYSTEMD_LOG_LEVEL=debug
     wait-online = {
       timeout = 20;
@@ -235,13 +263,20 @@ in
         matchConfig.Name = "enp1s0";
         networkConfig.DHCP = "ipv4";
       };
+
       "10-wireless-wan" = {
-        matchConfig.Name = "wlan0";
+        matchConfig.Name = "wlp5s0";
+        # [Match]
+        # Name=Nom de l'interface
+        # MACAddress=Adresse MAC de l'interface
+        # 04:f0:21:90:b2:78
+
         networkConfig.DHCP = "ipv4";
         networkConfig.IPv6AcceptRA = "no";
         networkConfig.LinkLocalAddressing = "ipv4";
         networkConfig.IgnoreCarrierLoss = "3s";
         networkConfig.Description = "WAN port";
+        networkConfig.MulticastDNS = true;
         linkConfig.RequiredForOnline = true;
 
       };
@@ -284,6 +319,7 @@ in
         networkConfig.DHCP = "ipv4";
 
       };
+
       "10-enp2s0" = {
         matchConfig.Name = "enp2s0";
         networkConfig.Bridge = "br0";
@@ -306,7 +342,7 @@ in
   networking = {
     useNetworkd = true;
     useDHCP = false;
-    hostName = "router";
+    hostName = "router"; # or router
     domain = "router.local";
 
     # networking.dhcpcd.enable = true;
@@ -350,17 +386,31 @@ in
     #   nat.internalInterfaces = [ "br0" ];
 
     wireless = {
+      enable = true; # Whether to enable wpa_supplicant., we use iwd here
 
-      # TODO create manually ? copy from desktop-.yaml
-      # secrets/
-      secretsFile = "/run/wireless.conf";
+      # Allow users of the ‘wpa_supplicant’ group to control wpa_supplicant through wpa_gui or wpa_cli. This is useful for laptop users that switch networks a lot and don’t want to depend on a large package such as NetworkManager just to pick nearby access points.
+      # see https://github.com/NixOS/nixpkgs/issues/370938
+      userControlled = true;
+
+      #          Whether to allow configuring networks “imperatively” (e.g. via ‘wpa_supplicant_gui’) and declaratively via networking.wireless.networks[1].
+      # his makes wpa_supplicant load /etc/wpa_supplicant.conf in addition to the configuration generated by NixOS.
+      # allowAuxiliaryImperativeNetworks = false;
+
+      # content of wireless.conf
+      # psk_home=mypassword
+      # psk_other=6a381cea59c7a2d6b30736ba0e6f397f7564a044bcdb7a327a1d16a1ed91b327
+      # pass_work=myworkpassword
+      #
+      # TODO create manually
+      secretsFile = "/etc/wireless.conf";
+
+      # secretsFile = "/home/teto/wireless.conf";
       scanOnLowSignal = false; # consume less energy and we dont roam anyway
-      # enable = true;
-      # userControlled.enable = true;
 
       # checkout man iwd.config
+      # ignores networks apparently :s
       iwd = {
-        enable = true;
+        enable = false;
         # https://iwd.wiki.kernel.org/networkconfigurationsettings
         settings = {
           Settings = {
@@ -396,8 +446,12 @@ in
       };
 
       networks = {
-        neotokyo = {
-          psk = secrets.router.password;
+        "${secrets.wifiNetworks.home.ssid}" = {
+          pskRaw = "ext:psk_home";
+          # echelon = {                   # safe version of the above: read PSK from the
+          #   pskRaw = "ext:psk_echelon"; # variable psk_echelon, defined in secretsFile,
+          # };                            # this won't leak into /nix/store
+
           # pskRaw
           # appended to wpa_supplicant.conf
           # freq_list=5180 5190 5200 5210 5220 5230 5240 5250 5260 5270 5280
@@ -431,6 +485,8 @@ in
 
   time.timeZone = "Europe/Paris";
 
+  services.resolved.settings.Resolve.MulticastDNS = true;
+
   # TODO bump it
-  system.stateVersion = "24.05";
+  system.stateVersion = "26.05";
 }

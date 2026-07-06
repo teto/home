@@ -30,29 +30,25 @@
     flakeSelf.homeProfiles.neovim
     # flakeSelf.homeProfiles.neovim # takes too much space for router
 
-    # TODO it should autoload those
+    # TODO it should autoload all of them ?
     flakeSelf.homeModules.bash
     flakeSelf.homeModules.fish
-    flakeSelf.homeModules.fre
+    # flakeSelf.homeModules.fre
     flakeSelf.homeModules.fzf
-    flakeSelf.homeModules.memento
     flakeSelf.homeModules.nvimpager
-    flakeSelf.homeModules.kitty
     # flakeSelf.homeModules.cliphist
     flakeSelf.homeModules.neovim
     # flakeSelf.homeModules.pimsync
     flakeSelf.homeModules.package-sets
-    flakeSelf.homeModules.tig
     flakeSelf.homeModules.yazi
-    flakeSelf.homeModules.zsh
+    # flakeSelf.homeModules.zsh
 
     (
-      { ... }:
+      # { ... }:
       {
         # to avoid warnings about incompatible stateVersions
         home.enableNixpkgsReleaseCheck = false;
-      }
-    )
+      })
   ];
   home-manager.extraSpecialArgs = {
     secrets = lib.optionalAttrs withSecrets secrets;
@@ -64,14 +60,6 @@
       ;
     inherit lib;
     # https://github.com/nix-community/home-manager/issues/5980
-
-    # lib = lib.extend (_: _: flakeSelf.inputs.hm.lib // builtins.trace "${lib.neovim.toto}" lib);
   };
 
-  # home-manager.users = {
-  #   teto = {
-  #     imports = [
-  #     ];
-  #   };
-  # };
 }

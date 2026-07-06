@@ -12,7 +12,6 @@ let
 
   term = "${pkgs.kitty}/bin/kitty";
   # we could go for xdg-terminal too
-  # term = "${pkgs.rio}/bin/rio";
   # term = "${pkgs.wezterm}/bin/wezterm";
 
   rofi = pkgs.rofi-teto; # rofi-wayland;

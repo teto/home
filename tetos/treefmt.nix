@@ -8,6 +8,7 @@
     enable = true;
     # package = myPkgs.nixfmt;
   };
+
   programs.stylua.enable = true;
   programs.just.enable = true;
   programs.shfmt.enable = true;
@@ -25,9 +26,11 @@
   settings.global.excludes = [
     "*.org"
     "*.wiki"
+    "*.norg"
     "nixpkgs/secrets.nix" # all git-crypt files ?
     "config/bash/jj.sh" # it has zsh oddities not supported by shfmt
     "config/nvim/lua/teto/secrets.lua"
+    "config/nvim/lua/matugen.lua"
   ];
 
 }

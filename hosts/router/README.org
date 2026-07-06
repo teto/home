@@ -4,6 +4,13 @@ Bought on https://teklager.se/en/products/routers/apu4d4-open-source-router
 It runs home-assistant with:
 - mosquitto: an mqtt message broker
 
+* deploy
+
+1. Connect the serial physical port
+2. with `tio /dev/serial/... `
+3. run `just bootstrap-router`
+4. create /run/secrets/wireless.conf with the form
+`psk_home=PASSWORD`
 
 * debug wifi
 

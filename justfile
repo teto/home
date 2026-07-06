@@ -27,6 +27,20 @@ noctalia-update-config:
     # TODO reset nc if needed
     noctalia config export > hosts/{{ HOSTNAME }}/home-manager/users/teto/programs/noctalia-shell-settings.json
 
+# bootstrap router
+# --disk-encryption-keys
+# --copy-host-keys copy over existing /etc/ssh/ssh_host_* host keys to the installation
+# --generate-hardware-config
+# write it to the specified path. lo
+# --disk-encryption-keys local path
+bootstrap-router target="teto@nixos":
+    nixos-anywhere --target-host {{ target }} --flake '.#router' \
+    --copy-host-keys \
+    --generate-hardware-config nixos-generate-config hosts/router/hardware.nix \
+    -i {{ SECRETS_FOLDER }}/ssh/id_rsa \
+    --build-on local \
+    --debug
+
 # deploy a brand new nixos install
 bootstrap-desktop target="root@bootstrap.local":
     nixos-anywhere --target-host {{ target }} --flake '.#laptop' \
@@ -50,7 +64,7 @@ bootstrap-vps target:
 
 # just to save the command
 
-repl:
+nix-repl:
     nix repl ~/home \
         --override-input nixpkgs {{ NIXPKGS_REPO }} \
         --override-input hm {{ HM_REPO }}
@@ -110,7 +124,7 @@ deploy-router:
     # deploy .\#router  -s  --auto-rollback false --magic-rollback false
     #     nix
     # run `nix path-info -Sh ./result` to see first if you have enough place
-    deploy .\#router  -s 
+    deploy .\#router  -s  --interactive-sudo=true
 
 # [confirm("prompt")]
 deploy-neotokyo:

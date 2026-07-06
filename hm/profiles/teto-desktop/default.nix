@@ -14,6 +14,16 @@ let
 in
 {
   imports = [
+    flakeSelf.inputs.jj-gh.homeManagerModules.default
+    flakeSelf.homeModules.memento
+    flakeSelf.homeModules.kitty
+    flakeSelf.homeModules.tig
+    flakeSelf.homeModules.avante
+    flakeSelf.homeModules.fzf
+    flakeSelf.homeModules.yazi
+    flakeSelf.homeModules.services-mujmap
+    flakeSelf.homeModules.package-sets
+    flakeSelf.homeModules.nixpkgs-monitor
 
     flakeSelf.homeProfiles.teto-aliases
     flakeSelf.homeProfiles.common
@@ -22,19 +32,11 @@ in
     flakeSelf.homeProfiles.sway-notification-center
     flakeSelf.homeProfiles.developer
     flakeSelf.homeProfiles.mpv
-    flakeSelf.homeProfiles.vscode
+    # flakeSelf.homeProfiles.vscode
     flakeSelf.homeProfiles.teto-zsh
     # flakeSelf.homeProfiles.yt-dlp
 
     flakeSelf.inputs.nix-index-database.homeModules.nix-index
-
-    flakeSelf.inputs.jj-gh.homeManagerModules.default
-    flakeSelf.homeModules.avante
-    flakeSelf.homeModules.fzf
-    flakeSelf.homeModules.yazi
-    flakeSelf.homeModules.services-mujmap
-    flakeSelf.homeModules.package-sets
-    flakeSelf.homeModules.nixpkgs-monitor
   ];
 
   # TODO restore this
@@ -53,6 +55,7 @@ in
     [
       # bottles  # to install games
       mdcat # markdown viewer
+      mitmproxy # help catch http traffic
       notmuch # needed for waybar-custom-notmuch.sh
 
       neovim-dbg # when neovim crashes, launch "nvim-debug" to debug

@@ -1,6 +1,4 @@
 {
-  config,
-  modulesPath,
   flakeSelf,
   lib,
   secretsFolder,
@@ -23,12 +21,13 @@ let
   #  };
 
   # TODO enable mdns / avahi and give him host name "bootstrap.local"
+  # TODO expose as nixos configuration
   sys = lib.nixosSystem {
     system = "x86_64-linux";
     modules = [
       (
         {
-          config,
+          # config,
           pkgs,
           lib,
           modulesPath,
@@ -38,6 +37,8 @@ let
           imports = [
             (modulesPath + "/installer/netboot/netboot-minimal.nix")
             ../accounts/teto/teto.nix
+            flakeSelf.nixosProfiles.avahi # to get mdns when deploying locally
+
           ];
 
           config = {
@@ -56,6 +57,13 @@ let
               };
             };
 
+            # necessary on router else we see no output
+            boot.kernelParams = [
+              "copytoram"
+              "console=ttyS0,115200"
+              "iomem=relaxed" # to be able to flash rom from host !
+            ];
+
             boot.supportedFilesystems = {
               # had compilation issues with it
               zfs = lib.mkForce false;
@@ -64,6 +72,8 @@ let
             # to automatically run disko ?
             # environment.etc."bashrc.local".text = ''
             #   '';
+
+            networking.hostName = "bootstrap.local";
 
             services.openssh = {
               enable = true;
@@ -80,7 +90,7 @@ let
             environment.systemPackages = [
               # TODO provide a better neovim / hx
               pkgs.neovim
-              flakeSelf.inputs.nixos-wizard.packages."x86_64-linux".default
+              # flakeSelf.inputs.nixos-wizard.packages."x86_64-linux".default
             ];
 
             # this is problematic because it sets tteto as both a system and a normal user
@@ -95,7 +105,7 @@ let
               # "${secretsFolder}/ssh/id_rsa.pub"
             ];
 
-            system.stateVersion = "25.11";
+            system.stateVersion = "26.05";
           };
         }
       )
@@ -107,6 +117,7 @@ in
   services.pixiecore = {
     # enable = false; # enable it per host
     debug = true;
+    mode = "boot";
 
     # extraArguments = ;
     # listen
@@ -123,8 +134,7 @@ in
     # kernel = "https://boot.netboot.xyz";
     # kernel = "${netboot}/bzImage";
 
-    #
-    # # requires
+    # TODO use local file system and build it instead
     # # imports = [ (modulesPath + "/installer/netboot/netboot-minimal.nix") ];
     kernel = "${build.kernel}/bzImage";
     initrd = "${build.netbootRamdisk}/initrd";

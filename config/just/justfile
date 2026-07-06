@@ -91,6 +91,7 @@ nixpkgs-index:
 nix-index args:
     nix run github:nix-community/nix-index-database {{ args }}
 
+# TODO pass arg for sudo ?
 nix-gc:
     nix-collect-garbage --delete-older-than 3d
 

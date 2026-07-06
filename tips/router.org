@@ -2,6 +2,34 @@ https://francis.begyn.be/blog/nixos-home-router
 
 https://github.com/NixOS/nixos-hardware/blob/master/pcengines/apu/default.nix
 
+* get bios version
+
+if you cant read it on start, use
+
+* patch bios
+
+guide at https://teklager.se/en/knowledge-base/apu-bios-upgrade/
+available at https://pcengines.github.io/#mr-63
+
+`dmidecode | grep coreboot`
+
+nix shell nixpkgs#flashrom
+
+Apparently it finds twice the same chip:
+
+```
+Enabling flash write... OK.
+Found Winbond flash chip "W25Q64BV/W25Q64CV/W25Q64FV" (8192 kB, SPI) mapped at physical address 0x00000000ff800000.
+Found Winbond flash chip "W25Q64JV-.Q" (8192 kB, SPI) mapped at physical address 0x00000000ff800000.
+Multiple flash chip definitions match the detected chip(s): "W25Q64BV/W25Q64CV/W25Q64FV", "W25Q64JV-.Q"
+Please specify which chip definition to use with the -c <chipname> option.
+```
+
+but `sudo flashrom -w ./apu4_v4.19.0.1.rom  -p internal -c "W25Q64BV/W25Q64CV/W25Q64FV"` fixed.
+
+
+
+
 Starting version 251.7
 kbd_mode: KDSKBMODE: Inappropriate ioctl for device
 starting device mapper and LVM...

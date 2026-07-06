@@ -1,0 +1,4 @@
+--download-archive ~/.cache/yt-dlp/archive.txt
+--no-overwrites
+--no-post-overwrites
+--keep-video
