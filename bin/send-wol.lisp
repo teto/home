@@ -5,6 +5,7 @@
 (defconstant +sol-socket+ 1)
 (defconstant +so-bindtodevice+ 25)
 (defconstant +default-port+ 9)
+(defparameter +limited-broadcast+ #(255 255 255 255))
 
 (sb-alien:define-alien-routine ("setsockopt" c-setsockopt) sb-alien:int
   (fd sb-alien:int)
@@ -14,24 +15,16 @@
   (optlen sb-alien:unsigned-int))
 
 (defun usage (&optional (stream *error-output*))
-  (format stream "Usage: send-wol.lisp --iface IFACE --broadcast IPV4 [--port PORT] MAC~%")
+  (format stream "Usage: send-wol.lisp --iface IFACE [--port PORT] MAC~%")
   (format stream "~%")
   (format stream "Example:~%")
-  (format stream "  send-wol.lisp --iface enp3s0 --broadcast 192.168.1.255 aa:bb:cc:dd:ee:ff~%"))
+  (format stream "  send-wol.lisp --iface enp3s0 aa:bb:cc:dd:ee:ff~%"))
 
 (defun die (format-control &rest args)
   (apply #'format *error-output* format-control args)
   (format *error-output* "~%~%")
   (usage)
   (sb-ext:exit :code 2))
-
-(defun split-string (string delimiter)
-  (loop
-    with start = 0
-    for pos = (position delimiter string :start start)
-    collect (subseq string start pos)
-    while pos
-    do (setf start (1+ pos))))
 
 (defun parse-port (string)
   (handler-case
@@ -41,21 +34,6 @@
         port)
     (error ()
       (die "Invalid port: ~A" string))))
-
-(defun parse-ipv4 (string)
-  (let ((parts (split-string string #\.)))
-    (unless (= 4 (length parts))
-      (die "Invalid IPv4 address: ~A" string))
-    (map 'vector
-         (lambda (part)
-           (handler-case
-               (let ((byte (parse-integer part)))
-                 (unless (<= 0 byte 255)
-                   (die "Invalid IPv4 address: ~A" string))
-                 byte)
-             (error ()
-               (die "Invalid IPv4 address: ~A" string))))
-         parts)))
 
 (defun hex-digit-p (char)
   (or (digit-char-p char 16) nil))
@@ -108,7 +86,7 @@
           (die "Failed to bind socket to interface ~A. Try running as root or with CAP_NET_RAW."
                interface))))))
 
-(defun send-wol (interface broadcast mac &key (port +default-port+))
+(defun send-wol (interface mac &key (port +default-port+))
   (let ((socket (make-instance 'sb-bsd-sockets:inet-socket
                                :type :datagram
                                :protocol :udp))
@@ -117,14 +95,13 @@
          (progn
            (setf (sb-bsd-sockets:sockopt-broadcast socket) t)
            (bind-socket-to-device socket interface)
-           (sb-bsd-sockets:socket-connect socket broadcast port)
+           (sb-bsd-sockets:socket-connect socket +limited-broadcast+ port)
            (sb-bsd-sockets:socket-send socket packet nil))
       (sb-bsd-sockets:socket-close socket))))
 
 (defun parse-args (args)
   (loop
     with interface = nil
-    with broadcast = nil
     with port = +default-port+
     with mac = nil
     while args
@@ -137,10 +114,6 @@
           (unless args
             (die "Missing value after --iface"))
           (setf interface (pop args)))
-         ((string= arg "--broadcast")
-          (unless args
-            (die "Missing value after --broadcast"))
-          (setf broadcast (parse-ipv4 (pop args))))
          ((string= arg "--port")
           (unless args
             (die "Missing value after --port"))
@@ -154,12 +127,10 @@
     finally
        (unless interface
          (die "Missing required --iface IFACE"))
-       (unless broadcast
-         (die "Missing required --broadcast IPV4"))
        (unless mac
          (die "Missing required MAC address"))
-       (return (values interface broadcast port mac))))
+       (return (values interface port mac))))
 
-(multiple-value-bind (interface broadcast port mac)
+(multiple-value-bind (interface port mac)
     (parse-args (cdr sb-ext:*posix-argv*))
-  (send-wol interface broadcast mac :port port))
+  (send-wol interface mac :port port))
