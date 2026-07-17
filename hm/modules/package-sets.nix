@@ -130,7 +130,8 @@ in
           # pkgs.aider-chat # breaks
           pkgs.python3Packages.huggingface-hub
 
-          pkgs.harbor-cli # for terminal-bench tests on llms
+          # pkgs.harbor-cli # for terminal-bench tests on llms
+          pkgs.harbor # from my overlay
 
           # a competitor of "safetensors_explorer"
           (pkgs.python3Packages.gguf.overridePythonAttrs (oa: {
