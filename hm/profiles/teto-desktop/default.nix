@@ -60,6 +60,7 @@ in
 
       neovim-dbg # when neovim crashes, launch "nvim-debug" to debug
 
+      ffsubsync # to sync subtitles
       # TODO provide debug package under different executable "nvim-debug"
 
       panvimdoc # to generate vim doc from README, for instance in gp.nvim

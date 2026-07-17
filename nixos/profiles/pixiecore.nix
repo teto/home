@@ -73,7 +73,7 @@ let
             # environment.etc."bashrc.local".text = ''
             #   '';
 
-            networking.hostName = "bootstrap.local";
+            networking.hostName = "bootstrap";
 
             services.openssh = {
               enable = true;

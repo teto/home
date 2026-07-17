@@ -27,6 +27,6 @@
       Timestamp: $timestamp
     EOF
 
-    echo "$messages" | msmtp --read-envelope-from --read-recipients -afastmail ${secrets.users.teto.email}
+    echo "$message" | msmtp --read-envelope-from --read-recipients -afastmail ${secrets.users.teto.email}
   '';
 }

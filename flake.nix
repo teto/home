@@ -117,6 +117,8 @@
 
     };
 
+    nix-cache-beacon.url = "github:adisbladis/nix-cache-beacon";
+
     # lux = {
     #   url = "github:nvim-neorocks/lux";
     #   inputs.nixpkgs.follows = "nixpkgs";
