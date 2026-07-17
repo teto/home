@@ -1,7 +1,8 @@
 {
-  config,
-  lib,
-  pkgs,
+  # config,
+  # lib,
+  pkgs
+, dotfilesPath,
   ...
 }:
 {
@@ -10,6 +11,7 @@
   services.llama-cpp = {
 
     enable = true;
+    # package = pkgs.llama-cuda;
     # package = pkgs.llama-cpp-matt;
     # -m,    --model FNAME                    model path (default: `models/$filename` with filename from `--hf-file`
     #                                         or `--model-url` if set, otherwise models/7B/ggml-model-f16.gguf)
@@ -23,7 +25,7 @@
     extraFlags = [
       # to allow devtools calls
       # "--jinja" # it is the default
-      "--model-presets contrib/llama-presets.ini"
+      "--models-preset" "${dotfilesPath}/contrib/llama-presets.ini"
     ];
     host = "0.0.0.0";
     # modelsPreset = {

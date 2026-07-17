@@ -37,6 +37,7 @@ in
 
     # installed via HM
     flakeSelf.inputs.nix-index-database.nixosModules.nix-index
+    flakeSelf.inputs.nix-cache-beacon.nixosModules.nix-cache-beacon
     flakeSelf.nixosModules.nvd
 
     flakeSelf.nixosProfiles.universal
@@ -63,16 +64,18 @@ in
     };
   };
 
-  # services.nix-cache-beacon = {
-  #   # Announce cache to the local network
-  #   advert = {
-  #     enable = true;
-  #     port = 5000; # Harmonia port
-  #   };
-  #
-  #   # Enable local binary cache using discovered caches on the local network
-  #   cache.enable = true;
-  # };
+  services.nix-cache-beacon = {
+    # Announce cache to the local network
+    advert = {
+      enable = true;
+      # 
+      port = 5000;
+      # port = config.services.harmonia-dev.settings.port; # Harmonia port
+    };
+
+    # Enable local binary cache using discovered caches on the local network
+    cache.enable = true;
+  };
 
   # Make Nix aware of our local network cache
   nix.settings.substituters = [ "http://localhost:5028" ];

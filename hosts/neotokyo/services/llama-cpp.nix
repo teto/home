@@ -16,9 +16,9 @@ in
 
   enable = true;
   openFirewall = true;
-  host = "0.0.0.0";
 
   settings = {
+    host = "0.0.0.0";
     port = 8888; # to avoid conflict with headscale
     models-preset = configFormat.generate "models-preset.ini" {
       "Qwen3-Coder-Next" = {

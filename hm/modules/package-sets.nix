@@ -707,7 +707,7 @@ in
     (mkIf (cfg.japanese && cfg.llms) {
 
       home.packages = [
-        pkgs.mokuro
+        # pkgs.mokuro
         pkgs.python3Packages.manga-ocr
       ];
 

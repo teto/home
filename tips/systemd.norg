@@ -5,6 +5,10 @@ systemctl show-environment --user ?
 loginctl show-session $XDG_SESSION_ID --value --property=Type
 tty
 
+systemctl list-jobs
+
+then I can cancel one with `systemctl cancel JOB_ID`
+
 * service types
 
   - Type=simple - Process doesn't fork, ready immediately (default)

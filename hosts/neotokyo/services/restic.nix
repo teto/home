@@ -46,10 +46,11 @@
       repository = secrets.backblaze.immich-backup-bucket;
 
       # repositoryFile
+      # will generate it with X-OnlyManualStart = true;
       timerConfig = {
         # daily
         OnCalendar = "03:00";
-        RandomizedDelaySec = "1h";
+        RandomizedDelaySec = "5m";
         # OnUnitActiveSec = "1d";
 
         # Persistent = true;

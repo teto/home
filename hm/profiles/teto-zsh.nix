@@ -1,10 +1,9 @@
 {
   config,
   flakeSelf,
-  secrets,
-  dotfilesPath,
-  pkgs,
-  flakeSelf,
+  # secrets,
+  # dotfilesPath,
+  # pkgs,
   ...
 }:
 {
@@ -16,11 +15,6 @@
     # default in latest hm
     ZDOTDIR = "$XDG_CONFIG_HOME/zsh";
   };
-
-  imports = [
-
-    flakeSelf.homeModules.zsh
-  ];
 
   programs.zsh = {
     enable = true;

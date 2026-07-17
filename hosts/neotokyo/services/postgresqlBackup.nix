@@ -33,7 +33,7 @@
         serviceConfig = {
           Group = "immich"; # such that it can read the files (but can not write to it)
           # Type = "exec"; # restic sets it to "oneshot"
-          RemainAfterExit = "yes";
+          # RemainAfterExit = "yes"; # might break the job enqueuing ?
         };
         unitConfig = {
           PartOf = "restic-backups-immich-db-to-backblaze.timer";

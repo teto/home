@@ -126,8 +126,8 @@ nixos-rebuild command extra_args="":
     nixos-rebuild \
       --flake ~/home \
       --sudo --keep-going \
-      --override-input nixpkgs {{ NIXPKGS_REPO }} \
-      --override-input hm {{ HM_REPO }} \
+      --override-input nixpkgs path:{{ NIXPKGS_REPO }} \
+      --override-input hm path:{{ HM_REPO }} \
        {{ extra_args }} \
        {{ command }}
 satellite:

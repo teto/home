@@ -22,7 +22,7 @@
     https = false;
 
     # TODO update to 33
-    package = pkgs.nextcloud33;
+    package = pkgs.nextcloud34;
 
     # so I used to have
     # ✗ PHP opcache: The PHP OPcache module is not properly configured. OPcache is not working as it should, opcache_get_status() returns false, please check configuration.

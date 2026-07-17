@@ -163,9 +163,10 @@
 
     # poetry.url = "github:nix-community/poetry2nix";
     neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
       # url = "path:/home/teto/neovim-nightly-overlay";
       # ff21a18bde28b4c8ca0bc1f9a5b7186a1b89a3d1 ok
-      url = "github:nix-community/neovim-nightly-overlay?rev=ff21a18bde28b4c8ca0bc1f9a5b7186a1b89a3d1";
+      # url = "github:nix-community/neovim-nightly-overlay?rev=ff21a18bde28b4c8ca0bc1f9a5b7186a1b89a3d1";
       # not good
       # url = "github:nix-community/neovim-nightly-overlay?rev=2b5cf92633caaf2604e7b78d8d16ad92dbb502c6";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -209,7 +210,7 @@
 
     nix-schemas.url = "github:DeterminateSystems/nix-src/flake-schemas";
 
-    jj-gh.url = "github:mrjones2014/jj-gh?ref=pull/232/head";
+    jj-gh.url = "github:mrjones2014/jj-gh";
 
     rocks-nvim = {
       # url = "/home/teto/neovim/rocks.nvim";

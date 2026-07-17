@@ -22,7 +22,7 @@ let
       New revision: $new_revision
       Previous revision: $old_revision
 
-      Timestamp: $timestamp"
+      Timestamp: $timestamp
     EOF
 
     notify-send --expire-time=0 -a "" "$title" "$message"
