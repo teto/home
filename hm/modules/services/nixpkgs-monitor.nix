@@ -7,7 +7,8 @@
 }:
 let
   cfg = config.services.nixpkgs-monitor;
-  defaultNotifier = pkgs.writeShellScript "notify-advancement" ''
+
+  localNotifier = pkgs.writeShellScript "notify-advancement" ''
     set -ue
 
     message="nixpkgs advanced";
@@ -28,20 +29,23 @@ let
     notify-send --expire-time=0 -a "" "$title" "$message"
   '';
 
+
 in
 {
   options = {
     services.nixpkgs-monitor = {
       enable = lib.mkEnableOption "nixpkgs-monitor";
+
       # trackedBranch = "";
       # lib.mkPackageOption pkgs "name" {
       on-branch-advance-cmd = lib.mkOption {
         type = lib.types.nullOr lib.types.package;
-        default = defaultNotifier;
+        default = localNotifier;
         description = ''
           Script to run in case of success
         '';
       };
+
     };
   };
   config = lib.mkIf cfg.enable {

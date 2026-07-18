@@ -59,8 +59,10 @@ in
   programs.bash = {
     initExtra = ''
       cd nixpkgs
-      echo "export token"
-    '';
+      echo "exporting token..."
+      export GITHUB_TOKEN=$(cat ~/github-token)
+    ''
+    ;
 
   };
 

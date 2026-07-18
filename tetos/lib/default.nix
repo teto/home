@@ -31,6 +31,33 @@ in
     nixosConfToBuilderAttr
     ;
 
+  nixpkgsMonitorEmailNotifier = destinationEmail: pkgs.writeShellScript "notify-advancement" ''
+
+    branch_name="$1"
+    old_revision="$2"
+    new_revision="$3"
+    timestamp="$4"
+
+    title="$branch_name advanced";
+
+    # strip leading spaces else msmtp will complain
+    message=$(cat <<EOF
+    From: ${destinationEmail}
+    To: ${destinationEmail}
+    Subject: $title
+
+
+    New revision: $new_revision
+    Previous revision: $old_revision
+
+    Timestamp: $timestamp
+    EOF
+    )
+
+    echo "$message" | ${lib.getExe pkgs.msmtp} --read-envelope-from --read-recipients -afastmail 
+  '';
+
+
   /**
     default system
     modules: List

@@ -94,11 +94,16 @@ end
 
 function run_success_command --argument-names success_command
     if test -z "$success_command"
+      # ignore empty command
         return 0
     end
 
+    set -l command_args $argv[2..-1]
+    echo $command_args
+
     log_progress "running advancement command: $success_command"
-    fish -c "$success_command"
+    # start program
+    "$success_command" $command_args
     set -l command_status $status
 
     if test $command_status -ne 0
@@ -164,11 +169,8 @@ end
 # Compare the current and last advancement dates
 if test "$current_advancement_date" != "$last_advancement_date"
     log_progress "advancement changed: '$last_advancement_date' -> '$current_advancement_date'"
-
     # Update the last known advancement date
     mkdir -p "$xdg_cache_home"
-    echo $current_advancement_date > "$last_advancement_file"
-    log_progress "updated cache file"
 
     # send_advancement_notification "$branch_name" "$last_advancement_date" "$current_advancement_date" "$current_advancement_timestamp"
     run_success_command "$success_command" "$branch_name" "$last_advancement_date" "$current_advancement_date" "$current_advancement_timestamp"
@@ -177,6 +179,10 @@ if test "$current_advancement_date" != "$last_advancement_date"
     if test $command_status -ne 0
         exit $command_status
     end
+
+    echo $current_advancement_date > "$last_advancement_file"
+    log_progress "updated cache file"
+
 
     # Return true (0) to indicate a successful check
     exit 0

@@ -1,9 +1,13 @@
 {
   flakeSelf
 , pkgs
+, lib
 , secrets
 , ...
 }:
+let
+  tetoEmail = secrets.users.teto.email;
+in
 {
 
   home.stateVersion = "26.05";
@@ -16,29 +20,11 @@
     flakeSelf.homeModules.nixpkgs-monitor
   ];
 
+  # move to teto
   services.nixpkgs-monitor = {
     enable = true;
     # TODO send a mail
-  on-branch-advance-cmd = pkgs.writeShellScript "notify-advancement" ''
-
-    message="nixpkgs advanced";
-    branch_name="$1"
-    old_revision="$2"
-    new_revision="$3"
-    timestamp="$4"
-
-    title="$branch_name advanced";
-
-    message=<<<EOF
-      New revision: $new_revision
-      Previous revision: $old_revision
-
-      Timestamp: $timestamp
-    EOF
-
-    echo "$message" | msmtp --read-envelope-from --read-recipients -afastmail ${secrets.users.teto.email}
-  '';
-
+    on-branch-advance-cmd = lib.nixpkgsMonitorEmailNotifier tetoEmail;
     # on-branch-advance-cmd
   };
 
