@@ -1,9 +1,9 @@
 {
-  flakeSelf
-, pkgs
-, lib
-, secrets
-, ...
+  flakeSelf,
+  pkgs,
+  lib,
+  secrets,
+  ...
 }:
 let
   tetoEmail = secrets.users.teto.email;

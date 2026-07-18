@@ -61,8 +61,7 @@ in
       cd nixpkgs
       echo "exporting token..."
       export GITHUB_TOKEN=$(cat ~/github-token)
-    ''
-    ;
+    '';
 
   };
 

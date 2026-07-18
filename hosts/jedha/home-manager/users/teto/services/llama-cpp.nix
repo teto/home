@@ -1,8 +1,8 @@
 {
   # config,
   # lib,
-  pkgs
-, dotfilesPath,
+  pkgs,
+  dotfilesPath,
   ...
 }:
 {
@@ -25,7 +25,8 @@
     extraFlags = [
       # to allow devtools calls
       # "--jinja" # it is the default
-      "--models-preset" "${dotfilesPath}/contrib/llama-presets.ini"
+      "--models-preset"
+      "${dotfilesPath}/contrib/llama-presets.ini"
     ];
     host = "0.0.0.0";
     # modelsPreset = {

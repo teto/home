@@ -1,6 +1,6 @@
 {
 
-  enable = true;
+  enable = false;
 
   openFirewall = true;
   interfaceName = "wlan0";

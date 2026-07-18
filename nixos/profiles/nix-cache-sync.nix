@@ -53,7 +53,6 @@ in
     '';
     serviceConfig = {
       Type = "oneshot";
-      # ExecStart = "${pkgs.coreutils}/bin/true";
     };
   };
 

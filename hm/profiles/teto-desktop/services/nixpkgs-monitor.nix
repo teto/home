@@ -1,7 +1,8 @@
-{ pkgs
-, secrets
-, lib
-, ...
+{
+  pkgs,
+  secrets,
+  lib,
+  ...
 }:
 let
   tetoEmail = secrets.users.teto.email;

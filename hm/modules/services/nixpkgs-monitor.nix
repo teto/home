@@ -29,7 +29,6 @@ let
     notify-send --expire-time=0 -a "" "$title" "$message"
   '';
 
-
 in
 {
   options = {

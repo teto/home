@@ -1,7 +1,7 @@
 # workaround a yazi bug
 [services]
-[services."neotokyo.fr"]
-type = "sftp"
+# [services."neotokyo.fr"]
+# type = "sftp"
 
 
 # [services.my-server]

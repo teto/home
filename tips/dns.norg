@@ -1,2 +1,7 @@
 resolvectl to dump config
 sudo systemd-resolve --interface=eno1 --set-dns=1.1.1.1 
+
+
+resolvectl query jedha.local
+
+The resolver is already returning both families; the ordering comes from libc’s getaddrinfo policy, not from networkd. I’m checking the native NixOS option so the change fits your configuration cleanly.
