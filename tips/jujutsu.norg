@@ -1,3 +1,6 @@
+* jj log slow
+
+  `jj debug index-changed-paths` to speed things up ?
 
 Answer directly from brice:
 > jj git init --colocate will try to read refs/remotes/origin/HEAD and set trunk() to it. It doesn't try any other remote names

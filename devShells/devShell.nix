@@ -15,6 +15,7 @@ pkgs.mkShell {
       age
       pkgs.bitwarden-cli # to sync passwords
       dmidecode
+      qrencode # to plot qrcodes and "show" secrets to smartphone
       #
       self.inputs.deploy-rs.packages.${stdenv.hostPlatform.system}.deploy-rs
       expect # to pipe into deploy-rs
