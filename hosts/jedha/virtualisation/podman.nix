@@ -5,7 +5,7 @@
   ...
 }:
 {
-  enable = true;
+  enable = false;
   # enableNvidia = true;
 
   # # podman-related changes

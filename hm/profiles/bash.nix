@@ -36,10 +36,11 @@
       netstat_tcp = "netstat -ltnp";
     };
 
-    initExtra = ''
-      # enable vimode
-      set -o vi
-    '';
+    #
+    # initExtra = ''
+    #   # enable vimode
+    #   set -o vi
+    # '';
   };
 
 }

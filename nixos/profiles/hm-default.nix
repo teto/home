@@ -25,6 +25,7 @@
     flakeSelf.inputs.wayland-pipewire-idle-inhibit.homeModules.default
     flakeSelf.inputs.sops-nix.homeManagerModules.sops
 
+    flakeSelf.homeProfiles.readline
     flakeSelf.homeProfiles.fzf
     flakeSelf.homeProfiles.common
     flakeSelf.homeProfiles.neovim

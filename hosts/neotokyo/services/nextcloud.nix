@@ -17,11 +17,14 @@
     enable = true;
 
     #  description = "FQDN for the nextcloud instance.";
-    hostName = "nextcloud.${secrets.jakku.hostname}";
+    # hostName = "nextcloud.${secrets.jakku.hostname}";
+    hostName = "localhost";
+    # Trusted domains, from which the nextcloud installation will be accessible. You don’t need to add ‘services.nextcloud.hostname’ here.
+    # trustedDomains = [ ];
+    # trusted_proxies = [ ];
     # true ?
     https = false;
 
-    # TODO update to 33
     package = pkgs.nextcloud34;
 
     # so I used to have
@@ -133,7 +136,8 @@
       # extends the already configured by the nixos module nginx
       # https://betterstack.com/community/questions/what-is-the-difference-between-host-http-host-server-name-variable-nginx/
       # server_name is  typically used to match the server block in the Nginx configuration based on the incoming request.
-      "nextcloud.${secrets.jakku.hostname}" = {
+      # "nextcloud.${secrets.jakku.hostname}" = {
+      "nextcloud.home" = {
         forceSSL = true;
 
         # proxyWebsockets = true
@@ -143,9 +147,14 @@
 
         # listen = [ 80 ];
         # listen = [ { addr = "127.0.0.1"; port = 80; }];
-        # locations."/" = {
-        #   proxyPass = "http://localhost:8080"; # Assuming service 1 runs on localhost:8080
-        # };
+        locations."/" = {
+          proxyPass = "http://localhost:8080"; # Assuming service 1 runs on localhost:8080
+        };
+
+        # extraConfig = ''
+        #   allow 192.168.0.1/24;
+        #   deny all;
+        # '';
       };
 
     };

@@ -1,5 +1,8 @@
-{ dotfilesPath, ... }:
+{ dotfilesPath, flakeSelf, ... }:
 {
+  _imports = [
+    flakeSelf.homeProfiles.readline
+  ];
 
   enable = true;
   variables = {

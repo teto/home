@@ -96,6 +96,7 @@ function M.register_keymaps()
         })
     end)
 
+    -- a bunch of these are helix-inspired
     vim.keymap.set('n', '<Leader>F', function()
         fzf_lua.filetypes()
     end, { desc = 'Select filetype' })
@@ -116,12 +117,19 @@ function M.register_keymaps()
         fzf_lua.buffers()
     end, { desc = 'Fuzzysearch buffers' })
 
+    -- diagnostics_document
+    -- lsp_document_diagnostics
+    -- diagnostics_workspace
+    vim.keymap.set('n', '<Leader>d', function()
+        fzf_lua.diagnostics_workspace()
+    end, { desc = 'Fuzzysearch diagnostics' })
+
     vim.keymap.set('n', '<Leader>C', function()
         -- awesome_colorschemes can download and install colorschemes
         fzf_lua.colorschemes()
     end, { desc = 'Select a colorscheme' })
 
-    vim.keymap.set('n', '<Leader>l', function()
+    vim.keymap.set('n', '<Leader>/', function()
         fzf_lua.live_grep()
     end)
 

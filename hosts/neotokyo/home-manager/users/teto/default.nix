@@ -28,11 +28,14 @@ in
     flakeSelf.homeProfiles.common
     flakeSelf.homeProfiles.bash
     flakeSelf.homeProfiles.teto-aliases
+    flakeSelf.homeProfiles.readline
+
     flakeSelf.homeProfiles.yazi
     flakeSelf.homeProfiles.yt-dlp
   ];
 
   home.packages = [
+    pkgs.just # to run justfile
     pkgs.nix-diff
   ];
 

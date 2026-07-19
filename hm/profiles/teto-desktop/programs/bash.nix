@@ -11,6 +11,7 @@ let
       lib.mkRemoteBuilderDesc
     else
       lib.warn "Using noop 'mkRemoteBuilderDesc' switch to 'scratch' branch" (_a: _b: "PLACEHOLDER");
+
   builder_neotokyo = mkRemoteBuilderDesc "3.0" (
     lib.nixosConfToBuilderAttr {
       sshKey = "${secretsFolder}/ssh/id_rsa";
@@ -30,6 +31,15 @@ let
     } flakeSelf.nixosConfigurations.jedha
   );
 
+  # TODO fix
+  builder_nixcommunity = mkRemoteBuilderDesc "3.0" (
+    lib.nixosConfToBuilderAttr {
+      sshKey = "${secretsFolder}/ssh/id_rsa";
+      # I might need to set it ?
+      publicHostKey = null;
+    } flakeSelf.nixosConfigurations.jedha
+  );
+
   # TODO add jedha
   # flakeSelf.deploy.nodes.jedha;
 in
@@ -39,6 +49,7 @@ in
   sessionVariables = {
     TETOS_0 = builder_neotokyo;
     TETOS_1 = builder_jedha;
+    # TETOS_2 = builder_nixcommunity;
 
     HISTTIMEFORMAT = "%d.%m.%y %T ";
     # CAREFUL
