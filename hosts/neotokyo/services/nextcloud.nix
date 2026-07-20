@@ -6,6 +6,9 @@
   flakeSelf,
   ...
 }:
+let
+  wgEndpoint = "10.100.0.1";
+in
 {
 
   imports = [
@@ -144,6 +147,10 @@
         # https://nixos.org/manual/nixos/stable/index.html#module-security-acme
         enableACME = true;
         # enableReload = true; # reloads service when config changes !
+
+        listenAddresses = [
+          wgEndpoint
+        ];
 
         # listen = [ 80 ];
         # listen = [ { addr = "127.0.0.1"; port = 80; }];

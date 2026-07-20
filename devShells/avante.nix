@@ -1,4 +1,6 @@
 { pkgs, ... }:
+
+# avante now has a flake
 pkgs.mkShell {
   name = "avante";
   buildInputs =
@@ -16,7 +18,7 @@ pkgs.mkShell {
       lua-language-server # not using emmy yet
       yq
       # needed for 'luatest'
-      pkgs.silver-searcher
+      # pkgs.silver-searcher-ng
       pkgs.python3
       pkgs.docker
       pkgs.stylua
