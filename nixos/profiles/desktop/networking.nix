@@ -9,4 +9,9 @@
     "::ffff:0:0/96" = 100;
   };
 
+  # add wireguard peers
+  extraHosts = ''
+    10.100.0.1   nextcloud.vps
+  '';
+
 }
