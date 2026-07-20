@@ -38,7 +38,7 @@ in
     new_revision="$3"
     timestamp="$4"
 
-    title="$branch_name advanced";
+    title="$branch_name advanced (from $(hostname))";
 
     # strip leading spaces else msmtp will complain
     message=$(cat <<EOF
@@ -50,7 +50,7 @@ in
     New revision: $new_revision
     Previous revision: $old_revision
 
-    Timestamp: $timestamp
+    
     EOF
     )
 

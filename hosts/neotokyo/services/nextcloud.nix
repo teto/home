@@ -8,6 +8,7 @@
 }:
 let
   wgEndpoint = "10.100.0.1";
+  nextcloudHostname =  "nextcloud.vps";
 in
 {
 
@@ -19,9 +20,9 @@ in
   services.nextcloud = {
     enable = true;
 
-    #  description = "FQDN for the nextcloud instance.";
-    # hostName = "nextcloud.${secrets.jakku.hostname}";
-    hostName = "localhost";
+    # 'hostName' is the name of the nginx virtualhost
+    hostName = nextcloudHostname;
+
     # Trusted domains, from which the nextcloud installation will be accessible. You don’t need to add ‘services.nextcloud.hostname’ here.
     # trustedDomains = [ ];
     # trusted_proxies = [ ];
@@ -44,13 +45,12 @@ in
       "opcache.memory_consumption" = "256";
       "opcache.revalidate_freq" = "1";
     };
-    # New option since NixOS 23.05
+
     caching = {
       apcu = true;
       redis = true;
       memcached = false;
     };
-    # caching.redis = true;
 
     # use default redis config for small servers
     configureRedis = true;
@@ -63,7 +63,6 @@ in
     config = {
       # we choose postgres because it's faster
       dbtype = "pgsql";
-
     };
 
     settings = {
@@ -73,11 +72,11 @@ in
     };
 
     extraApps = with config.services.nextcloud.package.packages.apps; {
-      # inherit news; # removed 'cos gives a wrong error
       inherit
         # memories # not supported
         previewgenerator
         # maps
+        # news
         # calendar
         ;
 
@@ -103,8 +102,6 @@ in
       nextcloud-occ user:add --password-from-env teto
       ${config.services.nextcloud.occ}/bin/nextcloud-occ user:setting teto settings email "${secrets.users.teto.email}"
     '';
-    # ${config.services.nextcloud.occ}/bin/nextcloud-occ user:add --password-from-env user2
-    # ${config.services.nextcloud.occ}/bin/nextcloud-occ user:setting user2 settings email "user2@localhost"
     # ${config.services.nextcloud.occ}/bin/nextcloud-occ user:setting admin settings email "admin@localhost"
     serviceConfig = {
       Type = "oneshot";
@@ -115,17 +112,7 @@ in
 
     # see https://discourse.nixos.org/t/disable-a-systemd-service-while-having-it-in-nixoss-conf/12732
     wantedBy = lib.mkForce [ ];
-    # "multi-user.target"
-    # ];
   };
-
-  # security.acme.
-  # https://nixos.org/manual/nixos/stable/index.html#module-security-acme
-  # TODO remove it uses defaults from nginx.nix
-  # security.acme = {
-  #   acceptTerms = true;
-  #   # defaults.email = secrets.users.teto.email;
-  # };
 
   # create some errors on deploy
   # for now we generate one certificate per virtual host
@@ -135,17 +122,14 @@ in
     # ceeformat is unknown ?
     virtualHosts = {
 
-      # see https://nixos.wiki/wiki/Nextcloud
-      # extends the already configured by the nixos module nginx
-      # https://betterstack.com/community/questions/what-is-the-difference-between-host-http-host-server-name-variable-nginx/
-      # server_name is  typically used to match the server block in the Nginx configuration based on the incoming request.
-      # "nextcloud.${secrets.jakku.hostname}" = {
-      "nextcloud.home" = {
-        forceSSL = true;
+      # the n
+      # extends the host already configured by the nixos module nginx
+      "${nextcloudHostname}" = {
+        forceSSL = false;
 
         # proxyWebsockets = true
         # https://nixos.org/manual/nixos/stable/index.html#module-security-acme
-        enableACME = true;
+        enableACME = false;
         # enableReload = true; # reloads service when config changes !
 
         listenAddresses = [
@@ -154,12 +138,12 @@ in
 
         # listen = [ 80 ];
         # listen = [ { addr = "127.0.0.1"; port = 80; }];
-        locations."/" = {
-          proxyPass = "http://localhost:8080"; # Assuming service 1 runs on localhost:8080
-        };
+        # locations."/" = {
+        #   proxyPass = "http://localhost:8080"; # Assuming service 1 runs on localhost:8080
+        # };
 
         # extraConfig = ''
-        #   allow 192.168.0.1/24;
+        #   allow 193.168.0.1/24;
         #   deny all;
         # '';
       };

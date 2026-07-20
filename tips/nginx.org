@@ -5,3 +5,8 @@ In this configuration nginx tests only the request’s header field “Host” t
 
 default_server parameter in the listen directive: 
 https://nginx.org/en/docs/http/request_processing.html
+
+https://betterstack.com/community/questions/what-is-the-difference-between-host-http-host-server-name-variable-nginx/
+https://discourse.nixos.org/t/accessing-nextcloud-on-local-network/23193/5
+server_name is  typically used to match the server block in the Nginx configuration based on the incoming request.
+
