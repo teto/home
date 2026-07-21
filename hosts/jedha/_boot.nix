@@ -78,6 +78,9 @@
     # device = "/dev/disk/by/uuid/65F4B09F417BB97C";
     device = "/dev/sdb2";
     fsType = "ntfs";
+    # to fix "Metadata kept in Windows cache, refused to mount." errors
+    # in e.g. systemd-fsck@dev-sdb2.service service
+    noCheck = true;
     # see https://nixos.wiki/wiki/NTFS
     options = [
       "rw"

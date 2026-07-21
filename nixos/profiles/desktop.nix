@@ -10,6 +10,7 @@ let
   autoloadedModule =
     { pkgs, ... }@args:
     flakeSelf.inputs.haumea.lib.load {
+      # name = "autoloaded";
       src = builtins.trace "${flakeSelf}/nixos/profiles/desktop" "${flakeSelf}/nixos/profiles/desktop";
       # Breaks everything
       # flakeSelf.inputs.nix-filter {

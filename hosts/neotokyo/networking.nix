@@ -1,5 +1,5 @@
 {
-  pkgs,
+  # pkgs,
   secrets,
   # , secretsFolder
   config,
@@ -68,17 +68,21 @@
         {
           # Feel free to give a meaningful name
           # Public key of the peer (not a file path).
-          # ${secretsFolder}/wireguard/tatooine-private-key
+          # "tatooine-private-key"
           publicKey = "HPrWcZUuJMsxc+qDrN08IC9GJoy/c1UofmvmTC/bm3U=";
 
           # List of IPs assigned to this peer within the tunnel subnet. Used to configure routing.
           allowedIPs = [ "10.100.0.2/32" ];
           persistentKeepalive = 45;
         }
-        # { # John Doe
-        #   publicKey = "{john doe's public key}";
-        #   allowedIPs = [ "10.100.0.3/32" ];
-        # }
+        {
+          # Feel free to give a meaningful name
+          publicKey = "Zr5Q5e2cN6pscnok0z8d30numWMlzud9LE4n0KSSczE=";
+
+          # List of IPs assigned to this peer within the tunnel subnet. Used to configure routing.
+          allowedIPs = [ "10.100.0.3/32" ];
+          persistentKeepalive = 45;
+        }
       ];
     };
   };

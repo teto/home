@@ -17,7 +17,7 @@
     };
     ml = {
       # enable machine learning
-      "enabled" = "yes";
+      enabled = "yes";
     };
   };
   # https://nixos.wiki/wiki/Netdata

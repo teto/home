@@ -28,6 +28,14 @@
 
   network = {
 
+    wait-online = {
+      # not sure why it keeps failing
+      enable = false;
+      # ignoredInterfaces = [ "enp11s0" ];
+      anyInterface = true;
+      timeout = 60;
+    };
+
     # links = {
     #   wired = {
     #     matchConfig = {

@@ -14,8 +14,6 @@
       # we prefer to configure it with networkd
       "interface-name:enp11s0"
       #   "interface-name:r?-*"
-      #   "interface-name:client-*"
-      #   "interface-name:server-*"
     ];
     wifi = {
       backend = "iwd";

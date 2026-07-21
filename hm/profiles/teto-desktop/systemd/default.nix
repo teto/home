@@ -25,7 +25,6 @@
 
     # settings.Manager.DefaultEnvironment
     # /home/teto/.local/state/nix/profile/bin refernece ceux installes par nix profile
-    # ${pkgs.coreutils}/bin
     PATH = "/home/teto/.local/state/nix/profile/bin:${dotfilesPath}/bin";
     NOTMUCH_CONFIG = "${config.xdg.configHome}/notmuch/default/config"; # for vdirsyncer
   };

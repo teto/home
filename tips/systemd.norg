@@ -1,11 +1,15 @@
 
 systemctl get-default  / set-default
-systemctl list-dependencies
+systemctl list-dependencies <SERVICE>
 systemctl show-environment --user ?
 loginctl show-session $XDG_SESSION_ID --value --property=Type
 tty
 
 systemctl list-jobs
+
+* See merged result
+
+systemctl show -p ExecStart systemd-networkd-wait-online.service
 
 then I can cancel one with `systemctl cancel JOB_ID`
 

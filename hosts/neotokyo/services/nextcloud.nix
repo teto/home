@@ -8,7 +8,7 @@
 }:
 let
   wgEndpoint = "10.100.0.1";
-  nextcloudHostname =  "nextcloud.vps";
+  nextcloudHostname = "nextcloud.vps";
 in
 {
 
