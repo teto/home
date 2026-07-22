@@ -143,7 +143,7 @@
     boardgamegeek = {
       urls = [
         {
-          template = "https://boardgamegeek.org/search/{searchTerms}";
+          template = "https://boardgamegeek.com/search/{searchTerms}";
           params = [
             {
               name = "query";
@@ -331,6 +331,10 @@
 
     "browser.search.hiddenOneOffs" = "Google,Yahoo,Bing,Amazon.com,Twitter";
     "browser.search.suggest.enabled" = false;
+
+    # support arbitrary TLDs
+    # https://blog.hardill.me.uk/2024/06/07/firefox-with-a-private-tld/
+    "browser.fixup.domainsuffixwhitelist.vpn" = true;
 
     "browser.translations.neverTranslateLanguages" = "en";
     "browser.newtabpage.activity-stream.showSponsored" = false;
