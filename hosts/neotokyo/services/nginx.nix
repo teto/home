@@ -131,9 +131,10 @@ in
     }
     // lib.optionalAttrs config.services.jellyfin.enable {
       # inspired by nixaar project
-      "jellyfin.${secrets.jakku.hostname}" = {
-        enableACME = true;
-        forceSSL = true;
+      # "jellyfin.${secrets.jakku.hostname}" = {
+      "jellyfin.vps" = {
+        enableACME = false;
+        forceSSL = false;
         locations."/" = {
           recommendedProxySettings = true;
           proxyWebsockets = true;

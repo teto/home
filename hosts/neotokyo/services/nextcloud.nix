@@ -67,8 +67,9 @@ in
 
     settings = {
       default_phone_region = "FR";
-      # Further forces Nextcloud to use HTTPS, useful when behind proxy
-      overwriteprotocol = "https";
+      # This internal vhost currently serves plain HTTP (https/forceSSL are disabled).
+      # Keep generated asset and login URLs on the protocol nginx actually serves.
+      overwriteprotocol = "http";
     };
 
     extraApps = with config.services.nextcloud.package.packages.apps; {
@@ -141,7 +142,7 @@ in
         # locations."/" = {
         #   proxyPass = "http://localhost:8080"; # Assuming service 1 runs on localhost:8080
         # };
-
+        #
         # extraConfig = ''
         #   allow 193.168.0.1/24;
         #   deny all;

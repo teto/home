@@ -12,6 +12,7 @@
   # add wireguard peers
   extraHosts = ''
     10.100.0.1   nextcloud.vps
+    10.100.0.1   nextcloud.vpn
   '';
 
 }

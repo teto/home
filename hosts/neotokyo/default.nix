@@ -126,7 +126,7 @@ in
     flakeSelf.inputs.buildbot-nix.nixosModules.buildbot-worker
   ];
 
-  users = {
+    users = {
 
     # that's where we
     # users.jellyfin = {
@@ -231,8 +231,23 @@ in
 
   documentation.enable = false;
 
+  # Enable 'sudo' with SSH key
+  # see https://github.com/serokell/deploy-rs/issues/299#issuecomment-3179359719
+  # to avoid password when using deploy-rs
+  security.pam.sshAgentAuth = {
+    enable = true;
+  };
   # security.sudo.wheelNeedsPassword = true;
   security.sudo.execWheelOnly = true;
+  security.sudo.extraRules = [
+  {
+    users = ["teto"];
+    commands = [
+      { command = "/nix/store/*-activatable-nixos-system-*/activate-rs"; }
+      { command = "/run/current-system/sw/bin/rm /tmp/deploy-rs-canary-*"; }
+    ];
+  }
+];
 
   environment.systemPackages = [
     # flakeSelf.inputs.transgression-tui.packages.${pkgs.stdenv.hostPlatform.system}.transgression-tui

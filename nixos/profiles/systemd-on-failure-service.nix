@@ -26,18 +26,23 @@
       User = "teto"; # to access teto's msmtp config
       Type = "oneshot";
       Environment = [
-        "SERVICE_NAME=%n"
+        "SERVICE_NAME=%n" # %n => 
         # "EXIT_CODE=%e" # this doesn't seem to exist
       ];
       # --read-envelope-from
       # TODO should be able to qualify service + result
+    #       "$MONITOR_UNIT" \
+    # "$MONITOR_SERVICE_RESULT" \
+    # "$MONITOR_EXIT_CODE" \
+    # "$MONITOR_EXIT_STATUS" \
+    # "$MONITOR_INVOCATION_ID"
       ExecStart =
         let
           script = pkgs.writeShellScript "notify-service-result" ''
             # echo "Result: %i"
             SUBJECT=$1
             MSG=$2
-            printf "Subject: notify service result %i: $SUBJECT\n\nSUBJECT: Test body\n" | ${pkgs.msmtp}/bin/msmtp -afastmail "${secrets.users.teto.email}"
+            printf "Subject: notify service result %i: $SUBJECT\n\nSystemd service [$MONITOR_UNIT] exited with exit value of $MONITOR_EXIT_STATUS\n" | ${pkgs.msmtp}/bin/msmtp -afastmail "${secrets.users.teto.email}"
           '';
         in
         ''${script} "''${SERVICE_NAME}"'';

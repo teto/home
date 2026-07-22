@@ -772,7 +772,7 @@
                 hostname = secrets.jedha.hostname;
               }
               // {
-                interactiveSudo = true;
+                # interactiveSudo = true;
                 sshUser = "teto";
               };
 
@@ -783,7 +783,7 @@
               }
               // {
                 # sshOpts = [ "-t" ];
-                interactiveSudo = true;
+                # interactiveSudo = true;
                 # user = "teto";
               }
               // {

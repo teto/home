@@ -3,7 +3,7 @@
   enable = true;
   # dataDir ?
   # group ?
-  # todo remove
+  # todo remove once we checked it worked against VPN
   openFirewall = true;
 
   #
