@@ -2,7 +2,7 @@
 {
   # if you want to get a notification
   # https://www.arthurkoziel.com/restic-backups-b2-nixos/
-  services.restic.backups = {
+  backups = {
     immich-db-to-backblaze = {
       # under which user to run. Defaults to root
       user = "teto";

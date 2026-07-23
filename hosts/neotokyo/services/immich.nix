@@ -23,7 +23,9 @@
       # enable = lib.mkForce true;
       enable = false;
     };
+
     # secretsFile
+    # TODO remove once it runs behind vpn
     openFirewall = true;
 
     # "IMMICH_MEDIA_LOCATION=/var/lib/immich"
@@ -36,28 +38,11 @@
     # secretsFile = "/run/secrets/immich";
   };
 
+  # TODO see nginx config for the reset
+
   systemd.services.immich-server.serviceConfig = {
     # we override the default 0077 such that the backup job can read the files
     UMask = "0027";
-  };
-
-  services.nginx.virtualHosts."immich.${secrets.jakku.hostname}" = {
-    forceSSL = true;
-    enableACME = true;
-    # useACMEHost = "${secrets.jakku.hostname}";
-    # listen on all interfaces
-    # listen = [ { addr = "0.0.0.0"; port = 80; }];
-
-    locations."/" = {
-      #  echo $server_name;  # Will output the server name defined in the current server block
-      proxyPass = "http://localhost:2283";
-      proxyWebsockets = true;
-      extraConfig = ''
-        client_max_body_size 100M;
-      '';
-
-    };
-
   };
 
 }

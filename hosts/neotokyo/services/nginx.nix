@@ -129,10 +129,44 @@ in
 
       };
     }
+    // lib.optionalAttrs config.services.immich.enable {
+
+
+  # "immich.${secrets.jakku.hostname}" = {
+  "immich.vps" = {
+    forceSSL = false;
+    enableACME = false;
+    # useACMEHost = "${secrets.jakku.hostname}";
+    # listen on all interfaces
+    # listen = [ { addr = "0.0.0.0"; port = 80; }];
+        listenAddresses = [
+          wgEndpoint
+        ];
+
+
+    locations."/" = {
+      #  echo $server_name;  # Will output the server name defined in the current server block
+      proxyPass = "http://localhost:${toString config.services.immich.port}";
+      proxyWebsockets = true;
+      extraConfig = ''
+        client_max_body_size 100M;
+      '';
+
+    };
+    };
+
+  }
+
+
     // lib.optionalAttrs config.services.jellyfin.enable {
       # inspired by nixaar project
       # "jellyfin.${secrets.jakku.hostname}" = {
       "jellyfin.vps" = {
+
+        listenAddresses = [
+          wgEndpoint
+        ];
+
         enableACME = false;
         forceSSL = false;
         locations."/" = {
@@ -141,11 +175,6 @@ in
 
           proxyPass = "http://127.0.0.1:${toString defaultJellyfinPort}";
         };
-
-        # root = pkgs.runCommand "testdir" { } ''
-        #   mkdir "$out"
-        #   echo hello world > "$out/index.html"
-        # '';
       };
     }
     // lib.optionalAttrs config.services.buildbot-nix.master.enable {
@@ -155,14 +184,11 @@ in
 
       };
     }
-    // lib.optionalAttrs config.services.buildbot-nix.master.enable {
+    // lib.optionalAttrs config.services.harmonia.cache.enable {
+      # harmonia 
       "cache.${secrets.jakku.hostname}" = {
         enableACME = true;
         forceSSL = true;
-
-        listenAddresses = [
-          wgEndpoint
-        ];
 
         # TODO replace with harmonia's port
         locations."/".extraConfig = ''

@@ -12,7 +12,6 @@
       # url = "github:teto/buildbot-nix?ref=teto/hack-niks3-eval-error";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     direnv-instant.url = "github:Mic92/direnv-instant";
 
     disko = {
@@ -32,9 +31,10 @@
 
     harmonia = {
       url = "github:nix-community/harmonia";
-      # url = "github:teto/harmonia?ref=teto/remove-mdDoc";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    jellyhaj.url = "github:owo-uwu-nyaa/jellyhaj";
 
     memento-kanjidict = {
       url = "https://github.com/themoeway/jmdict-yomitan/releases/latest/download/JMdict_french.zip";

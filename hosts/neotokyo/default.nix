@@ -27,6 +27,7 @@ let
           "services/llama-cpp.nix"
           "services/harmonia.nix"
           "services/jellyfin.nix"
+          "services/restic.nix"
           "services/buildbot-nix.nix"
           "services/transmission.nix"
           "services/headscale.nix"
@@ -109,10 +110,7 @@ in
     ./services/postgresqlBackup.nix
     ./services/nginx.nix
     ./services/immich.nix
-    ./services/restic.nix
-    # ./services/n8n.nix
-
-    # ./services/jellyfin.nix
+    # ./services/restic.nix
 
     # testing
     # ./services/vaultwarden.nix

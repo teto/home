@@ -111,7 +111,8 @@ boot: (nixos-rebuild "boot --install-bootloader" "")
 
 # new version using nh
 switch:
-    nh os switch --ask ~/home -- --keep-going \
+    # --ask 
+    nh os switch ~/home -- --keep-going \
          --override-input nixpkgs {{ NIXPKGS_REPO }} \
          --override-input hm {{ HM_REPO }}
 
