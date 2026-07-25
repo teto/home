@@ -131,32 +131,29 @@ in
     }
     // lib.optionalAttrs config.services.immich.enable {
 
-
-  # "immich.${secrets.jakku.hostname}" = {
-  "immich.vps" = {
-    forceSSL = false;
-    enableACME = false;
-    # useACMEHost = "${secrets.jakku.hostname}";
-    # listen on all interfaces
-    # listen = [ { addr = "0.0.0.0"; port = 80; }];
+      # "immich.${secrets.jakku.hostname}" = {
+      "immich.vps" = {
+        forceSSL = false;
+        enableACME = false;
+        # useACMEHost = "${secrets.jakku.hostname}";
+        # listen on all interfaces
+        # listen = [ { addr = "0.0.0.0"; port = 80; }];
         listenAddresses = [
           wgEndpoint
         ];
 
+        locations."/" = {
+          #  echo $server_name;  # Will output the server name defined in the current server block
+          proxyPass = "http://localhost:${toString config.services.immich.port}";
+          proxyWebsockets = true;
+          extraConfig = ''
+            client_max_body_size 100M;
+          '';
 
-    locations."/" = {
-      #  echo $server_name;  # Will output the server name defined in the current server block
-      proxyPass = "http://localhost:${toString config.services.immich.port}";
-      proxyWebsockets = true;
-      extraConfig = ''
-        client_max_body_size 100M;
-      '';
+        };
+      };
 
-    };
-    };
-
-  }
-
+    }
 
     // lib.optionalAttrs config.services.jellyfin.enable {
       # inspired by nixaar project
@@ -185,7 +182,7 @@ in
       };
     }
     // lib.optionalAttrs config.services.harmonia.cache.enable {
-      # harmonia 
+      # harmonia
       "cache.${secrets.jakku.hostname}" = {
         enableACME = true;
         forceSSL = true;

@@ -124,7 +124,7 @@ in
     flakeSelf.inputs.buildbot-nix.nixosModules.buildbot-worker
   ];
 
-    users = {
+  users = {
 
     # that's where we
     # users.jellyfin = {
@@ -238,14 +238,14 @@ in
   # security.sudo.wheelNeedsPassword = true;
   security.sudo.execWheelOnly = true;
   security.sudo.extraRules = [
-  {
-    users = ["teto"];
-    commands = [
-      { command = "/nix/store/*-activatable-nixos-system-*/activate-rs"; }
-      { command = "/run/current-system/sw/bin/rm /tmp/deploy-rs-canary-*"; }
-    ];
-  }
-];
+    {
+      users = [ "teto" ];
+      commands = [
+        { command = "/nix/store/*-activatable-nixos-system-*/activate-rs"; }
+        { command = "/run/current-system/sw/bin/rm /tmp/deploy-rs-canary-*"; }
+      ];
+    }
+  ];
 
   environment.systemPackages = [
     # flakeSelf.inputs.transgression-tui.packages.${pkgs.stdenv.hostPlatform.system}.transgression-tui
