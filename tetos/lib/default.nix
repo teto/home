@@ -49,8 +49,6 @@ in
 
     New revision: $new_revision
     Previous revision: $old_revision
-
-    
     EOF
     )
 

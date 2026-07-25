@@ -37,7 +37,7 @@
     #   });
 
     scripts = [
-      (pkgs.mpvScripts.autosub) # works with subliminal
+      # (pkgs.mpvScripts.autosub) # works with subliminal
 
       # pkgs.mpvScripts.thumbnail # show thumbnail on hover, thumbnail ENABLES osc contrary to what we want so let's keep it removed
       # pkgs.mpvScripts.modernz # new UI ? https://github.com/Samillion/ModernZ
