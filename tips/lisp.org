@@ -1,15 +1,61 @@
 
 sbcl fork of cmucl
 
+https://lispcookbook.github.io/cl-cookbook/systems.html
 https://stevelosh.com/blog/2021/03/small-common-lisp-cli-programs/
+
+https://nixos.org/manual/nixpkgs/stable/#lisp
 
 The programs need to be able to use libraries, so Quicklisp will need to be involved. Common Lisp has a lot of nice things built-in, but there are some libraries that are just too useful to pass up.
 
+Quicklisp is a library manager for Common Lisp.
+https://www.quicklisp.org/beta/
 
-* Load file
+sly: the Emacs package providing the UI
+
+* package management
+
+Common Lisp's packaging ecosystem uses three distinct layers: the language's built-in LOAD and DEFPACKAGE for basic file loading and namespacing, ASDF for defining systems (libraries) with dependencies and metadata, and Quicklisp for downloading systems from the internet.
+
+** with nix
+
+sbclPackages
+https://github.com/NixOS/nixpkgs/issues/248132
+
+(compile-file "test")
+
+#+asdf (require :asdf)
+
+
+** Load file
+
+(load "file")
+
+** ASDF
+
+to load asdf:
+(load (sb-ext:posix-getenv "ASDF"))
+
+load subsequent packages:
+
+(asdf:load-system 'alexandria)
+(require :alexandria)
+
+There are two predefined locations, one older and one currently preferred:
+
+    ~/common-lisp, the old one;
+    ~/.local/share/common-lisp/source, the XDG-compliant currently preferred one. Use this.
+
+** quicklisp
+
+unadvised on nixos
+Quicklisp calls ASDF under the hood, with the advantage that it will download and install any dependency if they are not already installed.
+
+** interpreters
+
+steel bank common lisp sbcl
 
 sbcl --load path/to/file.lisp
-(load "file")
 
 https://github.com/sharplispers/linedit
 (ql:quickload "linedit")

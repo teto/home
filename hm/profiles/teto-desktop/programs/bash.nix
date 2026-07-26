@@ -6,39 +6,6 @@
   ...
 }:
 let
-  mkRemoteBuilderDesc =
-    if lib ? mkRemoteBuilderDesc then
-      lib.mkRemoteBuilderDesc
-    else
-      lib.warn "Using noop 'mkRemoteBuilderDesc' switch to 'scratch' branch" (_a: _b: "PLACEHOLDER");
-
-  builder_neotokyo = mkRemoteBuilderDesc "3.0" (
-    lib.nixosConfToBuilderAttr {
-      sshKey = "${secretsFolder}/ssh/id_rsa";
-      # I might need to set it ?
-      # can
-      # it's a base64 version of it
-      publicHostKey = builtins.readFile ../../../../hosts/neotokyo/host_key.pub;
-    } flakeSelf.nixosConfigurations.neotokyo
-  );
-
-  # public host key of the remote machine.  If omitted, SSH uses its regular known_hosts file.
-  builder_jedha = mkRemoteBuilderDesc "3.0" (
-    lib.nixosConfToBuilderAttr {
-      sshKey = "${secretsFolder}/ssh/id_rsa";
-      # I might need to set it ?
-      publicHostKey = null;
-    } flakeSelf.nixosConfigurations.jedha
-  );
-
-  # TODO fix
-  builder_nixcommunity = mkRemoteBuilderDesc "3.0" (
-    lib.nixosConfToBuilderAttr {
-      sshKey = "${secretsFolder}/ssh/id_rsa";
-      # I might need to set it ?
-      publicHostKey = null;
-    } flakeSelf.nixosConfigurations.jedha
-  );
 
   # TODO add jedha
   # flakeSelf.deploy.nodes.jedha;
@@ -47,9 +14,6 @@ in
 
   # goes to .profile
   sessionVariables = {
-    TETOS_0 = builder_neotokyo;
-    TETOS_1 = builder_jedha;
-    # TETOS_2 = builder_nixcommunity;
 
     HISTTIMEFORMAT = "%d.%m.%y %T ";
     # CAREFUL

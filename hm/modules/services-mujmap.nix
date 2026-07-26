@@ -76,6 +76,9 @@ in
         lib.nameValuePair (mkMujmapServiceName name) {
           Unit = {
             Description = "mujmap mailbox synchronization";
+            # OnSuccess = "send-mail-to-teto@success.service";
+            # reference a system-level one
+            # OnFailure = "send-mail-to-teto@failure.service";
           };
 
           Service =
@@ -89,7 +92,6 @@ in
               # TODO should be
               ExecStart = "${cfg.package}/bin/mujmap -C ${config.accounts.email.maildirBasePath}/fastmail sync ${lib.concatStringsSep " " mujmapOptions}";
             };
-
         }
       ) config.accounts.email.accounts;
 

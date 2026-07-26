@@ -4,6 +4,17 @@
   self,
   ...
 }:
+let
+  myLisp = pkgs.sbcl.withPackages (
+    ps: with ps; [
+      # lips utilities (logging etc)
+      # https://alexandria.common-lisp.dev/draft/alexandria.html
+      alexandria
+      adopt # for parsers
+      linedit
+    ]
+  );
+in
 pkgs.mkShell {
   name = "dotfiles-shell";
 
@@ -16,7 +27,6 @@ pkgs.mkShell {
       pkgs.bitwarden-cli # to sync passwords
       dmidecode
       qrencode # to plot qrcodes and "show" secrets to smartphone
-      #
       self.inputs.deploy-rs.packages.${stdenv.hostPlatform.system}.deploy-rs
       expect # to pipe into deploy-rs
       fzf # for just's "--select"
@@ -24,6 +34,7 @@ pkgs.mkShell {
       just # to run justfiles
 
       lua5_1 # for tests
+      myLisp
       nix-output-monitor
       # nodejs # what for ?
       # termscp-matt
