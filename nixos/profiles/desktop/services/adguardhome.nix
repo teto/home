@@ -1,14 +1,17 @@
 {
   # COMPARE with competitot "blocky"
-  enable = false;
+  enable = true;
 
   # allow to change settings from webserver
   # mutableSettings = true;
   openFirewall = false;
 
-  # default is 80
+  # default is 3000
   # annoys
   port = 8084;
+
+  # mutableSettings = true;
+  # extraArgs = [];
 
   # https://github.com/AdguardTeam/AdGuardHome/wiki/Configuration#configuration-file
   settings = {

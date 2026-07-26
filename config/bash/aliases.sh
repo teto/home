@@ -53,8 +53,8 @@ alias lh="eza -dl .* --group-directories-first"
 
 # advanced
 # TODO add --hyperlink
-alias ls='eza --color=always --group-directories-first --icons=auto --hyperlink'
-alias ll='eza -la --icons --octal-permissions --group-directories-first --hyperlink'
+alias ls='eza --color=always --group-directories-first --icons=auto --hyperlink=auto'
+alias ll='eza -la --icons --octal-permissions --group-directories-first --hyperlink=auto'
 # alias llm='eza -lbGd --header --git --sort=modified --color=always --group-directories-first --icons=auto'
 # conflicts with lux
 alias lsx='eza -lbhHigUmuSa@ --time-style=long-iso --git --color-scale --color=always --group-directories-first --icons=auto'

@@ -6,10 +6,31 @@
 { config, ... }:
 {
   # conflicts with adguardhome
-  enable = !config.services.adguardhome.enable;
+  # enable = !config.services.adguardhome.enable;
+  enable = true;
 
   # ideally set it to false ?
-  settings.Resolve.DNSSEC = "false"; # "allow-downgrade";
+  settings.Resolve = {
+    DNSSEC = "false"; # "allow-downgrade";
+    # conflicts with avahi
+    MulticastDNS = true;
+    DNS = "127.0.0.1:53"; # defer to adguardhome ? port
+    # Domains=~.
+    # resolved exposes a stub listener at "127.0.0.53"
+    # defer to another
+    DNSStubListener = "no";
+
+    # TODO fallback on
+    # man resolved.conf
+    FallbackDNS = [
+      "1.1.1.1"
+      "8.8.8.8"
+    ];
+
+    LLMNR = true;
+    # MulticastDNS
+    # ReadEtcHosts=no,
+  };
 
   # MulticastDNS=
   #   Takes  a  boolean argument or "resolve". Controls Multicast DNS support (RFC 6762[3])
@@ -18,18 +39,6 @@
   #   abled, but responding is disabled. Note that systemd-networkd.service(8)  also  main‐
   #   tains  per-link  Multicast DNS settings. Multicast DNS will be enabled on a link only
   # "resolve";
-
-  # conflicts with avahi
-  settings.Resolve.MulticastDNS = true;
-
-  # resolved exposes a stub listener at "127.0.0.53"
-  # DNSStubListener=
-
-  # TODO fallback on
-  # man resolved.conf
-  settings.Resolve.FallbackDNS = [ ];
-  # MulticastDNS
-  # ReadEtcHosts=no,
   # services.resolved.dnsDelegates.example-org = {
   #   Delegate = {
   #     DNS = delegateAddress;
