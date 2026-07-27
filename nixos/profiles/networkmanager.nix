@@ -41,6 +41,21 @@
     # networking.resolvconfOptions
     # wifi.powersave=false;
     # TODO configure dispatcherScripts  for mptcp
+
+    # ensureProfiles = {
+    #   environmentFiles = "/home/joe/.wifi";
+    #
+    #   # Note the network will be called `REDACTED` in your UIs, but that
+    #   # does not have to be the same as the SSID
+    #   profiles."REDACTED" = {
+    #     connection = {
+    #       id = "REDACTED";
+    #       type = "wifi";
+    #       autoconnect = true;
+    #     };
+    #   };
+    # };
+
   };
 
 }

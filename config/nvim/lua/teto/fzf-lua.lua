@@ -36,28 +36,37 @@ local M = {}
 --   fzf_lua.files(opts)
 -- end
 
+local has_frecency = false
+
 function M.register_keymaps()
     -- autocomplete :FzfLua to see what's available
     vim.keymap.set('n', '<Leader>g', function()
         -- global picker accepts various prefixes such as $ for buffers , @ for lsp
         -- fzf_lua.global()
-        fzf_lua.combine({
-            -- can be a table as well
-            -- order matters
-            -- files can appear several times
-            -- uses options from the first picker
-            pickers = {
-                'frecency',
-                'files',
-            },
-        })
+        fzf_lua.git_diff()
+        -- fzf_lua.combine({
+        --     -- can be a table as well
+        --     -- order matters
+        --     -- files can appear several times
+        --     -- uses options from the first picker
+        --     pickers = {
+        --         -- 'frecency',
+        --         'files',
+        --     },
+        -- })
     end)
     -- local file_dir = vim.fn.expand('%:p:h')
+
+    vim.keymap.set('n', '<Leader>f', function()
+        -- global picker accepts various prefixes such as $ for buffers , @ for lsp
+        -- todo do smart version
+        fzf_lua.jj_files()
+    end)
 
     vim.keymap.set('n', '<Leader>/', function()
         -- global picker accepts various prefixes such as $ for buffers , @ for lsp
         -- todo do smart version
-        fzf_lua.jj_files()
+        fzf_lua.lines()
     end)
 
     --   vim.keymap.set('n', '<Leader>G', function()
@@ -89,7 +98,7 @@ function M.register_keymaps()
             -- files can appear several times
             -- uses options from the first picker
             pickers = {
-                'frecency',
+                -- 'frecency',
                 files_picker_name,
                 -- "files"
             },
@@ -98,6 +107,8 @@ function M.register_keymaps()
 
     -- a bunch of these are helix-inspired
     vim.keymap.set('n', '<Leader>F', function()
+        -- .files
+        -- cwd_root
         fzf_lua.filetypes()
     end, { desc = 'Select filetype' })
 
@@ -131,6 +142,10 @@ function M.register_keymaps()
 
     vim.keymap.set('n', '<Leader>/', function()
         fzf_lua.live_grep()
+    end)
+
+    vim.keymap.set('n', '<Leader>k', function()
+        -- fzf_lua.lsp_heeeelllp()
     end)
 
     -- removed cos overrode marks.nvim

@@ -4,7 +4,6 @@
 -- require('copilot').setup ({
 --   -- use recommended settings from above
 -- })
--- require('avante_lib').load()
 
 -- local llama_hostname =
 

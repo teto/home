@@ -33,11 +33,11 @@
       "src": "https://github.com/marko-cerovac/material.nvim"
     },
     "mini.sessions": {
-      "rev": "c96a1d1284b37ba2431092981a9d58f8c71a4fc3",
+      "rev": "49f89c3cd35a4926e3f03f268b73da303aec1ad8",
       "src": "https://github.com/nvim-mini/mini.sessions"
     },
     "neovim": {
-      "rev": "9504524e5ed0e326534698f637f9d038ba4cd0ee",
+      "rev": "ff483051a47e27d84bdef47703538df1ed9f4a47",
       "src": "https://github.com/rose-pine/neovim"
     },
     "nfnl": {
@@ -49,7 +49,7 @@
       "src": "https://github.com/gbprod/none-ls-shellcheck.nvim"
     },
     "nvim-lspconfig": {
-      "rev": "4b7fbaa239c5db6b36f424a4521ca9f1a401be33",
+      "rev": "7ab79bb1b57160a537f427ac8a6026102f12b701",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-thyme": {

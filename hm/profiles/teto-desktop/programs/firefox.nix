@@ -148,7 +148,7 @@ in
     };
 
     # to use with stable-diffusion
-    perso-nogpu = {
+    jobsearch = {
       settings = ffLib.myDefaultSettings // { };
       id = 5;
     };

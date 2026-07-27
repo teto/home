@@ -260,7 +260,6 @@
       definedAliases = [
         "@pr-nixpkgs"
       ];
-
     };
 
     github = {
@@ -277,6 +276,26 @@
       ];
       definedAliases = [
         "@gh"
+      ];
+    };
+
+    # TODO add nyaa
+    # https://nyaa.si/?f=0&c=0_0&q=toto
+    toshokan = {
+      urls = [
+        {
+          template = "https://www.tokyotosho.info/search.php?terms={searchTerms}&type=1&searchName=true&searchComment=true&size_min=&size_max=&username=";
+          # template = "https://github.com/NixOS/nixpkgs/pulls?q=sort%3Aupdated-desc+is%3Apr+is%3Aopen+{searchTerms}";
+          params = [
+            {
+              name = "q";
+              value = "{searchTerms}";
+            }
+          ];
+        }
+      ];
+      definedAliases = [
+        "@tosho"
       ];
     };
 

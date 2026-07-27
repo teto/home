@@ -21,6 +21,19 @@
       # with `powersave` enabled, the link gets into DORMANT mode and then it becomes impossible to wake it up
       # powersave = false;
     };
+    ensureProfiles = {
+      environmentFiles = "/home/joe/.wifi";
+
+      # Note the network will be called `REDACTED` in your UIs, but that
+      # does not have to be the same as the SSID
+      profiles."REDACTED" = {
+        connection = {
+          id = "REDACTED";
+          type = "wifi";
+          autoconnect = true;
+        };
+      };
+    };
   };
 
   useNetworkd = true;

@@ -72,6 +72,11 @@ end
 
 local _normal_hl = vim.api.nvim_get_hl(0, { name = 'Normal' })
 
+-- vim.g.lz_n = {
+--     ---@type fun(name: string)
+--     load = vim.cmd.packadd,
+-- }
+
 -- https://github.com/barrettruth/diffs.nvim
 vim.g.diffs = {
     integrations = {
@@ -250,9 +255,9 @@ local pluginDir = os.getenv('HOME') .. '/plugins'
 vim.opt.rtp:prepend(pluginDir .. '/avante.nvim')
 -- doing jj tests
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/diffview.nvim')
-vim.opt.rtp:prepend(pluginDir .. '/neorg')
+-- vim.opt.rtp:prepend(pluginDir .. '/neorg')
+-- vim.opt.rtp:prepend(pluginDir .. '/rocks.nvim')
 vim.opt.rtp:prepend(pluginDir .. '/rocks-git.nvim')
-vim.opt.rtp:prepend(pluginDir .. '/rocks.nvim')
 vim.opt.rtp:prepend(pluginDir .. '/auto-session')
 
 vim.g.loaded_matchit = 1
@@ -560,8 +565,8 @@ vim.g.indicator_hint = '❗'
 vim.g.indicator_ok = '✅'
 vim.g.spinner_frames = { '⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷' }
 
+require('plugins.fzf-lua')
 if use_fzf_lua then
-    -- require('plugins.fzf-lua')
     require('teto.fzf-lua').register_keymaps()
 else
     vim.notify('fzf-lua is MISSING !?')
@@ -719,7 +724,7 @@ vim.lsp.enable('ruff')
 -- we will miss a bunch of things :s
 vim.pack.add({
     -- my real neovim package manager (with nix)
-    'https://github.com/nvim-neorocks/rocks.nvim',
+    -- 'https://github.com/nvim-neorocks/rocks.nvim',
 
     'https://github.com/Olical/nfnl',
 
@@ -1114,18 +1119,26 @@ end, { desc = 'Ask without selecting anything' })
 -- }}}
 
 -- neorgmode {{{
-local has_norg, _norg = pcall(require, 'neorg')
 
-if has_norg then
-    -- dont load because:
-    -- || E5113: Lua chunk: /home/teto/plugins/neorg/lua/neorg/core/modules.lua:789: attempt to index a nil value
-    -- || stack traceback:
-    -- || 	/home/teto/plugins/neorg/lua/neorg/core/modules.lua:789: in function 'create_event'
-    -- || 	...o/plugins/neorg/lua/neorg/modules/core/dirman/module.lua:215: in function 'set_workspace'
-    -- || 	...o/plugins/neorg/lua/neorg/modules/core/dirman/module.lua:119: in function 'load'
+-- if has_norg then
+-- dont load because:
+-- || E5113: Lua chunk: /home/teto/plugins/neorg/lua/neorg/core/modules.lua:789: attempt to index a nil value
+-- || stack traceback:
+-- || 	/home/teto/plugins/neorg/lua/neorg/core/modules.lua:789: in function 'create_event'
+-- || 	...o/plugins/neorg/lua/neorg/modules/core/dirman/module.lua:215: in function 'set_workspace'
+-- || 	...o/plugins/neorg/lua/neorg/modules/core/dirman/module.lua:119: in function 'load'
 
-    require('plugins.neorg')
-end
+-- loaded from rocks-lazy
+-- require("lz.n").load {
+-- 	"neorg",
+-- 	cmd = "Neorg",
+-- 	before = function ()
+-- 		-- local has_norg, _norg = pcall(require, 'neorg')
+-- 		require('plugins.neorg')
+-- 	end
+-- }
+
+-- end
 -- }}}
 
 -- todo fix upgraded version

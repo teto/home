@@ -17,6 +17,10 @@ plugins_dir = "plugins/"
 [dev]
 path = "/home/teto/plugins"
 
+# https://github.com/lumen-oss/rocks-lazy.nvim#lua-configuration
+[rocks_lazy]
+# This is a subdirectory (relative to nvim/lua) to search for plugin specs. In this example, you can add a lua/lazy_specs/ directory to your nvim config, with a lua script for each plugin.
+import = "lazy_specs/"
 
 # [rocks-git]
 # path = "/home/teto/.local/share/nvim/site/pack/rocks"
@@ -28,9 +32,12 @@ path = "/home/teto/plugins"
 # List of Neovim plugins to install alongside their versions.
 # If the plugin name contains a dot then you must add quotes to the key name!
 [plugins]
-"rocks-git.nvim"= "2.5.10"
-"rocks-config.nvim" = "3.2.0"
-"haskell-tools.nvim" = "10.0.1"
+# "rocks-git.nvim"= "2.5.10"
+# "rocks-config.nvim" = "3.2.0"
+# "rocks-dev.nvim" = "1.8.1"
+# "rocks-lazy.nvim" = "1.2.2"
+
+# "haskell-tools.nvim" = "10.0.1"
 
 # needed the patch from https://github.com/nvimtools/none-ls.nvim/pull/277/
 "none-ls.nvim" = "scm"
@@ -48,11 +55,9 @@ path = "/home/teto/plugins"
 # should be installed via nix as well
 # "nui.nvim" = "0.4.0"
 
-"rocks-dev.nvim" = "1.8.1"
 "lsp_signature.nvim" = "0.3.1"
 friendly-snippets = "scm"
 # "haskell-snippets.nvim" = "1.4.4"
-"yazi.nvim" = "13.7.0"
 
 
 
@@ -79,14 +84,11 @@ friendly-snippets = "scm"
 
 # TODO marks-nvim ?
 
-vim-startuptime= "4.6.1"
 menu= "scm"
-# "lz.n" = "2.12.0"
 "indent-blankline.nvim" = "3.9.1"
 # "llm.nvim"= "scm"
 # volt is a UI library
 volt= "scm"
-"grug-far.nvim"= "1.6.72"
 # orgmode = "0.7.1"
 # neogit = "2.0.0"
 "gitsigns.nvim"= "2.1.0"
@@ -94,14 +96,16 @@ volt= "scm"
 # there is a bug where it creates home/teto folders everywhere
 # "typescript-tools.nvim" = "scm"
 
-"rest.nvim" = "3.13.0"
-magick = "1.6.0"
+# "rest.nvim" = "3.13.0"
+# magick = "1.6.0"
 # "image.nvim" = "1.3.0"
+
 # for the image preview , hopefully we can dot without soon with nvim 0.13
 "snacks.nvim" = "2.31.0"
 
 # how to get rid of it:
 
+# hopefully loads only for markdown
 "render-markdown.nvim" = "8.13.0"
 
 # disabled because of this bug https://github.com/neovim/neovim/issues/37317
@@ -109,53 +113,17 @@ magick = "1.6.0"
 # "dropbar.nvim" = "14.2.1"
 nvim-treesitter-context = "1.0.0"
 # nvim-dap = "0.10.0"
-neotest = "5.19.0"
-neotest-busted = "1.3.1"
+# neotest = "5.19.0"
+# neotest-busted = "1.3.1"
+
 auto-session = "2.5.1"
-fzf-lua= "0.0.2673"
-"diffs.nvim" = "0.1.2"
-# git = "teto/auto-session"
-# rev = "517228aa153c324e65b8c2d566b55365ad7cc741"
-# branch = "teto/dont-restore-for-at-least-one-arg"
-# "mini.sessions" = "0.17.0"
-
-# [plugins."feed.nvim"]
-# # version = "2.19.2"
-# dev = true
-# dir = "/home/teto/plugins/feed.nvim"
-
-
-# [plugins.neotest-haskell]
-# version = "2.0.0"
-# dir = "/home/teto/neotest-haskell"
-
-# guy said he is going to deprecate it
-# [plugins."auto-save.nvim"]
-# version = "scm"
-# cmd = "ASToggle" # optional for lazy loading on command
-
-# [plugins.neorg]
-# version = "9.3.0"
-
+"vim-startuptime"= "4.6.1"
+"grug-far.nvim"= "1.6.75"
+"yazi.nvim"= "13.9.0"
 
 [plugins."rikai.nvim"]
 dev = true
-# dir = "/home/teto/plugins/rikai.nvim"
-
-# seems ineffective ?
-# [plugins."command-and-cursor.nvim"]
-# git = "moyiz/command-and-cursor.nvim"
-# rev = "43485e6d4f0ffd42414b35e156075e46047563dd"
-
-# hides secrets
-# [plugins."cloak.nvim"]
-# git = "laytan/cloak.nvim"
-# rev = "648aca6d33ec011dc3166e7af3b38820d01a71e4"
-# opt = true
-
-[plugins."none-ls-luacheck.nvim"]
-git = "gbprod/none-ls-luacheck.nvim"
-rev = "v0.0.1"
+cmd = "Rikai"
 
 [plugins."hacker.nvim"]
 git = "letieu/hacker.nvim"
@@ -166,10 +134,6 @@ opt = true
 git = "m00qek/baleia.nvim"
 rev = "v1.4.0"
 
-[plugins."nvim-colorizer.lua"]
-git = "norcalli/nvim-colorizer.lua"
-rev = "a065833f35a3a7cc3ef137ac88b5381da2ba302e"
-
 [plugins."statuscol.nvim"]
 git = "luukvbaal/statuscol.nvim"
 rev = "c399884e8f64019ec9bb581251f9710915b7f996"
@@ -178,17 +142,10 @@ rev = "c399884e8f64019ec9bb581251f9710915b7f996"
 git = "h-hg/fcitx.nvim"
 rev = "dcb6b70888aa893d3d223bb777d4117bbdac06a7"
 
-[plugins.nvim-luadev]
-git = "bfredl/nvim-luadev"
-rev = "3ba0c02c378503739f1fdb95cff3ea2aad48db3e"
-
-[plugins."colortils.nvim"]
-git = "max397574/colortils.nvim"
-rev = "v1.2.0"
-
 [plugins."tidal.nvim"]
 git = "https://github.com/grddavies/tidal.nvim"
 rev = "fa4673e181e18fd1719ae17a1d4f4ecce2de37aa"
+opt = true
 
 [plugins."fzf-lua-frecency.nvim"]
 git = "elanmed/fzf-lua-frecency.nvim"
@@ -198,17 +155,17 @@ rev = "392bcd1f5053e5a6bb0d77e8f81d56712f362343"
 git = "rachartier/tiny-inline-diagnostic.nvim"
 rev = "d9d12d4bfb9a4c5b8b8bdf7f612551df6972946c"
 
-[plugins."jj.nvim"]
-git = "nicolasgb/jj.nvim"
-rev = "v0.7.1"
-
-[plugins."jujutsu.nvim"]
-git = "yannvanhalewyn/jujutsu.nvim"
-rev = "61239312730b3f51441596bdadab7e3578987592"
-
-[plugins."jiejie.nvim"]
-git = "jceb/jiejie.nvim"
-rev = "6a3a3598e6e015cfd3f1f447c257314972030e1b"
+# [plugins."jj.nvim"]
+# git = "nicolasgb/jj.nvim"
+# rev = "v0.7.1"
+#
+# [plugins."jujutsu.nvim"]
+# git = "yannvanhalewyn/jujutsu.nvim"
+# rev = "61239312730b3f51441596bdadab7e3578987592"
+#
+# [plugins."jiejie.nvim"]
+# git = "jceb/jiejie.nvim"
+# rev = "6a3a3598e6e015cfd3f1f447c257314972030e1b"
 
 # [plugins."opencode.nvim"]
 # git = "nickjvandyke/opencode.nvim"
@@ -225,15 +182,11 @@ branch = "master"
 
 [plugins."kitty-scrollback.nvim"]
 git = "mikesmithgh/kitty-scrollback.nvim"
-rev = "v9.2.0"
+rev = "v9.2.1"
 
 [plugins."tiny-cmdline.nvim"]
 git = "rachartier/tiny-cmdline.nvim"
 rev = "ad58747b955d0743ccfd56e97da1a4c1fac89f58"
-
-[plugins."zeal.nvim"]
-git = "paradoxical-dev/zeal.nvim"
-rev = "a3aa0c73ad0b30f75e8c77d3ccabefaeabded894"
 
 [plugins.nvim-biscuits]
 git = "code-biscuits/nvim-biscuits"
@@ -245,7 +198,7 @@ rev = "v0.8.0"
 
 [plugins."diffview-plus.nvim"]
 git = "dlyongemallo/diffview-plus.nvim"
-rev = "v0.35"
+rev = "v0.36"
 
 # [plugins."git-rebase-auto-diff.nvim"]
 # git = "yutkat/git-rebase-auto-diff.nvim"
