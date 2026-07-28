@@ -124,13 +124,12 @@ in
       # need gnome-accounts to make it work
       gnome-calendar
       gnome-control-center
-      gnome-maps
-      # gpu-usage-waybar
+      # gnome-maps
+
       jaq # jq in rust
 
       (lib.ignoreBroken lact) # GPU controller, needs a daemon
 
-      # xorg.xwininfo # for stylish
       moor # test as pager
       presenterm # for presentations from terminal/markdown (in rust, supports images, pretty cool)
 
@@ -162,12 +161,13 @@ in
     enableOfficePackages = true;
     kubernetes = true;
     developer = true;
+    finance = true;
     llms = true;
     enableIMPackages = true;
     japanese = true;
     enableGaming = true;
 
-    music-processing = true;
+    music-processing = false;
   };
 
   # package-sets.enableDesktopGUIPackages = true;

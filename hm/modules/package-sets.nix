@@ -22,6 +22,7 @@ in
       desktop = mkEnableOption "desktop packages";
       yubikey = mkEnableOption "yubikey packages";
       server = mkEnableOption "server packages";
+      finance = mkEnableOption "finance packages";
 
       developer = mkEnableOption "Developer packages";
 
@@ -379,10 +380,11 @@ in
           });
 
           # anthropic agent
-          mistral-vibe-custom = pkgs.mistral-vibe.overrideAttrs ({
-            doCheck = false;
-            doInstallCheck = false;
-          });
+          mistral-vibe-custom = pkgs.mistral-vibe;
+          # .overrideAttrs ({
+          #   doCheck = false;
+          #   doInstallCheck = false;
+          # });
         in
         # mcp-servers
         [
@@ -393,21 +395,18 @@ in
           bcal # calculatrice
           # bmm # rust bookmark manager (not package yet)
           # backblaze-b2-tetos
-          bfs # https://github.com/tavianator/bfs
+          # bfs # breadth first version of ls https://github.com/tavianator/bfs
           binutils
           btop-cuda # for jedha
           bubblewrap # sandboxing
-
           cargo
           codex # openai agent
           codex-acp # originated from zed-industries, used in avante
           # (ignoreBroken claude-code) # anthropic agent
 
           # dasht # ~ zeal but in terminal
-
           # defalt via hm
           # difftastic # smart diffs
-          # diff-so-fancy
           docker-credential-helpers # gives 'docker-credential-pass' for instance
 
           flamelens # rust
@@ -416,12 +415,10 @@ in
 
           gdb
           gnupg
-          gnum4 # hum
+          # gnum4 # hum
           gettext # for envsubst (TO NOT CONFOUND with gettext's envsubst)
           # glab # gitlab cli
-
           # hexyl # hexcode viewer
-
           jq
 
           # luau # lua server
@@ -431,13 +428,12 @@ in
           flakeSelf.inputs.jj-gh.packages.${system}.default
 
           # flakeSelf.inputs.starship-jj.packages.${system}.default # custom.jj for starship
-
           libossp_uuid # for the 'libuuid' executable
 
           # TODO pass to vim makeWrapperArgs
           # just in my branch :'(
           # git-remote-hg
-          manix # nix doc, might be outdated
+          # manix # nix doc, might be outdated
           mistral-vibe-custom
           net-tools # for netstat
           nix-output-monitor # 'nom'
@@ -478,7 +474,7 @@ in
           gitu # like lazygit
 
           haskellPackages.fast-tags # generate TAGS file for vim
-          hurl # http tester (broken)
+          hurl # http tester
           httpie # for api testing
 
           # there is also https://github.com/TaKO8Ki/gobang
@@ -489,21 +485,19 @@ in
           inotify-tools # for inotify-wait notably
           ncurses.dev # for infocmp
           neovide
-          # neovim-remote # broken for latex etc
-          # nix-doc # can generate tags for nix
           nix-update # nix-update <ATTR> to update a software
-          # nix-top # (abandoned) to list current builds
           nixpkgs-review # to help review nix packages
           nvimpager
-          patchutils # for interdiff
+          # patchutils # for interdiff
           perf-tools # to interpret
 
           # rainfrog # database exploration
-          # trurl # used to parse url in the firefox-router executable
+          trurl # used to parse url in the firefox-router executable
 
           process-compose # docker-compose - like
           # rpl # to replace strings across files
           strace
+          snitch # interactively watch connections
           shfmt # shell format
           tio # serial console reader
           tig
@@ -513,6 +507,7 @@ in
           unar # used to view archives by yazi (now using ouch ?)
           whois
           wget
+          # sttr # to process strings (base64 etc)
           zeal-custom # doc for developers
           xan # CLI csv helper
           # viddy # fileevent watcher
@@ -690,6 +685,14 @@ in
         pkgs.ardour # works only with X
         # pkgs.guitarix # amp
         # pkgs.lmms # still doesnt support recording
+      ];
+    })
+
+    (mkIf cfg.finance {
+      home.packages = [
+
+        pkgs.cointop
+        pkgs.bloomberb
       ];
     })
 

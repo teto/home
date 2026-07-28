@@ -52,7 +52,6 @@ in
     # on-branch-advance-cmd
   };
 
-
   # only on login shell
   # initExtra => interactive shell
   # profileExtra => login shell

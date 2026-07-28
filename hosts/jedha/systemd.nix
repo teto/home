@@ -83,6 +83,11 @@
     # enable = true;
 
     networks = {
+      "50-wg0" = {
+        matchConfig.Name = "wg0";
+        networkConfig.MulticastDNS = false;
+      };
+
       wired = {
         matchConfig = {
           Name = "enp11s0";
@@ -107,6 +112,7 @@
 
           # Gateway = "10.0.0.1";
           # DNS = "192.168.1.254";
+          # Weird that I would advertise this ?
           DNS = "1.1.1.1";
           EmitDNS = true;
           PoolOffset = 50;
