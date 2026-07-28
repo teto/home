@@ -34,16 +34,26 @@ let
       sshKey = "${secretsFolder}/ssh/id_rsa";
       # I might need to set it ?
       publicHostKey = null;
+      # favor jedha
+      speedFactor = 2;
     } flakeSelf.nixosConfigurations.jedha
   );
 
   # TODO fix
   builder_nixcommunity = mkRemoteBuilderDesc "3.0" (
-    lib.nixosConfToBuilderAttr {
-      sshKey = "${secretsFolder}/ssh/id_rsa";
+    (lib.nix-builders.defaultBuilderAttrs { })
+    // {
+      sshUser = "teto";
+      sshKey = "${secretsFolder}/ssh/nix-community-builder";
+      protocol = "ssh";
       # I might need to set it ?
       publicHostKey = null;
-    } flakeSelf.nixosConfigurations.jedha
+      maxJobs = 0;
+      speedFactor = 1;
+      hostName = "hostname build-box.nix-community.org";
+      system = "x86_64-linux";
+      # identitiesOnly yes
+    }
   );
 in
 {
@@ -67,6 +77,7 @@ in
     flakeSelf.homeProfiles.developer
     flakeSelf.homeProfiles.mpv
     # flakeSelf.homeProfiles.vscode
+    # TODO cleanup and remove zsh
     flakeSelf.homeProfiles.teto-zsh
     # flakeSelf.homeProfiles.yt-dlp
 

@@ -1,9 +1,33 @@
 {
-  lib,
-  flakeSelf,
+  # lib,
+  # flakeSelf,
   secretsFolder,
   ...
 }:
+let
+  defaultBuilderAttrs =
+    {
+      # or ssh-ng ?
+      protocol ? "ssh",
+      # TODO set it to -1 to adapt to machine ?
+      maxJobs ? 2,
+      speedFactor ? 1,
+      supportedFeatures ? [ ],
+      mandatoryFeatures ? [ ],
+      system ? "x86_64-linux",
+    }@builderAttrs:
+    builderAttrs
+    // {
+      inherit
+        system
+        protocol
+        maxJobs
+        speedFactor
+        supportedFeatures
+        mandatoryFeatures
+        ;
+    };
+in
 {
   # call with
   mk_builder_from_deployrs_node = nodes: [ ];
@@ -18,32 +42,29 @@
     };
 
   # we should be able to remove the defaults after nixpkgs changes
+  inherit defaultBuilderAttrs;
+
   nixosConfToBuilderAttr =
-    {
-      protocol ? "ssh",
-      maxJobs ? 2,
-      speedFactor ? 1,
-      supportedFeatures ? [ ],
-      mandatoryFeatures ? [ ],
-      system ? "x86_64-linux",
-      ...
-    }@builderAttrs:
-    nixosConf:
+    # {
+    #   # or ssh-ng ?
+    #   protocol ? "ssh",
+    #   # TODO set it to -1 to adapt to machine ?
+    #   maxJobs ? 2,
+    #   speedFactor ? 1,
+    #   supportedFeatures ? [ ],
+    #   mandatoryFeatures ? [ ],
+    #   system ? "x86_64-linux",
+    #   ...
+    # }@
+    builderAttrs: nixosConf:
     let
 
       cfg = nixosConf.config;
     in
-    builderAttrs
+    (defaultBuilderAttrs { })
+    // builderAttrs
     // {
       hostName = cfg.networking.domain;
-      inherit
-        system
-        protocol
-        maxJobs
-        speedFactor
-        supportedFeatures
-        mandatoryFeatures
-        ;
       sshUser = "teto";
       sshKey = "${secretsFolder}/ssh/id_rsa";
       # I might need to set it ?

@@ -49,9 +49,6 @@ in
   };
   config = lib.mkIf cfg.enable {
 
-    # TODO conditionnally define it
-    # lib.mkIf config.mujmap-fastmail.enable
-    # TODO try an equivalent with mail
     systemd.user = {
       services = {
         monitor-git-branch = {

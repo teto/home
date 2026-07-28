@@ -72,7 +72,8 @@
             $LAST_TIMESTAMP
             EOF
             )
-            echo "$message" | ${pkgs.msmtp}/bin/msmtp -afastmail"
+
+            echo "$message" | ${pkgs.msmtp}/bin/msmtp -afastmail
           '';
         in
         "${script} %i";

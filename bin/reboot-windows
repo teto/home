@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Launch with sudo
+grub-reboot  'Windows Boot Manager (on /dev/nvme0n1p3)'
+reboot

@@ -28,6 +28,19 @@
 
     users = [ ];
 
+    filtering = {
+      rewrites = [
+        {
+          domain = "*.vps";
+          answer = "10.100.0.1";
+        }
+      ];
+    };
+    # 'rewrites':
+    #   - 'domain': example.com
+    #     'answer': 127.0.0.1
+    #   - 'domain': '*.example.com'
+    #     'answer': A
     # dhcp = {
     # local_domain_name = "lan";
     # };

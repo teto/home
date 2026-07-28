@@ -121,14 +121,14 @@ switch-remote: (nixos-rebuild "switch" "--option builders \"$TETOS_0\" -j0")
 
 rollback: (nixos-rebuild "switch" "--rollback")
 
-# builders
+# builders, le path: envoye le dossier git avec, pas ouf
 [private]
 nixos-rebuild command extra_args="":
     nixos-rebuild \
       --flake ~/home \
       --sudo --keep-going \
-      --override-input nixpkgs path:{{ NIXPKGS_REPO }} \
-      --override-input hm path:{{ HM_REPO }} \
+      --override-input nixpkgs {{ NIXPKGS_REPO }} \
+      --override-input hm {{ HM_REPO }} \
        {{ extra_args }} \
        {{ command }}
 satellite:

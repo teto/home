@@ -139,7 +139,9 @@
     # mptcp-flake.url = "github:teto/mptcp-flake/fix-flake";
     mujmap = {
       # url = "github:elizagamedev/mujmap";
-      url = "github:Lyndeno/mujmap";
+      # url = "github:Lyndeno/mujmap";
+      url = "github:ntrocado/mujmap";
+
       # url = "github:spencerjackson/mujmap?ref=feature-pushLocalMail";
       # inputs.nixpkgs.follows = "nixpkgs"; # breaks build
     };
@@ -221,8 +223,6 @@
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-stable.url = "github:nixos/nixpkgs/nixos-26.05";
 
-    # nixpkgs-for-hls.url = "github:nixos/nixpkgs?rev=612f97239e2cc474c13c9dafa0df378058c5ad8d";
-
     # nix-search-cli = {
     #   url = "github:peterldowns/nix-search-cli";
     #   # inputs.nixpkgs.follows = "nixpkgs";
@@ -233,8 +233,6 @@
       inputs.nixpkgs.follows = "nixpkgs"; # breaks build
     };
 
-    # nix-index-cache.url = "github:Mic92/nix-index-database";
-
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -243,8 +241,6 @@
     # c8296214151883ce27036be74d22d04953418cf4
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     # nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
-
-    # nvd.url = "git+ssh://git@gitlab.com/mattator/nvd?ref=add-module";
 
     nur.url = "github:nix-community/NUR";
 
@@ -536,7 +532,7 @@
             meli-git
             # neomutt
             pass-perso
-            mujmap-unstable
+            # mujmap-unstable
             memento-whisper
             sway-scratchpad
             gpt4all-cuda

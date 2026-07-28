@@ -13,6 +13,103 @@ let
   defaultJellyfinPort = 8096;
 
   wgEndpoint = "10.100.0.1";
+
+  errorPageRoot = pkgs.writeTextDir "404.html" ''
+    <!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noindex">
+        <title>404 — Page not found</title>
+        <style>
+          :root {
+            color-scheme: dark;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+              "Liberation Mono", "Courier New", monospace;
+            background: #080b12;
+            color: #d8e2ff;
+          }
+
+          * { box-sizing: border-box; }
+
+          body {
+            min-height: 100vh;
+            margin: 0;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            background:
+              radial-gradient(circle at 50% 30%, #172445 0, transparent 42%),
+              repeating-linear-gradient(
+                0deg,
+                transparent 0,
+                transparent 3px,
+                rgb(255 255 255 / 0.025) 4px
+              ),
+              #080b12;
+          }
+
+          main {
+            width: min(42rem, calc(100% - 2rem));
+            padding: clamp(2rem, 7vw, 4.5rem);
+            border: 1px solid #2c4070;
+            background: rgb(8 11 18 / 0.82);
+            box-shadow: 0 0 4rem rgb(45 106 255 / 0.15);
+            text-align: center;
+          }
+
+          .code {
+            margin: 0;
+            color: #67e8f9;
+            font-size: clamp(5rem, 22vw, 10rem);
+            font-weight: 800;
+            line-height: .8;
+            letter-spacing: -.08em;
+            text-shadow: .04em .04em 0 #be3cff;
+          }
+
+          h1 {
+            margin: 2rem 0 .75rem;
+            font-size: clamp(1.25rem, 4vw, 1.75rem);
+            letter-spacing: .08em;
+            text-transform: uppercase;
+          }
+
+          p {
+            margin: 0 auto 2rem;
+            max-width: 30rem;
+            color: #94a3c7;
+            line-height: 1.7;
+          }
+
+          a {
+            display: inline-block;
+            padding: .8rem 1.1rem;
+            border: 1px solid #67e8f9;
+            color: #67e8f9;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+          }
+
+          a:hover, a:focus-visible {
+            background: #67e8f9;
+            color: #080b12;
+            outline: none;
+          }
+        </style>
+      </head>
+      <body>
+        <main>
+          <p class="code" aria-label="Error 404">404</p>
+          <h1>Signal lost</h1>
+          <p>The page you were looking for has moved, vanished, or never existed.</p>
+          <a href="/">Return home</a>
+        </main>
+      </body>
+    </html>
+  '';
 in
 {
 
@@ -94,6 +191,9 @@ in
 
         # I had to manually "chmod a+x /var/lib/gitolite"
         root = "/var/www/blog-generated";
+        extraConfig = ''
+          error_page 404 /404.html;
+        '';
 
         # Makes this vhost the default.
         # default = true;
@@ -120,6 +220,10 @@ in
           '';
         };
 
+        locations."= /404.html" = {
+          root = errorPageRoot;
+          extraConfig = "internal;";
+        };
       };
 
       "status.${secrets.jakku.hostname}" = {

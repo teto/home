@@ -477,6 +477,7 @@ in
           hurl # http tester
           httpie # for api testing
 
+          lazyrsync
           # there is also https://github.com/TaKO8Ki/gobang
           lazysql # SQL editor
           # harlequin # SQL python editor (broken)
@@ -690,9 +691,9 @@ in
 
     (mkIf cfg.finance {
       home.packages = [
-
-        pkgs.cointop
-        pkgs.bloomberb
+        pkgs.cointop # crypto only
+        pkgs.gloomberb # bun
+        pkgs.wealthfolio # node
       ];
     })
 

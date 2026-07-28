@@ -7,20 +7,21 @@
 }:
 {
 
-  services = {
-    pixiecore.wantedBy = lib.mkForce [ ];
+  services =
+    lib.mkIf config.services.pixiecore.enable {
+      # force manual start ?!
+      pixiecore.wantedBy = lib.mkForce [ ];
 
-    # you can try this at runtime
-    # systemctl service-log-level systemd-networkd debug
-    systemd-tmpfiles-setup.serviceConfig = {
-      LogLevelMax = "debug"; # or "info" for less verbose output
+      # you can try this at runtime
+      # systemctl service-log-level systemd-networkd debug
+      systemd-tmpfiles-setup.serviceConfig = {
+        LogLevelMax = "debug"; # or "info" for less verbose output
+      };
+    }
+    // lib.mkIf config.services.netdata.enable {
+      netdata.path = [ pkgs.linuxPackages.nvidia_x11 ];
+
     };
-
-  }
-  // lib.mkIf config.services.netdata.enable {
-    netdata.path = [ pkgs.linuxPackages.nvidia_x11 ];
-
-  };
 
   # just to test
   # https://www.freedesktop.org/software/systemd/man/latest/systemd-sysupdate.html

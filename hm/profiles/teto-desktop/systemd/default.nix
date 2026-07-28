@@ -71,7 +71,7 @@
     };
 
     # TODO enable conditionnally on account/services
-    mujmap-fastmail = {
+    mujmap-fastmail = lib.mkIf (config.programs.mujmap.enable) {
       Service = {
         Environment = [
           "GNUPGHOME=${config.programs.gpg.homedir}"
