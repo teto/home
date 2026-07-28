@@ -89,7 +89,7 @@ in
     [
       # bottles  # to install games
       mdcat # markdown viewer
-      mitmproxy # help catch http traffic
+      (ignoreBroken mitmproxy) # help catch http traffic
       notmuch # needed for waybar-custom-notmuch.sh
 
       neovim-dbg # when neovim crashes, launch "nvim-debug" to debug
@@ -106,8 +106,8 @@ in
       flakeSelf.inputs.pinix.packages.${pkgs.stdenv.hostPlatform.system}.default
       # poppler for pdf preview
 
-      kaggle # kaggle interface
-      python3Packages.kaggle
+      # kaggle # kaggle interface
+      # python3Packages.kaggle
 
       lux-cli
       # flakeSelf.inputs.lux.packages.${pkgs.stdenv.hostPlatform.system}.lux-cli

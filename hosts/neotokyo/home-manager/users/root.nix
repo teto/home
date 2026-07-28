@@ -20,12 +20,4 @@ in
     flakeSelf.homeModules.nixpkgs-monitor
   ];
 
-  # move to teto
-  services.nixpkgs-monitor = {
-    enable = true;
-    # TODO send a mail
-    on-branch-advance-cmd = lib.nixpkgsMonitorEmailNotifier tetoEmail;
-    # on-branch-advance-cmd
-  };
-
 }

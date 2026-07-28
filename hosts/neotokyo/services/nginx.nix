@@ -96,7 +96,8 @@ in
         root = "/var/www/blog-generated";
 
         # Makes this vhost the default.
-        default = true;
+        # default = true;
+
         forceSSL = true;
         # https://nixos.org/manual/nixos/stable/index.html#module-security-acme
         # enableACME = true; # exclusive with useACMEHost

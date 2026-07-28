@@ -14,6 +14,8 @@ in
   # https://github.com/mozilla/policy-templates#enterprisepoliciesenabled
   enable = true;
 
+  configPath = "${config.xdg.configHome}/mozilla/firefox";
+
   # import the one in pkgs/
   # package = myFirefox;
   languagePacks = [

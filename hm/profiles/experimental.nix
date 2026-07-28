@@ -5,6 +5,10 @@
 }:
 {
 
+  # wayland.windowManager.niri = {
+  #   enable = true;
+  # };
+
   # programs.zsh = {
   #   mcfly.enable = true;
   # };

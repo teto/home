@@ -1,4 +1,10 @@
 {
+  # Resolve every name below the private .vps suffix through the WireGuard VPS.
+  # services.dnsmasq = {
+  #   enable = true;
+  #   settings.address = [ "/.vps/10.100.0.1" ];
+  # };
+
   # controls order in which glibc returns IP,
   # prefer ipv4
   getaddrinfo.precedence = {
@@ -11,11 +17,7 @@
 
   # add wireguard peers
   extraHosts = ''
-    10.100.0.1   nextcloud.vps
     10.100.0.1   nextcloud.vpn
-
-    10.100.0.1   jellyfin.vps
-    10.100.0.1   immich.vps
   '';
 
 }

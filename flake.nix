@@ -439,6 +439,7 @@
                 builtins.elem pkgName [
                   "Oracle_VM_VirtualBox_Extension_Pack"
                   "Oracle_VirtualBox_Extension_Pack"
+                  "jocalsend"
                   "codeium"
                   "claude-code"
                   "mistral-vibe"
@@ -462,7 +463,7 @@
           };
         };
 
-      tetosPkgs = pkgImport self.inputs.nixpkgs true;
+      tetosPkgs = pkgImport self.inputs.nixpkgs false;
       # tetosPkgsCuda = pkgImport self.inputs.nixpkgs true;
       unstablePkgs = pkgImport self.inputs.nixos-unstable false;
       # stablePkgs = pkgImport self.inputs.nixos-stable;

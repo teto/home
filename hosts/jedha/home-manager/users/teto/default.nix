@@ -106,6 +106,8 @@ in
       llmDeps = [
         # python3Packages.llama-index-cli
         # python3Packages.llama-index
+        # pkgs.mokuro
+        # pkgs.python3Packages.manga-ocr
       ];
     in
     llmDeps
@@ -114,6 +116,8 @@ in
       cointop # bitcoin tracker
       # mdp # markdown CLI presenter
       # gthumb # image manager, great to tag pictures
+
+      jocalsend # for tests
 
       ethtool # to check wakeonlan capabilities
       # footswitch # to control foot pedals (use module instead)
@@ -124,7 +128,7 @@ in
       # gpu-usage-waybar
       jaq # jq in rust
 
-      lact # GPU controller, needs a daemon
+      (lib.ignoreBroken lact) # GPU controller, needs a daemon
 
       # xorg.xwininfo # for stylish
       moor # test as pager

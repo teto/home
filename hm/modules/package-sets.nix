@@ -410,6 +410,7 @@ in
           # diff-so-fancy
           docker-credential-helpers # gives 'docker-credential-pass' for instance
 
+          flamelens # rust
           fswatch # fileevent watcher
           fx # json reader
 
@@ -708,7 +709,7 @@ in
 
       home.packages = [
         # pkgs.mokuro
-        pkgs.python3Packages.manga-ocr
+        # pkgs.python3Packages.manga-ocr
       ];
 
     })

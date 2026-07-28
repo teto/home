@@ -3,6 +3,7 @@
   lib,
   pkgs,
   flakeSelf,
+  secrets,
   ...
 }:
 let
@@ -21,6 +22,7 @@ let
   # - to check the backups: systemctl status restic-backups-immich-db-to-backblaze.service
   # TODO add a justfile to run the basic steps
   banner = "You can start the nextcloud-add-user.service unit if teto user doesnt exist yet";
+  tetoEmail = secrets.users.teto.email;
 in
 {
   imports = [
@@ -29,6 +31,7 @@ in
     flakeSelf.homeProfiles.bash
     flakeSelf.homeProfiles.teto-aliases
     flakeSelf.homeProfiles.readline
+    flakeSelf.homeModules.nixpkgs-monitor
 
     flakeSelf.homeProfiles.yazi
     flakeSelf.homeProfiles.yt-dlp
@@ -40,6 +43,15 @@ in
   ];
 
   home.stateVersion = "26.05";
+
+  # move to teto
+  services.nixpkgs-monitor = {
+    enable = true;
+    # TODO send a mail
+    on-branch-advance-cmd = lib.nixpkgsMonitorEmailNotifier tetoEmail;
+    # on-branch-advance-cmd
+  };
+
 
   # only on login shell
   # initExtra => interactive shell

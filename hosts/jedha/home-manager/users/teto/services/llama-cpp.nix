@@ -11,7 +11,10 @@
   services.llama-cpp = {
 
     enable = true;
-    # package = pkgs.llama-cuda;
+    package = pkgs.llama-cpp.override {
+      cudaSupport = true;
+    };
+
     # package = pkgs.llama-cpp-matt;
     # -m,    --model FNAME                    model path (default: `models/$filename` with filename from `--hf-file`
     #                                         or `--model-url` if set, otherwise models/7B/ggml-model-f16.gguf)

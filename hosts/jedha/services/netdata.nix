@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  enable = true;
+  enable = false;
   enableAnalyticsReporting = false;
   config = {
     global = {
