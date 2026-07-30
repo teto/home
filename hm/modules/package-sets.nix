@@ -668,6 +668,8 @@ in
           memento-with-ocr
           pkgs.clanki
 
+          pkgs.python3Packages.videocr # to extract burn in subtitles
+
           # https://github.com/NixOS/nixpkgs/pull/368909
           pkgs.kakasi # convert kanjis into kanas etc
           pkgs.kanji-stroke-order-font # for memento, font that shows strike order (!!) cool when learning

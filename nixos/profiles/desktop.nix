@@ -74,11 +74,21 @@ in
     # };
 
     # Enable local binary cache using discovered caches on the local network
-    cache.enable = true;
+    cache = {
+      enable = true;
+      addSubstituter = true;
+      timeout = 3.0; # seconds
+
+      # listenAddresses = lib.mkOption {
+      #   type = lib.types.listOf lib.types.str;
+      #   default = [ "[::]:5028" ];
+      verbose = true;
+    };
   };
 
   # Make Nix aware of our local network cache
-  nix.settings.substituters = [ "http://localhost:5028" ];
+  # TODO depend on nix-cache-beacon port
+  # nix.settings.substituters = [ "http://localhost:${config.services.nix-cache-beacon.cache.port}" ];
 
   console = {
     # seems like a kernel bug resets it https://github.com/NixOS/nixpkgs/issues/413128
