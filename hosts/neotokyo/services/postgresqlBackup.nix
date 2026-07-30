@@ -21,25 +21,6 @@
   #   "z ${backupEncPassphraseFile} 400 postgres postgres"
   # ];
 
-  systemd.services.immich-server.serviceConfig = {
-    # we override the default 0077 such that the backup job can read the files
-    UMask = lib.mkForce "0027";
-  };
-
   # TODO add onFailure template to send a mail
-  systemd.services.restic-backups-immich-db-to-backblaze =
-    lib.mkIf (config.services.restic.backups ? immich-db-to-backblaze)
-      {
-        serviceConfig = {
-          Group = "immich"; # such that it can read the files (but can not write to it)
-          # Type = "exec"; # restic sets it to "oneshot"
-          # RemainAfterExit = "yes"; # might break the job enqueuing ?
-        };
-        unitConfig = {
-          PartOf = "restic-backups-immich-db-to-backblaze.timer";
-          # todo pass failure
-          OnSuccess = "send-mail-to-teto@success.service";
-          OnFailure = "send-mail-to-teto@failure.service";
-        };
-      };
+  # systemd.services.
 }

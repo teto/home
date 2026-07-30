@@ -150,7 +150,7 @@ in
       # --with-nth=N[,..]        Transform the presentation of each line using
       #                          field index expressions
       # --accept-nth=N[,..]      Define which fields to print on accept
-      programs.fzf.historyWidgetOptions = [ "--with-nth=2.." ];
+      programs.fzf.historyWidget.options = [ "--with-nth=2.." ];
 
       programs.zsh.initContent = zshIntegration;
     })

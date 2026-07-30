@@ -15,7 +15,7 @@ in
   # launches systemd.services.buildbot-master
 
   master = {
-    enable = true;
+    enable = false;
 
     # kkind of a cache ?
     niks3 = {
@@ -58,7 +58,7 @@ in
 
   # TODO setup worker
   worker = {
-    enable = true;
+    enable = false;
     name = "neotokyo";
     # number of workers. 0 for a per node
     workers = 1;

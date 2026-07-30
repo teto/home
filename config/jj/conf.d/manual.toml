@@ -8,7 +8,11 @@
 # jj config set --user remotes.origin.auto-track-bookmarks 'glob:*'
 # TODO ignore backport PRs ?
 gh.auto-track-bookmarks = 'glob:*'
+gh.auto-track-created-bookmarks = '*'
 up.auto-track-bookmarks = 'glob:*'
+# https://apheris.jobs.personio.de/job/2591406
+# gh-readonly-queue
+# backport
 
 [aliases]
 # `jj l` shows commits on the working-copy commit's (anonymous) bookmark

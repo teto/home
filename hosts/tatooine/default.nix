@@ -67,8 +67,6 @@ in
     flakeSelf.inputs.disko.nixosModules.disko
     flakeSelf.inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen5
 
-    flakeSelf.nixosProfiles.pixiecore
-
     flakeSelf.nixosProfiles.disko-desktop
     flakeSelf.nixosProfiles.networkmanager
 
@@ -83,7 +81,7 @@ in
     flakeSelf.nixosProfiles.desktop
     flakeSelf.nixosProfiles.laptop
     flakeSelf.nixosProfiles.podman
-    # flakeSelf.nixosProfiles.experimental
+    flakeSelf.nixosProfiles.experimental
     flakeSelf.nixosProfiles.steam
 
     flakeSelf.nixosProfiles.kanata
@@ -236,17 +234,6 @@ in
     # dbus.packages = [ ];
   };
 
-  # experimental
-  # niriswitch on hm level
-  programs.niri.enable = false;
-
-  # for tests
-  # services.vault = {
-  #   enable = true;
-  #   dev = true;
-  #   devRootTokenID = secrets.vault.rootTokenId;
-  # };
-
   # environment.
   # service to update bios etc
   # managed to get this problem https://github.com/NixOS/nixpkgs/issues/47640
@@ -277,9 +264,11 @@ in
   #   priority = 10; # higher than HDD swap
   # };
 
-  programs.gnome-disks = {
-    enable = true;
-  };
+  services.flatpak.enable = true;
+
+  # programs.gnome-disks = {
+  #   enable = true;
+  # };
 
   # smartcard service for yubikey
   # can conflict with gpg-agent depending on config

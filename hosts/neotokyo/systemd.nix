@@ -1,10 +1,20 @@
 {
   config,
+  lib,
   # , secretsFolder
   ...
 }:
 {
   # enable = true;
+  # TODO create folders for transmission/jellyfin in /media or /home/media
+  tmpfiles.rules = [
+    # "d '${cfg.location}' 0700 postgres - - -"
+
+    # 'backup' group hasread access only
+    # 0740 would be better but for now just make it work
+    # TODO check if this takes precedence over postgresqlBackup tmpfiles
+    # "d '/var/backup/postgresql' 0750 postgres backup - -"
+  ];
 
   # what's the diff with networking.useNetworkd ?
   network = {
@@ -71,4 +81,27 @@
       ];
     };
   };
+
+  # TODO condition on immich
+  services.immich-server.serviceConfig = {
+    # we override the default 0077 such that the backup job can read the files
+    UMask = lib.mkForce "0027";
+  };
+
+  services.restic-backups-immich-db-to-backblaze =
+    lib.mkIf (config.services.restic.backups ? immich-db-to-backblaze)
+      {
+        serviceConfig = {
+          Group = "immich"; # such that it can read the files (but can not write to it)
+          # Type = "exec"; # restic sets it to "oneshot"
+          # RemainAfterExit = "yes"; # might break the job enqueuing ?
+        };
+        unitConfig = {
+          PartOf = "restic-backups-immich-db-to-backblaze.timer";
+          # todo pass failure
+          OnSuccess = "send-mail-to-teto@success.service";
+          OnFailure = "send-mail-to-teto@failure.service";
+        };
+      };
+
 }

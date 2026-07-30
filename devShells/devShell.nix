@@ -44,6 +44,10 @@ pkgs.mkShell {
       sops # to decrypt secrets
       ssh-to-age
 
+      # to generate certificates
+      step-cli
+      step-ca
+
       self.inputs.nixos-anywhere.packages.${stdenv.hostPlatform.system}.nixos-anywhere
       disko
 

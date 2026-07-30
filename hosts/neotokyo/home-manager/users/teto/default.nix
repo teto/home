@@ -50,6 +50,7 @@ in
     # TODO send a mail
     on-branch-advance-cmd = lib.nixpkgsMonitorEmailNotifier tetoEmail;
     # on-branch-advance-cmd
+    monitorCommand = "${pkgs.git-branch-monitor}";
   };
 
   # only on login shell
@@ -76,9 +77,16 @@ in
       echo "exporting token..."
       export GITHUB_TOKEN=$(cat ~/github-token)
     '';
+    profileExtra = ''
+      cat "${pkgs.writeText "login-welcome" welcomeMessage}";
+    '';
 
   };
 
+  # to export XDG_CACHE_HOME
+  xdg.enable = true;
+
+  # TODO set default ?
   programs.fish.enable = true;
 
   # todo set zsh as default

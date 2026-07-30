@@ -34,11 +34,11 @@
       PermitRootLogin = lib.mkForce "no";
 
       # could not find it
-      HostKey = "/run/secrets/ssh_host_key";
+      # HostKey = "/run/secrets/ssh_host_key";
 
       AllowUsers = [
         "teto"
-        "gitolite"
+        "gitolite" # depend on gitolite service
       ];
       # KexAlgorithms =
     };

@@ -45,6 +45,13 @@ in
         '';
       };
 
+      monitorCommand = lib.mkOption {
+        type = lib.types.str;
+        default = "${dotfilesPath}/bin/monitor-git-branch.fish -b nixos-unstable";
+        description = ''
+          Command to run to check the 
+        '';
+      };
     };
   };
   config = lib.mkIf cfg.enable {
@@ -77,7 +84,8 @@ in
               let
                 # onSuccessScript = pkgs.writeScript
               in
-              "${dotfilesPath}/bin/monitor-git-branch.fish -b nixos-unstable"
+              cfg.monitorCommand
+              # "${dotfilesPath}/bin/monitor-git-branch.fish -b nixos-unstable"
               + lib.optionalString (cfg.on-branch-advance-cmd != null) " --command ${cfg.on-branch-advance-cmd}";
           };
         };

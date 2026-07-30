@@ -151,6 +151,7 @@ in
       # bridge-utils# pour  brctl
 
       # vscode-css-languageserver # to showcase 'cssls' lsp server
+      videocr # to extract hardcorded subs
 
     ];
 

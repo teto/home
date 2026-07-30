@@ -117,7 +117,8 @@ end
 # Path to store the last known advancement date
 set -l xdg_cache_home $XDG_CACHE_HOME
 if test -z "$xdg_cache_home"
-    set -l xdg_cache_home ~/.cache
+   echo "XDG_CACHE_HOME is not set. fallback..."
+   set xdg_cache_home ~/.cache
 end
 set -l escaped_branch_name (string escape --style=var "$branch_name")
 set -l last_advancement_file "$xdg_cache_home/monitor-git-branch-$escaped_branch_name-last-advancement"

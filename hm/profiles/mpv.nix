@@ -5,13 +5,10 @@
   ...
 }:
 {
-
   # TODO use wrapper instead ?
   programs.mpv = {
 
     config = {
-      ytdl-raw-options = "write-auto-sub=,write-sub=,sub-lang=en";
-      sub-auto = "fuzzy";
       osc = false; # mandatory  with the modernz plugin
       profile = "gpu-hq";
       force-window = true;
@@ -37,16 +34,13 @@
     #   });
 
     scripts = [
-      # (pkgs.mpvScripts.autosub) # works with subliminal
 
-      # pkgs.mpvScripts.thumbnail # show thumbnail on hover, thumbnail ENABLES osc contrary to what we want so let's keep it removed
       # pkgs.mpvScripts.modernz # new UI ? https://github.com/Samillion/ModernZ
       pkgs.mpvScripts.uosc # new UI ? https://github.com/Samillion/ModernZ
       pkgs.mpvScripts.thumbfast # works with uosc to show thumbnails
+      # pkgs.mpvScripts.thumbnail # show thumbnail on hover, thumbnail ENABLES osc contrary to what we want so let's keep it removed
       # pkgs.mpvScripts.mpv-notify-send # does not work ?
     ];
 
   };
-  # profiles
-  # scripts pkgs.mpvScripts.mpris
 }

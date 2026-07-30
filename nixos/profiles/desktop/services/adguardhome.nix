@@ -24,6 +24,7 @@
       # HACK this works only in this location
       "192.168.1.254" # router
       "192.168.1.14" # router
+
     ];
 
     users = [ ];
@@ -33,6 +34,7 @@
         {
           domain = "*.vps";
           answer = "10.100.0.1";
+          enabled = "true";
         }
       ];
     };

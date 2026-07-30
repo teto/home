@@ -1,3 +1,4 @@
+# config is visiblew at /var/www/nextcloud/config/config.php
 {
   config,
   secrets,
@@ -130,7 +131,8 @@ in
 
         # proxyWebsockets = true
         # https://nixos.org/manual/nixos/stable/index.html#module-security-acme
-        enableACME = false;
+        # enable step-ca generated
+        enableACME = true;
         # enableReload = true; # reloads service when config changes !
 
         listenAddresses = [
@@ -155,16 +157,5 @@ in
   environment.systemPackages = [
     config.services.nextcloud.occ
     # inherit (cfg) datadir occ;
-
   ];
-
-  # This is using an age key that is expected to already be in the filesystem
-  # sops.age.keyFile = "/home/teto/.config/sops/age/keys.txt";
-  sops.secrets."nextcloud/tetoPassword" = lib.mkIf config.services.nextcloud.enable {
-    mode = "0440";
-    # TODO only readable by gitlab
-    owner = config.users.users.nextcloud.name;
-    group = config.users.users.nextcloud.group;
-  };
-
 }

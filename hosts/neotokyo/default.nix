@@ -19,16 +19,24 @@ let
           # wrong ?
           "home-manager/"
           "users/users/root.nix"
+          "users/default.nix"
 
+          "ca.json"
           "sops.nix"
           "nix.nix"
           "systemd.nix"
           "networking.nix"
+          "security.nix"
+          "programs/msmtp.nix"
+          "services/gitolite.nix"
           "services/llama-cpp.nix"
           "services/harmonia.nix"
           "services/jellyfin.nix"
           "services/restic.nix"
+          "services/immich.nix"
+          "services/step-ca.nix"
           "services/buildbot-nix.nix"
+          "services/nixbot.nix"
           "services/transmission.nix"
           "services/headscale.nix"
         ];
@@ -77,7 +85,7 @@ in
     "tipc"
   ];
 
-  services.dbus.implementation = "dbus";
+  # services.dbus.implementation = "dbus";
 
   imports = [
 
@@ -101,15 +109,13 @@ in
 
     # move to autoloaded
 
-    ./programs/msmtp.nix
-
     ./services/openssh.nix
-    ./services/sshguard.nix
-    ./services/gitolite.nix
+    # ./services/sshguard.nix
+    # ./services/gitolite.nix
     ./services/nextcloud.nix
     ./services/postgresqlBackup.nix
     ./services/nginx.nix
-    ./services/immich.nix
+    # ./services/immich.nix
     # ./services/restic.nix
 
     # testing
@@ -122,81 +128,7 @@ in
     flakeSelf.nixosProfiles.server
     flakeSelf.inputs.buildbot-nix.nixosModules.buildbot-master
     flakeSelf.inputs.buildbot-nix.nixosModules.buildbot-worker
-  ];
-
-  users = {
-
-    # that's where we
-    # users.jellyfin = {
-    #   # that's where we gonna store our libraries
-    #   createHome = true;
-    # };
-    # users.media = {
-    #   # that's where we gonna store our libraries
-    #   # todo create some directories like movies/music with tmpfiles.d ?
-    #   createHome = true;
-    # };
-
-    users.teto = {
-      # name = "Matt";
-      extraGroups = [
-        "nextcloud" # to be able to list files
-        "backup" # to read
-        "www" # to be able to write into the nginx read folder /var/www
-
-        "media"
-        # "jellyfin"
-      ];
-    };
-    users.postgres = {
-      extraGroups = [
-        "backup"
-        config.users.groups.backup.name
-      ];
-    };
-
-    # might not be needed anymore ? for gitolite ?
-    users.git = {
-      isSystemUser = true;
-      group = "www";
-      home = "/home/git";
-      createHome = true;
-      shell = "${pkgs.git}/bin/git-shell";
-      openssh.authorizedKeys.keys = config.users.users.teto.openssh.authorizedKeys.keys ++ [
-        # your ssh key here
-        # ../../perso/keys/id_rsa.pub
-      ];
-    };
-
-    users.immich.extraGroups = [
-      "video"
-      "render"
-    ];
-
-    groups.media = {
-      members = [
-        # doesnt have a user ?
-        # config.users.users.${config.services.jellyfin.user}.name
-        config.users.users.teto.name
-      ]
-      ++
-        lib.optional config.services.transmission.enable
-          config.users.users.${config.services.transmission.user}.name
-
-      ;
-    };
-    groups.backup = { };
-    groups.www = { };
-  };
-
-  # TODO create folders for transmission/jellyfin in /media or /home/media
-  systemd.tmpfiles.rules = [
-    # "d '${cfg.location}' 0700 postgres - - -"
-
-    # 'backup' group hasread access only
-    # 0740 would be better but for now just make it work
-    # TODO check if this takes precedence over postgresqlBackup tmpfiles
-    # "d '/var/backup/postgresql' 0750 postgres backup - -"
+    flakeSelf.inputs.nixbot.nixosModules.buildbot-worker
   ];
 
   # home-manager.users = {
@@ -228,24 +160,6 @@ in
   };
 
   documentation.enable = false;
-
-  # Enable 'sudo' with SSH key
-  # see https://github.com/serokell/deploy-rs/issues/299#issuecomment-3179359719
-  # to avoid password when using deploy-rs
-  security.pam.sshAgentAuth = {
-    enable = true;
-  };
-  # security.sudo.wheelNeedsPassword = true;
-  security.sudo.execWheelOnly = true;
-  security.sudo.extraRules = [
-    {
-      users = [ "teto" ];
-      commands = [
-        { command = "/nix/store/*-activatable-nixos-system-*/activate-rs"; }
-        { command = "/run/current-system/sw/bin/rm /tmp/deploy-rs-canary-*"; }
-      ];
-    }
-  ];
 
   environment.systemPackages = [
     # flakeSelf.inputs.transgression-tui.packages.${pkgs.stdenv.hostPlatform.system}.transgression-tui

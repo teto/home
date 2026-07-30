@@ -27,3 +27,10 @@ ff2mpv
 
 * subtitle delays
 you can adjust sub delay with 'z' and 'x' keys,
+
+* adjust yt-dlp behavior
+
+https://github.com/mpv-player/mpv/issues/17537#issuecomment-4029385733
+mpv doesn't care about yt-dlp config
+ytdl-raw-options=write-sub=,sub-lang=zh-Hans,all-subs=
+

@@ -14,7 +14,8 @@
       "generated.json",
       "manual.json"
    ],
-   "close_on_focus_loss": false,
+   "close_on_focus_loss": true,
+   "consider_preedit": true,
    "pop_to_root_on_close": true,
    "activate_on_single_click": true,
    "favicon_service": "none",

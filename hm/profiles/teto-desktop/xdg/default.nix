@@ -27,6 +27,7 @@
 
   desktopEntries = {
 
+    # TODO convert into a module
     firefox-router = {
 
       type = "Application";

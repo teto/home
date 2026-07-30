@@ -1,0 +1,46 @@
+{
+	"root": "/home/teto/.step/certs/root_ca.crt",
+	"federatedRoots": null,
+	"crt": "/home/teto/.step/certs/intermediate_ca.crt",
+	"key": "/home/teto/.step/secrets/intermediate_ca_key",
+	"address": ":8443",
+	"insecureAddress": "",
+	"dnsNames": [
+		"localhost"
+	],
+	"logger": {
+		"format": "text"
+	},
+	"db": {
+		"type": "badgerv2",
+		"dataSource": "/home/teto/.step/db",
+		"badgerFileLoadingMode": ""
+	},
+	"authority": {
+		"provisioners": [
+			{
+				"type": "JWK",
+				"name": "totofake@gmail.com",
+				"key": {
+					"use": "sig",
+					"kty": "EC",
+					"kid": "hOX2iZ-sRSPqrJAY5OFx-X9MYVFTizMjlSQtM5ZVNyw",
+					"crv": "P-256",
+					"alg": "ES256",
+					"x": "rWvLLPPOR7ckFC2pXCD9aW4dqULfU8d31qAq6ThluP0",
+					"y": "53acUhFllJXjTW5_3f985isJ_WKWztA6jhb0IAyVniU"
+				},
+				"encryptedKey": "eyJhbGciOiJQQkVTMi1IUzI1NitBMTI4S1ciLCJjdHkiOiJqd2sranNvbiIsImVuYyI6IkEyNTZHQ00iLCJwMmMiOjYwMDAwMCwicDJzIjoiVllBanppN2RJRUM0cXg0S1pfSUtjUSJ9.ibD38rPbLMfBGJ7bFg1QAEyXUCjhcCl_wwO-4yGxyIsZvUVVysY3ew.5gtuP0d4856Rk60A.14t9VIvwGDkJgqknV6WXqtqRw-OuCUuO4mb57u6LwNSA1dTJmgcymeA5fJrBoLRYmVoQ1kBOHSxdnq_GQInqGYQONGEqESslhbSpN6g11WBrWrqCCQFwyu36V8U2JHAEyp7Zk-9Wviw_cKA18NWO6kzIXvOqFlN-bjzx8Ve3VxCxACGHgW20JCZBDnBgiS2VD2u8SeX4IMztTUBxxqeOvLCvynY_0FL40NgdhSFdhr9HWLaPTjFVAvBP4dfHzM3stc7N1JJB7nao_5YxRrcDz2Db6xWBGGia6-WdupjB0rcWabiLcFYZkYyPTmjSYO7p8v8wICrYDGsD1wWJmw8.Upn75WCka0IY2FAKZcVlow"
+			}
+		]
+	},
+	"tls": {
+		"cipherSuites": [
+			"TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256",
+			"TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256"
+		],
+		"minVersion": 1.2,
+		"maxVersion": 1.3,
+		"renegotiation": false
+	}
+}

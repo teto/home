@@ -13,46 +13,44 @@
 
   # git clone gitolite@host:gitolite-admin.git
 
-  users.users.gitolite.extraGroups = [
-    "www"
-    "nginx"
-  ];
+  # users.users.gitolite.extraGroups = [
+  #   "www"
+  #   "nginx"
+  # ];
 
   # enable gitolite
-  services.gitolite = {
-    enable = true;
-    # read
-    # services.gitolite.adminPubkey and declarative configuration (repos/extraConfig) are mutually exclusive.
-    # adminPubkey = builtins.readFile ./neotokyo-gitolite.pub;
-    # group = "";
-    # user
-    # enableGitAnnex = false;
-    # by default dataLib -> /var/lib/gitolite
-    # dataDir = /home/teto/gitolite;
+  enable = true;
+  # read
+  # services.gitolite.adminPubkey and declarative configuration (repos/extraConfig) are mutually exclusive.
+  # adminPubkey = builtins.readFile ./neotokyo-gitolite.pub;
+  # group = "";
+  # user
+  # enableGitAnnex = false;
+  # by default dataLib -> /var/lib/gitolite
+  # dataDir = /home/teto/gitolite;
 
-    # experimental
-    repos = {
+  # experimental
+  repos = {
 
-      blog = {
-        access = [
-          {
-            perm = "RW+";
-            users = [ "teto" ];
-          }
-        ];
-      };
-
+    blog = {
+      access = [
+        {
+          perm = "RW+";
+          users = [ "teto" ];
+        }
+      ];
     };
 
-    # perl code
-    extraGitoliteRc = ''
-      $RC{UMASK} = 0027;
-      $RC{SITE_INFO}  = 'This is our private repository host';
-      $RC{LOCAL_CODE} =  "$rc{GL_ADMIN_BASE}/local",
-      push( @{$RC{ENABLE}}, 'repo-specific-hooks'); # enable the command/feature
-    '';
-
-    # hooks deployed to every  repo
-    # commonHooks = [ ];
   };
+
+  # perl code
+  extraGitoliteRc = ''
+    $RC{UMASK} = 0027;
+    $RC{SITE_INFO}  = 'This is our private repository host';
+    $RC{LOCAL_CODE} =  "$rc{GL_ADMIN_BASE}/local",
+    push( @{$RC{ENABLE}}, 'repo-specific-hooks'); # enable the command/feature
+  '';
+
+  # hooks deployed to every  repo
+  # commonHooks = [ ];
 }

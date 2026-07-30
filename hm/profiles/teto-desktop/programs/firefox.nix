@@ -1,6 +1,10 @@
+# New profile system is a cluster fuck
+# https://github.com/nix-community/home-manager/issues/6934
+# https://dredyson.com/firefox-multiple-profiles-management-i-tested-every-solution-including-legacy-vs-new-selectable-profiles-aboutprofiles-command-line-and-third-party-workarounds-heres-what-actually-wor/
 {
   config,
   pkgs,
+  flakeSelf,
   lib,
   ...
 }:
@@ -8,11 +12,17 @@ let
   ffLib = lib.firefox;
 in
 {
+  # _imports = [
+  #   flakeSelf.homeModules.firefox
+  # ];
 
   # TODO prefix with stable
   # look at firefox/wrapper to add policies
   # https://github.com/mozilla/policy-templates#enterprisepoliciesenabled
   enable = true;
+
+  # from tetos module
+  mutableProfilesIni = true;
 
   configPath = "${config.xdg.configHome}/mozilla/firefox";
 
@@ -84,6 +94,9 @@ in
       path = "q1pprbmm.default";
       # extraConfig =
       id = 0;
+
+      # stolen from toolkit.profiles.storeID
+      storeId = "e41de5fe";
       # Not accepted. we should find another way to enable it
       # pass package for instance
       # with pkgs.nur.repos.rycee.firefox-addons;

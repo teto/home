@@ -75,12 +75,31 @@
       };
 
     }
-    // lib.optionalAttrs config.services.buildbot-master.enable {
+    // lib.optionalAttrs config.services.step-ca.enable {
+      "step-ca-root-key" = {
+        mode = "440";
+        owner = config.users.users.step-ca.name;
+        # should be readable by nginx as well
+        group = config.users.users.step-ca.group;
+      };
+    }
+    // lib.optionalAttrs (config.services.buildbot-master.enable || config.services.nixbot.enable) {
       "buildbot-client-secret" = {
         mode = "440";
-        owner = config.users.users.buildbot.name;
+        # owner = config.users.users.buildbot.name;
+        owner = config.users.users.nixbot.name;
         group = config.users.users.teto.group;
       };
-    };
+    }
+    // lib.optionalAttrs config.services.nextcloud.enable {
 
+      # This is using an age key that is expected to already be in the filesystem
+      # sops.age.keyFile = "/home/teto/.config/sops/age/keys.txt";
+      "nextcloud/tetoPassword" = {
+        mode = "0440";
+        # TODO only readable by gitlab
+        owner = config.users.users.nextcloud.name;
+        group = config.users.users.nextcloud.group;
+      };
+    };
 }

@@ -65,11 +65,13 @@ in
 
   };
 
+  # this neither
   networking.firewall.allowedTCPPorts = [
     80
     443
   ];
 
+  # this shouldn't be part of profiles
   sops.secrets.${nextcloudAdminPasswordSopsPath} = lib.mkIf config.services.nextcloud.enable {
     mode = "0440";
     owner = config.users.users.nextcloud.name;

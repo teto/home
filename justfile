@@ -5,7 +5,8 @@
 # TODO include global justfile
 
 HOSTNAME := `hostname`
-NIXPKGS_REPO := 'path:' + env('HOME') / 'nixpkgs'
+# 'path:' +
+NIXPKGS_REPO := env('HOME') / 'nixpkgs'
 HM_REPO := env('HOME') / "hm"
 # BLOG_FOLDER := "${HOME}/blog"
 

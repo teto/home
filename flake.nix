@@ -7,11 +7,17 @@
   description = "Un petit aperçu de l'enfer";
 
   inputs = {
+
+    # todo remove
     buildbot-nix = {
       url = "github:nix-community/buildbot-nix";
       # url = "github:teto/buildbot-nix?ref=teto/hack-niks3-eval-error";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixbot.url = "github:Mic92/nixbot";
+    nixbot.inputs.nixpkgs.follows = "nixpkgs";
+
     direnv-instant.url = "github:Mic92/direnv-instant";
 
     disko = {
@@ -141,7 +147,6 @@
       # url = "github:elizagamedev/mujmap";
       # url = "github:Lyndeno/mujmap";
       url = "github:ntrocado/mujmap";
-
       # url = "github:spencerjackson/mujmap?ref=feature-pushLocalMail";
       # inputs.nixpkgs.follows = "nixpkgs"; # breaks build
     };
@@ -459,7 +464,7 @@
           };
         };
 
-      tetosPkgs = pkgImport self.inputs.nixpkgs false;
+      tetosPkgs = pkgImport self.inputs.nixpkgs true;
       # tetosPkgsCuda = pkgImport self.inputs.nixpkgs true;
       unstablePkgs = pkgImport self.inputs.nixos-unstable false;
       # stablePkgs = pkgImport self.inputs.nixos-stable;
@@ -532,7 +537,6 @@
             meli-git
             # neomutt
             pass-perso
-            # mujmap-unstable
             memento-whisper
             sway-scratchpad
             gpt4all-cuda

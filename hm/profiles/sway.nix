@@ -197,11 +197,23 @@ in
 
           Menu = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
           "${mod}+Tab" = "exec ${pkgs.vicinae}/bin/vicinae toggle";
+
+          #### Windows key mappings
+          ##############################
+
           # "${mod}+Tab" = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
           # TODO dwindow exclusively with WIN
           "${mad}+Tab" = "exec ${pkgs.swayr}/bin/swayr switch-window";
           "${mad}+p" = "exec ${lib.getExe pkgs.wofi-pass} ";
-          "${mad}+a" = "exec \"${rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
+          "${mad}+w" = "exec \"${rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
+          # use sway-easyfocus
+          "${mad}+f" = "exec ${pkgs.sway-easyfocus}/bin/sway-easyfocus";
+          # "${mad}+w" = "exec ${pkgs.sway-easyfocus}/bin/sway-easyfocus";
+          # TODO bind
+          # XF86Copy
+
+          # ideally we shouldn't care if it's firefox or not ?
+          "${mad}+a" = "exec \"${dotfilesPath}/bin/firefox-focus-media\"";
 
           # locker
           # "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
@@ -243,11 +255,6 @@ in
 
           # for_window [con_mark="SCRATCHPAD_terminal"] border pixel 1
 
-          # use sway-easyfocus
-          "${mod}+g" = "exec ${pkgs.sway-easyfocus}/bin/sway-easyfocus";
-          "${mad}+w" = "exec ${pkgs.sway-easyfocus}/bin/sway-easyfocus";
-          # TODO bind
-          # XF86Copy
         }
         // lib.optionalAttrs config.programs.vicinae.enable {
           # vicinae://launch/clipboard/history

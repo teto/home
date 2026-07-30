@@ -118,7 +118,7 @@ nvim-treesitter-context = "1.0.0"
 
 auto-session = "2.5.1"
 "vim-startuptime"= "4.6.1"
-"grug-far.nvim"= "1.6.75"
+"grug-far.nvim"= "1.6.76"
 "yazi.nvim"= "13.9.0"
 
 [plugins."rikai.nvim"]
@@ -153,7 +153,7 @@ rev = "392bcd1f5053e5a6bb0d77e8f81d56712f362343"
 
 [plugins."tiny-inline-diagnostic.nvim"]
 git = "rachartier/tiny-inline-diagnostic.nvim"
-rev = "d9d12d4bfb9a4c5b8b8bdf7f612551df6972946c"
+rev = "6264451f14119d63a52580e5198d6baf8518b0b2"
 
 # [plugins."jj.nvim"]
 # git = "nicolasgb/jj.nvim"

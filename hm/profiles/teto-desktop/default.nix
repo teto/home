@@ -68,6 +68,7 @@ in
     flakeSelf.homeModules.services-mujmap
     flakeSelf.homeModules.package-sets
     flakeSelf.homeModules.nixpkgs-monitor
+    flakeSelf.homeModules.firefox
 
     flakeSelf.homeProfiles.teto-aliases
     flakeSelf.homeProfiles.common

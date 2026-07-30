@@ -260,6 +260,11 @@ vim.opt.rtp:prepend(pluginDir .. '/avante.nvim')
 vim.opt.rtp:prepend(pluginDir .. '/rocks-git.nvim')
 vim.opt.rtp:prepend(pluginDir .. '/auto-session')
 
+---TODO pass a list of generated nix plugins ?
+---or custom for now
+---@param all_plugins? table<rock_name, RockSpec>
+-- require('rocks-config.internal').setup()
+
 vim.g.loaded_matchit = 1
 
 vim.opt.shortmess:append('I')
