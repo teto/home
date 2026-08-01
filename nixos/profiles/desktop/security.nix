@@ -1,4 +1,12 @@
 {
+
+  pki.certificateFiles = [
+    # same as on neotokyo
+    ./root_ca.crt
+  ];
+
+
+
   # don't forget to run ulimit -c unlimited to get the actual coredump
   # check thos comment to setup user ulimits https://github.com/NixOS/nixpkgs/issues/159964#issuecomment-1252682060
   # systemd.services."user@1000".serviceConfig.LimitNOFILE = "32768";
@@ -8,7 +16,6 @@
   # fs.inotify.max_user_watches = 8192
   # fs.inotify.max_queued_events = 16384
   # type: soft/hard/- (-=both soft and hard
-  pam.services.swaylock = { };
 
   pam.loginLimits = [
     #
@@ -45,6 +52,7 @@
     services = {
       login.u2fAuth = true;
       sudo.u2fAuth = true;
+      swaylock = { };
     };
   };
 

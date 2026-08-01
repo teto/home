@@ -116,15 +116,7 @@ in
 
   #additionalModuleos defaultJellyfinPort
 
-  security.acme = {
-  };
-
   # users.users.nginx.extraGroups = [ "acme" ];
-
-  systemd.tmpfiles.rules = [
-    "d /var/www 0775 nginx www"
-    "d /var/www/blog-generated 0775 nginx www"
-  ];
 
   services.nginx = {
 
@@ -161,6 +153,7 @@ in
       # to avoid https:// redirecting to the first random virtual host
       # we should even return a special type -> redirect to blog ?
       "_tls-catchall" = {
+        # doesn't act as default because doesn't have force 
         default = true;
         addSSL = false;
         # use step-ca instead
@@ -295,7 +288,43 @@ in
           proxyPass = "http://127.0.0.1:${toString config.services.n8n.environment.N8N_PORT}";
         };
       };
-    };
+    }
+    // lib.optionalAttrs config.services.nextcloud.enable {
 
+  # create some errors on deploy
+  # for now we generate one certificate per virtual host
+  # https://discourse.nixos.org/t/nixos-nginx-acme-ssl-certificates-for-multiple-domains/19608/2
+
+    # ceeformat is unknown ?
+
+      # the n
+      # extends the host already configured by the nixos module nginx
+      "${config.services.nextcloud.hostName}" = {
+        forceSSL = true;
+
+        # proxyWebsockets = true
+        # https://nixos.org/manual/nixos/stable/index.html#module-security-acme
+        # enable step-ca generated
+        enableACME = true;
+        # enableReload = true; # reloads service when config changes !
+
+        listenAddresses = [
+          wgEndpoint
+        ];
+
+        # listen = [ 80 ];
+        # listen = [ { addr = "127.0.0.1"; port = 80; }];
+        # locations."/" = {
+        #   proxyPass = "http://localhost:8080"; # Assuming service 1 runs on localhost:8080
+        # };
+        #
+        # extraConfig = ''
+        #   allow 193.168.0.1/24;
+        #   deny all;
+        # '';
+      };
+
+    };
   };
+
 }

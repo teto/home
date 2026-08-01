@@ -5,6 +5,11 @@
 }:
 {
 
+  pki.certificateFiles = [
+    ./root_ca.crt
+  ];
+
+
   # see https://gquetel.fr/misc/step-ca-nixos/
   acme = {
     acceptTerms = true;

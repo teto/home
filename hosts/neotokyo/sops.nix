@@ -76,12 +76,27 @@
 
     }
     // lib.optionalAttrs config.services.step-ca.enable {
-      "step-ca-root-key" = {
+      # should be readable by nginx as well
+
+      # not needed after all
+      # "step-ca-root-key" = {
+      #   mode = "440";
+      #   owner = config.users.users.step-ca.name;
+      #   group = config.users.users.step-ca.group;
+      # };
+      "step-ca-intermediate-key" = {
         mode = "440";
         owner = config.users.users.step-ca.name;
-        # should be readable by nginx as well
         group = config.users.users.step-ca.group;
       };
+
+
+      "step-ca-certificate-password" = {
+        mode = "440";
+        owner = config.users.users.step-ca.name;
+        group = config.users.users.step-ca.group;
+      };
+
     }
     // lib.optionalAttrs (config.services.buildbot-master.enable || config.services.nixbot.enable) {
       "buildbot-client-secret" = {

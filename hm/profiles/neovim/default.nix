@@ -26,6 +26,8 @@ let
     '';
   };
 
+
+
   myNeovimUnwrapped =
     # "neovim-debug" / "neovim-developer"
     flakeSelf.inputs.neovim-nightly-overlay.packages."${pkgs.stdenv.hostPlatform.system
@@ -34,6 +36,17 @@ let
         # we want to take the luajit with our overlay of lua packages
         luajit = pkgs.luajit-tetos;
       });
+
+
+      vim-listchars = pkgs.buildVimPlugin {
+        src = pkgs.fetchFromGitHub {
+        owner =  "teto";
+        repo = "vim-listchars";
+        "sha256" = "1qahbrnnxgq0sbidvxsdqqhghzbr9arwkqz06sz2jf1bgs1bfmn3";
+        "hash" = "sha256-w1a3gn4rOCm+NuDjybNKeX34IMZN993i0gC/bm1eUOE=";
+        };
+
+      };
 
   # nvimLua = config.programs.neovim.finalPackage.passthru.unwrapped.lua;
 
@@ -80,6 +93,19 @@ let
     { plugin = vim-fugitive; }
 
     vim-scriptease # create commands like :Messages
+
+    # ({
+    #   plugin = vim-listchars
+    #   config = ''
+    #   vim.keymap.set(
+    #       'n',
+    #       '<F11>',
+    #       '<Plug>(ToggleListchars)',
+    #       { desc = 'Change between different flavors of space/tab characters' }
+    #   )
+    #
+    #     '';
+    #  })
 
     ({
       type = "lua";

@@ -14,6 +14,8 @@
   # extraArgs = [];
 
   # https://github.com/AdguardTeam/AdGuardHome/wiki/Configuration#configuration-file
+  #   settingsFormat = pkgs.formats.yaml { };
+  # careful this can easily break
   settings = {
     # List of DNS servers used for initial hostname resolution in case an upstream server name is a hostname.
     dns.bootstrap_dns = [
@@ -34,7 +36,7 @@
         {
           domain = "*.vps";
           answer = "10.100.0.1";
-          enabled = "true";
+          enabled = true;
         }
       ];
     };

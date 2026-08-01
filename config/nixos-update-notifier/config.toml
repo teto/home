@@ -1,0 +1,45 @@
+# Absolute path to your flake repo (the directory containing flake.nix). Required.
+flake_path = "/home/teto/home"
+
+# The nixosConfigurations.<name> attribute to evaluate and rebuild. Required.
+host_attr = "jedha"
+
+# Inputs to advance during a check/apply.
+#   - If omitted or empty: ALL inputs are candidates, minus `exclude_inputs`.
+#   - If set: ONLY these inputs are advanced (still minus `exclude_inputs`).
+# update_inputs = ["nixpkgs", "home-manager"]
+
+# Inputs that must NEVER be advanced. This is the safety valve for deliberately
+# rev-pinned inputs. Classic example: a `nixpkgs-kernel` input pinned to an immutable
+# commit that provides your kernel + ZFS — advancing it could break ZFS-on-root.
+exclude_inputs = ["nixpkgs-kernel"]
+
+# Background check cadence, in seconds. Default: 21600 (6 hours). Minimum: 60.
+interval = 21600
+
+# Fire desktop notifications when updates appear.
+notify = true
+
+# Which nixpkgs to resolve meta.changelog against when rendering the update list.
+# Any flake ref works: "nixpkgs", "github:NixOS/nixpkgs/nixos-24.11", or a path.
+# If omitted, the registry alias "nixpkgs" is used.
+# nixpkgs_ref_for_changelogs = "github:NixOS/nixpkgs/nixos-24.11"
+
+# NOTE: there is deliberately no `rebuild_extra_args` option. Arbitrary arguments
+# forwarded into root's `nixos-rebuild` would let anything that can write this file change
+# what root evaluates and builds — more than "rebuild my machine", and not shown on the
+# polkit prompt. Setting it now fails config parsing rather than being silently ignored.
+
+# Icon names per tray state. The defaults below are verified to exist in Breeze (KDE's
+# default theme) — an icon name the theme cannot resolve makes the tray item render as a
+# blank gap, with no error logged anywhere, so change these only to names you have checked.
+#
+# On a non-KDE desktop, or to use the Nix logo (needs the `nixos-icons` package), override:
+#   idle = "nix-snowflake"
+#
+# [icons]
+# idle = "update-none"
+# checking = "view-refresh"
+# system_changes = "update-low"         # inputs moved but no package changed version
+# updates_available = "update-medium"   # "update-high" is more attention-grabbing
+# error = "dialog-error"

@@ -25,6 +25,17 @@
     #   setlocal omnifunc=v:lua.vim.lsp.omnifunc
     # '';
 
+    # todo add plugins
+    initLua = ''
+      vim.keymap.set(
+          'n',
+          '<F11>',
+          '<Plug>(ToggleListchars)',
+          { desc = 'Change between different flavors of space/tab characters' }
+      )
+      '';
+
+
   };
 
 }

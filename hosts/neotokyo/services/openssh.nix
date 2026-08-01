@@ -6,11 +6,9 @@
   ...
 }:
 {
-  imports = [
+  _imports = [
     flakeSelf.nixosProfiles.openssh
   ];
-
-  services.openssh = {
 
     enable = true;
     ports = lib.mkIf withSecrets [ secrets.jakku.sshPort ];
@@ -25,7 +23,10 @@
       # LoginGraceTime = 500;
       Protocol = 2;
       ChallengeResponseAuthentication = false;
-      AcceptEnv = [ "GITHUB_TOKEN" ];
+      AcceptEnv = [
+        "GITHUB_TOKEN"
+        "SOPS_AGE_SSH_PRIVATE_KEY_FILE"
+      ];
       # LogLevel = "VERBOSE";
       LogLevel = lib.mkForce "DEBUG";
       KbdInteractiveAuthentication = false;
@@ -42,5 +43,4 @@
       ];
       # KexAlgorithms =
     };
-  };
 }

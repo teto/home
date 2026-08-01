@@ -24,10 +24,14 @@ let
           "ca.json"
           "sops.nix"
           "nix.nix"
+          "nix.nix"
+          "intermediate_ca.crt"
+          "root_ca.crt"
           "systemd.nix"
           "networking.nix"
           "security.nix"
           "programs/msmtp.nix"
+          "services/openssh.nix"
           "services/gitolite.nix"
           "services/llama-cpp.nix"
           "services/harmonia.nix"
@@ -109,7 +113,7 @@ in
 
     # move to autoloaded
 
-    ./services/openssh.nix
+    # ./services/openssh.nix
     # ./services/sshguard.nix
     # ./services/gitolite.nix
     ./services/nextcloud.nix
@@ -126,9 +130,11 @@ in
     # ../../nixos/modules/hercules-ci-agents.nix
 
     flakeSelf.nixosProfiles.server
+
+    # TODO remove once nixbot succeeds
     flakeSelf.inputs.buildbot-nix.nixosModules.buildbot-master
     flakeSelf.inputs.buildbot-nix.nixosModules.buildbot-worker
-    flakeSelf.inputs.nixbot.nixosModules.buildbot-worker
+    flakeSelf.inputs.nixbot.nixosModules.nixbot
   ];
 
   # home-manager.users = {

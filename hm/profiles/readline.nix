@@ -18,6 +18,9 @@
       "\\e[1~" = "beginning-of-line";
     };
     extraConfig = ''
+
+      "\C-a": beginning-of-line
+      "\C-e": end-of-line
       "\e[1~": beginning-of-line
       "\e[4~": end-of-line
       "\e[5~": beginning-of-history

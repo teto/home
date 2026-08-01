@@ -257,15 +257,15 @@ in
       # -- TODO higroup should be its own ? a darker version of CursorLine
       # -- if it doesnt exist
       #
-      programs.neovim.initLua = ''
-        -- todo add 'TextPutPost' if neovim version > 0.13
-        vim.api.nvim_create_autocmd({'TextYankPost' }, {
-            callback = function()
-                -- valid starting from 0.13
-                vim.hl.hl_op({ higroup = 'IncSearch', timeout = 1000 })
-            end,
-        })
-      '';
+      # programs.neovim.initLua = ''
+      #   -- todo add 'TextPutPost' if neovim version > 0.13
+      #   vim.api.nvim_create_autocmd({'TextYankPost' }, {
+      #       callback = function()
+      #           -- valid starting from 0.13
+      #           vim.hl.hl_op({ higroup = 'IncSearch', timeout = 1000 })
+      #       end,
+      #   })
+      # '';
     })
     (lib.mkIf cfg.enableMyDefaults {
 

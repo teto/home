@@ -14,6 +14,9 @@
     # 0740 would be better but for now just make it work
     # TODO check if this takes precedence over postgresqlBackup tmpfiles
     # "d '/var/backup/postgresql' 0750 postgres backup - -"
+
+    "d /var/www 0775 nginx www"
+    "d /var/www/blog-generated 0775 nginx www"
   ];
 
   # what's the diff with networking.useNetworkd ?

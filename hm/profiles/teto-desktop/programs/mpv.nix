@@ -29,7 +29,9 @@
     # dont override default options ?
     # according to https://github.com/mpv-player/mpv/issues/17537#issuecomment-4029385733
     # mpv doesn't care about yt-dlp's config
-    ytdl-raw-options = "write-auto-sub=,write-sub=,sub-langs='en,jp,fr'";
+    # ytdl-raw-options=sub-lang="en,eng",write-sub=
+    ytdl-raw-options = ''write-auto-sub=,write-sub=,sub-langs="en,jp,fr"'';
+    # ytdl-raw-options-append
     sub-auto = "fuzzy";
     profile = "gpu-hq";
     force-window = true;

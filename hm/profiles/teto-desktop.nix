@@ -16,7 +16,13 @@ let
   autoloadedModule =
     { pkgs, ... }@args:
     haumea.lib.load {
-
+  # src = lib.fileset.toSource {
+  #   root = ./.;
+  #   fileset = lib.fileset.unions [
+  #     ./folder-a
+  #     ./folder-b
+  #   ];
+  # };
       src = flakeSelf.inputs.nix-filter {
         root = lib.cleanSource ./teto-desktop;
       };

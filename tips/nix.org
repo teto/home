@@ -181,6 +181,10 @@ nix path-info -Sh $(nix-build ./shell.nix -A inputDerivation)
  
  does not execute hooks !
 
+* filter sources
+
+https://discourse.nixos.org/t/filtering-source-trees-with-nix-and-nixpkgs/19148
+
 * nixpkgs-review
 
 Pass `--build-args "--option substituters https://cache.nixos.org/"` for extra config

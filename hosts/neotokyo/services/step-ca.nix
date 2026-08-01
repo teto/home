@@ -20,15 +20,16 @@ in
   enable = true;
   port = 8443; # there is no default :s
   address = "localhost";
-  # intermediatePasswordFile = "";
+  intermediatePasswordFile = "/run/secrets/step-ca-certificate-password";
   # goes to ca.json  see
   # https://smallstep.com/docs/step-ca/configuration
   # settings = builtins.fromJSON (builtins.readFile ../ca.json);
   settings = {
     # dnsNames = [ "caserver" ];
-    root = "${test-certificates}/root_ca.crt";
-    # crt = "${test-certificates}/intermediate_ca.crt";
-    key = config.sops.secrets."step-ca-root-key".path;
+    root = "${../root_ca.crt}";
+    crt = "${../intermediate_ca.crt}";
+    # cl'est la cle de l'intermediate
+    key = config.sops.secrets."step-ca-intermediate-key".path;
     db = {
       type = "badger";
       dataSource = "/var/lib/step-ca/db";

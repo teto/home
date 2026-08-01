@@ -744,7 +744,7 @@ vim.pack.add({
     -- 'https://github.com/elanmed/fzf-lua-frecency.nvim', -- to rocks
 
     'https://github.com/neovim/nvim-lspconfig',
-    'https://github.com/teto/vim-listchars',
+    -- 'https://github.com/teto/vim-listchars',
     'https://github.com/yutkat/git-rebase-auto-diff.nvim',
 
     'https://github.com/gbprod/none-ls-shellcheck.nvim',
@@ -1221,6 +1221,15 @@ if vim.g.neovide then
     vim.g.neovide_floating_blur_amount_x = 30
     vim.g.neovide_floating_blur_amount_y = 30
 end
+
+-- todo add 'TextPutPost' if neovim version > 0.13
+vim.api.nvim_create_autocmd({'TextYankPost' }, {
+	callback = function()
+		-- valid starting from 0.13
+		vim.hl.hl_op({ higroup = 'IncSearch', timeout = 1000 })
+	end,
+})
+
 
 -- prints --embed which is not listed
 -- vim.print(vim.v.argv)

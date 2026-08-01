@@ -72,10 +72,10 @@ in
   };
 
   programs.bash = {
+    #       export GITHUB_TOKEN=$(cat ~/github-token)
     initExtra = ''
       cd nixpkgs
       echo "exporting token..."
-      export GITHUB_TOKEN=$(cat ~/github-token)
     '';
     profileExtra = ''
       cat "${pkgs.writeText "login-welcome" welcomeMessage}";

@@ -47,7 +47,7 @@ in
     flakeSelf.nixosModules.sudo
 
     # ./greetd.nix
-    ./ntp.nix
+    # ./ntp.nix
     # ../../nixos/profiles/librenms.nix
 
     ./pipewire.nix
@@ -65,6 +65,7 @@ in
     };
   };
 
+  # TODO move ?
   services.nix-cache-beacon = {
     # Announce cache to the local network
     # advert = {
