@@ -195,8 +195,6 @@
       url = "github:neovide/neovide";
       flake = false;
     };
-    nix-filter.url = "github:numtide/nix-filter";
-
     # waybar.url = "github:Alexays/Waybar";
     # todo update for ci ?
     nixpkgs = {

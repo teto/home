@@ -13,18 +13,9 @@ let
   autoloadedProfiles =
     { pkgs, ... }@args:
     haumea.lib.load {
-      src = flakeSelf.inputs.nix-filter {
+      src = lib.fileset.toSource {
         root = ./.;
-        include = [
-          # wrong ?
-          "programs/noctalia.nix"
-        ];
-        exclude = [
-          # "teto"
-          # "users"
-          # "home-manager" # exclude home-manager because intputs are not the same: it must be imported differently
-          # "root"
-        ];
+        fileset = ./programs/noctalia.nix;
       };
 
       inputs = args // {

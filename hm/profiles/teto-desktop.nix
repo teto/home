@@ -23,8 +23,9 @@ let
   #     ./folder-b
   #   ];
   # };
-      src = flakeSelf.inputs.nix-filter {
-        root = lib.cleanSource ./teto-desktop;
+      src = lib.fileset.toSource {
+        root = ./teto-desktop;
+        fileset = ./teto-desktop;
       };
       inputs = args // {
         inputs = flakeSelf.inputs;

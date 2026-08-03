@@ -10,57 +10,43 @@
 let
   haumea = flakeSelf.inputs.haumea;
 
-  autoloadedProfiles = let 
-      filteredSrc = flakeSelf.inputs.nix-filter {
+  autoloadedProfiles =
+    let
+      filteredSrc = lib.fileset.toSource {
         root = ./.;
-        include = [
-          # wrong ?
-          "home-manager/"
-          "users/users/root.nix"
-          "users/default.nix"
-
-          "ca.json"
-          "sops.nix"
-          "nix.nix"
-          "nix.nix"
-          "intermediate_ca.crt"
-          "root_ca.crt"
-          "systemd.nix"
-          "networking.nix"
-          "security.nix"
-          "programs/msmtp.nix"
-          "services/openssh.nix"
-          "services/gitolite.nix"
-          "services/llama-cpp.nix"
-          "services/harmonia.nix"
-          "services/jellyfin.nix"
-          "services/restic.nix"
-          "services/immich.nix"
-          "services/step-ca.nix"
-          "services/buildbot-nix.nix"
-          "services/nixbot.nix"
-          "services/transmission.nix"
-          "services/headscale.nix"
-        ];
-        exclude = [
-          # "teto"
-          # "users"
-          # "home-manager" # exclude home-manager because intputs are not the same: it must be imported differently
-          # "root"
+        fileset = lib.fileset.unions [
+          ./home-manager
+          ./users/default.nix
+          ./ca.json
+          ./sops.nix
+          ./nix.nix
+          ./intermediate_ca.crt
+          ./systemd.nix
+          ./networking.nix
+          ./security.nix
+          ./programs/msmtp.nix
+          ./services/openssh.nix
+          ./services/gitolite.nix
+          ./services/llama-cpp.nix
+          ./services/harmonia.nix
+          ./services/jellyfin.nix
+          ./services/restic.nix
+          ./services/immich.nix
+          ./services/step-ca.nix
+          ./services/buildbot-nix.nix
+          ./services/nixbot.nix
+          ./services/transmission.nix
+          ./services/headscale.nix
         ];
       };
-  in
+    in
     { pkgs, ... }@args:
     haumea.lib.load {
-       # error: lib.fileset.unions: Element 1 ("/nix/store/jx0avcglm965xdb8asiqgbzrlnr50mnl-source") is a string-like value, but it should be a file set or a path instead.
-       #     Paths represented as strings are not supported by `lib.fileset`, use `lib.sources` or derivations instead.
-      src = lib.fileset.unions [
-        ../../nixos/profiles/desktop/root_ca.crt
-        (lib.sources filteredSrc)
-      ];
+      src = filteredSrc;
 
       inputs = args // {
         osConfig = config;
+        rootCaPath = ../../nixos/profiles/desktop/root_ca.crt;
         # inputs = flakeSelf.inputs;
       };
       transformer = [

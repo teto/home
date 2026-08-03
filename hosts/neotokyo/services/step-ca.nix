@@ -3,7 +3,12 @@
 # https://gquetel.fr/misc/step-ca-nixos/
 # https://smallstep.com/docs/step-ca/configuration
 # look at nixos/tests/step-ca.nix for inspiration
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  rootCaPath,
+  ...
+}:
 let
   test-certificates = pkgs.runCommandLocal "test-certificates" { } ''
     mkdir -p $out
@@ -26,7 +31,7 @@ in
   # settings = builtins.fromJSON (builtins.readFile ../ca.json);
   settings = {
     # dnsNames = [ "caserver" ];
-    root = "${../root_ca.crt}";
+    root = "${rootCaPath}";
     crt = "${../intermediate_ca.crt}";
     # cl'est la cle de l'intermediate
     key = config.sops.secrets."step-ca-intermediate-key".path;

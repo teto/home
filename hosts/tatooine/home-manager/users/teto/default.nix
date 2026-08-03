@@ -13,13 +13,9 @@ let
   autoloadedTeto =
     { pkgs, ... }@args:
     haumea.lib.load {
-      src = flakeSelf.inputs.nix-filter {
-        name = "laptopAutoloaded";
+      src = lib.fileset.toSource {
         root = ./.;
-
-        exclude = [
-          "default.nix"
-        ];
+        fileset = lib.fileset.difference ./. ./default.nix;
       };
 
       inputs = args // {

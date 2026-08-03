@@ -12,10 +12,8 @@ let
     flakeSelf.inputs.haumea.lib.load {
       # name = "autoloaded";
       src = builtins.trace "${flakeSelf}/nixos/profiles/desktop" "${flakeSelf}/nixos/profiles/desktop";
-      # Breaks everything
-      # flakeSelf.inputs.nix-filter {
-      #   root = "${flakeSelf}/nixos/profiles/desktop";
-      # };
+      # TODO replace the traced path with lib.fileset.toSource once this loader
+      # can receive a path rooted in the flake source.
 
       inputs = args // {
         inputs = flakeSelf.inputs;

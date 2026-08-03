@@ -14,14 +14,9 @@ let
   autoloadedHmModule =
     { pkgs, ... }@args:
     haumea.lib.load {
-      src = flakeSelf.inputs.nix-filter {
+      src = lib.fileset.toSource {
         root = ./home-manager/users/teto;
-        exclude = [
-          # "teto"
-          # "users"
-          # "home-manager" # exclude home-manager because intputs are not the same: it must be imported differently
-          # "root"
-        ];
+        fileset = ./home-manager/users/teto;
       };
 
       inputs = args // {
@@ -36,14 +31,14 @@ let
   autoloadedNixosModule =
     { pkgs, ... }@args:
     haumea.lib.load {
-      src = flakeSelf.inputs.nix-filter {
+      src = lib.fileset.toSource {
         root = ./.;
-        exclude = [
-          # "teto"
-          # "users"
-          "default.nix"
-          "home-manager" # exclude home-manager because intputs are not the same: it must be imported differently
-        ];
+        fileset = lib.fileset.difference ./. (
+          lib.fileset.unions [
+            ./default.nix
+            ./home-manager
+          ]
+        );
       };
 
       inputs = args // {

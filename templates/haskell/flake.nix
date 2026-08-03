@@ -61,7 +61,7 @@
         mkPackage =
           name:
           hsPkgs.developPackage {
-            # TODO use nix-filter
+            # TODO use lib.fileset.toSource
             root = pkgs.lib.cleanSource (builtins.toPath ./. + "/src");
             name = name;
             returnShellEnv = false;

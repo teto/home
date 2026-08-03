@@ -11,40 +11,21 @@ let
   laptopAutoloaded =
     { pkgs, ... }@args:
     haumea.lib.load {
-      src = flakeSelf.inputs.nix-filter {
-        name = "laptopAutoloaded";
+      src = lib.fileset.toSource {
         root = ./.;
-
-        # TODO exclude instead
-        include = [
-          "boot.nix"
-          "environment.nix"
-          "nix.nix"
-          "sops.nix"
-          "systemd.nix"
-          # UNCOMMENTING this will break everything since its content is not adapted
-          # "home-manager/"
-          "networking/"
-          "users/"
-          "services/"
-          "security/"
-          "programs/"
-          "hardware/"
-          "home-manager/users/root/"
-          "home-manager/users/teto/default.nix"
-          # "home-manager/users/teto/programs/neovim.nix"
-          # "home-manager/users/teto/wayland.nix"
-          # "home-manager/users/teto/services/blueman-applet.nix"
-          # "home-manager/users/teto/services/mpd.nix"
-          # "home-manager/"
-        ];
-
-        exclude = [
-          # "boot.nix"
-          "generated.nix"
-        ]
-        ++ lib.optionals (!withSecrets) [
-          "sops/secrets.nix"
+        fileset = lib.fileset.unions [
+          ./boot.nix
+          ./environment.nix
+          ./nix.nix
+          ./sops.nix
+          ./systemd.nix
+          ./networking
+          ./users
+          ./services
+          ./security
+          ./programs
+          ./home-manager/users/root
+          ./home-manager/users/teto/default.nix
         ];
       };
 

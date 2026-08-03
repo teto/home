@@ -1,5 +1,6 @@
 {
   config,
+  rootCaPath,
   secrets,
   ...
 }:
@@ -9,7 +10,7 @@ in
 {
 
   pki.certificateFiles = [
-    ./root_ca.crt
+    rootCaPath
   ];
 
 
