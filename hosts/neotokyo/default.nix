@@ -46,6 +46,7 @@ let
 
       inputs = args // {
         osConfig = config;
+        # kinda hack
         rootCaPath = ../../nixos/profiles/desktop/root_ca.crt;
         # inputs = flakeSelf.inputs;
       };
@@ -110,7 +111,7 @@ in
     # ./services/sshguard.nix
     # ./services/gitolite.nix
     ./services/nextcloud.nix
-    ./services/postgresqlBackup.nix
+    # ./services/postgresqlBackup.nix
     ./services/nginx.nix
     # ./services/immich.nix
     # ./services/restic.nix
@@ -174,6 +175,7 @@ in
     pkgs.yazi
     pkgs.wireguard-tools # for 'wg'
 
+    config.services.nextcloud.occ
   ];
 
   # create a service to monitor new blog

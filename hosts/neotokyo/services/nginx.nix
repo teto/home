@@ -151,7 +151,7 @@ in
       # to avoid https:// redirecting to the first random virtual host
       # we should even return a special type -> redirect to blog ?
       "_tls-catchall" = {
-        # doesn't act as default because doesn't have force 
+        # doesn't act as default because doesn't have force
         default = true;
         addSSL = false;
         # use step-ca instead
@@ -289,11 +289,11 @@ in
     }
     // lib.optionalAttrs config.services.nextcloud.enable {
 
-  # create some errors on deploy
-  # for now we generate one certificate per virtual host
-  # https://discourse.nixos.org/t/nixos-nginx-acme-ssl-certificates-for-multiple-domains/19608/2
+      # create some errors on deploy
+      # for now we generate one certificate per virtual host
+      # https://discourse.nixos.org/t/nixos-nginx-acme-ssl-certificates-for-multiple-domains/19608/2
 
-    # ceeformat is unknown ?
+      # ceeformat is unknown ?
 
       # the n
       # extends the host already configured by the nixos module nginx

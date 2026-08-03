@@ -33,8 +33,7 @@
           '<Plug>(ToggleListchars)',
           { desc = 'Change between different flavors of space/tab characters' }
       )
-      '';
-
+    '';
 
   };
 

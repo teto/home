@@ -90,7 +90,6 @@
         group = config.users.users.step-ca.group;
       };
 
-
       "step-ca-certificate-password" = {
         mode = "440";
         owner = config.users.users.step-ca.name;

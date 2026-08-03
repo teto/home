@@ -8,7 +8,7 @@
   ...
 }:
 let
-  wgEndpoint = "10.100.0.1";
+  # wgEndpoint = "10.100.0.1";
   nextcloudHostname = "nextcloud.vps";
 in
 {
@@ -73,16 +73,16 @@ in
       overwriteprotocol = "https";
     };
 
-    extraApps = with config.services.nextcloud.package.packages.apps; {
-      inherit
-        # memories # not supported
-        previewgenerator
-        # maps
-        # news
-        # calendar
-        ;
-
-    };
+    # extraApps = with config.services.nextcloud.package.packages.apps; {
+    #   # inherit
+    #     # memories # not supported
+    #     # previewgenerator
+    #     # maps
+    #     # news
+    #     # calendar
+    #     ;
+    #
+    # };
 
     # secretFile = "/run/secrets/nextcloudSecrets.json";
     #     Secret options which will be appended to Nextcloud’s config.php file (written as JSON, in the same form as the services.nextcloud.settings[1] option), for example ‘{"redis":{"password":"secret"}}’.
@@ -97,27 +97,22 @@ in
   # --password-from-env  looks for the password in OC_PASS
   # environment = { # OC_PASS = "${confFile}";
   # };
-  systemd.services.nextcloud-add-user = {
-    path = [ config.services.nextcloud.occ ];
-    script = ''
-      export OC_PASS="$(cat ${config.sops.secrets."nextcloud/tetoPassword".path})"
-      nextcloud-occ user:add --password-from-env teto
-      ${config.services.nextcloud.occ}/bin/nextcloud-occ user:setting teto settings email "${secrets.users.teto.email}"
-    '';
-    # ${config.services.nextcloud.occ}/bin/nextcloud-occ user:setting admin settings email "admin@localhost"
-    serviceConfig = {
-      Type = "oneshot";
-      User = "nextcloud";
-    };
-    # DONT run it automatically
-    # after = [ "nextcloud-setup.service" ];
-
-    # see https://discourse.nixos.org/t/disable-a-systemd-service-while-having-it-in-nixoss-conf/12732
-    wantedBy = lib.mkForce [ ];
-  };
-
-  environment.systemPackages = [
-    config.services.nextcloud.occ
-    # inherit (cfg) datadir occ;
-  ];
+  # systemd.services.nextcloud-add-user = {
+  #   path = [ config.services.nextcloud.occ ];
+  #   script = ''
+  #     export OC_PASS="$(cat ${config.sops.secrets."nextcloud/tetoPassword".path})"
+  #     nextcloud-occ user:add --password-from-env teto
+  #     ${config.services.nextcloud.occ}/bin/nextcloud-occ user:setting teto settings email "${secrets.users.teto.email}"
+  #   '';
+  #   # ${config.services.nextcloud.occ}/bin/nextcloud-occ user:setting admin settings email "admin@localhost"
+  #   serviceConfig = {
+  #     Type = "oneshot";
+  #     User = "nextcloud";
+  #   };
+  #   # DONT run it automatically
+  #   # after = [ "nextcloud-setup.service" ];
+  #
+  #   # see https://discourse.nixos.org/t/disable-a-systemd-service-while-having-it-in-nixoss-conf/12732
+  #   wantedBy = lib.mkForce [ ];
+  # };
 }

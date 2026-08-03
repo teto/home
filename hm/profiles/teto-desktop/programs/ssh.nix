@@ -74,13 +74,13 @@ in
         identitiesOnly = true;
         # identityAgent =
         serverAliveCountMax = 3;
-        sendEnv = [ 
+        sendEnv = [
           "GITHUB_TOKEN"
           # seems like this might make deploy fail
           # "SOPS_AGE_SSH_PRIVATE_KEY_FILE"
         ];
 
-              # RequestTTY force
+        # RequestTTY force
         # RemoteCommand = "export GITHUB_TOKEN=$(cat ~/.config/sops-nix/secrets/github_token); exec $SHELL -l";
         # extraOptions = {
         # KnownHostsCommand is in addition to those listed in UserKnownHostsFile and GlobalKnownHostsFile

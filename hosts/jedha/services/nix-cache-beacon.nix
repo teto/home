@@ -5,7 +5,7 @@
     enable = true;
     port = 5000;
     # Harmonia port, doesn't exist, it is merged with "bind" option
-    # port = config.services.harmonia-dev.settings.port; 
+    # port = config.services.harmonia-dev.settings.port;
   };
 
   # Enable local binary cache using discovered caches on the local network

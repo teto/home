@@ -34,4 +34,10 @@ in
   #
   #   echo "$message" | msmtp --read-envelope-from --read-recipients -afastmail ${secrets.users.teto.email}
   # '';
+  # enable = true;
+  # # TODO send a mail
+  # on-branch-advance-cmd = lib.nixpkgsMonitorEmailNotifier tetoEmail;
+  # on-branch-advance-cmd
+  # monitorCommand = "${lib.getExe pkgs.git-branch-monitor}";
+
 }

@@ -26,8 +26,6 @@ let
     '';
   };
 
-
-
   myNeovimUnwrapped =
     # "neovim-debug" / "neovim-developer"
     flakeSelf.inputs.neovim-nightly-overlay.packages."${pkgs.stdenv.hostPlatform.system
@@ -37,16 +35,15 @@ let
         luajit = pkgs.luajit-tetos;
       });
 
+  vim-listchars = pkgs.buildVimPlugin {
+    src = pkgs.fetchFromGitHub {
+      owner = "teto";
+      repo = "vim-listchars";
+      "sha256" = "1qahbrnnxgq0sbidvxsdqqhghzbr9arwkqz06sz2jf1bgs1bfmn3";
+      "hash" = "sha256-w1a3gn4rOCm+NuDjybNKeX34IMZN993i0gC/bm1eUOE=";
+    };
 
-      vim-listchars = pkgs.buildVimPlugin {
-        src = pkgs.fetchFromGitHub {
-        owner =  "teto";
-        repo = "vim-listchars";
-        "sha256" = "1qahbrnnxgq0sbidvxsdqqhghzbr9arwkqz06sz2jf1bgs1bfmn3";
-        "hash" = "sha256-w1a3gn4rOCm+NuDjybNKeX34IMZN993i0gC/bm1eUOE=";
-        };
-
-      };
+  };
 
   # nvimLua = config.programs.neovim.finalPackage.passthru.unwrapped.lua;
 

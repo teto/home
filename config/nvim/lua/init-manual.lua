@@ -1223,13 +1223,12 @@ if vim.g.neovide then
 end
 
 -- todo add 'TextPutPost' if neovim version > 0.13
-vim.api.nvim_create_autocmd({'TextYankPost' }, {
-	callback = function()
-		-- valid starting from 0.13
-		vim.hl.hl_op({ higroup = 'IncSearch', timeout = 1000 })
-	end,
+vim.api.nvim_create_autocmd({ 'TextYankPost' }, {
+    callback = function()
+        -- valid starting from 0.13
+        vim.hl.hl_op({ higroup = 'IncSearch', timeout = 1000 })
+    end,
 })
-
 
 -- prints --embed which is not listed
 -- vim.print(vim.v.argv)

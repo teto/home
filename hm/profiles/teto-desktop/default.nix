@@ -148,10 +148,9 @@ in
   };
 
   home.shellAliases = {
-    
+
     # add --remote-build if you meet signature issues
     deploy-neotokyo = "deploy '.#neotokyo' -s --interactive-sudo=true -- --override-input nixpkgs /home/teto/nixpkgs";
-
 
     # lg = "lazygit";
     y = "yazi";

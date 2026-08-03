@@ -68,6 +68,7 @@ in
             Environment = [
               "PATH=${
                 lib.makeBinPath [
+                  pkgs.fish
                   pkgs.coreutils
                   pkgs.curl
                   pkgs.gawk

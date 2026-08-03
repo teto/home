@@ -1,6 +1,8 @@
 {
   config,
   lib,
+  secrets,
+  # withSecrets,
   # , secretsFolder
   ...
 }:
@@ -83,6 +85,25 @@
         }
       ];
     };
+  };
+
+  services.nextcloud-add-user = {
+    path = [ config.services.nextcloud.occ ];
+    script = ''
+      export OC_PASS="$(cat ${config.sops.secrets."nextcloud/tetoPassword".path})"
+      nextcloud-occ user:add --password-from-env teto
+      ${config.services.nextcloud.occ}/bin/nextcloud-occ user:setting teto settings email "${secrets.users.teto.email}"
+    '';
+    # ${config.services.nextcloud.occ}/bin/nextcloud-occ user:setting admin settings email "admin@localhost"
+    serviceConfig = {
+      Type = "oneshot";
+      User = "nextcloud";
+    };
+    # DONT run it automatically
+    # after = [ "nextcloud-setup.service" ];
+
+    # see https://discourse.nixos.org/t/disable-a-systemd-service-while-having-it-in-nixoss-conf/12732
+    wantedBy = lib.mkForce [ ];
   };
 
   # TODO condition on immich

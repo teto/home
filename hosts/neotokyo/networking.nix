@@ -13,11 +13,10 @@
   useNetworkd = true;
   # useDHCP = true;
 
-
   # without these overrides, seems like nginx selects wrong server
   extraHosts = ''
     10.100.0.1    nextcloud.vps
-    '';
+  '';
 
   firewall = {
     enable = true;

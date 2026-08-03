@@ -5,14 +5,13 @@
   ...
 }:
 let
-   stepcaServer = "https://localhost:${toString config.services.step-ca.port}/acme/acme/directory";
+  stepcaServer = "https://localhost:${toString config.services.step-ca.port}/acme/acme/directory";
 in
 {
 
   pki.certificateFiles = [
     rootCaPath
   ];
-
 
   # see https://gquetel.fr/misc/step-ca-nixos/
   acme = {
