@@ -65,6 +65,7 @@ pkgs.mkShell {
       wireguard-tools # for 'wg'
 
       lazyrsync # to exchange secrets
+      pkgs.git-branch-monitor
     ]
     ++ [
       # removed because it was using IFD and we use firefox policies instead

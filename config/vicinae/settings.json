@@ -15,10 +15,18 @@
       "manual.json"
    ],
    "close_on_focus_loss": true,
-   "consider_preedit": true,
+   "consider_preedit": false,
    "pop_to_root_on_close": true,
    "activate_on_single_click": true,
    "favicon_service": "none",
+   "keybinding": "vim",
+   "input_server": {
+      "enabled": true
+   },
+   "font": {
+      "rendering": "native",
+      "normal": {}
+   },
    "theme": {
       "dark": {
          "name": "noctalia",
@@ -74,6 +82,15 @@
             "eraseOnStartup": false,
             "ignorePasswords": false,
             "monitoring": true
+         }
+      },
+      "files": {
+         "preferences": {
+            "autoIndexing": false,
+            "excludedIndexingPaths": [],
+            "indexingPaths": [
+               "/home/teto"
+            ]
          }
       }
    }

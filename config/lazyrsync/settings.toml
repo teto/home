@@ -1,6 +1,6 @@
 skip_delete_warning = false
 hints = true
-last_profile = "desktop"
+last_profile = "desktop -> laptop"
 
 [theme]
 accent = "lightblue"

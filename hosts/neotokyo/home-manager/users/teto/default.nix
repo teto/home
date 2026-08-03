@@ -50,7 +50,7 @@ in
     # TODO send a mail
     on-branch-advance-cmd = lib.nixpkgsMonitorEmailNotifier tetoEmail;
     # on-branch-advance-cmd
-    monitorCommand = "${pkgs.git-branch-monitor}";
+    monitorCommand = "${lib.getExe pkgs.git-branch-monitor}";
   };
 
   # only on login shell

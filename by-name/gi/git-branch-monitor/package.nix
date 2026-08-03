@@ -1,11 +1,11 @@
 # we prefer to run the script directly from the host
 # but on VPS, I need a way to push it
 {
-  writeScript,
+  # writeScript,
+  writeScriptBin,
   fish,
   lib,
 }:
-writeScript "git-branch-monitor" ''
-
+writeScriptBin "git-branch-monitor" ''
   ${lib.getExe fish} ${../../../bin/monitor-git-branch.fish} $@
 ''
