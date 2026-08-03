@@ -3,6 +3,9 @@
   secrets,
   ...
 }:
+let
+   stepcaServer = "https://localhost:${toString config.services.step-ca.port}/acme/acme/directory";
+in
 {
 
   pki.certificateFiles = [
@@ -51,17 +54,18 @@
       "nextcloud.vps" = {
 
         # look for step-ca
+        server = stepcaServer;
+        webroot = "/var/lib/acme/acme-challenge/";
+        enableDebugLogs = true;
+      };
+
+      # todo then do the same for jellyfin ?
+      "immich.vps" = {
+
+        # look for step-ca
         server = "https://localhost:${toString config.services.step-ca.port}/acme/acme/directory";
         webroot = "/var/lib/acme/acme-challenge/";
         enableDebugLogs = true;
-        # group = "nginx";
-        # csr
-        # domain =
-        # credentialFiles
-        # extraDomainNames = [
-        #   # "${secrets.jakku.hostname}"
-        #   # "nextcloud.vps" # acme can't register for unknown TLDs
-        # ];
       };
 
     };

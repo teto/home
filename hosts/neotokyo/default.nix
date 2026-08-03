@@ -10,10 +10,8 @@
 let
   haumea = flakeSelf.inputs.haumea;
 
-  autoloadedProfiles =
-    { pkgs, ... }@args:
-    haumea.lib.load {
-      src = flakeSelf.inputs.nix-filter {
+  autoloadedProfiles = let 
+      filteredSrc = flakeSelf.inputs.nix-filter {
         root = ./.;
         include = [
           # wrong ?
@@ -51,6 +49,15 @@ let
           # "root"
         ];
       };
+  in
+    { pkgs, ... }@args:
+    haumea.lib.load {
+       # error: lib.fileset.unions: Element 1 ("/nix/store/jx0avcglm965xdb8asiqgbzrlnr50mnl-source") is a string-like value, but it should be a file set or a path instead.
+       #     Paths represented as strings are not supported by `lib.fileset`, use `lib.sources` or derivations instead.
+      src = lib.fileset.unions [
+        ../../nixos/profiles/desktop/root_ca.crt
+        (lib.sources filteredSrc)
+      ];
 
       inputs = args // {
         osConfig = config;

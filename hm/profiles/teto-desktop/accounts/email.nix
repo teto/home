@@ -234,6 +234,7 @@ let
 
     msmtp.enable = true;
     notmuch.enable = true;
+    mujmap.enable = false;
 
     userName = secrets.accounts.mail.gmail_perso.address;
     realName = "Matt";

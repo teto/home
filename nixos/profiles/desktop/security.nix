@@ -2,7 +2,9 @@
 
   pki.certificateFiles = [
     # same as on neotokyo
-    ./root_ca.crt
+    # ./root_ca.crt
+    ../../nixos/profiles/desktop/root_ca.crt
+
   ];
 
 

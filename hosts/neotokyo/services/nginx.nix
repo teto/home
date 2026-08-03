@@ -6,8 +6,6 @@
   ...
 }:
 let
-  # acmeRoot = "/var/lib/acme/";
-
   # config.services.jellyfin.port doesn't exist
   # toString config.services.jellyfin.port
   defaultJellyfinPort = 8096;
@@ -214,8 +212,8 @@ in
 
       # "immich.${secrets.jakku.hostname}" = {
       "immich.vps" = {
-        forceSSL = false;
-        enableACME = false;
+        forceSSL = true;
+        enableACME = true;
         # useACMEHost = "${secrets.jakku.hostname}";
         # listen on all interfaces
         # listen = [ { addr = "0.0.0.0"; port = 80; }];
