@@ -7,9 +7,12 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - name: Install Nix
-      uses: DeterminateSystems/nix-installer-action@v16
+      uses: DeterminateSystems/nix-installer-action@v22
+      with:
+       extra-conf: |
+         show-trace = true
     # - name: Run the Magic Nix Cache
     #   uses: DeterminateSystems/magic-nix-cache-action@v3
     # disabled for now
@@ -21,7 +24,7 @@ jobs:
         nix fmt -- --fail-on-change
     - name: eval desktop config
       run: |
-       nix eval .#nixosConfigurations.jedha-no-secrets.config.system.build.toplevel
+       nix eval --show-trace .#nixosConfigurations.jedha-no-secrets.config.system.build.toplevel
 
     - name: eval laptop config
       run: |
