@@ -35,7 +35,6 @@ in
     services.nixpkgs-monitor = {
       enable = lib.mkEnableOption "nixpkgs-monitor";
 
-      # trackedBranch = "";
       # lib.mkPackageOption pkgs "name" {
       on-branch-advance-cmd = lib.mkOption {
         type = lib.types.nullOr lib.types.package;

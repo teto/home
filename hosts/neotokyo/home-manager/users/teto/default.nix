@@ -4,6 +4,7 @@
   pkgs,
   flakeSelf,
   secrets,
+  withSecrets,
   ...
 }:
 let
@@ -22,7 +23,6 @@ let
   # - to check the backups: systemctl status restic-backups-immich-db-to-backblaze.service
   # TODO add a justfile to run the basic steps
   banner = "You can start the nextcloud-add-user.service unit if teto user doesnt exist yet";
-  tetoEmail = secrets.users.teto.email;
 in
 {
   imports = [
@@ -48,8 +48,9 @@ in
   services.nixpkgs-monitor = {
     enable = true;
     # TODO send a mail
-    on-branch-advance-cmd = lib.nixpkgsMonitorEmailNotifier tetoEmail;
-    # on-branch-advance-cmd
+    on-branch-advance-cmd = lib.optionalDrvAttr withSecrets (
+      lib.nixpkgsMonitorEmailNotifier secrets.users.teto.email
+    );
     monitorCommand = "${lib.getExe pkgs.git-branch-monitor}";
   };
 

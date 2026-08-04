@@ -1,14 +1,17 @@
-{
+{ lib
   # pkgs,
-  secrets,
+, secrets
   # , secretsFolder
-  config,
-  ...
+, config
+, withSecrets 
+, ...
 }:
-{
+lib.optionalAttrs withSecrets {
+  domain = secrets.jakku.domain;
+
+} // {
   # TODO fetch from secrets
   hostName = "neotokyo";
-  domain = secrets.jakku.domain;
 
   useNetworkd = true;
   # useDHCP = true;

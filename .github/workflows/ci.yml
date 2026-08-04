@@ -25,7 +25,7 @@ jobs:
 
     - name: eval laptop config
       run: |
-       nix eval .#nixosConfigurations.tatooine-no-secrets.config.system.build.toplevel
+       nix eval --show-trace .#nixosConfigurations.tatooine-no-secrets.config.system.build.toplevel
        nix build --dry-run .#nixosConfigurations.tatooine-no-secrets.config.system.build.toplevel
 
     - name: nix flake show
