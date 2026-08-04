@@ -18,7 +18,7 @@ jobs:
     - name: Install Nix
       uses: DeterminateSystems/determinate-nix-action@v3
     - name: Run the Magic Nix Cache
-      uses: DeterminateSystems/magic-nix-cache-action@v13
+      uses: DeterminateSystems/magic-nix-cache-action@v14
     - name: Update firefox-addons
       run: |
         just firefox-addons
