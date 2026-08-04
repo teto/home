@@ -127,7 +127,7 @@ cmd = "Rikai"
 
 [plugins."hacker.nvim"]
 git = "letieu/hacker.nvim"
-rev = "6818e75c076beb05ffcad2be6a78e0e0f800416d"
+rev = "7cf7189f488ea3a81d4b75b44d7c38663475c7a3"
 opt = true
 
 [plugins."baleia.nvim"]
@@ -136,11 +136,11 @@ rev = "v1.4.0"
 
 [plugins."statuscol.nvim"]
 git = "luukvbaal/statuscol.nvim"
-rev = "c399884e8f64019ec9bb581251f9710915b7f996"
+rev = "887b8a03ea3804628505c9002fd07bd06a3db2e0"
 
 [plugins."fcitx.nvim"]
 git = "h-hg/fcitx.nvim"
-rev = "dcb6b70888aa893d3d223bb777d4117bbdac06a7"
+rev = "c8543d72adf02a557722847c5d263171ec5c9bb4"
 
 [plugins."tidal.nvim"]
 git = "https://github.com/grddavies/tidal.nvim"
@@ -186,7 +186,7 @@ rev = "v9.2.1"
 
 [plugins."tiny-cmdline.nvim"]
 git = "rachartier/tiny-cmdline.nvim"
-rev = "ad58747b955d0743ccfd56e97da1a4c1fac89f58"
+rev = "e247d9ee4c980734f8f8bf616d31e0ab7c27485d"
 
 [plugins.nvim-biscuits]
 git = "code-biscuits/nvim-biscuits"

@@ -6,5 +6,5 @@
 }:
 {
 
-  services.tandoor-recipes.enable = true;
+  services.tandoor-recipes.enable = false;
 }
