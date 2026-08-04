@@ -1,15 +1,17 @@
-{ lib
+{
+  lib,
   # pkgs,
-, secrets
+  secrets,
   # , secretsFolder
-, config
-, withSecrets 
-, ...
+  config,
+  withSecrets ? false,
+  ...
 }:
-lib.optionalAttrs withSecrets {
+lib.optionalAttrs (lib.debug.traceValFn (a: "SECRETS ? ${toString a}") withSecrets) {
   domain = secrets.jakku.domain;
 
-} // {
+}
+// {
   # TODO fetch from secrets
   hostName = "neotokyo";
 

@@ -1,8 +1,6 @@
 {
   config,
   flakeSelf,
-  secrets,
-  # modulesPath,
   pkgs,
   lib,
   ...
@@ -37,6 +35,8 @@ let
           ./services/nixbot.nix
           ./services/transmission.nix
           ./services/headscale.nix
+          # ./services/vaultwarden.nix
+          # ./services/linkwarden.nix
         ];
       };
     in
@@ -117,8 +117,6 @@ in
     # ./services/restic.nix
 
     # testing
-    # ./services/vaultwarden.nix
-    # ./services/linkwarden.nix
     # ./services/hedgedoc.nix
 
     # ../../nixos/modules/hercules-ci-agents.nix

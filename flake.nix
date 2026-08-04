@@ -343,8 +343,6 @@
         prev: _:
         self.inputs.hm.lib
         // (import ./tetos/lib {
-          # inherit (self) inputs;
-
           pkgs = tetosPkgs;
           inherit dotfilesPath secretsFolder secrets;
           flakeSelf = self;
@@ -352,20 +350,11 @@
         })
       );
 
-      # tetonos ?
-      # tetosConfig = {
-      #   # should it depend on home.homeDirectory instead ?
-      #   inherit dotfilesPath secretsFolder;
-      #   # acts as builder ?
-      #   # withSecrets
-      # };
-
       system = "x86_64-linux";
       dotfilesPath = "/home/teto/home";
       secretsFolder = "/home/teto/home/secrets";
 
       secrets = import ./nixpkgs/secrets.nix;
-      # inherit secretsFolder dotfilesPath;
 
       # Eval the treefmt modules from ./treefmt.nix
       treefmtEval = treefmt-nix.lib.evalModule tetosPkgs ./tetos/treefmt.nix;
@@ -582,17 +571,32 @@
       # adjust the hostnames accordingly ?
       nixosConfigurations =
         let
-          disableSecrets =
-            name: val:
-            lib.nameValuePair "${name}-no-secrets" (
-              val.extendModules {
-                specialArgs = {
-                  withSecrets = false;
-                };
-              }
-            );
-          nixosConfigs = lib.importDirectories ./hosts;
-          nixosConfigsWithoutSecrets = lib.mapAttrs' disableSecrets nixosConfigs;
+          # disableSecrets =
+          #   name: val:
+          #   lib.nameValuePair "${name}-no-secrets" (
+          #     val.extendModules {
+          #       specialArgs = {
+          #         withSecrets = false;
+          #       };
+          #     }
+          #   );
+          createSystem =
+            hostname: withSecrets:
+            lib.mkNixosSystem {
+              # ideally we would return both versions
+              # withSecrets = true;
+              inherit withSecrets hostname;
+              modules = [
+                (./hosts + "/${hostname}")
+              ];
+            };
+
+          nixosConfigs = lib.importDirectories (
+            dirname: val: lib.nameValuePair dirname (createSystem dirname true)
+          ) ./hosts;
+          nixosConfigsWithoutSecrets = lib.importDirectories (
+            dirname: val: lib.nameValuePair "${dirname}-no-secrets" (createSystem dirname false)
+          ) ./hosts;
         in
         nixosConfigs // nixosConfigsWithoutSecrets;
 

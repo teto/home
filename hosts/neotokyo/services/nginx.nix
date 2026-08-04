@@ -3,6 +3,7 @@
   lib,
   pkgs,
   secrets,
+  withSecrets,
   ...
 }:
 let
@@ -161,132 +162,111 @@ in
         extraConfig = "return 444;";
       };
 
-      "blog.${secrets.jakku.hostname}" = {
-
-        # I had to manually "chmod a+x /var/lib/gitolite"
-        root = "/var/www/blog-generated";
-        extraConfig = ''
-          error_page 404 /404.html;
-        '';
-
-        # Makes this vhost the default.
-        # default = true;
-
-        forceSSL = true;
-        # https://nixos.org/manual/nixos/stable/index.html#module-security-acme
-        # enableACME = true; # exclusive with useACMEHost
-        useACMEHost = "blog.${secrets.jakku.hostname}";
-        # All serverAliases will be added as extra domain names on the certificate.
-        serverAliases = [
-          # "blog.${secrets.jakku.hostname}"
-          "${secrets.jakku.hostname}"
-          "www.${secrets.jakku.hostname}"
-        ];
-        # Directory for the ACME challenge, which is public. Don’t put certs or keys in here. Set to null to inherit from config.security.acme.
-        # acmeRoot = "/var/lib/acme/challenges-de";
-
-        # root /home/username/mysite/public/; #Absolute path to where your hugo site is
-        # index index.html; # Hugo generates HTML
-        # looking at https://gideonwolfe.com/posts/sysadmin/hugonginx/
-        locations."/" = {
-          extraConfig = ''
-            try_files $uri $uri/ =404;
-          '';
-        };
-
-        locations."= /404.html" = {
-          root = errorPageRoot;
-          extraConfig = "internal;";
-        };
-      };
-
-      "status.${secrets.jakku.hostname}" = {
-        root = pkgs.runCommand "testdir" { } ''
-          mkdir "$out"
-          echo hello world > "$out/index.html"
-        '';
-
-      };
     }
-    // lib.optionalAttrs config.services.immich.enable {
+    // lib.optionalAttrs withSecrets (
+      {
 
-      # "immich.${secrets.jakku.hostname}" = {
-      "immich.vps" = {
-        forceSSL = true;
-        enableACME = true;
-        # useACMEHost = "${secrets.jakku.hostname}";
-        # listen on all interfaces
-        # listen = [ { addr = "0.0.0.0"; port = 80; }];
-        listenAddresses = [
-          wgEndpoint
-        ];
+        "blog.${secrets.jakku.hostname}" = {
 
-        locations."/" = {
-          #  echo $server_name;  # Will output the server name defined in the current server block
-          proxyPass = "http://localhost:${toString config.services.immich.port}";
-          proxyWebsockets = true;
+          # I had to manually "chmod a+x /var/lib/gitolite"
+          root = "/var/www/blog-generated";
           extraConfig = ''
-            client_max_body_size 100M;
+            error_page 404 /404.html;
+          '';
+
+          # Makes this vhost the default.
+          # default = true;
+
+          forceSSL = true;
+          # https://nixos.org/manual/nixos/stable/index.html#module-security-acme
+          # enableACME = true; # exclusive with useACMEHost
+          useACMEHost = "blog.${secrets.jakku.hostname}";
+          # All serverAliases will be added as extra domain names on the certificate.
+          serverAliases = [
+            # "blog.${secrets.jakku.hostname}"
+            "${secrets.jakku.hostname}"
+            "www.${secrets.jakku.hostname}"
+          ];
+          # Directory for the ACME challenge, which is public. Don’t put certs or keys in here. Set to null to inherit from config.security.acme.
+          # acmeRoot = "/var/lib/acme/challenges-de";
+
+          # root /home/username/mysite/public/; #Absolute path to where your hugo site is
+          # index index.html; # Hugo generates HTML
+          # looking at https://gideonwolfe.com/posts/sysadmin/hugonginx/
+          locations."/" = {
+            extraConfig = ''
+              try_files $uri $uri/ =404;
+            '';
+          };
+
+          locations."= /404.html" = {
+            root = errorPageRoot;
+            extraConfig = "internal;";
+          };
+        };
+
+        "status.${secrets.jakku.hostname}" = {
+          root = pkgs.runCommand "testdir" { } ''
+            mkdir "$out"
+            echo hello world > "$out/index.html"
           '';
 
         };
-      };
+      }
+      // lib.optionalAttrs config.services.immich.enable {
 
-    }
+        # "immich.${secrets.jakku.hostname}" = {
+        "immich.vps" = {
+          forceSSL = true;
+          enableACME = true;
+          # useACMEHost = "${secrets.jakku.hostname}";
+          # listen on all interfaces
+          # listen = [ { addr = "0.0.0.0"; port = 80; }];
+          listenAddresses = [
+            wgEndpoint
+          ];
 
-    // lib.optionalAttrs config.services.jellyfin.enable {
-      # inspired by nixaar project
-      # "jellyfin.${secrets.jakku.hostname}" = {
-      "jellyfin.vps" = {
+          locations."/" = {
+            #  echo $server_name;  # Will output the server name defined in the current server block
+            proxyPass = "http://localhost:${toString config.services.immich.port}";
+            proxyWebsockets = true;
+            extraConfig = ''
+              client_max_body_size 100M;
+            '';
 
-        listenAddresses = [
-          wgEndpoint
-        ];
-
-        enableACME = false;
-        forceSSL = false;
-        locations."/" = {
-          recommendedProxySettings = true;
-          proxyWebsockets = true;
-
-          proxyPass = "http://127.0.0.1:${toString defaultJellyfinPort}";
+          };
         };
-      };
-    }
-    // lib.optionalAttrs config.services.buildbot-nix.master.enable {
-      "${config.services.buildbot-nix.master.domain}" = {
-        enableACME = true;
-        forceSSL = true;
 
-      };
-    }
-    // lib.optionalAttrs config.services.harmonia.cache.enable {
-      # harmonia
-      "cache.${secrets.jakku.hostname}" = {
-        enableACME = true;
-        forceSSL = true;
+      }
 
-        # TODO replace with harmonia's port
-        locations."/".extraConfig = ''
-          proxy_pass http://127.0.0.1:5000;
-          proxy_set_header Host $host;
-          proxy_redirect http:// https://;
-          proxy_http_version 1.1;
-          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-          proxy_set_header Upgrade $http_upgrade;
-          proxy_set_header Connection $connection_upgrade;
-        '';
-      };
-    }
-    // lib.optionalAttrs config.services.n8n.enable {
-      "n8n.${secrets.jakku.hostname}" = {
-        locations."/" = {
-          recommendedProxySettings = true;
-          proxyWebsockets = true;
-          proxyPass = "http://127.0.0.1:${toString config.services.n8n.environment.N8N_PORT}";
+      // lib.optionalAttrs config.services.harmonia.cache.enable {
+        # harmonia
+        "cache.${secrets.jakku.hostname}" = {
+          enableACME = true;
+          forceSSL = true;
+
+          # TODO replace with harmonia's port
+          locations."/".extraConfig = ''
+            proxy_pass http://127.0.0.1:5000;
+            proxy_set_header Host $host;
+            proxy_redirect http:// https://;
+            proxy_http_version 1.1;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection $connection_upgrade;
+          '';
         };
-      };
-    }
+      }
+      // lib.optionalAttrs config.services.n8n.enable {
+        "n8n.${secrets.jakku.hostname}" = {
+          locations."/" = {
+            recommendedProxySettings = true;
+            proxyWebsockets = true;
+            proxyPass = "http://127.0.0.1:${toString config.services.n8n.environment.N8N_PORT}";
+          };
+        };
+      }
+    )
     // lib.optionalAttrs config.services.nextcloud.enable {
 
       # create some errors on deploy
@@ -322,6 +302,32 @@ in
         # '';
       };
 
+    }
+    // lib.optionalAttrs config.services.jellyfin.enable {
+      # inspired by nixaar project
+      # "jellyfin.${secrets.jakku.hostname}" = {
+      "jellyfin.vps" = {
+
+        listenAddresses = [
+          wgEndpoint
+        ];
+
+        enableACME = false;
+        forceSSL = false;
+        locations."/" = {
+          recommendedProxySettings = true;
+          proxyWebsockets = true;
+
+          proxyPass = "http://127.0.0.1:${toString defaultJellyfinPort}";
+        };
+      };
+    }
+    // lib.optionalAttrs config.services.buildbot-nix.master.enable {
+      "${config.services.buildbot-nix.master.domain}" = {
+        enableACME = true;
+        forceSSL = true;
+
+      };
     };
   };
 

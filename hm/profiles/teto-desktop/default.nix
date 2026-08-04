@@ -186,6 +186,8 @@ in
     # TODO set it globally ?
     CDPATH = "$HOME/plugins";
 
+  }
+  // lib.optionalAttrs withSecrets {
     TETOS_0 = builder_neotokyo;
     TETOS_1 = builder_jedha;
     TETOS_2 = builder_nixcommunity;

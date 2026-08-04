@@ -65,12 +65,12 @@ in
       modules, # array
       withSecrets, # bool
       hostname,
+      # pkgs = self.inputs.nixos-unstable.legacyPackages.${system}.pkgs;
       pkgs ? myPkgs,
     }:
     lib.nixosSystem {
       system = "x86_64-linux";
       inherit pkgs;
-      # pkgs = self.inputs.nixos-unstable.legacyPackages.${system}.pkgs;
       modules = [
         flakeSelf.inputs.sops-nix.nixosModules.sops
         flakeSelf.inputs.hm.nixosModules.home-manager
@@ -94,31 +94,15 @@ in
   /**
     Maps over folders in folder
   */
-  importDirectories =
+  importDirectories = transformEntry:
     folder:
     let
       # transformEntry = lib.id;
       pred = key: val: val == "directory";
-      transformEntry =
-        dirname: val:
-        let
-          key = dirname;
-          val' = lib.mkNixosSystem {
-            # ideally we would return both versions
-            withSecrets = true;
-            hostname = dirname;
-            modules = [
-              (folder + "/${dirname}")
-            ];
-          };
-
-        in
-
-        lib.nameValuePair key val';
 
       folders = lib.mapAttrs' transformEntry (lib.filterAttrs pred (builtins.readDir folder));
     in
-    folders;
+      folders;
 
   importFiles =
     folder:

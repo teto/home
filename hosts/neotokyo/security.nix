@@ -2,6 +2,8 @@
   config,
   rootCaPath,
   secrets,
+  lib,
+  withSecrets,
   ...
 }:
 let
@@ -17,15 +19,17 @@ in
   acme = {
     acceptTerms = true;
     # defaults.email = "cert+admin@example.com";
-    # "blog.${secrets.jakku.hostname}"
     # config.security.acme.
-    defaults = {
-      validMinDays = 15; # to avoid the warning email from letsencrypt
-      email = secrets.jakku.email;
-      # security.acme.defaults.credentialFiles
-      # Environment variables suffixed by “_FILE” to set for the cert’s service for your selected dnsProvider. To find out what values you need to set, consult the documentation at https://go-acme.github.io/lego/dns/[1] for the corresponding
-      # dnsProvider. This allows to securely pass credential files to lego by leveraging systemd credentials.
-    };
+    defaults =
+      lib.optionalAttrs withSecrets {
+        email = secrets.jakku.email;
+      }
+      // {
+        validMinDays = 15; # to avoid the warning email from letsencrypt
+        # security.acme.defaults.credentialFiles
+        # Environment variables suffixed by “_FILE” to set for the cert’s service for your selected dnsProvider. To find out what values you need to set, consult the documentation at https://go-acme.github.io/lego/dns/[1] for the corresponding
+        # dnsProvider. This allows to securely pass credential files to lego by leveraging systemd credentials.
+      };
 
     /*
       we are trying to generate a multidomain certificate here,
@@ -33,42 +37,46 @@ in
       - https://discourse.nixos.org/t/nixos-nginx-acme-ssl-certificates-for-multiple-domains/19608/3
       - https://discourse.nixos.org/t/setup-a-wildcard-certificate-with-acme-on-a-custom-domain-name-hosted-by-powerdns/15055/6
     */
-    certs = {
-      "blog.${secrets.jakku.hostname}" = {
-        # blog.${secrets.jakku.hostname}
-        # webroot = acmeRoot;
-        # email = secrets.jakku.email;
+    certs =
+      lib.optionalAttrs withSecrets {
+        "blog.${secrets.jakku.hostname}" = {
+          # blog.${secrets.jakku.hostname}
+          # webroot = acmeRoot;
+          # email = secrets.jakku.email;
 
-        webroot = "/var/lib/acme/acme-challenge/";
-        enableDebugLogs = true;
-        group = "nginx";
+          webroot = "/var/lib/acme/acme-challenge/";
+          enableDebugLogs = true;
+          group = "nginx";
 
-        extraDomainNames = [
-          # "blog.${secrets.jakku.hostname}"
-          "www.${secrets.jakku.hostname}"
-          "${secrets.jakku.hostname}"
-          # "nextcloud.vps" # acme can't register for unknown TLDs
-        ];
+          extraDomainNames = [
+            # "blog.${secrets.jakku.hostname}"
+            "www.${secrets.jakku.hostname}"
+            "${secrets.jakku.hostname}"
+            # "nextcloud.vps" # acme can't register for unknown TLDs
+          ];
+        };
+
+      }
+      // {
+
+        "nextcloud.vps" = {
+
+          # look for step-ca
+          server = stepcaServer;
+          webroot = "/var/lib/acme/acme-challenge/";
+          enableDebugLogs = true;
+        };
+
+        # todo then do the same for jellyfin ?
+        "immich.vps" = {
+
+          # look for step-ca
+          server = "https://localhost:${toString config.services.step-ca.port}/acme/acme/directory";
+          webroot = "/var/lib/acme/acme-challenge/";
+          enableDebugLogs = true;
+        };
+
       };
-
-      "nextcloud.vps" = {
-
-        # look for step-ca
-        server = stepcaServer;
-        webroot = "/var/lib/acme/acme-challenge/";
-        enableDebugLogs = true;
-      };
-
-      # todo then do the same for jellyfin ?
-      "immich.vps" = {
-
-        # look for step-ca
-        server = "https://localhost:${toString config.services.step-ca.port}/acme/acme/directory";
-        webroot = "/var/lib/acme/acme-challenge/";
-        enableDebugLogs = true;
-      };
-
-    };
   };
 
   # Enable 'sudo' with SSH key
