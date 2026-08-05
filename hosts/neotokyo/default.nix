@@ -72,7 +72,6 @@ in
 
     # for wireguard
     "net.ipv4.conf.all.forwarding" = true;
-
   };
 
   # some hardening
@@ -171,6 +170,7 @@ in
     pkgs.nixpkgs-review
     pkgs.zola # needed in the post-receive hook of the blog !
     pkgs.yazi
+
     pkgs.wireguard-tools # for 'wg'
 
     config.services.nextcloud.occ

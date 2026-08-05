@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+# { config, lib, ... }:
 {
   hostName = "jedha";
   domain = "jedha.local"; # Define your hostname.

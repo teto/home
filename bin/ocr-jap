@@ -1,0 +1,2 @@
+ #!/bin/sh
+ tesseract /home/teto/shuffleisland.png stdout -l jpn --psm 7

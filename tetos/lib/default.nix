@@ -13,6 +13,8 @@ let
   neovim = import ./neovim.nix { inherit flakeSelf lib; };
 
   myPkgs = pkgs;
+
+
 in
 {
   inherit
@@ -30,6 +32,12 @@ in
     deployrsNodeToBuilderAttr
     nixosConfToBuilderAttr
     ;
+
+  inherit (import  ./wireguard.nix { inherit secrets flakeSelf lib secretsFolder; }) 
+    mkWireguardPeer
+    ;
+
+
 
   nixpkgsMonitorEmailNotifier = destinationEmail: pkgs.writeShellScript "notify-advancement" ''
 
