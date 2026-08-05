@@ -63,10 +63,15 @@ in
       set fish_cursor_visual block
     '';
 
-    programs.fish.binds = lib.mkIf cfg.enableFancyCtrlZ {
+    programs.fish.binds =
+      lib.optionalAttrs cfg.enableFancyCtrlZ {
 
-      "\cz".command = "fg 2>/dev/null; commandline -f repaint";
-    };
+        "\cz".command = "fg 2>/dev/null; commandline -f repaint";
+      }
+      // {
+        "ctrl-x".command = "edit_command_buffer";
+
+      };
 
   };
 }
