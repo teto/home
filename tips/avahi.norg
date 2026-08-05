@@ -1,3 +1,9 @@
+
+
+resolvectl service _ssh._tcp local
+
+* avahi
+
 Avahi provides local hostname resolution using a "hostname.local"
  avahi-browse --all --ignore-local --resolve --terminate
 

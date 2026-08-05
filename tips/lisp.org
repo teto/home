@@ -53,7 +53,7 @@ Quicklisp calls ASDF under the hood, with the advantage that it will download an
 
 ** interpreters
 
-steel bank common lisp sbcl
+steel bank (vs carnegie ) common lisp sbcl
 
 sbcl --load path/to/file.lisp
 
@@ -63,3 +63,25 @@ https://github.com/sharplispers/linedit
 (defvar x 10)
 (print (type-of x))
 (defconstant PI 3.141592)
+
+
+* language
+
+ `let*`: bindings are created sequentially
+ In Lisp, ' is shorthand for quote: it tells Lisp not to evaluate the following expression
+
+  (defpackage #:foo ...)
+
+  Here, #:foo is read as a fresh symbol named "FOO". For defpackage, it is commonly used to avoid accidentally referring to an
+  existing symbol named FOO in the current package.
+
+  Compare:
+
+  foo     ; interned in the current package
+  :foo    ; interned in the KEYWORD package
+  #:foo   ; uninterned; belongs to no package
+
+  Each occurrence of #:foo normally creates a distinct symbol:
+
+  (eq '#:foo '#:foo)
+  ;; => NIL

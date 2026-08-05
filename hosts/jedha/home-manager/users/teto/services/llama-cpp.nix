@@ -31,6 +31,8 @@
       "--models-preset"
       "${dotfilesPath}/contrib/llama-presets.ini"
     ];
+
+    # should it listen on ipv6 as well ?
     host = "0.0.0.0";
     # modelsPreset = {
     # "Qwen3-Coder-Next" = {

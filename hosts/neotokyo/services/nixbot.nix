@@ -1,5 +1,4 @@
 {
-  lib,
   withSecrets,
   secrets,
   pkgs,
@@ -32,8 +31,7 @@ in
     # oauthId = "aaaaaaaaaaaaaaaaaaaa";
     # oauthSecretFile = pkgs.writeText "oauthSecret" "ffffffffffffffffffffffffffffffffffffffff"; # FIXME: use a secret manager
     appId = bbSecrets.appId; # The numeric App ID
-    appSecretKeyFile = config.sops.secrets.buildbot-client-secret.path;
-    # "/run/secrets/buildbot-client-secret"; # Path to the downloaded private key
+    appSecretKeyFile = config.sops.secrets.nixbot-client-secret.path;
 
     # MUST BE SET FOR github
     oauthId = bbSecrets.oauthClientId;
@@ -50,16 +48,6 @@ in
   # cacheFailedBuilds = ;
   # buildTimeout =
 
-  # Gitea example.
-  # gitea = {
-  #   enable = true;
-  #   instanceUrl = "https://git.clan.lol";
-  #   tokenFile = "/var/lib/secrets/gitea-token";
-  #   oauthId = "aaaaaaaaaaaaaaaaaaaa";
-  #   oauthSecretFile = "/var/lib/secrets/gitea-oauth-secret";
-  #   topic = "build-with-buildbot";
-  # };
-
   # Systems to build; everything else arrives via nix remote builders.
   buildSystems = [ "x86_64-linux" ];
 
@@ -70,15 +58,6 @@ in
   # By default only default branches build. Additional branches:
   # branches = {
   #   releaseBranches.matchGlob = "release-*";
-  # };
-
-  # Generic OIDC login example.
-  # oidc = {
-  #   enable = true;
-  #   name = "Provider Name";
-  #   discoveryUrl = "https://id.thalheim.io/.well-known/openid-configuration";
-  #   clientId = "aaaaaaaaaaaaaaaaaaaa";
-  #   clientSecretFile = "/var/lib/secrets/oidc-secret";
   # };
 
   # Allow unauthenticated users to cancel and restart builds, e.g.

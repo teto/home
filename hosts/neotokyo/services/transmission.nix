@@ -38,7 +38,6 @@
     watch-dir-enabled = true;
     incomplete-dir-enabled = true;
 
-    # TODO add tmpfiles rules to create these folders
     # allow everyone to reach this folder ?
     watch-dir = "/home/teto/torrents";
     # must be absolute path

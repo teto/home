@@ -6,13 +6,12 @@
 
   programs.vscode.enable = false;
   programs.vscode = {
+    # https://marketplace.visualstudio.com/items?itemName=rheller.alive
     profiles.default.extensions = with pkgs.vscode-extensions; [
-      # arrterian.nix-env-selector # not packaged ?
-      # https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim
       # asvetliakov.vscode-neovim # only in my fork
       # todo replace with pylance/pyright
       # ms-kubernetes-tools.vscode-kubernetes-tools
-      ms-vsliveshare.vsliveshare
+      # ms-vsliveshare.vsliveshare
     ];
     # userSettings = {
     #   "extensions.autoCheckUpdates" = false;

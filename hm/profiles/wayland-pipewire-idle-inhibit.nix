@@ -6,7 +6,7 @@
 }:
 {
   services.wayland-pipewire-idle-inhibit = {
-    enable = true;
+    enable = false;
     systemdTarget = "sway-session.target";
     settings = {
       verbosity = "INFO";

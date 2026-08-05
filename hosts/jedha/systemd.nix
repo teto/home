@@ -7,6 +7,9 @@
 }:
 {
 
+  # SHould be a level instead ?
+  # enableStrictShellChecks = true;
+
   services =
     lib.mkIf config.services.pixiecore.enable {
       # force manual start ?!

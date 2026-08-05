@@ -11,8 +11,10 @@ let
   firefox = pkgs.callPackage ./firefox.nix { };
   nix-builders = import ./nix-builder.nix { inherit flakeSelf lib secretsFolder; };
   neovim = import ./neovim.nix { inherit flakeSelf lib; };
+  wireguard = import  ./wireguard.nix { inherit secrets flakeSelf lib secretsFolder; };
 
-  myPkgs = pkgs;
+  # myPkgs = pkgs;
+
 in
 {
   inherit
@@ -31,7 +33,18 @@ in
     nixosConfToBuilderAttr
     ;
 
-  nixpkgsMonitorEmailNotifier = destinationEmail: pkgs.writeShellScript "notify-advancement" ''
+  inherit wireguard;
+
+  inherit (wireguard) 
+    mkWireguardPeer
+    ;
+
+
+
+    nixpkgsMonitorEmailNotifier = 
+    fromEmail:
+    destinationEmail:
+    pkgs.writeShellScript "notify-advancement" ''
 
     branch_name="$1"
     old_revision="$2"
@@ -42,7 +55,7 @@ in
 
     # strip leading spaces else msmtp will complain
     message=$(cat <<EOF
-    From: ${destinationEmail}
+    From: ${fromEmail}
     To: ${destinationEmail}
     Subject: $title
 
@@ -66,7 +79,7 @@ in
       withSecrets, # bool
       hostname,
       # pkgs = self.inputs.nixos-unstable.legacyPackages.${system}.pkgs;
-      pkgs ? myPkgs,
+      pkgs,
     }:
     lib.nixosSystem {
       system = "x86_64-linux";
@@ -94,8 +107,8 @@ in
   /**
     Maps over folders in folder
   */
-  importDirectories = transformEntry:
-    folder:
+  importDirectories = folder: transformEntry:
+    
     let
       # transformEntry = lib.id;
       pred = key: val: val == "directory";
@@ -128,6 +141,7 @@ in
   # generate a client ssh config from the server config
   # https://fmartingr.com/blog/2022/08/12/using-ssh-config-match-to-connect-to-a-host-using-multiple-ip-or-hostnames/
   genSshClientConfig =
+    # value is one of nixosConfigurations.<ENTRY>
     value:
     let
       mcfg = value.config;
@@ -138,7 +152,8 @@ in
       lib.optionalAttrs sshCfg.enable
         # lib.warn if "teto" is not in users.users
         {
-          header = ''Match host="${mcfg.networking.hostName},${mcfg.networking.domain}"'';
+          # or false) 
+          header = ''Match host="${mcfg.networking.hostName},${mcfg.networking.domain}${lib.optionalString (mcfg.tetos.wireguard.enable or false) ",${mcfg.networking.hostName}.vpn"}"'';
           # assumption ? or check/warn it has it ?
           # user = "teto";
           identityFile = "${secretsFolder}/ssh/id_rsa";
@@ -146,9 +161,11 @@ in
           identitiesOnly = true;
           # extraOptions = {
           AddKeysToAgent = "yes";
-          HostName = lib.throwIf (
-            mcfg.networking.domain == null
-          ) "Missing domaing for ${name}" mcfg.networking.domain;
+
+          # TODO  set it depending if hostName is FQDN ?
+          # HostName = lib.throwIf (
+          #   mcfg.networking.domain == null
+          # ) "Missing domaing for ${name}" mcfg.networking.domain;
           # };
         }
     );

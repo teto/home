@@ -17,6 +17,13 @@ lib.optionalAttrs withSecrets {
   # It's also possible to use a ssh key, but only when it has no password:
   #age.sshKeyPaths = [ "/home/user/path-to-ssh-key" ];
 
+  secrets."restic/teto-bucket" = {
+    mode = "0440";
+    # TODO only readable by gitlab
+    # owner = config.users.users.teto.name;
+    # group = config.users.users.nobody.group;
+  };
+
   # By default secrets are owned by root:root. Furthermore the parent directory /run/secrets is only owned by root and the keys group has read access to it:
   # This is the actual specification of the secrets.
   secrets.github_token = {
@@ -25,15 +32,7 @@ lib.optionalAttrs withSecrets {
     # sign. Runtime dir is $XDG_RUNTIME_DIR on linux and $(getconf
     # DARWIN_USER_TEMP_DIR) on darwin.
     path = "%r/github_token";
-    # owner = config.users.users.teto.name;
-    # group = config.users.users.teto.group;
   };
-
-  # secrets."gitlab/apiToken" = {
-  #   mode = "400";
-  #   # owner = config.users.users.teto.name;
-  #   # group = config.users.users.teto.group;
-  # };
 
   # removed from secrets
   secrets."OPENAI_API_KEY_PERSO" = {

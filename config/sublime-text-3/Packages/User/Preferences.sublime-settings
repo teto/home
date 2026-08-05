@@ -1,4 +1,6 @@
 {
+	"font_face": "Iosevka",
 	"font_size": 17,
+	"theme": "Default.sublime-theme",
 	"update_check": false
 }

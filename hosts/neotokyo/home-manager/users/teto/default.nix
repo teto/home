@@ -45,21 +45,23 @@ in
   home.stateVersion = "26.05";
 
   # move to teto
-  services.nixpkgs-monitor = {
-    enable = true;
-    # TODO send a mail
-    on-branch-advance-cmd = lib.optionalDrvAttr withSecrets (
-      lib.nixpkgsMonitorEmailNotifier secrets.users.teto.email
-    );
-    monitorCommand = "${lib.getExe pkgs.git-branch-monitor}";
-  };
+  services.nixpkgs-monitor =
+    let
+      parts = lib.splitString "@" secrets.users.teto.email;
+      user = builtins.elemAt parts 0;
+      domain = builtins.elemAt parts 1;
+    in
+    {
+      enable = true;
+      # TODO send a mail
+      on-branch-advance-cmd = lib.optionalDrvAttr withSecrets (
+        lib.nixpkgsMonitorEmailNotifier "${user}+neotokyo@${domain}" secrets.users.teto.email
+      );
+      monitorCommand = "${lib.getExe pkgs.git-branch-monitor}";
+    };
 
   # only on login shell
-  # initExtra => interactive shell
   # profileExtra => login shell
-  # programs.bash.initExtra = ''
-  #   cat "${pkgs.writeText "welcome-message" banner}";
-  # '';
 
   # required for systemd to send emails
   programs.msmtp.enable = true;
@@ -76,7 +78,7 @@ in
     #       export GITHUB_TOKEN=$(cat ~/github-token)
     initExtra = ''
       cd nixpkgs
-      echo "exporting token..."
+      echo "exporting token..."deploy '.#neotokyo' -s --interactive-sudo=true -- --override-input nixpkgs /home/teto/nixpkgs
     '';
     profileExtra = ''
       cat "${pkgs.writeText "login-welcome" welcomeMessage}";

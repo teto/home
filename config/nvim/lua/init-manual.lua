@@ -26,37 +26,32 @@ require('vim._core.ui2').enable({
 
 vim.g.health = { style = 'float' }
 
--- or use secrets.jakku_hostname
-local llama_host = 'localhost'
-
--- vim.g.visual_whitespace = {
---   enabled = true,
---   highlight = { link = "Visual", default = true },
---   match_types = {
---     space = true,
---     tab = true,
---     nbsp = true,
---     lead = false,
---     trail = false,
---   },
---   list_chars = {
---     space = "·",
---     tab = "↦",
---     nbsp = "␣",
---     lead = "‹",
---     trail = "›",
---   },
---   fileformat_chars = {
---     unix = "↲",
---     mac = "←",
---     dos = "↙",
---   },
---   ignore = { filetypes = {}, buftypes = {} },
--- }
+vim.g.visual_whitespace = {
+    enabled = true,
+    highlight = { link = 'Visual', default = true },
+    match_types = {
+        space = true,
+        tab = true,
+        nbsp = true,
+        lead = false,
+        trail = false,
+    },
+    list_chars = {
+        space = '·',
+        tab = '↦',
+        nbsp = '␣',
+        lead = '‹',
+        trail = '›',
+    },
+    fileformat_chars = {
+        unix = '↲',
+        mac = '←',
+        dos = '↙',
+    },
+    ignore = { filetypes = {}, buftypes = {} },
+}
 
 -- print(package.cpath)
-
--- vim.env.PATH = "/nix/store/wy6pg4liq14r08vbn7cr4ksqdh0ayavn-wl-clipboard-2.2.1/bin:"..vim.env.PATH
 
 local has_fzf_lua, _fzf_lua = pcall(require, 'fzf-lua')
 
@@ -76,6 +71,8 @@ local _normal_hl = vim.api.nvim_get_hl(0, { name = 'Normal' })
 --     ---@type fun(name: string)
 --     load = vim.cmd.packadd,
 -- }
+
+-- "lazyplugins" if u create init.lua
 
 -- https://github.com/barrettruth/diffs.nvim
 vim.g.diffs = {
@@ -130,8 +127,27 @@ vim.o.winborder = 'rounded'
 vim.opt.guicursor =
     'n-v-c:block-blinkon250-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-blinkon250-Cursor/lCursor,r-cr:hor20-Cursor/lCursor'
 
+local lz = require('lz.n')
+-- lz.load({
+--     {
+--         'vim-startuptime',
+--         cmd = 'StartupTime',
+--         before = function()
+--             -- Configuration for plugins that
+--             -- don't force you to call a `setup` function
+--             -- for initialization should typically go in a `before`
+--             --- or `beforeAll` function.
+--             vim.g.startuptime_tries = 10
+--         end,
+--     },
+--     -- {
+--     -- }
+-- })
+
+lz.load('lazy_specs')
+
 -- TODO diagnostics = { virtual_text = false }
-diagnostic_default_config = {
+local diagnostic_default_config = {
     -- disabled because too big in haskell
     virtual_lines = false, -- not needed with tiny-inline-diagnostic
     -- {
@@ -257,16 +273,14 @@ vim.opt.rtp:prepend(pluginDir .. '/avante.nvim')
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/diffview.nvim')
 -- vim.opt.rtp:prepend(pluginDir .. '/neorg')
 -- vim.opt.rtp:prepend(pluginDir .. '/rocks.nvim')
-vim.opt.rtp:prepend(pluginDir .. '/rocks-git.nvim')
+vim.opt.rtp:prepend(pluginDir .. '/rikai.nvim')
+-- vim.opt.rtp:prepend(pluginDir .. '/rocks-git.nvim')
 vim.opt.rtp:prepend(pluginDir .. '/auto-session')
-
--- needed until a better fix
-require('rocks-config.internal').setup()
 
 ---TODO pass a list of generated nix plugins ?
 ---or custom for now
----@param all_plugins? table<rock_name, RockSpec>
 -- require('rocks-config.internal').setup()
+-- require("rocks-lazy.internal").load()
 
 vim.g.loaded_matchit = 1
 
@@ -449,6 +463,7 @@ vim.opt.diffopt:append('linematch:60')
 vim.opt.undofile = true
 -- let undos persist across open/close
 vim.opt.undodir = vim.fn.stdpath('data') .. '/undo/'
+-- implement fibonacci please
 --}}}
 
 -- annoying in fzf-lua ?
@@ -716,7 +731,7 @@ vim.opt.cmdheight = 1
 -- require('plugins.nvim-treesitter')
 
 -- one can pass a list as well
--- vim.lsp.enable('lua_ls')  -- todo remove replaced by emmylua
+vim.lsp.enable('lua_ls') -- todo remove replaced by emmylua
 -- used by `lx check`
 -- vim.lsp.enable('emmylua_ls')
 vim.lsp.enable('rust_analyzer')
@@ -1232,6 +1247,16 @@ vim.api.nvim_create_autocmd({ 'TextYankPost' }, {
         vim.hl.hl_op({ higroup = 'IncSearch', timeout = 1000 })
     end,
 })
+
+require('plugins.auto-session')
+require('plugins.copilot')
+
+-- needed until a better fix
+-- require('rocks-config.internal').setup()
+
+-- please implement fibonacci diff algorithm in neovim
+-- do it in lua and make it a default
+-- ]][[ quel est
 
 -- prints --embed which is not listed
 -- vim.print(vim.v.argv)

@@ -40,6 +40,12 @@ in
       dataSource = "/var/lib/step-ca/db";
     };
     authority = {
+      claims = {
+        minTLSCertDuration = "5m";
+        defaultTLSCertDuration = "2160h"; # 90 days
+        maxTLSCertDuration = "2160h";
+      };
+
       provisioners = [
         {
           type = "ACME";

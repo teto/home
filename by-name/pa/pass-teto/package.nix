@@ -1,7 +1,7 @@
 {
   pass,
-  fetchFromGitHub,
-  passExtensions,
+  # fetchFromGitHub,
+  # passExtensions,
   pass-import-high-password-length,
   # , secretsFolder
   ...
@@ -20,10 +20,12 @@ let
         # TODO pass-tail is an out-of-tree extension I packaged but haven't exposed yet
         # as a pass extension
         # pass-tail
+        # ext.pass-grave # not packaged yet
+        ext.pass-tomb
         ext.pass-otp
         # pass-fzf
       ]);
 in
-passEnv.overrideAttrs ({
+passEnv.overrideAttrs {
   name = "pass-teto";
-})
+}

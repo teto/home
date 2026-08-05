@@ -128,10 +128,12 @@ deploy-router:
     deploy .\#router  -s  --interactive-sudo=true
 
 # [confirm("prompt")]
-deploy-neotokyo:
+deploy-neotokyo: (deploy "neotokyo")
+
+deploy nixosConfig:
     # --magic-rollback false --auto-rollback=false
     echo "add --remote-build if you meet signature issues"
-    deploy '.#neotokyo' -s --interactive-sudo=true -- --override-input nixpkgs {{ NIXPKGS_REPO }}
+    deploy .#{{ nixosConfig }} -s --interactive-sudo=true -- --override-input nixpkgs {{ NIXPKGS_REPO }}
 
 # regenerate my email contacts
 # (to speed up alot autocompletion)

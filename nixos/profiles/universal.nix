@@ -19,7 +19,6 @@
   imports = [
     ../accounts/root/root.nix
     ../accounts/teto/teto.nix
-    flakeSelf.nixosProfiles.ntp
   ];
 
   boot.tmp.cleanOnBoot = true; # to clean /tmp on reboot
@@ -33,7 +32,6 @@
       kitty.terminfo # to be able to edit over ssh
     ]
     ++ (with pkgs; [
-      # autoconf
       curl
       fd # replaces 'find'
       file

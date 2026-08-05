@@ -1,3 +1,5 @@
+#
+# create a service to monitor new blog
 {
   config,
   flakeSelf,
@@ -31,7 +33,7 @@ let
           ./services/restic.nix
           ./services/immich.nix
           ./services/step-ca.nix
-          ./services/buildbot-nix.nix
+          # ./services/buildbot-nix.nix
           ./services/nixbot.nix
           ./services/transmission.nix
           ./services/headscale.nix
@@ -72,7 +74,6 @@ in
 
     # for wireguard
     "net.ipv4.conf.all.forwarding" = true;
-
   };
 
   # some hardening
@@ -82,6 +83,14 @@ in
     "rds"
     "tipc"
   ];
+
+  tetos.wireguard = {
+    enable = true;
+    id = 1;
+    privateKeyFile = config.sops.secrets.wg-private-key.path;
+    publicKey = "1uhd6iscyFt68twrVz+y4zvws5PzhpIuY4rrr4N/Ymk=";
+
+  };
 
   # services.dbus.implementation = "dbus";
 
@@ -97,23 +106,18 @@ in
     flakeSelf.inputs.disko.nixosModules.disko
     flakeSelf.nixosModules.teto-nogui
     flakeSelf.nixosModules.default-hm
+    flakeSelf.nixosModules.wireguard
 
+    flakeSelf.nixosProfiles.wireguard
     flakeSelf.nixosProfiles.server
-    flakeSelf.nixosProfiles.ntp
     flakeSelf.nixosProfiles.nix-daemon
 
-    # ./nix.nix
     ./hardware.nix
 
     # move to autoloaded
-
-    # ./services/openssh.nix
-    # ./services/sshguard.nix
-    # ./services/gitolite.nix
     ./services/nextcloud.nix
     # ./services/postgresqlBackup.nix
     ./services/nginx.nix
-    # ./services/immich.nix
     # ./services/restic.nix
 
     # testing
@@ -124,8 +128,8 @@ in
     flakeSelf.nixosProfiles.server
 
     # TODO remove once nixbot succeeds
-    flakeSelf.inputs.buildbot-nix.nixosModules.buildbot-master
-    flakeSelf.inputs.buildbot-nix.nixosModules.buildbot-worker
+    # flakeSelf.inputs.buildbot-nix.nixosModules.buildbot-master
+    # flakeSelf.inputs.buildbot-nix.nixosModules.buildbot-worker
     flakeSelf.inputs.nixbot.nixosModules.nixbot
   ];
 
@@ -165,19 +169,16 @@ in
     pkgs.restic # testing against restic
     pkgs.sops
     # pkgs.rustic # testing against restic
-    pkgs.backblaze-b2-tetos
+    pkgs.backblaze-b2-tetos # b2 backup tool
     pkgs.msmtp # to send mails
     pkgs.systemctl-tui
     pkgs.nixpkgs-review
     pkgs.zola # needed in the post-receive hook of the blog !
     pkgs.yazi
+
     pkgs.wireguard-tools # for 'wg'
 
     config.services.nextcloud.occ
   ];
-
-  # create a service to monitor new blog
-
-  # services.gitolite.adminPubkey = secrets.gitolitePublicKey;
 
 }

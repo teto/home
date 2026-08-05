@@ -1,3 +1,5 @@
+# to force reentry of the password
+# gpgconf --kill gpg-agent
 { pkgs, ... }:
 {
   enable = true;
@@ -35,8 +37,8 @@
   # '';
   # };
 
+  # 'no-allow-external-cache' also prevents pinentry/GNOME components from maintaining their own cache.
   extraConfig = ''
-
-
+    no-allow-external-cache 
   '';
 }

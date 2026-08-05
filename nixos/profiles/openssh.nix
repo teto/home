@@ -5,11 +5,9 @@
 {
 
   services.openssh = {
-    # kinda experimental
-    # openssh.banner = "Hello world";
-
     # # for sshfs edit or scp
-    allowSFTP = true;
+    # allowSFTP = false;
+
     # needed since default is true !
     # listenAddresses = [
     #   { addr = "0.0.0.0"; port = 64022; }
@@ -22,10 +20,10 @@
     # ];
     # new format
     settings = {
-      LogLevel = "VERBOSE";
+      # LogLevel = "VERBOSE";
       KbdInteractiveAuthentication = false;
-      # PasswordAuthentication = false;
-      # PermitRootLogin = "no";
+      PasswordAuthentication = false;
+      PermitRootLogin = "no";
       X11Forwarding = false;
     };
   };

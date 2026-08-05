@@ -2,7 +2,7 @@
   lib,
   pkgs,
   flakeSelf,
-  withSecrets,
+  # withSecrets,
   ...
 }:
 let
@@ -16,16 +16,17 @@ let
         fileset = lib.fileset.unions [
           ./boot.nix
           ./environment.nix
-          ./nix.nix
-          ./sops.nix
-          ./systemd.nix
-          ./networking
-          ./users
-          ./services
-          ./security
-          ./programs
           ./home-manager/users/root
           ./home-manager/users/teto/default.nix
+          ./networking
+          ./nix.nix
+          ./programs
+          ./sops.nix
+          ./systemd.nix
+          ./services
+          ./security
+          ./tetos.nix
+          ./users
         ];
       };
 
@@ -77,53 +78,31 @@ in
   #   enable = true;
   # };
 
-  services.pipewire.wireplumber.configPackages = [
-    # pkgs.hello
-    # (pkgs.writeTextDir "share/wireplumber/wireplumber.conf.d/10-bluez.conf" ''
-    #   monitor.bluez.properties = {
-    #     bluez5.roles = [ a2dp_sink a2dp_source bap_sink bap_source hsp_hs hsp_ag hfp_hf hfp_ag ]
-    #     bluez5.codecs = [ sbc sbc_xq aac ]
-    #     bluez5.enable-sbc-xq = true
-    #     bluez5.hfphsp-backend = "native"
-    #   }
-    # '')
-  ];
-
-  nix.buildMachines = [
-    # builder_neotokyo
-    # {
-    #   # using secrets.nix
-    #   hostName = "laptop.local";
-    #   system =  "x86_64-linux";
-    # }
-  ];
+  # services.pipewire.wireplumber.configPackages = [
+  # pkgs.hello
+  # (pkgs.writeTextDir "share/wireplumber/wireplumber.conf.d/10-bluez.conf" ''
+  #   monitor.bluez.properties = {
+  #     bluez5.roles = [ a2dp_sink a2dp_source bap_sink bap_source hsp_hs hsp_ag hfp_hf hfp_ag ]
+  #     bluez5.codecs = [ sbc sbc_xq aac ]
+  #     bluez5.enable-sbc-xq = true
+  #     bluez5.hfphsp-backend = "native"
+  #   }
+  # '')
+  # ];
 
   # enables command on boot/suspend etc
   security.polkit.enable = true;
 
-  # this is for gaming
-  # just trying to make some steam warnings go away
-
-  # TODO conditionnally enable it
-  # networking.wireless.iwd.enable = true;
   boot.loader.systemd-boot.enable = true;
   # boot.loader.efi.efiSysMountPoint = "/boot/EFI";
   boot.loader.efi.canTouchEfiVariables = true;
   # boot.loader.grub.enableCryptodisk = false;
-  # boot.loader.grub.enable = false;
-  # boot.loader.grub.device = "nodev";
-  # boot.loader.grub.efiInstallAsRemovable = true; # in case canTouchEfiVariables doesn't work for your system
-  # boot.loader.grub.efiSupport = true;
 
   # Setup keyfile
   # boot.initrd.secrets = {
   #   # for systemd-crypt or luks ?
   #   "/crypto_keyfile.bin" = null;
   # };
-
-  # Enable swap on luks
-  # boot.initrd.luks.devices."luks-abd09d4b-3972-405a-b314-44821af95c0e".keyFile = "/crypto_keyfile.bin";
-
   ### HWP
 
   home-manager.users = {
@@ -139,7 +118,7 @@ in
   # it is necessary to use dnssec though :(
   # hostId
   networking.hostName = "tatooine"; # Define your hostname.
-  networking.domain = "tatooine.local";
+  networking.domain = ".local";
 
   hardware = {
     enableAllFirmware = true;
@@ -218,10 +197,6 @@ in
   services.fwupd.enable = true;
   services.gvfs.enable = true;
 
-  # let's be fucking crazy
-  # environment.enableDebugInfo = true;
-  # } ++ lib.optionalAttrs (config.programs ? mininet) {
-
   networking.iproute2.enable = true;
 
   swapDevices = [
@@ -244,10 +219,6 @@ in
 
   services.flatpak.enable = true;
 
-  # programs.gnome-disks = {
-  #   enable = true;
-  # };
-
   # smartcard service for yubikey
   # can conflict with gpg-agent depending on config
   system.stateVersion = "26.05";
@@ -256,8 +227,6 @@ in
     # alternatively one can run journalctl --vacuum-time=2d
     SystemMaxUse=2G
   '';
-
-  # powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 
   # to remove "TSC_DEADLINE disabled due to Errata;
   # please update microcode to version: 0x22"

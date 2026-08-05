@@ -43,12 +43,6 @@ in
     extraApps = with config.services.nextcloud.package.packages.apps; {
       # inherit news; # removed 'cos gives a wrong error
       inherit contacts;
-      # mail extension can't be download :s
-      # example of how to get a more recent version
-      # contacts = pkgs.fetchNextcloudApp rec {
-      #   url = "https://github.com/nextcloud-releases/contacts/releases/download/v4.2.2/contacts-v4.2.2.tar.gz";
-      #   sha256 = "sha256-eTc51pkg3OdHJB7X4/hD39Ce+9vKzw1nlJ7BhPOzdy0=";
-      # };
     };
     # to be able to send mails from the admin panel
     # Test mails can be send via administration interface in the menu section "Basic settings".

@@ -1,7 +1,16 @@
 
+* find what font a program is using
+
+`rg -i '\.(ttf|otf|ttc)( |$)' "/proc/$pid/maps"`
+
+* How does font-manager work ?
+
+Creates ~/.config/fontconfig/conf.d/78-Reject.conf
+
 * to find what font renders the character, you can try
 
   fc-match -s monospace:charset=f796
+  fc-match -f '%{family}\n%{file}\n' monospace
 
   or  (-s = sort)
 

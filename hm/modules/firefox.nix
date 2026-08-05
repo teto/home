@@ -70,6 +70,10 @@ in
       in
       lib.mkIf cfg.mutableProfilesIni {
 
+        # HACK
+        home.file."${cfg.configPath}/profiles.ini".force = true;
+
+        # programs.firefox.configPath force = true;
         home.activation = {
           makeProfilesIniWritable =
             lib.hm.dag.entryAfter [ "writeBoundary" ]

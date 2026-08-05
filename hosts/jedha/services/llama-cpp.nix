@@ -1,7 +1,8 @@
 {
 
-  # I have written my own home-manager module
+  # started by home-manager instead
   enable = false;
+
   # lacks a model anyway
   openFirewall = true;
 

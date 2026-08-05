@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
 
   pki.certificateFiles = [
@@ -5,6 +6,22 @@
     # ./root_ca.crt
     ../../profiles/desktop/root_ca.crt
 
+  ];
+
+  sudo.execWheelOnly = true;
+  sudo.extraRules = [
+    {
+      users = [ "teto" ];
+      commands = [
+        # { command = "/nix/store/*-activatable-nixos-system-*/activate-rs"; }
+        # { command = "/run/current-system/sw/bin/rm /tmp/deploy-rs-canary-*"; }
+        {
+          command = "${pkgs.wireguard-tools}/bin/wg show";
+          options = [ "NOPASSWD" ];
+        }
+
+      ];
+    }
   ];
 
   # don't forget to run ulimit -c unlimited to get the actual coredump

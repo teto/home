@@ -1,7 +1,4 @@
 {
-  config,
-  pkgs,
-  lib,
   flakeSelf,
   ...
 }:
@@ -40,7 +37,7 @@
       LogLevel = "VERBOSE";
       KbdInteractiveAuthentication = false;
       PasswordAuthentication = false;
-      # PermitRootLogin = "no";
+      PermitRootLogin = "no";
     };
   };
 }

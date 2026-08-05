@@ -64,7 +64,26 @@ let
       # testing my fork
       # { plugin = diffview-nvim; }
 
-      (luaPlugin {
+      {
+        plugin = tiny-inline-diagnostic-nvim;
+        config = ''
+          require('tiny-inline-diagnostic').setup({
+              preset = 'modern',
+
+            multilines = {
+                enabled = true, -- Enable support for multiline diagnostic messages
+                always_show = false, -- Always show messages on all lines of multiline diagnostics
+                trim_whitespaces = false, -- Remove leading/trailing whitespace from each line
+                tabstop = 4, -- Number of spaces per tab when expanding tabs
+                severity = nil, -- Filter multiline diagnostics by severity (e.g., { vim.diagnostic.severity.ERROR })
+            },
+            -- Show all diagnostics on the current cursor line, not just those under the cursor
+            show_all_diags_on_cursorline = false,
+            })
+        '';
+      }
+
+      {
         plugin = marks-nvim;
         config = # lua
           ''
@@ -96,7 +115,10 @@ let
                 mappings = {}
             }
           '';
-      })
+      }
+
+      # to test with avante
+      copilot-lua
 
       # install via rocks
       # vim-lion # Use with gl/L<text object><character to align to
@@ -244,6 +266,7 @@ let
     # while I wish feed.nvim would be packaged with it
     # for markdown preview, should be in the package closure instead
     pandoc
+
     # pythonPackages.pdftotext  # should appear only in RC ? broken
     # nil # a nix lsp, can be debugged with NIL_LOG_PATH and NIL_LOG=nil=debug
     nixd # another nix LSP
@@ -252,7 +275,7 @@ let
     # rnix-lsp
     rust-analyzer
     shellcheck
-    # lua-language-server # replaced with emmylua-ls
+    lua-language-server # emmylua-ls still kinda broken
     gopls # LSP for go
     marksman # markdown LSP server
 
@@ -441,7 +464,7 @@ in
     # ++ pkgs.vimPlugins.llm-nvim.runtimeDeps # temporary workaround
     # provides typescript-language-server
     ++ pkgs.vimPlugins.typescript-tools-nvim.runtimeDeps
-    # ++ flakeSelf.packages.${pkgs.stdenv.hostPlatform.system}.pkgs.rikai-nvim.runtimeDeps  # hardcoded here since
+    ++ flakeSelf.inputs.rikai-nvim.packages.${pkgs.stdenv.hostPlatform.system}.rikai-nvim.runtimeDeps # hardcoded here since
     ++ [
       pkgs.typescript # for tsserver
       pkgs.stylua # for lua formatting

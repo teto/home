@@ -314,9 +314,9 @@ in
         # khard # see khal.nix instead ?
         # libsecret  # to consult
         # newsboat #
-        bmm # bookmark manager
+        # bmm # bookmark manager
         carl # cargo cal
-        python3Packages.subliminal # to download subtitles
+        # python3Packages.subliminal # to download subtitles
         immich-cli
         mujmap-unstable # to sync notmuch tags across jmap
         # (lib.ignoreBroken oculante) # image viewer
@@ -336,9 +336,6 @@ in
       home.packages = with pkgs; [
         vlc
         # pinta # photo editing
-
-        # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail
-        # mairix mutt msmtp lbdb contacts spamassassin
         # element-desktop # TODO this should go into nix profile install
         popcorntime
 
@@ -381,10 +378,6 @@ in
 
           # anthropic agent
           mistral-vibe-custom = pkgs.mistral-vibe;
-          # .overrideAttrs ({
-          #   doCheck = false;
-          #   doInstallCheck = false;
-          # });
         in
         # mcp-servers
         [
@@ -394,12 +387,11 @@ in
           bat
           bcal # calculatrice
           # bmm # rust bookmark manager (not package yet)
-          # backblaze-b2-tetos
           # bfs # breadth first version of ls https://github.com/tavianator/bfs
           binutils
           btop-cuda # for jedha
           bubblewrap # sandboxing
-          cargo
+          # cargo # should be project-dependant
           codex # openai agent
           codex-acp # originated from zed-industries, used in avante
           # (ignoreBroken claude-code) # anthropic agent
@@ -415,9 +407,9 @@ in
 
           gdb
           gnupg
-          # gnum4 # hum
-          gettext # for envsubst (TO NOT CONFOUND with gettext's envsubst)
-          # glab # gitlab cli
+          gpg-tui
+
+          # gettext # for envsubst (TO NOT CONFOUND with gettext's envsubst)
           # hexyl # hexcode viewer
           jq
 
@@ -446,13 +438,13 @@ in
           nurl # generate nix code
           numbat # fancy calculator
 
-          pwgen
+          pwgen # password generator
 
           # editorconfig-core-c
           # for fuser, useful when can't umount a directory
           # https://unix.stackexchange.com/questions/107885/busy-device-on-umount
           # psmisc # ps -a for python ?
-          rbw
+          rbw # rust bitwarden
           util-linux # for lsns (namespace listing)
           just
           gitFull # to get send-email
@@ -635,7 +627,6 @@ in
         source-han-sans # sourceHanSansPackages.japanese
         fira-code-symbols # for ligatures
         iosevka
-
       ];
 
     })

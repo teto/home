@@ -3,7 +3,7 @@
   pkgs,
   lib,
   withSecrets,
-  dotfilesPath,
+  # dotfilesPath,
   secrets,
   ...
 }:
@@ -16,28 +16,7 @@ let
 
   defaultSendMailCommand = "${pkgs.msmtp}/bin/msmtpq --debug --read-envelope-from --read-recipients";
 
-  # mbsyncConfig = {
-  #   enable = true;
-  #   extraConfig.channel = {
-  #     # unlimited
-  #     # when setting MaxMessages, set ExpireUnread
-  #     MaxMessages = 20000;
-  #     # size[k|m][b]
-  #     MaxSize = "1m";
-  #     CopyArrivalDate = "yes"; # Keeps the time stamp based message sorting intact.
-  #   };
-  #   create = "maildir"; # create missing mailboxes
-  #   expunge = "both";
-  # };
-
   accountExtra = {
-    # set new_mail_command = ""
-    # onNewMailCommand = mkOption {
-    #   type = types.nullOr types.str;
-    #   description = ''
-    #     <command>msmtpq --read-envelope-from --read-recipients</command>.
-    #   '';
-    # };
     alot = {
       # TODO pass mon fichier a moi
       contactCompletion = {
@@ -54,18 +33,6 @@ let
     };
 
   };
-
-  # problem is I don't get the error/can't interrupt => TODO use another one
-  # mbsyncWrapper = pkgs.writeShellScriptBin "mbsync-wrapper" ''
-  #   ${pkgs.isync}/bin/mbsync $@
-  #   notmuch new
-  # '';
-
-  # my_tls = {
-  #   enable = true;
-  #   # certificatesFile = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
-  #   certificatesFile = "/etc/ssl/certs/ca-certificates.crt";
-  # };
 
   gpgModule = {
     key = "64BB678705EF85ABF7345F69BD024BD9C261596D";
@@ -101,23 +68,106 @@ let
     meli = {
       enable = true;
       # ""jmap
+      mailboxAliases = {
+        # interesting to see in man meli.conf
+        "INBOX" = {
+          alias = "Inbox";
+          autoload = true;
+          # must depend on parent ?
+          collapsed = true;
+          # silently insert updates
+          ignore = false;
+          # usage boolean                         (optional) special usage of  this  mailbox.   Valid
+          #                             values are:
+          #                             -   Normal (default)
+          #                             -   Inbox
+          #                             -   Archive
+          #                             -   Drafts
+          #                             -   Flagged
+          #                             -   Junk
+          #                             -   Sent
+          #                             -   Trash
+
+          sort_order = 0;
+          # limit in time
+          query = "tag:inbox and not tag:killed and date:1y..";
+          # subscribe => watch mailbox for update
+          # subscribe = true;
+        };
+        "Drafts" = {
+          query = "tag:draft";
+          # subscribe = true;
+        };
+        "Sent" = {
+          # query="from:username@server.tld from:username2@server.tld";
+          # include variations later ?
+          query = "from:${secrets.accounts.mail.fastmail_perso.email}";
+          # subscribe = true;
+        };
+        Trash = {
+          # query="from:username@server.tld from:username2@server.tld";
+          # include variations later ?
+          query = "tag:killed";
+          role = "Trash";
+          # subscribe = true;
+        };
+      };
+      # "INBOX" = {  query="tag:inbox and not tag:killed", subscribe = true }
+      # "Drafts" = {  query="tag:draft", subscribe = true }
+      # "Sent" = {  query="from:username@server.tld from:username2@server.tld", subscribe = true }
+
       settings = {
+
+        # until https://git.meli-email.org/meli/meli/issues/700 gets fixed
+        # manual_refresh = true;
+        #  "systemctl start mujmap-fastmail"
+        #   refresh_command = "just -g mail-sync";
+
+        # could be generated from the module
+        # manpage says:
+        # send_mail String|SmtpServerConf       Command to pipe new mail to (exit code  must  be  0
+        # send_mail = "msmtp --read-recipients --read-envelope-from";
         format = "notmuch"; # HM generates "jmap" by default
         # must hint at folder with .notmuch DB
         root_mailbox = config.accounts.email.maildirBasePath;
+
+        #TODO
+        # vcard_folder =
+
+        # plain | threaded | compact | conversations
         listing.index_style = "compact";
+        shortcuts.listing = {
+          commands = [
+            {
+              command = [ "tag remove trash" ];
+              shortcut = "D";
+            }
+            {
+              command = [ "tag add trash" ];
+              shortcut = "d";
+            }
+          ];
+
+          # D =  "tag add trash";
+          # { command = [ "tag add trash", "flag set trash" ], shortcut = "d" } ]
+          # D =
+        };
+
+        # not liked
+        # conf_override = true;
+
+        notmuch_address_book_query = "--output=recipients --deduplicate=address date:6M..";
+        # manual_refresh = false # defaults to false
+        # TODO could be generated
+        refresh_command = "systemctl start mujmap-fastmail";
+        # extra_identities  =
+
         # server_password_command = getPasswordCommand "perso/fastmail_mc_jmap";
         # server_username = null;
         # server_url = null;
         # server_password_command = null;
       };
     };
-
-    # mbsync = mbsyncConfig // {
-    #   enable = false; # mujmap is better at it
-    #   remove = "both";
-    #   # sync = true;
-    # };
 
     # folders.sent = "[Gmail]/Sent Mail";
 

@@ -55,8 +55,6 @@ in
     autoloadedNixosModule # loaded by haumea
     ./_boot.nix
 
-    flakeSelf.inputs.buildbot-nix.nixosModules.buildbot-master
-    flakeSelf.inputs.buildbot-nix.nixosModules.buildbot-worker
     # use nixpkgs
     flakeSelf.inputs.harmonia.nixosModules.harmonia
     flakeSelf.nixosProfiles.greetd
@@ -82,7 +80,6 @@ in
   ];
 
   home-manager.users = {
-    # TODO use from flake or from unstable
     teto = {
       # TODO it should load the whole folder
       imports = [
@@ -95,8 +92,6 @@ in
   boot =
     let
       kernelPkgs = pkgs.linuxKernel.packages.linux_7_1;
-      # kernelPkgs = pkgs.linuxKernel.packages.linux_6_18;
-      # pkgs.linuxKernel.packages.linux_6_18.r8125
     in
     {
       consoleLogLevel = 6;
@@ -233,13 +228,6 @@ in
   #   ln -s ${config.boot.kernelPackages.kernel.dev}/vmlinux $out/vmlinux
   # '';
 
-  # SHould be a level instead ?
-  # systemd.enableStrictShellChecks = true;
-
-  # users = {
-  #   groups.nginx.gid = config.ids.gids.nginx;
-  #
-  # };
-
+  # TODO passer a 26.05
   system.stateVersion = "25.11";
 }

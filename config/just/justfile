@@ -17,6 +17,10 @@ import? '{{ config_directory() }}'
 default:
     just --choose
 
+# regenerate the font cache
+font-regen-cache:
+    fc-cache -fv
+
 # dump noctalia-shell settings
 noctalia-dump-settings:
     noctalia-shell ipc call state all | jq .settings
@@ -120,6 +124,9 @@ switch:
 switch-remote: (nixos-rebuild "switch" "--option builders \"$TETOS_0\" -j0")
 
 rollback: (nixos-rebuild "switch" "--rollback")
+
+http-ask-models:
+  http get jedha.vpn:8080/models
 
 # builders, le path: envoye le dossier git avec, pas ouf
 [private]

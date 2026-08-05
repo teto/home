@@ -117,13 +117,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos-wizard = {
-      url = "github:km-clay/nixos-wizard";
-      # inputs.nixpkgs.follows = "nixpkgs";
+    authentik-nix.url = "github:nix-community/authentik-nix";
+    authentik-nix.inputs.nixpkgs.follows = "nixpkgs";
 
-    };
+    # nixos-wizard = {
+    #   url = "github:km-clay/nixos-wizard";
+    #   # inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     nix-cache-beacon.url = "github:adisbladis/nix-cache-beacon";
+    nix-cache-beacon.inputs.nixpkgs.follows = "nixpkgs";
 
     # lux = {
     #   url = "github:nvim-neorocks/lux";
@@ -157,8 +160,8 @@
     };
 
     meli-src = {
-      url = "git+https://git.meli-email.org/meli/meli.git";
-      # url = "github:meli/meli"; # official mirror
+      # url = "git+https://git.meli-email.org/meli/meli.git";
+      url = "github:teto/meli?ref=teto/add-completion"; # official mirror
       # ref = "refs/pull/449/head";
       flake = false;
     };
@@ -451,18 +454,15 @@
           };
         };
 
-      tetosPkgs = pkgImport self.inputs.nixpkgs true;
-      # tetosPkgsCuda = pkgImport self.inputs.nixpkgs true;
+      tetosPkgs = pkgImport self.inputs.nixpkgs false;
+      tetosPkgsCuda = pkgImport self.inputs.nixpkgs true;
       unstablePkgs = pkgImport self.inputs.nixos-unstable false;
-      # stablePkgs = pkgImport self.inputs.nixos-stable;
 
     in
     flake-utils.lib.eachSystem [ "x86_64-linux" ] (system: {
 
       # todo create a bootstrap devShell
       # https://github.com/numtide/blueprint/blob/0ed984d51a3031065925ab08812a5434f40b93d4/lib/default.nix#L547
-      # lib.importFiles ./devShells //
-
       devShells =
         let
           # Load all devShells from the devShells/ directory
@@ -483,7 +483,8 @@
               );
             in
             {
-              name = builtins.replaceStrings [ ".nix" ] [ "" ] (lib.traceVal file);
+              # lib.traceVal
+              name = builtins.replaceStrings [ ".nix" ] [ "" ] file;
               value = shell;
             }
           );
@@ -580,23 +581,57 @@
           #       };
           #     }
           #   );
-          createSystem =
-            hostname: withSecrets:
-            lib.mkNixosSystem {
-              # ideally we would return both versions
-              # withSecrets = true;
-              inherit withSecrets hostname;
-              modules = [
-                (./hosts + "/${hostname}")
-              ];
-            };
+          # createSystem =
+          #   hostname: withSecrets:
+          # lib.mkNixosSystem {
+          #   # ideally we would return both versions
+          #   inherit withSecrets hostname;
+          #   modules = [
+          #     (./hosts + "/${hostname}")
+          #   ];
+          #
+          #   # encode it in name or
+          #   pkgs = tetosPkgs;
+          #   # pkgs = if hostname == "jedha" then tetosPkgsCuda else tetosPkgs;
+          # };
 
-          nixosConfigs = lib.importDirectories (
-            dirname: val: lib.nameValuePair dirname (createSystem dirname true)
-          ) ./hosts;
-          nixosConfigsWithoutSecrets = lib.importDirectories (
-            dirname: val: lib.nameValuePair "${dirname}-no-secrets" (createSystem dirname false)
-          ) ./hosts;
+          nixosConfigs = lib.importDirectories ./hosts (
+            # dirname => hostname
+            hostname: val:
+            lib.nameValuePair hostname (
+              lib.mkNixosSystem {
+                inherit hostname;
+                # ideally we would return both versions
+                withSecrets = true;
+                modules = [
+                  (./hosts + "/${hostname}")
+                ];
+
+                # encode it in name or
+                pkgs = if hostname == "jedha" then tetosPkgsCuda else tetosPkgs;
+              }
+            )
+          );
+
+          nixosConfigsWithoutSecrets = lib.importDirectories ./hosts (
+            hostname: val:
+            lib.nameValuePair "${hostname}-no-secrets"
+              # dirname => hostname
+              (
+                lib.mkNixosSystem {
+                  inherit hostname;
+                  # ideally we would return both versions
+                  withSecrets = false;
+                  modules = [
+                    (./hosts + "/${hostname}")
+                  ];
+
+                  # encode it in name or
+                  # pkgs = tetosPkgs;
+                  pkgs = if hostname == "jedha" then tetosPkgsCuda else tetosPkgs;
+                }
+              )
+          );
         in
         nixosConfigs // nixosConfigsWithoutSecrets;
 
@@ -608,18 +643,9 @@
         # teto-desktop = ./hm/profiles/teto-desktop.nix;
       };
 
-      homeModules =
-        let
-          # autoloaded = haumea.lib.load {
-          #   src = ./hm/modules;
-          #   transformer = haumea.transformers.liftDefault;
-          # };
-        in
-        # todo autoload
-        lib.importFiles ./hm/modules
-        // {
-          nixpkgs-monitor = import ./hm/modules/services/nixpkgs-monitor.nix;
-        };
+      homeModules = lib.importFiles ./hm/modules // {
+        nixpkgs-monitor = import ./hm/modules/services/nixpkgs-monitor.nix;
+      };
 
       nixosProfiles = lib.importFiles ./nixos/profiles;
 
@@ -648,10 +674,6 @@
 
       # TODO autoload overlays
       overlays = {
-
-        # no sense to reexport those
-        # mptcp = self.inputs.mptcp-flake.overlays.default;
-        # nur = self.inputs.nur.overlay;
 
         # TODO
         local = import ./overlays/pkgs/default.nix;
@@ -733,7 +755,7 @@
                 name = "neptune";
                 # local-facing address neptune.local
                 # hostname = "neptune.local"; # temporary
-                hostname = "192.168.1.21"; # temporary
+                hostname = "neptune.local"; # temporary
               }
               // {
                 # while working around require-sigs issue
@@ -748,7 +770,7 @@
                   # "-i/home/teto/.ssh/id_rsa"
                   # "-p${toString secrets.router.sshPort}"
                 ];
-                user = "teto";
+                user = "root";
                 sshUser = "teto";
               };
 

@@ -8,9 +8,9 @@
   enable = true;
 
   # todo add nova registry ?
-  registries.search = [
-    "docker.io"
-    "quay.io"
-  ];
+  # registries.settings = [
+  #   "docker.io"
+  #   "quay.io"
+  # ];
 
 }

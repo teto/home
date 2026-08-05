@@ -26,4 +26,14 @@ RESTIC_READ_CONCURRENCY
 # export RESTIC_PASSWORD_FILE=/etc/restic-password
 
 
+• A rustic/restic snapshot ID is the SHA-256 hash of the snapshot metadata object—not a sequence number or the hash of all backed-up files.
+
+  That metadata includes information such as:
+
+  - Creation time
+  - Hostname
+  - Backed-up paths
+  - Tags
+  - The root tree ID pointing to the snapshot’s files
+
 restic restore snapshot id

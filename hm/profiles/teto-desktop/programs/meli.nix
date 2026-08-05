@@ -11,7 +11,7 @@
 
   # there is meli-teto as well
   # package = pkgs.meli-git;
-  package = pkgs.meli;
+  package = pkgs.meli-teto;
 
   includes = [
     "manual.toml"
@@ -50,5 +50,8 @@
     #   editor_command = 'nvim +/^$' # optional, by default $EDITOR is used.
     # };
 
+    # shortcuts = {
+    #   general.enter_command_mode = ":";
+    # };
   };
 }
