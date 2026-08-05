@@ -11,11 +11,11 @@ let
 
 in
 {
-  enable = true;
+  enable = withSecrets;
 
   # privateRepoViewers = {};
   # Domain name under which the web frontend is reachable. MANDATORY
-  domain = if withSecrets then "nixbot.${secrets.jakku.hostname}" else "placeholder";
+  domain = "nixbot.${secrets.jakku.hostname}";
 
   # Users in this list are allowed to trigger builds and change settings.
   # Entries are provider-qualified: "github:<login>", "gitea:<login>",

@@ -32,9 +32,8 @@ in
   # osConfig.
   settings =
     # TODO we could customize them, with sendEnv for instance ?
-    (
-      lib.optionalAttrs withSecrets {
-
+    hostsConfigs // 
+    {
         # we need to override this here so we can push to gitolite repos as simple users
         # use "gitolite-teto" as the user in the git remote
         gitolite-as-teto = (lib.genSshClientConfig flakeSelf.nixosConfigurations.neotokyo) // {
@@ -130,8 +129,7 @@ in
         # };
 
       }
-      // hostsConfigs
-    );
+    ;
 
   includes = [
     "${config.xdg.configHome}/ssh/config"

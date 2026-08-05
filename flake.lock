@@ -1377,11 +1377,11 @@
     "memento-dev": {
       "flake": false,
       "locked": {
-        "lastModified": 1784002908,
-        "narHash": "sha256-cSLf1y29h6k46xcHjpblGptQqAiF+KS/MkEpdnqEOGY=",
+        "lastModified": 1785654521,
+        "narHash": "sha256-sGDWzqj8S56w1w3peDD0qjdZ3xEoHJTGTRqnolIFu5w=",
         "owner": "ripose-jp",
         "repo": "Memento",
-        "rev": "67ba6a9a426854eb60a48224e5e002b4fd200792",
+        "rev": "1b31e688ecf2d120a11a416ef2b0bd46b8091a65",
         "type": "github"
       },
       "original": {
@@ -2131,11 +2131,11 @@
     },
     "nixpkgs_13": {
       "locked": {
-        "lastModified": 1785513351,
-        "narHash": "sha256-YvLPcpWuaILQm9vVU1WbYiny3+RpK0jGMi9xgDVrjE0=",
+        "lastModified": 1785931105,
+        "narHash": "sha256-yknQNXV5+ySYifoX9FXyF6Atte1DTFm7vpFGxEsX67g=",
         "owner": "teto",
         "repo": "nixpkgs",
-        "rev": "a39e789f0e83ce9ac16954b4645b54ab69525302",
+        "rev": "149cefd9b07b71e016bd08a24ae4009727b15859",
         "type": "github"
       },
       "original": {

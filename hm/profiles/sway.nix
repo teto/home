@@ -10,7 +10,28 @@ let
   mod = "Mod1";
   mad = "Mod4";
 
-  term = "${pkgs.kitty}/bin/kitty";
+  rawTerm = "${pkgs.kitty}/bin/kitty";
+
+  # Start terminals in a directory associated with the focused Sway workspace.
+  # Add more workspace-number/directory pairs to the case statement as needed.
+  workspaceTerm = pkgs.writeShellApplication {
+    name = "kitty-for-workspace";
+    runtimeInputs = [
+      pkgs.jq
+      pkgs.sway
+    ];
+    text = ''
+      workspace="$(${pkgs.sway}/bin/swaymsg -t get_workspaces | ${pkgs.jq}/bin/jq -r '.[] | select(.focused) | .num')"
+
+      case "$workspace" in
+        3) directory="$HOME/nixpkgs" ;;
+        *) directory="$HOME" ;;
+      esac
+
+      exec ${rawTerm} --directory "$directory" "$@"
+    '';
+  };
+  term = "${workspaceTerm}/bin/kitty-for-workspace";
   # we could go for xdg-terminal too
   # term = "${pkgs.wezterm}/bin/wezterm";
 
@@ -190,7 +211,7 @@ in
 
           # start a terminal
           "${mod}+Return" = "exec --no-startup-id ${term}";
-          "${mod}+Shift+Return" = ''exec --no-startup-id ${term} -d "$(${../../bin/kitty-get-cwd.sh})"'';
+          "${mod}+Shift+Return" = ''exec --no-startup-id ${rawTerm} -d "$(${../../bin/kitty-get-cwd.sh})"'';
 
           # Text to speech
           "Ctrl+f1" = "record-myself";

@@ -653,7 +653,7 @@ in
         let
           # capable to display 2 subtitles at same time
           # like mpv but with a lsit of subtitles
-          memento-with-ocr = memento.override ({ withOcr = true; });
+          # memento-with-ocr = memento.override ({ withOcr = true; });
           # sudachi-rs # a japanese tokenizer (can have sudachidict builtins)
 
           sudachi-rs-full = pkgs.sudachi-rs.override ({
@@ -665,7 +665,7 @@ in
         [
           # hakuneko # X only
           clanki # SRS in cli
-          memento-with-ocr
+          # memento-with-ocr
           pkgs.clanki
 
           pkgs.python3Packages.videocr # to extract burn in subtitles
