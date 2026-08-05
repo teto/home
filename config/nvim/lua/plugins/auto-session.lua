@@ -1,5 +1,5 @@
 require('auto-session').setup({
-    log_level = 'debug', -- debug hijacks cmdline
+    -- log_level = 'debug', -- debug hijacks cmdline
     suppress_dirs = {
         '~/',
         '~/Projects',

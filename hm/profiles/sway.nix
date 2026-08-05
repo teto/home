@@ -25,6 +25,7 @@ let
 
       case "$workspace" in
         3) directory="$HOME/nixpkgs" ;;
+        9) directory="$HOME/home" ;;
         *) directory="$HOME" ;;
       esac
 
@@ -234,7 +235,7 @@ in
           # XF86Copy
 
           # ideally we shouldn't care if it's firefox or not ?
-          "${mad}+a" = "exec \"${dotfilesPath}/bin/firefox-focus-media\"";
+          "${mad}+a" = ''exec "${dotfilesPath}/bin/focus-firefox-media"'';
 
           # locker
           # "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
