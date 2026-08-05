@@ -30,8 +30,8 @@
       keep-derivations = true; # Idem
       keep-failed = true;
 
-      # experimental-features = nix-command flakes auto-allocate-uids
-      extra-experimental-features = "auto-allocate-uids nix-command flakes cgroups";
+      # add pipe-operators ?
+      experimental-features = "auto-allocate-uids nix-command flakes cgroups";
 
       substituters = [
       ];

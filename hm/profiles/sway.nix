@@ -236,6 +236,8 @@ in
 
           # ideally we shouldn't care if it's firefox or not ?
           "${mad}+a" = ''exec "${dotfilesPath}/bin/focus-firefox-media"'';
+          # TODO copy result and send notif
+          "${mad}+c" = ''exec "${dotfilesPath}/bin/ocr-jap"'';
 
           # locker
           # "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";

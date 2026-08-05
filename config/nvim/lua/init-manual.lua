@@ -260,9 +260,6 @@ vim.opt.rtp:prepend(pluginDir .. '/avante.nvim')
 vim.opt.rtp:prepend(pluginDir .. '/rocks-git.nvim')
 vim.opt.rtp:prepend(pluginDir .. '/auto-session')
 
--- needed until a better fix
-require('rocks-config.internal').setup()
-
 ---TODO pass a list of generated nix plugins ?
 ---or custom for now
 ---@param all_plugins? table<rock_name, RockSpec>
@@ -1232,6 +1229,9 @@ vim.api.nvim_create_autocmd({ 'TextYankPost' }, {
         vim.hl.hl_op({ higroup = 'IncSearch', timeout = 1000 })
     end,
 })
+
+-- needed until a better fix
+require('rocks-config.internal').setup()
 
 -- prints --embed which is not listed
 -- vim.print(vim.v.argv)
