@@ -664,9 +664,10 @@ in
         in
         [
           # hakuneko # X only
+          anki-miner
           clanki # SRS in cli
           # memento-with-ocr
-          pkgs.clanki
+          # pkgs.clanki
 
           pkgs.python3Packages.videocr # to extract burn in subtitles
 
