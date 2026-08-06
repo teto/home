@@ -314,9 +314,9 @@ in
         # khard # see khal.nix instead ?
         # libsecret  # to consult
         # newsboat #
-        bmm # bookmark manager
+        # bmm # bookmark manager
         carl # cargo cal
-        python3Packages.subliminal # to download subtitles
+        # python3Packages.subliminal # to download subtitles
         immich-cli
         mujmap-unstable # to sync notmuch tags across jmap
         # (lib.ignoreBroken oculante) # image viewer
@@ -336,9 +336,6 @@ in
       home.packages = with pkgs; [
         vlc
         # pinta # photo editing
-
-        # leafnode dovecot22 dovecot_pigeonhole fetchmail procmail
-        # mairix mutt msmtp lbdb contacts spamassassin
         # element-desktop # TODO this should go into nix profile install
         popcorntime
 

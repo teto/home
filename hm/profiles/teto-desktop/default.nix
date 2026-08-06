@@ -86,12 +86,6 @@ in
   ];
 
   # TODO restore this
-  # # generate an addressbook that can be used later
-  # home.file."bin-nix/generate-addressbook".text = ''
-  #   #!/bin/sh
-  #   ${pkgs.notmuch}/bin/notmuch address --format=json --output=recipients  date:3Y.. > ${mailLib.addressBookFilename}
-  # '';
-
   # to avoid cluttering $HOME
   # home.preferXdgDirectories = true;
 

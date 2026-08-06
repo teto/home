@@ -19,6 +19,15 @@
   # You can still refer to its generated content via:
   configFile."vicinae/generated.json".source = config.xdg.configFile."vicinae/settings.json".source;
 
+  configFile."just/justfile.generated".text = ''
+    # WIP
+  '';
+  # # generate an addressbook that can be used later
+  # home.file."bin-nix/generate-addressbook".text = ''
+  #   #!/bin/sh
+  #   ${pkgs.notmuch}/bin/notmuch address --format=json --output=recipients  date:3Y.. > ${mailLib.addressBookFilename}
+  # '';
+
   configFile."mpd/mpd.conf" = {
     # until it gets merged
     enable = config.services.mpd ? generatedConfig;
