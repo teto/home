@@ -1,13 +1,9 @@
+{ pkgs, ... }:
 {
-  pkgs,
-  ...
-}:
-{
-
-  programs.vscode.enable = false;
-  programs.vscode = {
+  enable = false;
+  profiles = {
     # https://marketplace.visualstudio.com/items?itemName=rheller.alive
-    profiles.default.extensions = with pkgs.vscode-extensions; [
+    default.extensions = with pkgs.vscode-extensions; [
       # asvetliakov.vscode-neovim # only in my fork
       # todo replace with pylance/pyright
       # ms-kubernetes-tools.vscode-kubernetes-tools
@@ -21,4 +17,5 @@
     #   "[nix]"."editor.tabSize" = 2;
     # };
   };
+
 }

@@ -1,7 +1,10 @@
 { pkgs }:
-# let
-#   install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-# in
+let
+  #   install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+
+  nixFlakeIcon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+
+in
 {
   # copy/pasted from
   # https://gitlab.com/rycee/nur-expressions/-/blob/master/pkgs/firefox-addons/default.nix?ref_type=heads
@@ -221,6 +224,7 @@
     };
     "NixOS Wiki" = {
       urls = [ { template = "https://nixos.wiki/index.php?search={searchTerms}"; } ];
+      # doesnt work
       icon = "https://nixos.wiki/favicon.png";
       updateInterval = 24 * 60 * 60 * 1000; # every day
       definedAliases = [ "@nw" ];
@@ -257,6 +261,7 @@
           ];
         }
       ];
+      icon = nixFlakeIcon;
       definedAliases = [
         "@pr-nixpkgs"
       ];

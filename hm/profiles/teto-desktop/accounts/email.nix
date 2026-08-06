@@ -16,28 +16,7 @@ let
 
   defaultSendMailCommand = "${pkgs.msmtp}/bin/msmtpq --debug --read-envelope-from --read-recipients";
 
-  # mbsyncConfig = {
-  #   enable = true;
-  #   extraConfig.channel = {
-  #     # unlimited
-  #     # when setting MaxMessages, set ExpireUnread
-  #     MaxMessages = 20000;
-  #     # size[k|m][b]
-  #     MaxSize = "1m";
-  #     CopyArrivalDate = "yes"; # Keeps the time stamp based message sorting intact.
-  #   };
-  #   create = "maildir"; # create missing mailboxes
-  #   expunge = "both";
-  # };
-
   accountExtra = {
-    # set new_mail_command = ""
-    # onNewMailCommand = mkOption {
-    #   type = types.nullOr types.str;
-    #   description = ''
-    #     <command>msmtpq --read-envelope-from --read-recipients</command>.
-    #   '';
-    # };
     alot = {
       # TODO pass mon fichier a moi
       contactCompletion = {
@@ -54,18 +33,6 @@ let
     };
 
   };
-
-  # problem is I don't get the error/can't interrupt => TODO use another one
-  # mbsyncWrapper = pkgs.writeShellScriptBin "mbsync-wrapper" ''
-  #   ${pkgs.isync}/bin/mbsync $@
-  #   notmuch new
-  # '';
-
-  # my_tls = {
-  #   enable = true;
-  #   # certificatesFile = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
-  #   certificatesFile = "/etc/ssl/certs/ca-certificates.crt";
-  # };
 
   gpgModule = {
     key = "64BB678705EF85ABF7345F69BD024BD9C261596D";
@@ -103,7 +70,18 @@ let
       # ""jmap
       mailboxAliases = {
         "INBOX" = {
-          query = "tag:inbox and not tag:killed";
+          # limit in time
+          query = "tag:inbox and not tag:killed and date:1y..";
+          subscribe = true;
+        };
+        "Drafts" = {
+          query = "tag:draft";
+          subscribe = true;
+        };
+        "Sent" = {
+          # query="from:username@server.tld from:username2@server.tld";
+          # include variations later ?
+          query = "from:${secrets.accounts.mail.fastmail_perso.email}";
           subscribe = true;
         };
       };
@@ -116,28 +94,19 @@ let
         # must hint at folder with .notmuch DB
         root_mailbox = config.accounts.email.maildirBasePath;
         listing.index_style = "compact";
-        # goes into "mailboxes"
-        #   # "INBOX" = {  query="tag:inbox and not tag:killed", subscribe = true }
 
-        # "Drafts" = {  query="tag:draft", subscribe = true }
-        # "Sent" = {  query="from:username@server.tld from:username2@server.tld", subscribe = true }
-        # "INBOX" = { index_style = "plain" }
-        # "INBOX/Lists/devlist" = { autoload = false, pager = { filter = "pygmentize -l diff -f 256"} }
-        # mailboxAliases = {
-        #   "INBOX" = {  query="tag:inbox and not tag:killed"; subscribe = true; };
-        # };
+        notmuch_address_book_query = "--output=recipients --deduplicate=address date:6M..";
+        # manual_refresh = false # defaults to false
+        # TODO could be generated
+        refresh_command = "systemctl start mujmap-fastmail";
+        # extra_identities  =
+
         # server_password_command = getPasswordCommand "perso/fastmail_mc_jmap";
         # server_username = null;
         # server_url = null;
         # server_password_command = null;
       };
     };
-
-    # mbsync = mbsyncConfig // {
-    #   enable = false; # mujmap is better at it
-    #   remove = "both";
-    #   # sync = true;
-    # };
 
     # folders.sent = "[Gmail]/Sent Mail";
 

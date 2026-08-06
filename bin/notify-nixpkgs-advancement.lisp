@@ -3,7 +3,7 @@
 
 (defpackage #:foo
   (:use #:cl)
-  (:export #:toplevel #:greet #:main))
+  (:export #:toplevel #:greet #:main #:compare-stdout ))
 
 (in-package #:foo)
 
@@ -20,6 +20,12 @@
     (format t "Branch:  ~a~%" branch)
     (format t "Files:   ~s~%" files)))
 
+; b7c2ada94fe99c15b0dbcf4d11fd7850b957a436 refs/heads/nixos-unstable
+(defun compare-stdout (stdout)
+  (let (first (uiop:split-string stdout :separator "	"))
+  (format t "stdout: ~a~% vs ~a" first stdout)))
+
+
 (defun start-check (command)
   (let* ((branch (clingon:getopt command :branch))
          (reference (format nil "refs/heads/~a" branch)))
@@ -31,11 +37,11 @@
          :output :string
          :error-output :string
          :ignore-error-status t)
-      (format t "stdout: ~a~%" stdout)
+        (compare-stdout stdout)
       (unless (uiop:emptyp stderr)
         (format *error-output* "stderr: ~a~%" stderr))
       (unless (zerop exit-code)
-        (error "git ls-remote failed with status ~d" exit-code)))))
+        (error "failed to fetch latest branch revision: git ls-remote exited with ~d" exit-code)))))
 
 ;; Clingon example: https://github.com/dnaeon/clingon
 (defun make-app ()
