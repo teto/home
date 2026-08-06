@@ -8,6 +8,6 @@
 {
   enable = true;
   on-branch-advance-cmd = lib.optionalDrvAttr withSecrets (
-    lib.nixpkgsMonitorEmailNotifier secrets.users.teto.email
+    lib.nixpkgsMonitorEmailNotifier secrets.users.teto.email secrets.users.teto.email
   );
 }

@@ -45,14 +45,20 @@ in
   home.stateVersion = "26.05";
 
   # move to teto
-  services.nixpkgs-monitor = {
-    enable = true;
-    # TODO send a mail
-    on-branch-advance-cmd = lib.optionalDrvAttr withSecrets (
-      lib.nixpkgsMonitorEmailNotifier secrets.users.teto.email
-    );
-    monitorCommand = "${lib.getExe pkgs.git-branch-monitor}";
-  };
+  services.nixpkgs-monitor =
+    let
+      parts = lib.splitString "@" secrets.users.teto.email;
+      user = builtins.elemAt parts 0;
+      domain = builtins.elemAt parts 1;
+    in
+    {
+      enable = true;
+      # TODO send a mail
+      on-branch-advance-cmd = lib.optionalDrvAttr withSecrets (
+        lib.nixpkgsMonitorEmailNotifier "${user}+neotokyo@${domain}" secrets.users.teto.email
+      );
+      monitorCommand = "${lib.getExe pkgs.git-branch-monitor}";
+    };
 
   # only on login shell
   # initExtra => interactive shell

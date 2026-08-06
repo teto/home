@@ -5,6 +5,7 @@
 }:
 
 meli.overrideAttrs (old: rec {
+  pname = old.pname + "-tetos";
   src = flakeSelf.inputs.meli-src;
 
   cargoBuildFlags = (old.cargoBuildFlags or [ ]) ++ [ "--features=debug-tracing" ];

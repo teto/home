@@ -86,7 +86,9 @@ in
               in
               cfg.monitorCommand
               # "${dotfilesPath}/bin/monitor-git-branch.fish -b nixos-unstable"
-              + lib.optionalString (cfg.on-branch-advance-cmd != null) " --command ${cfg.on-branch-advance-cmd}";
+              + lib.optionalString (
+                cfg.on-branch-advance-cmd != null
+              ) " --command '${cfg.on-branch-advance-cmd}'";
           };
         };
 

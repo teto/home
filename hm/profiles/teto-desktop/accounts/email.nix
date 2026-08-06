@@ -116,7 +116,16 @@ let
         # must hint at folder with .notmuch DB
         root_mailbox = config.accounts.email.maildirBasePath;
         listing.index_style = "compact";
+        # goes into "mailboxes"
+        #   # "INBOX" = {  query="tag:inbox and not tag:killed", subscribe = true }
 
+        # "Drafts" = {  query="tag:draft", subscribe = true }
+        # "Sent" = {  query="from:username@server.tld from:username2@server.tld", subscribe = true }
+        # "INBOX" = { index_style = "plain" }
+        # "INBOX/Lists/devlist" = { autoload = false, pager = { filter = "pygmentize -l diff -f 256"} }
+        # mailboxAliases = {
+        #   "INBOX" = {  query="tag:inbox and not tag:killed"; subscribe = true; };
+        # };
         # server_password_command = getPasswordCommand "perso/fastmail_mc_jmap";
         # server_username = null;
         # server_url = null;

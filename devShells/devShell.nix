@@ -11,6 +11,7 @@ let
       # https://alexandria.common-lisp.dev/draft/alexandria.html
       alexandria
       adopt # for parsers
+      clingon # cli parser
       linedit
     ]
   );
@@ -46,7 +47,7 @@ pkgs.mkShell {
       ssh-to-age
 
       # to generate certificates
-      step-cli
+      step-cli # 'step' command
       step-ca
 
       self.inputs.nixos-anywhere.packages.${stdenv.hostPlatform.system}.nixos-anywhere
@@ -62,6 +63,9 @@ pkgs.mkShell {
       pam_u2f # pamu2fcfg > ~/.config/Yubico/u2f_keys
 
       magic-wormhole-rs # to transfer secrets
+
+      rlwrap # poor solution to wrap sbcl
+
       wormhole-rs # "wormhole-rs send"
       wireguard-tools # for 'wg'
 
@@ -82,7 +86,9 @@ pkgs.mkShell {
             # TODO generate the mail headers
             cat contrib/2025-05-04-21.38.53.mail | msmtp --read-envelope-from --read-recipients -afastmail ${secrets.users.teto.email}
       '';
-
+      # in ~/.inputrc
+      # "\C-xe":   rlwrap-call-editor            # CTRL-x e
+      #  (asdf:load-system 'clingon)
     in
     ''
       export SOPS_AGE_KEY_FILE=$PWD/secrets/age.key
@@ -93,5 +99,10 @@ pkgs.mkShell {
 
       ln -sf ${generatedJustfile} justfile.generated
       echo "Run just ..."
+      echo "To work with sbcl:"
+      echo '* (load (sb-ext:posix-getenv "ASDF"))'
+      echo "* (asdf:load-system 'alexandria)"
+
+      alias lisp="rlwrap --remember --complete-filenames sbcl"
     '';
 }
