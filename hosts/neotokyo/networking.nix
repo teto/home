@@ -22,6 +22,8 @@ lib.optionalAttrs (lib.debug.traceValFn (a: "SECRETS ? ${toString a}") withSecre
 
   # without these overrides, seems like nginx selects wrong server
   extraHosts = ''
+    10.100.0.1    jellyfin.vps
+    10.100.0.1    immich.vps
     10.100.0.1    nextcloud.vps
   '';
 

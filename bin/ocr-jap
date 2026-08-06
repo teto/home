@@ -1,2 +1,3 @@
  #!/bin/sh
- tesseract /home/teto/shuffleisland.png stdout -l jpn --psm 7
+ flameshot gui --raw | magick -resize 400% png:- png:- | tesseract -l jpn stdin stdout | wl-copy
+ # tesseract /home/teto/shuffleisland.png stdout -l jpn --psm 7

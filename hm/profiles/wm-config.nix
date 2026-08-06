@@ -237,7 +237,6 @@ in
     # "${mad}+c" = "exec ${pkgs.rofi-calc}/bin/rofi-calc";
     "${mad}+f" = ''exec "${pkgs.rofi}/bin/rofi -modi filebrowser -show filebrowser"'';
 
-
     # "${mad}+c" = ''exec "${pkgs.rofi}/bin/rofi -modi filebrowser -show filebrowser"'';
 
     # "${mad}+Tab" = "exec \"${pkgs.rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";

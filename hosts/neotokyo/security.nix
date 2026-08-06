@@ -4,7 +4,7 @@
   secrets,
   lib,
   withSecrets,
-  pkgs, 
+  pkgs,
   ...
 }:
 let

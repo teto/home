@@ -20,11 +20,9 @@
           options = [ "NOPASSWD" ];
         }
 
-
       ];
     }
   ];
-
 
   # don't forget to run ulimit -c unlimited to get the actual coredump
   # check thos comment to setup user ulimits https://github.com/NixOS/nixpkgs/issues/159964#issuecomment-1252682060
