@@ -1,8 +1,9 @@
-{ config,
-secrets, 
-lib,
-withSecrets,
-...
+{
+  config,
+  secrets,
+  lib,
+  withSecrets,
+  ...
 }:
 {
   networking = {
@@ -15,17 +16,14 @@ withSecrets,
     usePredictableInterfaceNames = true;
     # networking.firewall.interfaces.enp1s0.allowedTCPPorts = [ 4949 ];
 
-
     wireguard.interfaces = {
-        wg0 = lib.mkWireguardPeer {
+      wg0 = lib.mkWireguardPeer {
 
         id = 4;
         # TODO upload one
         privateKeyFile = "/home/teto/router-wg.key";
       };
     };
-
-
 
     firewall = {
       enable = false;

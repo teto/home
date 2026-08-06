@@ -3,7 +3,7 @@
   pkgs,
   lib,
   withSecrets,
-  dotfilesPath,
+  # dotfilesPath,
   secrets,
   ...
 }:
@@ -101,11 +101,22 @@ let
     meli = {
       enable = true;
       # ""jmap
+      mailboxAliases = {
+        "INBOX" = {
+          query = "tag:inbox and not tag:killed";
+          subscribe = true;
+        };
+      };
+      # "INBOX" = {  query="tag:inbox and not tag:killed", subscribe = true }
+      # "Drafts" = {  query="tag:draft", subscribe = true }
+      # "Sent" = {  query="from:username@server.tld from:username2@server.tld", subscribe = true }
+
       settings = {
         format = "notmuch"; # HM generates "jmap" by default
         # must hint at folder with .notmuch DB
         root_mailbox = config.accounts.email.maildirBasePath;
         listing.index_style = "compact";
+
         # server_password_command = getPasswordCommand "perso/fastmail_mc_jmap";
         # server_username = null;
         # server_url = null;

@@ -38,6 +38,7 @@ pkgs.mkShell {
       nix-output-monitor
       # nodejs # what for ?
       # termscp-matt
+      openssl_3 # to inspect certificates
       treefmt-home # use formatter instead ?
       ripgrep
       rustic # testing against restic
