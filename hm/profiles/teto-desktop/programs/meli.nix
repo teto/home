@@ -11,7 +11,7 @@
 
   # there is meli-teto as well
   # package = pkgs.meli-git;
-  package = pkgs.meli;
+  package = pkgs.meli-teto;
 
   includes = [
     "manual.toml"

@@ -120,6 +120,7 @@ auto-session = "2.5.1"
 "vim-startuptime"= "4.6.1"
 "grug-far.nvim"= "1.6.76"
 "yazi.nvim"= "13.9.0"
+"quicker.nvim" = "1.5.1"
 
 [plugins."rikai.nvim"]
 dev = true
@@ -199,6 +200,10 @@ rev = "v0.8.0"
 [plugins."diffview-plus.nvim"]
 git = "dlyongemallo/diffview-plus.nvim"
 rev = "v0.36"
+
+[plugins.vlime]
+git = "vlime/vlime"
+rev = "v0.4.0"
 
 # [plugins."git-rebase-auto-diff.nvim"]
 # git = "yutkat/git-rebase-auto-diff.nvim"

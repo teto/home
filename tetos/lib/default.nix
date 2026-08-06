@@ -39,7 +39,10 @@ in
 
 
 
-  nixpkgsMonitorEmailNotifier = destinationEmail: pkgs.writeShellScript "notify-advancement" ''
+    nixpkgsMonitorEmailNotifier = 
+    fromEmail:
+    destinationEmail:
+    pkgs.writeShellScript "notify-advancement" ''
 
     branch_name="$1"
     old_revision="$2"
@@ -50,7 +53,7 @@ in
 
     # strip leading spaces else msmtp will complain
     message=$(cat <<EOF
-    From: ${destinationEmail}
+    From: ${fromEmail}
     To: ${destinationEmail}
     Subject: $title
 

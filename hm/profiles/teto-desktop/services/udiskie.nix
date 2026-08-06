@@ -2,7 +2,7 @@
   # services.udiskie = {
 
   # tray is enabled by default
-  enable = true;
+  enable = false; # bug
   notify = false;
   automount = false;
   # };
