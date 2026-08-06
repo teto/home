@@ -117,13 +117,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos-wizard = {
-      url = "github:km-clay/nixos-wizard";
-      # inputs.nixpkgs.follows = "nixpkgs";
+    authentik-nix.url = "github:nix-community/authentik-nix";
+    authentik-nix.inputs.nixpkgs.follows = "nixpkgs";
 
-    };
+    # nixos-wizard = {
+    #   url = "github:km-clay/nixos-wizard";
+    #   # inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     nix-cache-beacon.url = "github:adisbladis/nix-cache-beacon";
+    nix-cache-beacon.inputs.nixpkgs.follows = "nixpkgs";
 
     # lux = {
     #   url = "github:nvim-neorocks/lux";
