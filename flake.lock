@@ -1440,17 +1440,18 @@
     "meli-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1786002872,
-        "narHash": "sha256-IQI0zAXSIaCbfVt7kFfUlUVTIXmKV8xJdHNoyRrdabY=",
-        "ref": "refs/heads/master",
-        "rev": "aa1aa4ef247aa1cbb6c303e6e8abd194825ccb0f",
-        "revCount": 3093,
-        "type": "git",
-        "url": "https://git.meli-email.org/meli/meli.git"
+        "lastModified": 1786138262,
+        "narHash": "sha256-6pZfVKifozuTReUxkDGN28yWjEbE5q2dNJqxF52tofU=",
+        "owner": "teto",
+        "repo": "meli",
+        "rev": "1016b8c832b317b3dca398934a7df0aaf88d7844",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "https://git.meli-email.org/meli/meli.git"
+        "owner": "teto",
+        "ref": "teto/add-completion",
+        "repo": "meli",
+        "type": "github"
       }
     },
     "memento-dev": {

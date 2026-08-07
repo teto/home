@@ -157,7 +157,7 @@
     };
   };
 
-  # needed by zigbee2mqtt
+  # needed by zigbee2mqtt, it's some kind of queue
   services.mosquitto = {
     enable = true;
     listeners = [

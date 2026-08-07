@@ -63,27 +63,8 @@ in
     };
   };
 
-  # TODO move ?
-  services.nix-cache-beacon = {
-    # Announce cache to the local network
-    # advert = {
-    #   enable = true;
-    #   port = 5000;
-    #   # port = config.services.harmonia-dev.settings.port; # Harmonia port
-    # };
+  fonts.enableDefaultPackages = true;
 
-    # Enable local binary cache using discovered caches on the local network
-    cache = {
-      enable = true;
-      addSubstituter = true;
-      timeout = 3.0; # seconds
-
-      # listenAddresses = lib.mkOption {
-      #   type = lib.types.listOf lib.types.str;
-      #   default = [ "[::]:5028" ];
-      verbose = true;
-    };
-  };
 
   # Make Nix aware of our local network cache
   # TODO depend on nix-cache-beacon port
@@ -96,19 +77,6 @@ in
     # font = "ter-v32n"; # Terminus font, larger size
     packages = [ pkgs.terminus_font ];
     useXkbConfig = true;
-  };
-
-  i18n.glibcLocales = pkgs.glibcLocales.override {
-    allLocales = true;
-    locales = [
-      "fr_FR.UTF-8/UTF-8"
-      "en_US.UTF-8/UTF-8"
-      "ja_JP.utf8"
-      # ja_JP
-      "ja_JP.eucjp"
-      # ja_JP.ujis
-      # ja_JP.utf8
-    ];
   };
 
   # #! /bin/sh
@@ -177,12 +145,6 @@ in
     pkgs.noto-fonts-cjk-sans
   ];
 
-  # networking.firewall.checkReversePath = false; # for nixops
-  networking.firewall.allowedUDPPorts = [
-    5353 # mdns via resolved or avahi
-  ];
-  # networking.firewall.allowedTCPPorts = [ 631 ];
-
   hardware = {
     enableAllFirmware = true;
     enableRedistributableFirmware = true;
@@ -195,7 +157,7 @@ in
   # inspired by https://gist.github.com/539h/8144b5cabf97b5b206da
   # todo find a good japanese font
   fonts = {
-    fontDir.enable = true; # ?
+    fontDir.enable = true;
     packages = with pkgs; [
       ubuntu-classic
       inconsolata # monospace
@@ -219,31 +181,21 @@ in
       allowBitmaps = false; # ugly
       includeUserConf = true;
       cache32Bit = false; # defualt false
+
       defaultFonts = {
 
         monospace = [ "Noto Sans Mono CJK JP" ];
-
-        sansSerif = [ "Noto Sans CJK JP" ];
+        sansSerif = [ "Fira code" ];
 
         # monospace = [ "" ];
-        # serif = [ "" ];
+        # sansSerif
+        # Une police serif est une police avec de petits traits décoratifs au bout des lettres, appelés empattements
+        serif = [ "" ];
         # sansSerif =
+        emoji = [ ];
       };
+      # confPackages = [];
     };
-  };
-
-  nix = {
-
-    # This priority propagates to build processes. 0 is the default Unix process I/O priority, 7 is the lowest
-    # daemonIONiceLevel = 3;
-    # prepending with 'flake:' makes HM copy a lot more thna just 'path:'
-    nixPath = [
-      "nixpkgs=/home/teto/nixpkgs"
-    ];
-
-    # either use --option extra-binary-caches http://hydra.nixos.org/
-    # handy to hack/fix around
-    # readOnlyStore = false;
   };
 
   # can be configured through pam
@@ -260,24 +212,9 @@ in
   ];
   boot.kernel.sysctl."kernel.dmesg_restrict" = false;
 
-  # then coredumpctl debug will launch gdb !
-  # boot.kernel.sysctl."kernel.core_pattern" = "core"; to disable.
-  # security.pam.loginLimits
-  systemd.coredump.enable = false;
-
   # boot.loader.timeout = lib.mkForce 5;
   system.nixos.distroName = "Tetonos";
 
-  # see
-  #JournalSizeMax=767M
-  #MaxUse=
-  #KeepFree=
-  systemd.coredump.settings.Coredump = ''
-    #Storage=external
-    #Compress=yes
-    ProcessSizeMax=5G
-    ExternalSizeMax=10G
-  '';
 
   # systemd.services."systemd-coredump".serviceConfig.ProtectHome = false;
   # systemd.services."systemd-coredump@".serviceConfig.ProtectHome = false;

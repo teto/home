@@ -248,6 +248,30 @@ vim.g.rocks_nvim = {
             'lhaskell',
         },
     },
+    --- see https://github.com/lumen-oss/rocks.nvim/issues/720
+    ---@type fun():table<rock_name, RockSpec>
+    --   get_user_rocks = function()
+    --       local config = require("rocks.config.internal")
+    --       ---@type RocksToml
+    --       local rocks_toml = config.get_rocks_toml()
+    --
+    --       ---@type table<rock_name, RockSpec>
+    --       local user_rocks =
+    --           vim.tbl_deep_extend("force", vim.empty_dict(), rocks_toml.rocks or {}, rocks_toml.plugins or {})
+    --
+    --       --- Extend user_rocks with your Nix plugins ---
+    --       -- {version?}       (string)    The rock version
+    --       -- {opt?}           (boolean)   Set to `true` to prevent rocks from being loaded eagerly
+    --       -- {pin?}           (boolean)   Pinned rocks will not be updated
+    --       -- {install_args?}  (string[])  Additional args to pass to `luarocks install`
+    --       -- {string}         (unknown)   Fields that can be added by external modules
+    --
+    -- user_rocks["rocks-git.nvim"] = {
+    -- 	name = "rocks-git.nvim",
+    -- 	version = "test" , opt = false, pin = false }
+    --
+    --       return config.apply_rock_spec_modifiers(user_rocks)
+    --   end,
 }
 
 local pluginDir = os.getenv('HOME') .. '/plugins'
@@ -264,6 +288,7 @@ vim.opt.rtp:prepend(pluginDir .. '/auto-session')
 ---or custom for now
 ---@param all_plugins? table<rock_name, RockSpec>
 -- require('rocks-config.internal').setup()
+-- require("rocks-lazy.internal").load()
 
 vim.g.loaded_matchit = 1
 
@@ -1231,7 +1256,7 @@ vim.api.nvim_create_autocmd({ 'TextYankPost' }, {
 })
 
 -- needed until a better fix
-require('rocks-config.internal').setup()
+-- require('rocks-config.internal').setup()
 
 -- prints --embed which is not listed
 -- vim.print(vim.v.argv)

@@ -34,29 +34,56 @@
     # check depending on services.restic. instead
     # lib.optionalAttrs config.services.postgresqlBackup.enable
     {
-      "restic/backblaze_backup_immich_credentials" = {
-        mode = "440";
-        # path = "%r/github_token";
-        owner = config.users.users.teto.name;
-        group = config.users.users.teto.group;
-      };
-
       "nix-signing-key" = {
         mode = "440";
-        # path = "%r/github_token";
         owner = config.users.users.root.name;
         group = config.users.users.root.group;
       };
 
-      "restic/endpoint" = {
+      "restic/immich/backblaze_credentials" = {
         mode = "440";
         # path = "%r/github_token";
         owner = config.users.users.teto.name;
         group = config.users.users.teto.group;
       };
 
-      "restic/backup_immich_repo_password" = {
+      "restic/immich/endpoint" = {
         mode = "440";
+        # path = "%r/github_token";
+        owner = config.users.users.teto.name;
+        group = config.users.users.teto.group;
+      };
+
+      "restic/immich/repository" = {
+        mode = "440";
+        # path = "%r/restic-repository-immich";
+        owner = config.users.users.teto.name;
+        group = config.users.users.teto.group;
+      };
+
+      "restic/immich/repo_password" = {
+        mode = "440";
+        owner = config.users.users.teto.name;
+        group = config.users.users.teto.group;
+      };
+
+      "restic/nextcloud/repository" = {
+        mode = "440";
+        # path = "%r/restic-repository-nextcloud";
+        owner = config.users.users.teto.name;
+        group = config.users.users.teto.group;
+      };
+
+      "restic/nextcloud/backblaze_credentials" = {
+        mode = "440";
+        # path = "%r/restic-repository-nextcloud";
+        owner = config.users.users.teto.name;
+        group = config.users.users.teto.group;
+      };
+
+      "restic/nextcloud/password" = {
+        mode = "440";
+        # path = "%r/restic-repository-nextcloud";
         owner = config.users.users.teto.name;
         group = config.users.users.teto.group;
       };
@@ -98,7 +125,7 @@
 
     }
     // lib.optionalAttrs (config.services.buildbot-master.enable || config.services.nixbot.enable) {
-      "buildbot-client-secret" = {
+      "nixbot-client-secret" = {
         mode = "440";
         # owner = config.users.users.buildbot.name;
         owner = config.users.users.nixbot.name;

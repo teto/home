@@ -18,7 +18,12 @@
 [log]
 # TRACE
 # careful
-maximum_level = "WARN"
+maximum_level = "TRACE"
+
+# mailboxes
+# "Archives" = {  query="tag:archived", subscribe = true }
+# "Archives/2019" = {  query="tag:archived date:01-2019..12-2019", parent="Archives", subscribe = true }
+
 
 [terminal]
 use_color = true
@@ -27,7 +32,7 @@ window_title = "My emails"
 use_mouse = true
 # progress_spinner_sequence = 0
 # progress_spinner_sequence = { frames = [] }
-#theme = "dark" # or "light"
+theme = "nord" # or "light"
 
 [notifications]
 # with title as 1st arg and body as 2nd
@@ -52,15 +57,20 @@ html_filter = "w3m -I utf-8 -T text/html"
 [shortcuts.general]
 next_tab = ']'
 quit = 'Q'
+commands = [
+ { command = [ "tag remove trash"  ], shortcut = "D" },
+   { command = [ "tag add trash"  ], shortcut = "d"}
+]
+
 
 
 # listing-compact
-[shortcuts.listing]
-# scroll_up = "up"
-# scroll_down = "down"
-focus_left = "left"
-focus_right = "right"
-exit_entry = "q"
+# [shortcuts.listing]
+# # scroll_up = "up"
+# # scroll_down = "down"
+# focus_left = "left"
+# focus_right = "right"
+# exit_entry = "q"
 
 # [shortcuts.composing]
 # edit_mail = 'e'

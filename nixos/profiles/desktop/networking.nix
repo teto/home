@@ -20,4 +20,12 @@
     10.100.0.1   nextcloud.vpn
   '';
 
+
+  # networking.firewall.checkReversePath = false; # for nixops
+  firewall.allowedUDPPorts = [
+    5353 # mdns via resolved or avahi
+  ];
+  # firewall.allowedTCPPorts = [ 631 ];
+
+
 }

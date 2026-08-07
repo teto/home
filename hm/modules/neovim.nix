@@ -288,10 +288,12 @@ in
       programs.neovim.plugins = [
         pkgs.vimPlugins.lz-n
         pkgs.vimPlugins.rocks-nvim
-        pkgs.vimPlugins.rocks-lazy-nvim
-        pkgs.vimPlugins.rocks-config-nvim
-        pkgs.vimPlugins.rocks-dev-nvim
-        pkgs.vimPlugins.rocks-git-nvim # has no vimPlugins equivalent !
+
+        # foireux
+        # pkgs.vimPlugins.rocks-lazy-nvim
+        # pkgs.vimPlugins.rocks-config-nvim
+        # pkgs.vimPlugins.rocks-dev-nvim
+        # pkgs.vimPlugins.rocks-git-nvim # has no vimPlugins equivalent !
       ];
 
       # TODO add  vim.g.rocks

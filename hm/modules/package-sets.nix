@@ -632,7 +632,6 @@ in
         source-han-sans # sourceHanSansPackages.japanese
         fira-code-symbols # for ligatures
         iosevka
-
       ];
 
     })

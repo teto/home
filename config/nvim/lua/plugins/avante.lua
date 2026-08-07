@@ -9,9 +9,9 @@
 
 -- local provider = 'mistral'
 -- provider = 'claude'
-if vim.fn.hostname() == 'jedha' then
-    provider = 'llamacpp'
-end
+-- if vim.fn.hostname() == 'jedha' then
+--     provider = 'llamacpp'
+-- end
 
 -- overrule both
 -- provider = 'llamacpp'
@@ -310,7 +310,7 @@ jedha_default_model = 'qwen3.6-dense'
 local res = mk_llama_provider('jedha.local:8080', jedha_default_model, {
 
     -- check default prompt w/o
-    disable_tools = true,
+    disable_tools = false,
 })
 opts.providers['jedha'] = vim.tbl_extend('force', res, {})
 

@@ -64,7 +64,6 @@
     shell = "${pkgs.git}/bin/git-shell";
     openssh.authorizedKeys.keys = config.users.users.teto.openssh.authorizedKeys.keys ++ [
       # your ssh key here
-      # ../../perso/keys/id_rsa.pub
     ];
   };
 
