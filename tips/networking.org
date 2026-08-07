@@ -3,6 +3,11 @@
 Look for config in /etc/systemd/network/
 
 
+* mdns query with systemd
+
+resolvectl service _ssh._tcp local
+
+
 just `networkctl` will list 
 o
 

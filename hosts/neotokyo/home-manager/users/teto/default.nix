@@ -61,11 +61,7 @@ in
     };
 
   # only on login shell
-  # initExtra => interactive shell
   # profileExtra => login shell
-  # programs.bash.initExtra = ''
-  #   cat "${pkgs.writeText "welcome-message" banner}";
-  # '';
 
   # required for systemd to send emails
   programs.msmtp.enable = true;
@@ -82,7 +78,7 @@ in
     #       export GITHUB_TOKEN=$(cat ~/github-token)
     initExtra = ''
       cd nixpkgs
-      echo "exporting token..."
+      echo "exporting token..."deploy '.#neotokyo' -s --interactive-sudo=true -- --override-input nixpkgs /home/teto/nixpkgs
     '';
     profileExtra = ''
       cat "${pkgs.writeText "login-welcome" welcomeMessage}";

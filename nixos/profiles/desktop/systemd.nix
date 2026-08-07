@@ -1,5 +1,20 @@
-{ config, ... }:
+# { config, ... }:
 {
+  # then coredumpctl debug will launch gdb !
+  # boot.kernel.sysctl."kernel.core_pattern" = "core"; to disable.
+  # security.pam.loginLimits
+  coredump.enable = false;
+  # see
+  #JournalSizeMax=767M
+  #MaxUse=
+  #KeepFree=
+  coredump.settings.Coredump = ''
+    #Storage=external
+    #Compress=yes
+    ProcessSizeMax=5G
+    ExternalSizeMax=10G
+  '';
+
   # sleep.settings.Sleep = {
   #   HibernateDelaySec="30m";
   #   SuspendState="mem";

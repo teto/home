@@ -48,6 +48,7 @@ in
     ./hardware.nix
     ./networking.nix
     ./services/openssh.nix
+    # ./services/mqtt.nix
 
     # TODO replace with systemd mdns
     # flakeSelf.nixosProfiles.avahi
@@ -61,17 +62,15 @@ in
     # disabled for now to reduce memory print
     # flashrom # to be able to flash the bios see https://teklager.se/en/knowledge-base/apu-bios-upgrade/
     # dmidecode # to get version of the bios: dmidecode -t bios
+    btop
     iw
     iwd # contains iwmon
     # pkgs.wirelesstools # to get iwconfig
     # pkgs.tshark too heavy
-    # pkgs.wget
 
     # to wake up desktop
-    # pkgs.wakeonlan
     pkgs.ethtool
-    pkgs.just
-    pkgs.python3Packages.wakeonlan
+    pkgs.just # might be too muich
     pkgs.wolli
   ];
 

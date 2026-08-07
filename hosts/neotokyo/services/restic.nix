@@ -1,4 +1,4 @@
-{ config, secrets, ... }:
+{ config, ... }:
 {
   # if you want to get a notification
   # https://www.arthurkoziel.com/restic-backups-b2-nixos/
@@ -11,9 +11,9 @@
       ];
 
       # that's where our provider (backblaze) credentials go
-      environmentFile = config.sops.secrets."restic/backblaze_backup_immich_credentials".path;
+      environmentFile = config.sops.secrets."restic/immich/backblaze_credentials".path;
       # this is the restic password
-      passwordFile = config.sops.secrets."restic/backup_immich_repo_password".path;
+      passwordFile = config.sops.secrets."restic/immich/repo_password".path;
       # passwordFile = "/var/run/secrets/restic/backup_immich_repo_password";
       paths =
         let
@@ -32,32 +32,55 @@
           "${UPLOAD_LOCATION}/profile"
           "${UPLOAD_LOCATION}/upload"
         ];
-      # pruneOpts = [
-      #   "--keep-daily 7"
-      #   "--keep-weekly 4"
-      #   "--keep-monthly 2"
-      #   "--keep-yearly 0"
-      # ];
+
+      pruneOpts = [
+        # "--keep-daily 7"
+        # "--keep-weekly 4"
+        # "--keep-monthly 2"
+        "--keep-yearly 2"
+      ];
 
       # backupPrepareCommand = "${pkgs.restic}/bin/restic unlock";
+
+      # backupCleanupCommand
+      #    A script that must run after finishing the backup process.
+
+      # generate and add a script to the system path, that has the  same  environment  variables  set as the systemd service. This can be used to e.g.
+      # for instance 'restic-immich-db-to-backblaze'
+      createWrapper = true;
+      # create restic repo if it doesn't exist
+      initialize = true;
+      repositoryFile = config.sops.secrets."restic/immich/repository".path;
+
+      # repository = secrets.backblaze.immich-backup-bucket;
+
+      # dynamicFilesFrom
+      # exclude = [];
+
+      # will generate it with X-OnlyManualStart = true;
+      timerConfig = {
+        OnCalendar = "03:00";
+        RandomizedDelaySec = "5m";
+      };
+    };
+
+    nextcloud-to-backblaze = {
       createWrapper = true;
       initialize = true; # create restic repo if it doesn't exist
       # could we check the service at buildtime ?
-      repository = secrets.backblaze.immich-backup-bucket;
-
       # repositoryFile
-      # will generate it with X-OnlyManualStart = true;
+      repositoryFile = config.sops.secrets."restic/nextcloud/repository".path;
+
+      # s3:s3.us-east-005.backblazeb2.com/teto-vault
+      environmentFile = config.sops.secrets."restic/nextcloud/backblaze_credentials".path;
+
+      # this is the restic password
+      passwordFile = config.sops.secrets."restic/nextcloud/password".path;
+
       timerConfig = {
-        # daily
-        OnCalendar = "03:00";
+        OnCalendar = "01:00";
         RandomizedDelaySec = "5m";
-        # OnUnitActiveSec = "1d";
-
-        # Persistent = true;
-        # NB: the option Persistent=true triggers the service
-        # immediately if it missed the last start time
       };
-
     };
   };
 }

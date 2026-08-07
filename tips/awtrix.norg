@@ -1,0 +1,13 @@
+
+ssid: awtrix_XXX
+mdp: 12345678
+
+
+ après une tentative de connexion échouée (mauvais mot de passe ou routeur injoignable), l'appareil Awtrix arrête d'émettre son propre point d'accès de configuration awtrix_XXXXXX pour tenter d'économiser ses ressources ou bloquer une boucle de reconnexion.
+
+ Use reset if you forget password.
+
+ Once logged in 192.168.4.1
+
+Flows:
+- stopwatch https://flows.blueforcer.de/flow/WpHaPuZaAK3Z

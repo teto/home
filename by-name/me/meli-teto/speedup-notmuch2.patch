@@ -1,0 +1,58 @@
+diff --git a/melib/src/notmuch/mod.rs b/melib/src/notmuch/mod.rs
+index 0bedbdd6..97e59c5e 100644
+--- a/melib/src/notmuch/mod.rs
++++ b/melib/src/notmuch/mod.rs
+@@ -188,6 +188,27 @@ impl DbConnection {
+                 directory_current.as_mut().map(|d| d.mtime()).unwrap_or(0);
+             let mtime_snapshot: libc::time_t =
+                 directory_snapshot.as_mut().map(|d| d.mtime()).unwrap_or(0);
++
++            // Compare mtime_snapshot to mtime_current. If they are equivalent, terminate
++            // the algorithm at this point, (this directory has not been updated
++            // in the filesystem since the last database scan of PASS 2).
++            //
++            // If the directory's modification time in the filesystem is the same as what we
++            // recorded in the database the last time we scanned it, then we can skip the
++            // second pass entirely.
++            //
++            // We test for strict equality here to avoid a bug that can happen if the system
++            // clock jumps backward, (preventing new mail from being discovered
++            // until the clock catches up and the directory is modified again).
++
++            if directory_snapshot.is_some()
++                && directory_current.is_some()
++                && mtime_snapshot == mtime_current
++                && mtime_snapshot != 0
++            {
++                continue;
++            }
++
+             let (current_files, current_subdirs): (HashSet<CString>, HashSet<CString>) =
+                 if let Some(directory) = directory_current.as_mut() {
+                     assert_eq!(&directory.path, &path);
+@@ -217,25 +238,6 @@ impl DbConnection {
+                     (current_files, current_subdirs)
+                 };
+ 
+-            // Compare mtime_snapshot to mtime_current. If they are equivalent, terminate
+-            // the algorithm at this point, (this directory has not been updated
+-            // in the filesystem since the last database scan of PASS 2).
+-            //
+-            // If the directory's modification time in the filesystem is the same as what we
+-            // recorded in the database the last time we scanned it, then we can skip the
+-            // second pass entirely.
+-            //
+-            // We test for strict equality here to avoid a bug that can happen if the system
+-            // clock jumps backward, (preventing new mail from being discovered
+-            // until the clock catches up and the directory is modified again).
+-
+-            if directory_snapshot.is_some()
+-                && directory_current.is_some()
+-                && mtime_snapshot == mtime_current
+-                && mtime_snapshot != 0
+-            {
+-                continue;
+-            }
+             // Ask the snapshot database for files and directories within 'path'
+             // (snapshot_files and snapshot_subdirs)
+             let (snapshot_files, snapshot_subdirs): (HashSet<CString>, HashSet<CString>) =

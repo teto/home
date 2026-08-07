@@ -1,0 +1,41 @@
+diff --git i/melib/src/notmuch/mod.rs w/melib/src/notmuch/mod.rs
+index 0bedbdd6..a8fb87e7 100644
+--- i/melib/src/notmuch/mod.rs
++++ w/melib/src/notmuch/mod.rs
+@@ -881,27 +881,28 @@ impl MailBackend for NotmuchDb {
+         Ok(Box::pin(try_fn_stream(|emitter| async move {
+             // Move watcher to prevent it being Dropped.
+             let _watcher = watcher;
+-            // Set to non-zero value whenever a filesystem event is received, and poll more
+-            // frequently as long as it is non-zero. This allows us to be more sensitive
++            // Set to true whenever a filesystem event is received, and poll more
++            // frequently as long as it is true. This allows us to be more sensitive
+             // about updates whenever notmuch-new is more likely to have been
+             // called.
+-            let mut fs_event_counter: u32 = 10;
++            let mut fs_event_counter: bool = true;
+             loop {
+-                let sleep_fut = crate::utils::futures::sleep(if fs_event_counter > 0 {
++                let sleep_fut = crate::utils::futures::sleep(if fs_event_counter {
+                     std::time::Duration::from_secs(2)
+                 } else {
+-                    std::time::Duration::from_secs(30)
++                    std::time::Duration::from_secs(3 * 60)
+                 });
+-                //sleep_fut.await;
+                 match futures::future::select(rx.next(), std::pin::pin!(sleep_fut)).await {
+                     futures::future::Either::Left((None, _)) => {
+                         break;
+                     }
+                     futures::future::Either::Left((Some(ev), _)) => {
+-                        fs_event_counter = 10;
++                        fs_event_counter = true;
+                         ev?;
+                     }
+-                    futures::future::Either::Right((_, _)) => {}
++                    futures::future::Either::Right((_, _)) => {
++                        fs_event_counter = false;
++                    }
+                 }
+ 
+                 let events = {

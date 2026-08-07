@@ -9,6 +9,17 @@
 }:
 {
 
+    # This priority propagates to build processes. 0 is the default Unix process I/O priority, 7 is the lowest
+    # daemonIONiceLevel = 3;
+    # prepending with 'flake:' makes HM copy a lot more thna just 'path:'
+    nixPath = [
+      "nixpkgs=/home/teto/nixpkgs"
+    ];
+
+    # either use --option extra-binary-caches http://hydra.nixos.org/
+    # handy to hack/fix around
+    # readOnlyStore = false;
+
   # to benefit from https://github.com/NixOS/nix/pull/15449
   package = flakeSelf.inputs.nix.packages.${pkgs.stdenv.hostPlatform.system}.default;
 

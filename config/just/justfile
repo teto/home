@@ -17,6 +17,10 @@ import? '{{ config_directory() }}'
 default:
     just --choose
 
+# regenerate the font cache
+font-regen-cache:
+    fc-cache -fv
+
 # dump noctalia-shell settings
 noctalia-dump-settings:
     noctalia-shell ipc call state all | jq .settings

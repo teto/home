@@ -13,7 +13,8 @@
   acpi,
   brightnessctl,
   yad,
-  xorg,
+  xset,
+  xrandr,
 }:
 
 rustPlatform.buildRustPackage rec {
@@ -79,8 +80,8 @@ rustPlatform.buildRustPackage rec {
           acpi # acpi
           brightnessctl # optional: brightness control
           yad # dialog utility
-          xorg.xset # optional: display power management
-          xorg.xrandr # optional: display configuration
+          xset # optional: display power management
+          xrandr # optional: display configuration
         ]
       }
     )

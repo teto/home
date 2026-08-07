@@ -32,10 +32,10 @@ import = "lazy_specs/"
 # List of Neovim plugins to install alongside their versions.
 # If the plugin name contains a dot then you must add quotes to the key name!
 [plugins]
-# "rocks-git.nvim"= "2.5.10"
-# "rocks-config.nvim" = "3.2.0"
-# "rocks-dev.nvim" = "1.8.1"
-# "rocks-lazy.nvim" = "1.2.2"
+"rocks-git.nvim"= "2.5.10"
+"rocks-config.nvim" = "3.2.0"
+"rocks-dev.nvim" = "1.8.1"
+"rocks-lazy.nvim" = "1.2.2"
 
 # "haskell-tools.nvim" = "10.0.1"
 
@@ -124,7 +124,6 @@ auto-session = "2.5.1"
 
 [plugins."rikai.nvim"]
 dev = true
-cmd = "Rikai"
 
 [plugins."hacker.nvim"]
 git = "letieu/hacker.nvim"
@@ -150,7 +149,7 @@ opt = true
 
 [plugins."fzf-lua-frecency.nvim"]
 git = "elanmed/fzf-lua-frecency.nvim"
-rev = "392bcd1f5053e5a6bb0d77e8f81d56712f362343"
+rev = "5726403e132fe8699d670c7ef8d59dbed887b4e6"
 
 [plugins."tiny-inline-diagnostic.nvim"]
 git = "rachartier/tiny-inline-diagnostic.nvim"

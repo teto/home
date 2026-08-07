@@ -244,6 +244,7 @@ let
     # while I wish feed.nvim would be packaged with it
     # for markdown preview, should be in the package closure instead
     pandoc
+
     # pythonPackages.pdftotext  # should appear only in RC ? broken
     # nil # a nix lsp, can be debugged with NIL_LOG_PATH and NIL_LOG=nil=debug
     nixd # another nix LSP
@@ -252,7 +253,7 @@ let
     # rnix-lsp
     rust-analyzer
     shellcheck
-    # lua-language-server # replaced with emmylua-ls
+    lua-language-server # emmylua-ls still kinda broken
     gopls # LSP for go
     marksman # markdown LSP server
 

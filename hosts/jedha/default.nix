@@ -81,6 +81,9 @@ in
     # ../../nixos/profiles/localai.nix
   ];
 
+  # test
+  nixpkgs.config.cudaSupport = true;
+
   home-manager.users = {
     # TODO use from flake or from unstable
     teto = {

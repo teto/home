@@ -160,8 +160,8 @@
     };
 
     meli-src = {
-      url = "git+https://git.meli-email.org/meli/meli.git";
-      # url = "github:meli/meli"; # official mirror
+      # url = "git+https://git.meli-email.org/meli/meli.git";
+      url = "github:teto/meli?ref=teto/add-completion"; # official mirror
       # ref = "refs/pull/449/head";
       flake = false;
     };
@@ -454,8 +454,8 @@
           };
         };
 
-      tetosPkgs = pkgImport self.inputs.nixpkgs true;
-      # tetosPkgsCuda = pkgImport self.inputs.nixpkgs true;
+      tetosPkgs = pkgImport self.inputs.nixpkgs false;
+      tetosPkgsCuda = pkgImport self.inputs.nixpkgs true;
       unstablePkgs = pkgImport self.inputs.nixos-unstable false;
       # stablePkgs = pkgImport self.inputs.nixos-stable;
 
@@ -486,7 +486,8 @@
               );
             in
             {
-              name = builtins.replaceStrings [ ".nix" ] [ "" ] (lib.traceVal file);
+              # lib.traceVal
+              name = builtins.replaceStrings [ ".nix" ] [ "" ] file;
               value = shell;
             }
           );
@@ -592,6 +593,9 @@
               modules = [
                 (./hosts + "/${hostname}")
               ];
+
+              # encode it in name or
+              # pkgs = if hostname == "jedha" then tetosPkgsCuda else tetosPkgs;
             };
 
           nixosConfigs = lib.importDirectories (
@@ -736,7 +740,7 @@
                 name = "neptune";
                 # local-facing address neptune.local
                 # hostname = "neptune.local"; # temporary
-                hostname = "192.168.1.21"; # temporary
+                hostname = "neptune.local"; # temporary
               }
               // {
                 # while working around require-sigs issue

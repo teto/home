@@ -5,7 +5,8 @@
   pkgs,
   # utils,
   pkgsPath,
-  osConfig,
+  dotfilesPath,
+  # osConfig,
   ...
 }:
 
@@ -75,10 +76,13 @@ in
 
     systemd.user.services.llama-cpp = {
       Unit = {
-        Description = "LLaMA C++ server";
+        Description = "LLaMA C++ server/inference engine";
         After = [ "network.target" ];
         # After = [ "graphical-session.target" ];
         # PartOf = [ "graphical-session.target" ];
+        X-Restart-Triggers = [
+          "${dotfilesPath}/contrib/llama-presets.ini"
+        ];
 
       };
       # Install = {
@@ -86,12 +90,16 @@ in
       # };
 
       Service = {
-        Type = "idle";
+        # what does it mean ?
+        # Type = "idle";
         KillSignal = "SIGINT";
         # need to restore:
         #
         # but how to import utils ? see nixos/modules/misc/extra-arguments.nix
         # --log-disable
+        Environment = [
+          "GGML_CUDA_ENABLE_UNIFIED_MEMORY=1"
+        ];
         ExecStart = "${cfg.package}/bin/llama-server --host ${cfg.host} --port ${toString cfg.port} ${utils.escapeSystemdExecArgs cfg.extraFlags}";
         # Restart = "on-failure";
         Restart = "always";

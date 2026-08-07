@@ -32,8 +32,7 @@ in
     # oauthId = "aaaaaaaaaaaaaaaaaaaa";
     # oauthSecretFile = pkgs.writeText "oauthSecret" "ffffffffffffffffffffffffffffffffffffffff"; # FIXME: use a secret manager
     appId = bbSecrets.appId; # The numeric App ID
-    appSecretKeyFile = config.sops.secrets.buildbot-client-secret.path;
-    # "/run/secrets/buildbot-client-secret"; # Path to the downloaded private key
+    appSecretKeyFile = config.sops.secrets.nixbot-client-secret.path;
 
     # MUST BE SET FOR github
     oauthId = bbSecrets.oauthClientId;
