@@ -21,11 +21,20 @@ lib.optionalAttrs (lib.debug.traceValFn (a: "SECRETS ? ${toString a}") withSecre
   # useDHCP = true;
 
   # without these overrides, seems like nginx selects wrong server
-  extraHosts = ''
-    10.100.0.1    jellyfin.vps
-    10.100.0.1    immich.vps
-    10.100.0.1    nextcloud.vps
-  '';
+  extraHosts =
+    let
+      # interested in router mostly
+      peer = builtins.head lib.wireguard.clientPeers;
+    in
+    ''
+      ${lib.wireguard.mkPeerIp peer} ${peer.hostName} 
+      10.100.0.3    tatooine.vpn
+      10.100.0.3    jedha.vpn
+      10.100.0.4    home-assistant.vpn
+      10.100.0.1    jellyfin.vps
+      10.100.0.1    immich.vps
+      10.100.0.1    nextcloud.vps
+    '';
 
   firewall = {
     enable = true;

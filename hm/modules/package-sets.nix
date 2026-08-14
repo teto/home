@@ -412,6 +412,8 @@ in
 
           gdb
           gnupg
+          gpg-tui
+
           # gnum4 # hum
           gettext # for envsubst (TO NOT CONFOUND with gettext's envsubst)
           # glab # gitlab cli

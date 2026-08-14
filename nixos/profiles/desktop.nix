@@ -65,7 +65,6 @@ in
 
   fonts.enableDefaultPackages = true;
 
-
   # Make Nix aware of our local network cache
   # TODO depend on nix-cache-beacon port
   # nix.settings.substituters = [ "http://localhost:${config.services.nix-cache-beacon.cache.port}" ];
@@ -214,7 +213,6 @@ in
 
   # boot.loader.timeout = lib.mkForce 5;
   system.nixos.distroName = "Tetonos";
-
 
   # systemd.services."systemd-coredump".serviceConfig.ProtectHome = false;
   # systemd.services."systemd-coredump@".serviceConfig.ProtectHome = false;

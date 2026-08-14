@@ -588,13 +588,13 @@
             hostname: withSecrets:
             lib.mkNixosSystem {
               # ideally we would return both versions
-              # withSecrets = true;
               inherit withSecrets hostname;
               modules = [
                 (./hosts + "/${hostname}")
               ];
 
               # encode it in name or
+              pkgs = tetosPkgs;
               # pkgs = if hostname == "jedha" then tetosPkgsCuda else tetosPkgs;
             };
 

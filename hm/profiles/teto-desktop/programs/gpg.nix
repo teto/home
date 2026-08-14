@@ -31,6 +31,7 @@
     require-cross-certification = true;
     no-symkey-cache = true;
     use-agent = true;
-    throw-keyids = true;
+    # stops GPG from putting recipient key IDs into encrypted messages. This hides who should get the message. It helps stop traffic analysis, but it also makes decryption slower because GPG must try all secret keys to open the file.
+    # throw-keyids = true;
   };
 }

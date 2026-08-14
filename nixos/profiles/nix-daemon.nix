@@ -6,8 +6,6 @@
 {
   nix = {
 
-    distributedBuilds = true;
-
     settings = {
       #   # http-connections = 25 is the default
       #   http2 = true;
@@ -26,9 +24,9 @@
       # starting from nix 2.30
       trace-import-from-derivation = true;
 
-      keep-outputs = true; # Nice for developers
+      # keep-outputs = false; # Nice for developers
       keep-derivations = true; # Idem
-      keep-failed = true;
+      # keep-failed = false;
 
       # add pipe-operators ?
       experimental-features = "auto-allocate-uids nix-command flakes cgroups";

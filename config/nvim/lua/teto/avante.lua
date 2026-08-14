@@ -1,9 +1,8 @@
 -- return the Sidebar
 -- local s = require('avante').get()
-local Highlights = require('avante.highlights')
-local Utils = require('avante.utils')
-local Config = require('avante.config')
-local rag_service = require('avante.rag_service')
+-- local Highlights = require('avante.highlights')
+-- local Utils = require('avante.utils')
+-- local Config = require('avante.config')
 -- if not sidebar then return nil, "No sidebar" end
 
 -- if not Utils.is_valid_container(self.containers.result, true) then return end
@@ -71,46 +70,46 @@ end
 
 -- custom renderer for input prompt, to show the currently selected provider !
 -- inspired by Sidebar:render_header
-function M.render_header()
-    -- if not bufnr or not api.nvim_buf_is_valid(bufnr) then return end
-
-    local function format_segment(text, highlight)
-        return '%#' .. highlight .. '#' .. text
-    end
-
-    -- if Config.windows.sidebar_header.rounded then
-    --   header_text = format_segment(Utils.icon("", "『"), reverse_hl)
-    --     .. format_segment(header_text, hl)
-    --     .. format_segment(Utils.icon("", "』"), reverse_hl)
-    -- else
-    --   header_text = format_segment(" " .. header_text .. " ", hl)
-    -- end
-    local header_text = string.format(
-        '%s%s (%s)',
-        Utils.icon('󱜸 '),
-        'Ask' or 'Chat with',
-        Config.provider
-        -- Config.mappings.sidebar.switch_windows
-    )
-
-    local winbar_text
-    -- if Config.windows.sidebar_header.align == "left" then
-    --   winbar_text = header_text .. "%=" .. format_segment("", Highlights.AVANTE_SIDEBAR_WIN_HORIZONTAL_SEPARATOR)
-    -- elseif Config.windows.sidebar_header.align == "center" then
-    winbar_text = format_segment('%=', Highlights.AVANTE_SIDEBAR_WIN_HORIZONTAL_SEPARATOR)
-        .. header_text
-        .. format_segment('%=', Highlights.AVANTE_SIDEBAR_WIN_HORIZONTAL_SEPARATOR)
-    -- elseif Config.windows.sidebar_header.align == "right" then
-    --   winbar_text = format_segment("%=", Highlights.AVANTE_SIDEBAR_WIN_HORIZONTAL_SEPARATOR) .. header_text
-    -- end
-
-    -- print(winbar_text)
-    -- winbar_text = "tOTO"
-    return winbar_text
-    --  api.nvim_set_option_value("winbar", winbar_text, {
-    -- win = winid
-    --  })
-end
+-- function M.render_header()
+--     -- if not bufnr or not api.nvim_buf_is_valid(bufnr) then return end
+--
+--     local function format_segment(text, highlight)
+--         return '%#' .. highlight .. '#' .. text
+--     end
+--
+--     -- if Config.windows.sidebar_header.rounded then
+--     --   header_text = format_segment(Utils.icon("", "『"), reverse_hl)
+--     --     .. format_segment(header_text, hl)
+--     --     .. format_segment(Utils.icon("", "』"), reverse_hl)
+--     -- else
+--     --   header_text = format_segment(" " .. header_text .. " ", hl)
+--     -- end
+--     local header_text = string.format(
+--         '%s%s (%s)',
+--         Utils.icon('󱜸 '),
+--         'Ask' or 'Chat with',
+--         Config.provider
+--         -- Config.mappings.sidebar.switch_windows
+--     )
+--
+--     local winbar_text
+--     -- if Config.windows.sidebar_header.align == "left" then
+--     --   winbar_text = header_text .. "%=" .. format_segment("", Highlights.AVANTE_SIDEBAR_WIN_HORIZONTAL_SEPARATOR)
+--     -- elseif Config.windows.sidebar_header.align == "center" then
+--     winbar_text = format_segment('%=', Highlights.AVANTE_SIDEBAR_WIN_HORIZONTAL_SEPARATOR)
+--         .. header_text
+--         .. format_segment('%=', Highlights.AVANTE_SIDEBAR_WIN_HORIZONTAL_SEPARATOR)
+--     -- elseif Config.windows.sidebar_header.align == "right" then
+--     --   winbar_text = format_segment("%=", Highlights.AVANTE_SIDEBAR_WIN_HORIZONTAL_SEPARATOR) .. header_text
+--     -- end
+--
+--     -- print(winbar_text)
+--     -- winbar_text = "tOTO"
+--     return winbar_text
+--     --  api.nvim_set_option_value("winbar", winbar_text, {
+--     -- win = winid
+--     --  })
+-- end
 
 vim.api.nvim_create_autocmd('User', {
     pattern = 'ToggleMyPrompt',
@@ -127,6 +126,8 @@ vim.keymap.set('n', '<Leader>lm', '<Plug>AvanteModels', { desc = 'List models' }
 
 ---@param prompt string
 function M.ask(prompt)
+  local rag_service = require('avante.rag_service')
+
     -- resp is a lua value decoded from json ?
     local on_complete = function(resp, error)
         if error then

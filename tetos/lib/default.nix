@@ -11,9 +11,9 @@ let
   firefox = pkgs.callPackage ./firefox.nix { };
   nix-builders = import ./nix-builder.nix { inherit flakeSelf lib secretsFolder; };
   neovim = import ./neovim.nix { inherit flakeSelf lib; };
+  wireguard = import  ./wireguard.nix { inherit secrets flakeSelf lib secretsFolder; };
 
-  myPkgs = pkgs;
-
+  # myPkgs = pkgs;
 
 in
 {
@@ -33,7 +33,9 @@ in
     nixosConfToBuilderAttr
     ;
 
-  inherit (import  ./wireguard.nix { inherit secrets flakeSelf lib secretsFolder; }) 
+  inherit wireguard;
+
+  inherit (wireguard) 
     mkWireguardPeer
     ;
 
@@ -77,7 +79,7 @@ in
       withSecrets, # bool
       hostname,
       # pkgs = self.inputs.nixos-unstable.legacyPackages.${system}.pkgs;
-      pkgs ? myPkgs,
+      pkgs,
     }:
     lib.nixosSystem {
       system = "x86_64-linux";

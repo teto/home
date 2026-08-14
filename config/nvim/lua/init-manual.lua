@@ -281,6 +281,7 @@ vim.opt.rtp:prepend(pluginDir .. '/avante.nvim')
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/diffview.nvim')
 -- vim.opt.rtp:prepend(pluginDir .. '/neorg')
 -- vim.opt.rtp:prepend(pluginDir .. '/rocks.nvim')
+vim.opt.rtp:prepend(pluginDir .. '/rikai.nvim')
 vim.opt.rtp:prepend(pluginDir .. '/rocks-git.nvim')
 vim.opt.rtp:prepend(pluginDir .. '/auto-session')
 
@@ -738,7 +739,7 @@ vim.opt.cmdheight = 1
 -- require('plugins.nvim-treesitter')
 
 -- one can pass a list as well
--- vim.lsp.enable('lua_ls')  -- todo remove replaced by emmylua
+vim.lsp.enable('lua_ls')  -- todo remove replaced by emmylua
 -- used by `lx check`
 -- vim.lsp.enable('emmylua_ls')
 vim.lsp.enable('rust_analyzer')
