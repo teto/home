@@ -21,6 +21,7 @@ let
     # ];
   };
 
+  # map nixos configuration name
   clientPeers = [
     {
       # jedha
@@ -43,6 +44,11 @@ let
 
 in
 {
+
+  inherit clientPeers serverPeer;
+
+  mkPeerIp = peer: "10.100.0.${toString peer.id}";
+
   # load data from json
   mkWireguardPeer =
     {

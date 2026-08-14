@@ -11,6 +11,8 @@ Look at .gpg-id
 
 PASSWORD_STORE_ENABLE_EXTENSIONS
 
+PASSWORD_STORE_GPG_OPTS
+
 * import from bitwarden
   with https://github.com/roddhjav/pass-import one can import from bitwarden via:
   pass import bitwarden <bitwarden_export_....json>
