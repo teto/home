@@ -344,7 +344,7 @@ in
                       })
                   end, { buffer = true })
                   vim.keymap.set('n', ']e', function()
-                      vim.diagnostic.jump({ 
+                      vim.diagnostic.jump({
                         count = 1,
                         wrap = true,
                         severity = vim.diagnostic.severity.ERROR,

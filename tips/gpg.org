@@ -36,3 +36,7 @@ gpg-agent.conf contains:
 # To trust a key:
 gpg --edit-key peerKey.asc
 gpg > trust
+
+* inspect a gpg secret 
+
+gpg --list-packets ~/.password-store/6play.fr.gpg
