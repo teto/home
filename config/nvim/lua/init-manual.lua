@@ -77,6 +77,21 @@ local _normal_hl = vim.api.nvim_get_hl(0, { name = 'Normal' })
 --     load = vim.cmd.packadd,
 -- }
 
+-- "lazyplugins" if u create init.lua
+require("lz.n").load({
+    {
+        "vim-startuptime",
+        cmd = "StartupTime",
+        before = function()
+            -- Configuration for plugins that
+            -- don't force you to call a `setup` function
+            -- for initialization should typically go in a `before`
+            --- or `beforeAll` function.
+            vim.g.startuptime_tries = 10
+        end,
+    },
+})
+
 -- https://github.com/barrettruth/diffs.nvim
 vim.g.diffs = {
     integrations = {
@@ -282,8 +297,9 @@ vim.opt.rtp:prepend(pluginDir .. '/avante.nvim')
 -- vim.opt.rtp:prepend(pluginDir .. '/neorg')
 -- vim.opt.rtp:prepend(pluginDir .. '/rocks.nvim')
 vim.opt.rtp:prepend(pluginDir .. '/rikai.nvim')
-vim.opt.rtp:prepend(pluginDir .. '/rocks-git.nvim')
+-- vim.opt.rtp:prepend(pluginDir .. '/rocks-git.nvim')
 vim.opt.rtp:prepend(pluginDir .. '/auto-session')
+
 
 ---TODO pass a list of generated nix plugins ?
 ---or custom for now
@@ -1255,6 +1271,8 @@ vim.api.nvim_create_autocmd({ 'TextYankPost' }, {
         vim.hl.hl_op({ higroup = 'IncSearch', timeout = 1000 })
     end,
 })
+
+require('plugins.auto-session')
 
 -- needed until a better fix
 -- require('rocks-config.internal').setup()

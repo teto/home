@@ -15,7 +15,7 @@
     # no disko ?
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    # flakeSelf.nixosProfiles.desktop
+    flakeSelf.nixosProfiles.desktop
     flakeSelf.nixosProfiles.gnome
     flakeSelf.nixosProfiles.avahi
     flakeSelf.nixosProfiles.nix-daemon

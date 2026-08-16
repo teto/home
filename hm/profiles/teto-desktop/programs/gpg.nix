@@ -32,6 +32,9 @@
     no-symkey-cache = true;
     use-agent = true;
     # stops GPG from putting recipient key IDs into encrypted messages. This hides who should get the message. It helps stop traffic analysis, but it also makes decryption slower because GPG must try all secret keys to open the file.
+    # also means you have to use something like
+    # PASSWORD_STORE_GPG_OPTS='--try-secret-key 8C8032ED61514963B24641CBE3D6AEAC94BFF81D'
+    # to tell pass what key to use
     # throw-keyids = true;
   };
 }
