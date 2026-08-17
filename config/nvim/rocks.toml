@@ -32,6 +32,7 @@ import = "lazy_specs/"
 # List of Neovim plugins to install alongside their versions.
 # If the plugin name contains a dot then you must add quotes to the key name!
 [plugins]
+"rocks.nvim" = "2.49.0"
 "rocks-git.nvim"= "2.5.10"
 "rocks-config.nvim" = "3.2.0"
 "rocks-dev.nvim" = "1.8.1"
@@ -48,12 +49,6 @@ import = "lazy_specs/"
 
 # i seldomly use it
 # "trouble.nvim" = "scm"
-
-# stopped working
-# "rocks-lazy.nvim" = "scm"
-
-# should be installed via nix as well
-# "nui.nvim" = "0.4.0"
 
 "lsp_signature.nvim" = "0.3.1"
 friendly-snippets = "scm"
@@ -121,7 +116,6 @@ nvim-treesitter-context = "1.0.0"
 "grug-far.nvim"= "1.6.76"
 "yazi.nvim"= "13.9.0"
 "quicker.nvim" = "1.5.1"
-"rocks.nvim" = "2.49.0"
 
 [plugins."rikai.nvim"]
 dev = true

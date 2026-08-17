@@ -107,8 +107,8 @@ in
   /**
     Maps over folders in folder
   */
-  importDirectories = transformEntry:
-    folder:
+  importDirectories = folder: transformEntry:
+    
     let
       # transformEntry = lib.id;
       pred = key: val: val == "directory";

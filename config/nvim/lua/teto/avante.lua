@@ -126,7 +126,7 @@ vim.keymap.set('n', '<Leader>lm', '<Plug>AvanteModels', { desc = 'List models' }
 
 ---@param prompt string
 function M.ask(prompt)
-  local rag_service = require('avante.rag_service')
+    local rag_service = require('avante.rag_service')
 
     -- resp is a lua value decoded from json ?
     local on_complete = function(resp, error)

@@ -136,12 +136,40 @@ let
     vim-nix # for NixEdit
     vim-rsi # the goat
 
-    visual-whitespace-nvim # shows spaces/tabs upon visual selection. Lovely
+    {
+      # shows spaces/tabs upon visual selection. Lovely
+      plugin = visual-whitespace-nvim;
+      config = ''
+        vim.g.visual_whitespace = {
+          enabled = true,
+          highlight = { link = "Visual", default = true },
+          match_types = {
+            space = true,
+            tab = true,
+            nbsp = true,
+            lead = false,
+            trail = false,
+          },
+          list_chars = {
+            space = "·",
+            tab = "↦",
+            nbsp = "␣",
+            lead = "‹",
+            trail = "›",
+          },
+          fileformat_chars = {
+            unix = "↲",
+            mac = "←",
+            dos = "↙",
+          },
+          ignore = { filetypes = {}, buftypes = {} },
+        }
+      '';
+    }
 
     # ' " syntax file for neomutt
     {
       plugin = vim-sayonara;
-      type = "lua";
       config = ''
         vim.g.sayonara_confirm_quit = 0
         vim.keymap.set('n', '<leader>q', '<Cmd>Sayonara!<cr>', { silent = true, desc = 'Closes current window' })

@@ -29,34 +29,32 @@ vim.g.health = { style = 'float' }
 -- or use secrets.jakku_hostname
 local llama_host = 'localhost'
 
--- vim.g.visual_whitespace = {
---   enabled = true,
---   highlight = { link = "Visual", default = true },
---   match_types = {
---     space = true,
---     tab = true,
---     nbsp = true,
---     lead = false,
---     trail = false,
---   },
---   list_chars = {
---     space = "·",
---     tab = "↦",
---     nbsp = "␣",
---     lead = "‹",
---     trail = "›",
---   },
---   fileformat_chars = {
---     unix = "↲",
---     mac = "←",
---     dos = "↙",
---   },
---   ignore = { filetypes = {}, buftypes = {} },
--- }
+vim.g.visual_whitespace = {
+    enabled = true,
+    highlight = { link = 'Visual', default = true },
+    match_types = {
+        space = true,
+        tab = true,
+        nbsp = true,
+        lead = false,
+        trail = false,
+    },
+    list_chars = {
+        space = '·',
+        tab = '↦',
+        nbsp = '␣',
+        lead = '‹',
+        trail = '›',
+    },
+    fileformat_chars = {
+        unix = '↲',
+        mac = '←',
+        dos = '↙',
+    },
+    ignore = { filetypes = {}, buftypes = {} },
+}
 
 -- print(package.cpath)
-
--- vim.env.PATH = "/nix/store/wy6pg4liq14r08vbn7cr4ksqdh0ayavn-wl-clipboard-2.2.1/bin:"..vim.env.PATH
 
 local has_fzf_lua, _fzf_lua = pcall(require, 'fzf-lua')
 
@@ -78,19 +76,6 @@ local _normal_hl = vim.api.nvim_get_hl(0, { name = 'Normal' })
 -- }
 
 -- "lazyplugins" if u create init.lua
-require("lz.n").load({
-    {
-        "vim-startuptime",
-        cmd = "StartupTime",
-        before = function()
-            -- Configuration for plugins that
-            -- don't force you to call a `setup` function
-            -- for initialization should typically go in a `before`
-            --- or `beforeAll` function.
-            vim.g.startuptime_tries = 10
-        end,
-    },
-})
 
 -- https://github.com/barrettruth/diffs.nvim
 vim.g.diffs = {
@@ -144,6 +129,22 @@ vim.o.winborder = 'rounded'
 -- todo can now be set as list ?
 vim.opt.guicursor =
     'n-v-c:block-blinkon250-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-blinkon250-Cursor/lCursor,r-cr:hor20-Cursor/lCursor'
+
+require('lz.n').load({
+    {
+        'vim-startuptime',
+        cmd = 'StartupTime',
+        before = function()
+            -- Configuration for plugins that
+            -- don't force you to call a `setup` function
+            -- for initialization should typically go in a `before`
+            --- or `beforeAll` function.
+            vim.g.startuptime_tries = 10
+        end,
+    },
+    -- {
+    -- }
+})
 
 -- TODO diagnostics = { virtual_text = false }
 diagnostic_default_config = {
@@ -299,7 +300,6 @@ vim.opt.rtp:prepend(pluginDir .. '/avante.nvim')
 vim.opt.rtp:prepend(pluginDir .. '/rikai.nvim')
 -- vim.opt.rtp:prepend(pluginDir .. '/rocks-git.nvim')
 vim.opt.rtp:prepend(pluginDir .. '/auto-session')
-
 
 ---TODO pass a list of generated nix plugins ?
 ---or custom for now
@@ -755,7 +755,7 @@ vim.opt.cmdheight = 1
 -- require('plugins.nvim-treesitter')
 
 -- one can pass a list as well
-vim.lsp.enable('lua_ls')  -- todo remove replaced by emmylua
+vim.lsp.enable('lua_ls') -- todo remove replaced by emmylua
 -- used by `lx check`
 -- vim.lsp.enable('emmylua_ls')
 vim.lsp.enable('rust_analyzer')
