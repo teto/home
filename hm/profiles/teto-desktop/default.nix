@@ -47,10 +47,10 @@ let
       sshKey = "${secretsFolder}/ssh/nix-community-builder";
       protocol = "ssh";
       # I might need to set it ?
-      publicHostKey = null;
-      maxJobs = 0;
+      publicHostKey = null; # builtins.readFile ../../../../hosts/neotokyo/host_key.pub;
+      maxJobs = 3;
       speedFactor = 1;
-      hostName = "hostname build-box.nix-community.org";
+      hostName = "build-box.nix-community.org";
       system = "x86_64-linux";
       # identitiesOnly yes
     }

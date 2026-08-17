@@ -457,15 +457,12 @@
       tetosPkgs = pkgImport self.inputs.nixpkgs false;
       tetosPkgsCuda = pkgImport self.inputs.nixpkgs true;
       unstablePkgs = pkgImport self.inputs.nixos-unstable false;
-      # stablePkgs = pkgImport self.inputs.nixos-stable;
 
     in
     flake-utils.lib.eachSystem [ "x86_64-linux" ] (system: {
 
       # todo create a bootstrap devShell
       # https://github.com/numtide/blueprint/blob/0ed984d51a3031065925ab08812a5434f40b93d4/lib/default.nix#L547
-      # lib.importFiles ./devShells //
-
       devShells =
         let
           # Load all devShells from the devShells/ directory
@@ -584,26 +581,57 @@
           #       };
           #     }
           #   );
-          createSystem =
-            hostname: withSecrets:
-            lib.mkNixosSystem {
-              # ideally we would return both versions
-              inherit withSecrets hostname;
-              modules = [
-                (./hosts + "/${hostname}")
-              ];
+          # createSystem =
+          #   hostname: withSecrets:
+          # lib.mkNixosSystem {
+          #   # ideally we would return both versions
+          #   inherit withSecrets hostname;
+          #   modules = [
+          #     (./hosts + "/${hostname}")
+          #   ];
+          #
+          #   # encode it in name or
+          #   pkgs = tetosPkgs;
+          #   # pkgs = if hostname == "jedha" then tetosPkgsCuda else tetosPkgs;
+          # };
 
-              # encode it in name or
-              pkgs = tetosPkgs;
-              # pkgs = if hostname == "jedha" then tetosPkgsCuda else tetosPkgs;
-            };
+          nixosConfigs = lib.importDirectories ./hosts (
+            # dirname => hostname
+            hostname: val:
+            lib.nameValuePair hostname (
+              lib.mkNixosSystem {
+                inherit hostname;
+                # ideally we would return both versions
+                withSecrets = true;
+                modules = [
+                  (./hosts + "/${hostname}")
+                ];
 
-          nixosConfigs = lib.importDirectories (
-            dirname: val: lib.nameValuePair dirname (createSystem dirname true)
-          ) ./hosts;
-          nixosConfigsWithoutSecrets = lib.importDirectories (
-            dirname: val: lib.nameValuePair "${dirname}-no-secrets" (createSystem dirname false)
-          ) ./hosts;
+                # encode it in name or
+                pkgs = if hostname == "jedha" then tetosPkgsCuda else tetosPkgs;
+              }
+            )
+          );
+
+          nixosConfigsWithoutSecrets = lib.importDirectories ./hosts (
+            hostname: val:
+            lib.nameValuePair "${hostname}-no-secrets"
+              # dirname => hostname
+              (
+                lib.mkNixosSystem {
+                  inherit hostname;
+                  # ideally we would return both versions
+                  withSecrets = false;
+                  modules = [
+                    (./hosts + "/${hostname}")
+                  ];
+
+                  # encode it in name or
+                  # pkgs = tetosPkgs;
+                  pkgs = if hostname == "jedha" then tetosPkgsCuda else tetosPkgs;
+                }
+              )
+          );
         in
         nixosConfigs // nixosConfigsWithoutSecrets;
 
@@ -615,18 +643,9 @@
         # teto-desktop = ./hm/profiles/teto-desktop.nix;
       };
 
-      homeModules =
-        let
-          # autoloaded = haumea.lib.load {
-          #   src = ./hm/modules;
-          #   transformer = haumea.transformers.liftDefault;
-          # };
-        in
-        # todo autoload
-        lib.importFiles ./hm/modules
-        // {
-          nixpkgs-monitor = import ./hm/modules/services/nixpkgs-monitor.nix;
-        };
+      homeModules = lib.importFiles ./hm/modules // {
+        nixpkgs-monitor = import ./hm/modules/services/nixpkgs-monitor.nix;
+      };
 
       nixosProfiles = lib.importFiles ./nixos/profiles;
 
@@ -655,10 +674,6 @@
 
       # TODO autoload overlays
       overlays = {
-
-        # no sense to reexport those
-        # mptcp = self.inputs.mptcp-flake.overlays.default;
-        # nur = self.inputs.nur.overlay;
 
         # TODO
         local = import ./overlays/pkgs/default.nix;
