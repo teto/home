@@ -85,7 +85,6 @@
       system_health = { };
       system_log = { };
       mobile_app = { };
-      shopping_list = { };
       backup = { };
       logger.default = "info";
       # Text to speech
