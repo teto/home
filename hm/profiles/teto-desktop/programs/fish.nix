@@ -163,9 +163,7 @@ in
   # to install plugins on nixos do
   # environment.systemPackages = with pkgs; [
   #   fishPlugins.done
-  #   fishPlugins.fzf-fish  # to compare with fzf-git-sh
   #   fishPlugins.forgit
-  #   fishPlugins.hydro
   #   fishPlugins.grc
   # ];
 
@@ -198,6 +196,11 @@ in
     {
       name = "tide-item-jj";
       src = fishPluginFromVendor tideItemJj;
+    }
+    {
+      #   fishPlugins.fzf-fish  # to compare with fzf-git-sh
+      name = "fzf-fish";
+      src = fishPluginFromVendor pkgs.fishPlugins.fzf-fish;
     }
     # {
     #   name = "async-prompt";

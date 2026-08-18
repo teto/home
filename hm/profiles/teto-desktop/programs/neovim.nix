@@ -117,6 +117,9 @@ let
           '';
       }
 
+      # to test with avante
+      copilot-lua
+
       # install via rocks
       # vim-lion # Use with gl/L<text object><character to align to
 

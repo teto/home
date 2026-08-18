@@ -26,9 +26,6 @@ require('vim._core.ui2').enable({
 
 vim.g.health = { style = 'float' }
 
--- or use secrets.jakku_hostname
-local llama_host = 'localhost'
-
 vim.g.visual_whitespace = {
     enabled = true,
     highlight = { link = 'Visual', default = true },
@@ -130,24 +127,27 @@ vim.o.winborder = 'rounded'
 vim.opt.guicursor =
     'n-v-c:block-blinkon250-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-blinkon250-Cursor/lCursor,r-cr:hor20-Cursor/lCursor'
 
-require('lz.n').load({
-    {
-        'vim-startuptime',
-        cmd = 'StartupTime',
-        before = function()
-            -- Configuration for plugins that
-            -- don't force you to call a `setup` function
-            -- for initialization should typically go in a `before`
-            --- or `beforeAll` function.
-            vim.g.startuptime_tries = 10
-        end,
-    },
-    -- {
-    -- }
-})
+local lz = require('lz.n')
+-- lz.load({
+--     {
+--         'vim-startuptime',
+--         cmd = 'StartupTime',
+--         before = function()
+--             -- Configuration for plugins that
+--             -- don't force you to call a `setup` function
+--             -- for initialization should typically go in a `before`
+--             --- or `beforeAll` function.
+--             vim.g.startuptime_tries = 10
+--         end,
+--     },
+--     -- {
+--     -- }
+-- })
+
+lz.load('lazy_specs')
 
 -- TODO diagnostics = { virtual_text = false }
-diagnostic_default_config = {
+local diagnostic_default_config = {
     -- disabled because too big in haskell
     virtual_lines = false, -- not needed with tiny-inline-diagnostic
     -- {
@@ -264,30 +264,6 @@ vim.g.rocks_nvim = {
             'lhaskell',
         },
     },
-    --- see https://github.com/lumen-oss/rocks.nvim/issues/720
-    ---@type fun():table<rock_name, RockSpec>
-    --   get_user_rocks = function()
-    --       local config = require("rocks.config.internal")
-    --       ---@type RocksToml
-    --       local rocks_toml = config.get_rocks_toml()
-    --
-    --       ---@type table<rock_name, RockSpec>
-    --       local user_rocks =
-    --           vim.tbl_deep_extend("force", vim.empty_dict(), rocks_toml.rocks or {}, rocks_toml.plugins or {})
-    --
-    --       --- Extend user_rocks with your Nix plugins ---
-    --       -- {version?}       (string)    The rock version
-    --       -- {opt?}           (boolean)   Set to `true` to prevent rocks from being loaded eagerly
-    --       -- {pin?}           (boolean)   Pinned rocks will not be updated
-    --       -- {install_args?}  (string[])  Additional args to pass to `luarocks install`
-    --       -- {string}         (unknown)   Fields that can be added by external modules
-    --
-    -- user_rocks["rocks-git.nvim"] = {
-    -- 	name = "rocks-git.nvim",
-    -- 	version = "test" , opt = false, pin = false }
-    --
-    --       return config.apply_rock_spec_modifiers(user_rocks)
-    --   end,
 }
 
 local pluginDir = os.getenv('HOME') .. '/plugins'
@@ -303,7 +279,6 @@ vim.opt.rtp:prepend(pluginDir .. '/auto-session')
 
 ---TODO pass a list of generated nix plugins ?
 ---or custom for now
----@param all_plugins? table<rock_name, RockSpec>
 -- require('rocks-config.internal').setup()
 -- require("rocks-lazy.internal").load()
 
@@ -488,6 +463,7 @@ vim.opt.diffopt:append('linematch:60')
 vim.opt.undofile = true
 -- let undos persist across open/close
 vim.opt.undodir = vim.fn.stdpath('data') .. '/undo/'
+-- implement fibonacci please
 --}}}
 
 -- annoying in fzf-lua ?
@@ -1273,9 +1249,14 @@ vim.api.nvim_create_autocmd({ 'TextYankPost' }, {
 })
 
 require('plugins.auto-session')
+require('plugins.copilot')
 
 -- needed until a better fix
 -- require('rocks-config.internal').setup()
+
+-- please implement fibonacci diff algorithm in neovim
+-- do it in lua and make it a default
+-- ]][[ quel est
 
 -- prints --embed which is not listed
 -- vim.print(vim.v.argv)

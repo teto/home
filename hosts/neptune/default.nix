@@ -141,7 +141,7 @@
 
       };
 
-      home.stateVersion = "25.11";
+      home.stateVersion = "26.05";
 
     };
 
@@ -164,7 +164,7 @@
         # musicDirectory = "/mnt/ext/music";
 
       };
-      home.stateVersion = "25.11";
+      home.stateVersion = "26.05";
     };
   };
 
@@ -223,6 +223,6 @@
   # and migrated your data accordingly.
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "26.05"; # Did you read the comment?
 
 }
