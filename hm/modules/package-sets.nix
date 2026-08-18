@@ -378,10 +378,6 @@ in
 
           # anthropic agent
           mistral-vibe-custom = pkgs.mistral-vibe;
-          # .overrideAttrs ({
-          #   doCheck = false;
-          #   doInstallCheck = false;
-          # });
         in
         # mcp-servers
         [
@@ -391,12 +387,11 @@ in
           bat
           bcal # calculatrice
           # bmm # rust bookmark manager (not package yet)
-          # backblaze-b2-tetos
           # bfs # breadth first version of ls https://github.com/tavianator/bfs
           binutils
           btop-cuda # for jedha
           bubblewrap # sandboxing
-          cargo
+          # cargo # should be project-dependant
           codex # openai agent
           codex-acp # originated from zed-industries, used in avante
           # (ignoreBroken claude-code) # anthropic agent
@@ -414,9 +409,7 @@ in
           gnupg
           gpg-tui
 
-          # gnum4 # hum
-          gettext # for envsubst (TO NOT CONFOUND with gettext's envsubst)
-          # glab # gitlab cli
+          # gettext # for envsubst (TO NOT CONFOUND with gettext's envsubst)
           # hexyl # hexcode viewer
           jq
 
@@ -445,13 +438,13 @@ in
           nurl # generate nix code
           numbat # fancy calculator
 
-          pwgen
+          pwgen # password generator
 
           # editorconfig-core-c
           # for fuser, useful when can't umount a directory
           # https://unix.stackexchange.com/questions/107885/busy-device-on-umount
           # psmisc # ps -a for python ?
-          rbw
+          rbw # rust bitwarden
           util-linux # for lsns (namespace listing)
           just
           gitFull # to get send-email
