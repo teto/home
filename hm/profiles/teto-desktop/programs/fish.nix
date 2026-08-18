@@ -183,6 +183,22 @@ in
     # }
 
     # https://github.com/franciscolourenco/done
+    # {
+    #
+    #   name = "fish-ai";
+    #
+    #   src = pkgs.fishPlugins.ai.src;
+    #   # src = pkgs.fetchFromGitHub {
+    #   #   owner = "Realiserad";
+    #   #   repo = "fish-ai";
+    #   #   rev = "74b322dbdad9502a55afb522f072bd19b0625842";
+    #   #   hash = "sha256-RnNOrdsDbqbUyMne0Ueo1ITMlFfD+4cxbFVrMiPSqsI=";
+    #   # };
+    # }
+    {
+      name = "fish-ai";
+      src = fishPluginFromVendor pkgs.fish-ai;
+    }
     {
       name = "done";
       src = pkgs.fishPlugins.done.src;

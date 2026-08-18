@@ -11,7 +11,7 @@
     flakeSelf.nixosProfiles.pixiecore
 
   ];
-  enable = true;
+  enable = false;
   port = 8089;
   # systemd.services.jellyfin.wantedBy = lib.mkForce [ ];
 
