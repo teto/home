@@ -1,3 +1,4 @@
+{ lib, ... }:
 {
   # Resolve every name below the private .vps suffix through the WireGuard VPS.
   # services.dnsmasq = {
@@ -16,14 +17,7 @@
   };
 
   # add wireguard peers
-  extraHosts = ''
-    10.100.0.4    router.vpn
-    10.100.0.1    nextcloud.vpn
-    10.100.0.1    jellyfin.vps
-    10.100.0.1    immich.vps
-    10.100.0.1    nextcloud.vps
-
-  '';
+  extraHosts = lib.wireguard.vpnHosts;
 
   # networking.firewall.checkReversePath = false; # for nixops
   firewall.allowedUDPPorts = [

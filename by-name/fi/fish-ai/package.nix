@@ -26,16 +26,16 @@ let
     pythonImportsCheck = [ "aws_bedrock_token_generator" ];
   };
 in
-python3Packages.buildPythonApplication rec {
+python3Packages.buildPythonApplication {
   pname = "fish-ai";
-  version = "2.13.1";
+  version = "2.15.0-unstable-2026-08-19";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "Realiserad";
     repo = "fish-ai";
-    rev = "v${version}";
-    hash = "sha256-ZSFoE9/UesA6GVSYyRKAfj7+uw1gTZ/E08zAHPizAAQ=";
+    rev = "82ffd5902d9547ede4d360a151f8d22763805f3e";
+    hash = "sha256-UnjihRU/bSBWX+lekqJDe+1yfq+Y9K/Zz/71JWC4XoY=";
   };
 
   build-system = with python3Packages; [ setuptools ];

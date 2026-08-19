@@ -322,8 +322,8 @@ in
         };
       };
     }
-    // lib.optionalAttrs config.services.buildbot-nix.master.enable {
-      "${config.services.buildbot-nix.master.domain}" = {
+    // lib.optionalAttrs config.services.nixbot.enable {
+      "${config.services.nixbot.domain}" = {
         enableACME = true;
         forceSSL = true;
 

@@ -22,6 +22,7 @@ let
   };
 
   # map nixos configuration name
+  # filter nixosConfigurations over tetos.wireguard ?
   clientPeers = [
     {
       # jedha
@@ -42,10 +43,21 @@ let
     }
   ];
 
+  # TODO collect from nixosConfigurations. wireguard module
+  vpnHosts = ''
+    10.100.0.3    tatooine.vpn
+    10.100.0.3    jedha.vpn
+    10.100.0.4    home-assistant.vpn
+    10.100.0.1    jellyfin.vps
+    10.100.0.1    immich.vps
+    10.100.0.1    nextcloud.vps
+  '';
+
 in
 {
 
   inherit clientPeers serverPeer;
+  inherit vpnHosts;
 
   mkPeerIp = peer: "10.100.0.${toString peer.id}";
 
@@ -82,17 +94,5 @@ in
       inherit privateKeyFile;
 
       peers = if id == serverPeer.id then map mkPeer clientPeers else [ (mkPeer serverPeer) ];
-
-      #   [
-      #
-      #   # For a client configuration, one peer entry for the server will suffice.
-      #   {
-      #     # Public key of the server (not a file path).
-      #     inherit publicKey;
-      #     # publicKey = "1uhd6iscyFt68twrVz+y4zvws5PzhpIuY4rrr4N/Ymk=";
-      #
-      #     # Forward all the traffic via VPN.
-      #     # Or forward only particular subnets
-      #     endpoint = "${secrets.jakku.ipv4}:51820"; # ToDo: route to endpoint not automatically configured https://wiki.archlinux.org/index.php/WireGuard#Loop_routing https://discourse.nixos.org/t/solved-minimal-firewall-setup-for-wireguard-client/7577
     };
 }
