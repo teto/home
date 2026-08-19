@@ -93,18 +93,18 @@ opts = {
     },
     providers = {
         azure = nil,
-        claude = {
-            endpoint = 'https://api.anthropic.com',
-            model = 'claude-sonnet-4-5-20250929',
-            -- extra_request_body = {
-            --   temperature = 0.75,
-            --   max_tokens = 4096,
-            -- },
-            -- should use XDG_CONFIG_HOME or
-            api_key_name = 'cmd:cat ' .. sops_folder .. '/claude_api_key',
-
-            -- disabled_tools = { "python" },
-        },
+        -- claude = {
+        --     endpoint = 'https://api.anthropic.com',
+        --     model = 'claude-sonnet-4-5-20250929',
+        --     -- extra_request_body = {
+        --     --   temperature = 0.75,
+        --     --   max_tokens = 4096,
+        --     -- },
+        --     -- should use XDG_CONFIG_HOME or
+        --     api_key_name = 'cmd:cat ' .. sops_folder .. '/claude_api_key',
+        --
+        --     -- disabled_tools = { "python" },
+        -- },
 
         gemini = {
             api_key_name = 'cmd:cat ' .. sops_folder .. '/gemini_matt_key',
@@ -277,18 +277,23 @@ opts = {
 -- todo hide all of them by default ?
 local hidden_models = {
     'aihubmix',
+    'claude-haiku',
+    'claude-opus',
     -- 'copilot',
     -- 'gemini',
     -- 'openai',
     -- 'openai-gpt-4o-mini',
-    -- 'vertex',
-    -- 'vertex_claude',
+    'vertex',
+    'vertex_claude',
     -- 'ollama',
-    -- 'moonshot',
+    'moonshot',
 }
 
+-- TODO fix this and add it to FAQ
+-- hide_in_model_selector is set but doesn't work with input provider ?!
 -- hides everything in hidden_models
 for _, model in ipairs(hidden_models) do
+    -- vim.print("disabling model ", model)
     opts.providers[model] = { hide_in_model_selector = true, is_env_set = false }
     -- is_env_set
 end
@@ -303,7 +308,8 @@ end
 
 local valid_file, nix_deps = pcall(require, 'generated-by-nix')
 
-local jedha_default_model = 'ministral3-8b'
+local jedha_default_model
+-- = 'ministral3-8b'
 jedha_default_model = 'qwen3.6-dense'
 
 -- so it inherited the model
@@ -316,6 +322,7 @@ opts.providers['jedha'] = vim.tbl_extend('force', res, {})
 
 -- we can switch jakku_hostname
 if valid_file and nix_deps.jakku_hostname or false then
+    -- this is weird !
     opts.providers['neokyoto'] = mk_llama_provider(nix_deps.jakku_hostname, jedha_default_model, {
         -- check default prompt w/o
         -- add tools
