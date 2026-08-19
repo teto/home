@@ -30,10 +30,9 @@ in
       };
 
       privateKeyFile = lib.mkOption {
-        default = false;
         type = lib.types.str;
         description = ''
-          pubkey
+          path towards file containing private peer key file
         '';
       };
     };
