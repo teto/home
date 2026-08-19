@@ -9,8 +9,9 @@
 }:
 let
   # TODO filter out the configurations ending with -no-secret ?
+  # could remove it afterwards instead
   hostsConfigs = lib.mapAttrs (_: val: lib.genSshClientConfig val) (
-    lib.filterAttrs (name: _val: name != "neotokyo-no-secrets") flakeSelf.nixosConfigurations
+    lib.filterAttrs (name: _val: lib.hasSuffix "-no-secrets" name) flakeSelf.nixosConfigurations
   );
 in
 {
@@ -41,6 +42,10 @@ in
         user = "gitolite";
         identityFile = "${secretsFolder}/ssh/id_rsa";
         # port = secrets.jakku.sshPort;
+
+        extraOptions = {
+          # test = "toto";
+        };
       };
 
       # userKnownHostsFile
