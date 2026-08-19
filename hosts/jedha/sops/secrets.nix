@@ -4,7 +4,7 @@
   pkgs,
   ...
 }:
-lib.mkIf config.services.buildbot-nix.master.enable {
+lib.mkIf config.services.nixbot.enable {
   "buildbot-client-secret" = {
     mode = "440";
     # path = "%r/github_token";

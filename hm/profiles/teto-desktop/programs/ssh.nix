@@ -14,11 +14,11 @@ let
   );
 in
 {
-
-  # HashKnownHosts no
-  # Match localnetwork
-
   enable = withSecrets;
+
+  includes = [
+    "${config.xdg.configHome}/ssh/config"
+  ];
 
   # When enabled, a private key that is used during authentication will be added to ssh-agent if it is running (with confirmation enabled if set to ‘confirm’). The argument must be ‘no’ (the default), ‘yes’, ‘confirm’ (optionally followed by a time
   #           interval), ‘ask’ or a time interval (e.g. ‘1h’).
@@ -29,7 +29,8 @@ in
   # TODO generate those from the list of nixosConfigurations ?
   # can I have it per target ?
   # controlPath = "";
-  # osConfig.
+  # HashKnownHosts no
+  # Match localnetwork
   settings =
     # TODO we could customize them, with sendEnv for instance ?
     hostsConfigs // {
@@ -85,7 +86,6 @@ in
         # };
       };
 
-      # match = "user teto host nix-community";
       # Match Tagged forceTMUX
       #   # Force start tmux automatically with a session named "RemoteSSH"
       #   # If that session already exist, connect to it instead of starting a new one
@@ -114,24 +114,7 @@ in
         sendEnv = [ "GITHUB_TOKEN" ];
         tag = "nix-builder";
       };
-
-      # as a user we should be able to override the key
-      # neotokyo = {
-      #   header = "Match user gitolite host ${secrets.jakku.hostname}";
-      #   # match =;
-      #   hostname = secrets.jakku.hostname;
-      #   # user = "gitolite";
-      #   # le port depend du service
-      #   port = secrets.jakku.sshPort;
-      #   identityFile = "${secretsFolder}/ssh/neotokyo-gitolite";
-      #   identitiesOnly = true;
-      # };
-
     };
-
-  includes = [
-    "${config.xdg.configHome}/ssh/config"
-  ];
 
   # GlobalKnownHostfiles Specifies one or more files to use for the global host key database, separated by whitespace. The default is /etc/ssh/ssh_known_hosts, /etc/ssh/ssh_known_hosts2.
   extraOptionOverrides = {

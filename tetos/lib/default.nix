@@ -141,6 +141,7 @@ in
   # generate a client ssh config from the server config
   # https://fmartingr.com/blog/2022/08/12/using-ssh-config-match-to-connect-to-a-host-using-multiple-ip-or-hostnames/
   genSshClientConfig =
+    # value is one of nixosConfigurations.<ENTRY>
     value:
     let
       mcfg = value.config;
@@ -151,7 +152,8 @@ in
       lib.optionalAttrs sshCfg.enable
         # lib.warn if "teto" is not in users.users
         {
-          header = ''Match host="${mcfg.networking.hostName},${mcfg.networking.domain}"'';
+          # or false) 
+          header = ''Match host="${mcfg.networking.hostName},${mcfg.networking.domain}${lib.optionalString (mcfg.tetos.wireguard.enable or false) ",${mcfg.networking.hostName}.vpn"} "'';
           # assumption ? or check/warn it has it ?
           # user = "teto";
           identityFile = "${secretsFolder}/ssh/id_rsa";

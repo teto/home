@@ -124,10 +124,9 @@
       };
 
     }
-    // lib.optionalAttrs (config.services.buildbot-master.enable || config.services.nixbot.enable) {
+    // lib.optionalAttrs config.services.nixbot.enable {
       "nixbot-client-secret" = {
         mode = "440";
-        # owner = config.users.users.buildbot.name;
         owner = config.users.users.nixbot.name;
         group = config.users.users.teto.group;
       };

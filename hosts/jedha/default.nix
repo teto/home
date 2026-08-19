@@ -55,8 +55,6 @@ in
     autoloadedNixosModule # loaded by haumea
     ./_boot.nix
 
-    flakeSelf.inputs.buildbot-nix.nixosModules.buildbot-master
-    flakeSelf.inputs.buildbot-nix.nixosModules.buildbot-worker
     # use nixpkgs
     flakeSelf.inputs.harmonia.nixosModules.harmonia
     flakeSelf.nixosProfiles.greetd

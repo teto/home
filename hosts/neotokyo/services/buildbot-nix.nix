@@ -37,7 +37,6 @@ in
     github = {
       appId = bbSecrets.appId; # The numeric App ID
       appSecretKeyFile = config.sops.secrets.buildbot-client-secret.path;
-      # "/run/secrets/buildbot-client-secret"; # Path to the downloaded private key
 
       # MUST BE SET FOR github
       oauthId = bbSecrets.oauthClientId;

@@ -43,16 +43,17 @@ in
     flakeSelf.nixosProfiles.avahi
     flakeSelf.nixosProfiles.nix-daemon
     flakeSelf.nixosModules.sudo
+    flakeSelf.nixosModules.wireguard
 
-    # ./greetd.nix
     # ./ntp.nix
-    # ../../nixos/profiles/librenms.nix
 
     ./pipewire.nix
 
     # TODO autoload it ?
     # ./desktop/sops.nix
   ];
+
+  tetos.wireguard.enable = true;
 
   # attempt to print japanese characters
   services.kmscon = {
@@ -65,10 +66,6 @@ in
 
   fonts.enableDefaultPackages = true;
 
-  # Make Nix aware of our local network cache
-  # TODO depend on nix-cache-beacon port
-  # nix.settings.substituters = [ "http://localhost:${config.services.nix-cache-beacon.cache.port}" ];
-
   console = {
     # seems like a kernel bug resets it https://github.com/NixOS/nixpkgs/issues/413128
     earlySetup = true;
@@ -78,7 +75,7 @@ in
     useXkbConfig = true;
   };
 
-  # #! /bin/sh
+  # TODO move to lemurs ?
   # exec ${lib.getExe config.programs.sway.package}
   environment.etc."lemurs/wayland/sway-systemd" = {
     mode = "755";
