@@ -86,6 +86,10 @@ in
 
   tetos.wireguard = {
     enable = true;
+    id = 1;
+    privateKeyFile = config.sops.secrets.wg-private-key.path;
+    publicKey = "1uhd6iscyFt68twrVz+y4zvws5PzhpIuY4rrr4N/Ymk=";
+
   };
 
   # services.dbus.implementation = "dbus";

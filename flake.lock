@@ -1440,11 +1440,11 @@
     "meli-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1786138262,
-        "narHash": "sha256-6pZfVKifozuTReUxkDGN28yWjEbE5q2dNJqxF52tofU=",
+        "lastModified": 1787214833,
+        "narHash": "sha256-8jl2CofPSiVU1TWxNNedvVRUJ3c9HOmFei6flKFP6aM=",
         "owner": "teto",
         "repo": "meli",
-        "rev": "1016b8c832b317b3dca398934a7df0aaf88d7844",
+        "rev": "e34f55e90a800109a6a433d6d104aece6537c5af",
         "type": "github"
       },
       "original": {

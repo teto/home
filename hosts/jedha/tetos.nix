@@ -1,4 +1,9 @@
-{ config, withSecrets, secretsFolder, ...}:
+{
+  config,
+  withSecrets,
+  secretsFolder,
+  ...
+}:
 {
   wireguard = {
     enable = withSecrets;

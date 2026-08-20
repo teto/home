@@ -54,14 +54,13 @@ let
     10.100.0.1    nextcloud.vps
   '';
 
-  mkPeerIp = peer: "10.100.0.${toString peer.id}";
+  mkPeerIp = peerId: "10.100.0.${toString peerId}";
 in
 {
 
   inherit clientPeers serverPeer;
   # for now
   inherit wgNetwork vpnHosts mkPeerIp;
-
 
   # load data from json
   mkWireguardPeer =
@@ -79,7 +78,8 @@ in
 
           # Send keepalives every 25 seconds. Important to keep NAT tables alive.
           persistentKeepalive = 25;
-          allowedIPs = if id == 1 then [ "${lib.mkPeerIp p.id}/32" ] else [ wgNetwork ];
+          # used to generate routing table, if central node (id ==1) we have routes towards all other peers
+          allowedIPs = if id == 1 then [ "${mkPeerIp p.id}/32" ] else [ wgNetwork ];
         };
     in
 
