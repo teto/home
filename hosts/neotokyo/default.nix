@@ -60,6 +60,8 @@ let
 
 in
 {
+  # does it make sense to harden it with ?
+  # fileSystems."/".options = [ "noexec" ];
 
   # bumping to 25.11 broke nextcloyud
   system.stateVersion = "25.05";

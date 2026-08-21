@@ -139,8 +139,8 @@
     # };
 
     llama-cpp = {
-      # url = "github:ggml-org/llama.cpp";
-      url = "github:teto/llama.cpp?ref=teto/fish-completion";
+      url = "github:ggml-org/llama.cpp";
+      # url = "github:teto/llama.cpp?ref=teto/fish-completion";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -159,13 +159,18 @@
       flake = false;
     };
 
+    # https://git.meli-email.org/meli/meli/src/branch/attempt-fix-700
+    # meli-src = {
+    #   # url = "git+https://git.meli-email.org/meli/meli.git";
+    #   # url = "github:teto/meli?ref=teto/add-completion"; # official mirror
+    #   url = "github:teto/meli?ref=teto/add-completion"; # official mirror
+    #   # ref = "refs/pull/449/head";
+    #   flake = false;
+    # };
     meli-src = {
-      # url = "git+https://git.meli-email.org/meli/meli.git";
-      url = "github:teto/meli?ref=teto/add-completion"; # official mirror
-      # ref = "refs/pull/449/head";
+      url = "git+https://git.meli-email.org/meli/meli.git?ref=attempt-fix-700";
       flake = false;
     };
-
     neomutt-src = {
       url = "github:neomutt/neomutt";
       flake = false;
