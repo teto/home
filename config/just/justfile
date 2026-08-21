@@ -126,7 +126,7 @@ switch-remote: (nixos-rebuild "switch" "--option builders \"$TETOS_0\" -j0")
 rollback: (nixos-rebuild "switch" "--rollback")
 
 http-ask-models:
-  http get jedha.vpn:8080/models
+    http get jedha.vpn:8080/models
 
 # builders, le path: envoye le dossier git avec, pas ouf
 [private]

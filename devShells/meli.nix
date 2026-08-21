@@ -4,7 +4,7 @@
 pkgs.mkShell {
   name = "meli";
   buildInputs = with pkgs; [
-    cargo 
+    cargo
     rustc
     gnum4
     gcc

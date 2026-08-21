@@ -13,6 +13,6 @@ let
     ];
   };
 in
-myRofi.overrideAttrs ({
+myRofi.overrideAttrs {
   name = "rofi-matt-${rofi-unwrapped.version}";
-})
+}

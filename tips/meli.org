@@ -1,0 +1,1 @@
+:close  pour fermer le tab d'edition de courriel

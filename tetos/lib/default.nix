@@ -8,6 +8,7 @@
   ...
 }:
 let
+  sway = import ./sway.nix;
   firefox = pkgs.callPackage ./firefox.nix { };
   nix-builders = import ./nix-builder.nix { inherit flakeSelf lib secretsFolder; };
   neovim = import ./neovim.nix { inherit flakeSelf lib; };
@@ -21,6 +22,7 @@ in
     nix-builders
     firefox
     neovim
+    sway
     ;
 
   inherit (neovim)
