@@ -1,5 +1,6 @@
 ## Setting up an account for an already existing notmuch database
 
+
 [tags]
 # valid inputs: #HHHHHH, #ABC -> #AABBCC, XTERM_NAME, 0-255 byte
 colors = { signed="#Ff6600", replied="DeepSkyBlue4", draft="#f00" }
@@ -36,6 +37,8 @@ use_mouse = true
 # progress_spinner_sequence = { frames = [] }
 theme = "nord" # or "light"
 force_text_presentation = true
+# use in 'save-attachment' command
+save-attachment-picker = 3 vifm --choose-dir - --delimiter ''      
 
 [notifications]
 # with title as 1st arg and body as 2nd

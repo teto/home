@@ -1439,16 +1439,15 @@
     "meli-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1787297540,
-        "narHash": "sha256-XuZM0xYVxGd3bQitI5SKk5894J//vy7qHMq+gtdByCg=",
-        "ref": "attempt-fix-700",
-        "rev": "d919122b982d7d5e5616c15467bf14e6ce557f08",
-        "revCount": 3099,
+        "lastModified": 1787559686,
+        "narHash": "sha256-xZCHQiHG9USd2/sopE4qjbco/5B7jeOsPt36mLd96iI=",
+        "ref": "refs/heads/master",
+        "rev": "99f340f016ec3c6e1174b4738dda041949333bab",
+        "revCount": 3112,
         "type": "git",
         "url": "https://git.meli-email.org/meli/meli.git"
       },
       "original": {
-        "ref": "attempt-fix-700",
         "type": "git",
         "url": "https://git.meli-email.org/meli/meli.git"
       }

@@ -160,15 +160,9 @@
     };
 
     # https://git.meli-email.org/meli/meli/src/branch/attempt-fix-700
-    # meli-src = {
-    #   # url = "git+https://git.meli-email.org/meli/meli.git";
-    #   # url = "github:teto/meli?ref=teto/add-completion"; # official mirror
-    #   url = "github:teto/meli?ref=teto/add-completion"; # official mirror
-    #   # ref = "refs/pull/449/head";
-    #   flake = false;
-    # };
     meli-src = {
-      url = "git+https://git.meli-email.org/meli/meli.git?ref=attempt-fix-700";
+      # ?ref=attempt-fix-700
+      url = "git+https://git.meli-email.org/meli/meli.git";
       flake = false;
     };
     neomutt-src = {
