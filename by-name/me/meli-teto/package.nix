@@ -2,8 +2,6 @@
   flakeSelf,
   meli,
   rustPlatform,
-  stdenv,
-  lib,
 }:
 
 #   withNotmuch ? true,
@@ -13,19 +11,8 @@ meli.overrideAttrs (old: rec {
 
   # cargoBuildFlags = (old.cargoBuildFlags or [ ]) ++ [ "--features=debug-tracing" ];
 
-  patches = [
-    ./speedup-notmuch.patch
-    ./speedup-notmuch2.patch
-  ];
-  postInstall =
-    old.postInstall or ""
-    + lib.optionalString (stdenv.buildPlatform.canExecute stdenv.hostPlatform) ''
-      installShellCompletion --cmd meli \
-        --bash <($out/bin/meli completions bash) \
-        --zsh <($out/bin/meli completions zsh) \
-        --fish <($out/bin/meli completions fish)
-    '';
-
+  # The attempt-fix-700 branch already contains these notmuch fixes.
+  patches = [ ];
   # postPatch = ''
   #
   #   cat melib/src/notmuch/mod.rs

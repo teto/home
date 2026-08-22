@@ -60,6 +60,8 @@ let
 
 in
 {
+  # does it make sense to harden it with ?
+  # fileSystems."/".options = [ "noexec" ];
 
   # bumping to 25.11 broke nextcloyud
   system.stateVersion = "25.05";
@@ -86,6 +88,10 @@ in
 
   tetos.wireguard = {
     enable = true;
+    id = 1;
+    privateKeyFile = config.sops.secrets.wg-private-key.path;
+    publicKey = "1uhd6iscyFt68twrVz+y4zvws5PzhpIuY4rrr4N/Ymk=";
+
   };
 
   # services.dbus.implementation = "dbus";

@@ -1375,16 +1375,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1782849763,
-        "narHash": "sha256-NzdCP3OfEWgVYGOZznhZUyqSMl19qWlCKjEWgml165E=",
-        "owner": "teto",
+        "lastModified": 1787313684,
+        "narHash": "sha256-46b+5YWwF5k1vBBzsjSCrn6k8dkPuBYy2bqWhgFqCbQ=",
+        "owner": "ggml-org",
         "repo": "llama.cpp",
-        "rev": "c3ca02151d9429925a1083c5e96718125431082e",
+        "rev": "bb4caa7540188872173c44d161602d9271386413",
         "type": "github"
       },
       "original": {
-        "owner": "teto",
-        "ref": "teto/fish-completion",
+        "owner": "ggml-org",
         "repo": "llama.cpp",
         "type": "github"
       }
@@ -1440,18 +1439,18 @@
     "meli-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1786138262,
-        "narHash": "sha256-6pZfVKifozuTReUxkDGN28yWjEbE5q2dNJqxF52tofU=",
-        "owner": "teto",
-        "repo": "meli",
-        "rev": "1016b8c832b317b3dca398934a7df0aaf88d7844",
-        "type": "github"
+        "lastModified": 1787297540,
+        "narHash": "sha256-XuZM0xYVxGd3bQitI5SKk5894J//vy7qHMq+gtdByCg=",
+        "ref": "attempt-fix-700",
+        "rev": "d919122b982d7d5e5616c15467bf14e6ce557f08",
+        "revCount": 3099,
+        "type": "git",
+        "url": "https://git.meli-email.org/meli/meli.git"
       },
       "original": {
-        "owner": "teto",
-        "ref": "teto/add-completion",
-        "repo": "meli",
-        "type": "github"
+        "ref": "attempt-fix-700",
+        "type": "git",
+        "url": "https://git.meli-email.org/meli/meli.git"
       }
     },
     "memento-dev": {
@@ -1587,11 +1586,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1786665931,
-        "narHash": "sha256-q6OfJQzaF4sCFTdYQkVrivFtTJfn6tOXWZgh2+jSdWQ=",
+        "lastModified": 1787270553,
+        "narHash": "sha256-asLSl0KYWs5AGkN65V5Rd8UceXgbnajfHfkMQ4SBT6o=",
         "owner": "nix-community",
         "repo": "neovim-nightly-overlay",
-        "rev": "3e18c5a4359334e9aaaec6b3c265065c0987bf96",
+        "rev": "9f379da3a958d09abeb2b884b1e6c3f42f0c4233",
         "type": "github"
       },
       "original": {
@@ -1603,11 +1602,11 @@
     "neovim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1786664812,
-        "narHash": "sha256-dd8R90vbRRZRwx5591OeySSdN+GvowuRwgP8EYU0YHM=",
+        "lastModified": 1787269594,
+        "narHash": "sha256-FtIDSg4XlHcv84jU1+gpw60Q0eJTv3MVrJRSLhdEQBU=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "ca88ad10c8e9eeee2f2bf1bc73466d207663c4d2",
+        "rev": "af37d459a64df0697e2a20132ec79a17718a66cd",
         "type": "github"
       },
       "original": {

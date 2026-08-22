@@ -78,6 +78,12 @@ in
       };
   };
 
+  auditd.enable = true;
+  audit.enable = true;
+  audit.rules = [
+    "-a exit,always -F arch=b64 -S execve"
+  ];
+
   # Enable 'sudo' with SSH key
   # see https://github.com/serokell/deploy-rs/issues/299#issuecomment-3179359719
   # to avoid password when using deploy-rs

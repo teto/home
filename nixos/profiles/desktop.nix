@@ -1,8 +1,9 @@
 {
-  config,
-  lib,
+  # config,
+  # lib,
   pkgs,
   flakeSelf,
+  withSecrets,
   ...
 }:
 let
@@ -38,6 +39,7 @@ in
     flakeSelf.inputs.nix-index-database.nixosModules.nix-index
     flakeSelf.inputs.nix-cache-beacon.nixosModules.nix-cache-beacon
     flakeSelf.nixosModules.nvd
+    flakeSelf.nixosModules.tetos
 
     flakeSelf.nixosProfiles.universal
     flakeSelf.nixosProfiles.avahi
@@ -53,7 +55,7 @@ in
     # ./desktop/sops.nix
   ];
 
-  tetos.wireguard.enable = true;
+  tetos.wireguard.enable = withSecrets;
 
   # attempt to print japanese characters
   services.kmscon = {

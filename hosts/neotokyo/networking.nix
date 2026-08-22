@@ -27,7 +27,7 @@ lib.optionalAttrs (lib.debug.traceValFn (a: "SECRETS ? ${toString a}") withSecre
       peer = builtins.head lib.wireguard.clientPeers;
     in
     ''
-      ${lib.wireguard.mkPeerIp peer} ${peer.hostName} 
+      ${lib.wireguard.mkPeerIp peer.id} ${peer.hostName} 
       10.100.0.3    tatooine.vpn
       10.100.0.3    jedha.vpn
       10.100.0.4    home-assistant.vpn
