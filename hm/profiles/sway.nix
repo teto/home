@@ -416,8 +416,6 @@ in
       # host specific
       include ~/.config/sway/`hostname`/*
     '';
-    # exec swaymsg -t subscribe '["shutdown"]' && systemctl --user stop sway-session.target
-    # include ~/.config/sway/swayfx.txt
 
     extraOptions = [
       # "--verbose"

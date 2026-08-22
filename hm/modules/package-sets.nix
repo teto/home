@@ -657,8 +657,6 @@ in
           # hakuneko # X only
           anki-miner
           clanki # SRS in cli
-          # memento-with-ocr
-          # pkgs.clanki
 
           pkgs.python3Packages.videocr # to extract burn in subtitles
 
@@ -669,6 +667,10 @@ in
           jiten # unfree, helpful for jap.nvim
           sudachi-rs-full
           # sudachidict # exists in small/medium/large
+
+          pkgs.mokuro
+          pkgs.python3Packages.manga-ocr
+
         ];
 
       # xdg.dataFile."jmdict".source = pkgs.jmdict;
@@ -706,8 +708,8 @@ in
     (mkIf (cfg.japanese && cfg.llms) {
 
       home.packages = [
-        # pkgs.mokuro
-        # pkgs.python3Packages.manga-ocr
+        pkgs.mokuro
+        pkgs.python3Packages.manga-ocr
       ];
 
     })
