@@ -36,6 +36,7 @@ let
       publicHostKey = null;
       # favor jedha
       speedFactor = 2;
+      maxJobs = 8;
     } flakeSelf.nixosConfigurations.jedha
   );
 

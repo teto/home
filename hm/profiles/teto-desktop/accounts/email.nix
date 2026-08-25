@@ -172,7 +172,7 @@ let
     # folders.sent = "[Gmail]/Sent Mail";
 
     msmtp.enable = true;
-    aerc.enable = true;
+    aerc.enable = false;
     notmuch = {
       enable = true;
       # fqdn = "fastmail.com";

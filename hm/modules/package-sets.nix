@@ -139,6 +139,8 @@ in
             dependencies = oa.dependencies ++ oa.optional-dependencies.gui;
           }))
 
+          pi-coding-agent # to test as ACP provider for avante
+
           # pkgs.python3Packages.vllm
           # pkgs.repomix # to upload a codebase to llm
         ];
@@ -658,8 +660,6 @@ in
           anki-miner
           clanki # SRS in cli
 
-          pkgs.python3Packages.videocr # to extract burn in subtitles
-
           # https://github.com/NixOS/nixpkgs/pull/368909
           pkgs.kakasi # convert kanjis into kanas etc
           pkgs.kanji-stroke-order-font # for memento, font that shows strike order (!!) cool when learning
@@ -668,12 +668,13 @@ in
           sudachi-rs-full
           # sudachidict # exists in small/medium/large
 
-          pkgs.mokuro
-          pkgs.python3Packages.manga-ocr
+          pkgs.mokuro # generates .mokuro files with OCR-ed overlays. dope.
+          # pkgs.python3Packages.manga-ocr
+          # pkgs.python3Packages.videocr # to extract burn in subtitles
+          pkgs.videocr # translate hardcoded subtitles into soft subtitles
+          pkgs.subminer # mpv-related mining
 
         ];
-
-      # xdg.dataFile."jmdict".source = pkgs.jmdict;
     })
 
     (mkIf cfg.music-processing {
