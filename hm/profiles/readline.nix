@@ -2,6 +2,7 @@
   programs.readline = {
 
     enable = true;
+    includeSystemConfig = true;
     variables = {
       # taken from examples
       expand-tilde = true;
@@ -12,7 +13,6 @@
       show-mode-in-prompt = true;
       enable-bracketed-paste = true;
     };
-    includeSystemConfig = true;
     #
     bindings = {
       "\\e[1~" = "beginning-of-line";

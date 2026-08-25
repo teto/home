@@ -48,16 +48,20 @@ in
     ./hardware.nix
     ./networking.nix
     ./services/openssh.nix
+    ./services/home-assistant.nix
+    ./services/zigbee2mqtt.nix
     # ./services/mqtt.nix
 
     # TODO replace with systemd mdns
     # flakeSelf.nixosProfiles.avahi
     flakeSelf.nixosProfiles.router
     flakeSelf.nixosProfiles.universal
-    flakeSelf.nixosProfiles.home-assistant
 
   ];
 
+  documentation.man.enable = true;
+
+  # mkForce ?
   environment.systemPackages = with pkgs; [
     # disabled for now to reduce memory print
     # flashrom # to be able to flash the bios see https://teklager.se/en/knowledge-base/apu-bios-upgrade/
@@ -91,7 +95,6 @@ in
       # flakeSelf.homeModules.teto-nogui
       flakeSelf.homeModules.neovim
       flakeSelf.homeProfiles.readline
-      # ./teto/nix.nix # done at
     ];
 
     home.packages = [

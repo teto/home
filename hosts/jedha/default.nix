@@ -91,16 +91,22 @@ in
 
   boot =
     let
-      kernelPkgs = pkgs.linuxKernel.packages.linux_7_1;
+      kernelPkgs = pkgs.linuxKernel.packages.linux_7_2;
     in
     {
       consoleLogLevel = 6;
       kernelPackages = kernelPkgs;
-      blacklistedKernelModules = [ "nouveau" ];
+      blacklistedKernelModules = [
+        "nouveau"
+      ];
       extraModulePackages = [
-
         kernelPkgs.r8125
       ];
+      #  disable energy mgmt on wifi card
+      extraModprobeConfig = ''
+        options r8125 aspm=0
+
+        '';
 
       # Ensure initrd has resume support
       # initrd.luks.devices."crypted".allowDiscards = true;
@@ -142,6 +148,10 @@ in
 
       # hide messages !
       kernelParams = [
+        #  Some built-in drivers—not compiled as loadable modules—require kernel command-line parameters instead:
+
+
+
         # used with resumeDevice. computed by filefrag -v /fucking_swap
         # "resume_offset=692224"
         "resume_offset=55296"
@@ -209,14 +219,6 @@ in
         echo 'enabled' > '/sys/class/net/wlp10s0/device/power/wakeup';
       '';
     };
-  };
-
-  nix.settings = {
-
-    trusted-public-keys = [
-      # (builtins.readFile ./tatooine-signing-key.pub)
-      "tatooine-signing-key:T2TGDnv8CCFbIVd75Y+5oriAknm7FXJTLfdC3MOuMyg="
-    ];
   };
 
   # to test bitwig

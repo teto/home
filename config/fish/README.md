@@ -1,0 +1,2 @@
+- ctrl-o to ask LLM for answer
+- 

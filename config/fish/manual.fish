@@ -44,6 +44,15 @@ set fish_cursor_external line
 set fish_cursor_visual block
 
 
+# https://fishshell.com/docs/current/cmds/abbr.html
+# and pressing space or enter, the full text git checkout will appear in the command line. To avoid expanding something that looks like an abbreviation, the default ctrl-space binding inserts a space without expandin
+abbr -a L --position anywhere --set-cursor "% | less"
+
+function nvim_edit
+    echo nvim $argv
+end
+abbr -a nvim_edit_texts --position command --regex ".+\.txt" --function nvim_edit
+
 # tide config
 # set tide_cmd_duration_threshold 3000
 

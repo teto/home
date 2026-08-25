@@ -112,11 +112,6 @@ let
   '';
 in
 {
-
-  #additionalModuleos defaultJellyfinPort
-
-  # users.users.nginx.extraGroups = [ "acme" ];
-
   services.nginx = {
 
     # tailscaleAuth.enable
@@ -175,7 +170,7 @@ in
           '';
 
           # Makes this vhost the default.
-          # default = true;
+          default = true;
 
           forceSSL = true;
           # https://nixos.org/manual/nixos/stable/index.html#module-security-acme

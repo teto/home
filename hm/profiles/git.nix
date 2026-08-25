@@ -8,7 +8,7 @@
 {
 
   # for aws-vault ?
-  home.file.".ssh/allowed_signers".text = "* ${builtins.readFile ../../perso/keys/id_rsa.pub}";
+  # home.file.".ssh/allowed_signers".text = "* ${builtins.readFile ../../perso/keys/id_rsa.pub}";
 
   programs.git = {
     enable = true;

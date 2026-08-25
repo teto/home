@@ -6,6 +6,8 @@ alias nf='nix flake'
 alias nb1='nix build --option builders "$TETOS_0" -j0'
 alias n1='nix develop --option builders "$TETOS_0" -j0'
 alias n2='nix develop --option builders "$TETOS_1" -j0'
+
+alias J=jjui
 #
 alias nrc="nix repl --expr 'import <nixpkgs> { config.cudaSupport = true; config.allowUnfree = true; }'"
 
@@ -14,7 +16,6 @@ alias nrc="nix repl --expr 'import <nixpkgs> { config.cudaSupport = true; config
 alias reboot-windows="systemctl --boot-loader-entry=auto-windows reboot"
 
 # Haskell related aliases{{{
-alias nhs98="nix develop \$HOME/home#nhs98"
 alias nhs910="nix develop \$HOME/home#nhs910"
 alias nhs912="nix develop \$HOME/home#nhs912"
 # }}}
