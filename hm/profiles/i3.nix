@@ -28,8 +28,6 @@ in
   };
 
   home.packages = with pkgs; [
-    # xbacklight # for usage with i3pystatus backight module
-    # i3-layout-manager  # to save/load layouts
     arandr # to move screens/monitors around
     # xclip
     xcwd

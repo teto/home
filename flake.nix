@@ -193,10 +193,10 @@
     #   url = "github:ahlinc/tree-sitter";
     #   flake = false;
     # };
-    neovide = {
-      url = "github:neovide/neovide";
-      flake = false;
-    };
+    # neovide = {
+    #   url = "github:neovide/neovide";
+    #   flake = false;
+    # };
     # waybar.url = "github:Alexays/Waybar";
     # todo update for ci ?
     nixpkgs = {

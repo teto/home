@@ -139,7 +139,7 @@ in
             dependencies = oa.dependencies ++ oa.optional-dependencies.gui;
           }))
 
-          pi-coding-agent # to test as ACP provider for avante
+          pkgs.pi-coding-agent # to test as ACP provider for avante
 
           # pkgs.python3Packages.vllm
           # pkgs.repomix # to upload a codebase to llm
@@ -691,6 +691,9 @@ in
         pkgs.cointop # crypto only
         pkgs.gloomberb # bun
         pkgs.wealthfolio # node
+        pkgs.stonks-cli
+        # pkgs.ticker # bof
+        # pkgs.mop # bof2
       ];
     })
 
