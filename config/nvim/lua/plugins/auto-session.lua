@@ -28,4 +28,4 @@ require('auto-session').setup({
 })
 
 -- used to be obsession
-vim.keymap.set('n', '<Leader>$', '<Cmd>SessionSave<CR>')
+vim.keymap.set('n', '<Leader>$', '<Cmd>AutoSession save<CR>')

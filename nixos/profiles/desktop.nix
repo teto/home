@@ -1,6 +1,6 @@
 {
   # config,
-  # lib,
+  lib,
   pkgs,
   flakeSelf,
   withSecrets,
@@ -66,17 +66,6 @@ in
     };
   };
 
-  fonts.enableDefaultPackages = true;
-
-  console = {
-    # seems like a kernel bug resets it https://github.com/NixOS/nixpkgs/issues/413128
-    earlySetup = true;
-    font = "${pkgs.terminus_font}/share/consolefonts/ter-i28b.psf.gz";
-    # font = "ter-v32n"; # Terminus font, larger size
-    packages = [ pkgs.terminus_font ];
-    useXkbConfig = true;
-  };
-
   # TODO move to lemurs ?
   # exec ${lib.getExe config.programs.sway.package}
   environment.etc."lemurs/wayland/sway-systemd" = {
@@ -91,6 +80,33 @@ in
       systemctl start --user --wait sway-session.service
     '';
   };
+
+  # service-name
+  #              is the friendly name the service is known by and looked up
+  #              under.  It is case sensitive.  Often, the client program is
+  #              named after the service-name.
+  #
+  #       port   is the port number (in decimal) to use for this service.
+  #
+  #       protocol
+  #              is the type of protocol to be used.  This field should
+  #              match an entry in the protocols(5) file.  Typical values
+  #              include tcp and udp.
+  #
+  #       aliases
+  #              is an optional space or tab separated list of other names
+  #              for this service.  Again, the names are case sensitive.
+  #
+  # sources
+  #      services.source = pkgs.iana-etc + "/etc/services";
+  #
+  ## /etc/protocols: IP protocol numbers.
+  # protocols.source = pkgs.iana-etc + "/etc/protocols";
+  # nusrp            49001/tcp  # Nuance Unity Service Request Protocol
+  environment.etc.services.text = lib.mkForce ''
+    piper   10200/tcp
+    hass    8123/tcp
+  '';
 
   # see https://github.com/NixOS/nixpkgs/issues/15293
   # Set your time zone.
@@ -107,13 +123,14 @@ in
   ];
 
   # let home-manager do it
-  # xdg.portal = {
-  #  # https://github.com/flatpak/xdg-desktop-portal/blob/1.18.1/doc/portals.conf.rst.in
-  #  enable = true;
-  #  xdgOpenUsePortal = true;
+  xdg.portal = {
+    #  # https://github.com/flatpak/xdg-desktop-portal/blob/1.18.1/doc/portals.conf.rst.in
+    #  enable = true;
+    #  xdgOpenUsePortal = true;
 
-  #  # is this in configuration.nix ?
-  #  config.common.default = "*";
+    #  # is this in configuration.nix ?
+    config.common.default = "*";
+  };
   #              # {
   #              #   common = {
   #              #     default = [
@@ -139,9 +156,17 @@ in
 
   # };
 
-  environment.systemPackages = [
-    pkgs.noto-fonts-cjk-sans
-  ];
+  environment.systemPackages =
+    let
+      # loop over those
+      resticWrapper =
+        flakeSelf.nixosConfigurations.neotokyo.config.services.restic.backups.nextcloud-to-backblaze.generatedWrapper;
+    in
+    [
+      pkgs.noto-fonts-cjk-sans
+      resticWrapper
+      flakeSelf.nixosConfigurations.neotokyo.config.services.restic.backups.immich-db-to-backblaze.generatedWrapper
+    ];
 
   hardware = {
     enableAllFirmware = true;

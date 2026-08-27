@@ -27,26 +27,29 @@ max_height      = 900
 image_filter    = "triangle"
 image_quality   = 75
 sixel_fraction  = 15
-ueberzug_scale  = 1
-ueberzug_offset = [ 0, 0, 0, 0 ]
 
+# ueberzug_scale  = 1
+# ueberzug_offset = [ 0, 0, 0, 0 ]
+
+# defaults are good enough ?
 [opener]
-edit = [
-	{ run = '${EDITOR:=nvim} "$@"', desc = "$EDITOR", block = true, for = "unix" },
-]
-open = [
-	{ run = 'xdg-open "$1"',                desc = "xdg-open", for = "linux" , block = true },
-]
-open-external = [
-	# todo use gio launch ?
-	{ run = 'xdg-open "$1"',                desc = "xdg-open", for = "linux" , block = true },
-]
-reveal = [
-	{ run = '''exiftool "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show EXIF", for = "unix" },
-]
-extract = [
-	{ run = 'unar "$1"', desc = "Extract here" },
-]
+# edit = [
+# 	{ run = '${EDITOR:=nvim} "$@"', desc = "$EDITOR", block = true, for = "unix" },
+# ]
+# open = [
+# 	{ run = 'xdg-open "$1"', desc = "xdg-open", for = "linux" , block = true },
+# ]
+# open-external = [
+# 	# todo use gio launch ?
+# 	{ run = 'xdg-open "$1"', desc = "xdg-open", for = "linux" , block = true },
+# ]
+# reveal = [
+# 	{ run = '''exiftool "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show EXIF", for = "unix" },
+# ]
+# extract = [
+# 	{ run = 'unar "$1"', desc = "Extract here" },
+# ]
+
 extract-ouch = [
 	{ run = 'ouch d -y "$@"', desc = "Extract here with ouch", for = "unix" }
 ]
@@ -55,13 +58,15 @@ extract_zlib = [
 	{ run = 'pigz -dc "$1"', desc = "Extract zlib here" },
 	# { run = 'nvim "$1"', desc = "Extract zlib here" },
 ]
-play = [
-	{ run = 'mpv %s', orphan = true, for = "unix" , desc = "Open with mpv"},
-	{ run = '''mediainfo "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show media info", for = "unix" },
-]
-nix = [
+# play = [
+# 	{ run = 'mpv %s', orphan = true, for = "unix" , desc = "Open with mpv"},
+# 	{ run = '''mediainfo "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show media info", for = "unix" },
+# ]
 
-]
+# eval / build / deploy
+# nix = [
+#
+# ]
 
 [open]
 rules = [
@@ -70,7 +75,7 @@ rules = [
 	{ mime = "text/*",  use = [ "edit", "reveal" ] },
 	# { mime = "image/*", use = [ "open", "reveal" ] },
 	{ mime = "video/*", use = [ "play", "reveal" ] },
-	# { mime = "audio/*", use = [ "play", "reveal" ] },
+	{ mime = "audio/*", use = [ "play", "open" ] },
 	# { mime = "inode/x-empty", use = [ "edit", "reveal" ] },
 
 	# { mime = "application/json", use = [ "edit", "reveal" ] },
@@ -119,7 +124,8 @@ preloaders = [
 prepend_previewers = [
   # sync = true
   { mime = "message/rfc822", run = "code" },
-  { mime = "audio/*", run = "zaz" },
+  # wth is that
+  # { mime = "audio/*", run = "zaz" },
   # Archive previewer
   # file -bL --mime-type
  	{ mime = "application/*zip",            run = "ouch" },

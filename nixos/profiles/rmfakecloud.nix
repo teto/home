@@ -1,8 +1,5 @@
 {
   config,
-  lib,
-  pkgs,
-  secrets,
   ...
 }:
 {
@@ -12,7 +9,7 @@
     # values at LOGLEVEL
     environmentFile = null; # "/etc/secrets/rmfakecloud.env";
     # storageUrl = "remarkable.${secrets.jakku.hostname}";
-    storageUrl = "http://tatooine.local";
+    storageUrl = "http://${config.networking.hostName}.local";
     # services.rmfakecloud.storageUrl
     #     URL used by the tablet to access the rmfakecloud service.
 

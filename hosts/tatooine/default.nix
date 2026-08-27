@@ -119,7 +119,9 @@ in
   # it is necessary to use dnssec though :(
   # hostId
   networking.hostName = "tatooine"; # Define your hostname.
-  networking.domain = ".local";
+  # networking.domain = ".local";
+  networking.search = [ "vpn" ];
+
 
   hardware = {
     enableAllFirmware = true;
@@ -223,6 +225,12 @@ in
   # smartcard service for yubikey
   # can conflict with gpg-agent depending on config
   system.stateVersion = "26.05";
+
+  # apparently deprecated / replaced by https://github.com/OHF-Voice/linux-voice-assistant
+  # which is not packaged (yet)
+  # services.wyoming.satellite = {
+  #   enable = true;
+  # };
 
   services.journald.extraConfig = ''
     # alternatively one can run journalctl --vacuum-time=2d

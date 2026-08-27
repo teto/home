@@ -3,7 +3,7 @@
   lib,
   ...
 }:
-let 
+let
   server = config.networking.hostName;
 in
 {
@@ -26,22 +26,21 @@ in
         proxy_set_header Connection $connection_upgrade;
       '';
     };
-    }
-    # check llama-cpp
-    // lib.optionalAttrs config.home-manager.users.teto.services.llama-cpp.enable {
-      "llamacpp.${server}" = {
-        enableACME = false;
-        forceSSL = false;
-
-      };
-    }
-    // lib.optionalAttrs config.services.wyoming.openwakeword.enable {
-      "wyoming.${server}" = {
-        enableACME = false;
-        forceSSL = false;
-
-      };
+  }
+  # check llama-cpp
+  // lib.optionalAttrs config.home-manager.users.teto.services.llama-cpp.enable {
+    "llamacpp.${server}" = {
+      enableACME = false;
+      forceSSL = false;
 
     };
-}
+  }
+  // lib.optionalAttrs config.services.wyoming.openwakeword.enable {
+    "wyoming.${server}" = {
+      enableACME = false;
+      forceSSL = false;
 
+    };
+
+  };
+}

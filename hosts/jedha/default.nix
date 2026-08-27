@@ -1,5 +1,4 @@
 {
-  config,
   flakeSelf,
   # modulesPath,
   withSecrets,
@@ -11,22 +10,22 @@ let
   haumea = flakeSelf.inputs.haumea;
 
   # NOT READY YET
-  autoloadedHmModule =
-    { pkgs, ... }@args:
-    haumea.lib.load {
-      src = lib.fileset.toSource {
-        root = ./home-manager/users/teto;
-        fileset = ./home-manager/users/teto;
-      };
-
-      inputs = args // {
-        # inputs = flakeSelf.inputs;
-      };
-      transformer = [
-        haumea.lib.transformers.liftDefault
-        (haumea.lib.transformers.hoistLists "_imports" "imports")
-      ];
-    };
+  # autoloadedHmModule =
+  #   { pkgs, ... }@args:
+  #   haumea.lib.load {
+  #     src = lib.fileset.toSource {
+  #       root = ./home-manager/users/teto;
+  #       fileset = ./home-manager/users/teto;
+  #     };
+  #
+  #     inputs = args // {
+  #       # inputs = flakeSelf.inputs;
+  #     };
+  #     transformer = [
+  #       haumea.lib.transformers.liftDefault
+  #       (haumea.lib.transformers.hoistLists "_imports" "imports")
+  #     ];
+  #   };
 
   autoloadedNixosModule =
     { pkgs, ... }@args:
@@ -62,6 +61,7 @@ in
     flakeSelf.nixosProfiles.nix-daemon
     flakeSelf.nixosProfiles.gnome
     flakeSelf.nixosProfiles.nix-ld # for avante
+    flakeSelf.nixosProfiles.wyoming
 
     flakeSelf.nixosProfiles.steam
     flakeSelf.nixosProfiles.universal
@@ -98,15 +98,15 @@ in
       kernelPackages = kernelPkgs;
       blacklistedKernelModules = [
         "nouveau"
+        # The in-tree r8169 driver supports the RTL8125.  Do not let the
+        # out-of-tree r8125 module compete for the same PCI device.
+        "r8125"
       ];
-      extraModulePackages = [
-        kernelPkgs.r8125
-      ];
-      #  disable energy mgmt on wifi card
+      # The MT7922 is prone to losing its link after entering PCIe ASPM even
+      # though NetworkManager-level Wi-Fi power saving is disabled.
       extraModprobeConfig = ''
-        options r8125 aspm=0
-
-        '';
+        options mt7921e disable_aspm=1
+      '';
 
       # Ensure initrd has resume support
       # initrd.luks.devices."crypted".allowDiscards = true;
@@ -149,8 +149,6 @@ in
       # hide messages !
       kernelParams = [
         #  Some built-in drivers—not compiled as loadable modules—require kernel command-line parameters instead:
-
-
 
         # used with resumeDevice. computed by filefrag -v /fucking_swap
         # "resume_offset=692224"
@@ -231,5 +229,5 @@ in
   # '';
 
   # TODO passer a 26.05
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
 }

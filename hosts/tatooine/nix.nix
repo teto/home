@@ -21,6 +21,5 @@
       "http://jedha.local?priority=10&retry-attempts=2&retry-max-delay=1000"
     ];
 
-    # secret-key-files = "${secretsFolder}/nix/tatooine-signing-key";
   };
 }

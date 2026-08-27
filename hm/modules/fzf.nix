@@ -175,6 +175,9 @@ in
       programs.zsh.initContent = "source ${fzf-git-sh}/share/fzf-git-sh/fzf-git.sh";
 
       programs.bash.initExtra = "source ${fzf-git-sh}/share/fzf-git-sh/fzf-git.sh";
+
+      # interactiveShellInit
+      programs.fish.interactiveShellInit = "source ${fzf-git-sh}/share/fzf-git-sh/fzf-git.fish";
     })
 
     # actually exists already "cliphist-fzf"

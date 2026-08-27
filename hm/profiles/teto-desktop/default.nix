@@ -3,8 +3,10 @@
   pkgs,
   lib,
   config,
-  withSecrets,
+  osConfig,
+  # withSecrets,
   secretsFolder,
+  secrets,
   dotfilesPath,
   ...
 }:
@@ -96,7 +98,7 @@ in
     [
       # bottles  # to install games
       mdcat # markdown viewer
-      (ignoreBroken mitmproxy) # help catch http traffic
+      mitmproxy # help catch http traffic
       notmuch # needed for waybar-custom-notmuch.sh
 
       neovim-dbg # when neovim crashes, launch "nvim-debug" to debug
@@ -104,6 +106,8 @@ in
       ffsubsync # to sync subtitles
       # TODO provide debug package under different executable "nvim-debug"
 
+      # qalc --exrates '100 EUR to CHF' to update rates from net
+      libqalculate
       # panvimdoc # to generate vim doc from README, for instance in gp.nvim
       pciutils # for lspci
 
@@ -145,7 +149,8 @@ in
   home.shellAliases = {
 
     # add --remote-build if you meet signature issues
-    deploy-neotokyo = "deploy '.#neotokyo' -s --interactive-sudo=true -- --override-input nixpkgs /home/teto/nixpkgs";
+    # pass as shellAbbr
+    # deploy-neotokyo = "deploy '.#neotokyo' -s --interactive-sudo=true -- --override-input nixpkgs /home/teto/nixpkgs";
 
     # lg = "lazygit";
     y = "yazi";
@@ -157,9 +162,9 @@ in
 
     n = "nix develop";
 
-    n1 = ''nix develop --option builders "$TETOS_0" -j0'';
+    n1 = ''nix develop --option builders "$TETOS_BUILDER_NIXCOMMUNITY" -j0'';
     n2 = ''nix develop --option builders "$TETOS_1" -j0'';
-    nr1 = ''nix run --option builders "$TETOS_0" -j0'';
+    nr1 = ''nix run --option builders "$TETOS_BUILDER_NIXCOMMUNITY" -j0'';
     nr2 = ''nix run --option builders "$TETOS_1" -j0'';
 
     # trans aliases{{{
@@ -182,10 +187,15 @@ in
     CDPATH = "$HOME/plugins";
 
   }
-  // lib.optionalAttrs withSecrets {
-    TETOS_0 = builder_neotokyo;
-    TETOS_1 = builder_jedha;
-    TETOS_2 = builder_nixcommunity;
+  // lib.optionalAttrs osConfig.tetos.withSecrets {
+    # customsearch cancelled ffs
+    # GOOGLE_SEARCH_ENGINE_ID="64ff2b96809e947cc";
+    # GOOGLE_SEARCH_API_KEY=secrets.google.customsearch_api_key;
+    TETOS_BUILDER_NEOTOKYO = builder_neotokyo;
+    TETOS_BUILDER_JEDHA = builder_jedha;
+    TETOS_BUILDER_NIXCOMMUNITY = builder_nixcommunity;
+    inherit (secrets) TAVILY_API_KEY;
+
   };
 
   home.sessionSearchVariables = {
@@ -197,24 +207,10 @@ in
     ];
   };
 
-  # rofi module doesn't have extraConfig
-  # https://github.com/davatorium/rofi/blob/next/doc/rofi-theme.5.markdown
-  # @theme "gruvbox-light"
-  # home.file."${config.programs.rofi.configPath}".text = ''
-  #   ?import "${config.xdg.configHome}/rofi/manual.rasi"
-  #
-  #   @import "${config.xdg.cacheHome}/wallust/colors.rasi"
-  #
-  # '';
-
-  # for aws-vault ?
   # "* ${builtins.readFile ../../../perso/keys/id_rsa.pub}";
-
   home.file.".ssh/allowed_signers".text = ''
     ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDC/+rkPJvHRlXBuOI7NSQTAXBBsFjjcKchNm+hIs1kpwrpwNvEQUg1U2xuLvS5AEBdFdqUn6V67uGB6sfSDwS7dUakV5E9Cvmadw0cenZ7DSMaUAqMqAhVtY2Rzx3iNfD2sDBItdU9lyXrg6rwl0nPy+EfJPItV/wvJnI7a8dxdNf0PbbdZTQLDPpGlRec4+tvPQNvwRl5x5Y39jWqtTUrRDF11d/b99lcIaihnPvlRi53FfvypwdMuFf81Ufc/4klAP80GTYIDlWh1juMCF0tIp0rb5iE4+ABbTVAczE2iO8lYYGtqOPe/YGJ+7RwrGnDVdwhsq3A9iT76T2mvLtn teto@tatooine
-    '';
-
-
+  '';
 
   package-sets = {
 

@@ -57,7 +57,6 @@
 
         # ensure file is readable by `systemd-network` user
         PrivateKeyFile = config.sops.secrets.wg-private-key.path;
-        # PrivateKeyFile = "${secretsFolder}/wireguard/tatooine-private-key";
 
         # To automatically create routes for everything in AllowedIPs,
         # add RouteTable=main

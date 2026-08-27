@@ -1,9 +1,9 @@
 {
   secretsFolder,
-  withSecrets,
+  osConfig,
   lib,
 }:
-lib.optionalAttrs withSecrets {
+lib.optionalAttrs osConfig.tetos.withSecrets {
   # SECRETS appear in ~/.config/sops-nix/secrets/*
 
   # This will add secrets.yml to the nix store

@@ -40,52 +40,6 @@
       timeout = 60;
     };
 
-    # links = {
-    #   wired = {
-    #     matchConfig = {
-    #              Name = "enp11s0";
-    #            };
-    #   };
-    #
-    #   # wlp10s0
-    #
-    # };
-
-    # netdevs = {
-    #
-    #   # wlp10s0
-    #    wireless = {
-    #      # add it to secrets
-    #
-    #      # security =
-    #      netdevConfig = {
-    #              # Kind = "bridge";
-    #              # Name = "mybridge";
-    #
-    #        # Description = "toto";
-    #       # SSID = "neotokyo";
-    #       # KeyManagement = "wpa-psk";
-    #      };
-    #
-    #       # wlanConfig = {
-    #       #
-    #       # };
-    #       # Security = {
-    #       #   Passphrase = secrets.router.password;
-    #       # };
-    #
-    #       extraConfig = ''
-    #
-    #         [Security]
-    #         Passphrase = toto
-    #
-    #         '';
-    #
-    #   };
-    # };
-
-    # enable = true;
-
     networks = {
       "50-wg0" = {
         matchConfig.Name = "wg0";

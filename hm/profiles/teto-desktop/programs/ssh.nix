@@ -11,7 +11,7 @@ let
   # TODO filter out the configurations ending with -no-secret ?
   # could remove it afterwards instead
   hostsConfigs = lib.mapAttrs (_: val: lib.genSshClientConfig val) (
-    lib.filterAttrs (name: _val: lib.hasSuffix "-no-secrets" name) flakeSelf.nixosConfigurations
+    lib.filterAttrs (name: val: builtins.trace "nixosConfig ssh dest: ${name} has secrets ? ${toString val.config.tetos.withSecrets}"  val.config.tetos.withSecrets) flakeSelf.nixosConfigurations
   );
 in
 {
@@ -27,11 +27,9 @@ in
   # avoids nasty warning
   enableDefaultConfig = false;
 
-  # TODO generate those from the list of nixosConfigurations ?
   # can I have it per target ?
   # controlPath = "";
   # HashKnownHosts no
-  # Match localnetwork
   settings =
     # TODO we could customize them, with sendEnv for instance ?
     hostsConfigs // {
@@ -44,7 +42,6 @@ in
         # port = secrets.jakku.sshPort;
 
         extraOptions = {
-          # test = "toto";
         };
       };
 

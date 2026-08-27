@@ -17,7 +17,6 @@ let
     lib.optional (cfg.verbose) "--verbose"
     ++ lib.optional (cfg.configFile != null) "-C ${cfg.configFile}";
 in
-# ++ [ (concatMapStringsSep " -a" (a: a.name) mujmapAccounts) ];
 {
   meta.maintainers = [ ];
 
@@ -89,6 +88,7 @@ in
             # ''}
             {
               Type = "oneshot";
+              SyslogIdentifier = mkMujmapServiceName name;
               # TODO should be
               ExecStart = "${cfg.package}/bin/mujmap -C ${config.accounts.email.maildirBasePath}/fastmail sync ${lib.concatStringsSep " " mujmapOptions}";
             };

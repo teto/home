@@ -287,6 +287,7 @@ vim.g.loaded_matchit = 1
 vim.opt.shortmess:append('I')
 vim.opt.foldlevel = 99
 vim.opt.mousemoveevent = true
+vim.opt.isfname:remove('=')
 
 vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
 

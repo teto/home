@@ -14,8 +14,6 @@ let
   neovim = import ./neovim.nix { inherit flakeSelf lib; };
   wireguard = import  ./wireguard.nix { inherit secrets flakeSelf lib secretsFolder; };
 
-  # myPkgs = pkgs;
-
 in
 {
   inherit
@@ -90,6 +88,12 @@ in
         flakeSelf.inputs.sops-nix.nixosModules.sops
         flakeSelf.inputs.hm.nixosModules.home-manager
 
+        # own module
+        flakeSelf.nixosModules.tetos
+        {
+            tetos.withSecrets = true;
+        }
+
       ]
       ++ modules;
 
@@ -142,6 +146,7 @@ in
 
   # generate a client ssh config from the server config
   # https://fmartingr.com/blog/2022/08/12/using-ssh-config-match-to-connect-to-a-host-using-multiple-ip-or-hostnames/
+  # Match localnetwork
   genSshClientConfig =
     # value is one of nixosConfigurations.<ENTRY>
     value:
@@ -155,7 +160,12 @@ in
         # lib.warn if "teto" is not in users.users
         {
           # or false) 
-          header = ''Match host="${mcfg.networking.hostName},${mcfg.networking.domain}${lib.optionalString (mcfg.tetos.wireguard.enable or false) ",${mcfg.networking.hostName}.vpn"}"'';
+          header = ''Match host=${mcfg.networking.hostName}''
+          # let resolved handle expansion for now ?!
+          # + lib.optionalString (mcfg.networking.domain != null) ",${mcfg.networking.hostName}.${mcfg.networking.domain}" 
+          # + lib.optionalString (mcfg.tetos.wireguard.enable or false) ",${mcfg.networking.hostName}.vpn"
+          ;
+
           # assumption ? or check/warn it has it ?
           # user = "teto";
           identityFile = "${secretsFolder}/ssh/id_rsa";
@@ -163,7 +173,9 @@ in
           identitiesOnly = true;
           # extraOptions = {
           AddKeysToAgent = "yes";
-
+          CanonicalizeHostname = true;
+          CanonicalDomains = [ "local" "vpn" ];
+          # set domain to null ?
           # TODO  set it depending if hostName is FQDN ?
           # HostName = lib.throwIf (
           #   mcfg.networking.domain == null

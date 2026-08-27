@@ -149,7 +149,7 @@ in
       "_tls-catchall" = {
         # doesn't act as default because doesn't have force
         default = true;
-        addSSL = false;
+        addSSL = true;
         # use step-ca instead
         #               # proxyPass = "http://unix:${webUnixSocket}";
         # sslCertificate = "/path/to/internal-cert.pem";

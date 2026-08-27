@@ -121,7 +121,7 @@ switch:
          --override-input hm {{ HM_REPO }}
 
 # builds everything on remote
-switch-remote: (nixos-rebuild "switch" "--option builders \"$TETOS_0\" -j0")
+switch-remote: (nixos-rebuild "switch" "--option builders \"$TETOS_BUILDER_NIXCOMMUNITY\" -j0")
 
 rollback: (nixos-rebuild "switch" "--rollback")
 

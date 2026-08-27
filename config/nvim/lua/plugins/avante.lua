@@ -183,10 +183,14 @@ opts = {
     },
     web_search_engine = {
         -- todo pass key
-        provider = 'tavily', -- tavily, serpapi, google, kagi, brave, or searxng
+        -- provider = 'google', -- tavily, serpapi, google, kagi, brave, or searxng
         proxy = nil, -- proxy support, e.g., http://127.0.0.1:7890
     },
+    disabled_tools = {
+        'web_search_tavily',
+    },
     custom_tools = {
+        require('avante.llm_tools.web_search').web_search_google,
         -- {
         --     name = 'run_model_manager_tests', -- Unique name for the tool
         --     description = 'run the ModelManagerSpec',
@@ -310,10 +314,11 @@ local valid_file, nix_deps = pcall(require, 'generated-by-nix')
 
 local jedha_default_model
 -- = 'ministral3-8b'
+-- 3.8
 jedha_default_model = 'qwen3.6-dense'
 
 -- so it inherited the model
-local res = mk_llama_provider('jedha.vpn:8080', jedha_default_model, {
+local res = mk_llama_provider('jedha.vpn:9931', jedha_default_model, {
 
     -- check default prompt w/o
     disable_tools = false,
