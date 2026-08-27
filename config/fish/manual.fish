@@ -67,4 +67,11 @@ abbr -a nvim_edit_texts --position command --regex ".+\.txt" --function nvim_edi
 # Example: Custom key bindings
 # bind \cf forward-char
 
+abbr --add -- re 'nixos-rebuild \
+      --flake ~/home \
+      --sudo --keep-going \
+      --override-input nixpkgs ~/nixpkgs \
+      --override-input hm ~/hm'
+
+abb --add --set-cursor -- build-nom 'nom build .#nixosConfigurations.%.config.system.build.toplevel'
 
