@@ -1,6 +1,5 @@
 {
   config,
-  lib,
   pkgs,
   ...
 }:
@@ -149,12 +148,47 @@ in
     "..." = "cd ../..";
   };
 
-  # to install plugins on nixos do
-  # environment.systemPackages = with pkgs; [
-  #   fishPlugins.done
-  #   fishPlugins.forgit
-  #   fishPlugins.grc
-  # ];
+  shellAbbrs = {
+    # abbr --add git-clone-url --position command --regex --function git_clone_url
+    "git-clone-url" = {
+          position = "command";
+          expansion = "--color";
+          regex = ".+\.git";
+          function = "git_clone_url";
+    };
+
+    # abbr --add --set-cursor -- build-nom 'nom build .#nixosConfigurations.%.config.system.build.toplevel'
+    build-nom = {
+      # position = "curs
+      setCursor = true;
+      command = "nom build .#nixosConfigurations.%.config.system.build.toplevel";
+
+    };
+    # rollback = {
+    #   # position = "curs
+    #   setCursor = true;
+    #   command = "nom build .#nixosConfigurations.%.config.system.build.toplevel";
+    #
+    # };
+    http-models = {
+      command = "http get jedha.vpn:8080/models";
+    };
+# abbr --add -- re 'nixos-rebuild \
+#       --flake ~/home \
+#       --sudo --keep-going \
+#       --override-input nixpkgs ~/nixpkgs \
+#       --override-input hm ~/hm'
+
+    tetos-sw = {
+      # switch-remote: (nixos-rebuild "switch" "--option builders \"$TETOS_0\" -j0")
+        command = "nh os switch ~/home -- --keep-going \
+         --override-input nixpkgs ~/nixpkgs \
+         --override-input hm ~/hm";
+
+
+    };
+  };
+
 
   # these are added to ~/.config/fish/conf.d
   # use { name = ... ; src = drv }
@@ -229,7 +263,6 @@ in
 
   # Source manual configuration file
   interactiveShellInit = ''
-    abbr --add git-clone-url --position command --regex '.+\.git' --function git_clone_url
 
     # 'done' plugin config
     set -U __done_min_cmd_duration 5000  # default: 5000 ms

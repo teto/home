@@ -25,24 +25,32 @@ let
   };
 in
 {
+  # Put the hostname or IP address of the device running your Wyoming service (such as Piper, Whisper, or OpenWakeWord
+  # so I need only one ?
   services.wyoming.piper.servers = {
-    "en" = {
+    "fr" = {
       enable = true;
-      voice = "fr_FR-semaine-medium";
+      # see https://rhasspy.github.io/piper-samples/#fr_FR-mls-medium
+      voice = "fr_FR-mls-medium";
+      # voice = "fr_FR-semaine-medium";
       uri = "tcp://${server}:10200";
+      # zeroconf
+      # useCUDA = pkgs.config.cudaSupport;
     };
   };
 
+  # Looks ok
   services.wyoming.faster-whisper.servers = {
     "medium-en" = {
       enable = true;
       model = "medium-int8";
       language = "en";
       uri = "tcp://${server}:10301";
-      device = "cuda";
+      # device = "cuda";
     };
   };
 
+  # by default it is on tcp://0.0.0.0:10400
   services.wyoming.openwakeword = {
     enable = true;
     # package = 

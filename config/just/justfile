@@ -88,8 +88,8 @@ mail-sync:
     # systemctl start --user mujmap-fastmail.service
 
 # generate database executable -> nix attributes
-nixpkgs-index:
-    rippkgs-index nixpkgs {{ NIXPKGS_REPO }} --index ~/.local/share/rippkgs-index.sqlite
+# nixpkgs-index:
+#     rippkgs-index nixpkgs {{ NIXPKGS_REPO }} --index ~/.local/share/rippkgs-index.sqlite
 
 # TODO finish
 nix-index args:
@@ -125,8 +125,8 @@ switch-remote: (nixos-rebuild "switch" "--option builders \"$TETOS_0\" -j0")
 
 rollback: (nixos-rebuild "switch" "--rollback")
 
-http-ask-models:
-    http get jedha.vpn:8080/models
+# http-ask-models:
+#     http get jedha.vpn:8080/models
 
 # builders, le path: envoye le dossier git avec, pas ouf
 [private]
