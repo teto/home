@@ -98,15 +98,15 @@ in
       kernelPackages = kernelPkgs;
       blacklistedKernelModules = [
         "nouveau"
+        # The in-tree r8169 driver supports the RTL8125.  Do not let the
+        # out-of-tree r8125 module compete for the same PCI device.
+        "r8125"
       ];
-      extraModulePackages = [
-        kernelPkgs.r8125
-      ];
-      #  disable energy mgmt on wifi card
+      # The MT7922 is prone to losing its link after entering PCIe ASPM even
+      # though NetworkManager-level Wi-Fi power saving is disabled.
       extraModprobeConfig = ''
-        options r8125 aspm=0
-
-        '';
+        options mt7921e disable_aspm=1
+      '';
 
       # Ensure initrd has resume support
       # initrd.luks.devices."crypted".allowDiscards = true;
