@@ -73,5 +73,5 @@ abbr --add -- re 'nixos-rebuild \
       --override-input nixpkgs ~/nixpkgs \
       --override-input hm ~/hm'
 
-abb --add --set-cursor -- build-nom 'nom build .#nixosConfigurations.%.config.system.build.toplevel'
+# abbr --add --set-cursor -- build-nom 'nom build .#nixosConfigurations.%.config.system.build.toplevel'
 

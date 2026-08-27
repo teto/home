@@ -45,6 +45,7 @@
         "mqtt"
         "meteo_france"
         "wyoming" 
+        "upnp" 
         # "met"
       ];
     };
