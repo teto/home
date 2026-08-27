@@ -77,6 +77,60 @@ in
     };
     kssh = "kitten ssh";
   };
+  shellAbbrs = {
+    # abbr --add git-clone-url --position command --regex --function git_clone_url
+    "git-clone-url" = {
+          position = "command";
+          expansion = "--color";
+          regex = ".+\.git";
+          function = "git_clone_url";
+    };
+
+    # abbr --add --set-cursor -- build-nom 'nom build .#nixosConfigurations.%.config.system.build.toplevel'
+    # expand on hosts ?
+    build-nom = {
+      # position = "curs
+      setCursor = true;
+      expansion = "nom build .#nixosConfigurations.%.config.system.build.toplevel";
+
+    };
+    # rollback = {
+    #   # position = "curs
+    #   setCursor = true;
+    #   command = "nom build .#nixosConfigurations.%.config.system.build.toplevel";
+    #
+    # };
+    http-models = {
+      name = "jedha-models";
+      command = "http";
+      expansion = "http get jedha.vpn:8080/models";
+    };
+# abbr --add -- re 'nixos-rebuild \
+#       --flake ~/home \
+#       --sudo --keep-going \
+#       --override-input nixpkgs ~/nixpkgs \
+#       --override-input hm ~/hm'
+
+    tetos-sw = {
+      name = "tetos-sw";
+      # function
+      # command = "nh";
+      # position
+      # switch-remote: (nixos-rebuild "switch" "--option builders \"$TETOS_0\" -j0")
+      expansion = ''nh os switch ~/home -- --keep-going \
+         --override-input nixpkgs ~/nixpkgs \
+         --override-input hm ~/hm'';
+
+
+    };
+    # tetos-sw-remote = {
+    #   # Specifies the command(s) for which the abbreviation should expand.
+    #     expansion = ''nh os switch ~/home -- --keep-going \
+    #      --override-input nixpkgs ~/nixpkgs \
+    #      --override-input hm ~/hm'';
+    # };
+  };
+
 
   #
   functions = {
@@ -146,47 +200,6 @@ in
   shellAliases = {
     g = "git";
     "..." = "cd ../..";
-  };
-
-  shellAbbrs = {
-    # abbr --add git-clone-url --position command --regex --function git_clone_url
-    "git-clone-url" = {
-          position = "command";
-          expansion = "--color";
-          regex = ".+\.git";
-          function = "git_clone_url";
-    };
-
-    # abbr --add --set-cursor -- build-nom 'nom build .#nixosConfigurations.%.config.system.build.toplevel'
-    build-nom = {
-      # position = "curs
-      setCursor = true;
-      command = "nom build .#nixosConfigurations.%.config.system.build.toplevel";
-
-    };
-    # rollback = {
-    #   # position = "curs
-    #   setCursor = true;
-    #   command = "nom build .#nixosConfigurations.%.config.system.build.toplevel";
-    #
-    # };
-    http-models = {
-      command = "http get jedha.vpn:8080/models";
-    };
-# abbr --add -- re 'nixos-rebuild \
-#       --flake ~/home \
-#       --sudo --keep-going \
-#       --override-input nixpkgs ~/nixpkgs \
-#       --override-input hm ~/hm'
-
-    tetos-sw = {
-      # switch-remote: (nixos-rebuild "switch" "--option builders \"$TETOS_0\" -j0")
-        command = "nh os switch ~/home -- --keep-going \
-         --override-input nixpkgs ~/nixpkgs \
-         --override-input hm ~/hm";
-
-
-    };
   };
 
 

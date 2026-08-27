@@ -97,22 +97,21 @@ in
   # services.dbus.implementation = "dbus";
 
   imports = [
+    autoloadedProfiles
 
     ./ovh.nix
-
-    autoloadedProfiles
     ./disko-config.nix
-
-    flakeSelf.nixosProfiles.systemd-on-failure-service
 
     flakeSelf.inputs.disko.nixosModules.disko
     flakeSelf.nixosModules.teto-nogui
     flakeSelf.nixosModules.default-hm
     flakeSelf.nixosModules.wireguard
 
-    flakeSelf.nixosProfiles.wireguard
     flakeSelf.nixosProfiles.server
     flakeSelf.nixosProfiles.nix-daemon
+    flakeSelf.nixosProfiles.server
+    flakeSelf.nixosProfiles.systemd-on-failure-service
+
 
     ./hardware.nix
 
@@ -125,13 +124,6 @@ in
     # testing
     # ./services/hedgedoc.nix
 
-    # ../../nixos/modules/hercules-ci-agents.nix
-
-    flakeSelf.nixosProfiles.server
-
-    # TODO remove once nixbot succeeds
-    # flakeSelf.inputs.buildbot-nix.nixosModules.buildbot-master
-    # flakeSelf.inputs.buildbot-nix.nixosModules.buildbot-worker
     flakeSelf.inputs.nixbot.nixosModules.nixbot
   ];
 

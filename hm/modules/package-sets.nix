@@ -427,7 +427,7 @@ in
           # TODO pass to vim makeWrapperArgs
           # just in my branch :'(
           # git-remote-hg
-          # manix # nix doc, might be outdated
+          manix # nix doc, might be outdated
           mistral-vibe-custom
           net-tools # for netstat
           nix-output-monitor # 'nom'

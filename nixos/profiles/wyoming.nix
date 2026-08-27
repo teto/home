@@ -1,7 +1,8 @@
 { pkgs, lib, ... }:
 
 let
-  server = "tatooine.local";
+  server = "0.0.0.0";
+  # server = "tatooine.local";
 
   customWakeWordModels = pkgs.stdenv.mkDerivation {
     pname = "home-assistant-wakewords-collection";

@@ -1,5 +1,4 @@
 {
-  config,
   flakeSelf,
   # modulesPath,
   withSecrets,
@@ -11,22 +10,22 @@ let
   haumea = flakeSelf.inputs.haumea;
 
   # NOT READY YET
-  autoloadedHmModule =
-    { pkgs, ... }@args:
-    haumea.lib.load {
-      src = lib.fileset.toSource {
-        root = ./home-manager/users/teto;
-        fileset = ./home-manager/users/teto;
-      };
-
-      inputs = args // {
-        # inputs = flakeSelf.inputs;
-      };
-      transformer = [
-        haumea.lib.transformers.liftDefault
-        (haumea.lib.transformers.hoistLists "_imports" "imports")
-      ];
-    };
+  # autoloadedHmModule =
+  #   { pkgs, ... }@args:
+  #   haumea.lib.load {
+  #     src = lib.fileset.toSource {
+  #       root = ./home-manager/users/teto;
+  #       fileset = ./home-manager/users/teto;
+  #     };
+  #
+  #     inputs = args // {
+  #       # inputs = flakeSelf.inputs;
+  #     };
+  #     transformer = [
+  #       haumea.lib.transformers.liftDefault
+  #       (haumea.lib.transformers.hoistLists "_imports" "imports")
+  #     ];
+  #   };
 
   autoloadedNixosModule =
     { pkgs, ... }@args:
@@ -62,6 +61,7 @@ in
     flakeSelf.nixosProfiles.nix-daemon
     flakeSelf.nixosProfiles.gnome
     flakeSelf.nixosProfiles.nix-ld # for avante
+    flakeSelf.nixosProfiles.wyoming
 
     flakeSelf.nixosProfiles.steam
     flakeSelf.nixosProfiles.universal
@@ -231,5 +231,5 @@ in
   # '';
 
   # TODO passer a 26.05
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
 }

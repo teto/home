@@ -85,9 +85,9 @@ in
         ];
 
       };
-      # Install = {
-      #   WantedBy = [ "multi-user.target" ];
-      # };
+      Install = {
+        WantedBy = [ "multi-user.target" ];
+      };
 
       Service = {
         # what does it mean ?
