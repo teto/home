@@ -48,6 +48,7 @@ in
 
     flakeSelf.nixosProfiles.disko-desktop
     flakeSelf.nixosProfiles.networkmanager
+    flakeSelf.nixosProfiles.wyoming
 
     # removed 'cos it clashed with disk-config but these are not the same
     # ./generated.nix

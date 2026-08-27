@@ -8,8 +8,6 @@
 
   # for android development
   services.home-assistant = {
-    enable = true;
-    openFirewall = true;
 
     # subset of package.extraComponents ?!
     # extraComponents = [
@@ -46,6 +44,7 @@
         # "emulated_hue"
         "mqtt"
         "meteo_france"
+        "wyoming" 
         # "met"
       ];
     };
@@ -100,15 +99,12 @@
       frontend = {
         themes = "!include_dir_merge_named themes";
       };
-      http = {
-        server_host = "0.0.0.0";
-        server_port = 8123;
-      };
-      # TODO remove as it was removed from yaml
-      # feedreader.urls = [
-      #   "https://www.home-assistant.io/atom.xml"
-      #   # "https://nixos.org/blogs.xml"
-      # ];
+
+      # TODO remove this is handled from UI now ?!
+      # http = {
+      #   server_host = "0.0.0.0";
+      #   server_port = 8123;
+      # };
       # services.home-assistant.config."scene manual" = [];
       # services.home-assistant.config."scene ui" = "!include scenes.yaml";
     };
@@ -130,42 +126,4 @@
   # services.deconz.enable
   # with my conbee 2 key
 
-  # "z2m" (zigbee2mqtt)
-  services.zigbee2mqtt = {
-    enable = true;
-    # https://www.zigbee2mqtt.io/information/configuration.html
-    settings = {
-      # homeassistant = config.services.home-assistant.enable;
-      # homeassistant = false;
-      permit_join = true; # todo disable after configuration for secuirty
-      serial = {
-        # according to https://www.zigbee2mqtt.io/guide/adapters/#recommended
-        # might need to flash the firmware
-        adapter = "deconz"; # value for conbee II
-        port = "/dev/ttyACM0";
-        # port = null;
-      };
-      frontend = {
-        enabled = true;
-        # Optional, default 8080
-        # port= 1010;
-      };
-      advanced = {
-        log_level = "debug";
-      };
-    };
-  };
-
-  # needed by zigbee2mqtt, it's some kind of queue
-  services.mosquitto = {
-    enable = true;
-    listeners = [
-      {
-        acl = [ "pattern readwrite #" ];
-        # TODO set one via !secret ?
-        omitPasswordAuth = true;
-        settings.allow_anonymous = true;
-      }
-    ];
-  };
 }

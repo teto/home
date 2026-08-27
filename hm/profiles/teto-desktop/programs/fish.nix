@@ -82,21 +82,10 @@ in
   #
   functions = {
 
-    # a way to implement the equivalent of `alias -s git`.
-    # might be easier to create the file myself
-    fish_command_not_found = ''
-      set -l cmd $argv[1]
-
-      # Check if the command ends with .git
-      if string match -qr '\.git$' -- $cmd
-          git clone $cmd
-          return 0
-      end
-
-      # Otherwise, show the default error
-      echo "fish: Unknown command '$cmd'"
-      return 127
+    git_clone_url = ''
+      echo git clone $argv[1]
     '';
+
     # normal-function = "";
     # event-handler = {
     #   body = "";
@@ -240,6 +229,8 @@ in
 
   # Source manual configuration file
   interactiveShellInit = ''
+    abbr --add git-clone-url --position command --regex '.+\.git' --function git_clone_url
+
     # 'done' plugin config
     set -U __done_min_cmd_duration 5000  # default: 5000 ms
 

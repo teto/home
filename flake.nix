@@ -159,16 +159,15 @@
       flake = false;
     };
 
-    # https://git.meli-email.org/meli/meli/src/branch/attempt-fix-700
     meli-src = {
-      # ?ref=attempt-fix-700
       url = "git+https://git.meli-email.org/meli/meli.git";
       flake = false;
     };
-    neomutt-src = {
-      url = "github:neomutt/neomutt";
-      flake = false;
-    };
+
+    # neomutt-src = {
+    #   url = "github:neomutt/neomutt";
+    #   flake = false;
+    # };
 
     # poetry.url = "github:nix-community/poetry2nix";
     neovim-nightly-overlay = {
@@ -207,17 +206,24 @@
     nix = {
       url = "github:NixOS/nix";
       # url = "github:teto/nix?ref=teto/remove-assert-outputsSubstitutionTried";
-      # inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-schemas.url = "github:DeterminateSystems/nix-src/flake-schemas";
+
     nh = {
       url = "github:nix-community/nh";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    noctalia-shell.url = "github:noctalia-dev/noctalia-shell";
 
-    nix-schemas.url = "github:DeterminateSystems/nix-src/flake-schemas";
+    noctalia-shell = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    jj-gh.url = "github:mrjones2014/jj-gh";
+
+    jj-gh = {
+      url = "github:mrjones2014/jj-gh";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     rocks-nvim = {
       # url = "/home/teto/neovim/rocks.nvim";
@@ -249,10 +255,6 @@
 
     nur.url = "github:nix-community/NUR";
 
-    pinix = {
-      url = "github:remi-dupre/pinix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     # https://git.sr.ht/~whynothugo/pimsync
     pimsync-src = {
@@ -261,12 +263,17 @@
       flake = false;
     };
 
-    purebred = {
-      url = "github:purebred-mua/purebred";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # pinix = {
+    #   url = "github:remi-dupre/pinix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
-    rippkgs.url = "github:replit/rippkgs";
+    # purebred = {
+    #   url = "github:purebred-mua/purebred";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+
+    # rippkgs.url = "github:replit/rippkgs";
     # rippkgs.inputs.nixpkgs.follows = "nixpkgs";
 
     rikai-nvim = {
@@ -281,10 +288,10 @@
     # };
 
     # rofi-hoogle.url = "github:teto/rofi-hoogle/fixup";
-    rofi-hoogle = {
-      url = "github:rebeccaskinner/rofi-hoogle";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # rofi-hoogle = {
+    #   url = "github:rebeccaskinner/rofi-hoogle";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -522,7 +529,6 @@
             pass-import-high-password-length
             jmdict
             meli-git
-            # neomutt
             pass-perso
             memento-whisper
             sway-scratchpad
@@ -687,142 +693,7 @@
 
       # the 'deploy' entry is used by 'deploy-rs' to deploy our nixosConfigurations
       # if it doesn't work you can always fall back to the vanilla nixos-rebuild:
-      deploy = {
-        # This is the user that the profile will be deployed to (will use sudo if not the same as above).
-        # If `sshUser` is specified, this will be the default (though it will _not_ default to your own username)
-        sshUser = "teto";
-        # user = "root";
-
-        # Which sudo command to use. Must accept at least two arguments:
-        # the user name to execute commands as and the rest is the command to execute
-        # This will default to "sudo -u" if not specified anywhere.
-        # sudo = "doas -u";
-
-        # This is an optional list of arguments that will be passed to SSH.
-        # sshOpts = [ "-p" "2121" ];
-
-        # Fast connection to the node. If this is true, copy the whole closure instead of letting the node substitute.
-        # This defaults to `false`
-        fastConnection = false;
-
-        # If the previous profile should be re-activated if activation fails.
-        # This defaults to `true`
-        autoRollback = true;
-
-        # See the earlier section about Magic Rollback for more information.
-        # This defaults to `true`
-        magicRollback = true;
-
-        # The path which deploy-rs will use for temporary files, this is currently only used by `magicRollback` to create an inotify watcher in for confirmations
-        # If not specified, this will default to `/tmp`
-        # (if `magicRollback` is in use, this _must_ be writable by `user`)
-        # tempPath = "/home/someuser/.deploy-rs";
-
-        # Build the derivation on the target system.
-        # Will also fetch all external dependencies from the target system's substituters.
-        # This default to `false`
-        remoteBuild = false;
-
-        # Timeout for profile activation.
-        # This defaults to 240 seconds.
-        activationTimeout = 600;
-
-        # Timeout for profile activation confirmation.
-        # This defaults to 30 seconds.
-        confirmTimeout = 60;
-
-        # for now
-        # sshOpts = [ "-F" "ssh_config" ];
-        # TODO go through all nixosConfigurations actually ?
-        # If you require a signing key to push closures to your server, specify the path to it in the LOCAL_KEY environment variable.
-        nodes =
-          let
-            # system = "x86_64-linux";
-            genNode = attrs: {
-              inherit (attrs) hostname;
-              profiles.system = {
-                # remoteBuild = false;
-                user = "root";
-                hostname = attrs.hostname;
-                path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.${attrs.name};
-              };
-            };
-          in
-          {
-            neptune-no-secrets =
-              genNode {
-                name = "neptune";
-                # local-facing address neptune.local
-                # hostname = "neptune.local"; # temporary
-                hostname = "neptune.local"; # temporary
-              }
-              // {
-                # while working around require-sigs issue
-                # remoteBuild = true;
-
-                sshOpts = [
-                  # "-p12666"
-                  #NIXOS_NO_CHECK=1
-                  # "-oSendEnv=NIXOS_NO_CHECK"
-                  "-p22"
-                  # "-F" "ssh_config"
-                  # "-i/home/teto/.ssh/id_rsa"
-                  # "-p${toString secrets.router.sshPort}"
-                ];
-                user = "root";
-                sshUser = "teto";
-              };
-
-            router =
-              genNode {
-                name = "router";
-                # local-facing address
-                hostname = "router";
-              }
-              // {
-                # sshOpts = [ "-F" "ssh_config" ];
-                # sshUser = "root";
-                sshOpts = [
-                  # "-i/home/teto/.ssh/id_rsa"
-                  # "-p${toString secrets.router.sshPort}"
-                ];
-              };
-
-            #
-            jedha =
-              genNode {
-                name = "jedha";
-                # fetch from secrets
-                hostname = secrets.jedha.hostname;
-              }
-              // {
-                # interactiveSudo = true;
-                sshUser = "teto";
-              };
-
-            neotokyo =
-              genNode {
-                name = "neotokyo";
-                hostname = secrets.jakku.hostname;
-              }
-              // {
-                # sshOpts = [ "-t" ];
-                # interactiveSudo = true;
-                # user = "teto";
-              }
-              // {
-                # user = "teto";
-                sshUser = "teto";
-                # TODO should be picked up by ssh automatically
-                # sshOpts = [
-                #   "-i"
-                #   "~/.ssh/id_rsa"
-                #   # "-p${toString secrets.router.sshPort}"
-                # ];
-
-              };
-          };
-      };
+      deploy = import ./deploy.nix { inherit secrets system; flakeSelf = self; };
 
     };
 }

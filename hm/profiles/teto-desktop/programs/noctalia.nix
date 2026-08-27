@@ -5,6 +5,8 @@
 {
   enable = true;
 
+  # package
+
   # see https://docs.noctalia.dev/v4/getting-started/nixos/#calendar-events-support
   # (inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default.override { calendarSupport = true; })
   # package=  https://github.com/noctalia-dev/noctalia-shell.git

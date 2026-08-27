@@ -50,7 +50,7 @@ let
       # I might need to set it ?
       publicHostKey = null; # builtins.readFile ../../../../hosts/neotokyo/host_key.pub;
       maxJobs = 3;
-      speedFactor = 1;
+      speedFactor = 1.3;
       hostName = "build-box.nix-community.org";
       system = "x86_64-linux";
       # identitiesOnly yes
@@ -104,13 +104,13 @@ in
       ffsubsync # to sync subtitles
       # TODO provide debug package under different executable "nvim-debug"
 
-      panvimdoc # to generate vim doc from README, for instance in gp.nvim
+      # panvimdoc # to generate vim doc from README, for instance in gp.nvim
       pciutils # for lspci
 
       # slidev-cli # text-based slides generate via npm nice prez
       # only for matt ?
       pass-perso
-      flakeSelf.inputs.pinix.packages.${pkgs.stdenv.hostPlatform.system}.default
+      # flakeSelf.inputs.pinix.packages.${pkgs.stdenv.hostPlatform.system}.default
       # poppler for pdf preview
 
       # kaggle # kaggle interface
@@ -206,6 +206,15 @@ in
   #   @import "${config.xdg.cacheHome}/wallust/colors.rasi"
   #
   # '';
+
+  # for aws-vault ?
+  # "* ${builtins.readFile ../../../perso/keys/id_rsa.pub}";
+
+  home.file.".ssh/allowed_signers".text = ''
+    ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDC/+rkPJvHRlXBuOI7NSQTAXBBsFjjcKchNm+hIs1kpwrpwNvEQUg1U2xuLvS5AEBdFdqUn6V67uGB6sfSDwS7dUakV5E9Cvmadw0cenZ7DSMaUAqMqAhVtY2Rzx3iNfD2sDBItdU9lyXrg6rwl0nPy+EfJPItV/wvJnI7a8dxdNf0PbbdZTQLDPpGlRec4+tvPQNvwRl5x5Y39jWqtTUrRDF11d/b99lcIaihnPvlRi53FfvypwdMuFf81Ufc/4klAP80GTYIDlWh1juMCF0tIp0rb5iE4+ABbTVAczE2iO8lYYGtqOPe/YGJ+7RwrGnDVdwhsq3A9iT76T2mvLtn teto@tatooine
+    '';
+
+
 
   package-sets = {
 

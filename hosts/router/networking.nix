@@ -29,6 +29,9 @@
       enable = false;
       interfaces.br0.allowedTCPPorts = [ 53 ];
       interfaces.br0.allowedUDPPorts = [ 53 ];
+
+      # if home-assistant enabled, open
+      # 8123
     };
 
     #   # address of the livebox

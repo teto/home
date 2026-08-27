@@ -1,6 +1,8 @@
 { pkgs, lib, ... }:
 
 let
+  server = "tatooine.local";
+
   customWakeWordModels = pkgs.stdenv.mkDerivation {
     pname = "home-assistant-wakewords-collection";
     version = "6480a05";
@@ -26,8 +28,8 @@ in
   services.wyoming.piper.servers = {
     "en" = {
       enable = true;
-      voice = "en_GB-semaine-medium";
-      uri = "tcp://127.0.0.1:10200";
+      voice = "fr_FR-semaine-medium";
+      uri = "tcp://${server}:10200";
     };
   };
 
@@ -36,19 +38,21 @@ in
       enable = true;
       model = "medium-int8";
       language = "en";
-      uri = "tcp://127.0.0.1:10301";
+      uri = "tcp://${server}:10301";
       device = "cuda";
     };
   };
 
   services.wyoming.openwakeword = {
     enable = true;
+    # package = 
+    # threshold =
     customModelsDirectories = [
       #customWakeWordModels
     ];
-    preloadModels = [
-      #"echoh"
-      "hey_jarvis"
-    ];
+    # preloadModels = [
+    #   #"echoh"
+    #   "hey_jarvis"
+    # ];
   };
 }
