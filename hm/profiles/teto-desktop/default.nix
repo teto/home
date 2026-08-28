@@ -5,6 +5,7 @@
   config,
   withSecrets,
   secretsFolder,
+  secrets,
   dotfilesPath,
   ...
 }:
@@ -145,6 +146,7 @@ in
   home.shellAliases = {
 
     # add --remote-build if you meet signature issues
+    # pass as shellAbbr
     deploy-neotokyo = "deploy '.#neotokyo' -s --interactive-sudo=true -- --override-input nixpkgs /home/teto/nixpkgs";
 
     # lg = "lazygit";
@@ -157,9 +159,9 @@ in
 
     n = "nix develop";
 
-    n1 = ''nix develop --option builders "$TETOS_0" -j0'';
+    n1 = ''nix develop --option builders "$TETOS_BUILDER_NIXCOMMUNITY" -j0'';
     n2 = ''nix develop --option builders "$TETOS_1" -j0'';
-    nr1 = ''nix run --option builders "$TETOS_0" -j0'';
+    nr1 = ''nix run --option builders "$TETOS_BUILDER_NIXCOMMUNITY" -j0'';
     nr2 = ''nix run --option builders "$TETOS_1" -j0'';
 
     # trans aliases{{{
@@ -178,14 +180,18 @@ in
     PASSWORD_STORE_ENABLE_EXTENSIONS = "true"; # it must be "true" and nothing else !
     PASSWORD_STORE_EXTENSIONS_DIR = "${dotfilesPath}/contrib/pass-extensions";
 
+
     # TODO set it globally ?
     CDPATH = "$HOME/plugins";
 
   }
   // lib.optionalAttrs withSecrets {
-    TETOS_0 = builder_neotokyo;
-    TETOS_1 = builder_jedha;
-    TETOS_2 = builder_nixcommunity;
+    # customsearch cancelled ffs
+    # GOOGLE_SEARCH_ENGINE_ID="64ff2b96809e947cc";
+    # GOOGLE_SEARCH_API_KEY=secrets.google.customsearch_api_key;
+    TETOS_BUILDER_NEOTOKYO = builder_neotokyo;
+    TETOS_BUILDER_JEDHA = builder_jedha;
+    TETOS_BUILDER_NIXCOMMUNITY = builder_nixcommunity;
   };
 
   home.sessionSearchVariables = {

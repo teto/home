@@ -31,6 +31,7 @@
         # removed to avoid zha
         "default_config" # metapackage
         "homeassistant_yellow" # metapackage
+        "data_grand_lyon" # to fetch TCL software
         "deconz" # interface for zigbee conbee II
         # "esphome"
         # "hue"
@@ -44,6 +45,8 @@
         # "emulated_hue"
         "mqtt"
         "meteo_france"
+        # else we get :
+        # flow could not be loaded: {"message":"Invalid handler specified"}
         "wyoming" 
         "upnp" 
         # "met"
@@ -54,7 +57,7 @@
     # backups exist at /var/lib/hass/backups/
     # https://nixos.wiki/wiki/Home_Assistant
     config = {
-
+      assist_pipeline = {};
       # bluetooth = {};  # NO
       default_config = { }; # enables several default components
       # map = {};  # show a local map

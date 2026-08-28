@@ -1,3 +1,12 @@
+/** 
+Wyoming is a small network protocol used by Home Assistant Assist to connect voice-processing services such as:
+
+- Whisper or Speech-to-Phrase: speech → text
+- Piper: text → speech
+- openWakeWord: wake-word detection
+
+It is primarily the plumbing between Home Assistant and those services—not the voice assistant itself. Home Assistant’s Wyoming documentation (https://www.home-assistant.io/integrations/wyoming/)
+*/
 { pkgs, lib, ... }:
 
 let

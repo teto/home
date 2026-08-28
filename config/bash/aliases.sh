@@ -3,8 +3,8 @@ alias pc="process-compose"
 alias n="nix develop"
 alias nb='nix build'
 alias nf='nix flake'
-alias nb1='nix build --option builders "$TETOS_0" -j0'
-alias n1='nix develop --option builders "$TETOS_0" -j0'
+alias nb1='nix build --option builders "$TETOS_BUILDER_NIXCOMMUNITY" -j0'
+alias n1='nix develop --option builders "$TETOS_BUILDER_NIXCOMMUNITY" -j0'
 alias n2='nix develop --option builders "$TETOS_1" -j0'
 
 alias J=jjui
@@ -22,12 +22,12 @@ alias nhs912="nix develop \$HOME/home#nhs912"
 #
 
 # TODO should use all runners
-# alias nall='nix develop --option builders "$TETOS_0" -j0'
+# alias nall='nix develop --option builders "$TETOS_BUILDER_NIXCOMMUNITY" -j0'
 # alias j="just -g"
 # alias jg="just -g "
 # alias g="git"
 alias nr="nix run "
-alias nr1='nix run --option builders "$TETOS_0" -j0'
+alias nr1='nix run --option builders "$TETOS_BUILDER_NIXCOMMUNITY" -j0'
 alias nr2='nix run --option builders "$TETOS_1" -j0'
 alias nl="nix log "
 # alias js="just switch"
@@ -39,6 +39,8 @@ alias gap="git add -p"
 alias grc="git rebase --continue"
 alias gra="git rebase --abort"
 alias gpf="git push --force-with-lease"
+
+
 
 # rename mptcp ?
 # alias mp="mptcpanalyzer"

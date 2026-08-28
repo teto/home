@@ -183,10 +183,14 @@ opts = {
     },
     web_search_engine = {
         -- todo pass key
-        provider = 'tavily', -- tavily, serpapi, google, kagi, brave, or searxng
+        -- provider = 'google', -- tavily, serpapi, google, kagi, brave, or searxng
         proxy = nil, -- proxy support, e.g., http://127.0.0.1:7890
     },
+	disabled_tools = {
+	 "web_search_tavily"
+	},
     custom_tools = {
+	  require'avante.llm_tools.web_search'.web_search_google
         -- {
         --     name = 'run_model_manager_tests', -- Unique name for the tool
         --     description = 'run the ModelManagerSpec',

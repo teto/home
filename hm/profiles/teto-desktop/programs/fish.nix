@@ -129,6 +129,11 @@ in
     #      --override-input nixpkgs ~/nixpkgs \
     #      --override-input hm ~/hm'';
     # };
+    deploy-neotokyo = {
+      setCursor = true;
+      # command = "deploy";
+      expansion = ''deploy '.#%neotokyo' -s --interactive-sudo=true -- --override-input nixpkgs ~/nixpkgs'';
+    };
   };
 
 
