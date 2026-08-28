@@ -96,7 +96,7 @@ in
     [
       # bottles  # to install games
       mdcat # markdown viewer
-      (ignoreBroken mitmproxy) # help catch http traffic
+      mitmproxy # help catch http traffic
       notmuch # needed for waybar-custom-notmuch.sh
 
       neovim-dbg # when neovim crashes, launch "nvim-debug" to debug

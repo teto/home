@@ -80,8 +80,8 @@ in
   shellAbbrs = {
     # abbr --add git-clone-url --position command --regex --function git_clone_url
     "git-clone-url" = {
-          position = "command";
-          expansion = "--color";
+          # position = "command";
+          # expansion = "--color";
           regex = ".+\.git";
           function = "git_clone_url";
     };
