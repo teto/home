@@ -1,14 +1,26 @@
-/** 
-Wyoming is a small network protocol used by Home Assistant Assist to connect voice-processing services such as:
+/**
+  Wyoming is a small network protocol used by Home Assistant Assist to connect voice-processing services such as:
 
-- Whisper or Speech-to-Phrase: speech → text
-- Piper: text → speech
-- openWakeWord: wake-word detection
+  - Whisper or Speech-to-Phrase: speech → text
+  - Piper: text → speech
+  - openWakeWord: wake-word detection
 
-It is primarily the plumbing between Home Assistant and those services—not the voice assistant itself. Home Assistant’s Wyoming documentation (https://www.home-assistant.io/integrations/wyoming/)
+  It is primarily the plumbing between Home Assistant and those services—not the voice assistant itself. Home Assistant’s Wyoming documentation (https://www.home-assistant.io/integrations/wyoming/)
+
+  https://github.com/rhasspy/wyoming-satellite/blob/master/docs/tutorial_2mic.md
+  --preload-model 'ok_nabu'
+
+  Add --debug to print additional logs. See --help for more information.
+
+  Included wake words are:
+
+      ok_nabu
+      hey_jarvis
+      alexa
+      hey_mycroft
+      hey_rhasspy
 */
-{ pkgs, lib, ... }:
-
+{ pkgs, dotfilesPath, ... }:
 let
   server = "0.0.0.0";
   # server = "tatooine.local";
@@ -63,11 +75,16 @@ in
   # by default it is on tcp://0.0.0.0:10400
   services.wyoming.openwakeword = {
     enable = true;
-    # package = 
+    # package =
     # threshold =
+    # area = []
+    # extraArgs=
+
+    # Paths to directories with custom wake word models (*.tflite model files).
     customModelsDirectories = [
       #customWakeWordModels
     ];
+
     # preloadModels = [
     #   #"echoh"
     #   "hey_jarvis"

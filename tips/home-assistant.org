@@ -7,6 +7,10 @@ ne pas hesiter a entrer le numero de serie
 
 sudo -u hass /nix/store/j0d9289d0sg7f1l62vd1g3mfw4268dhl-homeassistant-2024.4.4/bin/hass --script auth  --config '/var/lib/hass'  list
 
+* voice detection
+
+  # --preload-model 'ok_nabu'
+
 * zigbee2mqtt (z2m)
 
   1. enable mqtt service (mosquitto for instance)
@@ -15,3 +19,14 @@ sudo -u hass /nix/store/j0d9289d0sg7f1l62vd1g3mfw4268dhl-homeassistant-2024.4.4/
  
 ** sonoff SNZB-02 
    Change celsius to fahreneit: double tap reset button https://www.zigbee2mqtt.io/devices/SNZB-02D.html
+
+
+* how to reset advices
+
+** philips play
+
+le plus simple est de se connecter via l'app HUE
+
+https://www.zigbee2mqtt.io/devices/915005733701.html
+
+https://www.philips-hue.com/en-gb/support/article/how-to-factory-reset-philips-hue-lights/000004

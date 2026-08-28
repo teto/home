@@ -16,10 +16,12 @@
     "10.100.0.1" = [ "neotokyo.local" ];
   };
 
-  firewall.allowedTCPPorts = lib.optional config.services.rmfakecloud.enable config.services.rmfakecloud.port ++ [
-    10301 # whisper service
-    10400 # openwakeword
-  ];
+  firewall.allowedTCPPorts =
+    lib.optional config.services.rmfakecloud.enable config.services.rmfakecloud.port
+    ++ [
+      10301 # whisper service
+      10400 # openwakeword
+    ];
 
   firewall.allowedUDPPorts = [
     51820 # wireguard

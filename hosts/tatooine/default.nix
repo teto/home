@@ -230,7 +230,6 @@ in
   #   enable = true;
   # };
 
-
   services.journald.extraConfig = ''
     # alternatively one can run journalctl --vacuum-time=2d
     SystemMaxUse=2G

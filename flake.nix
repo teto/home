@@ -219,7 +219,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-
     jj-gh = {
       url = "github:mrjones2014/jj-gh";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -254,7 +253,6 @@
     # nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
 
     nur.url = "github:nix-community/NUR";
-
 
     # https://git.sr.ht/~whynothugo/pimsync
     pimsync-src = {
@@ -693,7 +691,10 @@
 
       # the 'deploy' entry is used by 'deploy-rs' to deploy our nixosConfigurations
       # if it doesn't work you can always fall back to the vanilla nixos-rebuild:
-      deploy = import ./deploy.nix { inherit secrets system; flakeSelf = self; };
+      deploy = import ./deploy.nix {
+        inherit secrets system;
+        flakeSelf = self;
+      };
 
     };
 }

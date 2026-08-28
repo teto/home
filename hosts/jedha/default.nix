@@ -150,8 +150,6 @@ in
       kernelParams = [
         #  Some built-in drivers—not compiled as loadable modules—require kernel command-line parameters instead:
 
-
-
         # used with resumeDevice. computed by filefrag -v /fucking_swap
         # "resume_offset=692224"
         "resume_offset=55296"

@@ -80,10 +80,10 @@ in
   shellAbbrs = {
     # abbr --add git-clone-url --position command --regex --function git_clone_url
     "git-clone-url" = {
-          # position = "command";
-          # expansion = "--color";
-          regex = ".+\.git";
-          function = "git_clone_url";
+      # position = "command";
+      # expansion = "--color";
+      regex = ".+\.git";
+      function = "git_clone_url";
     };
 
     # abbr --add --set-cursor -- build-nom 'nom build .#nixosConfigurations.%.config.system.build.toplevel'
@@ -105,11 +105,11 @@ in
       command = "http";
       expansion = "http get jedha.vpn:8080/models";
     };
-# abbr --add -- re 'nixos-rebuild \
-#       --flake ~/home \
-#       --sudo --keep-going \
-#       --override-input nixpkgs ~/nixpkgs \
-#       --override-input hm ~/hm'
+    # abbr --add -- re 'nixos-rebuild \
+    #       --flake ~/home \
+    #       --sudo --keep-going \
+    #       --override-input nixpkgs ~/nixpkgs \
+    #       --override-input hm ~/hm'
 
     tetos-sw = {
       name = "tetos-sw";
@@ -117,10 +117,10 @@ in
       # command = "nh";
       # position
       # switch-remote: (nixos-rebuild "switch" "--option builders \"$TETOS_0\" -j0")
-      expansion = ''nh os switch ~/home -- --keep-going \
-         --override-input nixpkgs ~/nixpkgs \
-         --override-input hm ~/hm'';
-
+      expansion = ''
+        nh os switch ~/home -- --keep-going \
+                 --override-input nixpkgs ~/nixpkgs \
+                 --override-input hm ~/hm'';
 
     };
     # tetos-sw-remote = {
@@ -132,10 +132,9 @@ in
     deploy-neotokyo = {
       setCursor = true;
       # command = "deploy";
-      expansion = ''deploy '.#%neotokyo' -s --interactive-sudo=true -- --override-input nixpkgs ~/nixpkgs'';
+      expansion = "deploy '.#%neotokyo' -s --interactive-sudo=true -- --override-input nixpkgs ~/nixpkgs";
     };
   };
-
 
   #
   functions = {
@@ -206,7 +205,6 @@ in
     g = "git";
     "..." = "cd ../..";
   };
-
 
   # these are added to ~/.config/fish/conf.d
   # use { name = ... ; src = drv }

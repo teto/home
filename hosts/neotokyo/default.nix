@@ -112,7 +112,6 @@ in
     flakeSelf.nixosProfiles.server
     flakeSelf.nixosProfiles.systemd-on-failure-service
 
-
     ./hardware.nix
 
     # move to autoloaded

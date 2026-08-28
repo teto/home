@@ -1,7 +1,11 @@
-{ flakeSelf, pkgs, lib
-# , secretsFolder
-, ... }:
-let 
+{
+  flakeSelf,
+  pkgs,
+  lib,
+  # , secretsFolder
+  ...
+}:
+let
   genYaziVFSServer =
     # value is one of nixosConfigurations.<ENTRY>
     value:
@@ -10,26 +14,25 @@ let
       sshCfg = mcfg.services.openssh;
       name = mcfg.networking.hostName;
     in
-    builtins.trace "YAZI config for ${name}" 
+    builtins.trace "YAZI config for ${name}"
 
-          # header = ''Match host="${mcfg.networking.hostName},${mcfg.networking.domain}${lib.optionalString (mcfg.tetos.wireguard.enable or false) ",${mcfg.networking.hostName}.vpn"}"'';
-          # assumption ? or check/warn it has it ?
-          # identityFile = "${secretsFolder}/ssh/id_rsa";
-          # host = "${mcfg.networking.hostName}";
-          ''
-          [sftp.${name}]
-          host = "${mcfg.networking.hostName}.${mcfg.networking.domain}"
-          user = "teto"
-          port = ${toString (builtins.head sshCfg.ports)}
-          ''
-          # relies on SSH_AUTH_SOCK by default
-          # key_file = "~/.ssh/id_rsa"
-          # or identity_agent
-          ;
+      # header = ''Match host="${mcfg.networking.hostName},${mcfg.networking.domain}${lib.optionalString (mcfg.tetos.wireguard.enable or false) ",${mcfg.networking.hostName}.vpn"}"'';
+      # assumption ? or check/warn it has it ?
+      # identityFile = "${secretsFolder}/ssh/id_rsa";
+      # host = "${mcfg.networking.hostName}";
+      ''
+        [sftp.${name}]
+        host = "${mcfg.networking.hostName}.${mcfg.networking.domain}"
+        user = "teto"
+        port = ${toString (builtins.head sshCfg.ports)}
+      ''
+  # relies on SSH_AUTH_SOCK by default
+  # key_file = "~/.ssh/id_rsa"
+  # or identity_agent
+  ;
 
   serverConfigs = lib.mapAttrsToList (
-    _: nixosCfg:
-    lib.optionalAttrs nixosCfg.config.services.openssh.enable (genYaziVFSServer nixosCfg)
+    _: nixosCfg: lib.optionalAttrs nixosCfg.config.services.openssh.enable (genYaziVFSServer nixosCfg)
   ) flakeSelf.nixosConfigurations;
 
 in
