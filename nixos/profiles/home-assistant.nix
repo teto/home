@@ -26,6 +26,7 @@
       # look at https://www.home-assistant.io/integrations/
       # pkgs/servers/home-assistant/component-packages.nix
       extraComponents = [
+        "alexa" # while trying to use 'alexa' as wakeword
         "recorder" # to plot history of devices
 
         # removed to avoid zha
@@ -39,6 +40,8 @@
         "emulated_hue"
         "freebox"
         "homeassistant_yellow" # brings zha
+
+        # "hacs" ?
         "hue"
 
         "met"
@@ -49,6 +52,7 @@
         # flow could not be loaded: {"message":"Invalid handler specified"}
         "wyoming"
         "upnp"
+        "wake_on_lan"
         # "met"
       ];
     };

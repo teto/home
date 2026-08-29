@@ -24,18 +24,28 @@
       "--no-zeroconf"
 
       "--debug"
-      "--wake-word-name alexa"
 
+    #  to specify the network address of a remote wake word detection service
+    # "--wake-uri"
+    # "tcp://127.0.0.1:10400"
+
+
+    "--wake-word-name"
+    "alexa"
+    # [--wake-command WAKE_COMMAND]                                                        ║
+# [--wake-word-name name [pipeline ...]]          
+    # "--wake-word-name" "alexa"
       # --wake-word-name 'ok_nabu'
     ];
 
     # refractorySeconds
     sounds = {
       # --awake-wav
-      awake = "${dotfilesPath}/data/audio/wake.wav";
+      awake = "${dotfilesPath}/data/audio/awake.wav";
       done = "${dotfilesPath}/data/audio/done.wav";
     };
 
-    vad.enable = true; # Whether to enable voice activity detection.
+    #Rather than always streaming audio to Home Assistant, the satellite can wait until speech is detected.
+    vad.enable = true;
   };
 }

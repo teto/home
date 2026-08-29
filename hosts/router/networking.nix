@@ -34,36 +34,6 @@
       # 8123
     };
 
-    #   # address of the livebox
-    #   defaultGateway = { address = "192.168.1.1"; interface = "wlp5s0"; };
-    #  interfaces.enp1s0 = {
-    #     useDHCP = true;
-    #     # ipv4.addresses = [
-    #     # { address = "192.168.1.127"; prefixLength = 24; }
-    #     # ];
-    #   };
-
-    #   interfaces.wlp5s0 = {
-    #     useDHCP = true;
-    #     # ipv4.addresses = [
-    #     # { address = "192.168.1.127"; prefixLength = 24; }
-    #     # ];
-    #   };
-
-    #   interfaces.br0 = {
-    #     ipv4.addresses = [
-    #       bridgeNetwork
-    #     ];
-    #   };
-
-    #   bridges.br0 = {
-    #     interfaces = [ "enp2s0" "enp3s0" "enp4s0" ];
-    #   };
-
-    #   nat.enable = true;
-    #   nat.externalInterface = externalInterface;
-    #   nat.internalInterfaces = [ "br0" ];
-
     wireless = {
       enable = true; # Whether to enable wpa_supplicant., we use iwd here
 
@@ -130,13 +100,9 @@
           # echelon = {                   # safe version of the above: read PSK from the
           #   pskRaw = "ext:psk_echelon"; # variable psk_echelon, defined in secretsFile,
           # };                            # this won't leak into /nix/store
-
           # pskRaw
           # appended to wpa_supplicant.conf
           # freq_list=5180 5190 5200 5210 5220 5230 5240 5250 5260 5270 5280
-          #
-
-          #            freq_list=5180 5190 5200 5210 5220 5230 5240 5250 5260 5270 5280
 
           # extraConfig = ''
           #  bssid_whitelist=04:E3:1A:6A:CF:05

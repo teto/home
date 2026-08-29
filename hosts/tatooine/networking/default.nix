@@ -18,9 +18,11 @@
 
   firewall.allowedTCPPorts =
     lib.optional config.services.rmfakecloud.enable config.services.rmfakecloud.port
+    ++ lib.optional config.services.wyoming.satellite.enable 10700
+    ++ lib.optional config.services.wyoming.openwakeword.enable 10400
     ++ [
       10301 # whisper service
-      10400 # openwakeword
+      # 10400 # openwakeword
     ];
 
   firewall.allowedUDPPorts = [

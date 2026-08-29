@@ -30,7 +30,7 @@ in
     netstat_tcp = "netstat -ltnp";
 
     # nixpaste = "curl -F \"text=<-\" http://nixpaste.lbr.uno";
-    m = "neomutt"; # or meli ?
+    m = "meli";
     ns = "nix-shell";
 
     # ls aliases {{{

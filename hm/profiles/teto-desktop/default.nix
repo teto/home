@@ -147,7 +147,7 @@ in
 
     # add --remote-build if you meet signature issues
     # pass as shellAbbr
-    deploy-neotokyo = "deploy '.#neotokyo' -s --interactive-sudo=true -- --override-input nixpkgs /home/teto/nixpkgs";
+    # deploy-neotokyo = "deploy '.#neotokyo' -s --interactive-sudo=true -- --override-input nixpkgs /home/teto/nixpkgs";
 
     # lg = "lazygit";
     y = "yazi";

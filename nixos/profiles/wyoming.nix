@@ -74,11 +74,20 @@ in
 
   # by default it is on tcp://0.0.0.0:10400
   services.wyoming.openwakeword = {
+# - okay_nabu
+#   - hey_jarvis
+#   - hey_mycroft
+#   - alexa
+#   - hey_rhasspy
+#
+#   The client or Home Assistant pipeline chooses one. For Home Assistant, the conventional
+#   choice is “Okay Nabu” (okay_nabu).
     enable = true;
     # package =
     # threshold =
     # area = []
     # extraArgs=
+      # triggerLevel = 1;
 
     # Paths to directories with custom wake word models (*.tflite model files).
     customModelsDirectories = [

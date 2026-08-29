@@ -8,9 +8,6 @@
   - https://francis.begyn.be/blog/nixos-home-router
   - https://www.jjpdev.com/posts/home-router-nixos/
 
-  systemd is advertised on the matrix:nixos-router so:
-  - the guide https://nixos.wiki/wiki/Systemd-networkd
-
   When booting, hit tab to edit the boot entry.
   Normally NixOS does not output to serial in the boot process, so we need to enable is by appending console=ttyS0,115200 to the boot entry. All characters appear twice, so just make sure you type it correctyl ;) . ctrl+l can be used to refresh the screen.
    After installing, you want to make sure that the PCEngine APU entry from the NixOS hardware repo is present, as it enables the console port.
@@ -346,19 +343,6 @@ in
   # systemd.services.systemd-networkd.environment.SYSTEMD_LOG_LEVEL = "debug";
   # services.dhcpd4 = {
   #   enable = true;
-
-  #   # TODO FIX
-  #   extraConfig = ''
-  #   option subnet-mask 255.255.255.0;
-  #   # L'option routers spécifie une liste d'adresses IP de routeurs qui sont sur le sous-réseau du client. Les routeurs doivent être mentionnés par ordre de préférence.
-  #   option routers ${bridgeNetwork.address};
-  #   option domain-name-servers 192.168.1.1;
-  #   subnet ${bridgeNetwork.address} netmask 255.255.255.0 {
-  #       range 10.0.0.100 10.0.0.199;
-  #   }
-  #   '';
-  #   interfaces = [ "br0" ];
-  # };
 
   time.timeZone = "Europe/Paris";
 
