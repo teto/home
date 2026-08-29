@@ -191,6 +191,8 @@ in
     TETOS_BUILDER_NEOTOKYO = builder_neotokyo;
     TETOS_BUILDER_JEDHA = builder_jedha;
     TETOS_BUILDER_NIXCOMMUNITY = builder_nixcommunity;
+    inherit (secrets) TAVILY_API_KEY;
+
   };
 
   home.sessionSearchVariables = {
@@ -202,19 +204,7 @@ in
     ];
   };
 
-  # rofi module doesn't have extraConfig
-  # https://github.com/davatorium/rofi/blob/next/doc/rofi-theme.5.markdown
-  # @theme "gruvbox-light"
-  # home.file."${config.programs.rofi.configPath}".text = ''
-  #   ?import "${config.xdg.configHome}/rofi/manual.rasi"
-  #
-  #   @import "${config.xdg.cacheHome}/wallust/colors.rasi"
-  #
-  # '';
-
-  # for aws-vault ?
   # "* ${builtins.readFile ../../../perso/keys/id_rsa.pub}";
-
   home.file.".ssh/allowed_signers".text = ''
     ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDC/+rkPJvHRlXBuOI7NSQTAXBBsFjjcKchNm+hIs1kpwrpwNvEQUg1U2xuLvS5AEBdFdqUn6V67uGB6sfSDwS7dUakV5E9Cvmadw0cenZ7DSMaUAqMqAhVtY2Rzx3iNfD2sDBItdU9lyXrg6rwl0nPy+EfJPItV/wvJnI7a8dxdNf0PbbdZTQLDPpGlRec4+tvPQNvwRl5x5Y39jWqtTUrRDF11d/b99lcIaihnPvlRi53FfvypwdMuFf81Ufc/4klAP80GTYIDlWh1juMCF0tIp0rb5iE4+ABbTVAczE2iO8lYYGtqOPe/YGJ+7RwrGnDVdwhsq3A9iT76T2mvLtn teto@tatooine
   '';

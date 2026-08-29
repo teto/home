@@ -314,10 +314,11 @@ local valid_file, nix_deps = pcall(require, 'generated-by-nix')
 
 local jedha_default_model
 -- = 'ministral3-8b'
+-- 3.8
 jedha_default_model = 'qwen3.6-dense'
 
 -- so it inherited the model
-local res = mk_llama_provider('jedha.vpn:8080', jedha_default_model, {
+local res = mk_llama_provider('jedha.vpn:9931', jedha_default_model, {
 
     -- check default prompt w/o
     disable_tools = false,

@@ -127,6 +127,9 @@ in
     #       --override-input nixpkgs ~/nixpkgs \
     #       --override-input hm ~/hm'
 
+    llama-jedha="GGML_CUDA_ENABLE_UNIFIED_MEMORY=1 llama-server --host 0.0.0.0 --port 8080 --jinja -v --log-prefix --models-preset ~/home/contrib/llama-presets.ini ";
+
+
     tetos-sw = {
       name = "tetos-sw";
       # function

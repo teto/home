@@ -103,7 +103,6 @@ alias kcat="kitten icat"
 # --api-key
 # GGML_CUDA_ENABLE_UNIFIED_MEMORY
 # --api-key toto
-alias llama-jedha="GGML_CUDA_ENABLE_UNIFIED_MEMORY=1 llama-server --host 0.0.0.0 --port 8080 --jinja -v --log-prefix --models-preset ~/home/contrib/llama-presets.ini "
 #
 # test atuin instead or histdb ?
 # export MCFLY_KEY_SCHEME=vim
