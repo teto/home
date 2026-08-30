@@ -25,16 +25,15 @@
 
       "--debug"
 
-    #  to specify the network address of a remote wake word detection service
-    # "--wake-uri"
-    # "tcp://127.0.0.1:10400"
+      #  to specify the network address of a remote wake word detection service
+      "--wake-uri"
+      "tcp://127.0.0.1:10400"
 
-
-    "--wake-word-name"
-    "alexa"
-    # [--wake-command WAKE_COMMAND]                                                        ║
-# [--wake-word-name name [pipeline ...]]          
-    # "--wake-word-name" "alexa"
+      "--wake-word-name"
+      "alexa"
+      # [--wake-command WAKE_COMMAND]                                                        ║
+      # [--wake-word-name name [pipeline ...]]
+      # "--wake-word-name" "alexa"
       # --wake-word-name 'ok_nabu'
     ];
 

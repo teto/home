@@ -7,16 +7,16 @@
 }:
 
 let
-  version = "0.10.1";
+  version = "0.10.5";
 
   sources = {
     aarch64-linux = {
       arch = "arm64";
-      hash = "sha256-9CAZ27BdOwpwcIqR+egvFZOadCRk1WuwFRSqxLtCZ3w=";
+      hash = "sha256-I2pJ7cAIMoLFcRyL/LH8JwGuHFKGg8IxFYAMX1+uqK0=";
     };
     x86_64-linux = {
       arch = "x64";
-      hash = "sha256-w2WTWp1zwvuVtnsPQA4yl/RPM9ke/AwlQEkXDR4rQY8=";
+      hash = "sha256-nVX0CbYv5eOWR2uoL4i4AWphfHmRKWDd4tBqN5hA9I8=";
     };
   };
 
@@ -27,7 +27,7 @@ stdenv.mkDerivation {
   inherit version;
 
   src = fetchurl {
-    url = "https://github.com/vincelwt/gloomberb/releases/download/v${version}/gloomberb-linux-${source.arch}.gz";
+    url = "https://github.com/gloom-sh/gloomberb/releases/download/v${version}/gloomberb-linux-${source.arch}.gz";
     inherit (source) hash;
   };
 
@@ -63,8 +63,8 @@ stdenv.mkDerivation {
 
   meta = {
     description = "Open-source finance terminal";
-    homepage = "https://github.com/vincelwt/gloomberb";
-    changelog = "https://github.com/vincelwt/gloomberb/releases/tag/v${version}";
+    homepage = "https://github.com/gloom-sh/gloomberb";
+    changelog = "https://github.com/gloom-sh/gloomberb/releases/tag/v${version}";
     license = lib.licenses.mit;
     maintainers = with lib.maintainers; [ teto ];
     mainProgram = "gloomberb";

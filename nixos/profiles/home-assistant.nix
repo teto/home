@@ -18,12 +18,11 @@
 
     package = pkgs.home-assistant.override {
 
-      extraPackages = ps:
-        [
-          # ps.numpy
-          ps.psycopg2
-          ps.hass-nabucasa
-        ];
+      extraPackages = ps: [
+        # ps.numpy
+        ps.psycopg2
+        ps.hass-nabucasa
+      ];
       # look at https://www.home-assistant.io/integrations/
       # pkgs/servers/home-assistant/component-packages.nix
       extraComponents = [

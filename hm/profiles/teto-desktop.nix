@@ -90,7 +90,7 @@ in
       # pkgs.peek # GIF recorder  BROKEN
       pkgs.alsa-utils # for alsamixer
       pkgs.lm_sensors # for `sensors` executable
-      self.inputs.deploy-rs.packages.${stdenv.hostPlatform.system}.deploy-rs
+      flakeSelf.inputs.deploy-rs.packages.${stdenv.hostPlatform.system}.deploy-rs
       pciutils # for lspci
       timg
       gh-dash

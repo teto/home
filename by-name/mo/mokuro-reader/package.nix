@@ -20,7 +20,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "mokuro-reader";
   version = "1.8.2";
 
-
   src = src-teto;
   # src = fetchFromGitHub {
   #   owner = "Gnathonic";

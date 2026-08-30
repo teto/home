@@ -2,15 +2,6 @@
 {
   systemd.user = {
     services = {
-      # only if enabled
-      # xwayland-satellite = {
-      #   Service = {
-      #     # TODO need DBUS_SESSION_BUS_ADDRESS
-      #     # --app-name="%N" toto
-      #     Environment = [ ''DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"'' ];
-      #     Exec = "${pkgs.xwayland-satellite}/bin/xwayland-satellite";
-      #   };
-      # };
 
     };
 

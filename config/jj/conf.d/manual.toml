@@ -329,15 +329,18 @@ pager = "delta"
 up.auto-track-bookmarks = 'nixos-unstable | master | nixpkgs-unstable | staging | teto/*'
 
 
-[fix.tools.treefmt]
-command = ["treefmt"]
+# [fix.tools.treefmt]
+# command = ["treefmt"]
 # patterns = ["word_list.txt"]
 
+# can be called with jj fix
+[fix.tools.treefmt]
+command = ["nix", "develop", "--command", "treefmt", "--no-cache", "--tree-root", "$root", "--stdin", "$path"]
+patterns = ["glob:'**'"]
 
-[jj-gh]
- # default_base_branch = "main"
- # # default remote to use
-default_remote = "up" 
-#  # default remote to use for cross-fork PR fetching
-upstream_remote = "up"
+# [jj-gh]
+# default_base_branch = "main"
+# default_remote = "up" 
+# default remote to use for cross-fork PR fetching
+# upstream_remote = "up"
 
