@@ -46,6 +46,26 @@
         "type": "github"
       }
     },
+    "avante-nvim": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1781978143,
+        "narHash": "sha256-1nK0viIDDZ+GB0lY/2fXZ4m9lk/K71/Q8ole9QU6LNA=",
+        "owner": "teto",
+        "repo": "avante.nvim",
+        "rev": "8bab415a5a4cda0f46dd3f037b1110faf5c480d5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "teto",
+        "repo": "avante.nvim",
+        "type": "github"
+      }
+    },
     "blueprint": {
       "inputs": {
         "nixpkgs": [
@@ -2488,6 +2508,7 @@
     "root": {
       "inputs": {
         "authentik-nix": "authentik-nix",
+        "avante-nvim": "avante-nvim",
         "buildbot-nix": "buildbot-nix",
         "deploy-rs": "deploy-rs",
         "direnv-instant": "direnv-instant",

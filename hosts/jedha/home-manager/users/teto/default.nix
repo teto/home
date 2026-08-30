@@ -78,8 +78,6 @@ in
 
   # xdg.configFile."zsh/zshrc.generated".source = ../../../config/zsh/zshrc;
 
-  # programs.nh.enable = true;
-
   # never tried
   # home.preferXdgDirectories = false;
 
@@ -103,6 +101,7 @@ in
     in
     llmDeps
     ++ [
+      flakeSelf.packages.${pkgs.stdenv.hostPlatform.system}.ragService
       # llm-ls # needed by the neovim plugin
       cointop # bitcoin tracker
       # mdp # markdown CLI presenter

@@ -4,8 +4,8 @@
   pkgs,
   lib,
   # system,
-  withSecrets,
-  secrets,
+  # withSecrets,
+  # secrets,
   dotfilesPath,
   secretsFolder,
   ...
@@ -16,13 +16,6 @@ let
   autoloadedModule =
     { pkgs, ... }@args:
     haumea.lib.load {
-      # src = lib.fileset.toSource {
-      #   root = ./.;
-      #   fileset = lib.fileset.unions [
-      #     ./folder-a
-      #     ./folder-b
-      #   ];
-      # };
       src = lib.fileset.toSource {
         root = ./teto-desktop;
         fileset = ./teto-desktop;
@@ -97,17 +90,10 @@ in
       # pkgs.peek # GIF recorder  BROKEN
       pkgs.alsa-utils # for alsamixer
       pkgs.lm_sensors # for `sensors` executable
-      # pinentry-bemenu
-      # pinentry-rofi
+      self.inputs.deploy-rs.packages.${stdenv.hostPlatform.system}.deploy-rs
       pciutils # for lspci
-      # gnome3.gnome-font-viewer  # Not very good
-
-      # pkgs.librsvg # for rikai.nvim
-
       timg
       gh-dash
-      # wpaperd
-
       pi-coding-agent # to test as ACP provider for avante
     ]
   );
@@ -118,23 +104,25 @@ in
     "${dotfilesPath}/bin"
   ];
 
+  # let noctalia deal with it ?
   services.network-manager-applet.enable = true;
 
   # needed for gpg-agent gnome pinentry
   # services.dbus.packages = [ pkgs.gcr ];
   programs.nvimpager.enable = false; # too slow
 
-  programs.rbw = {
-    enable = withSecrets;
-    settings = {
-      email = config.accounts.email.accounts.fastmail.address;
-      lock_timeout = 300;
-      # pinentry = pkgs.pinentry-gnome3;
-      pinentry = pkgs.pinentry-rofi;
-      # see https://github.com/nix-community/home-manager/issues/2476
-      device_id = secrets.bitwarden.device-id;
-    };
-  };
+  # always broken
+  # programs.rbw = {
+  #   enable = withSecrets;
+  #   settings = {
+  #     email = config.accounts.email.accounts.fastmail.address;
+  #     lock_timeout = 300;
+  #     # pinentry = pkgs.pinentry-gnome3;
+  #     pinentry = pkgs.pinentry-rofi;
+  #     # see https://github.com/nix-community/home-manager/issues/2476
+  #     device_id = secrets.bitwarden.device-id;
+  #   };
+  # };
 
   # https://github.com/NixOS/nixpkgs/issues/196651
   manual.manpages.enable = true;

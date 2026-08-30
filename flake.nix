@@ -63,12 +63,12 @@
       flake = false;
     };
 
-    # avante-nvim-src = {
-    #   # url = "github:teto/avante.nvim?ref=matt/debug";
-    #   url = "path:/home/teto/neovim/avante.nvim";
-    #   flake = false;
-    #   # inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    avante-nvim = {
+      url = "github:teto/avante.nvim";
+      # url = "path:/home/teto/neovim/avante.nvim";
+      # flake = false;
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # blink-cmp = {
     #   url = "github:Saghen/blink.cmp";

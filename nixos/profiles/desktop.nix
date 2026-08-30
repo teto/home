@@ -1,6 +1,6 @@
 {
   # config,
-  # lib,
+  lib,
   pkgs,
   flakeSelf,
   withSecrets,
@@ -92,6 +92,37 @@ in
     '';
   };
 
+ # service-name
+ #              is the friendly name the service is known by and looked up
+ #              under.  It is case sensitive.  Often, the client program is
+ #              named after the service-name.
+ #
+ #       port   is the port number (in decimal) to use for this service.
+ #
+ #       protocol
+ #              is the type of protocol to be used.  This field should
+ #              match an entry in the protocols(5) file.  Typical values
+ #              include tcp and udp.
+ #
+ #       aliases
+ #              is an optional space or tab separated list of other names
+ #              for this service.  Again, the names are case sensitive.
+ #
+ # sources
+ #      services.source = pkgs.iana-etc + "/etc/services";
+  #
+  # # /etc/protocols: IP protocol numbers.
+  # protocols.source = pkgs.iana-etc + "/etc/protocols";
+# nusrp            49001/tcp  # Nuance Unity Service Request Protocol
+# nusdp-disc       49001/udp  # Nuance Unity Service Discovery Protocol
+# inspider         49150/tcp  # InSpider System
+  environment.etc.services.text = lib.mkForce ''
+    piper   10200/tcp
+
+    '';
+
+  # { };
+
   # see https://github.com/NixOS/nixpkgs/issues/15293
   # Set your time zone.
   time.timeZone = "Europe/Paris";
@@ -105,6 +136,7 @@ in
     "/share/xdg-desktop-portal"
     "/share/applications"
   ];
+
 
   # let home-manager do it
   # xdg.portal = {

@@ -50,25 +50,37 @@ in
   # Put the hostname or IP address of the device running your Wyoming service (such as Piper, Whisper, or OpenWakeWord
   # so I need only one ?
   services.wyoming.piper.servers = {
-    "fr" = {
+    fr = {
       enable = true;
+      zeroconf.enable = false;
       # see https://rhasspy.github.io/piper-samples/#fr_FR-mls-medium
       voice = "fr_FR-mls-medium";
+      # default = "en-us-ryan-medium";
       # voice = "fr_FR-semaine-medium";
       uri = "tcp://${server}:10200";
       # zeroconf
       # useCUDA = pkgs.config.cudaSupport;
+      # extraArgs = []
     };
   };
 
   # Looks ok
+  # speech to text
   services.wyoming.faster-whisper.servers = {
-    "medium-en" = {
+    medium-en = {
       enable = true;
       model = "medium-int8";
-      language = "en";
+      language = "fr";
       uri = "tcp://${server}:10301";
       # device = "cuda";
+      # initialPrompt = ''
+      #          The following conversation takes place in the universe of
+      #          Wizard of Oz. Key terms include 'Yellow Brick Road' (the path
+      #          to follow), 'Emerald City' (the ultimate goal), and 'Ruby
+      #          Slippers' (the magical tools to succeed). Keep these in mind as
+      #          they guide the journey.
+      #        ''
+
     };
   };
 

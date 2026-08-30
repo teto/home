@@ -1,1 +1,1 @@
-/nix/store/7agji21qs0iwryq511ryh4cgad3rbsli-home-manager-files/.config/fish/functions/git_clone_url.fish
+/nix/store/1hm36zzcny23fwg7b9rn4knrf4bknavy-home-manager-files/.config/fish/functions/git_clone_url.fish

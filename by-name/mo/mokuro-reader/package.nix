@@ -8,17 +8,26 @@
   nodejs,
   npmHooks,
 }:
-
+let
+  src-teto = fetchFromGitHub {
+    owner = "teto";
+    repo = "mokuro-reader";
+    rev = "241b3c4177eccdf6ce276c074b5c39ab2fec6a5c";
+    hash = "sha256-+EjKJueJJulH4iMBCHBAfNjM/Fqb2MI00+GU09lRYJs=";
+  };
+in
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "mokuro-reader";
   version = "1.8.2";
 
-  src = fetchFromGitHub {
-    owner = "Gnathonic";
-    repo = "mokuro-reader";
-    tag = "v${finalAttrs.version}";
-    hash = "sha256-+EjKJueJJulH4iMBCHBAfNjM/Fqb3MI00+GU09lRYJs=";
-  };
+
+  src = src-teto;
+  # src = fetchFromGitHub {
+  #   owner = "Gnathonic";
+  #   repo = "mokuro-reader";
+  #   tag = "v${finalAttrs.version}";
+  #   hash = "sha256-+EjKJueJJulH4iMBCHBAfNjM/Fqb3MI00+GU09lRYJs=";
+  # };
 
   npmDeps = fetchNpmDeps {
     name = "${finalAttrs.pname}-${finalAttrs.version}-npm-deps";

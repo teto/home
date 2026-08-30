@@ -88,6 +88,7 @@ in
             # ''}
             {
               Type = "oneshot";
+              SyslogIdentifier = mkMujmapServiceName name;
               # TODO should be
               ExecStart = "${cfg.package}/bin/mujmap -C ${config.accounts.email.maildirBasePath}/fastmail sync ${lib.concatStringsSep " " mujmapOptions}";
             };
