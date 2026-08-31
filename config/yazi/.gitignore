@@ -5,5 +5,6 @@ plugins/*
 theme.toml
 flavors/noctalia.yazi
 # ignore for now
-vfs.toml
+vfs*.toml
+
 

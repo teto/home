@@ -22,8 +22,9 @@
 */
 { pkgs, config, ... }:
 let
-  server = "${config.networking.hostName}.local";
-  # "0.0.0.0";
+  # this sometimes resolves to ipv6 ?
+  # server = "${config.networking.hostName}.local";
+  server = "0.0.0.0";
   # server = "tatooine.local";
 
   # customWakeWordModels = pkgs.stdenv.mkDerivation {
@@ -50,6 +51,7 @@ in
 {
   # Put the hostname or IP address of the device running your Wyoming service (such as Piper, Whisper, or OpenWakeWord
   # so I need only one ?
+  # error while attempting to bind on address ('fe80::d46e:39cc:2a61:7908', 10200, 0, 0): [errno 22] invalid argument   
   services.wyoming.piper.servers = {
     fr = {
       enable = true;
@@ -59,8 +61,9 @@ in
       # default = "en-us-ryan-medium";
       # voice = "fr_FR-semaine-medium";
       uri = "tcp://${server}:10200";
-      # zeroconf
-      # useCUDA = pkgs.config.cudaSupport;
+      useCUDA = pkgs.config.cudaSupport;
+
+      # --local-files-only (dont dl from HF)
       # extraArgs = []
     };
   };

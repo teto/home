@@ -103,14 +103,10 @@ in
   ## /etc/protocols: IP protocol numbers.
   # protocols.source = pkgs.iana-etc + "/etc/protocols";
   # nusrp            49001/tcp  # Nuance Unity Service Request Protocol
-  # nusdp-disc       49001/udp  # Nuance Unity Service Discovery Protocol
-  # inspider         49150/tcp  # InSpider System
   environment.etc.services.text = lib.mkForce ''
     piper   10200/tcp
     hass    8123/tcp
   '';
-
-  # { };
 
   # see https://github.com/NixOS/nixpkgs/issues/15293
   # Set your time zone.
@@ -127,13 +123,14 @@ in
   ];
 
   # let home-manager do it
-  # xdg.portal = {
+  xdg.portal = {
   #  # https://github.com/flatpak/xdg-desktop-portal/blob/1.18.1/doc/portals.conf.rst.in
   #  enable = true;
   #  xdgOpenUsePortal = true;
 
   #  # is this in configuration.nix ?
-  #  config.common.default = "*";
+   config.common.default = "*";
+ };
   #              # {
   #              #   common = {
   #              #     default = [
@@ -165,6 +162,7 @@ in
   in [
     pkgs.noto-fonts-cjk-sans
     resticWrapper
+    flakeSelf.nixosConfigurations.neotokyo.config.services.restic.backups.immich-db-to-backblaze.generatedWrapper
   ];
 
   hardware = {

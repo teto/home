@@ -7,7 +7,6 @@
 {
   imports = [
     flakeSelf.nixosProfiles.home-assistant
-    # flakeSelf.nixosProfiles.wyoming
   ];
 
   services.home-assistant = {
@@ -19,8 +18,9 @@
     blueprints = {
       automation = [
         (pkgs.fetchurl {
+          name = "blueprint";
           url = "https://gist.github.com/markkvdb/9ce600a7ceee95f52c013df985803f9d";
-          hash = "sha256-nkKa5R6TBEclpzJshF5NvKT3DKHebZEbJhV+nZj5CdY=";
+          hash = "sha256-yI4AjxgRR4cpa9Cw0gfX6ejtXx4r93wDiZ2Pg6WYy5k=";
         })
       ];
 
