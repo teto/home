@@ -8,17 +8,13 @@
 
   inputs = {
 
-    # todo remove
-    buildbot-nix = {
-      url = "github:nix-community/buildbot-nix";
-      # url = "github:teto/buildbot-nix?ref=teto/hack-niks3-eval-error";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nixbot.url = "github:Mic92/nixbot";
     nixbot.inputs.nixpkgs.follows = "nixpkgs";
 
-    direnv-instant.url = "github:Mic92/direnv-instant";
+    direnv-instant = {
+      url = "github:Mic92/direnv-instant";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     disko = {
       url = "github:nix-community/disko";
@@ -77,13 +73,9 @@
 
     deploy-rs = {
       url = "github:serokell/deploy-rs";
-      # url = "github:apoloqize/deploy-rs?rev=b48c508f1e8c9f0c82a9baeffa014e86d716a546";
-
       # inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # https://github.com/DeterminateSystems/nix-src/pull/217
-    flake-schemas.url = "github:DeterminateSystems/flake-schemas";
 
     # firefox2nix.url = "git+https://git.sr.ht/~rycee/mozilla-addons-to-nix";
 
@@ -109,16 +101,16 @@
     };
 
     # nixpkgs follow
-    jujutsu = {
-      # ?rev=669bfaf09b48a94c4756aff94ff00af9ee387307 is the commit with conf.d support
-      url = "github:jj-vcs/jj";
-      # url = "github:bryceberger/jj?ref=revset-evaluator";
+    # jujutsu = {
+    #   # ?rev=669bfaf09b48a94c4756aff94ff00af9ee387307 is the commit with conf.d support
+    #   url = "github:jj-vcs/jj";
+    #   # url = "github:bryceberger/jj?ref=revset-evaluator";
+    #
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    authentik-nix.url = "github:nix-community/authentik-nix";
-    authentik-nix.inputs.nixpkgs.follows = "nixpkgs";
+    # authentik-nix.url = "github:nix-community/authentik-nix";
+    # authentik-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     # nixos-wizard = {
     #   url = "github:km-clay/nixos-wizard";
@@ -172,11 +164,6 @@
     # poetry.url = "github:nix-community/poetry2nix";
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
-      # url = "path:/home/teto/neovim-nightly-overlay";
-      # ff21a18bde28b4c8ca0bc1f9a5b7186a1b89a3d1 ok
-      # url = "github:nix-community/neovim-nightly-overlay?rev=ff21a18bde28b4c8ca0bc1f9a5b7186a1b89a3d1";
-      # not good
-      # url = "github:nix-community/neovim-nightly-overlay?rev=2b5cf92633caaf2604e7b78d8d16ad92dbb502c6";
       inputs.nixpkgs.follows = "nixpkgs";
       # inputs.neovim-src.follows = "neovim-src";
     };
@@ -186,17 +173,11 @@
       flake = false;
     };
 
-    # TODO extend vim plugins from this overlay
-    # neovim-overlay.url = "github:teto/neovim-nightly-overlay/vimPlugins-overlay";
-    # tree-sitter = {
-    #   url = "github:ahlinc/tree-sitter";
-    #   flake = false;
-    # };
     # neovide = {
     #   url = "github:neovide/neovide";
     #   flake = false;
     # };
-    # waybar.url = "github:Alexays/Waybar";
+
     # todo update for ci ?
     nixpkgs = {
       url = "github:teto/nixpkgs/scratch";
@@ -207,7 +188,9 @@
       url = "github:NixOS/nix";
       # url = "github:teto/nix?ref=teto/remove-assert-outputsSubstitutionTried";
     };
-    nix-schemas.url = "github:DeterminateSystems/nix-src/flake-schemas";
+    # https://github.com/DeterminateSystems/nix-src/pull/217
+    # flake-schemas.url = "github:DeterminateSystems/flake-schemas";
+    # nix-schemas.url = "github:DeterminateSystems/nix-src/flake-schemas";
 
     nh = {
       url = "github:nix-community/nh";
@@ -225,9 +208,8 @@
     };
 
     rocks-nvim = {
-      # url = "/home/teto/neovim/rocks.nvim";
       url = "github:nvim-neorocks/rocks.nvim";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -254,7 +236,6 @@
 
     nur.url = "github:nix-community/NUR";
 
-    # https://git.sr.ht/~whynothugo/pimsync
     pimsync-src = {
       # "sourcehut:"
       url = "git+https://git.sr.ht/~whynothugo/pimsync";
@@ -279,11 +260,6 @@
       # url = "/home/teto/neovim/jap.nvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # rest-nvim = {
-    #   url = "github:teto/rest.nvim?ref=matt/nix-expo";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
 
     # rofi-hoogle.url = "github:teto/rofi-hoogle/fixup";
     # rofi-hoogle = {
@@ -317,10 +293,6 @@
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # AModules/fix-expand-fill-no-center
-    # https://github.com/Alexays/Waybar/pull/3881
-    # waybar.url = "github:Alexays/Waybar?ref=pull/3881/head";
 
     # doesn't work, hypridle seems better fitted ?
     wayland-pipewire-idle-inhibit = {
@@ -575,15 +547,20 @@
       # adjust the hostnames accordingly ?
       nixosConfigurations =
         let
-          # disableSecrets =
-          #   name: val:
-          #   lib.nameValuePair "${name}-no-secrets" (
-          #     val.extendModules {
-          #       specialArgs = {
-          #         withSecrets = false;
-          #       };
-          #     }
-          #   );
+          disableSecrets =
+            name: val:
+            lib.nameValuePair "${name}-no-secrets" (
+              val.extendModules {
+                modules = [
+                  {
+                    config.tetos.withSecrets = false;
+                  }
+                ];
+                # specialArgs = {
+                #   withSecrets = false;
+                # };
+              }
+            );
           # createSystem =
           #   hostname: withSecrets:
           # lib.mkNixosSystem {
@@ -616,25 +593,28 @@
             )
           );
 
-          nixosConfigsWithoutSecrets = lib.importDirectories ./hosts (
-            hostname: val:
-            lib.nameValuePair "${hostname}-no-secrets"
-              # dirname => hostname
-              (
-                lib.mkNixosSystem {
-                  inherit hostname;
-                  # ideally we would return both versions
-                  withSecrets = false;
-                  modules = [
-                    (./hosts + "/${hostname}")
-                  ];
-
-                  # encode it in name or
-                  # pkgs = tetosPkgs;
-                  pkgs = if hostname == "jedha" then tetosPkgsCuda else tetosPkgs;
-                }
-              )
-          );
+          nixosConfigsWithoutSecrets = lib.mapAttrs'
+            disableSecrets
+            nixosConfigs;
+          #   lib.importDirectories ./hosts (
+          #   hostname: val:
+          #   lib.nameValuePair "${hostname}-no-secrets"
+          #     # dirname => hostname
+          #     (
+          #       lib.mkNixosSystem {
+          #         inherit hostname;
+          #         # ideally we would return both versions
+          #         withSecrets = false;
+          #         modules = [
+          #           (./hosts + "/${hostname}")
+          #         ];
+          #
+          #         # encode it in name or
+          #         # pkgs = tetosPkgs;
+          #         pkgs = if hostname == "jedha" then tetosPkgsCuda else tetosPkgs;
+          #       }
+          #     )
+          # );
         in
         nixosConfigs // nixosConfigsWithoutSecrets;
 

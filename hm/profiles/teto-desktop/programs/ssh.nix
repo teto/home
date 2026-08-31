@@ -11,7 +11,8 @@ let
   # TODO filter out the configurations ending with -no-secret ?
   # could remove it afterwards instead
   hostsConfigs = lib.mapAttrs (_: val: lib.genSshClientConfig val) (
-    lib.filterAttrs (name: val: val.config.tetos.hasSecrets or false) flakeSelf.nixosConfigurations
+    # or false
+    lib.filterAttrs (name: val: val.config.tetos.withSecrets ) flakeSelf.nixosConfigurations
   );
 in
 {

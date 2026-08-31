@@ -90,6 +90,8 @@ in
         flakeSelf.inputs.sops-nix.nixosModules.sops
         flakeSelf.inputs.hm.nixosModules.home-manager
 
+        # own module
+        flakeSelf.nixosModules.tetos
       ]
       ++ modules;
 
