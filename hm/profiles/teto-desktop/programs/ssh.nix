@@ -12,7 +12,7 @@ let
   # could remove it afterwards instead
   hostsConfigs = lib.mapAttrs (_: val: lib.genSshClientConfig val) (
     # or false
-    lib.filterAttrs (name: val: val.config.tetos.withSecrets ) flakeSelf.nixosConfigurations
+    lib.filterAttrs (name: val: val.config.tetos.withSecrets) flakeSelf.nixosConfigurations
   );
 in
 {

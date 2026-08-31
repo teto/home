@@ -2,6 +2,7 @@
   flakeSelf,
   pkgs,
   lib,
+  config,
   ...
 }:
 {
@@ -28,9 +29,9 @@
     };
   };
 
-  systemd.services.home-assistant.serviceConfig = {
+  systemd.services.home-assistant.serviceConfig = lib.mkIf config.services.home-assistant.enable {
     # on-failure
     # when there are not enough space failure
-    Restart = lib.mkForce "always";
+    # Restart = lib.mkForce "always";
   };
 }

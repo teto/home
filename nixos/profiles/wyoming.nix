@@ -51,7 +51,7 @@ in
 {
   # Put the hostname or IP address of the device running your Wyoming service (such as Piper, Whisper, or OpenWakeWord
   # so I need only one ?
-  # error while attempting to bind on address ('fe80::d46e:39cc:2a61:7908', 10200, 0, 0): [errno 22] invalid argument   
+  # error while attempting to bind on address ('fe80::d46e:39cc:2a61:7908', 10200, 0, 0): [errno 22] invalid argument
   services.wyoming.piper.servers = {
     fr = {
       enable = true;

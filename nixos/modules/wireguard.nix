@@ -1,4 +1,4 @@
-# move to "tetos" subfolder? 
+# move to "tetos" subfolder?
 {
   config,
   lib,

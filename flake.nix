@@ -76,7 +76,6 @@
       # inputs.nixpkgs.follows = "nixpkgs";
     };
 
-
     # firefox2nix.url = "git+https://git.sr.ht/~rycee/mozilla-addons-to-nix";
 
     flake-utils.url = "github:numtide/flake-utils";
@@ -580,9 +579,7 @@
             )
           );
 
-          nixosConfigsWithoutSecrets = lib.mapAttrs'
-            disableSecrets
-            nixosConfigs;
+          nixosConfigsWithoutSecrets = lib.mapAttrs' disableSecrets nixosConfigs;
           #   lib.importDirectories ./hosts (
           #   hostname: val:
           #   lib.nameValuePair "${hostname}-no-secrets"

@@ -124,13 +124,13 @@ in
 
   # let home-manager do it
   xdg.portal = {
-  #  # https://github.com/flatpak/xdg-desktop-portal/blob/1.18.1/doc/portals.conf.rst.in
-  #  enable = true;
-  #  xdgOpenUsePortal = true;
+    #  # https://github.com/flatpak/xdg-desktop-portal/blob/1.18.1/doc/portals.conf.rst.in
+    #  enable = true;
+    #  xdgOpenUsePortal = true;
 
-  #  # is this in configuration.nix ?
-   config.common.default = "*";
- };
+    #  # is this in configuration.nix ?
+    config.common.default = "*";
+  };
   #              # {
   #              #   common = {
   #              #     default = [
@@ -156,14 +156,17 @@ in
 
   # };
 
-  environment.systemPackages = let 
-    # loop over those
-    resticWrapper = flakeSelf.nixosConfigurations.neotokyo.config.services.restic.backups.nextcloud-to-backblaze.generatedWrapper;
-  in [
-    pkgs.noto-fonts-cjk-sans
-    resticWrapper
-    flakeSelf.nixosConfigurations.neotokyo.config.services.restic.backups.immich-db-to-backblaze.generatedWrapper
-  ];
+  environment.systemPackages =
+    let
+      # loop over those
+      resticWrapper =
+        flakeSelf.nixosConfigurations.neotokyo.config.services.restic.backups.nextcloud-to-backblaze.generatedWrapper;
+    in
+    [
+      pkgs.noto-fonts-cjk-sans
+      resticWrapper
+      flakeSelf.nixosConfigurations.neotokyo.config.services.restic.backups.immich-db-to-backblaze.generatedWrapper
+    ];
 
   hardware = {
     enableAllFirmware = true;

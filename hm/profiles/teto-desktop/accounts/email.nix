@@ -227,10 +227,12 @@ let
 in
 {
   maildirBasePath = mailDirBasePath;
-  accounts = lib.optionalAttrs (builtins.traceVerbose osConfig.tetos.withSecrets osConfig.tetos.withSecrets) {
-    inherit
-      gmail
-      fastmail
-      ;
-  };
+  accounts =
+    lib.optionalAttrs (builtins.traceVerbose osConfig.tetos.withSecrets osConfig.tetos.withSecrets)
+      {
+        inherit
+          gmail
+          fastmail
+          ;
+      };
 }

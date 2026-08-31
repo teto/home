@@ -101,7 +101,7 @@ in
     in
     llmDeps
     ++ [
-      # disable for now because of 
+      # disable for now because of
       # >   `/nix/store/klzrf7krj1whzms0cbk8hw7nyrn013c3-rag-service-env/bin/activate' and
       # >   `/nix/store/pzvl9qcgq404rmd3jasn5hvwh3frp75r-deploy-rs-0.1.0/bin/activate'
       # flakeSelf.inputs.avante-nvim.packages.${pkgs.stdenv.hostPlatform.system}.ragService
