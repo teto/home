@@ -20,31 +20,32 @@
       hey_mycroft
       hey_rhasspy
 */
-{ pkgs, dotfilesPath, ... }:
+{ pkgs, config, ... }:
 let
-  server = "0.0.0.0";
+  server = "${config.networking.hostName}.local";
+  # "0.0.0.0";
   # server = "tatooine.local";
 
-  customWakeWordModels = pkgs.stdenv.mkDerivation {
-    pname = "home-assistant-wakewords-collection";
-    version = "6480a05";
-
-    src = pkgs.fetchFromGitHub {
-      owner = "fwartner";
-      repo = "home-assistant-wakewords-collection";
-      rev = "6480a05b5e66905c294e95b9256d1b2e51f7e3d4";
-      hash = "sha256-lm20gldJbjBs5t3AdNAMI2c8O4nRM6/wPozohmtGBfI=";
-    };
-
-    dontBuild = true;
-
-    installPhase = ''
-      runHook preInstall
-      mkdir $out
-      find . -name "*.tflite" -exec cp -v {} $out/ \;
-      runHook postInstall
-    '';
-  };
+  # customWakeWordModels = pkgs.stdenv.mkDerivation {
+  #   pname = "home-assistant-wakewords-collection";
+  #   version = "6480a05";
+  #
+  #   src = pkgs.fetchFromGitHub {
+  #     owner = "fwartner";
+  #     repo = "home-assistant-wakewords-collection";
+  #     rev = "6480a05b5e66905c294e95b9256d1b2e51f7e3d4";
+  #     hash = "sha256-lm20gldJbjBs5t3AdNAMI2c8O4nRM6/wPozohmtGBfI=";
+  #   };
+  #
+  #   dontBuild = true;
+  #
+  #   installPhase = ''
+  #     runHook preInstall
+  #     mkdir $out
+  #     find . -name "*.tflite" -exec cp -v {} $out/ \;
+  #     runHook postInstall
+  #   '';
+  # };
 in
 {
   # Put the hostname or IP address of the device running your Wyoming service (such as Piper, Whisper, or OpenWakeWord

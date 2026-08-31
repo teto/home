@@ -66,17 +66,6 @@ in
     };
   };
 
-  fonts.enableDefaultPackages = true;
-
-  console = {
-    # seems like a kernel bug resets it https://github.com/NixOS/nixpkgs/issues/413128
-    earlySetup = true;
-    font = "${pkgs.terminus_font}/share/consolefonts/ter-i28b.psf.gz";
-    # font = "ter-v32n"; # Terminus font, larger size
-    packages = [ pkgs.terminus_font ];
-    useXkbConfig = true;
-  };
-
   # TODO move to lemurs ?
   # exec ${lib.getExe config.programs.sway.package}
   environment.etc."lemurs/wayland/sway-systemd" = {
@@ -170,8 +159,12 @@ in
 
   # };
 
-  environment.systemPackages = [
+  environment.systemPackages = let 
+    # loop over those
+    resticWrapper = flakeSelf.nixosConfigurations.neotokyo.config.services.restic.backups.nextcloud-to-backblaze.generatedWrapper;
+  in [
     pkgs.noto-fonts-cjk-sans
+    resticWrapper
   ];
 
   hardware = {
