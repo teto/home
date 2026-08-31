@@ -92,6 +92,10 @@ in
 
         # own module
         flakeSelf.nixosModules.tetos
+        {
+            tetos.withSecrets = true;
+        }
+
       ]
       ++ modules;
 

@@ -553,7 +553,7 @@
               val.extendModules {
                 modules = [
                   {
-                    config.tetos.withSecrets = false;
+                    config.tetos.withSecrets = lib.mkForce false;
                   }
                 ];
                 # specialArgs = {
@@ -561,19 +561,6 @@
                 # };
               }
             );
-          # createSystem =
-          #   hostname: withSecrets:
-          # lib.mkNixosSystem {
-          #   # ideally we would return both versions
-          #   inherit withSecrets hostname;
-          #   modules = [
-          #     (./hosts + "/${hostname}")
-          #   ];
-          #
-          #   # encode it in name or
-          #   pkgs = tetosPkgs;
-          #   # pkgs = if hostname == "jedha" then tetosPkgsCuda else tetosPkgs;
-          # };
 
           nixosConfigs = lib.importDirectories ./hosts (
             # dirname => hostname

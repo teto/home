@@ -3,7 +3,8 @@
   pkgs,
   lib,
   config,
-  withSecrets,
+  osConfig,
+  # withSecrets,
   secretsFolder,
   secrets,
   dotfilesPath,
@@ -184,7 +185,7 @@ in
     CDPATH = "$HOME/plugins";
 
   }
-  // lib.optionalAttrs withSecrets {
+  // lib.optionalAttrs osConfig.tetos.withSecrets {
     # customsearch cancelled ffs
     # GOOGLE_SEARCH_ENGINE_ID="64ff2b96809e947cc";
     # GOOGLE_SEARCH_API_KEY=secrets.google.customsearch_api_key;

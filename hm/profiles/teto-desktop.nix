@@ -4,8 +4,6 @@
   pkgs,
   lib,
   # system,
-  # withSecrets,
-  # secrets,
   dotfilesPath,
   secretsFolder,
   ...

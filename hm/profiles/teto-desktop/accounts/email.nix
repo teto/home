@@ -2,8 +2,8 @@
   config,
   pkgs,
   lib,
-  withSecrets,
   # dotfilesPath,
+  osConfig,
   secrets,
   ...
 }:
@@ -227,7 +227,7 @@ let
 in
 {
   maildirBasePath = mailDirBasePath;
-  accounts = lib.optionalAttrs withSecrets {
+  accounts = lib.optionalAttrs (builtins.traceVerbose osConfig.tetos.withSecrets osConfig.tetos.withSecrets) {
     inherit
       gmail
       fastmail
