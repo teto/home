@@ -522,6 +522,8 @@
         };
 
       # TODO run evals and treefmt checks
+      # used by nixbot
+      # https://github.com/nix-community/nixos-images/blob/56b52791312edeade1e6bd853ce56c778f363d50/flake.nix#L53
       checks = {
         # formatting = treefmtEval.${tetosPkgs.system}.config.build.check self;
 

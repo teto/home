@@ -14,8 +14,6 @@ let
   neovim = import ./neovim.nix { inherit flakeSelf lib; };
   wireguard = import  ./wireguard.nix { inherit secrets flakeSelf lib secretsFolder; };
 
-  # myPkgs = pkgs;
-
 in
 {
   inherit
@@ -148,6 +146,7 @@ in
 
   # generate a client ssh config from the server config
   # https://fmartingr.com/blog/2022/08/12/using-ssh-config-match-to-connect-to-a-host-using-multiple-ip-or-hostnames/
+  # Match localnetwork
   genSshClientConfig =
     # value is one of nixosConfigurations.<ENTRY>
     value:
@@ -161,7 +160,7 @@ in
         # lib.warn if "teto" is not in users.users
         {
           # or false) 
-          header = ''Match host="${mcfg.networking.hostName},${mcfg.networking.domain}${lib.optionalString (mcfg.tetos.wireguard.enable or false) ",${mcfg.networking.hostName}.vpn"}"'';
+          header = ''Match host="${mcfg.networking.hostName},${mcfg.networking.hostName}.${mcfg.networking.domain}${lib.optionalString (mcfg.tetos.wireguard.enable or false) ",${mcfg.networking.hostName}.vpn"}"'';
           # assumption ? or check/warn it has it ?
           # user = "teto";
           identityFile = "${secretsFolder}/ssh/id_rsa";
@@ -169,7 +168,12 @@ in
           identitiesOnly = true;
           # extraOptions = {
           AddKeysToAgent = "yes";
-
+          CanonicalizeHostname = true;
+          # CanonicalDomains corp.example.com lab.example.com 
+          # set domain to null ?
+          CanonicalDomains = [ "${mcfg.networking.hostName}.${mcfg.networking.domain}" ];
+          # Specifies  rules to determine whether CNAMEs should be followed when canonicalizing hostnames.  The rules consist
+          # CanonicalizePermittedCNAMEs
           # TODO  set it depending if hostName is FQDN ?
           # HostName = lib.throwIf (
           #   mcfg.networking.domain == null

@@ -1,1 +1,0 @@
-/nix/store/n90gf3mzgllrabwp6dygnkkjq243fnpd-home-manager-files/.config/fish/functions/git_clone_url.fish

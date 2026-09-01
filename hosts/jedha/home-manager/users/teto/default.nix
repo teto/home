@@ -3,8 +3,8 @@
   config,
   lib,
   pkgs,
-  withSecrets,
   flakeSelf,
+  withSecrets,
   ...
 }:
 let
@@ -58,7 +58,6 @@ in
 
     ./programs/neovim.nix
     # ./programs/noctalia.nix
-    # ./programs/waybar.nix # TODO resotre ?
     ./programs/zsh.nix
 
     ./services/llama-cpp.nix
@@ -69,6 +68,7 @@ in
     ./services/mpd.nix
     ./services/mpris.nix
   ]
+  # use lib.mkIf config.tetos.withSecrets ?
   ++ lib.optionals withSecrets [
     ./sops.nix
     ./ia.nix

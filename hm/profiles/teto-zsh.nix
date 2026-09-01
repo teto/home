@@ -17,14 +17,11 @@
   };
 
   programs.zsh = {
-    enable = true;
 
     # $HOME is prepend hence the issues
     dotDir = "${config.xdg.configHome}/zsh";
 
-    sessionVariables = {
-
-    };
+    sessionVariables = { };
     history = {
       # HISTSIZE
       # loaded in memory, careful since it slows down zsh
@@ -45,8 +42,8 @@
       ".." = "cd ..";
       "..." = "cd ../..";
 
-    }
-    // config.programs.bash.shellAliases;
+    };
+    # // config.programs.bash.shellAliases;
 
     autocd = true;
 

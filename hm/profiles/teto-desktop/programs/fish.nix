@@ -44,6 +44,8 @@ in
 # - rfw
 {
   enable = true;
+  preferAbbrs = true;
+  # If enabled, abbreviations will be preferred over aliases when other modules define aliases for fish.
 
   _imports = [
 
@@ -79,20 +81,20 @@ in
   # };
   shellAbbrs = {
     yr = "yazi ./result";
-    js = "just -g switch";
+    # js = "just -g switch";
 
     n1 = ''nix develop --option builders "$TETOS_BUILDER_NIXCOMMUNITY" -j0'';
     n2 = ''nix develop --option builders "$TETOS_1" -j0'';
     nr1 = ''nix run --option builders "$TETOS_BUILDER_NIXCOMMUNITY" -j0'';
     nr2 = ''nix run --option builders "$TETOS_1" -j0'';
 
-    fren = "trans -from fr -to en ";
-    enfr = "trans -from en -to fr ";
-    jpfr = "trans -from ja -to fr ";
-    frjp = "trans -from fr -to ja ";
-    jpen = "trans -from ja -to en ";
-    enjp = "trans -from en -to ja ";
-
+    # fren = "trans -from fr -to en ";
+    # enfr = "trans -from en -to fr ";
+    # jpfr = "trans -from ja -to fr ";
+    # frjp = "trans -from fr -to ja ";
+    # jpen = "trans -from ja -to en ";
+    # enjp = "trans -from en -to ja ";
+    #
     kssh = "kitten ssh";
     # abbr --add git-clone-url --position command --regex --function git_clone_url
     "git-clone-url" = {
@@ -131,14 +133,11 @@ in
 
     tetos-sw = {
       name = "tetos-sw";
-      # function
-      # command = "nh";
-      # position
-      # switch-remote: (nixos-rebuild "switch" "--option builders \"$TETOS_0\" -j0")
+      setCursor = true;
       expansion = ''
-        nh os switch ~/home -- --keep-going \
-                 --override-input nixpkgs ~/nixpkgs \
-                 --override-input hm ~/hm'';
+        nh os %switch ~/home -- --keep-going \
+          --override-input nixpkgs ~/nixpkgs \
+          --override-input hm ~/hm'';
 
     };
     # tetos-sw-remote = {
