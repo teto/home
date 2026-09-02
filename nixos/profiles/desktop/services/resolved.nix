@@ -23,6 +23,7 @@
     # TODO fallback on
     # man resolved.conf
     FallbackDNS = [
+      "192.168.1.254"
       "1.1.1.1"
       "8.8.8.8"
     ];

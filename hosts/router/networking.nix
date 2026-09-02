@@ -10,7 +10,8 @@
     useNetworkd = true;
     useDHCP = false;
     hostName = "router"; # or router
-    domain = "router.local";
+    # .vpn as well so...
+    domain = ".local";
 
     # networking.dhcpcd.enable = true;
     usePredictableInterfaceNames = true;

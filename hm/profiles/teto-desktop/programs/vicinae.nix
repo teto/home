@@ -88,11 +88,6 @@
     # https://www.raycast.com/capipo/pass
     # https://www.raycast.com/afok/password-store
     [
-      (config.lib.vicinae.mkRayCastExtension {
-        name = "dad-jokes";
-        rev = "b8c8fcd7ebd441a5452b396923f2a40e879565ba";
-        sha256 = "sha256-07IYIMKQjGlVWSDN1CX8wGOrx3Ob1beZeGmhaEMQYa4=";
-      })
       # broken with file-size-format
       # (config.lib.vicinae.mkRayCastExtension {
       #   name = "gif-search";

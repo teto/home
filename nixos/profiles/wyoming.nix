@@ -24,7 +24,10 @@
 let
   # this sometimes resolves to ipv6 ?
   # server = "${config.networking.hostName}.local";
-  server = "0.0.0.0";
+
+  # hoping mdns resolves to correct address ? since we enforced rules for it ?
+  server = config.networking.hostName;
+  # server = "0.0.0.0";
   # server = "tatooine.local";
 
   # customWakeWordModels = pkgs.stdenv.mkDerivation {

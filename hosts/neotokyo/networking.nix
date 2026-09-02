@@ -15,7 +15,8 @@ lib.optionalAttrs (lib.debug.traceValFn (a: "SECRETS ? ${toString a}") withSecre
   # TODO fetch from secrets
   hostName = "neotokyo";
 
-  domain = if withSecrets then secrets.jakku.domain else "toto";
+  domain = ".fr"; 
+  # if withSecrets then secrets.jakku.domain else "toto";
 
   useNetworkd = true;
   # useDHCP = true;

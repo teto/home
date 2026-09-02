@@ -94,7 +94,7 @@ in
     # frjp = "trans -from fr -to ja ";
     # jpen = "trans -from ja -to en ";
     # enjp = "trans -from en -to ja ";
-    #
+    
     kssh = "kitten ssh";
     # abbr --add git-clone-url --position command --regex --function git_clone_url
     "git-clone-url" = {
@@ -118,10 +118,21 @@ in
     #   command = "nom build .#nixosConfigurations.%.config.system.build.toplevel";
     #
     # };
+    man-home-configuration-nix = {
+      name = "hm";
+      command = "man";
+      expansion = "home-configuration.nix";
+    };
+    man-configuration-nix = {
+      name = "c";
+      command = "man";
+      expansion = "configuration.nix";
+    };
+    df = "'df -lThx tmpfs'";
     http-models = {
       name = "jedha-models";
       command = "http";
-      expansion = "http get jedha.vpn:8080/models";
+      expansion = "get jedha.vpn:8080/models";
     };
     # abbr --add -- re 'nixos-rebuild \
     #       --flake ~/home \
@@ -159,7 +170,29 @@ in
     git_clone_url = ''
       echo git clone $argv[1]
     '';
-
+fish_command_not_found = ''
+  set -l filename $argv[1]
+  if test -f $filename
+    set -l ext (string split -r -m1 '.' -- $filename)[-1]
+    switch $ext
+      case rs js ts go py md txt
+        bat $filename
+      case json
+        cat $filename | jaq
+      case pdf
+        open $filename
+      case mp4 mkv avi
+        vlc $filename
+      case jpg png gif
+        feh $filename
+      case '*'
+        __fish_default_command_not_found_handler $argv
+    end
+  else
+    __fish_default_command_not_found_handler $argv
+  end
+end
+'';
     # normal-function = "";
     # event-handler = {
     #   body = "";

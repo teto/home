@@ -1,5 +1,11 @@
 { lib, ... }:
 {
+  # when under ndots in hostname, try resolution with those
+  search = [
+    ".local" 
+    # ".vpn"
+  ];
+
   # controls order in which glibc returns IP,
   # prefer ipv4
   getaddrinfo.precedence = {

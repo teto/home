@@ -20,9 +20,10 @@ let
       # assumption ? or check/warn it has it ?
       # identityFile = "${secretsFolder}/ssh/id_rsa";
       # host = "${mcfg.networking.hostName}";
+      # .${mcfg.networking.domain}"
       ''
         [sftp.${name}]
-        host = "${mcfg.networking.hostName}.${mcfg.networking.domain}"
+        host = "${mcfg.networking.hostName}"
         user = "teto"
         port = ${toString (builtins.head sshCfg.ports)}
       ''

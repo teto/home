@@ -5,7 +5,7 @@
     user = "teto";
 
     #Rather than always streaming audio to Home Assistant, the satellite can wait until speech is detected.
-    vad = true;
+    vad.enable = true;
 
     microphone = {
       # WebRTC processing emits 10 ms (160-sample) blocks, which are

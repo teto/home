@@ -160,7 +160,11 @@ in
         # lib.warn if "teto" is not in users.users
         {
           # or false) 
-          header = ''Match host="${mcfg.networking.hostName},${mcfg.networking.hostName}.${mcfg.networking.domain}${lib.optionalString (mcfg.tetos.wireguard.enable or false) ",${mcfg.networking.hostName}.vpn"}"'';
+          header = ''Match host="${mcfg.networking.hostName}"''
+          # . is part of 'domain'
+          + lib.optionalString (mcfg.networking.domain != null) ",${mcfg.networking.hostName}${mcfg.networking.domain}" 
+          + lib.optionalString (mcfg.tetos.wireguard.enable or false) ",${mcfg.networking.hostName}.vpn";
+
           # assumption ? or check/warn it has it ?
           # user = "teto";
           identityFile = "${secretsFolder}/ssh/id_rsa";
@@ -168,10 +172,10 @@ in
           identitiesOnly = true;
           # extraOptions = {
           AddKeysToAgent = "yes";
-          CanonicalizeHostname = true;
+          # CanonicalizeHostname = true;
           # CanonicalDomains corp.example.com lab.example.com 
           # set domain to null ?
-          CanonicalDomains = [ "${mcfg.networking.hostName}.${mcfg.networking.domain}" ];
+          # CanonicalDomains = [ "${mcfg.networking.hostName}.${mcfg.networking.domain}" ];
           # Specifies  rules to determine whether CNAMEs should be followed when canonicalizing hostnames.  The rules consist
           # CanonicalizePermittedCNAMEs
           # TODO  set it depending if hostName is FQDN ?

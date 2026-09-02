@@ -146,6 +146,7 @@ graph.style = "square"
 # Uses Git's "diff3" conflict markers to support tools that depend on it
 # careful because it prevents from using diffconflicts
 conflict-marker-style = "git"
+diff-editor = ":builtin"
 
 [merge-tools.kdiff3]
 # program  = "kdiff3"     # Defaults to the name of the tool if not specified

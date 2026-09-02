@@ -1,8 +1,8 @@
 {
   flakeSelf,
   pkgs,
-  lib,
-  config,
+  # lib,
+  # config,
   ...
 }:
 {
@@ -24,14 +24,11 @@
           # url = "https://gist.github.com/markkvdb/9ce600a7ceee95f52c013df985803f9d";
           hash = "sha256-EriZ1saSSt6xLBtNX2S59oVITrDbQ4CFqk7/t+9qYeA=";
         })
+      ];
+      # TODO add
+      # https://github.com/10der/awtrix-ng-hass-integration
       # template = {};
       # script = {
-      ];
-
-
-        # TODO add
-        # https://github.com/10der/awtrix-ng-hass-integration
-      };
     };
   };
 }
