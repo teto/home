@@ -20,18 +20,18 @@
       automation = [
         (pkgs.fetchurl {
           name = "blueprint";
-          url = "https://gist.github.com/markkvdb/9ce600a7ceee95f52c013df985803f9d";
-          hash = "sha256-yI4AjxgRR4cpa9Cw0gfX6ejtXx4r93wDiZ2Pg6WYy5k=";
+          url = "https://gist.githubusercontent.com/markkvdb/9ce600a7ceee95f52c013df985803f9d/raw/eeecd3670a24e4c3efdc22fe30736d7bb176e881/blueprint.yaml";
+          # url = "https://gist.github.com/markkvdb/9ce600a7ceee95f52c013df985803f9d";
+          hash = "sha256-EriZ1saSSt6xLBtNX2S59oVITrDbQ4CFqk7/t+9qYeA=";
         })
+      # template = {};
+      # script = {
       ];
 
-      # templates = {};
-    };
-  };
 
-  systemd.services.home-assistant.serviceConfig = lib.mkIf config.services.home-assistant.enable {
-    # on-failure
-    # when there are not enough space failure
-    # Restart = lib.mkForce "always";
+        # TODO add
+        # https://github.com/10der/awtrix-ng-hass-integration
+      };
+    };
   };
 }

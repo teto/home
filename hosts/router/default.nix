@@ -261,9 +261,15 @@ in
     # Kind=bridge
 
     networks = {
+      "50-wg0" = {
+        matchConfig.Name = "wg0";
+        networkConfig.MulticastDNS = false;
+      };
+
       "10-enp1s0" = {
         matchConfig.Name = "enp1s0";
         networkConfig.DHCP = "ipv4";
+        networkConfig.MulticastDNS = false;
       };
 
       "10-wireless-wan" = {
@@ -299,6 +305,7 @@ in
         # networkConfig.DHCP = "ipv4";
         networkConfig.DHCPServer = true;
         networkConfig.IPMasquerade = "ipv4";
+        networkConfig.MulticastDNS = false;
 
         dhcpServerConfig = {
           PoolOffset = 100;

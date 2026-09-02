@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }:
 {
@@ -130,6 +131,16 @@
   systemd.tmpfiles.rules = [
     "f ${config.services.home-assistant.configDir}/automations.yaml 0755 hass hass"
   ];
+
+
+
+  systemd.services.home-assistant.serviceConfig = lib.mkIf config.services.home-assistant.enable {
+    # on-failure
+    # when there are not enough space failure
+    RestartSteps = 4; # advised by man systemd.service
+    RestartSec = "1s";
+    RestartMaxDelaySec = "15s";
+  };
 
   # services.deconz.enable
   # with my conbee 2 key

@@ -4,6 +4,9 @@
     enable = true;
     user = "teto";
 
+    #Rather than always streaming audio to Home Assistant, the satellite can wait until speech is detected.
+    vad = true;
+
     microphone = {
       # WebRTC processing emits 10 ms (160-sample) blocks, which are
       # incompatible with pysilero-vad's fixed 512-sample input window.
@@ -28,7 +31,9 @@
       #  to specify the network address of a remote wake word detection service
       "--wake-uri"
       "tcp://127.0.0.1:10400"
-
+      
+      # this disables VAD (Voice AutoDetection) and thus evrything gets streamed to wakeword
+      # https://github.com/rhasspy/wyoming-satellite/issues/329
       "--wake-word-name"
       "alexa"
       # [--wake-command WAKE_COMMAND]                                                        ║
@@ -44,7 +49,5 @@
       done = "${dotfilesPath}/data/audio/done.wav";
     };
 
-    #Rather than always streaming audio to Home Assistant, the satellite can wait until speech is detected.
-    vad.enable = true;
   };
 }

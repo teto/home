@@ -1,11 +1,11 @@
 # shellcheck shell=bash
-alias pc="process-compose"
-alias n="nix develop"
-alias nb='nix build'
-alias nf='nix flake'
-alias nb1='nix build --option builders "$TETOS_BUILDER_NIXCOMMUNITY" -j0'
-alias n1='nix develop --option builders "$TETOS_BUILDER_NIXCOMMUNITY" -j0'
-alias n2='nix develop --option builders "$TETOS_1" -j0'
+# alias pc="process-compose"
+# alias n="nix develop"
+# alias nb='nix build'
+# alias nf='nix flake'
+# alias nb1='nix build --option builders "$TETOS_BUILDER_NIXCOMMUNITY" -j0'
+# alias n1='nix develop --option builders "$TETOS_BUILDER_NIXCOMMUNITY" -j0'
+# alias n2='nix develop --option builders "$TETOS_1" -j0'
 
 alias J=jjui
 #
@@ -46,22 +46,22 @@ alias gpf="git push --force-with-lease"
 # nix aliases {{{
 
 # directories only
-alias ld="eza -lD"
-# alias      lf="eza -lF --color=always | grep -v /";
-alias lh="eza -dl .* --group-directories-first"
-# alias      ll="eza -al --group-directories-first";
-# alias      lt="eza -al --sort=modified -snew";
+# alias ld="eza -lD"
+# alias lf="eza -lF --color=always | grep -v /";
+# alias lh="eza -dl .* --group-directories-first"
+# alias ll="eza -al --group-directories-first";
+# alias lt="eza -al --sort=modified -snew";
 
 # advanced
 # TODO add --hyperlink
-alias ls='eza --color=always --group-directories-first --icons=auto --hyperlink=auto'
-alias ll='eza -la --icons --octal-permissions --group-directories-first --hyperlink=auto'
+# alias ls='eza --color=always --group-directories-first --icons=auto --hyperlink=auto'
+# alias ll='eza -la --icons --octal-permissions --group-directories-first --hyperlink=auto'
 # alias llm='eza -lbGd --header --git --sort=modified --color=always --group-directories-first --icons=auto'
 # conflicts with lux
-alias lsx='eza -lbhHigUmuSa@ --time-style=long-iso --git --color-scale --color=always --group-directories-first --icons=auto'
-
-alias lS='eza -1 --color=always --group-directories-first --icons=auto'
-alias lt='eza --tree --level=2 --color=always --group-directories-first --icons=auto -snew'
+# alias lsx='eza -lbhHigUmuSa@ --time-style=long-iso --git --color-scale --color=always --group-directories-first --icons=auto'
+#
+# alias lS='eza -1 --color=always --group-directories-first --icons=auto'
+# alias lt='eza --tree --level=2 --color=always --group-directories-first --icons=auto -snew'
 # alias l.="eza -a | grep -E '^\.'"
 
 # ls related updates {{{
@@ -76,12 +76,9 @@ alias lt='eza --tree --level=2 --color=always --group-directories-first --icons=
 # oftenly used programs {{{
 # alias c="cat"
 # alias v="nvim"
-alias vf="nvim \$(fzf)"
-#alias n="nvim"
-# TODO alias to meli
-alias m="neomutt -F \"\$XDG_CONFIG_HOME/mutt/muttrc\""
+# alias vf="nvim \$(fzf)"
 # view uses vim as a pager
-alias l="nvim +view"
+# alias l="nvim +view"
 # alias s="sxiv"
 # parce que apvlv est plus libre que zathura
 # alias z="apvlv"
@@ -91,7 +88,7 @@ alias q="qutebrowser"
 # compilation related {{{
 alias makej="make -j4"
 alias nm="nm -l"
-alias ts="tailscale"
+# alias ts="tailscale"
 # }}}
 
 # kitty aliases {{{

@@ -60,41 +60,32 @@
       # ignores networks apparently :s
       iwd = {
         enable = false;
+
         # https://iwd.wiki.kernel.org/networkconfigurationsettings
         settings = {
+
           Settings = {
             AutoConnect = true;
             AlwaysRandomizeAddress = false;
           };
+
           Network = {
             EnableIPv6 = false;
           };
 
           Rank = {
             # supposed to be the default
+            # we should use 2.4 not to interfere with host close to it ?
             BandModifier5Ghz = 1;
           };
           Scan = {
-
             DisablePeriodicScan = true;
-            # supp
-
           };
-
-          # DriverQuirks = {
-          #
-          # };
-          # IpV4
-          # APAddressPool
-          # Security = {
-          #   Passphrase = secrets.router.password;
-          # };
-
-          # psk = secrets.router.password;
         };
       };
 
       networks = {
+
         "${secrets.wifiNetworks.home.ssid}" = {
           pskRaw = "ext:psk_home";
           # echelon = {                   # safe version of the above: read PSK from the

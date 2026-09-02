@@ -106,6 +106,8 @@ in
       ffsubsync # to sync subtitles
       # TODO provide debug package under different executable "nvim-debug"
 
+      # qalc --exrates '100 EUR to CHF' to update rates from net
+      libqalculate
       # panvimdoc # to generate vim doc from README, for instance in gp.nvim
       pciutils # for lspci
 

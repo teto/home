@@ -119,7 +119,9 @@ in
   # it is necessary to use dnssec though :(
   # hostId
   networking.hostName = "tatooine"; # Define your hostname.
-  networking.domain = ".local";
+  # networking.domain = ".local";
+  networking.search = [ ".local" ];
+
 
   hardware = {
     enableAllFirmware = true;
