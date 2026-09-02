@@ -161,8 +161,10 @@ in
         {
           # or false) 
           header = ''Match host=${mcfg.networking.hostName}''
-          + lib.optionalString (mcfg.networking.domain != null) ",${mcfg.networking.hostName}.${mcfg.networking.domain}" 
-          + lib.optionalString (mcfg.tetos.wireguard.enable or false) ",${mcfg.networking.hostName}.vpn";
+          # let resolved handle expansion for now ?!
+          # + lib.optionalString (mcfg.networking.domain != null) ",${mcfg.networking.hostName}.${mcfg.networking.domain}" 
+          # + lib.optionalString (mcfg.tetos.wireguard.enable or false) ",${mcfg.networking.hostName}.vpn"
+          ;
 
           # assumption ? or check/warn it has it ?
           # user = "teto";
@@ -174,9 +176,6 @@ in
           CanonicalizeHostname = true;
           CanonicalDomains = [ "local" "vpn" ];
           # set domain to null ?
-          # CanonicalDomains = [ "${mcfg.networking.hostName}.${mcfg.networking.domain}" ];
-          # Specifies  rules to determine whether CNAMEs should be followed when canonicalizing hostnames.  The rules consist
-          # CanonicalizePermittedCNAMEs
           # TODO  set it depending if hostName is FQDN ?
           # HostName = lib.throwIf (
           #   mcfg.networking.domain == null
