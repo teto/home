@@ -96,21 +96,3 @@ alias ks="kitten ssh"
 alias kcat="kitten icat"
 # }}}
 
-# use jedha.local instead ?
-# --api-key
-# GGML_CUDA_ENABLE_UNIFIED_MEMORY
-# --api-key toto
-#
-# test atuin instead or histdb ?
-# export MCFLY_KEY_SCHEME=vim
-#
-# # defaults to 'RANK'
-# export MCFLY_RESULTS_SORT=LAST_RUN
-# export MCFLY_RESULTS=200
-# export MCFLY_INTERFACE_VIEW=BOTTOM
-# MCFLY_DISABLE_MENU
-# export MCFLY_PROMPT="❯"
-# export MCFLY_HISTORY_LIMIT
-
-# show branch
-# alias gv=glab ci view -b "\$(jj log -r 'ancestors(@) & bookmarks()')"

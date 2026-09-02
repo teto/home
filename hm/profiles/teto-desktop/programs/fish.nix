@@ -143,6 +143,7 @@ in
     llama-jedha = "GGML_CUDA_ENABLE_UNIFIED_MEMORY=1 llama-server --host 0.0.0.0 --port 8080 --jinja -v --log-prefix --models-preset ~/home/contrib/llama-presets.ini ";
 
     tetos-sw = {
+      # command "nh" ou bien nixos- ?
       name = "tetos-sw";
       setCursor = true;
       expansion = ''
@@ -167,6 +168,9 @@ in
   #
   functions = {
 
+# function my_chpwd --on-variable PWD
+#   echo "Changed to $PWD"
+# end
     git_clone_url = ''
       echo git clone $argv[1]
     '';

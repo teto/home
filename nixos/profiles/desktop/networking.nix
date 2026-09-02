@@ -2,8 +2,8 @@
 {
   # when under ndots in hostname, try resolution with those
   search = [
-    ".local" 
-    # ".vpn"
+    "local" 
+    # "vpn"
   ];
 
   # controls order in which glibc returns IP,

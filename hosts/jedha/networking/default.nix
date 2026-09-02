@@ -45,13 +45,11 @@
     "10.100.0.1" = [ "neotokyo.local" ];
   };
 
-  # hosts = [];
-
-  # creates problem with buffalo check if it blocks requests or what
-  # it is necessary to use dnssec though :(
-  # Whether DNS configuration is managed by resolvconf.
   resolvconf = {
+    # Whether DNS configuration is managed by resolvconf.
     enable = false;
+    # creates problem with buffalo check if it blocks requests or what
+    # it is necessary to use dnssec though :(
     dnsExtensionMechanism = false;
     dnsSingleRequest = false;
     # useLocalResolver = true; ?
