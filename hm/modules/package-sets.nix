@@ -17,6 +17,7 @@ in
   options = {
     package-sets = {
 
+      domotic = mkEnableOption "domotic";
       livecoding = mkEnableOption "live livecoding writing";
       fonts = mkEnableOption "extra fonts";
       desktop = mkEnableOption "desktop packages";
@@ -71,8 +72,13 @@ in
       ];
     })
 
+    (mkIf cfg.domotic {
+      home.packages = [
+        pkgs.home-assistant-cli
+      ];
+    })
     (mkIf cfg.bluetooth {
-      home.packages = with pkgs; [
+      home.packages = [
         pkgs.bluetuith
       ];
     })
