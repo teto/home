@@ -72,10 +72,11 @@ end
 -- lua vim.json.decode(str, opts)
 opts = {
     acp_providers = {
-        ['mistral-vibe'] = {
+        ['mistral-vibe-teto'] = {
             command = 'vibe-acp',
             env = {
-                MISTRAL_API_KEY = os.getenv('MISTRAL_API_KEY'), -- necessary if you setup Mistral Vibe manually
+                -- failed with DBUS_SESSION_BUS_ADDRESS
+				MISTRAL_API_KEY = os.getenv('MISTRAL_API_KEY'), -- necessary if you setup Mistral Vibe manually
             },
         },
         -- override the default one because it was missing USER
@@ -158,6 +159,11 @@ opts = {
                 max_tokens = 16383, -- to avoid using max_completion_tokens
             },
         },
+		mistral  = {
+
+            api_key_name = 'cmd:cat ' .. sops_folder .. '/mistral_test_api_key',
+		 -- MISTRAL_API_KEY = os.getenv('MISTRAL_API_KEY'), -- necessary if you setup Mistral Vibe manually
+		},
 
         -- ollama = {
         --     -- model = "qwq:32b",

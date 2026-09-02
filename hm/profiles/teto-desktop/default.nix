@@ -214,6 +214,7 @@ in
 
   package-sets = {
 
+    domotic = true;
     enableOfficePackages = true;
     kubernetes = true;
     developer = true;
