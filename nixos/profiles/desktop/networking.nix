@@ -1,10 +1,10 @@
 { lib, ... }:
 {
-  # Resolve every name below the private .vps suffix through the WireGuard VPS.
-  # services.dnsmasq = {
-  #   enable = true;
-  #   settings.address = [ "/.vps/10.100.0.1" ];
-  # };
+  # when under ndots in hostname, try resolution with those
+  search = [
+    "local" 
+    # "vpn"
+  ];
 
   # controls order in which glibc returns IP,
   # prefer ipv4
@@ -21,6 +21,7 @@
 
   # networking.firewall.checkReversePath = false; # for nixops
   firewall.allowedUDPPorts = [
+    # we can do without ?
     5353 # mdns via resolved or avahi
   ];
   # firewall.allowedTCPPorts = [ 631 ];

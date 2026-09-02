@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }:
 {
@@ -8,8 +9,6 @@
 
   # for android development
   services.home-assistant = {
-    enable = true;
-    openFirewall = true;
 
     # subset of package.extraComponents ?!
     # extraComponents = [
@@ -20,19 +19,21 @@
 
     package = pkgs.home-assistant.override {
 
-      extraPackages =
-        python3Packages: with pkgs.python3Packages; [
-          numpy
-          psycopg2
-        ];
+      extraPackages = ps: [
+        # ps.numpy
+        ps.psycopg2
+        ps.hass-nabucasa
+      ];
       # look at https://www.home-assistant.io/integrations/
       # pkgs/servers/home-assistant/component-packages.nix
       extraComponents = [
+        "alexa" # while trying to use 'alexa' as wakeword
         "recorder" # to plot history of devices
 
         # removed to avoid zha
         "default_config" # metapackage
         "homeassistant_yellow" # metapackage
+        "data_grand_lyon" # to fetch TCL software
         "deconz" # interface for zigbee conbee II
         # "esphome"
         # "hue"
@@ -40,12 +41,19 @@
         "emulated_hue"
         "freebox"
         "homeassistant_yellow" # brings zha
+
+        # "hacs" ?
         "hue"
 
         "met"
         # "emulated_hue"
         "mqtt"
         "meteo_france"
+        # else we get :
+        # flow could not be loaded: {"message":"Invalid handler specified"}
+        "wyoming"
+        "upnp"
+        "wake_on_lan"
         # "met"
       ];
     };
@@ -54,7 +62,7 @@
     # backups exist at /var/lib/hass/backups/
     # https://nixos.wiki/wiki/Home_Assistant
     config = {
-
+      assist_pipeline = { };
       # bluetooth = {};  # NO
       default_config = { }; # enables several default components
       # map = {};  # show a local map
@@ -100,15 +108,12 @@
       frontend = {
         themes = "!include_dir_merge_named themes";
       };
-      http = {
-        server_host = "0.0.0.0";
-        server_port = 8123;
-      };
-      # TODO remove as it was removed from yaml
-      # feedreader.urls = [
-      #   "https://www.home-assistant.io/atom.xml"
-      #   # "https://nixos.org/blogs.xml"
-      # ];
+
+      # TODO remove this is handled from UI now ?!
+      # http = {
+      #   server_host = "0.0.0.0";
+      #   server_port = 8123;
+      # };
       # services.home-assistant.config."scene manual" = [];
       # services.home-assistant.config."scene ui" = "!include scenes.yaml";
     };
@@ -127,45 +132,17 @@
     "f ${config.services.home-assistant.configDir}/automations.yaml 0755 hass hass"
   ];
 
+
+
+  systemd.services.home-assistant.serviceConfig = lib.mkIf config.services.home-assistant.enable {
+    # on-failure
+    # when there are not enough space failure
+    RestartSteps = 4; # advised by man systemd.service
+    RestartSec = "1s";
+    RestartMaxDelaySec = "15s";
+  };
+
   # services.deconz.enable
   # with my conbee 2 key
 
-  # "z2m" (zigbee2mqtt)
-  services.zigbee2mqtt = {
-    enable = true;
-    # https://www.zigbee2mqtt.io/information/configuration.html
-    settings = {
-      # homeassistant = config.services.home-assistant.enable;
-      # homeassistant = false;
-      permit_join = true; # todo disable after configuration for secuirty
-      serial = {
-        # according to https://www.zigbee2mqtt.io/guide/adapters/#recommended
-        # might need to flash the firmware
-        adapter = "deconz"; # value for conbee II
-        port = "/dev/ttyACM0";
-        # port = null;
-      };
-      frontend = {
-        enabled = true;
-        # Optional, default 8080
-        # port= 1010;
-      };
-      advanced = {
-        log_level = "debug";
-      };
-    };
-  };
-
-  # needed by zigbee2mqtt, it's some kind of queue
-  services.mosquitto = {
-    enable = true;
-    listeners = [
-      {
-        acl = [ "pattern readwrite #" ];
-        # TODO set one via !secret ?
-        omitPasswordAuth = true;
-        settings.allow_anonymous = true;
-      }
-    ];
-  };
 }

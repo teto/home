@@ -10,7 +10,8 @@
     useNetworkd = true;
     useDHCP = false;
     hostName = "router"; # or router
-    domain = "router.local";
+    # .vpn as well so...
+    domain = "local";
 
     # networking.dhcpcd.enable = true;
     usePredictableInterfaceNames = true;
@@ -29,37 +30,10 @@
       enable = false;
       interfaces.br0.allowedTCPPorts = [ 53 ];
       interfaces.br0.allowedUDPPorts = [ 53 ];
+
+      # if home-assistant enabled, open
+      # 8123
     };
-
-    #   # address of the livebox
-    #   defaultGateway = { address = "192.168.1.1"; interface = "wlp5s0"; };
-    #  interfaces.enp1s0 = {
-    #     useDHCP = true;
-    #     # ipv4.addresses = [
-    #     # { address = "192.168.1.127"; prefixLength = 24; }
-    #     # ];
-    #   };
-
-    #   interfaces.wlp5s0 = {
-    #     useDHCP = true;
-    #     # ipv4.addresses = [
-    #     # { address = "192.168.1.127"; prefixLength = 24; }
-    #     # ];
-    #   };
-
-    #   interfaces.br0 = {
-    #     ipv4.addresses = [
-    #       bridgeNetwork
-    #     ];
-    #   };
-
-    #   bridges.br0 = {
-    #     interfaces = [ "enp2s0" "enp3s0" "enp4s0" ];
-    #   };
-
-    #   nat.enable = true;
-    #   nat.externalInterface = externalInterface;
-    #   nat.internalInterfaces = [ "br0" ];
 
     wireless = {
       enable = true; # Whether to enable wpa_supplicant., we use iwd here
@@ -87,53 +61,40 @@
       # ignores networks apparently :s
       iwd = {
         enable = false;
+
         # https://iwd.wiki.kernel.org/networkconfigurationsettings
         settings = {
+
           Settings = {
             AutoConnect = true;
             AlwaysRandomizeAddress = false;
           };
+
           Network = {
             EnableIPv6 = false;
           };
 
           Rank = {
             # supposed to be the default
+            # we should use 2.4 not to interfere with host close to it ?
             BandModifier5Ghz = 1;
           };
           Scan = {
-
             DisablePeriodicScan = true;
-            # supp
-
           };
-
-          # DriverQuirks = {
-          #
-          # };
-          # IpV4
-          # APAddressPool
-          # Security = {
-          #   Passphrase = secrets.router.password;
-          # };
-
-          # psk = secrets.router.password;
         };
       };
 
       networks = {
+
         "${secrets.wifiNetworks.home.ssid}" = {
           pskRaw = "ext:psk_home";
           # echelon = {                   # safe version of the above: read PSK from the
           #   pskRaw = "ext:psk_echelon"; # variable psk_echelon, defined in secretsFile,
           # };                            # this won't leak into /nix/store
-
           # pskRaw
           # appended to wpa_supplicant.conf
           # freq_list=5180 5190 5200 5210 5220 5230 5240 5250 5260 5270 5280
-          #
-
-          #            freq_list=5180 5190 5200 5210 5220 5230 5240 5250 5260 5270 5280
 
           # extraConfig = ''
           #  bssid_whitelist=04:E3:1A:6A:CF:05

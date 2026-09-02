@@ -1,0 +1,3 @@
+* quitter un mail en cours d'ecriture 
+
+:close  pour fermer le tab d'edition de courriel

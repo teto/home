@@ -3,8 +3,8 @@
   config,
   lib,
   pkgs,
-  withSecrets,
   flakeSelf,
+  withSecrets,
   ...
 }:
 let
@@ -58,7 +58,6 @@ in
 
     ./programs/neovim.nix
     # ./programs/noctalia.nix
-    # ./programs/waybar.nix # TODO resotre ?
     ./programs/zsh.nix
 
     ./services/llama-cpp.nix
@@ -69,6 +68,7 @@ in
     ./services/mpd.nix
     ./services/mpris.nix
   ]
+  # use lib.mkIf config.tetos.withSecrets ?
   ++ lib.optionals withSecrets [
     ./sops.nix
     ./ia.nix
@@ -77,8 +77,6 @@ in
   # services.opensnitch-ui.enable
 
   # xdg.configFile."zsh/zshrc.generated".source = ../../../config/zsh/zshrc;
-
-  # programs.nh.enable = true;
 
   # never tried
   # home.preferXdgDirectories = false;
@@ -103,6 +101,11 @@ in
     in
     llmDeps
     ++ [
+      # disable for now because of
+      # >   `/nix/store/klzrf7krj1whzms0cbk8hw7nyrn013c3-rag-service-env/bin/activate' and
+      # >   `/nix/store/pzvl9qcgq404rmd3jasn5hvwh3frp75r-deploy-rs-0.1.0/bin/activate'
+      # flakeSelf.inputs.avante-nvim.packages.${pkgs.stdenv.hostPlatform.system}.ragService
+
       # llm-ls # needed by the neovim plugin
       cointop # bitcoin tracker
       # mdp # markdown CLI presenter

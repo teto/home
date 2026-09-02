@@ -8,9 +8,6 @@
   - https://francis.begyn.be/blog/nixos-home-router
   - https://www.jjpdev.com/posts/home-router-nixos/
 
-  systemd is advertised on the matrix:nixos-router so:
-  - the guide https://nixos.wiki/wiki/Systemd-networkd
-
   When booting, hit tab to edit the boot entry.
   Normally NixOS does not output to serial in the boot process, so we need to enable is by appending console=ttyS0,115200 to the boot entry. All characters appear twice, so just make sure you type it correctyl ;) . ctrl+l can be used to refresh the screen.
    After installing, you want to make sure that the PCEngine APU entry from the NixOS hardware repo is present, as it enables the console port.
@@ -48,16 +45,20 @@ in
     ./hardware.nix
     ./networking.nix
     ./services/openssh.nix
+    ./services/home-assistant.nix
+    ./services/zigbee2mqtt.nix
     # ./services/mqtt.nix
 
     # TODO replace with systemd mdns
     # flakeSelf.nixosProfiles.avahi
     flakeSelf.nixosProfiles.router
     flakeSelf.nixosProfiles.universal
-    flakeSelf.nixosProfiles.home-assistant
 
   ];
 
+  documentation.man.enable = true;
+
+  # mkForce ?
   environment.systemPackages = with pkgs; [
     # disabled for now to reduce memory print
     # flashrom # to be able to flash the bios see https://teklager.se/en/knowledge-base/apu-bios-upgrade/
@@ -91,7 +92,6 @@ in
       # flakeSelf.homeModules.teto-nogui
       flakeSelf.homeModules.neovim
       flakeSelf.homeProfiles.readline
-      # ./teto/nix.nix # done at
     ];
 
     home.packages = [
@@ -261,9 +261,15 @@ in
     # Kind=bridge
 
     networks = {
+      "50-wg0" = {
+        matchConfig.Name = "wg0";
+        networkConfig.MulticastDNS = false;
+      };
+
       "10-enp1s0" = {
         matchConfig.Name = "enp1s0";
         networkConfig.DHCP = "ipv4";
+        networkConfig.MulticastDNS = false;
       };
 
       "10-wireless-wan" = {
@@ -299,6 +305,7 @@ in
         # networkConfig.DHCP = "ipv4";
         networkConfig.DHCPServer = true;
         networkConfig.IPMasquerade = "ipv4";
+        networkConfig.MulticastDNS = false;
 
         dhcpServerConfig = {
           PoolOffset = 100;
@@ -343,19 +350,6 @@ in
   # systemd.services.systemd-networkd.environment.SYSTEMD_LOG_LEVEL = "debug";
   # services.dhcpd4 = {
   #   enable = true;
-
-  #   # TODO FIX
-  #   extraConfig = ''
-  #   option subnet-mask 255.255.255.0;
-  #   # L'option routers spécifie une liste d'adresses IP de routeurs qui sont sur le sous-réseau du client. Les routeurs doivent être mentionnés par ordre de préférence.
-  #   option routers ${bridgeNetwork.address};
-  #   option domain-name-servers 192.168.1.1;
-  #   subnet ${bridgeNetwork.address} netmask 255.255.255.0 {
-  #       range 10.0.0.100 10.0.0.199;
-  #   }
-  #   '';
-  #   interfaces = [ "br0" ];
-  # };
 
   time.timeZone = "Europe/Paris";
 

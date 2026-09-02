@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  withSecrets,
+  osConfig,
   ...
 }:
 {
@@ -10,7 +10,7 @@
   # enabling it
   # - teto profile: notmuch: Must have a user name set.
   # - teto profile: notmuch: Must have a user primary email address set.
-  enable = withSecrets;
+  enable = osConfig.tetos.withSecrets;
 
   # dont add "inbox" tag
   new.tags = [

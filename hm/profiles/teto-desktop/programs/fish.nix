@@ -1,6 +1,5 @@
 {
   config,
-  lib,
   pkgs,
   ...
 }:
@@ -45,6 +44,8 @@ in
 # - rfw
 {
   enable = true;
+  preferAbbrs = true;
+  # If enabled, abbreviations will be preferred over aliases when other modules define aliases for fish.
 
   _imports = [
 
@@ -69,34 +70,133 @@ in
   # interactiveShellInit
   # shellInit
   # shellInitLast
+  # shellAbbrs = {
+  #   l = "less";
+  #   gco = "git checkout";
+  #   "-C" = {
+  #     position = "anywhere";
+  #     expansion = "--color";
+  #   };
+  #   kssh = "kitten ssh";
+  # };
   shellAbbrs = {
-    l = "less";
-    gco = "git checkout";
-    "-C" = {
-      position = "anywhere";
-      expansion = "--color";
-    };
+    yr = "yazi ./result";
+    # js = "just -g switch";
+
+    n1 = ''nix develop --option builders "$TETOS_BUILDER_NIXCOMMUNITY" -j0'';
+    n2 = ''nix develop --option builders "$TETOS_1" -j0'';
+    nr1 = ''nix run --option builders "$TETOS_BUILDER_NIXCOMMUNITY" -j0'';
+    nr2 = ''nix run --option builders "$TETOS_1" -j0'';
+
+    # fren = "trans -from fr -to en ";
+    # enfr = "trans -from en -to fr ";
+    # jpfr = "trans -from ja -to fr ";
+    # frjp = "trans -from fr -to ja ";
+    # jpen = "trans -from ja -to en ";
+    # enjp = "trans -from en -to ja ";
+    
     kssh = "kitten ssh";
+    # abbr --add git-clone-url --position command --regex --function git_clone_url
+    "git-clone-url" = {
+      # position = "command";
+      # expansion = "--color";
+      regex = ".+\.git";
+      function = "git_clone_url";
+    };
+
+    # abbr --add --set-cursor -- build-nom 'nom build .#nixosConfigurations.%.config.system.build.toplevel'
+    # expand on hosts ?
+    build-nom = {
+      # position = "curs
+      setCursor = true;
+      expansion = "nom build .#nixosConfigurations.%.config.system.build.toplevel";
+
+    };
+    # rollback = {
+    #   # position = "curs
+    #   setCursor = true;
+    #   command = "nom build .#nixosConfigurations.%.config.system.build.toplevel";
+    #
+    # };
+    man-home-configuration-nix = {
+      name = "hm";
+      command = "man";
+      expansion = "home-configuration.nix";
+    };
+    man-configuration-nix = {
+      name = "c";
+      command = "man";
+      expansion = "configuration.nix";
+    };
+    df = "'df -lThx tmpfs'";
+    http-models = {
+      name = "jedha-models";
+      command = "http";
+      expansion = "get jedha.vpn:8080/models";
+    };
+    # abbr --add -- re 'nixos-rebuild \
+    #       --flake ~/home \
+    #       --sudo --keep-going \
+    #       --override-input nixpkgs ~/nixpkgs \
+    #       --override-input hm ~/hm'
+
+    llama-jedha = "GGML_CUDA_ENABLE_UNIFIED_MEMORY=1 llama-server --host 0.0.0.0 --port 8080 --jinja -v --log-prefix --models-preset ~/home/contrib/llama-presets.ini ";
+
+    tetos-sw = {
+      # command "nh" ou bien nixos- ?
+      name = "tetos-sw";
+      setCursor = true;
+      expansion = ''
+        nh os %switch ~/home -- --keep-going \
+          --override-input nixpkgs ~/nixpkgs \
+          --override-input hm ~/hm'';
+
+    };
+    # tetos-sw-remote = {
+    #   # Specifies the command(s) for which the abbreviation should expand.
+    #     expansion = ''nh os switch ~/home -- --keep-going \
+    #      --override-input nixpkgs ~/nixpkgs \
+    #      --override-input hm ~/hm'';
+    # };
+    deploy-neotokyo = {
+      setCursor = true;
+      # command = "deploy";
+      expansion = "deploy '.#%neotokyo' -s --interactive-sudo=true -- --override-input nixpkgs ~/nixpkgs";
+    };
   };
 
   #
   functions = {
 
-    # a way to implement the equivalent of `alias -s git`.
-    # might be easier to create the file myself
-    fish_command_not_found = ''
-      set -l cmd $argv[1]
-
-      # Check if the command ends with .git
-      if string match -qr '\.git$' -- $cmd
-          git clone $cmd
-          return 0
-      end
-
-      # Otherwise, show the default error
-      echo "fish: Unknown command '$cmd'"
-      return 127
+# function my_chpwd --on-variable PWD
+#   echo "Changed to $PWD"
+# end
+    git_clone_url = ''
+      echo git clone $argv[1]
     '';
+fish_command_not_found = ''
+  set -l filename $argv[1]
+  if test -f $filename
+    set -l ext (string split -r -m1 '.' -- $filename)[-1]
+    switch $ext
+      case rs js ts go py md txt
+        bat $filename
+      case json
+        cat $filename | jaq
+      case pdf
+        open $filename
+      case mp4 mkv avi
+        vlc $filename
+      case jpg png gif
+        feh $filename
+      case '*'
+        __fish_default_command_not_found_handler $argv
+    end
+  else
+    __fish_default_command_not_found_handler $argv
+  end
+end
+'';
     # normal-function = "";
     # event-handler = {
     #   body = "";
@@ -159,13 +259,6 @@ in
     g = "git";
     "..." = "cd ../..";
   };
-
-  # to install plugins on nixos do
-  # environment.systemPackages = with pkgs; [
-  #   fishPlugins.done
-  #   fishPlugins.forgit
-  #   fishPlugins.grc
-  # ];
 
   # these are added to ~/.config/fish/conf.d
   # use { name = ... ; src = drv }
@@ -240,6 +333,7 @@ in
 
   # Source manual configuration file
   interactiveShellInit = ''
+
     # 'done' plugin config
     set -U __done_min_cmd_duration 5000  # default: 5000 ms
 

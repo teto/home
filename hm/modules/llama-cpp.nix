@@ -59,7 +59,7 @@ in
 
       port = lib.mkOption {
         type = lib.types.port;
-        default = 8080;
+        default = 9931;
         description = "Listen port for LLaMA C++ server.";
       };
 
@@ -85,9 +85,9 @@ in
         ];
 
       };
-      # Install = {
-      #   WantedBy = [ "multi-user.target" ];
-      # };
+      Install = {
+        WantedBy = [ "multi-user.target" ];
+      };
 
       Service = {
         # what does it mean ?

@@ -23,5 +23,10 @@ use = "ndtoan96/ouch"
 rev = "594b8a2"
 hash = "c9e628fc0312d198db22ae2fa74883b"
 
+[[plugin.deps]]
+use = "gesellkammer/audio-preview"
+rev = "c95e4f6"
+hash = "94334f36009e7e1635de43c98c6502c5"
+
 [flavor]
 deps = []

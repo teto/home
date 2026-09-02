@@ -1,11 +1,13 @@
 # shellcheck shell=bash
-alias pc="process-compose"
-alias n="nix develop"
-alias nb='nix build'
-alias nf='nix flake'
-alias nb1='nix build --option builders "$TETOS_0" -j0'
-alias n1='nix develop --option builders "$TETOS_0" -j0'
-alias n2='nix develop --option builders "$TETOS_1" -j0'
+# alias pc="process-compose"
+# alias n="nix develop"
+# alias nb='nix build'
+# alias nf='nix flake'
+# alias nb1='nix build --option builders "$TETOS_BUILDER_NIXCOMMUNITY" -j0'
+# alias n1='nix develop --option builders "$TETOS_BUILDER_NIXCOMMUNITY" -j0'
+# alias n2='nix develop --option builders "$TETOS_1" -j0'
+
+alias J=jjui
 #
 alias nrc="nix repl --expr 'import <nixpkgs> { config.cudaSupport = true; config.allowUnfree = true; }'"
 
@@ -14,19 +16,18 @@ alias nrc="nix repl --expr 'import <nixpkgs> { config.cudaSupport = true; config
 alias reboot-windows="systemctl --boot-loader-entry=auto-windows reboot"
 
 # Haskell related aliases{{{
-alias nhs98="nix develop \$HOME/home#nhs98"
 alias nhs910="nix develop \$HOME/home#nhs910"
 alias nhs912="nix develop \$HOME/home#nhs912"
 # }}}
 #
 
 # TODO should use all runners
-# alias nall='nix develop --option builders "$TETOS_0" -j0'
+# alias nall='nix develop --option builders "$TETOS_BUILDER_NIXCOMMUNITY" -j0'
 # alias j="just -g"
 # alias jg="just -g "
 # alias g="git"
 alias nr="nix run "
-alias nr1='nix run --option builders "$TETOS_0" -j0'
+alias nr1='nix run --option builders "$TETOS_BUILDER_NIXCOMMUNITY" -j0'
 alias nr2='nix run --option builders "$TETOS_1" -j0'
 alias nl="nix log "
 # alias js="just switch"
@@ -45,22 +46,22 @@ alias gpf="git push --force-with-lease"
 # nix aliases {{{
 
 # directories only
-alias ld="eza -lD"
-# alias      lf="eza -lF --color=always | grep -v /";
-alias lh="eza -dl .* --group-directories-first"
-# alias      ll="eza -al --group-directories-first";
-# alias      lt="eza -al --sort=modified -snew";
+# alias ld="eza -lD"
+# alias lf="eza -lF --color=always | grep -v /";
+# alias lh="eza -dl .* --group-directories-first"
+# alias ll="eza -al --group-directories-first";
+# alias lt="eza -al --sort=modified -snew";
 
 # advanced
 # TODO add --hyperlink
-alias ls='eza --color=always --group-directories-first --icons=auto --hyperlink=auto'
-alias ll='eza -la --icons --octal-permissions --group-directories-first --hyperlink=auto'
+# alias ls='eza --color=always --group-directories-first --icons=auto --hyperlink=auto'
+# alias ll='eza -la --icons --octal-permissions --group-directories-first --hyperlink=auto'
 # alias llm='eza -lbGd --header --git --sort=modified --color=always --group-directories-first --icons=auto'
 # conflicts with lux
-alias lsx='eza -lbhHigUmuSa@ --time-style=long-iso --git --color-scale --color=always --group-directories-first --icons=auto'
-
-alias lS='eza -1 --color=always --group-directories-first --icons=auto'
-alias lt='eza --tree --level=2 --color=always --group-directories-first --icons=auto -snew'
+# alias lsx='eza -lbhHigUmuSa@ --time-style=long-iso --git --color-scale --color=always --group-directories-first --icons=auto'
+#
+# alias lS='eza -1 --color=always --group-directories-first --icons=auto'
+# alias lt='eza --tree --level=2 --color=always --group-directories-first --icons=auto -snew'
 # alias l.="eza -a | grep -E '^\.'"
 
 # ls related updates {{{
@@ -75,12 +76,9 @@ alias lt='eza --tree --level=2 --color=always --group-directories-first --icons=
 # oftenly used programs {{{
 # alias c="cat"
 # alias v="nvim"
-alias vf="nvim \$(fzf)"
-#alias n="nvim"
-# TODO alias to meli
-alias m="neomutt -F \"\$XDG_CONFIG_HOME/mutt/muttrc\""
+# alias vf="nvim \$(fzf)"
 # view uses vim as a pager
-alias l="nvim +view"
+# alias l="nvim +view"
 # alias s="sxiv"
 # parce que apvlv est plus libre que zathura
 # alias z="apvlv"
@@ -90,7 +88,7 @@ alias q="qutebrowser"
 # compilation related {{{
 alias makej="make -j4"
 alias nm="nm -l"
-alias ts="tailscale"
+# alias ts="tailscale"
 # }}}
 
 # kitty aliases {{{
@@ -98,22 +96,3 @@ alias ks="kitten ssh"
 alias kcat="kitten icat"
 # }}}
 
-# use jedha.local instead ?
-# --api-key
-# GGML_CUDA_ENABLE_UNIFIED_MEMORY
-# --api-key toto
-alias llama-jedha="GGML_CUDA_ENABLE_UNIFIED_MEMORY=1 llama-server --host 0.0.0.0 --port 8080 --jinja -v --log-prefix --models-preset ~/home/contrib/llama-presets.ini "
-#
-# test atuin instead or histdb ?
-# export MCFLY_KEY_SCHEME=vim
-#
-# # defaults to 'RANK'
-# export MCFLY_RESULTS_SORT=LAST_RUN
-# export MCFLY_RESULTS=200
-# export MCFLY_INTERFACE_VIEW=BOTTOM
-# MCFLY_DISABLE_MENU
-# export MCFLY_PROMPT="❯"
-# export MCFLY_HISTORY_LIMIT
-
-# show branch
-# alias gv=glab ci view -b "\$(jj log -r 'ancestors(@) & bookmarks()')"

@@ -3,7 +3,7 @@
   ...
 }:
 {
-  enable = true;
+  enable = false; # I like fish now
   enableTetoConfig = true;
 
   defaultKeymap = "viins";

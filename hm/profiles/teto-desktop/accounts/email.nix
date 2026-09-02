@@ -2,8 +2,8 @@
   config,
   pkgs,
   lib,
-  withSecrets,
   # dotfilesPath,
+  osConfig,
   secrets,
   ...
 }:
@@ -172,38 +172,31 @@ let
     # folders.sent = "[Gmail]/Sent Mail";
 
     msmtp.enable = true;
-    aerc.enable = true;
+    aerc.enable = false;
     notmuch = {
       enable = true;
       # fqdn = "fastmail.com";
     };
     mujmap = {
+      # look at https://github.com/elizagamedev/mujmap/blob/main/mujmap.toml.example
       enable = true;
       # session_url Mutually exclusive with `fqdn`.
       # fqdn = null;
       settings.fqdn = "fastmail.com";
       # TODO replace with pass
-      # settings.password_command = "cat /home/teto/mujmap_password";
-      # look at https://github.com/elizagamedev/mujmap/blob/main/mujmap.toml.example
-      # for example
-      # getPasswordCommand
       settings.username = secrets.accounts.mail.fastmail_perso.email;
       # settings.password_command = getPasswordCommand "perso/fastmail_mc_jmap";
-      # ${pkgs.pass-teto}/bin/
-      # ${pkgs.strace}/bin/strace -o /tmp/mujmap.log -f
+
+      # can be upgraded to token = { command = "..." }
+      # https://git.meli-email.org/meli/meli/pulls/725/files
       settings.password_command = "${pkgs.pass-perso}/bin/pass-perso show perso/fastmail_mc_jmap";
       settings.config_dir = mailDirBasePath;
 
       # settings.session_url = "https://api.fastmail.com/.well-known/jmap";
-      # settings.session_url = "https://api.fastmail.com/jmap/session";
       # check example at https://github.com/elizagamedev/mujmap/blob/main/mujmap.toml.example
-      # settings.timeout = 5
     };
 
     # described here https://www.fastmail.com/help/technical/servernamesandports.html
-    # imap = { host = "imap.fastmail.com"; tls = my_tls; };
-    # smtp = { host = "smtp.fastmail.com"; tls = my_tls; };
-    # smtp.tls.useStartTls = false;
   };
 
   gmail = accountExtra // {
@@ -217,70 +210,6 @@ let
     # Relative path of the inbox mail.
     folders.sent = "Sent";
     folders.trash = "Trash";
-
-    # CopyArrivalDate
-    # mbsync = mbsyncConfig // {
-    #   remove = "both";
-    #   # how to destroy on gmail ?
-    #   # expunge = "both";
-    #   # Exclude everything under the internal [Gmail] folder, except the interesting folders
-    #   # Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail"
-    #   # "[Gmail]/Inbox"
-    #   # patterns = ["* ![Gmail]*" "[Gmail]/Sent Mail" "[Gmail]/Starred" ];
-    #   # to be able to create drafts ?
-    #   create = "both";
-    #   groups.personal = {
-    #     channels = {
-    #       inbox = {
-    #         farPattern = "";
-    #         nearPattern = "";
-    #         extraConfig = {
-    #           Create = "Both";
-    #         };
-    #       };
-    #       sent = {
-    #         # farPattern = config.accounts.email.accounts.gmail.folders.sent;
-    #         farPattern = "[Gmail]/Sent Mail";
-    #         nearPattern = "Sent";
-    #         extraConfig = {
-    #           Create = "Both";
-    #         };
-    #       };
-    #       trash = {
-    #         farPattern = config.accounts.email.accounts.gmail.folders.trash;
-    #         # farPattern = "[Gmail]/Trash";
-    #         nearPattern = "Trash";
-    #         extraConfig = {
-    #           Create = "Both";
-    #         };
-    #       };
-    #       # starred = {
-    #       #   farPattern = "[Gmail]/Starred";
-    #       #   nearPattern = "Starred";
-    #       # };
-    #       # drafts = {
-    #       #   farPattern = config.accounts.email.accounts.gmail.folders.drafts;
-    #       #   nearPattern = "Drafts";
-    #       # };
-    #       # spam = {
-    #       #   farPattern = config.accounts.email.accounts.gmail.folders.drafts;
-    #       #   nearPattern = "Spam";
-    #       # };
-    #     };
-    #   };
-    #   extraConfig.account = {
-    #     # PipelineDepth = 50;
-    #     # AuthMechs = "LOGIN";
-    #     # SSLType = "IMAPS";
-    #     # SSLVersions = "TLSv1.2";
-    #   };
-    #   extraConfig.remote = {
-    #     Account = "gmail";
-    #   };
-    #   extraConfig.local = {
-    #     SubFolders = "Verbatim";
-    #   };
-    # };
 
     msmtp.enable = true;
     notmuch.enable = true;
@@ -297,14 +226,13 @@ let
 
 in
 {
-  # accounts.email = {
   maildirBasePath = mailDirBasePath;
-  accounts = lib.optionalAttrs withSecrets {
-    inherit
-      gmail
-      fastmail
-      ;
-  };
-  # };
-
+  accounts =
+    lib.optionalAttrs (builtins.traceVerbose osConfig.tetos.withSecrets osConfig.tetos.withSecrets)
+      {
+        inherit
+          gmail
+          fastmail
+          ;
+      };
 }

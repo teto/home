@@ -1,7 +1,10 @@
 { config, ... }:
 {
+  # _imports =
 
   settings = {
+    log-lines = 60;
+    preallocate-contents = true;
 
     distributedBuilds = false;
 

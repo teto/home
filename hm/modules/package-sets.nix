@@ -139,6 +139,8 @@ in
             dependencies = oa.dependencies ++ oa.optional-dependencies.gui;
           }))
 
+          pkgs.pi-coding-agent # to test as ACP provider for avante
+
           # pkgs.python3Packages.vllm
           # pkgs.repomix # to upload a codebase to llm
         ];
@@ -425,7 +427,7 @@ in
           # TODO pass to vim makeWrapperArgs
           # just in my branch :'(
           # git-remote-hg
-          # manix # nix doc, might be outdated
+          manix # nix doc, might be outdated
           mistral-vibe-custom
           net-tools # for netstat
           nix-output-monitor # 'nom'
@@ -657,10 +659,6 @@ in
           # hakuneko # X only
           anki-miner
           clanki # SRS in cli
-          # memento-with-ocr
-          # pkgs.clanki
-
-          pkgs.python3Packages.videocr # to extract burn in subtitles
 
           # https://github.com/NixOS/nixpkgs/pull/368909
           pkgs.kakasi # convert kanjis into kanas etc
@@ -669,9 +667,14 @@ in
           jiten # unfree, helpful for jap.nvim
           sudachi-rs-full
           # sudachidict # exists in small/medium/large
-        ];
 
-      # xdg.dataFile."jmdict".source = pkgs.jmdict;
+          pkgs.mokuro # generates .mokuro files with OCR-ed overlays. dope.
+          # pkgs.python3Packages.manga-ocr
+          # pkgs.python3Packages.videocr # to extract burn in subtitles
+          pkgs.videocr # translate hardcoded subtitles into soft subtitles
+          pkgs.subminer # mpv-related mining
+
+        ];
     })
 
     (mkIf cfg.music-processing {
@@ -688,6 +691,9 @@ in
         pkgs.cointop # crypto only
         pkgs.gloomberb # bun
         pkgs.wealthfolio # node
+        pkgs.stonks-cli
+        # pkgs.ticker # bof
+        # pkgs.mop # bof2
       ];
     })
 
@@ -706,8 +712,8 @@ in
     (mkIf (cfg.japanese && cfg.llms) {
 
       home.packages = [
-        # pkgs.mokuro
-        # pkgs.python3Packages.manga-ocr
+        pkgs.mokuro
+        pkgs.python3Packages.manga-ocr
       ];
 
     })

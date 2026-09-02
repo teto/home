@@ -4,6 +4,8 @@
 pkgs.mkShell {
   name = "meli";
   buildInputs = with pkgs; [
+    cargo
+    rustc
     gnum4
     gcc
     # missing 'ruststylecheck'

@@ -112,11 +112,6 @@ let
   '';
 in
 {
-
-  #additionalModuleos defaultJellyfinPort
-
-  # users.users.nginx.extraGroups = [ "acme" ];
-
   services.nginx = {
 
     # tailscaleAuth.enable
@@ -154,7 +149,7 @@ in
       "_tls-catchall" = {
         # doesn't act as default because doesn't have force
         default = true;
-        addSSL = false;
+        addSSL = true;
         # use step-ca instead
         #               # proxyPass = "http://unix:${webUnixSocket}";
         # sslCertificate = "/path/to/internal-cert.pem";
@@ -175,7 +170,7 @@ in
           '';
 
           # Makes this vhost the default.
-          # default = true;
+          default = true;
 
           forceSSL = true;
           # https://nixos.org/manual/nixos/stable/index.html#module-security-acme

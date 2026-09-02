@@ -1,0 +1,2 @@
+#!/bin/sh
+nix-store --gc --print-roots | egrep -v "^(/nix/var|/proc|/run/\w+-system|\{memory)" | less

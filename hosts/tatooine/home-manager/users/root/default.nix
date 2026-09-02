@@ -1,7 +1,5 @@
 {
-  withSecrets,
   lib,
-  flakeSelf,
   ...
 
 }:
@@ -9,8 +7,6 @@
   imports = [
 
     # flakeSelf.homeProfiles.neovim
-  ]
-  ++ lib.optionals withSecrets [
   ];
 
   home.stateVersion = "26.05";
