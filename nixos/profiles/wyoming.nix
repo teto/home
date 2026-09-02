@@ -26,8 +26,8 @@ let
   # server = "${config.networking.hostName}.local";
 
   # hoping mdns resolves to correct address ? since we enforced rules for it ?
-  server = config.networking.hostName;
-  # server = "0.0.0.0";
+  server = "${config.networking.hostName}.local";
+  # server = "0.0.0.0"; # this can select a fucked up interface like wireguard, I want the local one
   # server = "tatooine.local";
 
   # customWakeWordModels = pkgs.stdenv.mkDerivation {
@@ -74,7 +74,8 @@ in
   # Looks ok
   # speech to text
   services.wyoming.faster-whisper.servers = {
-    medium-en = {
+    # rename 
+    medium-fr = {
       enable = true;
       model = "medium-int8";
       language = "fr";
@@ -87,7 +88,6 @@ in
       #          Slippers' (the magical tools to succeed). Keep these in mind as
       #          they guide the journey.
       #        ''
-
     };
   };
 

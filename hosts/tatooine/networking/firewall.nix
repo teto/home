@@ -6,7 +6,7 @@
     # services.wyoming.piper.servers
     ++ lib.optional config.services.wyoming.openwakeword.enable 10400
     # medium-en / uri
-    ++ lib.optional config.services.wyoming.faster-whisper.servers.medium-en.enable 10301
+    ++ lib.optional config.services.wyoming.faster-whisper.servers.medium-fr.enable 10301
     ++ lib.optional config.services.wyoming.piper.servers.fr.enable 10200
     ++ [
       10301 # whisper service
