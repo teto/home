@@ -20,9 +20,9 @@
     package = pkgs.home-assistant.override {
 
       extraPackages = ps: [
-        # ps.numpy
         ps.psycopg2
-        ps.hass-nabucasa
+        ps.hass-nabucasa # to be able to login to cloud
+        ps.zlib_ng  # to remove warning
       ];
       # look at https://www.home-assistant.io/integrations/
       # pkgs/servers/home-assistant/component-packages.nix
@@ -32,7 +32,6 @@
 
         # removed to avoid zha
         "default_config" # metapackage
-        "homeassistant_yellow" # metapackage
         "data_grand_lyon" # to fetch TCL software
         "deconz" # interface for zigbee conbee II
         # "esphome"
@@ -40,7 +39,7 @@
         # "esphome"
         "emulated_hue"
         "freebox"
-        "homeassistant_yellow" # brings zha
+        # "homeassistant_yellow" # brings zha
 
         # "hacs" ?
         "hue"

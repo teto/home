@@ -63,6 +63,7 @@ in
     flakeSelf.nixosProfiles.podman
     flakeSelf.nixosProfiles.experimental
     flakeSelf.nixosProfiles.steam
+    flakeSelf.nixosProfiles.bluetooth
 
     flakeSelf.nixosProfiles.kanata
     # ./services/linkwarden.nix
@@ -142,24 +143,6 @@ in
       # package =
       # written to /etc/bluetooth/main.conf
       settings = {
-
-        General = {
-          Name = "toto";
-
-          # Shows battery charge of connected devices on supported
-          # Bluetooth adapters. Defaults to 'false'.
-          Experimental = true;
-
-          # to work with a2dp profile (seems outdated)
-          # unknown key
-          # Enable = "Source,Sink,Media,Socket";
-        };
-        Policy = {
-          # Enable all controllers when they are found. This includes
-          # adapters present on start as well as adapters that are plugged
-          # in later on. Defaults to 'true'.
-          AutoEnable = true;
-        };
       };
     };
     graphics = {
