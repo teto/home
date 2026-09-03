@@ -100,9 +100,11 @@ in
     # package-sets.wifi = true;
 
     # wakeonlan ${secrets.jedha.ethernetMac}
+    # sudo wolli --iface enp2s0 9c:6b:00:8b:2a:c8 --broadcast 255.255.255.255
+
     home.file."justfile".text = ''
       wakejedha:
-        sudo wolli --iface enp2s0 9c:6b:00:8b:2a:c8 --broadcast 255.255.255.255
+        sudo wolli --iface enp2s0 ${secrets.jedha.ethernetMac}
     '';
   };
 
