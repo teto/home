@@ -1,8 +1,11 @@
+# to list cards
+# ls -l /sys/class/drm/renderD*/device/driver
+# WLR_DRM_DEVICES
 {
   lib,
   pkgs,
   config,
-  dotfilesPath,
+  # dotfilesPath,
   ...
 }:
 let
@@ -20,25 +23,7 @@ let
 
   # Start terminals in a directory associated with the focused Sway workspace.
   # Add more workspace-number/directory pairs to the case statement as needed.
-  workspaceTerm = pkgs.writeShellApplication {
-    name = "kitty-for-workspace";
-    runtimeInputs = [
-      pkgs.jq
-      pkgs.sway
-    ];
-    text = ''
-      workspace="$(${pkgs.sway}/bin/swaymsg -t get_workspaces | ${pkgs.jq}/bin/jq -r '.[] | select(.focused) | .num')"
-
-      case "$workspace" in
-        3) directory="$HOME/nixpkgs" ;;
-        9) directory="$HOME/home" ;;
-        *) directory="$HOME" ;;
-      esac
-
-      exec ${rawTerm} --directory "$directory" "$@"
-    '';
-  };
-  term = "${workspaceTerm}/bin/kitty-for-workspace";
+  term = "${pkgs.kitty-workspace}/bin/kitty-for-workspace";
 
   rofi = pkgs.rofi-teto;
   sharedConfig = pkgs.callPackage ./wm-config.nix { inherit config; };
@@ -310,8 +295,9 @@ in
           # "${mod}+Tab" = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
           # TODO dwindow exclusively with WIN
           "${mad}+Tab" = "exec ${pkgs.swayr}/bin/swayr switch-window";
-          "${mad}+p" = "exec ${lib.getExe pkgs.wofi-pass} ";
-          "${mad}+w" = "exec \"${rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
+          # ca ne montre rien ?
+          # "${mad}+p" = "exec ${lib.getExe pkgs.wofi-pass} ";
+          # "${mad}+w" = "exec \"${rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
           # TODO bind
           # XF86Copy
 
@@ -330,11 +316,6 @@ in
           "${mod}+a" =
             "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty ${lib.getExe' pkgs.rmpc "rmpc"}' ";
 
-          # TODO implement Travis/Pasting Voice recognized text
-          # "${mod}+F4" =
-          #   ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 60 --height 50 --mark gp_nvim --command "kitty nvim -c 'GpChat' " '';
-          #
-
           # TODO try with flameshot again ?
           # "--release Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy area";
           "--release Print" = "exec ${pkgs.flameshot}/bin/flameshot gui";
@@ -346,6 +327,7 @@ in
           # vicinae://launch/clipboard/history
           # https://docs.vicinae.com/deeplinks
           "${mod}+Ctrl+h" = "exec ${pkgs.vicinae}/bin/vicinae vicinae://launch/clipboard/history";
+          "${mad}+w" = "exec ${pkgs.vicinae}/bin/vicinae deeplink vicinae://launch/wm/switch-windows";
         }
         # // lib.optionalAttrs config.services.clipcat.enable {
         #   "${mod}+Ctrl+h" =
@@ -422,17 +404,6 @@ in
       # "--debug"
     ];
 
-    # eventually start foot --server
-    # TODO we should wrap sway with that ?
-    # some of these advised by https://github.com/flameshot-org/flameshot/blob/master/docs/Sway%20and%20wlroots%20support.md
-    # export MOZ_ENABLE_WAYLAND=1
-    # TODO put it in the wrapper started by the .desktop file !
-    # # according to https://www.reddit.com/r/swaywm/comments/11d89w2/some_workarounds_to_use_sway_with_nvidia/
-    # export XWAYLAND_NO_GLAMOR=1
-
-    # to list cards
-    # ls -l /sys/class/drm/renderD*/device/driver
-    # WLR_DRM_DEVICES
     #       export XDG_CURRENT_DESKTOP=sway
     # export XDG_SESSION_DESKTOP=sway
     #
@@ -442,14 +413,4 @@ in
       gtk = true;
     };
   };
-
-  # include ~/.config/sway/config.shared
-  # this seems to be ignored ?!
-  # xdg.configFile."sway/config".text =
-  #   lib.mkBefore "
-  #   # TOTO TODO # use sharedConfig.sharedExtraConfig; instead
-  #    include ~/.config/sway/conf.d/*.conf
-  #    include ~/.config/sway/noctalia
-  #    ";
-
 }

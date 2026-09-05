@@ -32,7 +32,12 @@
       # keep-failed = false;
 
       # add pipe-operators ?
-      experimental-features = "auto-allocate-uids nix-command flakes cgroups";
+      experimental-features = [
+        "auto-allocate-uids"
+        "nix-command"
+        "flakes"
+        "cgroups"
+      ];
 
       substituters = [
       ];

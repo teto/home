@@ -853,7 +853,12 @@ vim.keymap.set('n', '[[', function()
     })
 end, { buffer = false })
 vim.keymap.set('n', ']]', function()
-    vim.diagnostic.jump({ count = 1, wrap = true })
+    vim.diagnostic.jump({ 
+		count = 1,
+		wrap = true,
+		on_jump = function () vim.notify("hello world") end,
+		severity = vim.diagnostic.severity.HINT,
+	})
 end, { buffer = false })
 
 -- rikai {{{

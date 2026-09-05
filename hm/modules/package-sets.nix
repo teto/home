@@ -147,7 +147,7 @@ in
 
           pkgs.pi-coding-agent # to test as ACP provider for avante
 
-          opencode  # to test in avante.nvim
+          pkgs.opencode  # to test in avante.nvim
           # pkgs.python3Packages.vllm
           # pkgs.repomix # to upload a codebase to llm
         ];
@@ -208,7 +208,7 @@ in
           pkgs.qutebrowser # broken keyboard driven fantastic browser
           pkgs.nautilus # demande webkit/todo replace by nemo ?
           # mcomix # manga reader
-          pkgs.popcorntime
+          # pkgs.popcorntime
           pkgs.peaclock # show big clock in terminal
           # gnome.california # fails
           # khard # see khal.nix instead ?
@@ -345,7 +345,6 @@ in
         vlc
         # pinta # photo editing
         # element-desktop # TODO this should go into nix profile install
-        popcorntime
 
       ];
 
