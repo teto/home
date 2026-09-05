@@ -117,10 +117,10 @@ in
     '';
   };
 
-  services.journald.extraConfig = ''
+  services.journald.settings.Journal = {
     # alternatively one can run journalctl --vacuum-time=2d
-    SystemMaxUse=200MB
-  '';
+    SystemMaxUse="200MB";
+  };
 
   # Use the GRUB 2 boot loader.
   # You cannot have duplicated devices in mirroredBoots

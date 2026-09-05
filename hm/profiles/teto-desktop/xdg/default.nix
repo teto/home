@@ -15,6 +15,7 @@
     flakeSelf.homeProfiles.xdg-portal
   ];
 
+  # TODO add our own vicinae module
   configFile."vicinae/settings.json".enable = false;
   # You can still refer to its generated content via:
   configFile."vicinae/generated.json".source = config.xdg.configFile."vicinae/settings.json".source;

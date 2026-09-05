@@ -73,7 +73,7 @@
 
     deploy-rs = {
       url = "github:serokell/deploy-rs";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # firefox2nix.url = "git+https://git.sr.ht/~rycee/mozilla-addons-to-nix";
@@ -99,22 +99,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # nixpkgs follow
     # jujutsu = {
-    #   # ?rev=669bfaf09b48a94c4756aff94ff00af9ee387307 is the commit with conf.d support
     #   url = "github:jj-vcs/jj";
-    #   # url = "github:bryceberger/jj?ref=revset-evaluator";
-    #
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
     # authentik-nix.url = "github:nix-community/authentik-nix";
     # authentik-nix.inputs.nixpkgs.follows = "nixpkgs";
-
-    # nixos-wizard = {
-    #   url = "github:km-clay/nixos-wizard";
-    #   # inputs.nixpkgs.follows = "nixpkgs";
-    # };
 
     nix-cache-beacon.url = "github:adisbladis/nix-cache-beacon";
     nix-cache-beacon.inputs.nixpkgs.follows = "nixpkgs";
@@ -135,7 +126,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # peerix.url = "github:cid-chan/peerix";
     # mptcp-flake.url = "github:teto/mptcp-flake/fix-flake";
     mujmap = {
       # url = "github:elizagamedev/mujmap";
@@ -155,12 +145,6 @@
       flake = false;
     };
 
-    # neomutt-src = {
-    #   url = "github:neomutt/neomutt";
-    #   flake = false;
-    # };
-
-    # poetry.url = "github:nix-community/poetry2nix";
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -171,11 +155,6 @@
       url = "github:neovim/neovim";
       flake = false;
     };
-
-    # neovide = {
-    #   url = "github:neovide/neovide";
-    #   flake = false;
-    # };
 
     # todo update for ci ?
     nixpkgs = {
@@ -214,11 +193,6 @@
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-stable.url = "github:nixos/nixpkgs/nixos-26.05";
 
-    # nix-search-cli = {
-    #   url = "github:peterldowns/nix-search-cli";
-    #   # inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
     nix-update = {
       url = "github:Mic92/nix-update";
       inputs.nixpkgs.follows = "nixpkgs"; # breaks build
@@ -231,7 +205,6 @@
 
     # c8296214151883ce27036be74d22d04953418cf4
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    # nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
 
     nur.url = "github:nix-community/NUR";
 
@@ -251,31 +224,16 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-    # rippkgs.url = "github:replit/rippkgs";
-    # rippkgs.inputs.nixpkgs.follows = "nixpkgs";
-
     rikai-nvim = {
       url = "github:teto/rikai.nvim";
       # url = "/home/teto/neovim/jap.nvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # rofi-hoogle.url = "github:teto/rofi-hoogle/fixup";
-    # rofi-hoogle = {
-    #   url = "github:rebeccaskinner/rofi-hoogle";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # GIT_DIR=.jj/repo/store/git gh issue list
-    # provides a package 'starship-jj' used as a custom
-    # starship-jj = {
-    #   url = "gitlab:lanastara_foss/starship-jj";
-    # };
 
     # stylix = {
     #   url = "github:nix-community/stylix";
@@ -293,11 +251,23 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # doesn't work, hypridle seems better fitted ?
-    wayland-pipewire-idle-inhibit = {
-      url = "github:rafaelrc7/wayland-pipewire-idle-inhibit";
-      # inputs.nixpkgs.follows = "nixpkgs";
+    vicinae = {
+      url = "github:vicinaehq/vicinae";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.systems.url = "github:nix-systems/default-linux";
     };
+
+    vicinae-extensions = {
+      url = "github:vicinaehq/extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # doesn't work, hypridle seems better fitted ?
+    # wayland-pipewire-idle-inhibit = {
+    #   url = "github:rafaelrc7/wayland-pipewire-idle-inhibit";
+    #   # inputs.nixpkgs.follows = "nixpkgs";
+    # };
+
     yazi = {
       url = "github:sxyazi/yazi";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -130,10 +130,12 @@ in
     sane.enable = true;
 
     # cant be enabled with pipewire
-    # pulseaudio = {
-    #   enable = true;
-    #   package = pkgs.pulseaudioFull;
-    # };
+    pulseaudio = {
+      # Using PipeWire as the sound server conflicts with PulseAudio. This option requires `services.pulseaudio.enable` to be set to false
+      enable = false;
+      # for ad2p profle ?
+      package = pkgs.pulseaudioFull;
+    };
 
     # High quality BT calls
     # https://nixos.wiki/wiki/Bluetooth
@@ -215,10 +217,10 @@ in
   #   enable = true;
   # };
 
-  services.journald.extraConfig = ''
+  services.journald.settings.Journal = {
     # alternatively one can run journalctl --vacuum-time=2d
-    SystemMaxUse=2G
-  '';
+    SystemMaxUse="2G";
+  };
 
   # to remove "TSC_DEADLINE disabled due to Errata;
   # please update microcode to version: 0x22"
