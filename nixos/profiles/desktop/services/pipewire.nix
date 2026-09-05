@@ -1,24 +1,28 @@
 # look at https://wiki.nixos.org/wiki/PipeWire#Bluetooth_Configuration
-{ pkgs, ... }:
+# { pkgs, ... }:
 {
   enable = true;
 
   wireplumber.enable = true;
-  # wireplumber.configPackages = [
-  #   (pkgs.writeTextDir "share/wireplumber/wireplumber.conf.d/10-bluez.conf" ''
-  #     monitor.bluez.properties = {
-  #       bluez5.roles = [ a2dp_sink a2dp_source bap_sink bap_source hsp_hs hsp_ag hfp_hf hfp_ag ]
-  #       bluez5.codecs = [ sbc sbc_xq aac ]
-  #       bluez5.enable-sbc-xq = true
-  #       bluez5.hfphsp-backend = "native"
-  #     }
-  #   '')
-  # ];
-
-  wireplumber.extraConfig."11-bluetooth-policy" = {
+  wireplumber.extraConfig = {
+    "10-bluez" = {
+    "monitor.bluez.properties" = {
+      "bluez5.roles" = [
+        "a2dp_sink"
+        "a2dp_source"
+        "bap_sink"
+        "bap_source"
+        "hfp_hf"
+        "hfp_ag"
+      ];
+    };
+    };
+    "11-bluetooth-policy" = {
     "wireplumber.settings" = {
       "bluetooth.autoswitch-to-headset-profile" = false;
     };
+  };
+
   };
 
   # Disable everything that causes pipewire to interact with alsa devices

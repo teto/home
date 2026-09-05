@@ -32,6 +32,6 @@
           AutoEnable = true;
         };
       };
-    }
+    };
 
 }

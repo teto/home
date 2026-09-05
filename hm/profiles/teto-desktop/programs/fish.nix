@@ -140,11 +140,11 @@ in
     #       --override-input nixpkgs ~/nixpkgs \
     #       --override-input hm ~/hm'
 
-    llama-jedha = "GGML_CUDA_ENABLE_UNIFIED_MEMORY=1 llama-server --host 0.0.0.0 --port 8080 --jinja -v --log-prefix --models-preset ~/home/contrib/llama-presets.ini ";
+    llama-jedha = "GGML_CUDA_ENABLE_UNIFIED_MEMORY=1 llama-server --host 0.0.0.0 --port 9931 --jinja -v --log-prefix --models-preset ~/home/contrib/llama-presets.ini ";
 
-    tetos-sw = {
+    js = {
       # command "nh" ou bien nixos- ?
-      name = "tetos-sw";
+      # name = "tetos-sw";
       setCursor = true;
       expansion = ''
         nh os %switch ~/home -- --keep-going \
@@ -168,35 +168,55 @@ in
   #
   functions = {
 
-# function my_chpwd --on-variable PWD
-#   echo "Changed to $PWD"
-# end
-    git_clone_url = ''
-      echo git clone $argv[1]
-    '';
-fish_command_not_found = ''
-  set -l filename $argv[1]
-  if test -f $filename
-    set -l ext (string split -r -m1 '.' -- $filename)[-1]
-    switch $ext
-      case rs js ts go py md txt
-        bat $filename
-      case json
-        cat $filename | jaq
-      case pdf
-        open $filename
-      case mp4 mkv avi
-        vlc $filename
-      case jpg png gif
-        feh $filename
-      case '*'
-        __fish_default_command_not_found_handler $argv
-    end
-  else
-    __fish_default_command_not_found_handler $argv
-  end
-end
-'';
+    # onProcessExit
+
+    my_chpwd = {
+
+      onVariable = "PWD";
+      body = ''
+        echo "Changed to $PWD"
+        '';
+      }; 
+      # --on-variable PWD
+    #   
+    # end
+    # git_clone_url = ''
+    #   echo git clone $argv[1]
+    # '';
+    __fish_command_not_found_handler = {
+      # body = "__fish_default_command_not_found_handler $argv[1]";
+      onEvent = "fish_command_not_found";
+      description = ''
+        trick to open file based on extension
+        '';
+      # try xdg-open instead !
+      body = ''
+        set -l filename $argv[1]
+        if test -f $filename
+          set -l ext (string split -r -m1 '.' -- $filename)[-1]
+          switch $ext
+            case rs js ts go py md txt
+              bat $filename
+            case json
+              cat $filename | jaq
+            case pdf
+              open $filename
+            case mp4 mkv avi
+              vlc $filename
+            case jpg png gif
+              feh $filename
+            case '*'
+              __fish_default_command_not_found_handler $argv
+          end
+        else
+          __fish_default_command_not_found_handler $argv
+        end
+      '';
+
+    };
+
+    gitignore = "curl -sL https://www.gitignore.io/api/$argv";
+
     # normal-function = "";
     # event-handler = {
     #   body = "";

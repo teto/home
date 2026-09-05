@@ -21,6 +21,9 @@
       # was problematic for a while
       use-cgroups = false;
 
+      # min-free = "${toString (100 * 1024 * 1024)}";
+      # max-free = "${toString (1024 * 1024 * 1024)}";
+
       # starting from nix 2.30
       trace-import-from-derivation = true;
 

@@ -1,28 +1,9 @@
--- require('img-clip').setup ({
---   -- use recommended settings from above
--- })
--- require('copilot').setup ({
---   -- use recommended settings from above
--- })
-
--- local llama_hostname =
-
--- local provider = 'mistral'
--- provider = 'claude'
--- if vim.fn.hostname() == 'jedha' then
---     provider = 'llamacpp'
--- end
-
--- overrule both
--- provider = 'llamacpp'
--- provider = 'codex' -- use acp
--- provider = 'unsloth/gemma-4-E4B-it-GGUF'
--- provider = 'mistral_devstral_2'
--- provider = 'mistral-vibe' -- default acp provider (not upstreamyed yet, might wanna add it there)
-
 local xdg_config = vim.env.XDG_CONFIG_HOME or os.getenv('HOME') .. '/.config'
-
 local sops_folder = vim.fs.joinpath(xdg_config, 'sops-nix/secrets')
+
+local jedha_default_model
+jedha_default_model = 'qwen3.6-dense'
+
 -- print("Loading avante")
 
 local function read_secret(filename)
@@ -94,25 +75,6 @@ opts = {
     },
     providers = {
         azure = nil,
-        -- claude = {
-        --     endpoint = 'https://api.anthropic.com',
-        --     model = 'claude-sonnet-4-5-20250929',
-        --     -- extra_request_body = {
-        --     --   temperature = 0.75,
-        --     --   max_tokens = 4096,
-        --     -- },
-        --     -- should use XDG_CONFIG_HOME or
-        --     api_key_name = 'cmd:cat ' .. sops_folder .. '/claude_api_key',
-        --
-        --     -- disabled_tools = { "python" },
-        -- },
-
-        gemini = {
-            api_key_name = 'cmd:cat ' .. sops_folder .. '/gemini_matt_key',
-        },
-        openai = {
-            api_key_name = 'cmd:cat ' .. sops_folder .. '/OPENAI_API_KEY_PERSO',
-        },
 
         --      llamacpp = {
         --          -- __inherited_from = 'llamacpp',
@@ -165,23 +127,6 @@ opts = {
 		 -- MISTRAL_API_KEY = os.getenv('MISTRAL_API_KEY'), -- necessary if you setup Mistral Vibe manually
 		},
 
-        -- ollama = {
-        --     -- model = "qwq:32b",
-        --     model = 'mistral',
-        --     endpoint = 'http://127.0.0.1:11434',
-        --     timeout = 30000, -- Timeout in milliseconds
-        --     -- disable_tools = true, -- not supported by mistral (but inherited by others so...)
-        --     --   disabled_tools = { "python" }, is also possible
-        --     is_env_set = require('avante.providers.ollama').check_endpoint_alive,
-        --     extra_request_body = {
-        --         options = {
-        --             temperature = 0.75,
-        --             -- 32768
-        --             num_ctx = 20480,
-        --             keep_alive = '10m',
-        --         },
-        --     },
-        -- },
         ['local:mistral-nemo'] = {
             model = 'devstral',
             __inherited_from = 'ollama',
@@ -192,45 +137,11 @@ opts = {
         -- provider = 'google', -- tavily, serpapi, google, kagi, brave, or searxng
         proxy = nil, -- proxy support, e.g., http://127.0.0.1:7890
     },
-    disabled_tools = {
-        'web_search_tavily',
-    },
+    -- disabled_tools = {
+    --     'web_search_tavily',
+    -- },
     custom_tools = {
         require('avante.llm_tools.web_search').web_search_google,
-        -- {
-        --     name = 'run_model_manager_tests', -- Unique name for the tool
-        --     description = 'run the ModelManagerSpec',
-        --     param = { -- Input parameters (optional)
-        --         type = 'table',
-        --         fields = {
-        --             -- {
-        --             --   name = "target",
-        --             --   description = "Package or directory to test (e.g. './pkg/...' or './internal/pkg')",
-        --             --   type = "string",
-        --             --   optional = true,
-        --             -- },
-        --         },
-        --     },
-        --     returns = { -- Expected return values
-        --         {
-        --             name = 'result',
-        --             description = 'Result of the fetch',
-        --             type = 'string',
-        --         },
-        --         {
-        --             name = 'error',
-        --             description = 'Error message if the fetch was not successful',
-        --             type = 'string',
-        --             optional = true,
-        --         },
-        --     },
-        --     func = function(params, on_log, on_complete) -- Custom function to execute
-        --         -- local target = params.target or "./..."
-        --         -- Shell command to execute
-        --         command = 'nix run .#simwork.model-manager._tests'
-        --         return vim.fn.system(command)
-        --     end,
-        -- },
 
         -- {
         --   name = "run_go_tests",  -- Unique name for the tool
@@ -292,7 +203,7 @@ local hidden_models = {
     -- 'copilot',
     -- 'gemini',
     -- 'openai',
-    -- 'openai-gpt-4o-mini',
+    -- 'cerebras',
     'vertex',
     'vertex_claude',
     -- 'ollama',
@@ -308,28 +219,17 @@ for _, model in ipairs(hidden_models) do
     -- is_env_set
 end
 
--- todo load from contrib/ or from llama api ?
--- local jedha_models = {
---     'llama_mistral7b',
---     'ministral3-8b',
---     'llama_ministral3_8b',
---     'llama_qwen2_5_3b',
--- }
-
 local valid_file, nix_deps = pcall(require, 'generated-by-nix')
 
-local jedha_default_model
--- = 'ministral3-8b'
--- 3.8
-jedha_default_model = 'qwen3.6-dense'
-
 -- so it inherited the model
-local res = mk_llama_provider('jedha.vpn:9931', jedha_default_model, {
+local res = mk_llama_provider('jedha:9931', jedha_default_model, {
 
     -- check default prompt w/o
     disable_tools = false,
 })
-opts.providers['jedha'] = vim.tbl_extend('force', res, {})
+
+-- blocks AvanteModels
+-- opts.providers['jedha'] = vim.tbl_extend('force', res, {})
 
 -- we can switch jakku_hostname
 if valid_file and nix_deps.jakku_hostname or false then

@@ -149,8 +149,9 @@ in
         # "$mod+Shift+f" = "fullscreen global";
         # "$mod+button3" = "floating toggle";
         # "$mod+m" = ''mode "monitors'';
-        "${mod}+p" = "exec ${pkgs.rofi-pass}/bin/rofi-pass";
-        # "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
+        # mad ?
+        "${mod}+p" = "exec ${pkgs.vicinae}/bin/vicinae deeplink vicinae://launch/@tinkerbells/pass/pass";
+        # todo should open noctalia screen ?
         "${mod}+Ctrl+L" = "exec ${pkgs.i3lock}/bin/i3lock";
 
         "${mod}+Ctrl+h" =

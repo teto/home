@@ -64,10 +64,13 @@ in
       # default = "en-us-ryan-medium";
       # voice = "fr_FR-semaine-medium";
       uri = "tcp://${server}:10200";
-      useCUDA = pkgs.config.cudaSupport;
 
-      # --local-files-only (dont dl from HF)
-      # extraArgs = []
+      # sets device ?
+      useCUDA = pkgs.config.cudaSupport;
+      extraArgs = [ 
+        # (dont dl from HF)
+        "--local-files-only" 
+      ];
     };
   };
 

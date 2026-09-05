@@ -1,7 +1,4 @@
-functions/fish_command_not_found.fish
-functions/fish_user_key_bindings.fish
-functions/git_clone_url.fish
-functions/yy.fish
+functions/
 conf.d/
 /fish_variables*
 config.fish
