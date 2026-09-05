@@ -4,26 +4,26 @@
   enable = true;
 
   wireplumber.enable = true;
-  wireplumber.extraConfig = {
-    "10-bluez" = {
-    "monitor.bluez.properties" = {
-      "bluez5.roles" = [
-        "a2dp_sink"
-        "a2dp_source"
-        "bap_sink"
-        "bap_source"
-        "hfp_hf"
-        "hfp_ag"
-      ];
-    };
-    };
-    "11-bluetooth-policy" = {
-    "wireplumber.settings" = {
-      "bluetooth.autoswitch-to-headset-profile" = false;
-    };
-  };
-
-  };
+  # wireplumber.extraConfig = {
+  #   "10-bluez" = {
+  #   "monitor.bluez.properties" = {
+  #     "bluez5.roles" = [
+  #       "a2dp_sink"
+  #       "a2dp_source"
+  #       "bap_sink"
+  #       "bap_source"
+  #       "hfp_hf"
+  #       "hfp_ag"
+  #     ];
+  #   };
+  #   };
+  #   "11-bluetooth-policy" = {
+  #   "wireplumber.settings" = {
+  #     "bluetooth.autoswitch-to-headset-profile" = false;
+  #   };
+  # };
+  #
+  # };
 
   # Disable everything that causes pipewire to interact with alsa devices
   # https://discourse.nixos.org/t/bluetooth-a2dp-sink-not-showing-up-in-pulseaudio-on-nixos/32447/4

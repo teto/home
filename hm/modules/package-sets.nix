@@ -80,6 +80,7 @@ in
     (mkIf cfg.bluetooth {
       home.packages = [
         pkgs.bluetuith
+        pkgs.bluetui
       ];
     })
 
@@ -223,7 +224,7 @@ in
           # gcalc
           # nomacs # image viewer
           # nyxt      # lisp browser
-          pulseaudioFull # for pactl
+          # pulseaudioFull # for pactl
           # replace with rust-wormhole
           # requires xdmcp https://github.com/freedesktop/libXdmcp
           rmpc # rust mpd client with synced lyrics and cover display !

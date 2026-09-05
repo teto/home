@@ -304,38 +304,12 @@ in
           # TODO make it a noctalia command
           "${mod}+Ctrl+L" = "exec ${pkgs.tetos.swaylockCmd} ";
 
-          "${mod}+F2" =
-            "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty ${lib.getExe' pkgs.rmpc "rmpc"}' ";
-
-          # replace with 'avante' alias ?
-          "${mod}+F3" =
-            ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 60 --height 50 --mark gp_nvim --command "kitty nvim -cLlmChat" '';
-
-          # "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command 'kitty nvim +Notes'  ";
-
-          "${mod}+a" =
-            "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty ${lib.getExe' pkgs.rmpc "rmpc"}' ";
 
           # TODO try with flameshot again ?
           # "--release Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy area";
           "--release Print" = "exec ${pkgs.flameshot}/bin/flameshot gui";
 
           # for_window [con_mark="SCRATCHPAD_terminal"] border pixel 1
-
-        }
-        // lib.optionalAttrs config.programs.vicinae.enable {
-          # vicinae://launch/clipboard/history
-          # https://docs.vicinae.com/deeplinks
-          "${mod}+Ctrl+h" = "exec ${pkgs.vicinae}/bin/vicinae vicinae://launch/clipboard/history";
-          "${mad}+w" = "exec ${pkgs.vicinae}/bin/vicinae deeplink vicinae://launch/wm/switch-windows";
-        }
-        # // lib.optionalAttrs config.services.clipcat.enable {
-        #   "${mod}+Ctrl+h" =
-        #     "exec ${pkgs.clipcat}/bin/clipcat-menu -f rofi  | ${sharedConfig.notify-send} 'Failed running clipcat' ";
-        # }
-        // lib.optionalAttrs config.services.cliphist.enable {
-          "${mod}+Ctrl+h" =
-            ''exec ${pkgs.cliphist}/bin/cliphist list | rofi -dmenu  -m -1 -p "Select item to copy" -lines 10 -width 35 | cliphist decode | wl-copy | ${sharedConfig.notify-send} 'Failed running cliphist' '';
 
         }
       # // lib.optionalAttrs config.services.clipman.enable {
