@@ -24,6 +24,12 @@ require('vim._core.ui2').enable({
     },
 })
 
+-- otherwise it hijacks my mappings
+vim.g.no_rust_maps = true
+
+local xdg_config = vim.env.XDG_CONFIG_HOME or os.getenv('HOME') .. '/.config'
+local sops_folder = vim.fs.joinpath(xdg_config, 'sops-nix/secrets')
+
 vim.g.health = { style = 'float' }
 
 vim.g.visual_whitespace = {
@@ -150,25 +156,7 @@ lz.load('lazy_specs')
 local diagnostic_default_config = {
     -- disabled because too big in haskell
     virtual_lines = false, -- not needed with tiny-inline-diagnostic
-    -- {
-    --        current_line = true,
-    --        -- Function that can transform the diagnostic
-    --        -- format = if
-    --    },
     virtual_text = false,
-    -- {
-    --        source = 'if_many',
-    --        -- • {format}?             (`fun(diagnostic:vim.Diagnostic): string?`) If
-    --        --                       not nil, the return value is the text used to
-    --        --                       display the diagnostic. Example: >lua
-    --        --                           function(diagnostic)
-    --        --                             if diagnostic.severity == vim.diagnostic.severity.ERROR then
-    --        --                               return string.format("E: %s", diagnostic.message)
-    --        --                             end
-    --        --                             return diagnostic.message
-    --        --                           end
-    --        --
-    --    },
     {
         severity = { min = vim.diagnostic.severity.WARN },
     },
@@ -198,7 +186,6 @@ local diagnostic_default_config = {
     update_in_insert = true,
 }
 
---
 vim.diagnostic.config(diagnostic_default_config)
 
 vim.g.rest_nvim = {
@@ -950,7 +937,7 @@ end, { desc = 'Go to file, create if missing' })
 -- Outside of the fork it kills the plugin so careful
 -- normally overriden by setup call
 vim.g.avante = {
-    debug = false, -- print error messages
+    debug = true, -- print error messages
     -- log_level =
     log_level = vim.log.levels.DEBUG,
 
@@ -1026,12 +1013,56 @@ vim.g.avante = {
     },
 
     -- provider loaded from history ?
-    -- provider = provider,
+    provider = "openrouter",
     ui = { border = 'single', background_color = '#FF0000' },
     selector = {
         provider = 'fzf_lua',
     },
+	providers = {
+		openrouter = {
+		 -- see also https://github.com/avante-corp/avante.nvim/issues/2310
+		 __inherited_from = 'openai',
+		 endpoint = "https://openrouter.ai/api/v1",
+		 -- Timeout in milliseconds. Make it long as server is "slow"
+		 -- timeout = 180000,
+		 -- api_key_name = "OPENROUTER_API_KEY",
+		 api_key_name = 'cmd:cat ' .. sops_folder .. '/openrouter-api-key',
 
+		 -- /models doesnt list all of them
+		 model = "deepseek/deepseek-v4-flash-0731",
+		 -- model = "openrouter/free",
+		},
+		navyai = {
+		 endpoint = "https://api.navy/v1",
+		 -- workds for models
+		 -- endpoint = "https://modelscope.ai/openapi/v1",
+		 -- Qwen 3.8 27B
+		 model = "deepseek-v4-flash-0731",
+		 -- MODELSCOPE_API_KEY = "ms-815db797-82d2-4a32-8d3a-3982367a93b9";
+		 api_key_name = 'cmd:cat /home/teto/home/secrets/navyai.key',
+		 __inherited_from = 'openai',
+		},
+		-- modelscope = {
+		--  __inherited_from = 'openai',
+		--  -- there is no legacy chat/completions
+		--  use_response_api = true,
+		--  -- endpoint = "https://modelscope.cn",
+		--  -- les 2 marchent
+		--  endpoint = "https://modelscope.cn/openapi/v1",
+		--  -- workds for models
+		--  -- endpoint = "https://modelscope.ai/openapi/v1",
+		--  model = "deepseek/deepseek-chat-v3-0324",
+		--  -- MODELSCOPE_API_KEY = "ms-815db797-82d2-4a32-8d3a-3982367a93b9";
+		--  api_key_name = 'cmd:cat /home/teto/home/secrets/modelscope.key',
+		-- },
+
+        gemini = {
+            api_key_name = 'cmd:cat ' .. sops_folder .. '/gemini_matt_key',
+        },
+        openai = {
+            api_key_name = 'cmd:cat ' .. sops_folder .. '/OPENAI_API_KEY_PERSO',
+        },
+	},
     -- might be interesting
     input = {
         -- provider =

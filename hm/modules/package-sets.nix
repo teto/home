@@ -147,6 +147,7 @@ in
 
           pkgs.pi-coding-agent # to test as ACP provider for avante
 
+          opencode  # to test in avante.nvim
           # pkgs.python3Packages.vllm
           # pkgs.repomix # to upload a codebase to llm
         ];
@@ -274,7 +275,6 @@ in
           rustic # rust client for restic. Backups should be compatible
           # rbw # Rust bitwarden unofficial client
           ripgrep
-          # rofi-pass # rofi-pass it's enabled in the HM module ?
           rofi-teto
           rsync
           seahorse # GUI to interact with gnome keyring

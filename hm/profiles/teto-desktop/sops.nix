@@ -3,6 +3,9 @@
   osConfig,
   lib,
 }:
+# %r gets replaced with a runtime directory, use %% to specify a '%'
+# sign. Runtime dir is $XDG_RUNTIME_DIR on linux and $(getconf
+# DARWIN_USER_TEMP_DIR) on darwin.
 lib.optionalAttrs osConfig.tetos.withSecrets {
   # SECRETS appear in ~/.config/sops-nix/secrets/*
 
@@ -28,11 +31,15 @@ lib.optionalAttrs osConfig.tetos.withSecrets {
   # This is the actual specification of the secrets.
   secrets.github_token = {
     mode = "400";
-    # %r gets replaced with a runtime directory, use %% to specify a '%'
-    # sign. Runtime dir is $XDG_RUNTIME_DIR on linux and $(getconf
-    # DARWIN_USER_TEMP_DIR) on darwin.
     path = "%r/github_token";
   };
+
+  secrets.openrouter-api-key = {
+    mode = "400";
+    key = "OPENROUTER_API_KEY";
+    path = "%r/openrouter-api.key";
+  };
+
 
   # removed from secrets
   secrets."OPENAI_API_KEY_PERSO" = {

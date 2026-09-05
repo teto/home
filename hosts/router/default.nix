@@ -53,8 +53,17 @@ in
     # flakeSelf.nixosProfiles.avahi
     flakeSelf.nixosProfiles.router
     flakeSelf.nixosProfiles.universal
+    flakeSelf.nixosProfiles.nix-daemon
 
   ];
+
+  nix.settings = {
+    # when reaches 10MB
+    min-free = "${toString (10 * 1024 * 1024)}";
+    # free 500MB
+    max-free = "${toString (500 * 1024 * 1024)}";
+
+  };
 
   documentation.man.enable = true;
 

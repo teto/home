@@ -8,8 +8,6 @@ let
     plugins = with pkgs; [
       rofi-calc
       rofi-bitwarden
-      rofi-pass
-
     ];
   };
 in

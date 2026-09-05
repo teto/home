@@ -156,7 +156,7 @@ in
     y = "yazi";
     yr = "yazi ./result";
 
-    js = "just -g switch";
+    # js = "just -g switch";
     j = "just";
     jg = "just -g ";
 
