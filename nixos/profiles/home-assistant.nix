@@ -22,7 +22,7 @@
       extraPackages = ps: [
         ps.psycopg2
         ps.hass-nabucasa # to be able to login to cloud
-        ps.zlib_ng  # to remove warning
+        ps.zlib-ng  # to remove warning
       ];
       # look at https://www.home-assistant.io/integrations/
       # pkgs/servers/home-assistant/component-packages.nix

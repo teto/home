@@ -15,6 +15,9 @@
     flakeSelf.homeProfiles.xdg-portal
   ];
 
+  enable = true;
+  mime.enable = true;
+
   # TODO add our own vicinae module
   configFile."vicinae/settings.json".enable = false;
   # You can still refer to its generated content via:

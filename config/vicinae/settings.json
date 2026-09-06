@@ -42,15 +42,6 @@
       }
    },
    "providers": {
-      "@thomaslombart/github": {
-         "preferences": {
-            "defaultSearchTerms": "author:@me",
-            "includeTeamReviewRequests": true,
-            "isOpenInBrowser": false,
-            "repositoryCloneProtocol": "https",
-            "repositoryFilterMode": "all"
-         }
-      },
       "applications": {
          "enabled": true,
          "preferences": {

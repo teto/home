@@ -77,10 +77,12 @@ nix-repl:
 build-nom hostname:
     nom build .#nixosConfigurations.{{ hostname }}.config.system.build.toplevel 
 
-# nom build
-# nix flake update
-# nix build .#nixosConfigurations.$HOSTNAME.config.system.build.toplevel
 # nix store diff-closures /run/current-system ./result
+
+convert-currencies:
+  # installed from libqalculate
+  qalc --exrates '100 EUR to CHF' to update rates from net
+
 
 # backup my photo folder
 backup-photos $AWS_ACCESS_KEY_ID=`pass show self-hosting/backblaze-restic-backup-key/username` $AWS_SECRET_ACCESS_KEY=`pass show self-hosting/backblaze-restic-backup-key/password`:
