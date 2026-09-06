@@ -14,7 +14,6 @@
       use-xdg-base-directories = true;
       preallocate-contents = true;
       warn-large-path-threshold = "10M";
-      log-lines = 20;
       use-registries = true;
       warn-dirty = true;
 

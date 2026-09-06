@@ -26,7 +26,8 @@ let
   # server = "${config.networking.hostName}.local";
 
   # hoping mdns resolves to correct address ? since we enforced rules for it ?
-  server = "${config.networking.hostName}.local";
+  # server = "${config.networking.hostName}.local";
+  server = "127.0.0.1";
   # server = "0.0.0.0"; # this can select a fucked up interface like wireguard, I want the local one
   # server = "tatooine.local";
 

@@ -87,7 +87,7 @@ skin=default
 
 [Layout]
 output_lines=0
-left_panel_size=0
+left_panel_size=47
 top_panel_size=0
 message_visible=true
 keybar_visible=true
@@ -103,9 +103,9 @@ horizontal_equal=true
 timeformat_recent=%e %b %H:%M
 timeformat_old=%e %b %Y
 ftp_proxy_host=gate
-ftpfs_password=
-display_codepage=
-source_codepage=
+ftpfs_password=anonymous@
+display_codepage=UTF-8
+source_codepage=Other_8_bit
 autodetect_codeset=
 clipboard_store=
 clipboard_paste=
@@ -114,3 +114,30 @@ clipboard_paste=
 base_color=
 xterm-kitty=
 color_terminals=
+
+[Panels]
+show_mini_info=true
+kilobyte_si=false
+mix_all_files=false
+show_backups=true
+show_dot_files=true
+fast_reload=false
+fast_reload_msg_shown=false
+mark_moves_down=true
+reverse_files_only=true
+auto_save_setup_panels=false
+navigate_with_arrows=false
+panel_scroll_pages=true
+panel_scroll_center=false
+mouse_move_pages=true
+filetype_mode=true
+permission_mode=false
+torben_fj_mode=false
+quick_search_mode=2
+select_flags=6
+
+[Panelize]
+Rechercher les programmes SUID et SGID=find . \\( \\( -perm -04000 -a -perm /011 \\) -o \\( -perm -02000 -a -perm /01 \\) \\) -print
+Rechercher les fichiers *.orig après l’application d’un correctif (patch)=find . -name \\*.orig -print
+Trouver les rejets après l’application d’un correctif (patch)=find . -name \\*.rej -print
+Fichiers git modifiés=git ls-files --modified
