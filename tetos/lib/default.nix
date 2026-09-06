@@ -156,7 +156,7 @@ in
       name = mcfg.networking.hostName;
     in
     builtins.trace "SSH config for ${name}" (
-      lib.optionalAttrs sshCfg.enable
+      lib.optionalAttrs sshCfg.enable 
         # lib.warn if "teto" is not in users.users
         {
           # or false) 
@@ -181,7 +181,9 @@ in
           #   mcfg.networking.domain == null
           # ) "Missing domaing for ${name}" mcfg.networking.domain;
           # };
-        }
+        } 
+        
+
     );
 
   # temporary solution since it's not portable

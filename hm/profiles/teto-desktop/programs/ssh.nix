@@ -10,9 +10,26 @@
 let
   # TODO filter out the configurations ending with -no-secret ?
   # could remove it afterwards instead
-  hostsConfigs = lib.mapAttrs (_: val: lib.genSshClientConfig val) (
-    lib.filterAttrs (name: val: builtins.trace "nixosConfig ssh dest: ${name} has secrets ? ${toString val.config.tetos.withSecrets}"  val.config.tetos.withSecrets) flakeSelf.nixosConfigurations
-  );
+  genSshConfig = name: val: 
+    (lib.genSshClientConfig
+        # nixos config
+        val ) //
+        # extra ssh args
+        lib.optionalAttrs (name == "neotokyo") {
+          sendEnv = [
+            "GITHUB_TOKEN"
+            # seems like this might make deploy fail
+            # "SOPS_AGE_SSH_PRIVATE_KEY_FILE"
+          ];
+        }
+    ;
+  
+  hostsConfigs = lib.flip lib.mapAttrs
+    (lib.filterAttrs (name: val: builtins.trace "nixosConfig ssh dest: ${name} has secrets ? ${toString val.config.tetos.withSecrets}"  val.config.tetos.withSecrets) flakeSelf.nixosConfigurations)
+    genSshConfig
+    ;
+
+    
 in
 {
   enable = withSecrets;
@@ -64,29 +81,29 @@ in
       };
 
       # this should be generated already ?
-      jakku-teto = lib.genSshClientConfig flakeSelf.nixosConfigurations.neotokyo // {
-        header = "Match user teto host ${secrets.jakku.hostname}";
-        # match = "user teto host ${secrets.jakku.hostname}";
-        hostname = secrets.jakku.hostname;
-        user = "teto";
-        addKeysToAgent = "yes";
-        # le port depend du service
-        identityFile = "${secretsFolder}/ssh/id_rsa";
-        identitiesOnly = true;
-        # identityAgent =
-        serverAliveCountMax = 3;
-        sendEnv = [
-          "GITHUB_TOKEN"
-          # seems like this might make deploy fail
-          # "SOPS_AGE_SSH_PRIVATE_KEY_FILE"
-        ];
-
-        # RequestTTY force
-        # RemoteCommand = "export GITHUB_TOKEN=$(cat ~/.config/sops-nix/secrets/github_token); exec $SHELL -l";
-        # extraOptions = {
-        # KnownHostsCommand is in addition to those listed in UserKnownHostsFile and GlobalKnownHostsFile
-        # };
-      };
+      # jakku-teto = lib.genSshClientConfig flakeSelf.nixosConfigurations.neotokyo // {
+      #   header = "Match user teto host ${secrets.jakku.hostname}";
+      #   # match = "user teto host ${secrets.jakku.hostname}";
+      #   # hostname = secrets.jakku.hostname;
+      #   user = "teto";
+      #   addKeysToAgent = "yes";
+      #   # le port depend du service
+      #   identityFile = "${secretsFolder}/ssh/id_rsa";
+      #   identitiesOnly = true;
+      #   # identityAgent =
+      #   serverAliveCountMax = 3;
+      #   sendEnv = [
+      #     "GITHUB_TOKEN"
+      #     # seems like this might make deploy fail
+      #     # "SOPS_AGE_SSH_PRIVATE_KEY_FILE"
+      #   ];
+      #
+      #   # RequestTTY force
+      #   # RemoteCommand = "export GITHUB_TOKEN=$(cat ~/.config/sops-nix/secrets/github_token); exec $SHELL -l";
+      #   # extraOptions = {
+      #   # KnownHostsCommand is in addition to those listed in UserKnownHostsFile and GlobalKnownHostsFile
+      #   # };
+      # };
 
       # Match Tagged forceTMUX
       #   # Force start tmux automatically with a session named "RemoteSSH"
@@ -99,7 +116,7 @@ in
         sendEnv = [ "GITHUB_TOKEN" ];
       };
 
-      "nix-community-teto" = {
+      nix-community-teto = {
         header = "Match user teto host nix-community";
 
         # https://nix-community.org/community-builders/
