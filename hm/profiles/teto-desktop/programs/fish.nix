@@ -128,12 +128,15 @@ in
       command = "man";
       expansion = "configuration.nix";
     };
-    df = "'df -lThx tmpfs'";
+
+    df = "df -lThx tmpfs";
+
     http-models = {
       name = "jedha-models";
       command = "http";
       expansion = "get jedha.vpn:8080/models";
     };
+
     # abbr --add -- re 'nixos-rebuild \
     #       --flake ~/home \
     #       --sudo --keep-going \
@@ -147,9 +150,8 @@ in
       # name = "tetos-sw";
       setCursor = true;
       expansion = ''
-        nh os %switch ~/home -- --keep-going \
-          --override-input nixpkgs ~/nixpkgs \
-          --override-input hm ~/hm'';
+        nh os switch ~/home -- --keep-going --override-input nixpkgs ~/nixpkgs 
+          --override-input hm ~/hm %# --option builders "$TETOS_BUILDER_JEDHA" -j0 '';
 
     };
     # tetos-sw-remote = {
@@ -165,11 +167,9 @@ in
     };
   };
 
-  #
   functions = {
 
     # onProcessExit
-
     my_chpwd = {
 
       onVariable = "PWD";

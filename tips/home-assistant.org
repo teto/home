@@ -37,3 +37,12 @@ le plus simple est de se connecter via l'app HUE
 https://www.zigbee2mqtt.io/devices/915005733701.html
 
 https://www.philips-hue.com/en-gb/support/article/how-to-factory-reset-philips-hue-lights/000004
+
+* hass-cli tips
+
+ hass-cli service call light.turn_on \
+   --arguments entity_id=light.lampe_chevet_fenetre_light
+
+  To discover your light entity IDs:
+
+  hass-cli state list 'light.*'
