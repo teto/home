@@ -19,11 +19,17 @@
     blueprints = {
       automation = [
         (pkgs.fetchurl {
-          name = "blueprint";
+          name = "blueprint-hue-switch";
           url = "https://gist.githubusercontent.com/markkvdb/9ce600a7ceee95f52c013df985803f9d/raw/eeecd3670a24e4c3efdc22fe30736d7bb176e881/blueprint.yaml";
           # url = "https://gist.github.com/markkvdb/9ce600a7ceee95f52c013df985803f9d";
           hash = "sha256-EriZ1saSSt6xLBtNX2S59oVITrDbQ4CFqk7/t+9qYeA=";
         })
+        (pkgs.fetchurl {
+          name = "blueprint-4button-switch";
+          url = "https://gist.githubusercontent.com/wujku/33ea9fecbdeb0a82019ec30f9e7b5e63/raw/97975429a6be77ac1de7c824f243e1323a3ae044/4button_scene_switch_zha.yaml";
+          hash = "sha256-3tUfgBfC1AQ4z0NmVVdAeOk8oGDCNFntFuv1ZlWDQn0=";
+        })
+        
       ];
       # TODO add
       # https://github.com/10der/awtrix-ng-hass-integration

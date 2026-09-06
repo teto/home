@@ -4,10 +4,11 @@
   ...
 }:
 let
-  server = config.networking.hostName;
+  # or vpn or leave without it 
+  server = "${config.networking.hostName}.local";
 in
 {
-  enable = false;
+  enable = true;
   recommendedTlsSettings = false;
 
   # using avahi hotname

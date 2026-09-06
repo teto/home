@@ -61,7 +61,6 @@ let
     lualine-nvim
 
     {
-      type = "lua";
       plugin = oil-nvim;
       config = ''
         require("oil").setup({

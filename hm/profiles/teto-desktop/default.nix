@@ -92,10 +92,26 @@ in
   # to avoid cluttering $HOME
   # home.preferXdgDirectories = true;
 
+  # needed for gpg-agent gnome pinentry
+  # services.dbus.packages = [ pkgs.gcr ];
+
+  # https://github.com/NixOS/nixpkgs/issues/196651
+  manual.manpages.enable = true;
+
   home.packages =
     with pkgs;
 
     [
+      # pkgs.up # live preview of pipes
+      # pkgs.peek # GIF recorder  BROKEN
+      pkgs.sshfs # to download
+      pkgs.alsa-utils # for alsamixer
+      pkgs.lm_sensors # for `sensors` executable
+      flakeSelf.inputs.deploy-rs.packages.${stdenv.hostPlatform.system}.deploy-rs
+      pciutils # for lspci
+      timg
+      gh-dash
+      pi-coding-agent # to test as ACP provider for avante
       # bottles  # to install games
       mdcat # markdown viewer
       mitmproxy # help catch http traffic
@@ -147,6 +163,8 @@ in
   };
 
   home.shellAliases = {
+    # use nix-sweep instead ?
+    nix-stray-roots = ''nix-store --gc --print-roots | egrep -v "^(/nix/var|/proc|/run/\w+-system|\{memory)" | less'';
 
     # add --remote-build if you meet signature issues
     # pass as shellAbbr
@@ -195,7 +213,6 @@ in
     TETOS_BUILDER_JEDHA = builder_jedha;
     TETOS_BUILDER_NIXCOMMUNITY = builder_nixcommunity;
     inherit (secrets) TAVILY_API_KEY;
-
   };
 
   home.sessionSearchVariables = {
@@ -213,6 +230,10 @@ in
   '';
 
   package-sets = {
+    desktop = true;
+    energy = true;
+    scientificSoftware = true;
+    fonts = true;
 
     domotic = true;
     enableOfficePackages = true;

@@ -79,15 +79,6 @@ in
   };
 
   extensions =
-    # let
-    #   # TODO update extensions example + add imports
-    #   ext_src = pkgs.fetchFromGitHub {
-    #     owner = "vicinaehq";
-    #     repo = "extensions";
-    #     rev = "cf30b80f619282d45b1748eb76e784a4f875bb01";
-    #     sha256 = "sha256-KwNv+THKbNUey10q26NZPDMSzYTObRHaSDr81QP9CPY=";
-    #   };
-    # in
 
     # "bluetooth" / "nix" / "wifi-commander" / "ssh"
     # https://www.raycast.com/capipo/pass
@@ -108,7 +99,9 @@ in
       # })
 
       extensions.agenda
+      # extensions.base64
       extensions.bitwarden
+      extensions.github
       extensions.pass
       extensions.nix
       extensions.noctalia-shell-wallpaper-selector
@@ -117,42 +110,15 @@ in
       # extensions.systemd
       extensions.timer
       extensions.wikipedia
+      extensions.reminders
       extensions.otp
 
-      (config.lib.vicinae.mkRayCastExtension {
-        name = "github";
-        rev = "238052eeb0e2fb9acb1f9418dd7178eafac5e5cf";
-        sha256 = "sha256-WjikX+a0h7Z65jhwclpjHLweEuPulG4wptGJiJfMT+0=";
-      })
-
       # (config.lib.vicinae.mkRayCastExtension {
-      #   name = "base64";
-      #   rev = "9befbb8bad621365a0f2896a13f6fb26fecb8d55";
-      #   sha256 = "sha256-T/utRy3ptNlC+v3X9ebnzRuCLVlSkZnm7sRwikIVeAk=";
-      # })
-      # FIXME: broken build
-      # pm error code 1, tries to contact github
-      # > npm error path /build/bitwarden/node_modules/electron
-      # > npm error command failed
-      # > npm error command sh -c node install.js
-      # > npm error RequestError: getaddrinfo EAI_AGAIN github.com
-      # (config.lib.vicinae.mkRayCastExtension {
-      #   name = "bitwarden";
-      #   rev = "d7f68ce8eb9759f2c3a9c1bdfe5991b14f55c6f7";
-      #   sha256 = "sha256-YcjrBdqeNgC116LKzfPdz1AmupxwvkmwFBbzBDK7wCI=";
+      #   name = "github";
+      #   rev = "238052eeb0e2fb9acb1f9418dd7178eafac5e5cf";
+      #   sha256 = "sha256-WjikX+a0h7Z65jhwclpjHLweEuPulG4wptGJiJfMT+0=";
       # })
 
-      # (config.lib.vicinae.mkExtension {
-      #   name = "pass";
-      #   src = "${ext_src}/extensions/pass";
-      # })
-
-      # (config.lib.vicinae.mkRayCastExtension {
-      #
-      #   name = "gif-search";
-      #   sha256 = "sha256-G7il8T1L+P/2mXWJsb68n4BCbVKcrrtK8GnBNxzt73Q=";
-      #   rev = "4d417c2dfd86a5b2bea202d4a7b48d8eb3dbaeb1";
-      # })
     ];
 
 }
