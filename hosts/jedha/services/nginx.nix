@@ -1,26 +1,71 @@
 {
   config,
-  lib,
-  pkgs,
+  # lib,
+  # pkgs,
   ...
 }:
+let 
+  # .local ?
+  suffix = config.networking.hostName;
+in
 {
   enable = true;
   recommendedTlsSettings = false;
 
-  # using avahi hotname
-  virtualHosts."${config.networking.hostName}" = {
-    enableACME = false;
-    forceSSL = false;
+  # Reload nginx when configuration file changes (instead of restart).
+  # The configuration file is exposed at /etc/nginx/nginx.conf
+  enableReload = true;
 
-    locations."/".extraConfig = ''
-      proxy_pass http://127.0.0.1:5000;
-      proxy_set_header Host $host;
-      proxy_redirect http:// https://;
-      proxy_http_version 1.1;
-      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-      proxy_set_header Upgrade $http_upgrade;
-      proxy_set_header Connection $connection_upgrade;
-    '';
+  # Enable status page reachable from localhost on http://127.0.0.1/nginx_status.
+  statusPage = true;
+  validateConfigFile = true;
+
+  logError = "stderr";
+
+  # using avahi hotname
+  virtualHosts = {
+    "${suffix}" = {
+      enableACME = false;
+      forceSSL = false;
+
+      locations."/".extraConfig = ''
+        proxy_pass http://127.0.0.1:5000;
+        proxy_set_header Host $host;
+        proxy_redirect http:// https://;
+        proxy_http_version 1.1;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+      '';
+    };
+
+    "faster-whisper.${suffix}" = {
+      enableACME = false;
+      forceSSL = false;
+
+      locations."/" = {
+        proxyPass = "http://localhost:10301";
+        proxyWebsockets = true;
+        extraConfig = ''
+          client_max_body_size 100M;
+        '';
+
+      };
+    };
+
+    "piper.${suffix}" = {
+      enableACME = false;
+      forceSSL = false;
+
+      locations."/" = {
+        proxyPass = "http://localhost:10200";
+        proxyWebsockets = true;
+        extraConfig = ''
+          client_max_body_size 100M;
+        '';
+
+      };
+    };
+
   };
 }

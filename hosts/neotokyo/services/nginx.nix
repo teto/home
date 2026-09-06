@@ -146,22 +146,27 @@ in
 
       # to avoid https:// redirecting to the first random virtual host
       # we should even return a special type -> redirect to blog ?
-      "_tls-catchall" = {
-        # doesn't act as default because doesn't have force
-        default = true;
-        addSSL = true;
-        # use step-ca instead
-        #               # proxyPass = "http://unix:${webUnixSocket}";
-        # sslCertificate = "/path/to/internal-cert.pem";
-        # sslCertificateKey = "/path/to/internal-key.pem";
-        extraConfig = "return 444;";
-      };
+      # "_tls-catchall" = {
+      #   # doesn't act as default because doesn't have force
+      #   default = true;
+      #   addSSL = true;
+      #   # use step-ca instead
+      #   # # proxyPass = "http://unix:${webUnixSocket}";
+      #
+      #   # TODO this is mandatory
+      #   # sslCertificate = "/path/to/internal-cert.pem";
+      #   # sslCertificateKey = "/path/to/internal-key.pem";
+      #   extraConfig = "return 444;";
+      # };
 
     }
     // lib.optionalAttrs withSecrets (
+      let 
+        suffix = "${secrets.jakku.hostname}.${secrets.jakku.hostname}";
+      in
       {
 
-        "blog.${secrets.jakku.hostname}" = {
+        "blog.${suffix}" = {
 
           # I had to manually "chmod a+x /var/lib/gitolite"
           root = "/var/www/blog-generated";

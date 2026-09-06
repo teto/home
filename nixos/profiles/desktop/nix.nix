@@ -4,7 +4,6 @@
   secretsFolder,
   lib,
   pkgs,
-  flakeSelf,
   ...
 }:
 {
@@ -30,7 +29,7 @@
       "https://cache.nixos-cuda.org"
       "https://nix-community.cachix.org"
     ]
-    ++ lib.optional withSecrets "https://cache.${secrets.jakku.hostname}";
+    ++ lib.optional withSecrets "https://cache.${secrets.jakku.hostname}.${secrets.jakku.domain}";
 
     trusted-substituters = [
       # "https://haskell-language-server.cachix.org"
@@ -51,6 +50,8 @@
     keep-outputs = true; # Nice for developers
     keep-derivations = true; # Idem
     keep-failed = true;
+    log-lines = 20;
+
   };
 
 }

@@ -101,7 +101,7 @@ https://github.com/NixOS/nixpkgs/pull/185719
  
  
  # builders
- nixpkgs-review pr 176375 --build-args="--substituters '' --option builders \"$NOVA_RUNNER3\" "
+ nixpkgs-review pr 176375 --build-args="--substituters '' --option builders \"$BUILDER_3\" "
  
  set "--post-build-hook true" to skip it.
  
