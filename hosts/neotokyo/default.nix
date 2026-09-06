@@ -156,8 +156,19 @@ in
 
   documentation.enable = false;
 
+
+  # just to remove warning
+  # swapDevices = [
+  #   {
+  #     device = "/swapfile";
+  #     size = 1000;
+  #   }
+  # ];
+
+
   # lib.mkForce to remove the default ones
-  environment.systemPackages = lib.mkForce [
+  # lib.mkForce  removes cat 
+  environment.systemPackages = [
     # flakeSelf.inputs.transgression-tui.packages.${pkgs.stdenv.hostPlatform.system}.transgression-tui
     pkgs.tremc
     pkgs.restic # testing against restic

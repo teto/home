@@ -1,7 +1,9 @@
+# generates ~/.inputrc
 {
   programs.readline = {
 
     enable = true;
+    # needed ?
     includeSystemConfig = true;
     variables = {
       # taken from examples
@@ -17,6 +19,9 @@
     bindings = {
       "\\e[1~" = "beginning-of-line";
     };
+
+    # add emacs
+    # ctrl-p vs ctrl-e ?
     extraConfig = ''
 
       "\C-a": beginning-of-line

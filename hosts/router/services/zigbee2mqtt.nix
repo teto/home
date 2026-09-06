@@ -1,11 +1,25 @@
 {
   # "z2m" (zigbee2mqtt)
+
+# homeassistant:
+#   enabled: true
+#   discovery_topic: homeassistant
+#   experimental_event_entities: true
+# mqtt:
+#   base_topic: zigbee2mqtt
+#   server: mqtt://localhost:1883
+
   services.zigbee2mqtt = {
     enable = true;
     # https://www.zigbee2mqtt.io/information/configuration.html
     settings = {
       # homeassistant = config.services.home-assistant.enable;
       # homeassistant = false;
+      homeassistant = {
+        enabled = true;
+      #   discovery_topic: homeassistant # default
+        experimental_event_entities= true; # not default
+      };
       permit_join = true; # todo disable after configuration for secuirty
       serial = {
         # according to https://www.zigbee2mqtt.io/guide/adapters/#recommended

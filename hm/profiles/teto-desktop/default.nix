@@ -104,6 +104,7 @@ in
     [
       # pkgs.up # live preview of pipes
       # pkgs.peek # GIF recorder  BROKEN
+      pkgs.sequoia-sq # gpg rust replacement ? exe is called "sq"
       pkgs.sshfs # to download
       pkgs.alsa-utils # for alsamixer
       pkgs.lm_sensors # for `sensors` executable
@@ -114,6 +115,7 @@ in
       pi-coding-agent # to test as ACP provider for avante
       # bottles  # to install games
       mdcat # markdown viewer
+      mcat  # universal viewer
       mitmproxy # help catch http traffic
       notmuch # needed for waybar-custom-notmuch.sh
 
@@ -130,6 +132,7 @@ in
       # slidev-cli # text-based slides generate via npm nice prez
       # only for matt ?
       pass-perso
+
       # flakeSelf.inputs.pinix.packages.${pkgs.stdenv.hostPlatform.system}.default
       # poppler for pdf preview
 

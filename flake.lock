@@ -1133,11 +1133,11 @@
     "meli-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1788628607,
-        "narHash": "sha256-hw8tQGWeu3+VPq7K/8zuYJNT12RlWft/xA1eoTV3UfA=",
+        "lastModified": 1788782363,
+        "narHash": "sha256-5lcMNfGy8rmOueSzVWZsZiNll/eiK/GZe3qDrt/BUBQ=",
         "ref": "refs/heads/master",
-        "rev": "e6d4dbc4b9d7c28cd57fab02b3c691c8d4fd66a7",
-        "revCount": 3161,
+        "rev": "e7bc6b092a84a0d4f1f8774bd6de5232b81cd3bb",
+        "revCount": 3180,
         "type": "git",
         "url": "https://git.meli-email.org/meli/meli.git"
       },

@@ -26,6 +26,7 @@
       ];
       # look at https://www.home-assistant.io/integrations/
       # pkgs/servers/home-assistant/component-packages.nix
+      # flow could not be loaded: {"message":"Invalid handler specified"}
       extraComponents = [
         "alexa" # while trying to use 'alexa' as wakeword
         "recorder" # to plot history of devices
@@ -49,9 +50,10 @@
         "mqtt"
         "meteo_france"
         # else we get :
-        # flow could not be loaded: {"message":"Invalid handler specified"}
-        "wyoming"
+
+        "yamaha_musiccast" # to control r-n800
         "upnp"
+        "wyoming"  # voice control
         "wake_on_lan"
         # "met"
       ];

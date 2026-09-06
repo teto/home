@@ -154,15 +154,16 @@ in
       mcfg = value.config;
       sshCfg = mcfg.services.openssh;
       name = mcfg.networking.hostName;
+      hasDomain = mcfg.networking.domain != null;
     in
     builtins.trace "SSH config for ${name}" (
-      lib.optionalAttrs sshCfg.enable
+      lib.optionalAttrs sshCfg.enable 
         # lib.warn if "teto" is not in users.users
         {
           # or false) 
           header = ''Match host=${mcfg.networking.hostName}''
           # let resolved handle expansion for now ?!
-          # + lib.optionalString (mcfg.networking.domain != null) ",${mcfg.networking.hostName}.${mcfg.networking.domain}" 
+          + lib.optionalString hasDomain ",${mcfg.networking.hostName}.${mcfg.networking.domain}" 
           # + lib.optionalString (mcfg.tetos.wireguard.enable or false) ",${mcfg.networking.hostName}.vpn"
           ;
 
@@ -171,16 +172,18 @@ in
           identityFile = "${secretsFolder}/ssh/id_rsa";
           port = builtins.head sshCfg.ports;
           identitiesOnly = true;
-          # extraOptions = {
           AddKeysToAgent = "yes";
-          CanonicalizeHostname = true;
-          CanonicalDomains = [ "local" "vpn" ];
+
           # set domain to null ?
           # TODO  set it depending if hostName is FQDN ?
           # HostName = lib.throwIf (
           #   mcfg.networking.domain == null
           # ) "Missing domaing for ${name}" mcfg.networking.domain;
           # };
+        }  // lib.optionalAttrs (!hasDomain) {
+          CanonicalizeHostname = true;
+          # done at resolve layer ?
+          CanonicalDomains = [ "local" "vpn" ];
         }
     );
 

@@ -76,6 +76,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    flyline = {
+      url = "github:HalFrgrd/flyline";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # firefox2nix.url = "git+https://git.sr.ht/~rycee/mozilla-addons-to-nix";
 
     flake-utils.url = "github:numtide/flake-utils";

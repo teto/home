@@ -112,14 +112,19 @@ in
     # sudo wolli --iface enp2s0 9c:6b:00:8b:2a:c8 --broadcast 255.255.255.255
 
     home.file."justfile".text = ''
+      # reveiller le desktop
       wakejedha:
         sudo wolli --iface enp2s0 ${secrets.jedha.ethernetMac}
+
+      # flasher la cler (GCFFlasher -l)
+      conbee-flasher:
+        nix shell nixpkgs#gcfflasher
     '';
   };
 
   services.journald.settings.Journal = {
     # alternatively one can run journalctl --vacuum-time=2d
-    SystemMaxUse="200MB";
+    SystemMaxUse="200M";
   };
 
   # Use the GRUB 2 boot loader.
