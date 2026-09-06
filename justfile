@@ -304,3 +304,6 @@ refresh-ssh-public-keys:
 
 eval-jedha-no-secrets:
     nix eval .#nixosConfigurations.jedha-no-secrets.config.system.build.toplevel
+
+hass-list-blueprints:
+ hass-cli -x -o yaml raw ws blueprint/list --json '{"domain":"script"}'
