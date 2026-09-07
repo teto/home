@@ -13,6 +13,15 @@ PASSWORD_STORE_ENABLE_EXTENSIONS
 
 PASSWORD_STORE_GPG_OPTS
 
+* read the output:
+
+In GnuPG’s [scea] capability field:
+
+  - s the key can sign
+  - c the key can certify other keys/subkeys
+  - e can encrypt (e) 
+  - a can authenticate (a)
+
 * import from bitwarden
   with https://github.com/roddhjav/pass-import one can import from bitwarden via:
   pass import bitwarden <bitwarden_export_....json>

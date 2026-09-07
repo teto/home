@@ -162,7 +162,8 @@ in
     }
     // lib.optionalAttrs withSecrets (
       let 
-        suffix = "${secrets.jakku.hostname}.${secrets.jakku.hostname}";
+        # suffix = "${secrets.jakku.hostname}.${secrets.jakku.hostname}";
+        suffix = "${config.networking.fqdn}";
       in
       {
 

@@ -39,6 +39,21 @@ in
       '';
     };
 
+    # optionaal depending on user service
+    "llamacpp.${suffix}" = {
+      enableACME = false;
+      forceSSL = false;
+
+      locations."/" = {
+        proxyPass = "http://localhost:10301";
+        proxyWebsockets = true;
+        extraConfig = ''
+          client_max_body_size 100M;
+        '';
+
+      };
+      };
+
     "faster-whisper.${suffix}" = {
       enableACME = false;
       forceSSL = false;

@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-field
 -- vim: set noet fdm=marker fenc=utf-8 ff=unix sts=0 sw=4 ts=4 :
 -- https://github.com/nanotee/nvim-lua-guide#using-meta-accessors
 -- https://www.reddit.com/r/neovim/comments/o8dlwg/how_to_append_to_an_option_in_lua/
@@ -504,9 +505,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end,
 })
 
-function string:endswith(ending)
-    return ending == '' or self:sub(-#ending) == ending
-end
+-- function string:endswith(ending)
+--     return ending == '' or self:sub(-#ending) == ending
+-- end
 
 -- TODO this should depend on theme ! computed via lush
 vim.api.nvim_create_autocmd('ColorScheme', {
@@ -616,6 +617,7 @@ vim.opt.showbreak = '↳ ' -- displayed in front of wrapped lines
 vim.opt.listchars = 'tab:•·,trail:·,extends:❯,precedes:❮,nbsp:×'
 -- set listchars+=conceal:X
 -- conceal is used by deefault if cchar does not exit
+---@diagnostic disable-next-line: undefined-field
 vim.opt.listchars:append('conceal:❯')
 
 -- "set shada=!,'50,<1000,s100,:0,n$XDG_CACHE_HOME/nvim/shada
@@ -853,7 +855,7 @@ vim.keymap.set('n', '[[', function()
     })
 end, { buffer = false })
 vim.keymap.set('n', ']]', function()
-    vim.diagnostic.jump({ 
+    vim.diagnostic.jump({
 		count = 1,
 		wrap = true,
 		on_jump = function () vim.notify("hello world") end,
@@ -1148,6 +1150,34 @@ vim.g.avante = {
         ---@type "ours" | "theirs"
         focus_on_apply = 'ours', -- which diff to focus after applying
     },
+    web_search_engine = {
+        -- todo pass key
+        -- provider = 'google', -- tavily, serpapi, google, kagi, brave, or searxng
+        proxy = nil, -- proxy support, e.g., http://127.0.0.1:7890
+    },
+    -- disabled_tools = {
+    --     'web_search_tavily',
+    -- },
+    custom_tools = {
+        require('avante.llm_tools.web_search').web_search_google,
+    },
+    slash_commands = {
+        -- it looks ignored ?
+        {
+            name = 'current_model',
+            description = 'Return the current avante model',
+            callback = function()
+                local Config = require('avante.config')
+                return Config.provider
+            end,
+            details = 'Nothing more',
+        },
+    },
+    prompt_logger = {
+        enabled = true, -- toggle logging entirely
+		-- directory where logs are saved ?
+        log_dir = vim.fn.stdpath('cache'),
+    },
 }
 
 local has_kitty_scrollback, _kitty_scrollback = pcall(require, 'kitty-scrollback')
@@ -1263,7 +1293,7 @@ vim.keymap.set({ 'n', 'v' }, '<RightMouse>', function()
     vim.cmd.exec('"normal! \\<RightMouse>"')
 
     -- clicked buf
-    local buf = vim.api.nvim_win_get_buf(vim.fn.getmousepos().winid)
+    -- local buf = vim.api.nvim_win_get_buf(vim.fn.getmousepos().winid)
     -- vim.bo[buf].ft == "NvimTree" and "nvimtree" or
     local options = 'default'
 
@@ -1297,3 +1327,21 @@ require('plugins.copilot')
 
 -- prints --embed which is not listed
 -- vim.print(vim.v.argv)
+function test_proxy()
+	-- vim.print(require'os'.getenv("http_proxy")) 
+	local s = require'avante.llm_tools.web_search'.web_search_tavily
+	s.func("Please fetch the content of perdu.com", 
+	{
+		on_complete = function (err, resp) 
+			vim.print("err", err) 
+			vim.print("resp", resp) 
+		end
+	} )
+	-- vim.net.request(
+	-- "GET",
+	-- "https://neovim.io",
+	-- { verbose = true },
+	-- function (err, res)
+	-- 	vim.print("err", err , "res", res)
+	-- end
+end

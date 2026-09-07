@@ -51,7 +51,7 @@ end
 
 -- TODO load configuration from llm-providers.json
 -- lua vim.json.decode(str, opts)
-opts = {
+local opts = {
     acp_providers = {
         ['mistral-vibe-teto'] = {
             command = 'vibe-acp',
@@ -131,67 +131,6 @@ opts = {
             model = 'devstral',
             __inherited_from = 'ollama',
         },
-    },
-    web_search_engine = {
-        -- todo pass key
-        -- provider = 'google', -- tavily, serpapi, google, kagi, brave, or searxng
-        proxy = nil, -- proxy support, e.g., http://127.0.0.1:7890
-    },
-    -- disabled_tools = {
-    --     'web_search_tavily',
-    -- },
-    custom_tools = {
-        require('avante.llm_tools.web_search').web_search_google,
-
-        -- {
-        --   name = "run_go_tests",  -- Unique name for the tool
-        --   description = "Run Go unit tests and return results",  -- Description shown to AI
-        --   command = "go test -v ./...",  -- Shell command to execute
-        --   param = {  -- Input parameters (optional)
-        --     type = "table",
-        --     fields = {
-        --       {
-        --         name = "target",
-        --         description = "Package or directory to test (e.g. './pkg/...' or './internal/pkg')",
-        --         type = "string",
-        --         optional = true,
-        --       },
-        --     },
-        --   },
-        --   returns = {  -- Expected return values
-        --     {
-        --       name = "result",
-        --       description = "Result of the fetch",
-        --       type = "string",
-        --     },
-        --     {
-        --       name = "error",
-        --       description = "Error message if the fetch was not successful",
-        --       type = "string",
-        --       optional = true,
-        --     },
-        --   },
-        --   func = function(params, on_log, on_complete)  -- Custom function to execute
-        --     local target = params.target or "./..."
-        --     return vim.fn.system(string.format("go test -v %s", target))
-        --   end,
-        -- },
-    },
-    slash_commands = {
-        -- it looks ignored ?
-        {
-            name = 'current_model',
-            description = 'Return the current avante model',
-            callback = function()
-                local Config = require('avante.config')
-                return Config.provider
-            end,
-            details = 'Nothing more',
-        },
-    },
-    prompt_logger = {
-        enabled = true, -- toggle logging entirely
-        log_dir = vim.fn.stdpath('cache'), -- directory where logs are saved
     },
 }
 
