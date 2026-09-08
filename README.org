@@ -149,6 +149,8 @@ transferred.
 
 TODO mention termscp or yazi + rsync ?
 
+#TODO gpg need to trust the imported key
+
 On the old machine:
 #+BEGIN_SRC
 $ wormhole send ~/.gnupg

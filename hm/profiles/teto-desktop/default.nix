@@ -104,6 +104,7 @@ in
     [
       # pkgs.up # live preview of pipes
       # pkgs.peek # GIF recorder  BROKEN
+      pkgs.sequoia-sq # gpg rust replacement ? exe is called "sq"
       pkgs.sshfs # to download
       pkgs.alsa-utils # for alsamixer
       pkgs.lm_sensors # for `sensors` executable
