@@ -137,6 +137,15 @@ in
       expansion = "get jedha.vpn:8080/models";
     };
 
+    # GCFFlasher -d COMX -t 60 -f Y
+    why = {
+      name = "why";
+      command = "nix";
+      setCursor = true;
+      expansion = "why-depends -a /nix/var/nix/profiles/system %/nix/store/b16b4gznnn94vqk9vz5l54h1fnxxljqv-mtools-4.0.49/bin/mtools";
+
+    };
+
     # abbr --add -- re 'nixos-rebuild \
     #       --flake ~/home \
     #       --sudo --keep-going \
@@ -150,7 +159,7 @@ in
       # name = "tetos-sw";
       setCursor = true;
       expansion = ''
-        nh os switch ~/home -- --keep-going --override-input nixpkgs ~/nixpkgs 
+        nh os switch ~/home -- --keep-going --override-input nixpkgs ~/nixpkgs \
           --override-input hm ~/hm %# --option builders "$TETOS_BUILDER_JEDHA" -j0 '';
 
     };
@@ -161,9 +170,10 @@ in
     #      --override-input hm ~/hm'';
     # };
     deploy-neotokyo = {
+      name = "neotokyo";
       setCursor = true;
-      # command = "deploy";
-      expansion = "deploy '.#%neotokyo' -s --interactive-sudo=true -- --override-input nixpkgs ~/nixpkgs";
+      command = "deploy";
+      expansion = "'.#%neotokyo' -s --interactive-sudo=true -- --override-input nixpkgs ~/nixpkgs";
     };
   };
 

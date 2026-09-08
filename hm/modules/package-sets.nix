@@ -74,7 +74,14 @@ in
 
     (mkIf cfg.domotic {
       home.packages = [
-        pkgs.home-assistant-cli
+        (pkgs.writeShellScriptBin "hass-cli" ''
+          case "''${HASS_SERVER:-}" in
+            "" | *://*) ;;
+            *) export HASS_SERVER="http://$HASS_SERVER" ;;
+          esac
+
+          exec ${pkgs.home-assistant-cli}/bin/hass-cli "$@"
+        '')
       ];
     })
     (mkIf cfg.bluetooth {

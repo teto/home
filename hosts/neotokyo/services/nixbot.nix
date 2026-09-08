@@ -14,7 +14,7 @@ in
 
   # privateRepoViewers = {};
   # Domain name under which the web frontend is reachable. MANDATORY
-  domain = "nixbot.${secrets.jakku.hostname}";
+  domain = "nixbot.${secrets.jakku.fqdn}";
 
   # Users in this list are allowed to trigger builds and change settings.
   # Entries are provider-qualified: "github:<login>", "gitea:<login>",

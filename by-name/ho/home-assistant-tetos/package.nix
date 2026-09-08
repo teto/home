@@ -1,0 +1,4 @@
+{
+  # copy from home-assistant
+
+}

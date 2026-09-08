@@ -38,9 +38,12 @@ in
       - https://discourse.nixos.org/t/nixos-nginx-acme-ssl-certificates-for-multiple-domains/19608/3
       - https://discourse.nixos.org/t/setup-a-wildcard-certificate-with-acme-on-a-custom-domain-name-hosted-by-powerdns/15055/6
     */
-    certs =
+    certs = let 
+      # fqdn = config.networking.fqdn
+      fqdn = secrets.jakku.fqdn;
+    in
       lib.optionalAttrs withSecrets {
-        "blog.${secrets.jakku.hostname}" = {
+        "blog.${fqdn}" = {
           # blog.${secrets.jakku.hostname}
           # webroot = acmeRoot;
           # email = secrets.jakku.email;
@@ -51,15 +54,17 @@ in
 
           extraDomainNames = [
             # "blog.${secrets.jakku.hostname}"
-            "www.${secrets.jakku.hostname}"
-            "${secrets.jakku.hostname}"
+            "www.${secrets.jakku.fqdn}"
+            "${secrets.jakku.fqdn}"
             # "nextcloud.vps" # acme can't register for unknown TLDs
           ];
         };
 
       }
+      # mkIf nextcloud
       // {
 
+        # "${config.services.nextcloud.hostName}"
         "nextcloud.vps" = {
           # look for step-ca
           server = stepcaServer;
@@ -70,7 +75,7 @@ in
         # todo then do the same for jellyfin ?
         "immich.vps" = {
           # look for step-ca
-          server = "https://localhost:${toString config.services.step-ca.port}/acme/acme/directory";
+          server = stepcaServer;
           webroot = "/var/lib/acme/acme-challenge/";
           enableDebugLogs = true;
         };
@@ -78,8 +83,10 @@ in
       };
   };
 
-  auditd.enable = true;
-  audit.enable = true;
+  
+  # enabling it seems to create login issues ?
+  auditd.enable = false;
+  audit.enable = false;
   audit.rules = [
     "-a exit,always -F arch=b64 -S execve"
   ];

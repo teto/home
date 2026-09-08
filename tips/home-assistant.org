@@ -38,8 +38,17 @@ https://www.zigbee2mqtt.io/devices/915005733701.html
 
 https://www.philips-hue.com/en-gb/support/article/how-to-factory-reset-philips-hue-lights/000004
 
+* integrations
+
+https://www.home-assistant.io/integrations/yamaha_musiccast/
+
+
 * hass-cli tips
 
+set -x HASS_TOKEN XXX
+set -x HASS_SERVER http://XXX
+
+the (http is important else weird errors !)
  hass-cli service call light.turn_on \
    --arguments entity_id=light.lampe_chevet_fenetre_light
 

@@ -307,3 +307,16 @@ eval-jedha-no-secrets:
 
 hass-list-blueprints:
  hass-cli -x -o yaml raw ws blueprint/list --json '{"domain":"script"}'
+
+# TODO move it to generated justfile (for remote/ )
+sync-secrets:
+  # -P => progress
+  # -a => --archive:  It is a quick way of saying you want recursion and want to preserve almost everything.  
+  # --delete
+  # This  tells  rsync  to delete extraneous files from the receiving side (those that
+  # don't exist on the sending side), but only for the directories that are being syn‐
+  # --delete-delay 
+  # --max-delete=0 to be warned
+  # Use the -n or --dry-run flag with -iv
+  # rsync -avhP -e ssh jedha:home/secrets ./secrets
+  rsync -avhP --dry-run -e ssh ./secrets/ tatooine:home/secrets 

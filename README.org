@@ -166,6 +166,16 @@ tar xvf -C ~/.gnupg/ gnupg.tar
 ...
 #+END_SRC
 
+**** transfer gpg keys
+
+@begin-src
+# Export on some machine
+gpg --export-secret-keys --armor nani.wtf > ~/gpg_keys.pem
+
+# Import
+gpg --import ~/gpg_keys.pem
+@end-src
+
 ** How to recover this repo cyphered files
 
 Get git-crypt do decypher the files
