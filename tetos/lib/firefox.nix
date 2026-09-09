@@ -360,6 +360,7 @@ in
     # https://blog.hardill.me.uk/2024/06/07/firefox-with-a-private-tld/
     "browser.fixup.domainsuffixwhitelist.vpn" = true;
     "browser.fixup.domainsuffixwhitelist.vps" = true;
+    "browser.fixup.domainsuffixwhitelist.home" = true;
 
     "browser.translations.neverTranslateLanguages" = "en";
     "browser.newtabpage.activity-stream.showSponsored" = false;
