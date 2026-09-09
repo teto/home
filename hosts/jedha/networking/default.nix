@@ -14,6 +14,7 @@
       # we prefer to configure it with networkd
       "interface-name:enp11s0"
       #   "interface-name:r?-*"
+      "interface-name:wlan1" # to avoid putting mac
     ];
     wifi = {
       backend = "iwd";
@@ -55,12 +56,7 @@
     # useLocalResolver = true; ?
   };
 
-  # search = [
-  #   ".local" 
-    # ".vpn"
-  # ];
-
-
+  # sear
   interfaces.enp11s0 = {
     #wakeOnLan.policy
     wakeOnLan.enable = true;

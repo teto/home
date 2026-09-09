@@ -55,7 +55,7 @@ in
     ./_boot.nix
 
     # use nixpkgs
-    flakeSelf.inputs.harmonia.nixosModules.harmonia
+    # flakeSelf.inputs.harmonia.nixosModules.harmonia
     flakeSelf.nixosProfiles.greetd
     flakeSelf.nixosProfiles.desktop
     flakeSelf.nixosProfiles.nix-daemon
@@ -75,8 +75,6 @@ in
     # TODO restore
     # ./teto/restic.nix
 
-    # TODO moved from their
-    # ../../nixos/profiles/localai.nix
   ];
 
   home-manager.users = {

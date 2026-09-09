@@ -31,10 +31,10 @@
       flake = false;
     };
 
-    harmonia = {
-      url = "github:nix-community/harmonia";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # harmonia = {
+    #   url = "github:nix-community/harmonia";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     jellyhaj.url = "github:owo-uwu-nyaa/jellyhaj";
 
@@ -591,11 +591,12 @@
         nixpkgs-monitor = import ./hm/modules/services/nixpkgs-monitor.nix;
       };
 
-      nixosProfiles = lib.importFiles ./nixos/profiles;
+      nixosProfiles = lib.importFiles ./nixos/profiles // {
+        teto = nixos/users/teto/teto.nix;
+      };
 
       nixosModules = lib.importFiles ./nixos/modules // {
         default-hm = self.nixosProfiles.hm-default;
-        teto-nogui = nixos/accounts/teto/teto.nix;
       };
 
       # autoload via lib.importDirectories

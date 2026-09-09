@@ -677,6 +677,7 @@ in
           pkgs.kakasi # convert kanjis into kanas etc
           pkgs.kanji-stroke-order-font # for memento, font that shows strike order (!!) cool when learning
           tagainijisho # japanese dict; like zkanji Qt based
+
           jiten # unfree, helpful for jap.nvim
           sudachi-rs-full
           # sudachidict # exists in small/medium/large

@@ -70,12 +70,11 @@ nix-repl:
         --override-input nixpkgs {{ NIXPKGS_REPO }} \
         --override-input hm {{ HM_REPO }}
 
-# --log-format internal-json
-# nom can hide when there is a lock
-# |& nom
-# env('HOST')       -j 1 \
+
+# build nixosConfiguration to get its closure size
 build-nom hostname:
     nom build .#nixosConfigurations.{{ hostname }}.config.system.build.toplevel 
+    nix path-info ./result
 
 # nix store diff-closures /run/current-system ./result
 
@@ -299,6 +298,9 @@ bitwarden-sync-to-password-store:
     bw export
     pass-perso import pass bitwarden  <FILE>
 
+mk-neovim-spells:
+   nvim --headless -i NONE -u NONE +'mkspell! local/share/nvim/site/spell/computer' +'quit!'
+
 refresh-ssh-public-keys:
     ssh-keyscan -q -p4231 -ted25519 neotokyo.fr | cut -d' ' -f2,3 > host_key.pub
 
@@ -320,3 +322,8 @@ sync-secrets:
   # Use the -n or --dry-run flag with -iv
   # rsync -avhP -e ssh jedha:home/secrets ./secrets
   rsync -avhP --dry-run -e ssh ./secrets/ tatooine:home/secrets 
+
+
+# see what is in the nix store 
+inspect-current-generation:
+  nix-graph /run/current-system/sw

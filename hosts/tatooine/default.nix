@@ -65,7 +65,7 @@ in
     flakeSelf.nixosProfiles.steam
     flakeSelf.nixosProfiles.bluetooth
 
-    flakeSelf.nixosProfiles.kanata
+    # flakeSelf.nixosProfiles.kanata
     # ./services/linkwarden.nix
 
     # ./networking/wireguard.nix
@@ -109,7 +109,6 @@ in
 
   home-manager.users = {
     teto = {
-      # TODO it should load the whole folder
       imports = [
         # custom modules
         ./home-manager/users/teto/default.nix
@@ -117,12 +116,7 @@ in
     };
   };
 
-  # it is necessary to use dnssec though :(
-  # hostId
-  networking.hostName = "tatooine"; # Define your hostname.
-  # networking.domain = ".local";
-  networking.search = [ "vpn" ];
-
+  # system.nssDatabases.hosts = (lib.mkOrder 501 [ "resolve [!UNAVAIL=return]" ]);
 
   hardware = {
     enableAllFirmware = true;

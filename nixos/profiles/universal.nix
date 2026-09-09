@@ -5,35 +5,37 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 {
-  config,
+  # config,
   pkgs,
   flakeSelf,
-  secrets,
-  options,
-  lib,
+  # secrets,
+  # options,
+  # lib,
   ...
 }:
 
 {
 
   imports = [
-    ../accounts/root/root.nix
-    ../accounts/teto/teto.nix
+    ../users/root/root.nix
+    flakeSelf.nixosProfiles.teto
   ];
 
   boot.tmp.cleanOnBoot = true; # to clean /tmp on reboot
+
+  networking.modemmanager.enable = false;
 
   # todo move to package sets
   environment.systemPackages =
     with pkgs;
     [
       man-pages # because man tcp should always be available
-      ncurses.dev # for infocmp
       kitty.terminfo # to be able to edit over ssh
     ]
     ++ (with pkgs; [
       curl
       fd # replaces 'find'
+      ripgrep
       file
     ]);
 
@@ -56,6 +58,11 @@
   environment.sessionVariables = { };
 
   environment.extraOutputsToInstall = [ "man" ];
+
+  # rsync/strace/perl
+  environment.defaultPackages = [];
+
+  programs.nano.enable = false;
 
   programs.less = {
     enable = true;

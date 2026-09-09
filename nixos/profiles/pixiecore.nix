@@ -36,7 +36,7 @@ let
         {
           imports = [
             (modulesPath + "/installer/netboot/netboot-minimal.nix")
-            ../accounts/teto/teto.nix
+            flakeSelf.nixosProfiles.teto
             flakeSelf.nixosProfiles.avahi # to get mdns when deploying locally
 
           ];

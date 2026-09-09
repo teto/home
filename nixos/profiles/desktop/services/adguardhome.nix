@@ -22,10 +22,11 @@
       "127.0.0.1"
     ];
 
+    # https://adguard-dns.io/kb/fr/adguard-home/configuration/
     dns.upstream_dns = [
       # HACK this works only in this location
       "192.168.1.254" # router
-      "192.168.1.14" # router
+      "[/home/]192.168.1.254" # can I reference _gateway there ?
 
     ];
 
@@ -40,11 +41,6 @@
         }
       ];
     };
-    # 'rewrites':
-    #   - 'domain': example.com
-    #     'answer': 127.0.0.1
-    #   - 'domain': '*.example.com'
-    #     'answer': A
     # dhcp = {
     # local_domain_name = "lan";
     # };

@@ -5,6 +5,7 @@
 }:
 let
   # or vpn or leave without it 
+  # fqdnOrHostname
   server = "${config.networking.hostName}.local";
 in
 {

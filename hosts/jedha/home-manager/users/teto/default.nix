@@ -125,7 +125,7 @@ in
       (lib.ignoreBroken lact) # GPU controller, needs a daemon
 
       moor # test as pager
-      presenterm # for presentations from terminal/markdown (in rust, supports images, pretty cool)
+      # presenterm # for presentations from terminal/markdown (in rust, supports images, pretty cool)
 
       # sioyek # pdf reader
       tailspin # (broken) a log viewer based on less ("spin" or "tsspin" is the executable)
@@ -141,12 +141,8 @@ in
       # simple-scan
       # vifm
       # anyrun
-
       # bridge-utils# pour  brctl
-
       # vscode-css-languageserver # to showcase 'cssls' lsp server
-      videocr # to extract hardcorded subs
-
     ];
 
   package-sets = {

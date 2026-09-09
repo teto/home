@@ -21,8 +21,9 @@
     flakeSelf.nixosProfiles.nix-daemon
     flakeSelf.nixosProfiles.openssh
     flakeSelf.nixosProfiles.universal
+    flakeSelf.nixosProfiles.teto
+
     flakeSelf.nixosModules.default-hm
-    ../../nixos/accounts/teto/teto.nix
   ];
 
   # Use the systemd-boot EFI boot loader.

@@ -1,12 +1,18 @@
 {
   config,
-  # lib,
+  lib,
   # pkgs,
   ...
 }:
 let 
   # .local ?
-  suffix = config.networking.hostName;
+  suffix = config.networking.fqdnOrHostName;
+
+  /*
+  I want to be able to access those services
+  */
+  mkServerAliases = prefix:
+    [ "${prefix}.home" "${prefix}.local" "${prefix}.vpn" ];
 in
 {
   enable = true;
@@ -24,7 +30,7 @@ in
 
   # using avahi hotname
   virtualHosts = {
-    "${suffix}" = {
+    harmonia = {
       enableACME = false;
       forceSSL = false;
 
@@ -40,37 +46,46 @@ in
     };
 
     # optionaal depending on user service
-    "llamacpp.${suffix}" = {
+    llamacpp = lib.mkIf config.home-manager.users.teto.services.llama-cpp.enable {
       enableACME = false;
       forceSSL = false;
+
+      # serverName = 
+      serverAliases = mkServerAliases "llamacpp";
+
 
       locations."/" = {
-        proxyPass = "http://localhost:10301";
-        proxyWebsockets = true;
-        extraConfig = ''
-          client_max_body_size 100M;
-        '';
+          proxyPass = "http://localhost:10301";
+          proxyWebsockets = true;
+          extraConfig = ''
+            client_max_body_size 100M;
+          '';
 
-      };
-      };
+        };
+        };
 
-    "faster-whisper.${suffix}" = {
+        faster-whisper = lib.mkIf (config.services.wyoming.faster-whisper.servers != [])
+          {
+              serverAliases = mkServerAliases "whisper";
+
+            enableACME = false;
+          forceSSL = false;
+
+          locations."/" = {
+            proxyPass = "http://localhost:10301";
+            proxyWebsockets = true;
+            extraConfig = ''
+              client_max_body_size 100M;
+            '';
+
+          };
+        };
+
+      piper = lib.mkIf (config.services.wyoming.piper.servers != [])
+      {
       enableACME = false;
       forceSSL = false;
-
-      locations."/" = {
-        proxyPass = "http://localhost:10301";
-        proxyWebsockets = true;
-        extraConfig = ''
-          client_max_body_size 100M;
-        '';
-
-      };
-    };
-
-    "piper.${suffix}" = {
-      enableACME = false;
-      forceSSL = false;
+              serverAliases = mkServerAliases "piper";
 
       locations."/" = {
         proxyPass = "http://localhost:10200";

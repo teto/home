@@ -25,13 +25,18 @@ require('vim._core.ui2').enable({
     },
 })
 
+local stdpath_config = vim.fn.stdpath('config')
+
 -- otherwise it hijacks my mappings
 vim.g.no_rust_maps = true
 
 local xdg_config = vim.env.XDG_CONFIG_HOME or os.getenv('HOME') .. '/.config'
 local sops_folder = vim.fs.joinpath(xdg_config, 'sops-nix/secrets')
 
+-- dictionary to add fixes to with zg or zG
+-- local to buffer
 vim.g.health = { style = 'float' }
+
 
 vim.g.visual_whitespace = {
     enabled = true,
@@ -126,6 +131,7 @@ vim.g.tiny_cmdline = {
     -- native_types = { "/", "?" },
 }
 
+-- opt_local in ft
 vim.o.spelllang = 'en_gb,fr'
 
 -- new option
@@ -201,24 +207,17 @@ vim.g.rest_nvim = {
     },
 }
 
--- -- TODO remove once it's merged upstream
--- vim.api.nvim_create_user_command('RestLog', function()
---   vim.cmd(string.format('tabnew %s', vim.fn.stdpath('cache')..'/rest.nvim.log'))
--- end, {
---   desc = 'Opens the rest.nvim log.',
--- })
-
 -- vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
 vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
 -- set it before loading vim plugins like autosession
--- ,localoptions
-vim.o.sessionoptions = 'buffers,curdir,help,tabpages,winsize,winpos,localoptions'
+-- ,localoptions folds
+vim.o.sessionoptions = 'buffers,folds,curdir,help,tabpages,winsize,winpos'
 
 -- require("vim.lsp._watchfiles")._watchfunc = require("vim._watch").watch
 -- local ffi = require 'ffi'
 -- todo it should work out of the box now ?
-local custom_luarocks_config_filename = vim.fn.stdpath('config') .. '/luarocks-config-generated.lua'
+local custom_luarocks_config_filename = stdpath_config .. '/luarocks-config-generated.lua'
 local luarocks_config_fn, errmsg = loadfile(custom_luarocks_config_filename)
 
 if luarocks_config_fn == nil then
@@ -275,7 +274,6 @@ vim.g.loaded_matchit = 1
 vim.opt.shortmess:append('I')
 vim.opt.foldlevel = 99
 vim.opt.mousemoveevent = true
-vim.opt.isfname:remove('=')
 
 vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
 
@@ -472,7 +470,7 @@ vim.opt.wildmode = { 'longest', 'list' } -- longest,list' => fills out longest t
 -- vim.opt.pumborder = "rounded"
 -- set wildoptions+=pum
 
-vim.g.hoogle_fzf_cache_file = vim.fn.stdpath('cache') .. '/hoogle_cache.json'
+-- vim.g.hoogle_fzf_cache_file = vim.fn.stdpath('cache') .. '/hoogle_cache.json'
 
 vim.opt.wildmenu = true
 -- vim.opt.omnifunc='v:lua.vim.lsp.omnifunc'
@@ -538,13 +536,14 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 -- http://stackoverflow.com/questions/28613190/exclude-quickfix-buffer-from-bnext-bprevious
 vim.keymap.set('n', '<Leader><Leader>', '<Cmd>b#<CR>', { desc = 'Focus alternate buffer' })
 
+-- move to nix ?
 vim.keymap.set('n', '0', '^', { desc = 'Go to first line' })
 
 vim.keymap.set('n', '<Leader>ev', '<Cmd>e $MYVIMRC<CR>', { desc = "Edit home-manager's generated neovim config" })
-vim.keymap.set('n', '<Leader>el', '<Cmd>e ' .. vim.fn.stdpath('config') .. '/lua/init-manual.lua<CR>')
+vim.keymap.set('n', '<Leader>el', '<Cmd>e ' .. stdpath_config .. '/lua/init-manual.lua<CR>')
 vim.keymap.set('n', '<F6>', '<Cmd>ASToggle<CR>', { desc = 'Toggle autosave' })
 
-vim.g.autosave_disable_inside_paths = { vim.fn.stdpath('config') }
+vim.g.autosave_disable_inside_paths = { stdpath_config }
 
 -- " auto reload vim config on save
 -- " Watch for changes to vimrc
@@ -722,6 +721,9 @@ vim.opt.cmdheight = 1
 
 -- one can pass a list as well
 vim.lsp.enable('lua_ls') -- todo remove replaced by emmylua
+-- set spells as diagnostic but kinda broken
+-- vim.lsp.enable('spellwand')
+
 -- used by `lx check`
 -- vim.lsp.enable('emmylua_ls')
 vim.lsp.enable('rust_analyzer')
@@ -752,6 +754,7 @@ vim.pack.add({
     -- 'https://github.com/elanmed/fzf-lua-frecency.nvim', -- to rocks
 
     'https://github.com/neovim/nvim-lspconfig',
+	-- { src = "https://github.com/chaneyzorn/spellwand.nvim" },
     -- 'https://github.com/teto/vim-listchars',
     'https://github.com/yutkat/git-rebase-auto-diff.nvim',
 
@@ -955,7 +958,7 @@ vim.g.avante = {
 
     -- can be a function as well
     -- avante is very talkative by default
-    override_prompt_dir = vim.fn.expand(vim.fn.stdpath('config') .. '/avante_prompts'),
+    override_prompt_dir = vim.fn.expand(stdpath_config .. '/avante_prompts'),
 
     -- can be a function, appended as well
     system_prompt = [[
@@ -1318,15 +1321,6 @@ vim.api.nvim_create_autocmd({ 'TextYankPost' }, {
 require('plugins.auto-session')
 require('plugins.copilot')
 
--- needed until a better fix
--- require('rocks-config.internal').setup()
-
--- please implement fibonacci diff algorithm in neovim
--- do it in lua and make it a default
--- ]][[ quel est
-
--- prints --embed which is not listed
--- vim.print(vim.v.argv)
 function test_proxy()
 	-- vim.print(require'os'.getenv("http_proxy")) 
 	local s = require'avante.llm_tools.web_search'.web_search_tavily
@@ -1345,3 +1339,7 @@ function test_proxy()
 	-- 	vim.print("err", err , "res", res)
 	-- end
 end
+
+-- _local
+vim.opt.spellfile = vim.fs.joinpath( vim.fn.stdpath("data"), "site/spell/computer.utf-8.add" )
+

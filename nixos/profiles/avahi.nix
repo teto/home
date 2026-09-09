@@ -6,7 +6,6 @@
 }:
 {
   services.avahi = {
-    # enable = false;
     allowPointToPoint = false;
     # defaults to 'local'
     # domainName = "local";

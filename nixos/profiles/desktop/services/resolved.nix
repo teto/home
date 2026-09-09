@@ -3,7 +3,7 @@
 
   man systemd.dnssd
 */
-{ config, ... }:
+# { config, ... }:
 {
   # conflicts with adguardhome
   # enable = !config.services.adguardhome.enable;
@@ -11,25 +11,30 @@
 
   # ideally set it to false ?
   settings.Resolve = {
-    DNSSEC = "false"; # "allow-downgrade";
+    DNSSEC = "no"; # "allow-downgrade";
     # conflicts with avahi
     MulticastDNS = true;
     DNS = "127.0.0.1:53"; # defer to adguardhome ? port
     # Domains=~.
-    # resolved exposes a stub listener at "127.0.0.53"
-    # defer to another
+    # if "yes" resolved exposes a stub listener at "127.0.0.53"
+    # but resolv.conf settings are tailored for the sub listener !
     DNSStubListener = "no";
+    # use the ones obtained by dhcp ?
+    UseDomains=true;
+    # Domains = [ "local" ]; # networking.domain
 
     # TODO fallback on
     # man resolved.conf
     FallbackDNS = [
+      # we could use _gateway (solved by mymachines ?) depending on the order 
+      # in nsswitch
       "192.168.1.254"
       "1.1.1.1"
       "8.8.8.8"
     ];
 
-    LLMNR = true;
-    # MulticastDNS
+    # this is windows resolution system
+    LLMNR = true; # blocks .local ?
     # ReadEtcHosts=no,
   };
 

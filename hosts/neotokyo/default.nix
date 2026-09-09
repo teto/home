@@ -101,9 +101,9 @@ in
 
     ./ovh.nix
     ./disko-config.nix
+    flakeSelf.nixosProfiles.teto
 
     flakeSelf.inputs.disko.nixosModules.disko
-    flakeSelf.nixosModules.teto-nogui
     flakeSelf.nixosModules.default-hm
     flakeSelf.nixosModules.wireguard
 

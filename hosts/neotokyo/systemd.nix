@@ -2,6 +2,7 @@
   config,
   lib,
   secrets,
+  pkgs,
   # withSecrets,
   # , secretsFolder
   ...
@@ -109,6 +110,38 @@
   services.immich-server.serviceConfig = {
     # we override the default 0077 such that the backup job can read the files
     UMask = lib.mkForce "0027";
+  };
+
+
+  services.build-blog = {
+    # serviceConfig = 
+    enable = true;
+    description = "build my blog";
+    path = [ pkgs.nix ];
+    serviceConfig = {
+      # Type = "oneshot";
+      # User = "nextcloud";
+      Type = "oneshot";
+      TimeoutSec = 60;
+      # ExecCondition = "/run/current-system/systemd/bin/systemctl -q is-active nginx.service";
+
+      # nginx ?
+      User = "gitolite";
+
+      # path to the repo
+      # ExecStart = "${lib.getExe' config.nix.package "nix-store"} --optimise";
+      # Nice = 19;
+      # CPUSchedulingPolicy = "idle";
+      # IOSchedulingClass = "idle";
+      ExecStart = "${lib.getExe' config.nix.package "nix-store"} build ./";
+    };
+
+    unitConfig = {
+      # PartOf = "restic-backups-immich-db-to-backblaze.timer";
+      # todo pass failure
+      OnSuccess = "send-mail-to-teto@success.service";
+      OnFailure = "send-mail-to-teto@failure.service";
+    };
   };
 
   services.restic-backups-immich-db-to-backblaze =
