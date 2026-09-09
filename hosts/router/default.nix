@@ -117,6 +117,9 @@ in
         sudo wolli --iface enp2s0 ${secrets.jedha.ethernetMac}
 
       # flasher la cler (GCFFlasher -l)
+      # selectionne le firmware  ici https://deconz.dresden-elektronik.de/deconz-firmware/
+      # deCONZ_ConBeeII_0x26780700.bin.GCF is a shitty one that makes conbee2 enter a restart loop over usb
+      # last working one is deCONZ_ConBeeII_0x26720700.bin.GCF
       conbee-flasher:
         nix shell nixpkgs#gcfflasher
     '';
@@ -285,7 +288,8 @@ in
       "10-enp1s0" = {
         matchConfig.Name = "enp1s0";
         networkConfig.DHCP = "ipv4";
-        networkConfig.MulticastDNS = false;
+        # try ?
+        networkConfig.MulticastDNS = true;
       };
 
       "10-wireless-wan" = {
@@ -313,15 +317,12 @@ in
         # address = [
         # ];
         networkConfig.Address = "10.0.0.1/${toString bridgeNetwork.prefixLength}";
-        # routes = [
-        #   { routeConfig = { Destination = "64:ff9b::/96"; Gateway = "2001:db8::1"; }; }
-        # ];
 
         # networkConfig.Gateway = "${bridgeNetwork.address}";
         # networkConfig.DHCP = "ipv4";
         networkConfig.DHCPServer = true;
         networkConfig.IPMasquerade = "ipv4";
-        networkConfig.MulticastDNS = false;
+        networkConfig.MulticastDNS = true;
 
         dhcpServerConfig = {
           PoolOffset = 100;
@@ -364,8 +365,6 @@ in
   };
 
   # systemd.services.systemd-networkd.environment.SYSTEMD_LOG_LEVEL = "debug";
-  # services.dhcpd4 = {
-  #   enable = true;
 
   time.timeZone = "Europe/Paris";
 

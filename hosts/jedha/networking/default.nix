@@ -55,12 +55,7 @@
     # useLocalResolver = true; ?
   };
 
-  # search = [
-  #   ".local" 
-    # ".vpn"
-  # ];
-
-
+  # sear
   interfaces.enp11s0 = {
     #wakeOnLan.policy
     wakeOnLan.enable = true;

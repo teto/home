@@ -225,8 +225,6 @@ in
 
     }
     // lib.optionalAttrs config.services.jellyfin.enable {
-      # inspired by nixaar project
-      # "jellyfin.${secrets.jakku.hostname}" = {
       "jellyfin.vps" = {
 
         listenAddresses = [

@@ -4,6 +4,10 @@
   ...
 }:
 {
+  # it is necessary to use dnssec though :(
+  # hostId
+  hostName = "tatooine"; # Define your hostname.
+
   networkmanager = {
     enable = true;
   };

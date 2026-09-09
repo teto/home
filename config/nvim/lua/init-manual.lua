@@ -31,7 +31,12 @@ vim.g.no_rust_maps = true
 local xdg_config = vim.env.XDG_CONFIG_HOME or os.getenv('HOME') .. '/.config'
 local sops_folder = vim.fs.joinpath(xdg_config, 'sops-nix/secrets')
 
+-- dictionary to add fixes to with zg or zG
+-- local to buffer
+-- set spells as diagnostic
+vim.b.spellfile = vim.fs.joinpath( vim.fn.stdpath("data"), "site/spell/computer" )
 vim.g.health = { style = 'float' }
+
 
 vim.g.visual_whitespace = {
     enabled = true,
@@ -722,6 +727,8 @@ vim.opt.cmdheight = 1
 
 -- one can pass a list as well
 vim.lsp.enable('lua_ls') -- todo remove replaced by emmylua
+vim.lsp.enable('spellwand')
+
 -- used by `lx check`
 -- vim.lsp.enable('emmylua_ls')
 vim.lsp.enable('rust_analyzer')
@@ -752,6 +759,7 @@ vim.pack.add({
     -- 'https://github.com/elanmed/fzf-lua-frecency.nvim', -- to rocks
 
     'https://github.com/neovim/nvim-lspconfig',
+	-- { src = "https://github.com/chaneyzorn/spellwand.nvim" },
     -- 'https://github.com/teto/vim-listchars',
     'https://github.com/yutkat/git-rebase-auto-diff.nvim',
 

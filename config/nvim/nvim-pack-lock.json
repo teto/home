@@ -68,6 +68,10 @@
       "rev": "cfacf1435c43e3d295afce4acd782a727b2b6be7",
       "src": "https://github.com/nvim-neorocks/rocks.nvim"
     },
+    "spellwand.nvim": {
+      "rev": "608a3b4717525d4cf4e3d8dbad70cfb7d6167ef7",
+      "src": "https://github.com/chaneyzorn/spellwand.nvim"
+    },
     "vim-aftercolors": {
       "rev": "89b7c45a48a661da88a3a574ef9fa90b936064a4",
       "src": "https://github.com/calvinchengx/vim-aftercolors"

@@ -161,9 +161,10 @@ in
         # lib.warn if "teto" is not in users.users
         {
           # or false) 
+          # use originalhost ?
           header = ''Match host=${mcfg.networking.hostName}''
           # let resolved handle expansion for now ?!
-          + lib.optionalString hasDomain ",${mcfg.networking.hostName}.${mcfg.networking.domain}" 
+          + lib.optionalString hasDomain ",${mcfg.networking.fqdn}"
           # + lib.optionalString (mcfg.tetos.wireguard.enable or false) ",${mcfg.networking.hostName}.vpn"
           ;
 
@@ -180,10 +181,14 @@ in
           #   mcfg.networking.domain == null
           # ) "Missing domaing for ${name}" mcfg.networking.domain;
           # };
+
+          # allow customizations ?
+          Include = "${secretsFolder}/ssh/${mcfg.networking.hostName}";
         }  // lib.optionalAttrs (!hasDomain) {
+          CanonicalizeFallbackLocal = true;
           CanonicalizeHostname = true;
           # done at resolve layer ?
-          CanonicalDomains = [ "local" "vpn" ];
+          # CanonicalDomains = [ "local" "vpn" ];
         }
     );
 
