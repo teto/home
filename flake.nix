@@ -31,10 +31,10 @@
       flake = false;
     };
 
-    harmonia = {
-      url = "github:nix-community/harmonia";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # harmonia = {
+    #   url = "github:nix-community/harmonia";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     jellyhaj.url = "github:owo-uwu-nyaa/jellyhaj";
 

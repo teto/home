@@ -13,6 +13,26 @@ let
 
   cfg = config.programs.neovim;
 
+  computerSpells = pkgs.vimUtils.buildVimPlugin {
+    pname = "computer-spells";
+    version = "1";
+    src = lib.fileset.toSource {
+      root = ../../local/share/nvim/site/spell;
+      fileset = ../../local/share/nvim/site/spell/computer;
+    };
+
+    nativeBuildInputs = [ pkgs.neovim ];
+
+    buildPhase = ''
+      runHook preBuild
+      NVIM_LOG_FILE=/dev/null nvim --headless -i NONE -u NONE "+mkspell! computer" "+quit!"
+      mkdir spell
+      mv computer.utf-8.spl spell/
+      rm computer
+      runHook postBuild
+    '';
+  };
+
   luaPlugin =
     attrs:
     attrs
@@ -140,6 +160,8 @@ in
         default = true;
       };
       enableBlink = mkEnableOption "blink-cmp autocompletion";
+
+      buildSpells = mkEnableOption "the local computer spell dictionary";
 
       # enableDebugVersion = mkEnableOption "Enable debug build";
 
@@ -282,6 +304,10 @@ in
 
     (lib.mkIf cfg.enableBlink {
       programs.neovim.plugins = blinkPlugins;
+    })
+
+    (lib.mkIf cfg.buildSpells {
+      programs.neovim.plugins = [ computerSpells ];
     })
 
     (lib.mkIf cfg.enableRocks {

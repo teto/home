@@ -35,7 +35,7 @@
     ++ (with pkgs; [
       curl
       fd # replaces 'find'
-      rg # ripgrep
+      ripgrep
       file
     ]);
 

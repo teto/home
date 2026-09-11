@@ -1,17 +1,11 @@
+# {
+#   pkgs,
+#   ...
+# }:
 {
-  pkgs,
-  ...
-}:
-{
-  # necessary else nixpkgs complains teto wont be able to login
-  programs.zsh.enable = true;
-
   users.users.teto = {
 
     # name = "Matt"; # This fucks up everything
-
-    # use fish at some point ?
-    # shell = pkgs.zsh;
 
     isNormalUser = true; # creates home/ sets default shell
     uid = 1000;

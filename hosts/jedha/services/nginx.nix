@@ -1,12 +1,12 @@
 {
   config,
-  # lib,
+  lib,
   # pkgs,
   ...
 }:
 let 
   # .local ?
-  suffix = config.networking.hostName;
+  suffix = config.networking.fqdnOrHostName;
 in
 {
   enable = true;
@@ -40,35 +40,37 @@ in
     };
 
     # optionaal depending on user service
-    "llamacpp.${suffix}" = {
+    "llamacpp.${suffix}" = lib.mkIf config.home-manager.users.teto.services.llama-cpp.enable {
       enableACME = false;
       forceSSL = false;
 
       locations."/" = {
-        proxyPass = "http://localhost:10301";
-        proxyWebsockets = true;
-        extraConfig = ''
-          client_max_body_size 100M;
-        '';
+          proxyPass = "http://localhost:10301";
+          proxyWebsockets = true;
+          extraConfig = ''
+            client_max_body_size 100M;
+          '';
 
+        };
+        };
+
+        "faster-whisper.${suffix}" = lib.mkIf (config.services.wyoming.faster-whisper.servers != [])
+          {
+          enableACME = false;
+        forceSSL = false;
+
+        locations."/" = {
+          proxyPass = "http://localhost:10301";
+          proxyWebsockets = true;
+          extraConfig = ''
+            client_max_body_size 100M;
+          '';
+
+        };
       };
-      };
 
-    "faster-whisper.${suffix}" = {
-      enableACME = false;
-      forceSSL = false;
-
-      locations."/" = {
-        proxyPass = "http://localhost:10301";
-        proxyWebsockets = true;
-        extraConfig = ''
-          client_max_body_size 100M;
-        '';
-
-      };
-    };
-
-    "piper.${suffix}" = {
+      "piper.${suffix}" = lib.mkIf (config.services.wyoming.piper.servers != [])
+      {
       enableACME = false;
       forceSSL = false;
 

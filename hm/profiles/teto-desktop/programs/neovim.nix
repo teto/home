@@ -159,16 +159,14 @@ let
   ];
 
   filetypePlugins = with pkgs.vimPlugins; [
-    { plugin = neomutt-vim; }
-    { plugin = pkgs.vimPlugins.hurl; }
-    { plugin = wmgraphviz-vim; }
+    # { plugin = neomutt-vim; }
+    # { plugin = pkgs.vimPlugins.hurl; }
+    # { plugin = wmgraphviz-vim; }
     # { plugin = fennel-vim; }
     { plugin = vim-toml; } # TODO use treesitter
     # { plugin = dhall-vim; }
     # { plugin = kmonad-vim; }
     { plugin = vim-just; }
-    # moonscript-vim
-    # idris-vim
   ];
 
   luaPlugins = with pkgs.vimPlugins; [
@@ -187,6 +185,7 @@ let
     # })
     { plugin = nui-nvim; }
     { plugin = nvim-colorizer-lua; }
+
     pkgs.vimPlugins.typescript-tools-nvim
 
     # pkgs.vimPlugins.gitlab-vim  # not
@@ -237,7 +236,7 @@ let
           --}}}
         '';
     })
-    (luaPlugin { plugin = sniprun; })
+    # (luaPlugin { plugin = sniprun; })
   ];
 
   extraPackages = with pkgs; [
@@ -297,6 +296,7 @@ in
   enableBlink = true;
   enableMyDefaults = true;
   useAsManViewer = true;
+  buildSpells = true;
 
   # neovim-debug is too slow we should try to build it and rename executable to nvim-debug
   # so it can still help debugging
