@@ -65,7 +65,7 @@ in
     flakeSelf.nixosProfiles.steam
     flakeSelf.nixosProfiles.bluetooth
 
-    flakeSelf.nixosProfiles.kanata
+    # flakeSelf.nixosProfiles.kanata
     # ./services/linkwarden.nix
 
     # ./networking/wireguard.nix

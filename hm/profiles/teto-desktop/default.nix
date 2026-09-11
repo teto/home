@@ -111,6 +111,8 @@ in
       flakeSelf.inputs.deploy-rs.packages.${stdenv.hostPlatform.system}.deploy-rs
       pciutils # for lspci
       timg
+      ncurses.dev # for infocmp
+
       gh-dash
       pi-coding-agent # to test as ACP provider for avante
       # bottles  # to install games

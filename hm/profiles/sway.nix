@@ -248,10 +248,6 @@ in
 
           "$mad+t" = "floating toggle";
           "$mod+y" = "sticky toggle; exec ${lib.getExe pkgs.libnotify}";
-          # "$mod+t" = "exec ${lib.getExe pkgs.voxinput} write; exec ${notify-send} 'voxinput write'";
-          # 2. Select a text box you want to speak into and use a global shortcut to run the following
-          # 3. Begin speaking, when you pause for a second or two your speach will be transcribed and typed into the active application.
-          # "$mod+Shift+t" = "exec ${lib.getExe pkgs.voxinput} record; exec ${notify-send} 'voxinput record'";
 
           # split in vertical orientation
           "$mod+v" = "split toggle";

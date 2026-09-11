@@ -70,9 +70,7 @@
       neptune-no-secrets =
         genNode {
           name = "neptune";
-          # local-facing address neptune.local
-          # hostname = "neptune.local"; # temporary
-          hostname = "neptune.local"; # temporary
+          hostname = "neptune";
         }
         // {
           # while working around require-sigs issue
@@ -91,11 +89,10 @@
           sshUser = "teto";
         };
 
-      # TODO router-local vs router-vpn
       router = genNode {
         name = "router";
         # local-facing address
-        hostname = "router.local";
+        hostname = "router";
       };
 
       #

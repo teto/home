@@ -33,8 +33,6 @@ local sops_folder = vim.fs.joinpath(xdg_config, 'sops-nix/secrets')
 
 -- dictionary to add fixes to with zg or zG
 -- local to buffer
--- set spells as diagnostic
-vim.b.spellfile = vim.fs.joinpath( vim.fn.stdpath("data"), "site/spell/computer" )
 vim.g.health = { style = 'float' }
 
 
@@ -131,6 +129,7 @@ vim.g.tiny_cmdline = {
     -- native_types = { "/", "?" },
 }
 
+-- opt_local in ft
 vim.o.spelllang = 'en_gb,fr'
 
 -- new option
@@ -217,8 +216,8 @@ vim.g.rest_nvim = {
 vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
 -- set it before loading vim plugins like autosession
--- ,localoptions
-vim.o.sessionoptions = 'buffers,curdir,help,tabpages,winsize,winpos,localoptions'
+-- ,localoptions folds
+vim.o.sessionoptions = 'buffers,folds,curdir,help,tabpages,winsize,winpos'
 
 -- require("vim.lsp._watchfiles")._watchfunc = require("vim._watch").watch
 -- local ffi = require 'ffi'
@@ -543,6 +542,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 -- http://stackoverflow.com/questions/28613190/exclude-quickfix-buffer-from-bnext-bprevious
 vim.keymap.set('n', '<Leader><Leader>', '<Cmd>b#<CR>', { desc = 'Focus alternate buffer' })
 
+-- move to nix ?
 vim.keymap.set('n', '0', '^', { desc = 'Go to first line' })
 
 vim.keymap.set('n', '<Leader>ev', '<Cmd>e $MYVIMRC<CR>', { desc = "Edit home-manager's generated neovim config" })
@@ -727,7 +727,8 @@ vim.opt.cmdheight = 1
 
 -- one can pass a list as well
 vim.lsp.enable('lua_ls') -- todo remove replaced by emmylua
-vim.lsp.enable('spellwand')
+-- set spells as diagnostic but kinda broken
+-- vim.lsp.enable('spellwand')
 
 -- used by `lx check`
 -- vim.lsp.enable('emmylua_ls')
@@ -1353,3 +1354,7 @@ function test_proxy()
 	-- 	vim.print("err", err , "res", res)
 	-- end
 end
+
+-- _local
+vim.opt.spellfile = vim.fs.joinpath( vim.fn.stdpath("data"), "site/spell/computer.utf-8.add" )
+

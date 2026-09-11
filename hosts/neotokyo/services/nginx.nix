@@ -157,7 +157,31 @@ in
           };
         };
 
-      }
+      } 
+      // lib.optionalAttrs config.services.hedgedoc.enable (
+        let
+  hedgedocDomain = "hedgedoc.${secrets.jakku.hostname}";
+in
+
+        {
+    forceSSL = true;
+    enableACME = true;
+    # useACMEHost = "${secrets.jakku.hostname}";
+    # listen on all interfaces
+    # listen = [ { addr = "0.0.0.0"; port = 80; }];
+
+    locations."/" = {
+      #  echo $server_name;  # Will output the server name defined in the current server block
+      # TODO refer to the port
+      # proxyPass = "http://localhost:3000";
+      proxyWebsockets = true;
+      extraConfig = ''
+        client_max_body_size 100M;
+      '';
+
+    };
+
+      })
 
       // lib.optionalAttrs config.services.harmonia.cache.enable {
         # harmonia

@@ -85,6 +85,11 @@ in
     };
 
     keybindings = {
+      # "$mod+t" = "exec ${lib.getExe pkgs.voxinput} write; exec ${notify-send} 'voxinput write'";
+      # 2. Select a text box you want to speak into and use a global shortcut to run the following
+      # 3. Begin speaking, when you pause for a second or two your speach will be transcribed and typed into the active application.
+      # "$mod+Shift+t" = "exec ${lib.getExe pkgs.voxinput} record; exec ${notify-send} 'voxinput record'";
+
       "${mad}+m" = ''exec "${dotfilesPath}/rofi-scripts/monitor_layout.sh"; mode default;'';
       # use sway-easyfocus
       "${mad}+f" = "exec ${pkgs.sway-easyfocus}/bin/sway-easyfocus";

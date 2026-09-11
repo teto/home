@@ -23,17 +23,19 @@
 
   boot.tmp.cleanOnBoot = true; # to clean /tmp on reboot
 
+  networking.modemmanager.enable = false;
+
   # todo move to package sets
   environment.systemPackages =
     with pkgs;
     [
       man-pages # because man tcp should always be available
-      ncurses.dev # for infocmp
       kitty.terminfo # to be able to edit over ssh
     ]
     ++ (with pkgs; [
       curl
       fd # replaces 'find'
+      rg # ripgrep
       file
     ]);
 
@@ -56,6 +58,11 @@
   environment.sessionVariables = { };
 
   environment.extraOutputsToInstall = [ "man" ];
+
+  # rsync/strace/perl
+  environment.defaultPackages = [];
+
+  programs.nano.enable = false;
 
   programs.less = {
     enable = true;

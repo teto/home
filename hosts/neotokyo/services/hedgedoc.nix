@@ -29,27 +29,9 @@ in
       ];
     };
   };
-
-  services.nginx.virtualHosts."${hedgedocDomain}" = lib.mkIf config.services.hedgedoc.enable {
-    forceSSL = true;
-    enableACME = true;
-    # useACMEHost = "${secrets.jakku.hostname}";
-    # listen on all interfaces
-    # listen = [ { addr = "0.0.0.0"; port = 80; }];
-
-    locations."/" = {
-      #  echo $server_name;  # Will output the server name defined in the current server block
-      # TODO refer to the port
-      # proxyPass = "http://localhost:3000";
-      proxyWebsockets = true;
-      extraConfig = ''
-        client_max_body_size 100M;
-      '';
-
-    };
-
-  };
-
-  # services.nginx.virtualHosts."immich.${secrets.jakku.hostname}" = {
+  #
+  # services.nginx.virtualHosts."${hedgedocDomain}" = lib.mkIf config.services.hedgedoc.enable {
+  #
+  # };
 
 }
