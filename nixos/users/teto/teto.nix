@@ -9,6 +9,7 @@
 
     isNormalUser = true; # creates home/ sets default shell
     uid = 1000;
+    group = "users";
     extraGroups = [
       "docker" # to access docker socket
       "input" # for libinput-gestures

@@ -70,12 +70,11 @@ nix-repl:
         --override-input nixpkgs {{ NIXPKGS_REPO }} \
         --override-input hm {{ HM_REPO }}
 
-# --log-format internal-json
-# nom can hide when there is a lock
-# |& nom
-# env('HOST')       -j 1 \
+
+# build nixosConfiguration to get its closure size
 build-nom hostname:
     nom build .#nixosConfigurations.{{ hostname }}.config.system.build.toplevel 
+    nix path-info ./result
 
 # nix store diff-closures /run/current-system ./result
 

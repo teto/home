@@ -117,7 +117,7 @@
     # serviceConfig = 
     enable = true;
     description = "build my blog";
-    paths = [ pkgs.nix ];
+    path = [ pkgs.nix ];
     serviceConfig = {
       # Type = "oneshot";
       # User = "nextcloud";
@@ -125,8 +125,15 @@
       TimeoutSec = 60;
       # ExecCondition = "/run/current-system/systemd/bin/systemctl -q is-active nginx.service";
 
+      # nginx ?
+      User = "gitolite";
+
       # path to the repo
-      ExecStart = "nix build ./";
+      # ExecStart = "${lib.getExe' config.nix.package "nix-store"} --optimise";
+      # Nice = 19;
+      # CPUSchedulingPolicy = "idle";
+      # IOSchedulingClass = "idle";
+      ExecStart = "${lib.getExe' config.nix.package "nix-store"} build ./";
     };
 
     unitConfig = {

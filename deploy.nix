@@ -54,15 +54,19 @@
   nodes =
     let
       # system = "x86_64-linux";
-      genNode = attrs: {
+      genNode = { name, ... }@attrs: 
+        let 
+          nixosCfg = flakeSelf.nixosConfigurations.${name};
+        in
+          {
         inherit (attrs) hostname;
         profiles.system = {
           # remoteBuild = false;
           user = "root";
-          hostname = attrs.hostname;
+          hostname = nixosCfg.config.networking.fqdnOrHostName; # attrs.hostname;
           path =
-            flakeSelf.inputs.deploy-rs.lib.${system}.activate.nixos
-              flakeSelf.nixosConfigurations.${attrs.name};
+            flakeSelf.inputs.deploy-rs.lib.${system}.activate.nixos nixosCfg;
+              
         };
       };
     in
@@ -110,7 +114,7 @@
       neotokyo =
         genNode {
           name = "neotokyo";
-          hostname = secrets.jakku.hostname;
+          hostname = secrets.jakku.fqdn;
         }
         // {
           sshUser = "teto";

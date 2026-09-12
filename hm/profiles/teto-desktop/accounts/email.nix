@@ -76,6 +76,8 @@ let
           # must depend on parent ?
           collapsed = true;
           # silently insert updates
+          # per mailbox
+          tags.rename = { "bug" = "🐜"; };
           ignore = false;
           # usage boolean                         (optional) special usage of  this  mailbox.   Valid
           #                             values are:

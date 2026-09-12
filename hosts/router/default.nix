@@ -98,7 +98,6 @@ in
     home.stateVersion = "26.05";
     # TODO it should load the whole folder
     imports = [
-      # flakeSelf.homeModules.teto-nogui
       flakeSelf.homeModules.neovim
       flakeSelf.homeProfiles.readline
     ];

@@ -1,7 +1,8 @@
 {
-  # config,
+  config,
   # pkgs,
   # lib,
+  dotfilesPath,
   ...
 }:
 {
@@ -26,8 +27,24 @@
   # group = "";
   # user
   # enableGitAnnex = false;
+
+
   # by default dataLib -> /var/lib/gitolite
   # dataDir = /home/teto/gitolite;
+
+
+  keys = {
+
+    # kinda hackish I need something more precise
+    teto = map builtins.readFile 
+      config.users.users.teto.openssh.authorizedKeys.keyFiles
+      ;
+
+    # [
+    #   # triggers a access to absolute path '/home/teto/home/perso/keys/id_rsa.pub'
+    #   (builtins.readFile "${dotfilesPath}/perso/keys/id_rsa.pub")
+    # ];
+  };
 
   # experimental
   repos = {

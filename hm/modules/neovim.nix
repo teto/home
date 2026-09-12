@@ -299,6 +299,9 @@ in
         vim.opt.cursorline = true -- highlight cursor line
 
         vim.opt.mousemodel = 'popup_setpos'
+
+        -- to be able to use 'gf' on systemd units
+        vim.opt.isfname:remove('=')
       '';
     })
 

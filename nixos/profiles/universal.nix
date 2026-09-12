@@ -5,20 +5,20 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 {
-  config,
+  # config,
   pkgs,
   flakeSelf,
-  secrets,
-  options,
-  lib,
+  # secrets,
+  # options,
+  # lib,
   ...
 }:
 
 {
 
   imports = [
-    ../accounts/root/root.nix
-    ../accounts/teto/teto.nix
+    ../users/root/root.nix
+    flakeSelf.nixosProfiles.teto
   ];
 
   boot.tmp.cleanOnBoot = true; # to clean /tmp on reboot
