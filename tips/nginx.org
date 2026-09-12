@@ -1,5 +1,8 @@
 * comment il process ses requets 
 
+
+nix shell nixpkgs#gixy a tool to validate nginx conf
+
 V
 In this configuration nginx tests only the request’s header field “Host” to determine which server the request should be routed to.
 

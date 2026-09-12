@@ -26,6 +26,27 @@ let
   # toString config.services.jellyfin.port
   defaultJellyfinPort = 8096;
 
+
+  # https://blog.stephane-robert.info/docs/services/web/nginx/#s%C3%A9curisation
+  # rate-limiting
+  nginxDoc = ''
+  server {
+      # Empêche le clickjacking
+      add_header X-Frame-Options "SAMEORIGIN" always;
+
+      # Empêche le sniffing MIME
+      add_header X-Content-Type-Options "nosniff" always;
+
+      # Politique de référent
+      add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+
+      # HSTS (après avoir vérifié que HTTPS fonctionne)
+      add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+
+      # CSP basique (à adapter selon votre app)
+      add_header Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';" always;
+  }'';
+
   # todo share it in contrib or something
   errorPageRoot = pkgs.writeTextDir "404.html" ./404.html;
 in
@@ -79,7 +100,7 @@ in
     }
     // lib.optionalAttrs withSecrets (
       let 
-        fqdn = "${secrets.jakku.fqdn}";
+        fqdn = config.networking.fqdn;
         # get it from wireguard config
         # TODO reference tetos.wireguard
         # "10.100.0.1";
@@ -188,6 +209,11 @@ in
         "cache.${fqdn}" = {
           enableACME = true;
           forceSSL = true;
+
+          serverAliases = [
+            # TODO
+            # "${fqdn}.vps"
+          ];
 
           # TODO replace with harmonia's port
           locations."/".extraConfig = ''

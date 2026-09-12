@@ -111,6 +111,28 @@
     UMask = lib.mkForce "0027";
   };
 
+
+  services.build-blog = {
+    # serviceConfig = 
+
+    serviceConfig = {
+      # Type = "oneshot";
+      # User = "nextcloud";
+      Type = "oneshot";
+      TimeoutSec = 60;
+      # ExecCondition = "/run/current-system/systemd/bin/systemctl -q is-active nginx.service";
+      # ExecStart = "/run/current-system/systemd/bin/systemctl reload nginx.service";
+
+    };
+
+    unitConfig = {
+      # PartOf = "restic-backups-immich-db-to-backblaze.timer";
+      # todo pass failure
+      OnSuccess = "send-mail-to-teto@success.service";
+      OnFailure = "send-mail-to-teto@failure.service";
+    };
+  };
+
   services.restic-backups-immich-db-to-backblaze =
     lib.mkIf (config.services.restic.backups ? immich-db-to-backblaze)
       {
