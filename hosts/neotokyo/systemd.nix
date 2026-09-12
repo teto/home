@@ -2,6 +2,7 @@
   config,
   lib,
   secrets,
+  pkgs,
   # withSecrets,
   # , secretsFolder
   ...
@@ -114,15 +115,18 @@
 
   services.build-blog = {
     # serviceConfig = 
-
+    enable = true;
+    description = "build my blog";
+    paths = [ pkgs.nix ];
     serviceConfig = {
       # Type = "oneshot";
       # User = "nextcloud";
       Type = "oneshot";
       TimeoutSec = 60;
       # ExecCondition = "/run/current-system/systemd/bin/systemctl -q is-active nginx.service";
-      # ExecStart = "/run/current-system/systemd/bin/systemctl reload nginx.service";
 
+      # path to the repo
+      ExecStart = "nix build ./";
     };
 
     unitConfig = {
