@@ -51,6 +51,8 @@
         "meteo_france"
         # else we get :
 
+        "music_assistant" 
+
         "yamaha_musiccast" # to control r-n800
         "upnp"
         "wyoming"  # voice control
