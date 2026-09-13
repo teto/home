@@ -113,6 +113,8 @@ in
       timg
       ncurses.dev # for infocmp
 
+      josm # openstreetmap editor (java)
+
       gh-dash
       pi-coding-agent # to test as ACP provider for avante
       # bottles  # to install games

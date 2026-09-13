@@ -52,6 +52,8 @@ in
     hostsConfigs // {
       # we need to override this here so we can push to gitolite repos as simple users
       # use "gitolite-teto" as the user in the git remote
+
+      # gitolite-admin is a hack just used for the blog
       gitolite-as-teto = (lib.genSshClientConfig flakeSelf.nixosConfigurations.neotokyo) // {
         header = "Match user gitolite host ${secrets.jakku.hostname}";
         user = "gitolite";
