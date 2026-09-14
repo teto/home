@@ -111,6 +111,7 @@ in
       # mdp # markdown CLI presenter
       # gthumb # image manager, great to tag pictures
 
+      unsloth-desktop
       jocalsend # for tests
 
       ethtool # to check wakeonlan capabilities
@@ -139,7 +140,7 @@ in
       nautilus # demande webkit/todo replace by nemo ?
       # hexyl # hex editor
       # simple-scan
-      # vifm
+      vifm
       # anyrun
       # bridge-utils# pour  brctl
       # vscode-css-languageserver # to showcase 'cssls' lsp server
@@ -169,8 +170,6 @@ in
     IPYTHONDIR = "$XDG_CONFIG_HOME/ipython";
     JUPYTER_CONFIG_DIR = "$XDG_CONFIG_HOME/jupyter";
     LLAMA_MODELS_DIR = "${config.home.homeDirectory}/llama-models";
-
-    LLM_LOCAL_PORT = 11111;
 
     DASHT_DOCSETS_DIR = "/mnt/ext/docsets";
     # $HOME/.local/share/Zeal/Zeal/docsets

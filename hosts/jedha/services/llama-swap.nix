@@ -12,7 +12,7 @@
   settings =
     let
       # set in teto/default.nix LLM_LOCAL_PORT
-      PORT = "11111";
+      # PORT = "11111";
       llama-cpp = pkgs.llama-cpp;
       # .override { rocmSupport = true; };
       llama-server = lib.getExe' llama-cpp "llama-server";
