@@ -95,4 +95,3 @@ alias nm="nm -l"
 alias ks="kitten ssh"
 alias kcat="kitten icat"
 # }}}
-

@@ -66,6 +66,12 @@ in
   # bumping to 25.11 broke nextcloyud
   system.stateVersion = "25.05";
 
+  # to allow for passwordless sudo with deploy
+  # allowed commands restricted by sudo.extraRules
+  users.users.teto.extraGroups = [
+    "sudo"
+  ];
+
   boot.kernel.sysctl = {
     "fs.protected_fifos" = 2;
     "fs.protected_regular" = 2;
@@ -156,7 +162,6 @@ in
 
   documentation.enable = false;
 
-
   # just to remove warning
   # swapDevices = [
   #   {
@@ -165,9 +170,8 @@ in
   #   }
   # ];
 
-
   # lib.mkForce to remove the default ones
-  # lib.mkForce  removes cat 
+  # lib.mkForce  removes cat
   environment.systemPackages = [
     # flakeSelf.inputs.transgression-tui.packages.${pkgs.stdenv.hostPlatform.system}.transgression-tui
     pkgs.tremc

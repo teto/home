@@ -46,6 +46,7 @@ in
     ./networking.nix
     ./services/openssh.nix
     ./services/home-assistant.nix
+    ./services/music-assistant.nix
     ./services/zigbee2mqtt.nix
     # ./services/mqtt.nix
 
@@ -126,7 +127,7 @@ in
 
   services.journald.settings.Journal = {
     # alternatively one can run journalctl --vacuum-time=2d
-    SystemMaxUse="200M";
+    SystemMaxUse = "200M";
   };
 
   # Use the GRUB 2 boot loader.

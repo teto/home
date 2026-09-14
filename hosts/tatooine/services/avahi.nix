@@ -15,7 +15,6 @@
   #   "wlp10s0"
   # ];
 
-
   # enable-wide-area= Takes a boolean value ("yes" or "no"). Enable wide-area DNS-SD, aka
   # DNS-SD over unicast DNS. If this is enabled only domains ending in .local will be re‐
   # solved on mDNS, all other domains are resolved via unicast DNS. I
@@ -49,4 +48,3 @@
   };
 
 }
-

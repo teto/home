@@ -66,6 +66,7 @@ in
   package-sets = {
     livecoding = false;
     bluetooth = true;
+    finance = true;
 
     enableDesktopGUIPackages = true;
     enableIMPackages = true;

@@ -37,7 +37,6 @@ local sops_folder = vim.fs.joinpath(xdg_config, 'sops-nix/secrets')
 -- local to buffer
 vim.g.health = { style = 'float' }
 
-
 vim.g.visual_whitespace = {
     enabled = true,
     highlight = { link = 'Visual', default = true },
@@ -263,6 +262,7 @@ vim.opt.rtp:prepend(pluginDir .. '/avante.nvim')
 vim.opt.rtp:prepend(pluginDir .. '/rikai.nvim')
 -- vim.opt.rtp:prepend(pluginDir .. '/rocks-git.nvim')
 vim.opt.rtp:prepend(pluginDir .. '/auto-session')
+vim.opt.rtp:prepend(pluginDir .. '/vim-listchars')
 
 ---TODO pass a list of generated nix plugins ?
 ---or custom for now
@@ -304,7 +304,7 @@ end
 --
 vim.filetype.add({
     extension = {
-        http = 'http',
+        -- http = 'http',
         env = 'env',
         kbd = 'kbd',
         v = 'coq',
@@ -314,7 +314,7 @@ vim.filetype.add({
         -- end
     },
     filename = {
-        ['wscript'] = 'python',
+        -- ['wscript'] = 'python',
         ['.env'] = 'env',
         -- todo add for my ssh configs as well
         -- ['.http'] = 'http'
@@ -441,8 +441,8 @@ vim.opt.fillchars = vim.opt.fillchars + 'diff: ' -- \
 -- default behavior for diff=filler,vertical
 vim.opt.diffopt = 'filler,vertical'
 -- neovim > change to default ?
-vim.opt.diffopt:append('hiddenoff')
-vim.opt.diffopt:append('iwhiteall')
+vim.opt.diffopt:append('hiddenoff,iwhiteall')
+-- vim.opt.diffopt:append('iwhiteall')
 -- vim.opt.diffopt:append('linematch')
 vim.opt.diffopt:append('internal,algorithm:patience')
 vim.opt.diffopt:append('linematch:60')
@@ -466,11 +466,9 @@ vim.opt.clipboard = 'unnamedplus'
 -- vim.opt.wildchar=("<Tab>"):byte()
 -- display a menu when need to complete a command
 -- list:longest, -- list breaks the pum
-vim.opt.wildmode = { 'longest', 'list' } -- longest,list' => fills out longest then show list
+-- longest,list' => fills out longest then show list
+vim.opt.wildmode = { 'longest', 'list' }
 -- vim.opt.pumborder = "rounded"
--- set wildoptions+=pum
-
--- vim.g.hoogle_fzf_cache_file = vim.fn.stdpath('cache') .. '/hoogle_cache.json'
 
 vim.opt.wildmenu = true
 -- vim.opt.omnifunc='v:lua.vim.lsp.omnifunc'
@@ -607,27 +605,27 @@ vim.g.tex_flavor = 'latex'
 -- vim.lsp.log.set_level(vim.lsp.log_levels.INFO)
 
 -- setup haskell-tools
-vim.g.haskell_tools = require('teto.haskell-tools').generate_settings()
+-- vim.g.haskell_tools = require('teto.haskell-tools').generate_settings()
 
+-- TODO dont set it in avante windows
 vim.opt.showbreak = '↳ ' -- displayed in front of wrapped lines
 
 -- TODO add a command to select a ref  and call Gitsigns change_base afterwards
 
-vim.opt.listchars = 'tab:•·,trail:·,extends:❯,precedes:❮,nbsp:×'
+-- vim.opt.listchars = 'tab:•·,trail:·,extends:❯,precedes:❮,nbsp:×'
+-- vim.opt.listchars:append('conceal:❯')
 -- set listchars+=conceal:X
 -- conceal is used by deefault if cchar does not exit
----@diagnostic disable-next-line: undefined-field
-vim.opt.listchars:append('conceal:❯')
 
 -- "set shada=!,'50,<1000,s100,:0,n$XDG_CACHE_HOME/nvim/shada
 -- vim.g.netrw_home = vim.fn.stdpath('data') .. '/nvim'
 
-vim.keymap.set(
-    'n',
-    '<F11>',
-    '<Plug>(ToggleListchars)',
-    { desc = 'Change between different flavors of space/tab characters' }
-)
+-- vim.keymap.set(
+--     'n',
+--     '<F11>',
+--     '<Plug>(ToggleListchars)',
+--     { desc = 'Change between different flavors of space/tab characters' }
+-- )
 
 -- nvim will load any .nvimrc in the cwd; useful for per-project settings
 vim.opt.exrc = true
@@ -703,20 +701,18 @@ end, { desc = 'Highlights ANSI termcodes in curbuf' })
 require('plugins.blink-cmp')
 
 -- Key mapping to apply Base64 encoding to selected text
-vim.api.nvim_set_keymap(
-    'v',
-    '<leader>be',
-    [[:lua apply_function_to_selection(base64_encode)<CR>]],
-    { noremap = true, silent = true }
-)
+-- vim.api.nvim_set_keymap(
+--     'v',
+--     '<leader>be',
+--     [[:lua apply_function_to_selection(base64_encode)<CR>]],
+--     { noremap = true, silent = true }
+-- )
 
 -- 0 is kinda buggy with confirm and so on
 vim.opt.cmdheight = 1
 
 -- for indentblankline
---
 -- require('plugins.nvim-treesitter-textobjects')
--- autoloaded
 -- require('plugins.nvim-treesitter')
 
 -- one can pass a list as well
@@ -754,7 +750,7 @@ vim.pack.add({
     -- 'https://github.com/elanmed/fzf-lua-frecency.nvim', -- to rocks
 
     'https://github.com/neovim/nvim-lspconfig',
-	-- { src = "https://github.com/chaneyzorn/spellwand.nvim" },
+    -- { src = "https://github.com/chaneyzorn/spellwand.nvim" },
     -- 'https://github.com/teto/vim-listchars',
     'https://github.com/yutkat/git-rebase-auto-diff.nvim',
 
@@ -859,11 +855,13 @@ vim.keymap.set('n', '[[', function()
 end, { buffer = false })
 vim.keymap.set('n', ']]', function()
     vim.diagnostic.jump({
-		count = 1,
-		wrap = true,
-		on_jump = function () vim.notify("hello world") end,
-		severity = vim.diagnostic.severity.HINT,
-	})
+        count = 1,
+        wrap = true,
+        on_jump = function()
+            vim.notify('hello world')
+        end,
+        severity = vim.diagnostic.severity.HINT,
+    })
 end, { buffer = false })
 
 -- rikai {{{
@@ -1023,48 +1021,48 @@ vim.g.avante = {
     },
 
     -- provider loaded from history ?
-    provider = "openrouter",
+    provider = 'openrouter',
     ui = { border = 'single', background_color = '#FF0000' },
     selector = {
         provider = 'fzf_lua',
     },
-	providers = {
-		openrouter = {
-		 -- see also https://github.com/avante-corp/avante.nvim/issues/2310
-		 __inherited_from = 'openai',
-		 endpoint = "https://openrouter.ai/api/v1",
-		 -- Timeout in milliseconds. Make it long as server is "slow"
-		 -- timeout = 180000,
-		 -- api_key_name = "OPENROUTER_API_KEY",
-		 api_key_name = 'cmd:cat ' .. sops_folder .. '/openrouter-api-key',
+    providers = {
+        openrouter = {
+            -- see also https://github.com/avante-corp/avante.nvim/issues/2310
+            __inherited_from = 'openai',
+            endpoint = 'https://openrouter.ai/api/v1',
+            -- Timeout in milliseconds. Make it long as server is "slow"
+            -- timeout = 180000,
+            -- api_key_name = "OPENROUTER_API_KEY",
+            api_key_name = 'cmd:cat ' .. sops_folder .. '/openrouter-api-key',
 
-		 -- /models doesnt list all of them
-		 model = "deepseek/deepseek-v4-flash-0731",
-		 -- model = "openrouter/free",
-		},
-		navyai = {
-		 endpoint = "https://api.navy/v1",
-		 -- workds for models
-		 -- endpoint = "https://modelscope.ai/openapi/v1",
-		 -- Qwen 3.8 27B
-		 model = "deepseek-v4-flash-0731",
-		 -- MODELSCOPE_API_KEY = "ms-815db797-82d2-4a32-8d3a-3982367a93b9";
-		 api_key_name = 'cmd:cat /home/teto/home/secrets/navyai.key',
-		 __inherited_from = 'openai',
-		},
-		-- modelscope = {
-		--  __inherited_from = 'openai',
-		--  -- there is no legacy chat/completions
-		--  use_response_api = true,
-		--  -- endpoint = "https://modelscope.cn",
-		--  -- les 2 marchent
-		--  endpoint = "https://modelscope.cn/openapi/v1",
-		--  -- workds for models
-		--  -- endpoint = "https://modelscope.ai/openapi/v1",
-		--  model = "deepseek/deepseek-chat-v3-0324",
-		--  -- MODELSCOPE_API_KEY = "ms-815db797-82d2-4a32-8d3a-3982367a93b9";
-		--  api_key_name = 'cmd:cat /home/teto/home/secrets/modelscope.key',
-		-- },
+            -- /models doesnt list all of them
+            model = 'deepseek/deepseek-v4-flash-0731',
+            -- model = "openrouter/free",
+        },
+        navyai = {
+            endpoint = 'https://api.navy/v1',
+            -- workds for models
+            -- endpoint = "https://modelscope.ai/openapi/v1",
+            -- Qwen 3.8 27B
+            model = 'deepseek-v4-flash-0731',
+            -- MODELSCOPE_API_KEY = "ms-815db797-82d2-4a32-8d3a-3982367a93b9";
+            api_key_name = 'cmd:cat /home/teto/home/secrets/navyai.key',
+            __inherited_from = 'openai',
+        },
+        -- modelscope = {
+        --  __inherited_from = 'openai',
+        --  -- there is no legacy chat/completions
+        --  use_response_api = true,
+        --  -- endpoint = "https://modelscope.cn",
+        --  -- les 2 marchent
+        --  endpoint = "https://modelscope.cn/openapi/v1",
+        --  -- workds for models
+        --  -- endpoint = "https://modelscope.ai/openapi/v1",
+        --  model = "deepseek/deepseek-chat-v3-0324",
+        --  -- MODELSCOPE_API_KEY = "ms-815db797-82d2-4a32-8d3a-3982367a93b9";
+        --  api_key_name = 'cmd:cat /home/teto/home/secrets/modelscope.key',
+        -- },
 
         gemini = {
             api_key_name = 'cmd:cat ' .. sops_folder .. '/gemini_matt_key',
@@ -1072,7 +1070,7 @@ vim.g.avante = {
         openai = {
             api_key_name = 'cmd:cat ' .. sops_folder .. '/OPENAI_API_KEY_PERSO',
         },
-	},
+    },
     -- might be interesting
     input = {
         -- provider =
@@ -1178,7 +1176,7 @@ vim.g.avante = {
     },
     prompt_logger = {
         enabled = true, -- toggle logging entirely
-		-- directory where logs are saved ?
+        -- directory where logs are saved ?
         log_dir = vim.fn.stdpath('cache'),
     },
 }
@@ -1322,24 +1320,22 @@ require('plugins.auto-session')
 require('plugins.copilot')
 
 function test_proxy()
-	-- vim.print(require'os'.getenv("http_proxy")) 
-	local s = require'avante.llm_tools.web_search'.web_search_tavily
-	s.func("Please fetch the content of perdu.com", 
-	{
-		on_complete = function (err, resp) 
-			vim.print("err", err) 
-			vim.print("resp", resp) 
-		end
-	} )
-	-- vim.net.request(
-	-- "GET",
-	-- "https://neovim.io",
-	-- { verbose = true },
-	-- function (err, res)
-	-- 	vim.print("err", err , "res", res)
-	-- end
+    -- vim.print(require'os'.getenv("http_proxy"))
+    local s = require('avante.llm_tools.web_search').web_search_tavily
+    s.func('Please fetch the content of perdu.com', {
+        on_complete = function(err, resp)
+            vim.print('err', err)
+            vim.print('resp', resp)
+        end,
+    })
+    -- vim.net.request(
+    -- "GET",
+    -- "https://neovim.io",
+    -- { verbose = true },
+    -- function (err, res)
+    -- 	vim.print("err", err , "res", res)
+    -- end
 end
 
 -- _local
-vim.opt.spellfile = vim.fs.joinpath( vim.fn.stdpath("data"), "site/spell/computer.utf-8.add" )
-
+vim.opt.spellfile = vim.fs.joinpath(vim.fn.stdpath('data'), 'site/spell/computer.utf-8.add')

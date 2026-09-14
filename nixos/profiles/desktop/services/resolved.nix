@@ -20,13 +20,13 @@
     # but resolv.conf settings are tailored for the sub listener !
     DNSStubListener = "no";
     # use the ones obtained by dhcp ?
-    UseDomains=true;
+    UseDomains = true;
     # Domains = [ "local" ]; # networking.domain
 
     # TODO fallback on
     # man resolved.conf
     FallbackDNS = [
-      # we could use _gateway (solved by mymachines ?) depending on the order 
+      # we could use _gateway (solved by mymachines ?) depending on the order
       # in nsswitch
       "192.168.1.254"
       "1.1.1.1"

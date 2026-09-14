@@ -73,6 +73,8 @@ in
     flakeSelf.homeModules.nixpkgs-monitor
     flakeSelf.homeModules.firefox
 
+    flakeSelf.inputs.chroncal.homeModules.default
+
     flakeSelf.homeProfiles.teto-aliases
     flakeSelf.homeProfiles.common
     flakeSelf.homeProfiles.neovim
@@ -119,7 +121,7 @@ in
       pi-coding-agent # to test as ACP provider for avante
       # bottles  # to install games
       mdcat # markdown viewer
-      mcat  # universal viewer
+      mcat # universal viewer
       mitmproxy # help catch http traffic
       notmuch # needed for waybar-custom-notmuch.sh
 

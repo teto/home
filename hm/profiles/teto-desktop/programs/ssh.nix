@@ -10,26 +10,27 @@
 let
   # TODO filter out the configurations ending with -no-secret ?
   # could remove it afterwards instead
-  genSshConfig = name: val: 
+  genSshConfig =
+    name: val:
     (lib.genSshClientConfig
-        # nixos config
-        val ) //
-        # extra ssh args
-        lib.optionalAttrs (name == "neotokyo") {
-          sendEnv = [
-            "GITHUB_TOKEN"
-            # seems like this might make deploy fail
-            # "SOPS_AGE_SSH_PRIVATE_KEY_FILE"
-          ];
-        }
-    ;
-  
-  hostsConfigs = lib.flip lib.mapAttrs
-    (lib.filterAttrs (name: val: builtins.trace "nixosConfig ssh dest: ${name} has secrets ? ${toString val.config.tetos.withSecrets}"  val.config.tetos.withSecrets) flakeSelf.nixosConfigurations)
-    genSshConfig
-    ;
+      # nixos config
+      val
+    )
+    //
+      # extra ssh args
+      lib.optionalAttrs (name == "neotokyo") {
+        sendEnv = [
+          "GITHUB_TOKEN"
+          # seems like this might make deploy fail
+          # "SOPS_AGE_SSH_PRIVATE_KEY_FILE"
+        ];
+      };
 
-    
+  hostsConfigs = lib.flip lib.mapAttrs (lib.filterAttrs (
+    name: val:
+    builtins.trace "nixosConfig ssh dest: ${name} has secrets ? ${toString val.config.tetos.withSecrets}" val.config.tetos.withSecrets
+  ) flakeSelf.nixosConfigurations) genSshConfig;
+
 in
 {
   enable = withSecrets;

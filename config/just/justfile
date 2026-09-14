@@ -5,12 +5,6 @@ HM_REPO := env('HOME') / "hm"
 
 set dotenv-load
 
-# LLAMA_MODELS_DIR loadeed from .env
-# LLAMA_MODELS_DIR := env('HOME') / 'llama-models'
-# LLM_LOCAL_PORT := env('LLM_LOCAL_PORT', 11111)
-
-# {{ config_directory() }}
-
 import? '{{ config_directory() }}'
 
 # select a target
@@ -27,8 +21,6 @@ noctalia-dump-settings:
 
 # Start mistral server
 llama:
-    # llama-server -m ${LLAMA_MODELS_DIR}/mistral-7b-openorca.Q6_K.gguf -c 2048 --port ${LLM_LOCAL_PORT} -ngl 33
-    # /mistral-7b-openorca.Q6_K.gguf
     llama-server --host 0.0.0.0 --port 8080 --models-dir ${LLAMA_MODELS_DIR} --jinja -v --log-prefix --models-preset ~/home/contrib/llama-presets.ini
 
 llama-bench:
@@ -38,7 +30,6 @@ llama-bench:
 whisper:
     #  whisper-server \
     # -m /home/teto/.cache/huggingface/hub/models--ggerganov--whisper.cpp/snapshots/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-large-v3.bin \
-    # --port ${LLM_LOCAL_PORT}
     # services.wyoming.openwakeword.enable
     llama-server -m /home/teto/.cache/huggingface/hub/models--ggerganov--whisper.cpp/snapshots/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-large-v3.bin -c 2048 --port ${LLM_LOCAL_PORT} -ngl 33
 

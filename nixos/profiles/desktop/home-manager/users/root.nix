@@ -9,14 +9,21 @@
 let
   # only do it for builders like jedha / jakku ? get hostname as key ?
   # aka do they have harmonia enabled ?
-  hostsConfigs = lib.mapAttrs 
-  (_: nixosCfg: lib.genSshClientConfig nixosCfg // {
-    User = "teto";
-  })
-    (lib.filterAttrs 
-      (_: nixosCfg:
-        nixosCfg.config.services.harmonia.cache.enable || nixosCfg.config.services.harmonia.cache.enable)
-        flakeSelf.nixosConfigurations);
+  hostsConfigs =
+    lib.mapAttrs
+      (
+        _: nixosCfg:
+        lib.genSshClientConfig nixosCfg
+        // {
+          User = "teto";
+        }
+      )
+      (
+        lib.filterAttrs (
+          _: nixosCfg:
+          nixosCfg.config.services.harmonia.cache.enable || nixosCfg.config.services.harmonia.cache.enable
+        ) flakeSelf.nixosConfigurations
+      );
 in
 
 {

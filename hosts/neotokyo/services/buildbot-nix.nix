@@ -22,7 +22,7 @@ in
       enable = false;
       package = pkgs.hello;
     };
-    domain = "buildbot.${secrets.jakku.hostname}";
+    domain = "buildbot.${config.networking.fqdnOrHostName}";
 
     useHTTPS = true;
 

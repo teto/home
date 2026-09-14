@@ -1,3 +1,6 @@
+
+jj bookmark advance
+
 * jj log slow
 
   `jj debug index-changed-paths` to speed things up ?

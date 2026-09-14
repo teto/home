@@ -3,9 +3,9 @@
   meli,
   rustPlatform,
 }:
-let 
+let
   meli-src = flakeSelf.inputs.meli-src;
-#   withNotmuch ? true,
+  #   withNotmuch ? true,
 in
 meli.overrideAttrs (old: rec {
   pname = old.pname + "-tetos";

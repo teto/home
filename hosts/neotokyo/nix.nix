@@ -7,7 +7,6 @@
     log-lines = 60;
     preallocate-contents = true;
 
-
     # Trigger garbage collection below 1 GiB free.
     min-free = 1 * 1024 * 1024 * 1024;
 

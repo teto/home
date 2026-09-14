@@ -108,34 +108,34 @@ in
       "${mad}+n" = startNvimNotes;
       "${mad}+o" = startNvimNotes;
 
-          "${mod}+F2" =
-            "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty ${lib.getExe' pkgs.rmpc "rmpc"}' ";
+      "${mod}+F2" =
+        "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty ${lib.getExe' pkgs.rmpc "rmpc"}' ";
 
-          # replace with 'avante' alias ?
-          # "${mod}+F3" =
-          #   ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 60 --height 50 --mark gp_nvim --command "kitty nvim -cLlmChat" '';
+      # replace with 'avante' alias ?
+      # "${mod}+F3" =
+      #   ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 60 --height 50 --mark gp_nvim --command "kitty nvim -cLlmChat" '';
 
-          # "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command 'kitty nvim +Notes'  ";
+      # "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command 'kitty nvim +Notes'  ";
 
-          "${mod}+a" =
-            "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty ${lib.getExe' pkgs.rmpc "rmpc"}' ";
+      "${mod}+a" =
+        "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty ${lib.getExe' pkgs.rmpc "rmpc"}' ";
 
     }
-        // lib.optionalAttrs config.programs.vicinae.enable {
-          # vicinae://launch/clipboard/history
-          # https://docs.vicinae.com/deeplinks
-          # "${mod}+p" = "exec ${pkgs.tessen}/bin/tessen --dmenu=rofi";
+    // lib.optionalAttrs config.programs.vicinae.enable {
+      # vicinae://launch/clipboard/history
+      # https://docs.vicinae.com/deeplinks
+      # "${mod}+p" = "exec ${pkgs.tessen}/bin/tessen --dmenu=rofi";
 
-          "${mod}+p" = "exec ${pkgs.vicinae}/bin/vicinae deeplink vicinae://launch/@tinkerbells/pass/pass";
+      "${mod}+p" = "exec ${pkgs.vicinae}/bin/vicinae deeplink vicinae://launch/@tinkerbells/pass/pass";
 
-          "${mod}+Ctrl+h" = "exec ${pkgs.vicinae}/bin/vicinae vicinae://launch/clipboard/history";
-          "${mad}+w" = "exec ${pkgs.vicinae}/bin/vicinae deeplink vicinae://launch/wm/switch-windows";
-        }
-        # // lib.optionalAttrs config.services.clipcat.enable {
-        #   "${mod}+Ctrl+h" =
-        #     "exec ${pkgs.clipcat}/bin/clipcat-menu -f rofi  | ${sharedConfig.notify-send} 'Failed running clipcat' ";
-        # }
-    
+      "${mod}+Ctrl+h" = "exec ${pkgs.vicinae}/bin/vicinae vicinae://launch/clipboard/history";
+      "${mad}+w" = "exec ${pkgs.vicinae}/bin/vicinae deeplink vicinae://launch/wm/switch-windows";
+    }
+    # // lib.optionalAttrs config.services.clipcat.enable {
+    #   "${mod}+Ctrl+h" =
+    #     "exec ${pkgs.clipcat}/bin/clipcat-menu -f rofi  | ${sharedConfig.notify-send} 'Failed running clipcat' ";
+    # }
+
     // audioKeybindings;
   };
 

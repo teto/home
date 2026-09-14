@@ -1,10 +1,13 @@
 {
   config,
-  # pkgs,
+  pkgs,
   # lib,
-  dotfilesPath,
+  # dotfilesPath,
   ...
 }:
+# let
+
+# adminHooks = pkgs.in
 {
 
   # one needs to setup the post-receive hook on the server
@@ -28,17 +31,13 @@
   # user
   # enableGitAnnex = false;
 
-
   # by default dataLib -> /var/lib/gitolite
   # dataDir = /home/teto/gitolite;
-
 
   keys = {
 
     # kinda hackish I need something more precise
-    teto = map builtins.readFile 
-      config.users.users.teto.openssh.authorizedKeys.keyFiles
-      ;
+    teto = map builtins.readFile config.users.users.teto.openssh.authorizedKeys.keyFiles;
 
     # [
     #   # triggers a access to absolute path '/home/teto/home/perso/keys/id_rsa.pub'
@@ -56,18 +55,36 @@
           users = [ "teto" ];
         }
       ];
+      # gitConfig =
+      options = {
+        "hook.post-receive" = "post-receive";
+      };
     };
 
   };
 
   # perl code
+  # https://gitolite.com/gitolite/cookbook.html#adding-other-non-update-hooks
+  # LOCAL_CODE => "$ENV{HOME}/local",
+  # /var/lib/gitolite/.gitolite/local/hooks/repo-specific/post-receive
+  # $RC{LOCAL_CODE} =  "$rc{GL_ADMIN_BASE}/local",
+  # /hooks/multi-hook-driver
+  # my $driver = $rc{MULTI_HOOK_DRIVER} || "$rc{LOCAL_CODE}/hooks/multi-hook-driver";
   extraGitoliteRc = ''
     $RC{UMASK} = 0027;
     $RC{SITE_INFO}  = 'This is our private repository host';
-    $RC{LOCAL_CODE} =  "$rc{GL_ADMIN_BASE}/local",
+    $RC{LOCAL_CODE} =  "${pkgs.gitolite-hooks}";
+    $RC{MULTI_HOOK_DRIVER} = "${config.services.gitolite.dataDir}/.gitolite/multi-hook-driver";
     push( @{$RC{ENABLE}}, 'repo-specific-hooks'); # enable the command/feature
   '';
 
+  # I had this in my gitolite-admin repo
+  # place matching hook in gitolite-admin/conf/gitolite.conf local/hooks/repo-specific/deploy.
+  # there is also a git-receive wrapper ?
+  # option hook.post-receive = post-receive
+
   # hooks deployed to every  repo
-  # commonHooks = [ ];
+  commonHooks = [
+    "${pkgs.gitolite-hooks}/hooks/repo-specific/post-receive"
+  ];
 }

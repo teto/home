@@ -11,12 +11,10 @@
     nixbot.url = "github:Mic92/nixbot";
     nixbot.inputs.nixpkgs.follows = "nixpkgs";
 
-
     chroncal = {
       url = "github:DouglasdeMoura/chroncal";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
 
     direnv-instant = {
       url = "github:Mic92/direnv-instant";
@@ -37,7 +35,6 @@
       url = "https://github.com/Doublevil/JmdictFurigana/releases/download/2.3.1%2B2024-11-25/JmdictFurigana.json.tar.gz";
       flake = false;
     };
-
 
     # harmonia = {
     #   url = "github:nix-community/harmonia";

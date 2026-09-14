@@ -300,7 +300,6 @@ in
           # TODO make it a noctalia command
           "${mod}+Ctrl+L" = "exec ${pkgs.tetos.swaylockCmd} ";
 
-
           # TODO try with flameshot again ?
           # "--release Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy area";
           "--release Print" = "exec ${pkgs.flameshot}/bin/flameshot gui";

@@ -24,6 +24,6 @@ require('nvim-biscuits').setup({
     },
 })
 
-
-vim.keymap.set('n', 'tb', function () require('nvim-biscuits').toggle_biscuits() end,
- { desc = "toggle nvim-biscuits"})
+vim.keymap.set('n', 'tb', function()
+    require('nvim-biscuits').toggle_biscuits()
+end, { desc = 'toggle nvim-biscuits' })

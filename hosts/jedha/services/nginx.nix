@@ -4,15 +4,16 @@
   # pkgs,
   ...
 }:
-let 
+let
   # .local ?
   suffix = config.networking.fqdnOrHostName;
 
-  /*
-  I want to be able to access those services
-  */
-  mkServerAliases = prefix:
-    [ "${prefix}.home" "${prefix}.local" "${prefix}.vpn" ];
+  # I want to be able to access those services
+  mkServerAliases = prefix: [
+    "${prefix}.home"
+    "${prefix}.local"
+    "${prefix}.vpn"
+  ];
 in
 {
   enable = true;
@@ -50,42 +51,39 @@ in
       enableACME = false;
       forceSSL = false;
 
-      # serverName = 
+      # serverName =
       serverAliases = mkServerAliases "llamacpp";
 
-
       locations."/" = {
-          proxyPass = "http://localhost:10301";
-          proxyWebsockets = true;
-          extraConfig = ''
-            client_max_body_size 100M;
-          '';
+        proxyPass = "http://localhost:10301";
+        proxyWebsockets = true;
+        extraConfig = ''
+          client_max_body_size 100M;
+        '';
 
-        };
-        };
+      };
+    };
 
-        faster-whisper = lib.mkIf (config.services.wyoming.faster-whisper.servers != [])
-          {
-              serverAliases = mkServerAliases "whisper";
+    faster-whisper = lib.mkIf (config.services.wyoming.faster-whisper.servers != [ ]) {
+      serverAliases = mkServerAliases "whisper";
 
-            enableACME = false;
-          forceSSL = false;
-
-          locations."/" = {
-            proxyPass = "http://localhost:10301";
-            proxyWebsockets = true;
-            extraConfig = ''
-              client_max_body_size 100M;
-            '';
-
-          };
-        };
-
-      piper = lib.mkIf (config.services.wyoming.piper.servers != [])
-      {
       enableACME = false;
       forceSSL = false;
-              serverAliases = mkServerAliases "piper";
+
+      locations."/" = {
+        proxyPass = "http://localhost:10301";
+        proxyWebsockets = true;
+        extraConfig = ''
+          client_max_body_size 100M;
+        '';
+
+      };
+    };
+
+    piper = lib.mkIf (config.services.wyoming.piper.servers != [ ]) {
+      enableACME = false;
+      forceSSL = false;
+      serverAliases = mkServerAliases "piper";
 
       locations."/" = {
         proxyPass = "http://localhost:10200";

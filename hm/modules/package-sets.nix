@@ -155,7 +155,7 @@ in
 
           pkgs.pi-coding-agent # to test as ACP provider for avante
 
-          pkgs.opencode  # to test in avante.nvim
+          pkgs.opencode # to test in avante.nvim
           # pkgs.python3Packages.vllm
           # pkgs.repomix # to upload a codebase to llm
         ];
@@ -271,7 +271,7 @@ in
 
           # ncpamixer # pulseaudio TUI mixer
           noti # send notifications when a command finishes
-          (ouch.override ({ enableUnfree = true; })) # to (de)compress files
+          (ouch.override { enableUnfree = true; }) # to (de)compress files
           # papis # library manager
           (lib.hiPrio pass-teto) # pass with extensions, override nova's
           pavucontrol
@@ -447,6 +447,7 @@ in
 
           nix-diff
           nix-prefetch-git
+          nix-prefetch-github
           nix-tree
           nix-melt
           netcat-gnu # plain 'netcat' is the bsd one

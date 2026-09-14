@@ -31,7 +31,7 @@
       #  to specify the network address of a remote wake word detection service
       "--wake-uri"
       "tcp://127.0.0.1:10400"
-      
+
       # this disables VAD (Voice AutoDetection) and thus evrything gets streamed to wakeword
       # https://github.com/rhasspy/wyoming-satellite/issues/329
       "--wake-word-name"

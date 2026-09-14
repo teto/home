@@ -22,7 +22,7 @@
       extraPackages = ps: [
         ps.psycopg2
         ps.hass-nabucasa # to be able to login to cloud
-        ps.zlib-ng  # to remove warning
+        ps.zlib-ng # to remove warning
       ];
       # look at https://www.home-assistant.io/integrations/
       # pkgs/servers/home-assistant/component-packages.nix
@@ -51,11 +51,11 @@
         "meteo_france"
         # else we get :
 
-        "music_assistant" 
+        "music_assistant"
 
         "yamaha_musiccast" # to control r-n800
         "upnp"
-        "wyoming"  # voice control
+        "wyoming" # voice control
         "wake_on_lan"
         # "met"
       ];
@@ -134,8 +134,6 @@
   systemd.tmpfiles.rules = [
     "f ${config.services.home-assistant.configDir}/automations.yaml 0755 hass hass"
   ];
-
-
 
   systemd.services.home-assistant.serviceConfig = lib.mkIf config.services.home-assistant.enable {
     # on-failure

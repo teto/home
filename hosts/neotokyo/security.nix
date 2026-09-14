@@ -38,10 +38,11 @@ in
       - https://discourse.nixos.org/t/nixos-nginx-acme-ssl-certificates-for-multiple-domains/19608/3
       - https://discourse.nixos.org/t/setup-a-wildcard-certificate-with-acme-on-a-custom-domain-name-hosted-by-powerdns/15055/6
     */
-    certs = let 
-      # fqdn = config.networking.fqdn
-      fqdn = secrets.jakku.fqdn;
-    in
+    certs =
+      let
+        # fqdn = config.networking.fqdn
+        fqdn = secrets.jakku.fqdn;
+      in
       lib.optionalAttrs withSecrets {
         "blog.${fqdn}" = {
           # blog.${secrets.jakku.hostname}
@@ -83,13 +84,29 @@ in
       };
   };
 
-  
   # enabling it seems to create login issues ?
-  auditd.enable = false;
-  audit.enable = false;
+  auditd.enable = true;
+  audit.enable = true;
   audit.rules = [
-    "-a exit,always -F arch=b64 -S execve"
+    # breaks
+    # "-a exit,always -F arch=b64 -S execve"
   ];
+
+  polkit = {
+    enable = true;
+    extraConfig = ''
+      polkit.addRule(function(action, subject) {
+        if (
+          action.id == "org.freedesktop.systemd1.manage-units" &&
+          action.lookup("unit") == "build-blog.service" &&
+          action.lookup("verb") == "start" &&
+          subject.user == "gitolite"
+        ) {
+          return polkit.Result.YES;
+        }
+      });
+    '';
+  };
 
   # Enable 'sudo' with SSH key
   # see https://github.com/serokell/deploy-rs/issues/299#issuecomment-3179359719
@@ -103,7 +120,15 @@ in
     {
       users = [ "teto" ];
       commands = [
-        { command = "/nix/store/*-activatable-nixos-system-*/activate-rs"; }
+        # runAs = "root"
+        # A command being either just a path to a binary to allow any arguments,
+        # the full command with arguments pre-set or with `""` used as the argument,
+        # not allowing arguments to the command at all.
+
+        {
+          command = "/nix/store/*-activatable-nixos-system-*/activate-rs";
+          options = [ "NOPASSWD" ];
+        }
         { command = "/run/current-system/sw/bin/rm /tmp/deploy-rs-canary-*"; }
 
       ];

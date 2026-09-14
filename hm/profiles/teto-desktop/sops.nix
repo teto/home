@@ -40,7 +40,6 @@ lib.optionalAttrs osConfig.tetos.withSecrets {
     path = "%r/openrouter-api.key";
   };
 
-
   # removed from secrets
   secrets."OPENAI_API_KEY_PERSO" = {
     # Key used to lookup in the sops file.

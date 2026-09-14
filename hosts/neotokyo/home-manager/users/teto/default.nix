@@ -72,6 +72,10 @@ in
     enableFzfLua = true;
     highlightOnYank = true;
     enableMyDefaults = true;
+
+    initLua = ''
+      vim.g.clipboard = 'osc52'
+    '';
   };
 
   programs.bash = {

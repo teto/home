@@ -54,21 +54,21 @@
   nodes =
     let
       # system = "x86_64-linux";
-      genNode = { name, ... }@attrs: 
-        let 
+      genNode =
+        { name, ... }@attrs:
+        let
           nixosCfg = flakeSelf.nixosConfigurations.${name};
         in
-          {
-        inherit (attrs) hostname;
-        profiles.system = {
-          # remoteBuild = false;
-          user = "root";
-          hostname = nixosCfg.config.networking.fqdnOrHostName; # attrs.hostname;
-          path =
-            flakeSelf.inputs.deploy-rs.lib.${system}.activate.nixos nixosCfg;
-              
+        {
+          inherit (attrs) hostname;
+          profiles.system = {
+            # remoteBuild = false;
+            user = "root";
+            hostname = nixosCfg.config.networking.fqdnOrHostName; # attrs.hostname;
+            path = flakeSelf.inputs.deploy-rs.lib.${system}.activate.nixos nixosCfg;
+
+          };
         };
-      };
     in
     {
       neptune-no-secrets =

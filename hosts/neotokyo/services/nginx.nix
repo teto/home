@@ -1,17 +1,16 @@
 /*
-Some of the domains are self-certified via step-ca
-make sure domains are a match else you get errors like:
-  `security.acme.certs.blog.neotokyo.fr.dnsProvider`,
-  `security.acme.certs.blog.neotokyo.fr.webroot`,
-  `security.acme.certs.blog.neotokyo.fr.listenHTTP` and
-  `security.acme.certs.blog.neotokyo.fr.s3Bucket`
-  is required.
-https://nixos.org/manual/nixos/stable/index.html#module-security-acme
+  Some of the domains are self-certified via step-ca
+  make sure domains are a match else you get errors like:
+    `security.acme.certs.blog.neotokyo.fr.dnsProvider`,
+    `security.acme.certs.blog.neotokyo.fr.webroot`,
+    `security.acme.certs.blog.neotokyo.fr.listenHTTP` and
+    `security.acme.certs.blog.neotokyo.fr.s3Bucket`
+    is required.
+  https://nixos.org/manual/nixos/stable/index.html#module-security-acme
 
+  enableACME => asks lets encrypt : it is misnamed
 
-enableACME => asks lets encrypt : it is misnamed
-
-parts of the ACME configuration happens in security.nix, to ask step-ca for VPN certs
+  parts of the ACME configuration happens in security.nix, to ask step-ca for VPN certs
 */
 {
   config,
@@ -26,26 +25,25 @@ let
   # toString config.services.jellyfin.port
   defaultJellyfinPort = 8096;
 
-
   # https://blog.stephane-robert.info/docs/services/web/nginx/#s%C3%A9curisation
   # rate-limiting
   nginxDoc = ''
-  server {
-      # Empêche le clickjacking
-      add_header X-Frame-Options "SAMEORIGIN" always;
+    server {
+        # Empêche le clickjacking
+        add_header X-Frame-Options "SAMEORIGIN" always;
 
-      # Empêche le sniffing MIME
-      add_header X-Content-Type-Options "nosniff" always;
+        # Empêche le sniffing MIME
+        add_header X-Content-Type-Options "nosniff" always;
 
-      # Politique de référent
-      add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+        # Politique de référent
+        add_header Referrer-Policy "strict-origin-when-cross-origin" always;
 
-      # HSTS (après avoir vérifié que HTTPS fonctionne)
-      add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+        # HSTS (après avoir vérifié que HTTPS fonctionne)
+        add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
 
-      # CSP basique (à adapter selon votre app)
-      add_header Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';" always;
-  }'';
+        # CSP basique (à adapter selon votre app)
+        add_header Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';" always;
+    }'';
 
   # todo share it in contrib or something
   errorPageRoot = pkgs.writeTextDir "404.html" ./404.html;
@@ -99,7 +97,7 @@ in
 
     }
     // lib.optionalAttrs withSecrets (
-      let 
+      let
         fqdn = config.networking.fqdn;
         # get it from wireguard config
         # TODO reference tetos.wireguard
@@ -178,31 +176,32 @@ in
           };
         };
 
-      } 
+      }
       // lib.optionalAttrs config.services.hedgedoc.enable (
         let
-  hedgedocDomain = "hedgedoc.${secrets.jakku.hostname}";
-in
+          hedgedocDomain = "hedgedoc.${secrets.jakku.hostname}";
+        in
 
         {
-    forceSSL = true;
-    enableACME = true;
-    # useACMEHost = "${secrets.jakku.hostname}";
-    # listen on all interfaces
-    # listen = [ { addr = "0.0.0.0"; port = 80; }];
+          forceSSL = true;
+          enableACME = true;
+          # useACMEHost = "${secrets.jakku.hostname}";
+          # listen on all interfaces
+          # listen = [ { addr = "0.0.0.0"; port = 80; }];
 
-    locations."/" = {
-      #  echo $server_name;  # Will output the server name defined in the current server block
-      # TODO refer to the port
-      # proxyPass = "http://localhost:3000";
-      proxyWebsockets = true;
-      extraConfig = ''
-        client_max_body_size 100M;
-      '';
+          locations."/" = {
+            #  echo $server_name;  # Will output the server name defined in the current server block
+            # TODO refer to the port
+            # proxyPass = "http://localhost:3000";
+            proxyWebsockets = true;
+            extraConfig = ''
+              client_max_body_size 100M;
+            '';
 
-    };
+          };
 
-      })
+        }
+      )
 
       // lib.optionalAttrs config.services.harmonia.cache.enable {
         # harmonia
@@ -236,68 +235,71 @@ in
           };
         };
       }
-    // lib.optionalAttrs config.services.nextcloud.enable {
+      // lib.optionalAttrs config.services.nextcloud.enable {
 
-      # create some errors on deploy
-      # for now we generate one certificate per virtual host
-      # https://discourse.nixos.org/t/nixos-nginx-acme-ssl-certificates-for-multiple-domains/19608/2
+        # create some errors on deploy
+        # for now we generate one certificate per virtual host
+        # https://discourse.nixos.org/t/nixos-nginx-acme-ssl-certificates-for-multiple-domains/19608/2
 
-      # extends the host already configured by the nixos module nginx
-      # nextcloud.vps
+        # extends the host already configured by the nixos module nginx
+        # nextcloud.vps
 
-      "${config.services.nextcloud.hostName}" = {
-        forceSSL = true;
+        "${config.services.nextcloud.hostName}" = {
+          forceSSL = true;
 
-        # enable letsencrypt
-        enableACME = true;
-        # enable step-ca generated
-        # useACMEHost = "nextcloud.vps";
+          # enable letsencrypt
+          enableACME = true;
+          # enable step-ca generated
+          # useACMEHost = "nextcloud.vps";
 
+          # proxyWebsockets = true
+          # enableReload = true; # reloads service when config changes !
 
-        # proxyWebsockets = true
-        # enableReload = true; # reloads service when config changes !
+          listenAddresses = [
+            wgEndpoint
+          ];
 
-        listenAddresses = [
-          wgEndpoint
-        ];
-
-        # listen = [ 80 ];
-        # listen = [ { addr = "127.0.0.1"; port = 80; }];
-        # locations."/" = {
-        #   proxyPass = "http://localhost:8080"; # Assuming service 1 runs on localhost:8080
-        # };
-        #
-        # extraConfig = ''
-        #   allow 193.168.0.1/24;
-        #   deny all;
-        # '';
-      };
-
-    }
-    // lib.optionalAttrs config.services.jellyfin.enable {
-      "jellyfin.vps" = {
-
-        listenAddresses = [
-          wgEndpoint
-        ];
-
-        enableACME = false;
-        forceSSL = false;
-        locations."/" = {
-          recommendedProxySettings = true;
-          proxyWebsockets = true;
-
-          proxyPass = "http://127.0.0.1:${toString defaultJellyfinPort}";
+          # listen = [ 80 ];
+          # listen = [ { addr = "127.0.0.1"; port = 80; }];
+          # locations."/" = {
+          #   proxyPass = "http://localhost:8080"; # Assuming service 1 runs on localhost:8080
+          # };
+          #
+          # extraConfig = ''
+          #   allow 193.168.0.1/24;
+          #   deny all;
+          # '';
         };
-      };
-    }
-    // lib.optionalAttrs config.services.nixbot.enable {
-      "${config.services.nixbot.domain}" = {
-        enableACME = true;
-        forceSSL = true;
 
-      };
-    });
+      }
+      // lib.optionalAttrs config.services.jellyfin.enable {
+        "jellyfin.vps" = {
+
+          #
+          # 8096
+          # 8920
+          listenAddresses = [
+            wgEndpoint
+          ];
+
+          enableACME = false;
+          forceSSL = false;
+          locations."/" = {
+            recommendedProxySettings = true;
+            proxyWebsockets = true;
+
+            proxyPass = "http://127.0.0.1:${toString defaultJellyfinPort}";
+          };
+        };
+      }
+      // lib.optionalAttrs config.services.nixbot.enable {
+        "${config.services.nixbot.domain}" = {
+          enableACME = true;
+          forceSSL = true;
+
+        };
+      }
+    );
   };
 
 }
