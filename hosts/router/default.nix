@@ -46,6 +46,7 @@ in
     ./networking.nix
     ./services/openssh.nix
     ./services/home-assistant.nix
+    ./services/music-assistant.nix
     ./services/zigbee2mqtt.nix
     # ./services/mqtt.nix
 

@@ -14,6 +14,7 @@ let
   neovim = import ./neovim.nix { inherit flakeSelf lib; };
   wireguard = import  ./wireguard.nix { inherit secrets flakeSelf lib secretsFolder; };
 
+  # email = import ./mail.nix { inherit pkgs; };
 in
 {
   inherit

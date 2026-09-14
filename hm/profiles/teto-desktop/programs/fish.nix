@@ -215,6 +215,8 @@ in
               vlc $filename
             case jpg png gif
               feh $filename
+            case git 
+              git clone $filename
             case '*'
               __fish_default_command_not_found_handler $argv
           end

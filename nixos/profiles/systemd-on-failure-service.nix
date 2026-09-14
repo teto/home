@@ -7,7 +7,19 @@
   ...
 }:
 {
-  # systemd template
+  # @ => systemd template
+  /*
+  <service_name>@<argument>.service
+  %i passes the argument, specially formatted (escaped)
+  %I passes the argument verbatim without escaping
+
+  The script can use:
+  - MONITOR_UNIT
+  - "$MONITOR_SERVICE_RESULT"
+  - "$MONITOR_EXIT_CODE" 
+  - "$MONITOR_EXIT_STATUS"
+  - "$MONITOR_INVOCATION_ID"
+  */
   systemd.services."send-mail-to-teto@" = {
     # unitConfig = {
     #   Description = "Log success for %i";
@@ -25,31 +37,20 @@
     serviceConfig = {
       User = "teto"; # to access teto's msmtp config
       Type = "oneshot";
-      # Environment = [
-      # "SERVICE_NAME=%n" # %n =>
-      # "EXIT_CODE=%e" # this doesn't seem to exist
-      # ];
-      # --read-envelope-from
-      # TODO should be able to qualify service + result
-      #       "$MONITOR_UNIT" \
-      # "$MONITOR_SERVICE_RESULT" \
-      # "$MONITOR_EXIT_CODE" \
-      # "$MONITOR_EXIT_STATUS" \
-      # "$MONITOR_INVOCATION_ID"
+      SyslogIdentifier = "notify-%i";
       ExecStart =
         let
-          #
-          # # This will be 1 in case of error
-          # # Healthchecks supports "fail" or 1 for this:
-          # # https://healthchecks.srv.vtimofeenko.com/docs/signaling_failures/
-          # EXIT_CODE=$MONITOR_EXIT_STATUS
-
+          # This will be 1 in case of error
+          # Healthchecks supports "fail" or 1 for this:
+          # https://healthchecks.srv.vtimofeenko.com/docs/signaling_failures/
           script = pkgs.writeShellScript "notify-service-result" ''
-            # echo "Result: %i"
-            SUBJECT=$1
-            MSG=$2
+            SUBJECT="$1"
+            # MSG="$2"
 
             title="notify service result %i"
+
+            echo "Looking at monitor_unit=$MONITOR_UNIT"
+            echo "with exit status=$MONITOR_EXIT_STATUS"
 
             # Get logs of last invocation
             # Source:
@@ -73,7 +74,8 @@
             EOF
             )
 
-            echo "$message" | ${pkgs.msmtp}/bin/msmtp -afastmail
+            # TODO use msmtpq instead ?
+            echo "$message" | ${pkgs.msmtp}/bin/msmtp msmtp --read-recipients -afastmail
           '';
         in
         "${script} %i";

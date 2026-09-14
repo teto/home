@@ -263,6 +263,7 @@ vim.opt.rtp:prepend(pluginDir .. '/avante.nvim')
 vim.opt.rtp:prepend(pluginDir .. '/rikai.nvim')
 -- vim.opt.rtp:prepend(pluginDir .. '/rocks-git.nvim')
 vim.opt.rtp:prepend(pluginDir .. '/auto-session')
+vim.opt.rtp:prepend(pluginDir .. '/vim-listchars')
 
 ---TODO pass a list of generated nix plugins ?
 ---or custom for now
@@ -607,27 +608,27 @@ vim.g.tex_flavor = 'latex'
 -- vim.lsp.log.set_level(vim.lsp.log_levels.INFO)
 
 -- setup haskell-tools
-vim.g.haskell_tools = require('teto.haskell-tools').generate_settings()
+-- vim.g.haskell_tools = require('teto.haskell-tools').generate_settings()
 
+-- TODO dont set it in avante windows
 vim.opt.showbreak = '↳ ' -- displayed in front of wrapped lines
 
 -- TODO add a command to select a ref  and call Gitsigns change_base afterwards
 
-vim.opt.listchars = 'tab:•·,trail:·,extends:❯,precedes:❮,nbsp:×'
+-- vim.opt.listchars = 'tab:•·,trail:·,extends:❯,precedes:❮,nbsp:×'
+-- vim.opt.listchars:append('conceal:❯')
 -- set listchars+=conceal:X
 -- conceal is used by deefault if cchar does not exit
----@diagnostic disable-next-line: undefined-field
-vim.opt.listchars:append('conceal:❯')
 
 -- "set shada=!,'50,<1000,s100,:0,n$XDG_CACHE_HOME/nvim/shada
 -- vim.g.netrw_home = vim.fn.stdpath('data') .. '/nvim'
 
-vim.keymap.set(
-    'n',
-    '<F11>',
-    '<Plug>(ToggleListchars)',
-    { desc = 'Change between different flavors of space/tab characters' }
-)
+-- vim.keymap.set(
+--     'n',
+--     '<F11>',
+--     '<Plug>(ToggleListchars)',
+--     { desc = 'Change between different flavors of space/tab characters' }
+-- )
 
 -- nvim will load any .nvimrc in the cwd; useful for per-project settings
 vim.opt.exrc = true

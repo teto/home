@@ -103,7 +103,12 @@ in
     {
       users = [ "teto" ];
       commands = [
-        { command = "/nix/store/*-activatable-nixos-system-*/activate-rs"; }
+        # runAs = "root"
+        # A command being either just a path to a binary to allow any arguments,
+        # the full command with arguments pre-set or with `""` used as the argument,
+        # not allowing arguments to the command at all.
+
+        { command = "/nix/store/*-activatable-nixos-system-*/activate-rs"; options = [ "NOPASSWD" ];}
         { command = "/run/current-system/sw/bin/rm /tmp/deploy-rs-canary-*"; }
 
       ];

@@ -66,6 +66,12 @@ in
   # bumping to 25.11 broke nextcloyud
   system.stateVersion = "25.05";
 
+  # to allow for passwordless sudo with deploy
+  # allowed commands restricted by sudo.extraRules
+  users.users.teto.extraGroups = [
+    "sudo"
+  ];
+
   boot.kernel.sysctl = {
     "fs.protected_fifos" = 2;
     "fs.protected_regular" = 2;

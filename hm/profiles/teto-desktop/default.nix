@@ -73,6 +73,8 @@ in
     flakeSelf.homeModules.nixpkgs-monitor
     flakeSelf.homeModules.firefox
 
+    flakeSelf.inputs.chroncal.homeModules.default
+
     flakeSelf.homeProfiles.teto-aliases
     flakeSelf.homeProfiles.common
     flakeSelf.homeProfiles.neovim

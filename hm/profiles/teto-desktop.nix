@@ -37,11 +37,6 @@ in
 
   ];
 
-  home.shell = {
-    enableZshIntegration = true;
-  };
-
-
   home.file.".password-store".source =
     config.lib.file.mkOutOfStoreSymlink "${secretsFolder}/password-store-perso";
   # TODO link .config
@@ -55,7 +50,7 @@ in
 
   # TODO remove ? dangerous
   home.sessionPath = lib.mkBefore [
-    "$XDG_DATA_HOME/../bin"
+    # "$XDG_DATA_HOME/../bin"
     "${dotfilesPath}/bin"
   ];
 

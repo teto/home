@@ -1,4 +1,6 @@
 -- vim.wo.statusline = 'TOTO'
+-- displayed in front of wrapped lines
+vim.opt.showbreak = '↳ ' 
 
 -- during testing
 -- vim.o.laststatus = 2

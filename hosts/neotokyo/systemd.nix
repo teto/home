@@ -7,6 +7,26 @@
   # , secretsFolder
   ...
 }:
+let 
+  # /var/lib/gitolite/repositories/blog.git
+  buildBlog = pkgs.writeShellScriptBin "build-blog" ''
+    set -x
+    GIT_REPO="${config.services.gitolite.dataDir}/repositories/blog.git"
+    TMP_REPO=$(mktemp -d)
+    PUBLIC_WWW=/var/www/blog-generated
+    cd "$TMP_REPO" || exit 3
+    git --work-tree=. \
+        --git-dir="$GIT_REPO" \
+        checkout -f main
+
+    # --out-link "$PUBLIC_WWW" fails if link already exists
+    nix build . 
+    ln -sfnT "$(readlink -f ./result)" "$PUBLIC_WWW"
+
+    '';
+    # cp /var/www/blog-generated
+    # send mail eventually about result ?
+in
 {
   # enable = true;
   # TODO create folders for transmission/jellyfin in /media or /home/media
@@ -19,6 +39,8 @@
     # "d '/var/backup/postgresql' 0750 postgres backup - -"
 
     "d /var/www 0775 nginx www"
+
+    # is this needed ? created by build-blog ?
     "d /var/www/blog-generated 0775 nginx www"
   ];
 
@@ -117,12 +139,12 @@
     # serviceConfig = 
     enable = true;
     description = "build my blog";
-    path = [ pkgs.nix ];
+    path = [ pkgs.git pkgs.nix ];
     serviceConfig = {
       # Type = "oneshot";
       # User = "nextcloud";
       Type = "oneshot";
-      TimeoutSec = 60;
+      TimeoutSec = 400;
       # ExecCondition = "/run/current-system/systemd/bin/systemctl -q is-active nginx.service";
 
       # nginx ?
@@ -133,14 +155,16 @@
       # Nice = 19;
       # CPUSchedulingPolicy = "idle";
       # IOSchedulingClass = "idle";
-      ExecStart = "${lib.getExe' config.nix.package "nix-store"} build ./";
+      ExecStart = "${lib.getExe buildBlog}";
+      # ExecStart = "${lib.getExe' config.nix.package "nix-store"} build ./";
     };
 
     unitConfig = {
       # PartOf = "restic-backups-immich-db-to-backblaze.timer";
       # todo pass failure
-      OnSuccess = "send-mail-to-teto@success.service";
-      OnFailure = "send-mail-to-teto@failure.service";
+      # %n ?
+      OnSuccess = "send-mail-to-teto@%n-success.service";
+      OnFailure = "send-mail-to-teto@%n-failure.service";
     };
   };
 
@@ -155,8 +179,8 @@
         unitConfig = {
           PartOf = "restic-backups-immich-db-to-backblaze.timer";
           # todo pass failure
-          OnSuccess = "send-mail-to-teto@success.service";
-          OnFailure = "send-mail-to-teto@failure.service";
+          OnSuccess = "send-mail-to-teto@%n-success.service";
+          OnFailure = "send-mail-to-teto@%n-failure.service";
         };
       };
 
