@@ -9,7 +9,6 @@
 let
   inherit (lib)
     genBlockLua
-    luaPlugin
     ;
 
   luaRcBlocks = {

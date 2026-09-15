@@ -85,11 +85,28 @@ in
 
   
   # enabling it seems to create login issues ?
-  auditd.enable = false;
-  audit.enable = false;
+  auditd.enable = true;
+  audit.enable = true;
   audit.rules = [
-    "-a exit,always -F arch=b64 -S execve"
+    # breaks
+    # "-a exit,always -F arch=b64 -S execve"
   ];
+
+  polkit = {
+    enable = true;
+    extraConfig = ''
+      polkit.addRule(function(action, subject) {
+        if (
+          action.id == "org.freedesktop.systemd1.manage-units" &&
+          action.lookup("unit") == "build-blog.service" &&
+          action.lookup("verb") == "start" &&
+          subject.user == "gitolite"
+        ) {
+          return polkit.Result.YES;
+        }
+      });
+    '';
+  };
 
   # Enable 'sudo' with SSH key
   # see https://github.com/serokell/deploy-rs/issues/299#issuecomment-3179359719

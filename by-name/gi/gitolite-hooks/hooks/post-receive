@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+set -eu
+
+# git submodule can subtly break when not cd'ed into the correct folder first !!
+
+#!/usr/bin/env bash
+set -eu
+
+# https://lucymcphail.com/posts/deploying-this-blog-on-nixos/
+# inspired by https://medium.com/zerosum-dot-org/a-pure-git-deploy-workflow-with-jekyll-and-gitolite-b3a48f2ce06f 
+# GIT_REPO=$HOME/repositories/blog.git
+GIT_REPO="$HOME/blog"
+# TMP_FOLDER=/tmp/blog
+PUBLIC_WWW=/var/www/blog-generated
+
+# TODO
+SITE="blog"
+TMP_REPO="/tmp/$SITE"
+
+echo "POST-RECEIVE hook start"
+while read oldrev newrev ref
+do
+    if [[ $ref =~ .*/main$ ]];
+    then
+        echo "main received. deploying..."
+		# TMP_REPO=$(mktemp -d)
+		#       git --work-tree=$TMP_REPO \
+		#           --git-dir="$GIT_REPO" \
+		#           checkout -f main
+		#       ls -l $TMP_REPO
+		#
+		#       set -x
+		#       cd $TMP_REPO
+		#       git --git-dir="$GIT_REPO" --work-tree=. submodule init
+		#
+		#       git --git-dir="$GIT_REPO" --work-tree=. submodule update
+		#       # nix build /tmp/$SITE -o /var/www/$SITE
+		# zola -r "$TMP_REPO" build --output-dir "$PUBLIC_WWW" --force
+
+        systemctl start --wait build-blog.service
+        set +x
+    else
+        echo "$ref successfully received. doing nothing."
+    fi
+done
+
+echo "POST-RECEIVE hook finished"

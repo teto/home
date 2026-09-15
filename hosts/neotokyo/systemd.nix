@@ -147,16 +147,11 @@ in
       TimeoutSec = 400;
       # ExecCondition = "/run/current-system/systemd/bin/systemctl -q is-active nginx.service";
 
-      # nginx ?
+      # so it can check out the repo
       User = "gitolite";
+      # User = "teto";
 
-      # path to the repo
-      # ExecStart = "${lib.getExe' config.nix.package "nix-store"} --optimise";
-      # Nice = 19;
-      # CPUSchedulingPolicy = "idle";
-      # IOSchedulingClass = "idle";
       ExecStart = "${lib.getExe buildBlog}";
-      # ExecStart = "${lib.getExe' config.nix.package "nix-store"} build ./";
     };
 
     unitConfig = {

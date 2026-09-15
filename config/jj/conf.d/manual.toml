@@ -128,7 +128,9 @@ diff-formatter = ":git"
 # log-word-wrap = true
 # Disable all pagination, equivalent to using --no-pager
 # paginate = "never"
-
+# name, author-name, author-email, author-date, committer-name, committer-email, committer-date
+bookmark-list-sort-keys = ["committer-date"]
+tag-list-sort-keys = ["name"]
 # what is it ?
 log-synthetic-elided-nodes = true
 graph.style = "square"
@@ -330,14 +332,17 @@ pager = "delta"
 up.auto-track-bookmarks = 'nixos-unstable | master | nixpkgs-unstable | staging | teto/*'
 
 
-# [fix.tools.treefmt]
-# command = ["treefmt"]
-# patterns = ["word_list.txt"]
+# [fix.tools.nix-treefmt]
+# command = ["nix", "develop", "--command", "treefmt", "--no-cache", "--tree-root", "$root", "--stdin", "$path"]
+# patterns = ["glob:'**'"]
+#
 
 # can be called with jj fix
 [fix.tools.treefmt]
-command = ["nix", "develop", "--command", "treefmt", "--no-cache", "--tree-root", "$root", "--stdin", "$path"]
-patterns = ["glob:'**'"]
+# "--tree-root", "$root", is most likely already wrapped by treefmt
+command = ["treefmt", "--no-cache", "--stdin", "$path"]
+# patterns = ["glob:'**'"]
+patterns = ["all()"]
 
 # [jj-gh]
 # default_base_branch = "main"

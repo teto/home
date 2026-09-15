@@ -305,7 +305,7 @@ end
 --
 vim.filetype.add({
     extension = {
-        http = 'http',
+        -- http = 'http', 
         env = 'env',
         kbd = 'kbd',
         v = 'coq',
@@ -315,7 +315,7 @@ vim.filetype.add({
         -- end
     },
     filename = {
-        ['wscript'] = 'python',
+        -- ['wscript'] = 'python',
         ['.env'] = 'env',
         -- todo add for my ssh configs as well
         -- ['.http'] = 'http'
@@ -442,8 +442,8 @@ vim.opt.fillchars = vim.opt.fillchars + 'diff: ' -- \
 -- default behavior for diff=filler,vertical
 vim.opt.diffopt = 'filler,vertical'
 -- neovim > change to default ?
-vim.opt.diffopt:append('hiddenoff')
-vim.opt.diffopt:append('iwhiteall')
+vim.opt.diffopt:append('hiddenoff,iwhiteall')
+-- vim.opt.diffopt:append('iwhiteall')
 -- vim.opt.diffopt:append('linematch')
 vim.opt.diffopt:append('internal,algorithm:patience')
 vim.opt.diffopt:append('linematch:60')
@@ -467,11 +467,9 @@ vim.opt.clipboard = 'unnamedplus'
 -- vim.opt.wildchar=("<Tab>"):byte()
 -- display a menu when need to complete a command
 -- list:longest, -- list breaks the pum
-vim.opt.wildmode = { 'longest', 'list' } -- longest,list' => fills out longest then show list
+-- longest,list' => fills out longest then show list
+vim.opt.wildmode = { 'longest', 'list' } 
 -- vim.opt.pumborder = "rounded"
--- set wildoptions+=pum
-
--- vim.g.hoogle_fzf_cache_file = vim.fn.stdpath('cache') .. '/hoogle_cache.json'
 
 vim.opt.wildmenu = true
 -- vim.opt.omnifunc='v:lua.vim.lsp.omnifunc'
@@ -704,20 +702,18 @@ end, { desc = 'Highlights ANSI termcodes in curbuf' })
 require('plugins.blink-cmp')
 
 -- Key mapping to apply Base64 encoding to selected text
-vim.api.nvim_set_keymap(
-    'v',
-    '<leader>be',
-    [[:lua apply_function_to_selection(base64_encode)<CR>]],
-    { noremap = true, silent = true }
-)
+-- vim.api.nvim_set_keymap(
+--     'v',
+--     '<leader>be',
+--     [[:lua apply_function_to_selection(base64_encode)<CR>]],
+--     { noremap = true, silent = true }
+-- )
 
 -- 0 is kinda buggy with confirm and so on
 vim.opt.cmdheight = 1
 
 -- for indentblankline
---
 -- require('plugins.nvim-treesitter-textobjects')
--- autoloaded
 -- require('plugins.nvim-treesitter')
 
 -- one can pass a list as well
