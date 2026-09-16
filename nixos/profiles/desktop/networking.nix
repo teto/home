@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, config, ... }:
 {
   # when under ndots in hostname, try resolution with those
   search = [
@@ -33,14 +33,28 @@
 
     };
   };
+
   # add wireguard peers
   extraHosts = lib.wireguard.vpnHosts;
 
   # networking.firewall.checkReversePath = false; # for nixops
-  firewall.allowedUDPPorts = [
+  firewall = {
+    allowedTCPPorts = []
+    ++ lib.optional config.services.wyoming.satellite.enable 10700
+    # services.wyoming.piper.servers
+    ++ lib.optional config.services.wyoming.openwakeword.enable 10400
+    # medium-en / uri
+    ++ lib.optional config.services.wyoming.faster-whisper.servers.medium-fr.enable 10301
+    ++ lib.optional config.services.wyoming.piper.servers.fr.enable 10200
+    ++ [
+      10301 # whisper service
+      # 10400 # openwakeword
+    ];
+
+    allowedUDPPorts = [
     # we can do without ?
     5353 # mdns via resolved or avahi
   ];
-  # firewall.allowedTCPPorts = [ 631 ];
+  };
 
 }

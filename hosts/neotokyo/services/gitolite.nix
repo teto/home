@@ -61,6 +61,19 @@
       };
     };
 
+    cv = {
+      access = [
+        {
+          perm = "RW+";
+          users = [ "teto" ];
+        }
+      ];
+      # gitConfig =
+      # options = {
+      #   "hook.post-receive" = "post-receive";
+      # };
+    };
+
   };
 
   # perl code

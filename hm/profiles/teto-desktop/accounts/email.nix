@@ -77,7 +77,11 @@ let
           # silently insert updates
           # per mailbox
           tags.rename = {
-            "bug" = "🐜";
+            bug = "🐜";
+            github =  "";
+             unread = "";
+            attachment = "📎";
+            replied =  "⏎";
           };
           ignore = false;
           # usage boolean                         (optional) special usage of  this  mailbox.   Valid

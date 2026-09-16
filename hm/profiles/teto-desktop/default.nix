@@ -104,6 +104,11 @@ in
     with pkgs;
 
     [
+      # for the noctalia OCR plugin
+      pkgs.grim
+      pkgs.slurp
+      pkgs.tesseract
+
       # pkgs.up # live preview of pipes
       # pkgs.peek # GIF recorder  BROKEN
       pkgs.sequoia-sq # gpg rust replacement ? exe is called "sq"
