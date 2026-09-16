@@ -7,7 +7,7 @@
   # , secretsFolder
   ...
 }:
-let 
+let
   # /var/lib/gitolite/repositories/blog.git
   buildBlog = pkgs.writeShellScriptBin "build-blog" ''
     set -x
@@ -23,9 +23,9 @@ let
     nix build . 
     ln -sfnT "$(readlink -f ./result)" "$PUBLIC_WWW"
 
-    '';
-    # cp /var/www/blog-generated
-    # send mail eventually about result ?
+  '';
+  # cp /var/www/blog-generated
+  # send mail eventually about result ?
 in
 {
   # enable = true;
@@ -134,12 +134,14 @@ in
     UMask = lib.mkForce "0027";
   };
 
-
   services.build-blog = {
-    # serviceConfig = 
+    # serviceConfig =
     enable = true;
     description = "build my blog";
-    path = [ pkgs.git pkgs.nix ];
+    path = [
+      pkgs.git
+      pkgs.nix
+    ];
     serviceConfig = {
       # Type = "oneshot";
       # User = "nextcloud";

@@ -5,8 +5,7 @@
   ...
 }:
 {
-  # --read-envelope-from 
+  # --read-envelope-from
   defaultSendMailCommand = "${pkgs.msmtp}/bin/msmtpq --debug --read-recipients";
-
 
 }

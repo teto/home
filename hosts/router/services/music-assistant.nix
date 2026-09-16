@@ -1,14 +1,19 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
 
   # advertised on 8927 ?
   services.music-assistant = {
-  enable = true;
+    enable = true;
 
-  extraOptions = [
-        "--log-level"
-        "DEBUG"
-      ];
+    extraOptions = [
+      "--log-level"
+      "DEBUG"
+    ];
 
     providers = [
       "mpd"

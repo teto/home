@@ -94,15 +94,15 @@ let
     {
       plugin = vim-listchars;
       config = ''
-      vim.keymap.set(
-          'n',
-          '<F11>',
-          '<Plug>(ToggleListchars)',
-          { desc = 'Change between different flavors of space/tab characters' }
-      )
+        vim.keymap.set(
+            'n',
+            '<F11>',
+            '<Plug>(ToggleListchars)',
+            { desc = 'Change between different flavors of space/tab characters' }
+        )
 
-        '';
-     }
+      '';
+    }
 
     {
       plugin = vim-sneak;

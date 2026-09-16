@@ -1,9 +1,9 @@
 /*
-I need some self-signed certificates for nextcloud client
-because I am using local TLDs, lets encrypt cant do
-https://gquetel.fr/misc/step-ca-nixos/
-https://smallstep.com/docs/step-ca/configuration
-look at nixos/tests/step-ca.nix for inspiration
+  I need some self-signed certificates for nextcloud client
+  because I am using local TLDs, lets encrypt cant do
+  https://gquetel.fr/misc/step-ca-nixos/
+  https://smallstep.com/docs/step-ca/configuration
+  look at nixos/tests/step-ca.nix for inspiration
 */
 {
   pkgs,

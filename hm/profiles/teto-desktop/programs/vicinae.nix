@@ -1,4 +1,9 @@
-{ config, pkgs, flakeSelf, ... }:
+{
+  config,
+  pkgs,
+  flakeSelf,
+  ...
+}:
 let
   ext_src = flakeSelf.inputs.vicinae-extensions;
   exts = ext_src;

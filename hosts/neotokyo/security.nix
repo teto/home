@@ -38,10 +38,11 @@ in
       - https://discourse.nixos.org/t/nixos-nginx-acme-ssl-certificates-for-multiple-domains/19608/3
       - https://discourse.nixos.org/t/setup-a-wildcard-certificate-with-acme-on-a-custom-domain-name-hosted-by-powerdns/15055/6
     */
-    certs = let 
-      # fqdn = config.networking.fqdn
-      fqdn = secrets.jakku.fqdn;
-    in
+    certs =
+      let
+        # fqdn = config.networking.fqdn
+        fqdn = secrets.jakku.fqdn;
+      in
       lib.optionalAttrs withSecrets {
         "blog.${fqdn}" = {
           # blog.${secrets.jakku.hostname}
@@ -83,7 +84,6 @@ in
       };
   };
 
-  
   # enabling it seems to create login issues ?
   auditd.enable = true;
   audit.enable = true;
@@ -125,7 +125,10 @@ in
         # the full command with arguments pre-set or with `""` used as the argument,
         # not allowing arguments to the command at all.
 
-        { command = "/nix/store/*-activatable-nixos-system-*/activate-rs"; options = [ "NOPASSWD" ];}
+        {
+          command = "/nix/store/*-activatable-nixos-system-*/activate-rs";
+          options = [ "NOPASSWD" ];
+        }
         { command = "/run/current-system/sw/bin/rm /tmp/deploy-rs-canary-*"; }
 
       ];

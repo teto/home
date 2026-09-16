@@ -60,7 +60,7 @@
   environment.extraOutputsToInstall = [ "man" ];
 
   # rsync/strace/perl
-  environment.defaultPackages = [];
+  environment.defaultPackages = [ ];
 
   programs.nano.enable = false;
 

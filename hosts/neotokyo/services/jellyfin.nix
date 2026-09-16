@@ -12,7 +12,7 @@
 
   transcoding.enableSubtitleExtraction = true;
 
-  # dataDir = 
+  # dataDir =
   # TODO use "media" as group, same for transmission
   # group =
 

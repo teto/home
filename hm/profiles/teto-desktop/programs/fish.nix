@@ -94,7 +94,7 @@ in
     # frjp = "trans -from fr -to ja ";
     # jpen = "trans -from ja -to en ";
     # enjp = "trans -from en -to ja ";
-    
+
     kssh = "kitten ssh";
     # abbr --add git-clone-url --position command --regex --function git_clone_url
     "git-clone-url" = {
@@ -185,10 +185,10 @@ in
       onVariable = "PWD";
       body = ''
         echo "Changed to $PWD"
-        '';
-      }; 
-      # --on-variable PWD
-    #   
+      '';
+    };
+    # --on-variable PWD
+    #
     # end
     # git_clone_url = ''
     #   echo git clone $argv[1]
@@ -198,7 +198,7 @@ in
       onEvent = "fish_command_not_found";
       description = ''
         trick to open file based on extension
-        '';
+      '';
       # try xdg-open instead !
       body = ''
         set -l filename $argv[1]

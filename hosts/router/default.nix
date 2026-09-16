@@ -127,7 +127,7 @@ in
 
   services.journald.settings.Journal = {
     # alternatively one can run journalctl --vacuum-time=2d
-    SystemMaxUse="200M";
+    SystemMaxUse = "200M";
   };
 
   # Use the GRUB 2 boot loader.

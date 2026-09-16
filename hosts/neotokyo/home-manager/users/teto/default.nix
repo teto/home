@@ -75,7 +75,7 @@ in
 
     initLua = ''
       vim.g.clipboard = 'osc52'
-      '';
+    '';
   };
 
   programs.bash = {

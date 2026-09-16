@@ -7,7 +7,7 @@
 }:
 # let
 
-  # adminHooks = pkgs.in
+# adminHooks = pkgs.in
 {
 
   # one needs to setup the post-receive hook on the server
@@ -31,17 +31,13 @@
   # user
   # enableGitAnnex = false;
 
-
   # by default dataLib -> /var/lib/gitolite
   # dataDir = /home/teto/gitolite;
-
 
   keys = {
 
     # kinda hackish I need something more precise
-    teto = map builtins.readFile 
-      config.users.users.teto.openssh.authorizedKeys.keyFiles
-      ;
+    teto = map builtins.readFile config.users.users.teto.openssh.authorizedKeys.keyFiles;
 
     # [
     #   # triggers a access to absolute path '/home/teto/home/perso/keys/id_rsa.pub'
@@ -83,10 +79,9 @@
   '';
 
   # I had this in my gitolite-admin repo
-    # place matching hook in gitolite-admin/conf/gitolite.conf local/hooks/repo-specific/deploy.
-    # there is also a git-receive wrapper ?
-    # option hook.post-receive = post-receive
-
+  # place matching hook in gitolite-admin/conf/gitolite.conf local/hooks/repo-specific/deploy.
+  # there is also a git-receive wrapper ?
+  # option hook.post-receive = post-receive
 
   # hooks deployed to every  repo
   commonHooks = [

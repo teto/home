@@ -37,7 +37,6 @@ local sops_folder = vim.fs.joinpath(xdg_config, 'sops-nix/secrets')
 -- local to buffer
 vim.g.health = { style = 'float' }
 
-
 vim.g.visual_whitespace = {
     enabled = true,
     highlight = { link = 'Visual', default = true },
@@ -305,7 +304,7 @@ end
 --
 vim.filetype.add({
     extension = {
-        -- http = 'http', 
+        -- http = 'http',
         env = 'env',
         kbd = 'kbd',
         v = 'coq',
@@ -468,7 +467,7 @@ vim.opt.clipboard = 'unnamedplus'
 -- display a menu when need to complete a command
 -- list:longest, -- list breaks the pum
 -- longest,list' => fills out longest then show list
-vim.opt.wildmode = { 'longest', 'list' } 
+vim.opt.wildmode = { 'longest', 'list' }
 -- vim.opt.pumborder = "rounded"
 
 vim.opt.wildmenu = true
@@ -751,7 +750,7 @@ vim.pack.add({
     -- 'https://github.com/elanmed/fzf-lua-frecency.nvim', -- to rocks
 
     'https://github.com/neovim/nvim-lspconfig',
-	-- { src = "https://github.com/chaneyzorn/spellwand.nvim" },
+    -- { src = "https://github.com/chaneyzorn/spellwand.nvim" },
     -- 'https://github.com/teto/vim-listchars',
     'https://github.com/yutkat/git-rebase-auto-diff.nvim',
 
@@ -856,11 +855,13 @@ vim.keymap.set('n', '[[', function()
 end, { buffer = false })
 vim.keymap.set('n', ']]', function()
     vim.diagnostic.jump({
-		count = 1,
-		wrap = true,
-		on_jump = function () vim.notify("hello world") end,
-		severity = vim.diagnostic.severity.HINT,
-	})
+        count = 1,
+        wrap = true,
+        on_jump = function()
+            vim.notify('hello world')
+        end,
+        severity = vim.diagnostic.severity.HINT,
+    })
 end, { buffer = false })
 
 -- rikai {{{
@@ -1020,48 +1021,48 @@ vim.g.avante = {
     },
 
     -- provider loaded from history ?
-    provider = "openrouter",
+    provider = 'openrouter',
     ui = { border = 'single', background_color = '#FF0000' },
     selector = {
         provider = 'fzf_lua',
     },
-	providers = {
-		openrouter = {
-		 -- see also https://github.com/avante-corp/avante.nvim/issues/2310
-		 __inherited_from = 'openai',
-		 endpoint = "https://openrouter.ai/api/v1",
-		 -- Timeout in milliseconds. Make it long as server is "slow"
-		 -- timeout = 180000,
-		 -- api_key_name = "OPENROUTER_API_KEY",
-		 api_key_name = 'cmd:cat ' .. sops_folder .. '/openrouter-api-key',
+    providers = {
+        openrouter = {
+            -- see also https://github.com/avante-corp/avante.nvim/issues/2310
+            __inherited_from = 'openai',
+            endpoint = 'https://openrouter.ai/api/v1',
+            -- Timeout in milliseconds. Make it long as server is "slow"
+            -- timeout = 180000,
+            -- api_key_name = "OPENROUTER_API_KEY",
+            api_key_name = 'cmd:cat ' .. sops_folder .. '/openrouter-api-key',
 
-		 -- /models doesnt list all of them
-		 model = "deepseek/deepseek-v4-flash-0731",
-		 -- model = "openrouter/free",
-		},
-		navyai = {
-		 endpoint = "https://api.navy/v1",
-		 -- workds for models
-		 -- endpoint = "https://modelscope.ai/openapi/v1",
-		 -- Qwen 3.8 27B
-		 model = "deepseek-v4-flash-0731",
-		 -- MODELSCOPE_API_KEY = "ms-815db797-82d2-4a32-8d3a-3982367a93b9";
-		 api_key_name = 'cmd:cat /home/teto/home/secrets/navyai.key',
-		 __inherited_from = 'openai',
-		},
-		-- modelscope = {
-		--  __inherited_from = 'openai',
-		--  -- there is no legacy chat/completions
-		--  use_response_api = true,
-		--  -- endpoint = "https://modelscope.cn",
-		--  -- les 2 marchent
-		--  endpoint = "https://modelscope.cn/openapi/v1",
-		--  -- workds for models
-		--  -- endpoint = "https://modelscope.ai/openapi/v1",
-		--  model = "deepseek/deepseek-chat-v3-0324",
-		--  -- MODELSCOPE_API_KEY = "ms-815db797-82d2-4a32-8d3a-3982367a93b9";
-		--  api_key_name = 'cmd:cat /home/teto/home/secrets/modelscope.key',
-		-- },
+            -- /models doesnt list all of them
+            model = 'deepseek/deepseek-v4-flash-0731',
+            -- model = "openrouter/free",
+        },
+        navyai = {
+            endpoint = 'https://api.navy/v1',
+            -- workds for models
+            -- endpoint = "https://modelscope.ai/openapi/v1",
+            -- Qwen 3.8 27B
+            model = 'deepseek-v4-flash-0731',
+            -- MODELSCOPE_API_KEY = "ms-815db797-82d2-4a32-8d3a-3982367a93b9";
+            api_key_name = 'cmd:cat /home/teto/home/secrets/navyai.key',
+            __inherited_from = 'openai',
+        },
+        -- modelscope = {
+        --  __inherited_from = 'openai',
+        --  -- there is no legacy chat/completions
+        --  use_response_api = true,
+        --  -- endpoint = "https://modelscope.cn",
+        --  -- les 2 marchent
+        --  endpoint = "https://modelscope.cn/openapi/v1",
+        --  -- workds for models
+        --  -- endpoint = "https://modelscope.ai/openapi/v1",
+        --  model = "deepseek/deepseek-chat-v3-0324",
+        --  -- MODELSCOPE_API_KEY = "ms-815db797-82d2-4a32-8d3a-3982367a93b9";
+        --  api_key_name = 'cmd:cat /home/teto/home/secrets/modelscope.key',
+        -- },
 
         gemini = {
             api_key_name = 'cmd:cat ' .. sops_folder .. '/gemini_matt_key',
@@ -1069,7 +1070,7 @@ vim.g.avante = {
         openai = {
             api_key_name = 'cmd:cat ' .. sops_folder .. '/OPENAI_API_KEY_PERSO',
         },
-	},
+    },
     -- might be interesting
     input = {
         -- provider =
@@ -1175,7 +1176,7 @@ vim.g.avante = {
     },
     prompt_logger = {
         enabled = true, -- toggle logging entirely
-		-- directory where logs are saved ?
+        -- directory where logs are saved ?
         log_dir = vim.fn.stdpath('cache'),
     },
 }
@@ -1319,24 +1320,22 @@ require('plugins.auto-session')
 require('plugins.copilot')
 
 function test_proxy()
-	-- vim.print(require'os'.getenv("http_proxy")) 
-	local s = require'avante.llm_tools.web_search'.web_search_tavily
-	s.func("Please fetch the content of perdu.com", 
-	{
-		on_complete = function (err, resp) 
-			vim.print("err", err) 
-			vim.print("resp", resp) 
-		end
-	} )
-	-- vim.net.request(
-	-- "GET",
-	-- "https://neovim.io",
-	-- { verbose = true },
-	-- function (err, res)
-	-- 	vim.print("err", err , "res", res)
-	-- end
+    -- vim.print(require'os'.getenv("http_proxy"))
+    local s = require('avante.llm_tools.web_search').web_search_tavily
+    s.func('Please fetch the content of perdu.com', {
+        on_complete = function(err, resp)
+            vim.print('err', err)
+            vim.print('resp', resp)
+        end,
+    })
+    -- vim.net.request(
+    -- "GET",
+    -- "https://neovim.io",
+    -- { verbose = true },
+    -- function (err, res)
+    -- 	vim.print("err", err , "res", res)
+    -- end
 end
 
 -- _local
-vim.opt.spellfile = vim.fs.joinpath( vim.fn.stdpath("data"), "site/spell/computer.utf-8.add" )
-
+vim.opt.spellfile = vim.fs.joinpath(vim.fn.stdpath('data'), 'site/spell/computer.utf-8.add')

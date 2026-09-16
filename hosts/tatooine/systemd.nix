@@ -13,10 +13,13 @@
     description = "Initialize ALSA sound cards and UCM";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-    Type = "oneshot";
-    RemainAfterExit = true;
-    SuccessExitStatus = [ 0 99 ];
-    ExecStart = "${pkgs.alsa-utils}/bin/alsactl init";
+      Type = "oneshot";
+      RemainAfterExit = true;
+      SuccessExitStatus = [
+        0
+        99
+      ];
+      ExecStart = "${pkgs.alsa-utils}/bin/alsactl init";
+    };
   };
-};
 }

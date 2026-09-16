@@ -57,7 +57,7 @@ local opts = {
             command = 'vibe-acp',
             env = {
                 -- failed with DBUS_SESSION_BUS_ADDRESS
-				MISTRAL_API_KEY = os.getenv('MISTRAL_API_KEY'), -- necessary if you setup Mistral Vibe manually
+                MISTRAL_API_KEY = os.getenv('MISTRAL_API_KEY'), -- necessary if you setup Mistral Vibe manually
             },
         },
         -- override the default one because it was missing USER
@@ -121,11 +121,11 @@ local opts = {
                 max_tokens = 16383, -- to avoid using max_completion_tokens
             },
         },
-		mistral  = {
+        mistral = {
 
             api_key_name = 'cmd:cat ' .. sops_folder .. '/mistral_test_api_key',
-		 -- MISTRAL_API_KEY = os.getenv('MISTRAL_API_KEY'), -- necessary if you setup Mistral Vibe manually
-		},
+            -- MISTRAL_API_KEY = os.getenv('MISTRAL_API_KEY'), -- necessary if you setup Mistral Vibe manually
+        },
 
         ['local:mistral-nemo'] = {
             model = 'devstral',

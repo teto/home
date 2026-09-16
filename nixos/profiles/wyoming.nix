@@ -68,9 +68,9 @@ in
 
       # sets device ?
       useCUDA = pkgs.config.cudaSupport;
-      extraArgs = [ 
+      extraArgs = [
         # (dont dl from HF)
-        "--local-files-only" 
+        "--local-files-only"
       ];
     };
   };
@@ -78,7 +78,7 @@ in
   # Looks ok
   # speech to text
   services.wyoming.faster-whisper.servers = {
-    # rename 
+    # rename
     medium-fr = {
       enable = true;
       model = "medium-int8";

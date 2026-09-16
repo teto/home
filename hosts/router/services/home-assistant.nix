@@ -35,9 +35,9 @@
         })
 
         (pkgs.fetchurl {
-        name = "Tuya-3button-ts0043.yaml";
-        url = "https://raw.githubusercontent.com/maklimcz/HA_blueprints/6c8e90101a26d8bec73894fa6a09a4d287c9b15c/blueprints/Tuya-3button-ts0043.yaml";
-        hash = "sha256-Y2A1LmyrE7bm7rRy9xT9mmmDU1uEArxj0YJ5elgiiVM=";
+          name = "Tuya-3button-ts0043.yaml";
+          url = "https://raw.githubusercontent.com/maklimcz/HA_blueprints/6c8e90101a26d8bec73894fa6a09a4d287c9b15c/blueprints/Tuya-3button-ts0043.yaml";
+          hash = "sha256-Y2A1LmyrE7bm7rRy9xT9mmmDU1uEArxj0YJ5elgiiVM=";
         })
 
         # works only with ZHA. For z2m see:
@@ -52,7 +52,7 @@
           url = "https://github.com/home-assistant/core/raw/2025.1.4/homeassistant/components/automation/blueprints/motion_light.yaml";
           hash = "sha256-4HrDX65ycBMfEY2nZ7A25/d3ZnIHdpHZ+80Cblp+P5w=";
         })
-        
+
       ];
       # TODO add
       # https://github.com/10der/awtrix-ng-hass-integration

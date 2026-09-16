@@ -213,7 +213,7 @@ in
 
   services.journald.settings.Journal = {
     # alternatively one can run journalctl --vacuum-time=2d
-    SystemMaxUse="2G";
+    SystemMaxUse = "2G";
   };
 
   # to remove "TSC_DEADLINE disabled due to Errata;

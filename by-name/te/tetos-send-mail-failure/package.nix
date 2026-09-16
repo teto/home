@@ -2,38 +2,43 @@
 
 # TODO complain loudly if incorrect number of arguments !
 writeShellScriptBin "notify-service-result" ''
-            TO="$1"
-            SUBJECT="$2"
-            # MSG="$2"
 
-            title="notify service result %i"
+  if [ $# -lt 2 ]; then 
+    echo "Usage: <DESTINATION_EMAIL> <SUBJECT>"
+    exit 1
+  fi
 
-            echo "Looking at monitor_unit=$MONITOR_UNIT"
-            echo "with exit status=$MONITOR_EXIT_STATUS"
+  TO="$1"
+  SUBJECT="$2"
 
-            # Get logs of last invocation
-            # Source:
-            # https://serverfault.com/questions/768901/is-there-a-way-to-make-journalctl-show-logs-from-the-last-time-foo-service-ran
-            # Slight tweak -- needs InactiveExitTimestamp ?
-            LAST_TIMESTAMP=$(systemctl show --property InactiveExitTimestamp --value "$MONITOR_UNIT")
-            LOGS=$(journalctl --no-pager -u "$MONITOR_UNIT" --since "$LAST_TIMESTAMP")
+  echo "Looking at monitor_unit=$MONITOR_UNIT"
+  echo "with exit status=$MONITOR_EXIT_STATUS"
 
-            # strip leading spaces else msmtp will complain
-            message=$(cat <<EOF
-            To: ''${TO}
-            Subject: $title
-            Content-Transfer-Encoding: 8bit
-            Content-Type: text/plain; charset=UTF-8
+  # Get logs of last invocation
+  # Source:
+  # https://serverfault.com/questions/768901/is-there-a-way-to-make-journalctl-show-logs-from-the-last-time-foo-service-ran
+  # Slight tweak -- needs InactiveExitTimestamp ?
+  LAST_TIMESTAMP=$(systemctl show --property InactiveExitTimestamp --value "$MONITOR_UNIT")
+  LOGS=$(journalctl --no-pager -u "$MONITOR_UNIT" --since "$LAST_TIMESTAMP")
 
-            Systemd service [$MONITOR_UNIT] exited with exit value of $MONITOR_EXIT_STATUS
+  # strip leading spaces else msmtp will complain
+  message=$(cat <<EOF
+  To: ''${TO}
+  Subject: ''${SUBJECT}
+  Content-Transfer-Encoding: 8bit
+  Content-Type: text/plain; charset=UTF-8
 
-            $LOGS
+  Systemd service [$MONITOR_UNIT] exited value [$MONITOR_EXIT_STATUS].
 
-            $LAST_TIMESTAMP
-            EOF
-            )
+  Logs:
+  ===
+  $LOGS
+  ===
 
-            # TODO use msmtpq instead ?
-            echo "$message" | ${msmtp}/bin/msmtp --read-recipients -afastmail
-          ''
+  $LAST_TIMESTAMP
+  EOF
+  )
 
+  # TODO use msmtpq instead ?
+  echo "$message" | ${msmtp}/bin/msmtp --read-recipients -afastmail
+''

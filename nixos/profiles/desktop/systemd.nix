@@ -29,5 +29,4 @@
   # force restart
   services.systemd-resolved.stopIfChanged = lib.mkForce true;
 
-
 }
