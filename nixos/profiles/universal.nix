@@ -19,6 +19,7 @@
   imports = [
     ../users/root/root.nix
     flakeSelf.nixosProfiles.teto
+    flakeSelf.nixosProfiles.teto
   ];
 
   boot.tmp.cleanOnBoot = true; # to clean /tmp on reboot
@@ -38,6 +39,7 @@
       ripgrep
       file
     ]);
+
 
   # TODO it appears in /etc/bashrc !
   environment.shellAliases = {

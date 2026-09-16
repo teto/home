@@ -254,7 +254,7 @@ vim.g.rocks_nvim = {
 
 local pluginDir = os.getenv('HOME') .. '/plugins'
 -- fixing some stuff
-vim.opt.rtp:prepend(pluginDir .. '/avante.nvim')
+vim.opt.rtp:prepend(pluginDir .. '/avante2')
 -- doing jj tests
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/diffview.nvim')
 -- vim.opt.rtp:prepend(pluginDir .. '/neorg')
@@ -979,12 +979,13 @@ vim.g.avante = {
         -- The runner for the RAG service (can use docker or nix)
         runner = 'nix',
         -- TODO should inherit the one from provider ?
+		-- TODO write this as config
         llm = {
             -- Configuration for the Language Model (LLM) used by the RAG service
             -- shouldn't it be the same ?
             provider = 'openai_like',
             -- endpoint = "https://api.openai.com/v1", -- The LLM API endpoint
-            endpoint = 'http://localhost:8080/v1', -- The LLM API endpoint
+            endpoint = 'http://localhost:9931/v1', -- The LLM API endpoint
             api_key = '', -- The environment variable name for the LLM API key
             -- -- The LLM model name
             -- model = "gpt-4o-mini",
@@ -994,7 +995,7 @@ vim.g.avante = {
         embed = { -- Configuration for the Embedding model used by the RAG service
             provider = 'openai_like', -- The embedding provider
             -- endpoint = "https://api.openai.com/v1", -- The embedding API endpoint
-            endpoint = 'http://localhost:8080/v1', -- The embedding API endpoint
+            endpoint = 'http://localhost:9931/v1', -- The embedding API endpoint
             api_key = '', -- The environment variable name for the embedding API key
             -- model = "text-embedding-3-large", -- The embedding model name
             extra = nil, -- Extra configuration options for the embedding model

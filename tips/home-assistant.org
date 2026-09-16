@@ -29,7 +29,12 @@ sudo -u hass /nix/store/j0d9289d0sg7f1l62vd1g3mfw4268dhl-homeassistant-2024.4.4/
 
 ** tuya  ZG-204ZM pir sensor
 
+
 pour recharger les piles, suffit de faire glisser le derriere !
+
+** tuya RH3040 PIR (grosse tete)
+
+https://www.zigbee2mqtt.io/devices/RH3040.html
 
 * how to reset advices
 

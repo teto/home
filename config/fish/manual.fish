@@ -53,6 +53,7 @@ function nvim_edit
 end
 abbr -a nvim_edit_texts --position command --regex ".+\.txt" --function nvim_edit
 
+
 # tide config
 # set tide_cmd_duration_threshold 3000
 
@@ -67,11 +68,15 @@ abbr -a nvim_edit_texts --position command --regex ".+\.txt" --function nvim_edi
 # Example: Custom key bindings
 # bind \cf forward-char
 
+# setup a llama-rag.jedha.XXX hostname with resolver depending on which network we are
+abbr --add rag avante-rag-service --llm-endpoint "llamacpp.jedha" --api-key '' --provider="openai_like" \
+     --embed-provider "openai_like" --api_key= '' # --worker=1
+
 abbr --add -- re 'nixos-rebuild \
       --flake ~/home \
       --sudo --keep-going \
       --override-input nixpkgs ~/nixpkgs \
       --override-input hm ~/hm'
-
+abbr --add llama-avante llama-server --host 0.0.0.0 --port 9931 --jinja -v --log-prefix --models-preset ~/home/contrib/llama-embed.ini
 # abbr --add --set-cursor -- build-nom 'nom build .#nixosConfigurations.%.config.system.build.toplevel'
 

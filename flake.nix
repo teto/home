@@ -65,8 +65,8 @@
     };
 
     avante-nvim = {
-      url = "github:teto/avante.nvim";
-      # url = "path:/home/teto/neovim/avante.nvim";
+      # url = "github:teto/avante.nvim";
+      url = "path:/home/teto/plugins/avante2";
       # flake = false;
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -109,10 +109,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # jujutsu = {
-    #   url = "github:jj-vcs/jj";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    jujutsu = {
+      url = "github:jj-vcs/jj";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # authentik-nix.url = "github:nix-community/authentik-nix";
     # authentik-nix.inputs.nixpkgs.follows = "nixpkgs";
@@ -236,12 +236,13 @@
 
     rikai-nvim = {
       url = "github:teto/rikai.nvim";
-      # url = "/home/teto/neovim/jap.nvim";
+      # url = "/home/teto/plugins/rikai.nvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
+      # url = "github:Mic92/sops-nix?ref=pull/984/head";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

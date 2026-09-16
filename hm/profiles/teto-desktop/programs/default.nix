@@ -1,4 +1,6 @@
 {
+  bat.enable = true;
+
   # TODO add config
   helix.enable = true;
 

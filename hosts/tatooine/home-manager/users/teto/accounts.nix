@@ -1,8 +1,5 @@
 {
-  lib,
   config,
-  secrets,
-  flakeSelf,
   ...
 }:
 {

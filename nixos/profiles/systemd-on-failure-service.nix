@@ -42,7 +42,7 @@
         # This will be 1 in case of error
         # Healthchecks supports "fail" or 1 for this:
         # https://healthchecks.srv.vtimofeenko.com/docs/signaling_failures/
-        ''${lib.getExe pkgs.tetos-send-mail-failure} ${secrets.jakku.email} "Neotokyo: %i'';
+        ''${lib.getExe pkgs.tetos-send-mail-failure} ${secrets.jakku.email} "Neotokyo: %i"'';
 
     };
   };

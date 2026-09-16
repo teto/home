@@ -35,6 +35,7 @@
     flakeSelf.homeModules.bash
     flakeSelf.homeModules.fish
     flakeSelf.homeModules.fzf
+    flakeSelf.homeModules.less
     flakeSelf.homeModules.nvimpager
     flakeSelf.homeModules.neovim
     flakeSelf.homeModules.package-sets
@@ -45,6 +46,8 @@
       {
         # to avoid warnings about incompatible stateVersions
         home.enableNixpkgsReleaseCheck = false;
+        programs.less.enableReadlineBindings = true;
+
       })
   ];
   home-manager.extraSpecialArgs = {
