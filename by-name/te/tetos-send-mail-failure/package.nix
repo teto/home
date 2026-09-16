@@ -1,4 +1,6 @@
 { writeShellScriptBin, msmtp }:
+
+# TODO complain loudly if incorrect number of arguments !
 writeShellScriptBin "notify-service-result" ''
             TO="$1"
             SUBJECT="$2"

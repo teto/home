@@ -43,9 +43,9 @@
           # This will be 1 in case of error
           # Healthchecks supports "fail" or 1 for this:
           # https://healthchecks.srv.vtimofeenko.com/docs/signaling_failures/
-          script = pkgs.tetos-send-mail-failure;
+          script = lib.getExe pkgs.tetos-send-mail-failure;
           in
-        "${script} %i";
+        ''${script} ${secrets.jakku.email} "%i"'';
 
     };
   };

@@ -33,8 +33,12 @@
           # url = "https://gist.github.com/markkvdb/9ce600a7ceee95f52c013df985803f9d";
           hash = "sha256-Ft+w5uiIMuHwoypcBaVesRcaxyhd/v+zkDg97VEMicI=";
         })
-        
 
+        (pkgs.fetchurl {
+        name = "Tuya-3button-ts0043.yaml";
+        url = "https://raw.githubusercontent.com/maklimcz/HA_blueprints/6c8e90101a26d8bec73894fa6a09a4d287c9b15c/blueprints/Tuya-3button-ts0043.yaml";
+        hash = "sha256-Y2A1LmyrE7bm7rRy9xT9mmmDU1uEArxj0YJ5elgiiVM=";
+        })
 
         # works only with ZHA. For z2m see:
         # https://community.home-assistant.io/t/zigbee2mqtt-tuya-4-button-scene-switch-ts0044/274735/172

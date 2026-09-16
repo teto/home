@@ -277,6 +277,9 @@ in
     // lib.optionalAttrs config.services.jellyfin.enable {
       "jellyfin.vps" = {
 
+        #
+        # 8096
+        # 8920
         listenAddresses = [
           wgEndpoint
         ];
