@@ -32,6 +32,16 @@
         "repo": "nix-evaluator-stats",
         "type": "github"
       }
+    },
+    {
+      "from": {
+        "id": "home",
+        "type": "indirect"
+      },
+      "to": {
+        "path": "/home/teto/home",
+        "type": "path"
+      }
     }
   ],
   "version": 2

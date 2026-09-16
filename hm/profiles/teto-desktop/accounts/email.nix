@@ -69,19 +69,24 @@ let
       # ""jmap
       mailboxAliases = {
         # interesting to see in man meli.conf
-        "INBOX" = {
+        INBOX = {
           alias = "Inbox";
           autoload = true;
           # must depend on parent ?
           collapsed = true;
           # silently insert updates
           # per mailbox
-          tags.rename = {
+          tags= {
+            ignore = [ "inbox" ];
+            rename = {
+            
             bug = "🐜";
-            github =  "";
+            github =  ""; # not visible
+            # github =  "G";  # works
              unread = "";
             attachment = "📎";
             replied =  "⏎";
+            };
           };
           ignore = false;
           # usage boolean                         (optional) special usage of  this  mailbox.   Valid
@@ -101,11 +106,11 @@ let
           # subscribe => watch mailbox for update
           # subscribe = true;
         };
-        "Drafts" = {
+        Drafts = {
           query = "tag:draft";
           # subscribe = true;
         };
-        "Sent" = {
+        Sent = {
           # query="from:username@server.tld from:username2@server.tld";
           # include variations later ?
           query = "from:${secrets.accounts.mail.fastmail_perso.email}";

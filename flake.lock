@@ -1151,11 +1151,11 @@
     "meli-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1789379091,
-        "narHash": "sha256-LgPioB1DvFEzCggfAhzmz+ZdEr1c5IclNggozDo0E/s=",
+        "lastModified": 1789564640,
+        "narHash": "sha256-MVAgyFS0PKUPvbirKLvq+749Qopb6IfYsOriah4K8l0=",
         "ref": "refs/heads/master",
-        "rev": "3d7eb2c59249b66f816a6c6f46c03b505f7d5206",
-        "revCount": 3224,
+        "rev": "6d3dd4bd4e152ba8ccc32221101eb0e447fd93a2",
+        "revCount": 3225,
         "type": "git",
         "url": "https://git.meli-email.org/meli/meli.git"
       },
@@ -2266,15 +2266,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1788914643,
-        "narHash": "sha256-4GuMPW90JSxXWDPUB9M+1m7fYbe3H0apOd86/zBQ2Kw=",
+        "lastModified": 1789546704,
+        "narHash": "sha256-h5SiwB5jAhOYhrPp1TThtJa0ObyV923hV5q34Y+5Iww=",
         "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "13616fff713a9f94055c66f15687ebdc17a335df",
+        "rev": "81630c5d814c38e6bf7b23888b53d8dad595e228",
         "type": "github"
       },
       "original": {
         "owner": "Mic92",
+        "ref": "pull/984/head",
         "repo": "sops-nix",
         "type": "github"
       }

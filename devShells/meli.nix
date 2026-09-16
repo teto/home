@@ -20,5 +20,6 @@ pkgs.mkShell {
       }
 
     echo "Welcome to the meli development environment!"
+    export PATH="${lib.makeBinPath [ gnum4 ]}:$PATH"
   '';
 }
