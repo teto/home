@@ -69,7 +69,7 @@ abbr -a nvim_edit_texts --position command --regex ".+\.txt" --function nvim_edi
 # bind \cf forward-char
 
 # setup a llama-rag.jedha.XXX hostname with resolver depending on which network we are
-abbr --add rag avante-rag-service --llm-endpoint "jedha:8080" --api-key '' --provider="openai_like" \
+abbr --add rag avante-rag-service --llm-endpoint "llamacpp.jedha" --api-key '' --provider="openai_like" \
      --embed-provider "openai_like" --api_key= ''
 
 abbr --add -- re 'nixos-rebuild \

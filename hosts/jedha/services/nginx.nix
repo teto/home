@@ -14,6 +14,8 @@ let
     "${prefix}.local"
     "${prefix}.vpn"
   ];
+
+  llama-cpp-service = config.home-manager.users.teto.services.llama-cpp;
 in
 {
   enable = true;
@@ -47,7 +49,7 @@ in
     };
 
     # optionaal depending on user service
-    llamacpp = lib.mkIf config.home-manager.users.teto.services.llama-cpp.enable {
+    llamacpp = lib.mkIf llama-cpp-service.enable {
       enableACME = false;
       forceSSL = false;
 
@@ -55,7 +57,7 @@ in
       serverAliases = mkServerAliases "llamacpp";
 
       locations."/" = {
-        proxyPass = "http://localhost:10301";
+        proxyPass = "http://localhost:${toString llama-cpp-service.port}";
         proxyWebsockets = true;
         extraConfig = ''
           client_max_body_size 100M;

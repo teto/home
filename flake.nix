@@ -235,8 +235,8 @@
     # };
 
     rikai-nvim = {
-      # url = "github:teto/rikai.nvim";
-      url = "/home/teto/plugins/rikai.nvim";
+      url = "github:teto/rikai.nvim";
+      # url = "/home/teto/plugins/rikai.nvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

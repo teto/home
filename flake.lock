@@ -2091,11 +2091,11 @@
         "treefmt-nix": "treefmt-nix_6"
       },
       "locked": {
-        "lastModified": 1789431488,
-        "narHash": "sha256-VYVMumoD6sgZYqLbyVA8Azd5VcPgz24HI2kSheP4MvQ=",
+        "lastModified": 1789649261,
+        "narHash": "sha256-Ng2gkU/va91mrQXaEOgmQHH6SA9pDH3JK/slX2ReBZo=",
         "owner": "teto",
         "repo": "rikai.nvim",
-        "rev": "5c6d20c5e92beb20afc45a5edcc2cc68b5e8f6ad",
+        "rev": "6b8a4241687f4eeec4dd403c961c44b2886bad8f",
         "type": "github"
       },
       "original": {
