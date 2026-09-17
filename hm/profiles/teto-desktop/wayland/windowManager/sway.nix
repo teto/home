@@ -80,6 +80,11 @@ in
   # package = pkgs.sway-unwrapped;
 
   config = {
+
+    workspaceAutoBackAndForth = true;
+    input = {
+      "type:pointer" = "accel_profile adaptive";
+    };
     output = {
       # todo put a better path
       # example = { "HDMI-A-2" = { bg = "~/path/to/background.png fill"; }; };

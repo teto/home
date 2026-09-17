@@ -51,6 +51,9 @@ in
     # "$HOME/.local/bin"
   ];
 
+  # just to test ~/.profile
+  # nix.useXdg = true;
+  home.pointerCursor.sway.size = 32;
   # broken on unstable because python2
   # services.opensnitch-ui.enable = false;
 
