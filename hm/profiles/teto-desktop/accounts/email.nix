@@ -66,7 +66,6 @@ let
     # TODO restore
     meli = {
       enable = true;
-      # ""jmap
       mailboxAliases = {
         # interesting to see in man meli.conf
         INBOX = {
@@ -77,7 +76,7 @@ let
           # silently insert updates
           # per mailbox
           tags= {
-            ignore = [ "inbox" ];
+            # ignore = [ "inbox" ];
             rename = {
             
             bug = "🐜";
@@ -223,6 +222,9 @@ let
     folders.sent = "Sent";
     folders.trash = "Trash";
 
+    meli = {
+      enable = true;
+    };
     msmtp.enable = true;
     notmuch.enable = true;
     mujmap.enable = false;

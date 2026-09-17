@@ -32,7 +32,7 @@ sudo -u hass /nix/store/j0d9289d0sg7f1l62vd1g3mfw4268dhl-homeassistant-2024.4.4/
 
 pour recharger les piles, suffit de faire glisser le derriere !
 
-** RH3040 PIR
+** tuya RH3040 PIR (grosse tete)
 
 https://www.zigbee2mqtt.io/devices/RH3040.html
 
