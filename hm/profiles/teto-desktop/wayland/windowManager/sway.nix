@@ -83,7 +83,9 @@ in
 
     workspaceAutoBackAndForth = true;
     input = {
-      "type:pointer" = "accel_profile adaptive";
+      "type:pointer" = {
+        accel_profile = "adaptive";
+      };
     };
     output = {
       # todo put a better path

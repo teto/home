@@ -168,7 +168,7 @@ local res = mk_llama_provider('jedha:9931', jedha_default_model, {
 })
 
 -- blocks AvanteModels
--- opts.providers['jedha'] = vim.tbl_extend('force', res, {})
+opts.providers['jedha'] = vim.tbl_extend('force', res, {})
 
 -- we can switch jakku_hostname
 if valid_file and nix_deps.jakku_hostname or false then

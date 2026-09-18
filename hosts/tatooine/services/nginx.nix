@@ -30,13 +30,16 @@ in
     };
   }
   # check llama-cpp
-  // lib.optionalAttrs config.home-manager.users.teto.services.llama-cpp.enable {
-    "llamacpp.${server}" = {
-      enableACME = false;
-      forceSSL = false;
+  //
+    lib.optionalAttrs
+      (config.home-manager.users.teto.services.llama-cpp.instances.default.enable or false)
+      {
+        "llamacpp.${server}" = {
+          enableACME = false;
+          forceSSL = false;
 
-    };
-  }
+        };
+      }
   // lib.optionalAttrs config.services.wyoming.openwakeword.enable {
     "wyoming.${server}" = {
       enableACME = false;
