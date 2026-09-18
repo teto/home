@@ -6,7 +6,7 @@
 }:
 let
   # .local ?
-  suffix = config.networking.fqdnOrHostName;
+  # suffix = config.networking.fqdnOrHostName;
 
   # I want to be able to access those services
   mkServerAliases = prefix: [
@@ -63,6 +63,22 @@ in
           client_max_body_size 100M;
         '';
 
+      };
+    };
+
+    llama-rag = lib.mkIf llama-cpp-service.enable {
+      enableACME = false;
+      forceSSL = false;
+
+      # serverName =
+      serverAliases = mkServerAliases "llama-rag";
+
+      locations."/" = {
+        proxyPass = "http://localhost:9932";
+        proxyWebsockets = true;
+        extraConfig = ''
+          client_max_body_size 100M;
+        '';
       };
     };
 
