@@ -11,6 +11,16 @@
 let
   cfg = config.services.llama-cpp;
   enabledInstances = lib.filterAttrs (_: instance: instance.enable) cfg.instances;
+  instanceArgs =
+    instance:
+    [
+      "${instance.package}/bin/llama-server"
+      "--host"
+      instance.host
+      "--port"
+      (toString instance.port)
+    ]
+    ++ instance.extraFlags;
 
   # TODO upstream to HM ?
   utils = import "${pkgsPath}/nixos/lib/utils.nix" {
@@ -43,6 +53,16 @@ in
         lib.types.submodule {
           options = {
             enable = lib.mkEnableOption "LLaMA C++ server";
+
+            createFishAbbr = lib.mkOption {
+              type = lib.types.bool;
+              default = false;
+              description = ''
+                Create a Fish abbreviation named llamacpp-<instance name> that
+                runs this instance's llama-server command with its configured
+                flags and CUDA environment. This is independent of enable.
+              '';
+            };
 
             package = lib.mkPackageOption pkgs "llama-cpp" { };
 
@@ -95,6 +115,19 @@ in
 
   config = {
 
+    programs.fish.shellAbbrs = lib.mapAttrs' (
+      name: instance:
+      lib.nameValuePair "llamacpp-${name}" (
+        lib.escapeShellArgs (
+          [
+            "env"
+            "GGML_CUDA_ENABLE_UNIFIED_MEMORY=1"
+          ]
+          ++ instanceArgs instance
+        )
+      )
+    ) (lib.filterAttrs (_: instance: instance.createFishAbbr) cfg.instances);
+
     systemd.user.services = lib.mapAttrs' (
       name: instance:
       lib.nameValuePair "llama-cpp-${name}" {
@@ -123,16 +156,7 @@ in
           Environment = [
             "GGML_CUDA_ENABLE_UNIFIED_MEMORY=1"
           ];
-          ExecStart = utils.escapeSystemdExecArgs (
-            [
-              "${instance.package}/bin/llama-server"
-              "--host"
-              instance.host
-              "--port"
-              (toString instance.port)
-            ]
-            ++ instance.extraFlags
-          );
+          ExecStart = utils.escapeSystemdExecArgs (instanceArgs instance);
           # Restart = "on-failure";
           Restart = "always";
 
