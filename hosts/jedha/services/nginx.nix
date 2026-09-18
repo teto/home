@@ -15,7 +15,10 @@ let
     "${prefix}.vpn"
   ];
 
-  llama-cpp-service = config.home-manager.users.teto.services.llama-cpp;
+  llama-cpp-service =
+    config.home-manager.users.teto.services.llama-cpp.instances.default or {
+      enable = false;
+    };
 in
 {
   enable = true;

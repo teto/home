@@ -254,7 +254,7 @@ vim.g.rocks_nvim = {
 
 local pluginDir = os.getenv('HOME') .. '/plugins'
 -- fixing some stuff
-vim.opt.rtp:prepend(pluginDir .. '/avante2')
+vim.opt.rtp:prepend(pluginDir .. '/avante.nvim')
 -- doing jj tests
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/diffview.nvim')
 -- vim.opt.rtp:prepend(pluginDir .. '/neorg')

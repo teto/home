@@ -4,7 +4,11 @@
     5028 # pour nix-cache-beacon
   ]
   ++ lib.optional config.home-manager.users.teto.services.ollama.enable config.home-manager.users.teto.services.ollama.port
-  ++ lib.optional config.home-manager.users.teto.services.llama-cpp.enable config.home-manager.users.teto.services.llama-cpp.port
+  ++ map (instance: instance.port) (
+    lib.filter (instance: instance.enable) (
+      lib.attrValues config.home-manager.users.teto.services.llama-cpp.instances
+    )
+  )
   ++ lib.optionals config.services.harmonia.cache.enable [
     443
     80
