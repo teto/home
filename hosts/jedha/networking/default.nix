@@ -1,7 +1,7 @@
 # { config, lib, ... }:
 {
   hostName = "jedha";
-  domain = null; # ".local"; # Define your hostname.
+  domain = "home"; # ".local"; # Define your hostname.
 
   wireless = {
     scanOnLowSignal = false; # consume less energy and we dont roam anyway
