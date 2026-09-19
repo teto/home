@@ -5,63 +5,65 @@
   flakeSelf,
   ...
 }:
-with lib;
 
 let
   cfg = config.package-sets;
 
   system = pkgs.stdenv.hostPlatform.system;
+  # with lib;
+
+  inherit (lib) mkIf ignoreBroken;
 in
 {
 
   options = {
     package-sets = {
 
-      domotic = mkEnableOption "domotic";
-      livecoding = mkEnableOption "live livecoding writing";
-      fonts = mkEnableOption "extra fonts";
-      desktop = mkEnableOption "desktop packages";
-      yubikey = mkEnableOption "yubikey packages";
-      server = mkEnableOption "server packages";
-      finance = mkEnableOption "finance packages";
+      domotic = lib.mkEnableOption "domotic";
+      livecoding = lib.mkEnableOption "live livecoding writing";
+      fonts = lib.mkEnableOption "extra fonts";
+      desktop = lib.mkEnableOption "desktop packages";
+      yubikey = lib.mkEnableOption "yubikey packages";
+      server = lib.mkEnableOption "server packages";
+      finance = lib.mkEnableOption "finance packages";
 
-      developer = mkEnableOption "Developer packages";
+      developer = lib.mkEnableOption "Developer packages";
 
-      music-processing = mkEnableOption "Music processing, e.g. guitar recording";
+      music-processing = lib.mkEnableOption "Music processing, e.g. guitar recording";
 
-      kubernetes = mkEnableOption "Kubernetes packages";
-      subtitleUtils = mkEnableOption "Subtitle edition";
+      kubernetes = lib.mkEnableOption "Kubernetes packages";
+      subtitleUtils = lib.mkEnableOption "Subtitle edition";
 
-      scientificSoftware = mkEnableOption "Scientific packages";
+      scientificSoftware = lib.mkEnableOption "Scientific packages";
 
-      enableOfficePackages = mkEnableOption "office/heavy packages";
-      enableDesktopGUIPackages = mkEnableOption "Heavy desktop packages";
+      enableOfficePackages = lib.mkEnableOption "office/heavy packages";
+      enableDesktopGUIPackages = lib.mkEnableOption "Heavy desktop packages";
       # TODO convert into description
       # the kind of packages u don't want to compile
       # TODO les prendres depuis un channel avec des binaires ?
       # with flakeSelf.inputs.nixos-stable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 
-      enableIMPackages = mkEnableOption "IM packages";
-      wifi = mkEnableOption "wifi packages";
-      bluetooth = mkEnableOption "bluetooth";
-      energy = mkEnableOption "energy management packages";
-      enableGaming = mkEnableOption "Gaming packages";
-      waylandPackages = mkEnableOption "Wayland packages";
+      enableIMPackages = lib.mkEnableOption "IM packages";
+      wifi = lib.mkEnableOption "wifi packages";
+      bluetooth = lib.mkEnableOption "bluetooth";
+      energy = lib.mkEnableOption "energy management packages";
+      enableGaming = lib.mkEnableOption "Gaming packages";
+      waylandPackages = lib.mkEnableOption "Wayland packages";
 
-      llms = mkEnableOption "IA/Large language model packages";
-      # laptop = mkEnableOption "Laptop packages (energy + wifi)";
+      llms = lib.mkEnableOption "IA/Large language model packages";
+      # laptop = lib.mkEnableOption "Laptop packages (energy + wifi)";
 
-      japanese = mkEnableOption "Japanese stuff";
+      japanese = lib.mkEnableOption "Japanese stuff";
 
-      jujutsu = mkEnableOption "jujutsu";
+      jujutsu = lib.mkEnableOption "jujutsu";
 
     };
 
   };
 
   # this gets merged by default
-  config = mkMerge [
-    ({
+  config = lib.mkMerge [
+    {
       # INSTALLED whatever the config
       home.packages = with pkgs; [
         curl
@@ -70,7 +72,7 @@ in
         tree
         # zenith  # resources monitor
       ];
-    })
+    }
 
     (mkIf cfg.domotic {
       home.packages = [
@@ -166,7 +168,7 @@ in
         let
 
           # for 'convert' executable. Can convert PDF too
-          myImagemagick = pkgs.imagemagick.override ({ ghostscriptSupport = true; });
+          myImagemagick = pkgs.imagemagick.override { ghostscriptSupport = true; };
           # emmylua-ls = flakeSelf.inputs.emmylua.packages.${system}.emmylua_ls; # lua LSP written in rust
           # emmylua-check = flakeSelf.inputs.emmylua.packages.${system}.emmylua_check # lua LSP written in rust
           inherit (pkgs)
@@ -641,7 +643,7 @@ in
         # Adobe Source Han Sans
         source-han-sans # sourceHanSansPackages.japanese
         fira-code-symbols # for ligatures
-        iosevka
+        (ignoreBroken iosevka)
       ];
 
     })
@@ -662,11 +664,11 @@ in
           # memento-with-ocr = memento.override ({ withOcr = true; });
           # sudachi-rs # a japanese tokenizer (can have sudachidict builtins)
 
-          sudachi-rs-full = pkgs.sudachi-rs.override ({
+          sudachi-rs-full = pkgs.sudachi-rs.override {
             sudachidict = pkgs.sudachidict.override {
               dict-type = "full";
             };
-          });
+          };
         in
         [
           # hakuneko # X only

@@ -18,7 +18,9 @@ in
     default = {
 
     enable = true;
+    createFishAbbr = true;
     package = llama-cuda;
+    port = 9931;
     extraFlags = [
       "-v"
       "--models-preset"
@@ -30,6 +32,8 @@ in
 
   embedding = {
     enable = true;
+    createFishAbbr = true;
+    port = 9932;
     package = llama-cuda;
     extraFlags = [
       "--models-preset"

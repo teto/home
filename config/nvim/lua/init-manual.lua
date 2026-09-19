@@ -857,9 +857,9 @@ vim.keymap.set('n', ']]', function()
     vim.diagnostic.jump({
         count = 1,
         wrap = true,
-        on_jump = function()
-            vim.notify('hello world')
-        end,
+        -- on_jump = function()
+        --     vim.notify('hello world')
+        -- end,
         severity = vim.diagnostic.severity.HINT,
     })
 end, { buffer = false })
@@ -1022,7 +1022,7 @@ vim.g.avante = {
     },
 
     -- provider loaded from history ?
-    provider = 'openrouter',
+    -- provider = 'openrouter',
     ui = { border = 'single', background_color = '#FF0000' },
     selector = {
         provider = 'fzf_lua',

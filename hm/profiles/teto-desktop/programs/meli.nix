@@ -20,6 +20,7 @@
     # "fastmail.toml"
   ];
 
+  # set n seen
   settings = {
 
     # notifications = {

@@ -82,7 +82,7 @@ let
             bug = "🐜";
             github =  ""; # not visible
             # github =  "G";  # works
-             unread = "";
+            unread = "";
             attachment = "📎";
             replied =  "⏎";
             };

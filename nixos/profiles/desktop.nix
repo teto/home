@@ -182,22 +182,21 @@ in
   # todo find a good japanese font
   fonts = {
     fontDir.enable = true;
-    packages = with pkgs; [
-      ubuntu-classic
-      inconsolata # monospace
-      noto-fonts-cjk-sans # asiatic
-      nerd-fonts.fira-code # otherwise no characters
-      nerd-fonts.droid-sans-mono # otherwise no characters
-
-      font-awesome_5
-      source-code-pro
-      dejavu_fonts
-      # Adobe Source Han Sans
-      source-han-sans # sourceHanSansPackages.japanese
-      fira-code-symbols # for ligatures
-      iosevka
-      # noto-fonts
-    ];
+    # packages = with pkgs; [
+    #   ubuntu-classic
+    #   inconsolata # monospace
+    #   noto-fonts-cjk-sans # asiatic
+    #   nerd-fonts.fira-code # otherwise no characters
+    #   nerd-fonts.droid-sans-mono # otherwise no characters
+    #
+    #   font-awesome_5
+    #   source-code-pro
+    #   dejavu_fonts
+    #   # Adobe Source Han Sans
+    #   source-han-sans # sourceHanSansPackages.japanese
+    #   fira-code-symbols # for ligatures
+    #   # noto-fonts
+    # ];
 
     fontconfig = {
       enable = true;

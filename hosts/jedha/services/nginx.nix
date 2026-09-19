@@ -6,13 +6,14 @@
 }:
 let
   # .local ?
-  # suffix = config.networking.fqdnOrHostName;
+  fqdn = config.networking.fqdnOrHostName;
 
   # I want to be able to access those services
   mkServerAliases = prefix: [
     "${prefix}.home"
     "${prefix}.local"
     "${prefix}.vpn"
+    "${prefix}.${fqdn}"
   ];
 
   llama-cpp-service =

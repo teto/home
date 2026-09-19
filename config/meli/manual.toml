@@ -93,8 +93,11 @@ exit_entry = "q"
 [shortcuts.envelope_view]
 toggle_expand_headers = "H"
 
-# [shortcuts.composing]
-# edit_mail = 'e'
+[shortcuts.composing]
+edit_mail = 'e'
+commands = [
+ { command = [ "close"  ], shortcut = "q" },
+]
 
 #
 ##Thread view defaults:
