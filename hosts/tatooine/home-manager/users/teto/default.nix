@@ -53,11 +53,7 @@ in
 
   # just to test ~/.profile
   # nix.useXdg = true;
-  home.pointerCursor = {
-    sway.enable = true;
-     name = "";
-    sway.size = 32;
-  };
+
   # broken on unstable because python2
   # services.opensnitch-ui.enable = false;
 

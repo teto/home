@@ -62,32 +62,35 @@ in
 {
   imports = [
     flakeSelf.inputs.jj-gh.homeManagerModules.default
-    flakeSelf.homeModules.memento
-    flakeSelf.homeModules.kitty
-    flakeSelf.homeModules.tig
-    flakeSelf.homeModules.avante
-    flakeSelf.homeModules.fzf
-    flakeSelf.homeModules.yazi
-    flakeSelf.homeModules.services-mujmap
-    flakeSelf.homeModules.package-sets
-    flakeSelf.homeModules.nixpkgs-monitor
-    flakeSelf.homeModules.firefox
-
     flakeSelf.inputs.chroncal.homeModules.default
+    flakeSelf.inputs.nix-index-database.homeModules.nix-index
 
-    flakeSelf.homeProfiles.teto-aliases
+    flakeSelf.homeModules.avante
+    flakeSelf.homeModules.firefox
+    flakeSelf.homeModules.fzf
+    flakeSelf.homeModules.kitty
+    flakeSelf.homeModules.memento
+    flakeSelf.homeModules.nixpkgs-monitor
+    flakeSelf.homeModules.package-sets
+    flakeSelf.homeModules.services-mujmap
+    flakeSelf.homeModules.tig
+    flakeSelf.homeModules.yazi
+    flakeSelf.homeModules.yubikey
+    flakeSelf.homeModules.zsh
+
     flakeSelf.homeProfiles.common
+    flakeSelf.homeProfiles.developer
+    flakeSelf.homeProfiles.mpv
     flakeSelf.homeProfiles.neovim
     flakeSelf.homeProfiles.sway
     flakeSelf.homeProfiles.sway-notification-center
-    flakeSelf.homeProfiles.developer
-    flakeSelf.homeProfiles.mpv
+    flakeSelf.homeProfiles.teto-aliases
+
     # flakeSelf.homeProfiles.vscode
     # TODO cleanup and remove zsh
-    flakeSelf.homeProfiles.teto-zsh
+    # flakeSelf.homeProfiles.teto-zsh
     # flakeSelf.homeProfiles.yt-dlp
 
-    flakeSelf.inputs.nix-index-database.homeModules.nix-index
   ];
 
   # TODO restore this
@@ -100,10 +103,19 @@ in
   # https://github.com/NixOS/nixpkgs/issues/196651
   manual.manpages.enable = true;
 
+  home.pointerCursor = {
+    sway.enable = true;
+    name = "Vanilla-DMZ";
+    package = pkgs.vanilla-dmz;
+    sway.size = 32;
+  };
+
   home.packages =
     with pkgs;
 
     [
+      pkgs.pinentry-curses
+
       # for the noctalia OCR plugin
       pkgs.grim
       pkgs.slurp

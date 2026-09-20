@@ -1,4 +1,27 @@
-rofi-pass / passmenu/ pass
+
+https://opensource.com/article/19/4/gpg-subkeys-ssh
+
+A GPG key is actually a collection of keys. There is one primary key, which is typically used only for signing and certification. The suggested usage of GPG is to create a subkey for encryption. This subkey is a separate key that, for all intents and purposes, is signed by your primary key and transmitted at the same time. This practice allows you to revoke the encryption subkey on its own, such as if it becomes compromised, while keeping your primary key valid.
+
+The important thing to realize is that a GPG key contains multiple keys. For backup and storage purposes, you can operate them as though they are one key, but when it is time to use a key, you can use them independently.
+* gpg-agent
+
+@begin
+gpg-connect-agent updatestartuptty /bye
+
+export DBUS_SESSION_BUS_ADDRESS=/dev/null
+export PINENTRY_BINARY="/usr/bin/pinentry-tty"
+
+* SSH_AUTH_SOCK
+
+tells SSH tools where to find the agent’s Unix socket. With gpg-agent’s SSH support enabled, pointing this variable at its SSH socket makes ssh and ssh-add use gpg-agent:
+
+  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+
+  This lets gpg-agent handle SSH authentication, including with a suitable authentication key on a smartcard or YubiKey.
+
+* 
+ gpg --export-ssh-key <key id> > .ssh/id_rsa.pub
 
 * A TUI can help
 
