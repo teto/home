@@ -13,4 +13,5 @@ flag (un)set FLAG
 
 :close  pour fermer le tab d'edition de courriel
 
+en mode url, press g+number to open url
 

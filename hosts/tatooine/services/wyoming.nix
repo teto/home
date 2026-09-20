@@ -1,7 +1,7 @@
 { pkgs, dotfilesPath, ... }:
 {
   satellite = {
-    enable = true;
+    enable = false;
     user = "teto";
 
     #Rather than always streaming audio to Home Assistant, the satellite can wait until speech is detected.

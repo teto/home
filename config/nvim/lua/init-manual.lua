@@ -1318,7 +1318,7 @@ vim.api.nvim_create_autocmd({ 'TextYankPost' }, {
 })
 
 require('plugins.auto-session')
-require('plugins.copilot')
+-- require('plugins.copilot')
 
 function test_proxy()
     -- vim.print(require'os'.getenv("http_proxy"))

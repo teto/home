@@ -40,6 +40,13 @@
           hash = "sha256-Y2A1LmyrE7bm7rRy9xT9mmmDU1uEArxj0YJ5elgiiVM=";
         })
 
+        # https://community.home-assistant.io/t/advanced-motion-sensor-automation/588615
+        (pkgs.fetchurl {
+          name = "advanced_custom_motion_sensor.yaml";
+          url = "https://raw.githubusercontent.com/brigger/HomeAssistant_Blueprints/5bb7521cb9fe25ca9d34a408bf66c6fb5415ea6a/advanced_custom_motion_sensor.yaml";
+          hash = "sha256-brfgdC0Zve9op9Ijd1R8ZCV0jgPVRCGIXIzdAIWVsng=";
+        })
+
         # works only with ZHA. For z2m see:
         # https://community.home-assistant.io/t/zigbee2mqtt-tuya-4-button-scene-switch-ts0044/274735/172
         # (pkgs.fetchurl {

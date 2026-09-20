@@ -54,7 +54,7 @@ let
     };
 
     neomutt = {
-      enable = true;
+      enable = false;
       # lib.mail.defaultSendMailCommand;
       sendMailCommand = "${pkgs.msmtp}/bin/msmtpq --debug --read-recipients";
 
@@ -223,7 +223,7 @@ let
     folders.trash = "Trash";
 
     meli = {
-      enable = true;
+      enable = false;
     };
     msmtp.enable = true;
     notmuch.enable = true;
