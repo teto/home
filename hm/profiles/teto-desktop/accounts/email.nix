@@ -75,16 +75,16 @@ let
           collapsed = true;
           # silently insert updates
           # per mailbox
-          tags= {
+          tags = {
             # ignore = [ "inbox" ];
             rename = {
-            
-            bug = "🐜";
-            github =  ""; # not visible
-            # github =  "G";  # works
-            unread = "";
-            attachment = "📎";
-            replied =  "⏎";
+
+              bug = "🐜";
+              github = ""; # not visible
+              # github =  "G";  # works
+              unread = "";
+              attachment = "📎";
+              replied = "⏎";
             };
           };
           ignore = false;
@@ -140,7 +140,7 @@ let
         # send_mail = "msmtp --read-recipients --read-envelope-from";
         format = "notmuch"; # HM generates "jmap" by default
         # must hint at folder with .notmuch DB
-        root_mailbox = config.accounts.email.maildirBasePath;
+        # root_mailbox = config.accounts.email.maildirBasePath;
 
         #TODO
         # vcard_folder =

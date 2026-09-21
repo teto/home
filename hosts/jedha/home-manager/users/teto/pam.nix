@@ -2,7 +2,7 @@
 
   yubico.authorizedYubiKeys = {
     # ids =
-      # path = 
+    # path =
   };
 
 }

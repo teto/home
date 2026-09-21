@@ -67,6 +67,7 @@ named_filters = { diff = "pygmentize -l diff -f 256", par = "par 72" }
 
 ###shortcuts
 [shortcuts.general]
+previous_tab = '['
 next_tab = ']'
 quit = 'Q'
 commands = [

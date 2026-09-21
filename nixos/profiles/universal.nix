@@ -40,7 +40,6 @@
       file
     ]);
 
-
   # TODO it appears in /etc/bashrc !
   environment.shellAliases = {
     # oftenly used programs {{{

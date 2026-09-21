@@ -62,7 +62,6 @@ in
 
   config =
     let
-
       mkMujmapServiceName = name: "mujmap-${name}";
     in
     lib.mkIf cfg.enable {
@@ -77,21 +76,15 @@ in
             Description = "mujmap mailbox synchronization";
             # OnSuccess = "send-mail-to-teto@success.service";
             # reference a system-level one
-            # OnFailure = "send-mail-to-teto@failure.service";
+            OnFailure = "desktop-notification@%i.service";
           };
 
-          Service =
-            # ${pkgs.dbus}/bin/dbus-send --system \
-            #   / net.nuetzlich.SystemNotifications.Notify \
-            #   "string:Problem detected with disk: $SMARTD_DEVICESTRING" \
-            #   "string:Warning message from smartd is: $SMARTD_MESSAGE"
-            # ''}
-            {
-              Type = "oneshot";
-              SyslogIdentifier = mkMujmapServiceName name;
-              # TODO should be
-              ExecStart = "${cfg.package}/bin/mujmap -C ${config.accounts.email.maildirBasePath}/fastmail sync ${lib.concatStringsSep " " mujmapOptions}";
-            };
+          Service = {
+            Type = "oneshot";
+            SyslogIdentifier = mkMujmapServiceName name;
+            # TODO where should db be ?
+            ExecStart = "${cfg.package}/bin/mujmap -C ${config.accounts.email.maildirBasePath}/fastmail sync ${lib.concatStringsSep " " mujmapOptions}";
+          };
         }
       ) config.accounts.email.accounts;
 

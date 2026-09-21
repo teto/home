@@ -1,13 +1,7 @@
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-{
-
-  enable = true;
+  _imports = [
+    # pixiecore
+  ];
+  enable = false;
   port = 8089;
-  # systemd.services.jellyfin.wantedBy = lib.mkForce [ ];
-
 }

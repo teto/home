@@ -28,6 +28,7 @@ in
       finance = lib.mkEnableOption "finance packages";
 
       developer = lib.mkEnableOption "Developer packages";
+      jellyfin = lib.mkEnableOption "Jellyfin packages";
 
       music-processing = lib.mkEnableOption "Music processing, e.g. guitar recording";
 
@@ -181,9 +182,11 @@ in
         [
           emmylua-ls
           emmylua-check
-          pkgs.brightnessctl # attempt to draw a bigger cursor pointer in sway
 
-          pkgs.phinger-cursors # attempt to draw a bigger cursor pointer in sway
+          # does noctalia need this ?
+          # pkgs.brightnessctl # attempt to draw a bigger cursor pointer in sway
+
+          # pkgs.phinger-cursors # attempt to draw a bigger cursor pointer in sway
 
           pkgs.ffmpeg # to transcribe audio
 
@@ -193,7 +196,7 @@ in
           pkgs.qimgv # qt image viewer
           pkgs.ristretto # gtk image viewer
 
-          pkgs.kooha # screen recorder
+          pkgs.kooha # screen recorder. Replaces peek
 
           # pkgs.termpdfpy # pdf in terminal , kinda broken
           # pkgs.fancy-cat  # zig pdf viewer in terminal (broken(
@@ -203,8 +206,8 @@ in
           # hopefully we can remove this from the environment
           # it's just that I can't setup latex correctly
           # pkgs.rofi-rbw-wayland
-          pkgs.ddcutil # to control external monitor background
-          pkgs.timg # to display images in terminal, to compare with imgcat ?
+          pkgs.ddcutil # to control external monitor background (todo should be a nixos module ?
+          pkgs.timg # to display images in terminal, to compare with imgcat ? viu ?
           myImagemagick
 
           # borken cos of pymupdf
@@ -220,19 +223,12 @@ in
           # pkgs.popcorntime
           pkgs.peaclock # show big clock in terminal
           # gnome.california # fails
-          # khard # see khal.nix instead ?
-          # libsecret  # to consult
-          # mujmap # to sync notmuch tags across jmap
           pkgs.vlc
-          # element-desktop # TODO this should go into nix profile install
-          # mcomix # manga reader
           # TODO
-          # apvlv # broken
           # buku # broken
           # gcalc
           # nomacs # image viewer
           # nyxt      # lisp browser
-          # pulseaudioFull # for pactl
           # replace with rust-wormhole
           # requires xdmcp https://github.com/freedesktop/libXdmcp
           rmpc # rust mpd client with synced lyrics and cover display !
@@ -247,7 +243,6 @@ in
           usbutils
           bandwhich # to monitor per app bandwidth
           desktop-file-utils # to get desktop
-          dogedns # dns solver "dog"
           # doggo # dns solver "dog"
           evince # succeed where zathura/mupdf fail
           font-manager # pretty good font manager
@@ -415,6 +410,7 @@ in
           # dasht # ~ zeal but in terminal
           # defalt via hm
           # difftastic # smart diffs
+          dogedns # dns solver "dog"
           docker-credential-helpers # gives 'docker-credential-pass' for instance
 
           flamelens # rust
@@ -710,6 +706,12 @@ in
         pkgs.stonks-cli
         # pkgs.ticker # bof
         # pkgs.mop # bof2
+      ];
+    })
+
+    (mkIf cfg.livecoding {
+      home.packages = [
+        pkgs.tsukumi
       ];
     })
 

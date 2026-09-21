@@ -78,7 +78,6 @@
       # s3:s3.us-east-005.backblazeb2.com/teto-vault
       environmentFile = config.sops.secrets."restic/nextcloud/backblaze_credentials".path;
 
-
       # command or path
       # dynamicFilesFrom
 

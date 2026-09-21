@@ -102,6 +102,17 @@ in
       };
     };
 
+    music-assistant = lib.mkIf config.services.music-assistant.enable {
+      enableACME = false;
+      forceSSL = false;
+      serverAliases = mkServerAliases "music-assistant";
+
+      locations."/" = {
+        proxyPass = "http://localhost:8097";
+        proxyWebsockets = true;
+      };
+    };
+
     piper = lib.mkIf (config.services.wyoming.piper.servers != [ ]) {
       enableACME = false;
       forceSSL = false;

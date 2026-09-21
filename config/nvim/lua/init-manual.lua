@@ -979,7 +979,7 @@ vim.g.avante = {
         -- The runner for the RAG service (can use docker or nix)
         runner = 'nix',
         -- TODO should inherit the one from provider ?
-		-- TODO write this as config
+        -- TODO write this as config
         llm = {
             -- Configuration for the Language Model (LLM) used by the RAG service
             -- shouldn't it be the same ?

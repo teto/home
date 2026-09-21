@@ -71,7 +71,6 @@ in
   # SWAYSOCK/WAYLAND etc
   # systemd.variables =  [ "PATH" ];
 
-
   # disabling swayfx until  those get merged
   # https://github.com/nix-community/home-manager/pull/4039
   # https://github.com/NixOS/nixpkgs/pull/237044

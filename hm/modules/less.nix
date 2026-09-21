@@ -7,8 +7,7 @@ let
   cfg = config.programs.less;
 in
 {
-  options.programs.less.enableReadlineBindings =
-    lib.mkEnableOption "Readline-style key bindings in less prompts";
+  options.programs.less.enableReadlineBindings = lib.mkEnableOption "Readline-style key bindings in less prompts";
 
   config = lib.mkIf cfg.enableReadlineBindings {
     home.file.".lesskey".text = ''

@@ -418,28 +418,29 @@ in
 
   # Some of these packages are only available in my lua overlay. Since those are used
   #
-  extraLuaPackages = lp: 
+  extraLuaPackages =
+    lp:
     [
 
-    # TODO should work with latest HM
-    # lp.lua-utils-nvim
-    # lp.pathlib-nvim
+      # TODO should work with latest HM
+      # lp.lua-utils-nvim
+      # lp.pathlib-nvim
 
-    # importing dependencies of rikai.nvim
-    # TODO: do it from overlay or look at the plugin itself
-    # lp.sqlite
-    # lp.utf8
-    # lp.lsqlite3 # should be taken care of automatically
-    # lp.lual
-    # lp.alogger
-    # lp.mega-cmdparse
-    # lp.mega-logging # should not be needed ?
+      # importing dependencies of rikai.nvim
+      # TODO: do it from overlay or look at the plugin itself
+      # lp.sqlite
+      # lp.utf8
+      # lp.lsqlite3 # should be taken care of automatically
+      # lp.lual
+      # lp.alogger
+      # lp.mega-cmdparse
+      # lp.mega-logging # should not be needed ?
 
-    lp.nvim-nio # for rocks.nvim (installed via vim.pack so required)
-    # lp.fzy
+      lp.nvim-nio # for rocks.nvim (installed via vim.pack so required)
+      # lp.fzy
 
-  ]
-  ++ flakeSelf.inputs.rikai-nvim.packages.${pkgs.stdenv.hostPlatform.system}.rikai-nvim.propagatedBuildInputs
+    ]
+    ++ flakeSelf.inputs.rikai-nvim.packages.${pkgs.stdenv.hostPlatform.system}.rikai-nvim.propagatedBuildInputs
   # nvimLua.pkgs.rest-nvim.propagatedBuildInputs
   ;
 
