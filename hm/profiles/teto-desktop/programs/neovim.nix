@@ -286,10 +286,6 @@ let
     yamlfmt
   ];
 
-  # finalLua = nvimLua.override {
-  #   packageOverrides = flakeSelf.inputs.rikai-nvim.overlays.luaOverlay;
-  # };
-
   vimPlugins = pkgs.vimPlugins;
 in
 {
@@ -417,27 +413,12 @@ in
   enableFzfLua = true;
 
   # Some of these packages are only available in my lua overlay. Since those are used
-  #
-  extraLuaPackages =
+  extraLuaPackages = 
     lp:
     [
 
-      # TODO should work with latest HM
-      # lp.lua-utils-nvim
-      # lp.pathlib-nvim
-
-      # importing dependencies of rikai.nvim
-      # TODO: do it from overlay or look at the plugin itself
-      # lp.sqlite
-      # lp.utf8
-      # lp.lsqlite3 # should be taken care of automatically
-      # lp.lual
-      # lp.alogger
-      # lp.mega-cmdparse
-      # lp.mega-logging # should not be needed ?
-
-      lp.nvim-nio # for rocks.nvim (installed via vim.pack so required)
-      # lp.fzy
+    lp.nvim-nio # for rocks.nvim (installed via vim.pack so required)
+    # lp.fzy
 
     ]
     ++ flakeSelf.inputs.rikai-nvim.packages.${pkgs.stdenv.hostPlatform.system}.rikai-nvim.propagatedBuildInputs

@@ -4,11 +4,10 @@
 [tags]
 # valid inputs: #HHHHHH, #ABC -> #AABBCC, XTERM_NAME, 0-255 byte
 colors = { signed="#Ff6600", replied="DeepSkyBlue4", draft="#f00" }
-# ignore_tags
+# ignore_tags = 
 
 # display_name =
 # extra_identities 
-# refresh_command = "just -g mail-fetch"
 
  
 [listing]

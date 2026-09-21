@@ -153,10 +153,14 @@
               root = "${luacurlPkg}";
             })
             # ${sqlite.out}/lib/libsqlite3${stdenv.hostPlatform.extensions.sharedLibrary}
-            ({
-              name = "sqlite.lua";
-              root = "${luaInterpreter.pkgs.sqlite}";
-            })
+            # {
+            #   name = "sqlite.lua";
+            #   root = "${luaInterpreter.pkgs.sqlite}";
+            # }
+            {
+              name = "lsqlite3";
+              root = "${luaInterpreter.pkgs.lsqlite3}";
+            }
           ];
 
           # we need variables for lib-curl.lua to be installable

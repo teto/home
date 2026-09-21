@@ -132,7 +132,7 @@ let
         # until https://git.meli-email.org/meli/meli/issues/700 gets fixed
         # manual_refresh = true;
         #  "systemctl start mujmap-fastmail"
-        #   refresh_command = "just -g mail-sync";
+        # refresh_command = "just -g mail-sync";
 
         # could be generated from the module
         # manpage says:

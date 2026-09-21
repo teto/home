@@ -23,7 +23,6 @@ in
       livecoding = lib.mkEnableOption "live livecoding writing";
       fonts = lib.mkEnableOption "extra fonts";
       desktop = lib.mkEnableOption "desktop packages";
-      yubikey = lib.mkEnableOption "yubikey packages";
       server = lib.mkEnableOption "server packages";
       finance = lib.mkEnableOption "finance packages";
 
@@ -91,13 +90,6 @@ in
       home.packages = [
         pkgs.bluetuith
         pkgs.bluetui
-      ];
-    })
-
-    (mkIf cfg.yubikey {
-      home.packages = with pkgs; [
-        yubioath-flutter # not sure it's great yubikey-manager #
-        yubikey-manager
       ];
     })
 

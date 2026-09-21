@@ -845,14 +845,17 @@ vim.g.mcphub = {
     },
 }
 
+-- get rid of severity
 vim.keymap.set('n', '[[', function()
     vim.diagnostic.jump({
         count = -1,
         wrap = true,
         -- severity
         -- on_jump
+		severity = vim.diagnostic.severity.HINT,
     })
 end, { buffer = false })
+
 vim.keymap.set('n', ']]', function()
     vim.diagnostic.jump({
         count = 1,

@@ -222,19 +222,17 @@ in
   };
 
   home.sessionVariables = {
-    VIBE_HOME = "${config.xdg.configHome}/vibe";
+    # VIBE_HOME = "${config.xdg.configHome}/vibe";
     # might be a hack
     PASSWORD_STORE_ENABLE_EXTENSIONS = "true"; # it must be "true" and nothing else !
     PASSWORD_STORE_EXTENSIONS_DIR = "${dotfilesPath}/contrib/pass-extensions";
 
     # TODO set it globally ?
     CDPATH = "$HOME/plugins";
+    PAGER="bat";
 
   }
   // lib.optionalAttrs osConfig.tetos.withSecrets {
-    # customsearch cancelled ffs
-    # GOOGLE_SEARCH_ENGINE_ID="64ff2b96809e947cc";
-    # GOOGLE_SEARCH_API_KEY=secrets.google.customsearch_api_key;
     TETOS_BUILDER_NEOTOKYO = builder_neotokyo;
     TETOS_BUILDER_JEDHA = builder_jedha;
     TETOS_BUILDER_NIXCOMMUNITY = builder_nixcommunity;
@@ -249,11 +247,6 @@ in
       "${dotfilesPath}/rofi-scripts"
     ];
   };
-
-  # "* ${builtins.readFile ../../../perso/keys/id_rsa.pub}";
-  home.file.".ssh/allowed_signers".text = ''
-    ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDC/+rkPJvHRlXBuOI7NSQTAXBBsFjjcKchNm+hIs1kpwrpwNvEQUg1U2xuLvS5AEBdFdqUn6V67uGB6sfSDwS7dUakV5E9Cvmadw0cenZ7DSMaUAqMqAhVtY2Rzx3iNfD2sDBItdU9lyXrg6rwl0nPy+EfJPItV/wvJnI7a8dxdNf0PbbdZTQLDPpGlRec4+tvPQNvwRl5x5Y39jWqtTUrRDF11d/b99lcIaihnPvlRi53FfvypwdMuFf81Ufc/4klAP80GTYIDlWh1juMCF0tIp0rb5iE4+ABbTVAczE2iO8lYYGtqOPe/YGJ+7RwrGnDVdwhsq3A9iT76T2mvLtn teto@tatooine
-  '';
 
   package-sets = {
     desktop = true;

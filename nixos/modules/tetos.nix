@@ -11,6 +11,8 @@ in
   options = {
     tetos = {
       withSecrets = lib.mkEnableOption "withSecrets";
+      # enableYubikey = lib.mkEnableOption "yubikey";
+      # one for wireguard
       # secretsFolder = lib.mkOption {
       #   default = false;
       #   type = lib.types.str;
@@ -20,6 +22,9 @@ in
       # };
     };
   };
-  # config = lib.mkIf cfg.enable {
+
+  # config = lib.mkIf cfg.enableYubikey {
+  #   # dictated by https://nixos.wiki/wiki/Yubikey
+  #
   # };
 }
