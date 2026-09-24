@@ -132,7 +132,7 @@ in
       timg
       ncurses.dev # for infocmp
 
-      josm # openstreetmap editor (java)
+      # josm # openstreetmap editor (java)
 
       gh-dash
       pi-coding-agent # to test as ACP provider for avante
@@ -140,7 +140,7 @@ in
       mdcat # markdown viewer
       mcat # universal viewer
       mitmproxy # help catch http traffic
-      notmuch # needed for waybar-custom-notmuch.sh
+      notmuch # needed 
 
       neovim-dbg # when neovim crashes, launch "nvim-debug" to debug
 
@@ -165,12 +165,9 @@ in
       lux-cli
       # flakeSelf.inputs.lux.packages.${pkgs.stdenv.hostPlatform.system}.lux-cli
 
-      # rendercv # yaml-based CV
-
       stow
       systemctl-tui
       timr-tui # rust clock
-      viu # a console image viewer
 
       # cups-pk-helper # to add printer through gnome control center
       pkgs.lm_sensors # to see CPU temperature (command 'sensors')
@@ -231,6 +228,9 @@ in
     CDPATH = "$HOME/plugins";
     PAGER="bat";
 
+    MANPAGER="moor";
+    # MANPAGER = "less -R -i --use-color -Dd+M -Du+C";
+    # MANROFFOPT = "-c";
   }
   // lib.optionalAttrs osConfig.tetos.withSecrets {
     TETOS_BUILDER_NEOTOKYO = builder_neotokyo;
@@ -238,6 +238,8 @@ in
     TETOS_BUILDER_NIXCOMMUNITY = builder_nixcommunity;
     inherit (secrets) TAVILY_API_KEY;
   };
+
+  # tetos.enableYubikey = true;
 
   home.sessionSearchVariables = {
 
@@ -260,7 +262,6 @@ in
     developer = true;
     enableIMPackages = true;
     jujutsu = true;
-    yubikey = true;
     waylandPackages = true;
   };
 

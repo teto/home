@@ -116,6 +116,14 @@ in
     };
   };
 
+  # https://blog.matthewbrunelle.com/swap-zram-zswap-and-hibernate-on-nixos/
+  # hoping it preserves SSD ?
+  boot.zswap = {
+    enable = true;
+    compressor = "lz4";
+  };
+  boot.kernel.sysctl."vm.swappiness" = 100;
+
   # system.nssDatabases.hosts = (lib.mkOrder 501 [ "resolve [!UNAVAIL=return]" ]);
 
   hardware = {

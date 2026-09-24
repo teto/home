@@ -20,7 +20,6 @@
 
   defaultCacheTtl = 7200;
   # maxCacheTtl
-  # grabKeyboardAndMouse= false;
   grabKeyboardAndMouse = false; # should be set to false instead
   # default-cache-ttl 60
   # --max-cache-ttl
@@ -41,6 +40,7 @@
   # '';
   # };
 
+  # noAllowExternalCache
   # 'no-allow-external-cache' also prevents pinentry/GNOME components from maintaining their own cache.
   extraConfig = ''
     no-allow-external-cache 

@@ -160,7 +160,7 @@ in
       setCursor = true;
       expansion = ''
         nh os switch ~/home -- --keep-going --override-input nixpkgs ~/nixpkgs \
-          --override-input hm ~/hm %# --option builders "$TETOS_BUILDER_JEDHA" -j0 '';
+          --override-input hm ~/hm #% --option builders "$TETOS_BUILDER_JEDHA" -j0 '';
 
     };
     # tetos-sw-remote = {

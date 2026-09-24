@@ -481,6 +481,7 @@ in
 
           inotify-info # to debug filewatching issues, very nice
           inotify-tools # for inotify-wait notably
+          moor # to be used as pager
           ncurses.dev # for infocmp
           neovide
           nix-update # nix-update <ATTR> to update a software
@@ -503,6 +504,8 @@ in
           universal-ctags # there are many different ctags, be careful !
           uv # to install python packages
           unar # used to view archives by yazi (now using ouch ?)
+          viu # a console image viewer
+
           whois
           wget
           # sttr # to process strings (base64 etc)

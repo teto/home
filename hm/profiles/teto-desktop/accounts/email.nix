@@ -139,8 +139,11 @@ let
         # send_mail String|SmtpServerConf       Command to pipe new mail to (exit code  must  be  0
         # send_mail = "msmtp --read-recipients --read-envelope-from";
         format = "notmuch"; # HM generates "jmap" by default
-        # must hint at folder with .notmuch DB
-        # root_mailbox = config.accounts.email.maildirBasePath;
+
+        # must hint at folder with .notmuch DB, this looks wrong but removing it triggers:
+        # Configuration error: Notmuch `root_mailbox` /home/teto/maildir/fastmail for account fastmail does not contain a `.notmuch` subdirectory.
+        # I probably need to move those files
+        root_mailbox = config.accounts.email.maildirBasePath;
 
         #TODO
         # vcard_folder =

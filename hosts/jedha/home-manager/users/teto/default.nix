@@ -162,7 +162,6 @@ in
     music-processing = false;
   };
 
-  # package-sets.enableDesktopGUIPackages = true;
   home.stateVersion = "26.05";
 
   home.sessionVariables = {

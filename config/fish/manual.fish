@@ -68,6 +68,9 @@ function nvim_edit
 end
 abbr -a nvim_edit_texts --position command --regex ".+\.txt" --function nvim_edit
 
+# from bat's README
+abbr -a --position anywhere -- --help '--help | bat -plhelp'
+abbr -a --position anywhere -- -h '-h | bat -plhelp'
 
 # tide config
 # set tide_cmd_duration_threshold 3000

@@ -9,6 +9,8 @@
   # TODO add to nginx
   # 8097
   enable = true;
+  # there is no declarative setting to tell it where to listen to, one has to click
+  # an UI setting
 
   extraOptions = [
     "--log-level"
@@ -16,7 +18,7 @@
   ];
 
   providers = [
-    "mpd"
+    "mpd" # yet not available ?
     "jellyfin"
     "musiccast"
   ];

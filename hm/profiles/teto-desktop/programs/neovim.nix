@@ -291,7 +291,9 @@ in
 {
   enableBlink = true;
   enableMyDefaults = true;
-  useAsManViewer = true;
+
+  # neovim as pager is too slow, takes ages to parse configuration.nix
+  useAsManViewer = false;
   buildSpells = true;
 
   # neovim-debug is too slow we should try to build it and rename executable to nvim-debug

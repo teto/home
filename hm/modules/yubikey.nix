@@ -3,6 +3,7 @@ Needs nixos/profiles/yubikey.nix as well ?
 Links
 - https://nixos.wiki/wiki/Yubikey
 - see https://joinemm.dev/blog/yubikey-nixos-guide for gpg advice
+- https://github.com/nullcopy/ykluks-tools
 
 */
 { config, lib, pkgs, ... }:
@@ -29,8 +30,6 @@ in
         # path = 
     # };
 
-    programs.yubikey-manager.enable = true;
-
     home.packages = with pkgs; [
       pamtester # to test yubikey 
       pam_u2f # pamu2fcfg > ~/.config/Yubico/u2f_keys
@@ -38,7 +37,19 @@ in
       yubikey-manager
     ];
 
+    programs.gpg = {
+      # https://support.yubico.com/hc/en-us/articles/4819584884124-Resolving-GPG-s-CCID-conflicts
+      scdaemonSettings = {
+        disable-ccid = true;
+      };
+    };
+
+
+
+
+    # 
     services.gpg-agent = {
+
       #  The enable-ssh-support option configures gpg-agent to act as a replacement for the          ↳ traditional ssh-agent, allowing you to use your GPG authentication keys for SSH              ↳ logins                                                                              
         enableSshSupport = false;                                                             
                                                                                               

@@ -765,6 +765,7 @@ vim.pack.add({
     'https://github.com/vim-scripts/Solarized',
 
     -- filetypes
+    -- 'https://github.com/nvim-orgmode/orgmode',
     'https://github.com/PotatoesMaster/i3-vim-syntax',
     'https://github.com/overleaf/vim-env-syntax',
     'https://git.sr.ht/~m15a/vim-fennel-syntax',
@@ -774,6 +775,8 @@ vim.pack.add({
     'https://github.com/calvinchengx/vim-aftercolors',
     'https://github.com/raddari/last-color.nvim',
 })
+
+-- require('plugins.orgmode')
 
 -- wont work if last-color is not installed
 local theme = require('last-color').recall() or 'sonokai'
@@ -977,10 +980,8 @@ vim.g.avante = {
     rag_service = { -- RAG service configuration
         -- Enables the RAG service
         enabled = false, -- make it
-        -- Host mount path for the RAG service (Docker will mount this path)
-        host_mount = os.getenv('HOME'),
         -- The runner for the RAG service (can use docker or nix)
-        runner = 'nix',
+        runner = 'native',
         -- TODO should inherit the one from provider ?
         -- TODO write this as config
         llm = {
@@ -991,19 +992,19 @@ vim.g.avante = {
             endpoint = 'http://localhost:9931/v1', -- The LLM API endpoint
             api_key = '', -- The environment variable name for the LLM API key
             -- -- The LLM model name
-            -- model = "gpt-4o-mini",
+			model = "qwen3-14b-dense",
             -- extra = nil, -- Extra configuration options for the LLM
         },
         -- do we need a special model for that ?
-        embed = { -- Configuration for the Embedding model used by the RAG service
-            provider = 'openai_like', -- The embedding provider
-            -- endpoint = "https://api.openai.com/v1", -- The embedding API endpoint
-            endpoint = 'http://localhost:9931/v1', -- The embedding API endpoint
-            api_key = '', -- The environment variable name for the embedding API key
-            -- model = "text-embedding-3-large", -- The embedding model name
+        embed = {
+			-- Configuration for the Embedding model used by the RAG service
+            provider = 'openai_like',
+            endpoint = 'http://localhost:9932/v1',
+			-- The environment variable name for the embedding API key
+            api_key = '',
+            model = "text-embedding-3-large",
             extra = nil, -- Extra configuration options for the embedding model
         },
-        -- docker_extra_args = "", -- Extra arguments to pass to the docker command
     },
     behaviour = {
         auto_set_keymaps = true,
@@ -1013,7 +1014,7 @@ vim.g.avante = {
         acp_follow_agent_locations = true,
 
         enable_token_counting = true,
-        show_inference_timings = true,
+        show_inference_timings = true, -- this is from my fork ?
         -- auto_approve_tool_permissions = {"bash", "replace_in_file"}, -- Auto-approve specific tools only
         auto_focus_on_diff_view = true,
         auto_add_current_file = true,

@@ -81,6 +81,7 @@ in
     # rename
     medium-fr = {
       enable = true;
+      zeroconf.enable = false;
       model = "medium-int8";
       language = "fr";
       uri = "tcp://${server}:10301";
@@ -105,7 +106,9 @@ in
     #
     #   The client or Home Assistant pipeline chooses one. For Home Assistant, the conventional
     #   choice is “Okay Nabu” (okay_nabu).
-    enable = true;
+
+    # annoying eats CPU
+    enable = false;
     # package =
     # threshold =
     # area = []

@@ -9,6 +9,9 @@ pkgs.mkShell {
     gnum4
     gcc
     # missing 'ruststylecheck'
+    pkg-config
+    openssl
+    perl
   ];
 
   shellHook = with pkgs; ''

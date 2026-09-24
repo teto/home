@@ -19,6 +19,8 @@ Session.vim
 **/.claude/settings.local.json
 # aider-chat workflow files
 /.aider*
+avante.md
+AGENTS.md
 
 # remove core files
 /core

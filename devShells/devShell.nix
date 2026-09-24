@@ -62,7 +62,6 @@ pkgs.mkShell {
       # chntpw # broken to edit BCD (Boot configuration data) from windows
       efibootmgr
 
-      # yubikey deps
       smartmontools # for smartctl
 
       magic-wormhole-rs # to transfer secrets
