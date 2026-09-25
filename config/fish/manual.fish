@@ -72,6 +72,14 @@ abbr -a nvim_edit_texts --position command --regex ".+\.txt" --function nvim_edi
 abbr -a --position anywhere -- --help '--help | bat -plhelp'
 abbr -a --position anywhere -- -h '-h | bat -plhelp'
 
+
+# see https://github.com/jabirali/fish-abbrfile
+# next from https://github.com/wawa19933/fish-systemd :
+abbr -a -g sc systemctl
+abbr -a -g scu systemctl --user
+abbr -a -g jr journalctl
+abbr -a -g jru journalctl --user
+
 # tide config
 # set tide_cmd_duration_threshold 3000
 

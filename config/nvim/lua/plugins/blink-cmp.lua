@@ -222,11 +222,11 @@ local opts = {
             -- lua = { inherit_defaults = true, 'lazydev' }
         },
         providers = {
-            orgmode = {
-                name = 'Orgmode',
-                module = 'orgmode.org.autocompletion.blink',
-                fallbacks = { 'buffer' },
-            },
+            -- orgmode = {
+            --     name = 'Orgmode',
+            --     module = 'orgmode.org.autocompletion.blink',
+            --     fallbacks = { 'buffer' },
+            -- },
             -- ve:
 
             git = {
