@@ -53,6 +53,6 @@ meli.overrideAttrs (old: rec {
   # so changing cargoHash alone does not recreate the vendor derivation.
   cargoDeps = rustPlatform.fetchCargoVendor {
     inherit src;
-    hash = "sha256-Hw0PIulNbLfHNGOSOpmyJlcmy5V+LQH+FNC8z8x/XQQ=";
+    hash = "sha256-DwMgPgdjnmjse3+N0YPMMV5Ht+40Sg+U22WT2ce16LE=";
   };
 })
