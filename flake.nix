@@ -200,6 +200,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    mokuro = {
+      url = "github:teto/mokuro";
+      flake = false;
+    };
+
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-stable.url = "github:nixos/nixpkgs/nixos-26.05";
 

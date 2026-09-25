@@ -35,17 +35,14 @@
     # ReadEtcHosts=no,
   };
 
-  # MulticastDNS=
-  #   Takes  a  boolean argument or "resolve". Controls Multicast DNS support (RFC 6762[3])
-  #   on the local host. If true, enables full Multicast DNS responder  and  resolver  sup‐
-  #   port.  If  false,  disables both. If set to "resolve", only resolution support is en‐
-  #   abled, but responding is disabled. Note that systemd-networkd.service(8)  also  main‐
-  #   tains  per-link  Multicast DNS settings. Multicast DNS will be enabled on a link only
   # "resolve";
-  # services.resolved.dnsDelegates.example-org = {
+
+  #  *.dns-delegate files may be used to delegate DNS lookups in specific domains to specific DNS servers. See "systemd.dns-delegate"
+  # thus I should run a DNS server on local network for jedha stuff and so on
+  # services.resolved.dnsDelegates.jedha-home = {
   #   Delegate = {
   #     DNS = delegateAddress;
-  #     Domains = [ "delegated.example.org" ];
+  #     Domains = [ "jedha.home" ];
   #   };
   #
 }

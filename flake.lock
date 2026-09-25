@@ -1232,6 +1232,22 @@
         "url": "https://github.com/themoeway/jmdict-yomitan/releases/latest/download/JMdict_french.zip"
       }
     },
+    "mokuro": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1784464601,
+        "narHash": "sha256-fF7/XGIHkdVRoNXZT18PMzb09kL3rY72IL4Ujw835b0=",
+        "owner": "teto",
+        "repo": "mokuro",
+        "rev": "9f79b1281066f953ec6e5d1e7086c401fa8da159",
+        "type": "github"
+      },
+      "original": {
+        "owner": "teto",
+        "repo": "mokuro",
+        "type": "github"
+      }
+    },
     "mujmap": {
       "inputs": {
         "blueprint": "blueprint",
@@ -2191,6 +2207,7 @@
         "meli-src": "meli-src",
         "memento-dev": "memento-dev",
         "memento-kanjidict": "memento-kanjidict",
+        "mokuro": "mokuro",
         "mujmap": "mujmap",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "neovim-src": "neovim-src_2",

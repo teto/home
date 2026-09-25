@@ -4,4 +4,6 @@
   _imports = [
     flakeSelf.nixosProfiles.adguardhome
   ];
+
+  enable = true;
 }
