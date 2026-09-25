@@ -855,7 +855,7 @@ vim.keymap.set('n', '[[', function()
         wrap = true,
         -- severity
         -- on_jump
-		severity = vim.diagnostic.severity.HINT,
+        severity = vim.diagnostic.severity.HINT,
     })
 end, { buffer = false })
 
@@ -992,17 +992,17 @@ vim.g.avante = {
             endpoint = 'http://localhost:9931/v1', -- The LLM API endpoint
             api_key = '', -- The environment variable name for the LLM API key
             -- -- The LLM model name
-			model = "qwen3-14b-dense",
+            model = 'qwen3-14b-dense',
             -- extra = nil, -- Extra configuration options for the LLM
         },
         -- do we need a special model for that ?
         embed = {
-			-- Configuration for the Embedding model used by the RAG service
+            -- Configuration for the Embedding model used by the RAG service
             provider = 'openai_like',
             endpoint = 'http://localhost:9932/v1',
-			-- The environment variable name for the embedding API key
+            -- The environment variable name for the embedding API key
             api_key = '',
-            model = "text-embedding-3-large",
+            model = 'text-embedding-3-large',
             extra = nil, -- Extra configuration options for the embedding model
         },
     },

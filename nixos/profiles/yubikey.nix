@@ -17,7 +17,7 @@
     };
   };
 
-    programs.yubikey-manager.enable = true;
+  programs.yubikey-manager.enable = true;
 
   services.pcscd.enable = true;
   services.yubikey-agent.enable = true;

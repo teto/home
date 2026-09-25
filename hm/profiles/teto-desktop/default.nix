@@ -140,7 +140,7 @@ in
       mdcat # markdown viewer
       mcat # universal viewer
       mitmproxy # help catch http traffic
-      notmuch # needed 
+      notmuch # needed
 
       neovim-dbg # when neovim crashes, launch "nvim-debug" to debug
 
@@ -226,9 +226,9 @@ in
 
     # TODO set it globally ?
     CDPATH = "$HOME/plugins";
-    PAGER="bat";
+    PAGER = "bat";
 
-    MANPAGER="moor";
+    MANPAGER = "moor";
     # MANPAGER = "less -R -i --use-color -Dd+M -Du+C";
     # MANROFFOPT = "-c";
   }

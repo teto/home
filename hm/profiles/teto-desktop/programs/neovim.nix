@@ -415,12 +415,12 @@ in
   enableFzfLua = true;
 
   # Some of these packages are only available in my lua overlay. Since those are used
-  extraLuaPackages = 
+  extraLuaPackages =
     lp:
     [
 
-    lp.nvim-nio # for rocks.nvim (installed via vim.pack so required)
-    # lp.fzy
+      lp.nvim-nio # for rocks.nvim (installed via vim.pack so required)
+      # lp.fzy
 
     ]
     ++ flakeSelf.inputs.rikai-nvim.packages.${pkgs.stdenv.hostPlatform.system}.rikai-nvim.propagatedBuildInputs

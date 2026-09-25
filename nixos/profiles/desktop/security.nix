@@ -55,7 +55,6 @@
     }
   ];
 
-
   # users.motd =
   # security.pam.loginLimits = [
   #   {

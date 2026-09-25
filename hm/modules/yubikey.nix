@@ -1,12 +1,16 @@
 /*
-Needs nixos/profiles/yubikey.nix as well ?
-Links
-- https://nixos.wiki/wiki/Yubikey
-- see https://joinemm.dev/blog/yubikey-nixos-guide for gpg advice
-- https://github.com/nullcopy/ykluks-tools
-
+  Needs nixos/profiles/yubikey.nix as well ?
+  Links
+  - https://nixos.wiki/wiki/Yubikey
+  - see https://joinemm.dev/blog/yubikey-nixos-guide for gpg advice
+  - https://github.com/nullcopy/ykluks-tools
 */
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   cfg = config.programs.yubikey;
 in
@@ -26,12 +30,12 @@ in
   config = lib.mkIf cfg.enable {
 
     # pam.yubico.authorizedYubiKeys = {
-      # ids =
-        # path = 
+    # ids =
+    # path =
     # };
 
     home.packages = with pkgs; [
-      pamtester # to test yubikey 
+      pamtester # to test yubikey
       pam_u2f # pamu2fcfg > ~/.config/Yubico/u2f_keys
       yubioath-flutter # not sure it's great yubikey-manager #
       yubikey-manager
@@ -44,19 +48,16 @@ in
       };
     };
 
-
-
-
-    # 
+    #
     services.gpg-agent = {
 
-      #  The enable-ssh-support option configures gpg-agent to act as a replacement for the          ↳ traditional ssh-agent, allowing you to use your GPG authentication keys for SSH              ↳ logins                                                                              
-        enableSshSupport = false;                                                             
-                                                                                              
-        # enable smartcard                                                                    
-        # can conflict with pcscd                                                             
-        # https://ludovicrousseau.blogspot.com/2019/06/gnupg-and-pcsc-conflicts.html          
-        enableScDaemon = true;                                                        
-        };
+      #  The enable-ssh-support option configures gpg-agent to act as a replacement for the          ↳ traditional ssh-agent, allowing you to use your GPG authentication keys for SSH              ↳ logins
+      enableSshSupport = false;
+
+      # enable smartcard
+      # can conflict with pcscd
+      # https://ludovicrousseau.blogspot.com/2019/06/gnupg-and-pcsc-conflicts.html
+      enableScDaemon = true;
+    };
   };
 }
