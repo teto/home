@@ -1,5 +1,6 @@
 { config, ... }:
 {
+  # this triggers an haumea error
   # systemPackages = [ config.services.hickory-dns.package ];
   # set on shell initialisation (e.g. in /etc/profile
   variables = {
