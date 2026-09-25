@@ -199,10 +199,6 @@ rev = "v0.37"
 git = "vlime/vlime"
 rev = "v0.4.0"
 
-[plugins.vlime]
-git = "vlime/vlime"
-rev = "v0.4.0"
-
 # [plugins."git-rebase-auto-diff.nvim"]
 # git = "yutkat/git-rebase-auto-diff.nvim"
 # rev = "6fd2f5ba63828e5c4fd59bb1b75ef7525a5ce39f"
