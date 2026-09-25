@@ -6,6 +6,10 @@
   ...
 }:
 {
+
+  # extraHosts = ''
+  # '';
+
   networking = {
     useNetworkd = true;
     useDHCP = false;

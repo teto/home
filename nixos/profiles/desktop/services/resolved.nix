@@ -21,7 +21,7 @@
     DNSStubListener = "no";
     # use the ones obtained by dhcp ?
     UseDomains = true;
-    # Domains = [ "local" ]; # networking.domain
+    # Domains = [ ]; # networking.domain
 
     # TODO fallback on
     # man resolved.conf
@@ -31,7 +31,7 @@
     ];
 
     # this is windows resolution system
-    LLMNR = true; # blocks .local ?
+    LLMNR = false; # blocks .local ?
     # ReadEtcHosts=no,
   };
 

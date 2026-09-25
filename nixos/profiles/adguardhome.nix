@@ -1,5 +1,7 @@
 # to be included 
 {
+
+  services.adguardhome = {
   # COMPARE with competitot "blocky"
   # enable = false;
 
@@ -104,6 +106,7 @@
     #     url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_30.txt
     #     name: Phishing URL Blocklist (PhishTank and OpenPhish)
     #     id: 1789572143
+  };
   };
 }
 
