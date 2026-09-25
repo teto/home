@@ -1,14 +1,8 @@
-# { config, lib, pkgs, ... }:
+{ config, ... }:
 {
-
+  # systemPackages = [ config.services.hickory-dns.package ];
   # set on shell initialisation (e.g. in /etc/profile
   variables = {
-    # TODO move to sway/wayland
-    # WLR_NO_HARDWARE_CURSORS = "1";
-
-    # see if it is correctly interpolated
-    # TODO remove ?
-    ZDOTDIR = "$HOME/.config/zsh";
   };
 
   # variables set by PAM early in the process

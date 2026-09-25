@@ -22,6 +22,28 @@
 */
 { pkgs, config, ... }:
 let
+  whisperModelRevision = "c9af9dfadcad017757293c10e4478d42a5a06773";
+  whisperModelFile = name: hash: {
+    inherit name;
+    path = pkgs.fetchurl {
+      url = "https://huggingface.co/rhasspy/faster-whisper-medium-int8/resolve/${whisperModelRevision}/${name}";
+      inherit hash;
+    };
+  };
+  whisperModel = pkgs.linkFarm "faster-whisper-medium-int8" [
+    (whisperModelFile "config.json" "sha256-yd7j1nXDHDdjwe48nnI1BQ6Hfa3ZACxbPGA2bj2B2io=")
+    (whisperModelFile "model.bin" "sha256-4Zuj6D5osV1IDe+BhbB/yK9WyqFbuEcPLEfsjB+q7EQ=")
+    (whisperModelFile "vocabulary.txt" "sha256-NM4/4cUEECez+NQpEicJk/mG28S7NM8n+VHjSh5FORM=")
+    {
+      # The int8 repository omits this; without it faster-whisper downloads a tokenizer.
+      name = "tokenizer.json";
+      path = pkgs.fetchurl {
+        url = "https://huggingface.co/Systran/faster-whisper-medium/resolve/08e178d48790749d25932bbc082711ddcfdfbc4f/tokenizer.json";
+        hash = "sha256-+3tjGR6bsEUILHn9dCoxBqEsmVE6sw30oNR/pstv0Ks=";
+      };
+    }
+  ];
+
   # this sometimes resolves to ipv6 ?
   # server = "${config.networking.hostName}.local";
 
@@ -82,7 +104,9 @@ in
     medium-fr = {
       enable = true;
       zeroconf.enable = false;
-      model = "medium-int8";
+      model = "${whisperModel}";
+      sttLibrary = "faster-whisper";
+      extraArgs = [ "--local-files-only" ];
       language = "fr";
       uri = "tcp://${server}:10301";
       # device = "cuda";

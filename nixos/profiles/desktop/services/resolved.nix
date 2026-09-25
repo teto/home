@@ -26,11 +26,8 @@
     # TODO fallback on
     # man resolved.conf
     FallbackDNS = [
-      # we could use _gateway (solved by mymachines ?) depending on the order
-      # in nsswitch
+      # we could use _gateway (solved by mymachines ?) depending on the order in nsswitch
       "192.168.1.254"
-      "1.1.1.1"
-      "8.8.8.8"
     ];
 
     # this is windows resolution system
