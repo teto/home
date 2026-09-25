@@ -1,14 +1,11 @@
 # config is visiblew at /var/www/nextcloud/config/config.php
 {
-  config,
-  secrets,
   lib,
   pkgs,
   flakeSelf,
   ...
 }:
 let
-  # wgEndpoint = "10.100.0.1";
   nextcloudHostname = "nextcloud.vps";
 in
 {
@@ -25,7 +22,7 @@ in
     hostName = nextcloudHostname;
 
     # Trusted domains, from which the nextcloud installation will be accessible. You don’t need to add ‘services.nextcloud.hostname’ here.
-    # trustedDomains = [ ];
+    # trustedDomains = [ "vps" ];
     # trusted_proxies = [ ];
     # true ?
     https = true;
@@ -88,31 +85,4 @@ in
     #     Secret options which will be appended to Nextcloud’s config.php file (written as JSON, in the same form as the services.nextcloud.settings[1] option), for example ‘{"redis":{"password":"secret"}}’.
 
   };
-
-  # services.redis.servers."nextcloud".enable = true;
-  # services.redis.servers."nextcloud".port = 6379;
-
-  # Creating Nextcloud users and configure mail adresses
-  # disabling since it fails after first time
-  # --password-from-env  looks for the password in OC_PASS
-  # environment = { # OC_PASS = "${confFile}";
-  # };
-  # systemd.services.nextcloud-add-user = {
-  #   path = [ config.services.nextcloud.occ ];
-  #   script = ''
-  #     export OC_PASS="$(cat ${config.sops.secrets."nextcloud/tetoPassword".path})"
-  #     nextcloud-occ user:add --password-from-env teto
-  #     ${config.services.nextcloud.occ}/bin/nextcloud-occ user:setting teto settings email "${secrets.users.teto.email}"
-  #   '';
-  #   # ${config.services.nextcloud.occ}/bin/nextcloud-occ user:setting admin settings email "admin@localhost"
-  #   serviceConfig = {
-  #     Type = "oneshot";
-  #     User = "nextcloud";
-  #   };
-  #   # DONT run it automatically
-  #   # after = [ "nextcloud-setup.service" ];
-  #
-  #   # see https://discourse.nixos.org/t/disable-a-systemd-service-while-having-it-in-nixoss-conf/12732
-  #   wantedBy = lib.mkForce [ ];
-  # };
 }

@@ -8,9 +8,6 @@
   - https://francis.begyn.be/blog/nixos-home-router
   - https://www.jjpdev.com/posts/home-router-nixos/
 
-  systemd is advertised on the matrix:nixos-router so:
-  - the guide https://nixos.wiki/wiki/Systemd-networkd
-
   When booting, hit tab to edit the boot entry.
   Normally NixOS does not output to serial in the boot process, so we need to enable is by appending console=ttyS0,115200 to the boot entry. All characters appear twice, so just make sure you type it correctyl ;) . ctrl+l can be used to refresh the screen.
    After installing, you want to make sure that the PCEngine APU entry from the NixOS hardware repo is present, as it enables the console port.
@@ -48,16 +45,30 @@ in
     ./hardware.nix
     ./networking.nix
     ./services/openssh.nix
+    ./services/home-assistant.nix
+    ./services/music-assistant.nix
+    ./services/zigbee2mqtt.nix
     # ./services/mqtt.nix
 
     # TODO replace with systemd mdns
     # flakeSelf.nixosProfiles.avahi
     flakeSelf.nixosProfiles.router
     flakeSelf.nixosProfiles.universal
-    flakeSelf.nixosProfiles.home-assistant
+    flakeSelf.nixosProfiles.nix-daemon
 
   ];
 
+  nix.settings = {
+    # when reaches 10MB
+    min-free = "${toString (10 * 1024 * 1024)}";
+    # free 500MB
+    max-free = "${toString (500 * 1024 * 1024)}";
+
+  };
+
+  documentation.man.enable = true;
+
+  # mkForce ?
   environment.systemPackages = with pkgs; [
     # disabled for now to reduce memory print
     # flashrom # to be able to flash the bios see https://teklager.se/en/knowledge-base/apu-bios-upgrade/
@@ -88,28 +99,36 @@ in
     home.stateVersion = "26.05";
     # TODO it should load the whole folder
     imports = [
-      # flakeSelf.homeModules.teto-nogui
       flakeSelf.homeModules.neovim
       flakeSelf.homeProfiles.readline
-      # ./teto/nix.nix # done at
     ];
 
     home.packages = [
       pkgs.systemctl-tui
     ];
-    # package-sets.wifi = true;
+
+    # wakeonlan ${secrets.jedha.ethernetMac}
+    # sudo wolli --iface enp2s0 9c:6b:00:8b:2a:c8 --broadcast 255.255.255.255
 
     # wakeonlan ${secrets.jedha.ethernetMac}
     home.file."justfile".text = ''
+      # reveiller le desktop
       wakejedha:
-        sudo wolli --iface enp2s0 9c:6b:00:8b:2a:c8 --broadcast 255.255.255.255
+        sudo wolli --iface enp2s0 ${secrets.jedha.ethernetMac}
+
+      # flasher la cler (GCFFlasher -l)
+      # selectionne le firmware  ici https://deconz.dresden-elektronik.de/deconz-firmware/
+      # deCONZ_ConBeeII_0x26780700.bin.GCF is a shitty one that makes conbee2 enter a restart loop over usb
+      # last working one is deCONZ_ConBeeII_0x26720700.bin.GCF
+      conbee-flasher:
+        nix shell nixpkgs#gcfflasher
     '';
   };
 
-  services.journald.extraConfig = ''
+  services.journald.settings.Journal = {
     # alternatively one can run journalctl --vacuum-time=2d
-    SystemMaxUse=200MB
-  '';
+    SystemMaxUse = "200M";
+  };
 
   # Use the GRUB 2 boot loader.
   # You cannot have duplicated devices in mirroredBoots
@@ -261,9 +280,16 @@ in
     # Kind=bridge
 
     networks = {
+      "50-wg0" = {
+        matchConfig.Name = "wg0";
+        networkConfig.MulticastDNS = false;
+      };
+
       "10-enp1s0" = {
         matchConfig.Name = "enp1s0";
         networkConfig.DHCP = "ipv4";
+        # try ?
+        networkConfig.MulticastDNS = true;
       };
 
       "10-wireless-wan" = {
@@ -291,14 +317,12 @@ in
         # address = [
         # ];
         networkConfig.Address = "10.0.0.1/${toString bridgeNetwork.prefixLength}";
-        # routes = [
-        #   { routeConfig = { Destination = "64:ff9b::/96"; Gateway = "2001:db8::1"; }; }
-        # ];
 
         # networkConfig.Gateway = "${bridgeNetwork.address}";
         # networkConfig.DHCP = "ipv4";
         networkConfig.DHCPServer = true;
         networkConfig.IPMasquerade = "ipv4";
+        networkConfig.MulticastDNS = true;
 
         dhcpServerConfig = {
           PoolOffset = 100;
@@ -341,21 +365,6 @@ in
   };
 
   # systemd.services.systemd-networkd.environment.SYSTEMD_LOG_LEVEL = "debug";
-  # services.dhcpd4 = {
-  #   enable = true;
-
-  #   # TODO FIX
-  #   extraConfig = ''
-  #   option subnet-mask 255.255.255.0;
-  #   # L'option routers spécifie une liste d'adresses IP de routeurs qui sont sur le sous-réseau du client. Les routeurs doivent être mentionnés par ordre de préférence.
-  #   option routers ${bridgeNetwork.address};
-  #   option domain-name-servers 192.168.1.1;
-  #   subnet ${bridgeNetwork.address} netmask 255.255.255.0 {
-  #       range 10.0.0.100 10.0.0.199;
-  #   }
-  #   '';
-  #   interfaces = [ "br0" ];
-  # };
 
   time.timeZone = "Europe/Paris";
 

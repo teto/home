@@ -19,14 +19,6 @@
   # lines= ;
   location = "center";
 
-  pass = {
-    enable = true;
-    extraConfig = ''
-      # workaround for https://github.com/carnager/rofi-pass/issues/226
-      help_color="#FF0000"'';
-  };
-  # pass.stores = [];
-
   plugins = with pkgs; [
     rofi-emoji
     rofi-calc

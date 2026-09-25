@@ -3,6 +3,7 @@
   secrets,
   withSecrets,
   config,
+  dotfilesPath,
   # flakeSelf,
   ...
 }:
@@ -14,10 +15,12 @@
   package = pkgs.meli-teto;
 
   includes = [
-    "manual.toml"
+    # use fullpath because it's easier to copy/paste
+    "${dotfilesPath}/config/meli/manual.toml"
     # "fastmail.toml"
   ];
 
+  # set n seen
   settings = {
 
     # notifications = {

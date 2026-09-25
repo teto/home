@@ -8,17 +8,18 @@
 
   inputs = {
 
-    # todo remove
-    buildbot-nix = {
-      url = "github:nix-community/buildbot-nix";
-      # url = "github:teto/buildbot-nix?ref=teto/hack-niks3-eval-error";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nixbot.url = "github:Mic92/nixbot";
     nixbot.inputs.nixpkgs.follows = "nixpkgs";
 
-    direnv-instant.url = "github:Mic92/direnv-instant";
+    chroncal = {
+      url = "github:DouglasdeMoura/chroncal";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    direnv-instant = {
+      url = "github:Mic92/direnv-instant";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     disko = {
       url = "github:nix-community/disko";
@@ -35,10 +36,10 @@
       flake = false;
     };
 
-    harmonia = {
-      url = "github:nix-community/harmonia";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # harmonia = {
+    #   url = "github:nix-community/harmonia";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     jellyhaj.url = "github:owo-uwu-nyaa/jellyhaj";
 
@@ -63,12 +64,12 @@
       flake = false;
     };
 
-    # avante-nvim-src = {
-    #   # url = "github:teto/avante.nvim?ref=matt/debug";
-    #   url = "path:/home/teto/neovim/avante.nvim";
-    #   flake = false;
-    #   # inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    avante-nvim = {
+      # url = "github:teto/avante.nvim";
+      url = "path:/home/teto/plugins/avante2";
+      # flake = false;
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # blink-cmp = {
     #   url = "github:Saghen/blink.cmp";
@@ -77,13 +78,13 @@
 
     deploy-rs = {
       url = "github:serokell/deploy-rs";
-      # url = "github:apoloqize/deploy-rs?rev=b48c508f1e8c9f0c82a9baeffa014e86d716a546";
-
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # https://github.com/DeterminateSystems/nix-src/pull/217
-    flake-schemas.url = "github:DeterminateSystems/flake-schemas";
+    flyline = {
+      url = "github:HalFrgrd/flyline";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # firefox2nix.url = "git+https://git.sr.ht/~rycee/mozilla-addons-to-nix";
 
@@ -108,22 +109,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # nixpkgs follow
     jujutsu = {
-      # ?rev=669bfaf09b48a94c4756aff94ff00af9ee387307 is the commit with conf.d support
       url = "github:jj-vcs/jj";
-      # url = "github:bryceberger/jj?ref=revset-evaluator";
-
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    authentik-nix.url = "github:nix-community/authentik-nix";
-    authentik-nix.inputs.nixpkgs.follows = "nixpkgs";
-
-    # nixos-wizard = {
-    #   url = "github:km-clay/nixos-wizard";
-    #   # inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    # authentik-nix.url = "github:nix-community/authentik-nix";
+    # authentik-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-cache-beacon.url = "github:adisbladis/nix-cache-beacon";
     nix-cache-beacon.inputs.nixpkgs.follows = "nixpkgs";
@@ -139,12 +131,11 @@
     # };
 
     llama-cpp = {
-      # url = "github:ggml-org/llama.cpp";
-      url = "github:teto/llama.cpp?ref=teto/fish-completion";
+      url = "github:ggml-org/llama.cpp";
+      # url = "github:teto/llama.cpp?ref=teto/fish-completion";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # peerix.url = "github:cid-chan/peerix";
     # mptcp-flake.url = "github:teto/mptcp-flake/fix-flake";
     mujmap = {
       # url = "github:elizagamedev/mujmap";
@@ -160,25 +151,12 @@
     };
 
     meli-src = {
-      # url = "git+https://git.meli-email.org/meli/meli.git";
-      url = "github:teto/meli?ref=teto/add-completion"; # official mirror
-      # ref = "refs/pull/449/head";
+      url = "git+https://git.meli-email.org/meli/meli.git";
       flake = false;
     };
 
-    neomutt-src = {
-      url = "github:neomutt/neomutt";
-      flake = false;
-    };
-
-    # poetry.url = "github:nix-community/poetry2nix";
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
-      # url = "path:/home/teto/neovim-nightly-overlay";
-      # ff21a18bde28b4c8ca0bc1f9a5b7186a1b89a3d1 ok
-      # url = "github:nix-community/neovim-nightly-overlay?rev=ff21a18bde28b4c8ca0bc1f9a5b7186a1b89a3d1";
-      # not good
-      # url = "github:nix-community/neovim-nightly-overlay?rev=2b5cf92633caaf2604e7b78d8d16ad92dbb502c6";
       inputs.nixpkgs.follows = "nixpkgs";
       # inputs.neovim-src.follows = "neovim-src";
     };
@@ -188,17 +166,6 @@
       flake = false;
     };
 
-    # TODO extend vim plugins from this overlay
-    # neovim-overlay.url = "github:teto/neovim-nightly-overlay/vimPlugins-overlay";
-    # tree-sitter = {
-    #   url = "github:ahlinc/tree-sitter";
-    #   flake = false;
-    # };
-    neovide = {
-      url = "github:neovide/neovide";
-      flake = false;
-    };
-    # waybar.url = "github:Alexays/Waybar";
     # todo update for ci ?
     nixpkgs = {
       url = "github:teto/nixpkgs/scratch";
@@ -208,31 +175,33 @@
     nix = {
       url = "github:NixOS/nix";
       # url = "github:teto/nix?ref=teto/remove-assert-outputsSubstitutionTried";
-      # inputs.nixpkgs.follows = "nixpkgs";
     };
+    # https://github.com/DeterminateSystems/nix-src/pull/217
+    # flake-schemas.url = "github:DeterminateSystems/flake-schemas";
+    # nix-schemas.url = "github:DeterminateSystems/nix-src/flake-schemas";
+
     nh = {
       url = "github:nix-community/nh";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    noctalia-shell.url = "github:noctalia-dev/noctalia-shell";
 
-    nix-schemas.url = "github:DeterminateSystems/nix-src/flake-schemas";
+    noctalia-shell = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    jj-gh.url = "github:mrjones2014/jj-gh";
+    jj-gh = {
+      url = "github:mrjones2014/jj-gh";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     rocks-nvim = {
-      # url = "/home/teto/neovim/rocks.nvim";
       url = "github:nvim-neorocks/rocks.nvim";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-stable.url = "github:nixos/nixpkgs/nixos-26.05";
-
-    # nix-search-cli = {
-    #   url = "github:peterldowns/nix-search-cli";
-    #   # inputs.nixpkgs.follows = "nixpkgs";
-    # };
 
     nix-update = {
       url = "github:Mic92/nix-update";
@@ -246,57 +215,36 @@
 
     # c8296214151883ce27036be74d22d04953418cf4
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    # nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
 
     nur.url = "github:nix-community/NUR";
 
-    pinix = {
-      url = "github:remi-dupre/pinix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # https://git.sr.ht/~whynothugo/pimsync
     pimsync-src = {
       # "sourcehut:"
       url = "git+https://git.sr.ht/~whynothugo/pimsync";
       flake = false;
     };
 
-    purebred = {
-      url = "github:purebred-mua/purebred";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    rippkgs.url = "github:replit/rippkgs";
-    # rippkgs.inputs.nixpkgs.follows = "nixpkgs";
-
-    rikai-nvim = {
-      url = "github:teto/rikai.nvim";
-      # url = "/home/teto/neovim/jap.nvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # rest-nvim = {
-    #   url = "github:teto/rest.nvim?ref=matt/nix-expo";
+    # pinix = {
+    #   url = "github:remi-dupre/pinix";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-    # rofi-hoogle.url = "github:teto/rofi-hoogle/fixup";
-    rofi-hoogle = {
-      url = "github:rebeccaskinner/rofi-hoogle";
+    # purebred = {
+    #   url = "github:purebred-mua/purebred";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+
+    rikai-nvim = {
+      url = "github:teto/rikai.nvim";
+      # url = "/home/teto/plugins/rikai.nvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
+      # url = "github:Mic92/sops-nix?ref=pull/984/head";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # GIT_DIR=.jj/repo/store/git gh issue list
-    # provides a package 'starship-jj' used as a custom
-    # starship-jj = {
-    #   url = "gitlab:lanastara_foss/starship-jj";
-    # };
 
     # stylix = {
     #   url = "github:nix-community/stylix";
@@ -314,15 +262,23 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # AModules/fix-expand-fill-no-center
-    # https://github.com/Alexays/Waybar/pull/3881
-    # waybar.url = "github:Alexays/Waybar?ref=pull/3881/head";
+    vicinae = {
+      url = "github:vicinaehq/vicinae";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.systems.url = "github:nix-systems/default-linux";
+    };
+
+    vicinae-extensions = {
+      url = "github:vicinaehq/extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # doesn't work, hypridle seems better fitted ?
-    wayland-pipewire-idle-inhibit = {
-      url = "github:rafaelrc7/wayland-pipewire-idle-inhibit";
-      # inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # wayland-pipewire-idle-inhibit = {
+    #   url = "github:rafaelrc7/wayland-pipewire-idle-inhibit";
+    #   # inputs.nixpkgs.follows = "nixpkgs";
+    # };
+
     yazi = {
       url = "github:sxyazi/yazi";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -523,7 +479,6 @@
             pass-import-high-password-length
             jmdict
             meli-git
-            # neomutt
             pass-perso
             memento-whisper
             sway-scratchpad
@@ -548,6 +503,8 @@
         };
 
       # TODO run evals and treefmt checks
+      # used by nixbot
+      # https://github.com/nix-community/nixos-images/blob/56b52791312edeade1e6bd853ce56c778f363d50/flake.nix#L53
       checks = {
         # formatting = treefmtEval.${tetosPkgs.system}.config.build.check self;
 
@@ -572,28 +529,20 @@
       # adjust the hostnames accordingly ?
       nixosConfigurations =
         let
-          # disableSecrets =
-          #   name: val:
-          #   lib.nameValuePair "${name}-no-secrets" (
-          #     val.extendModules {
-          #       specialArgs = {
-          #         withSecrets = false;
-          #       };
-          #     }
-          #   );
-          # createSystem =
-          #   hostname: withSecrets:
-          # lib.mkNixosSystem {
-          #   # ideally we would return both versions
-          #   inherit withSecrets hostname;
-          #   modules = [
-          #     (./hosts + "/${hostname}")
-          #   ];
-          #
-          #   # encode it in name or
-          #   pkgs = tetosPkgs;
-          #   # pkgs = if hostname == "jedha" then tetosPkgsCuda else tetosPkgs;
-          # };
+          disableSecrets =
+            name: val:
+            lib.nameValuePair "${name}-no-secrets" (
+              val.extendModules {
+                modules = [
+                  {
+                    config.tetos.withSecrets = lib.mkForce false;
+                  }
+                ];
+                # specialArgs = {
+                #   withSecrets = false;
+                # };
+              }
+            );
 
           nixosConfigs = lib.importDirectories ./hosts (
             # dirname => hostname
@@ -613,25 +562,26 @@
             )
           );
 
-          nixosConfigsWithoutSecrets = lib.importDirectories ./hosts (
-            hostname: val:
-            lib.nameValuePair "${hostname}-no-secrets"
-              # dirname => hostname
-              (
-                lib.mkNixosSystem {
-                  inherit hostname;
-                  # ideally we would return both versions
-                  withSecrets = false;
-                  modules = [
-                    (./hosts + "/${hostname}")
-                  ];
-
-                  # encode it in name or
-                  # pkgs = tetosPkgs;
-                  pkgs = if hostname == "jedha" then tetosPkgsCuda else tetosPkgs;
-                }
-              )
-          );
+          nixosConfigsWithoutSecrets = lib.mapAttrs' disableSecrets nixosConfigs;
+          #   lib.importDirectories ./hosts (
+          #   hostname: val:
+          #   lib.nameValuePair "${hostname}-no-secrets"
+          #     # dirname => hostname
+          #     (
+          #       lib.mkNixosSystem {
+          #         inherit hostname;
+          #         # ideally we would return both versions
+          #         withSecrets = false;
+          #         modules = [
+          #           (./hosts + "/${hostname}")
+          #         ];
+          #
+          #         # encode it in name or
+          #         # pkgs = tetosPkgs;
+          #         pkgs = if hostname == "jedha" then tetosPkgsCuda else tetosPkgs;
+          #       }
+          #     )
+          # );
         in
         nixosConfigs // nixosConfigsWithoutSecrets;
 
@@ -647,11 +597,12 @@
         nixpkgs-monitor = import ./hm/modules/services/nixpkgs-monitor.nix;
       };
 
-      nixosProfiles = lib.importFiles ./nixos/profiles;
+      nixosProfiles = lib.importFiles ./nixos/profiles // {
+        teto = nixos/users/teto/teto.nix;
+      };
 
       nixosModules = lib.importFiles ./nixos/modules // {
         default-hm = self.nixosProfiles.hm-default;
-        teto-nogui = nixos/accounts/teto/teto.nix;
       };
 
       # autoload via lib.importDirectories
@@ -688,141 +639,9 @@
 
       # the 'deploy' entry is used by 'deploy-rs' to deploy our nixosConfigurations
       # if it doesn't work you can always fall back to the vanilla nixos-rebuild:
-      deploy = {
-        # This is the user that the profile will be deployed to (will use sudo if not the same as above).
-        # If `sshUser` is specified, this will be the default (though it will _not_ default to your own username)
-        sshUser = "teto";
-        # user = "root";
-
-        # Which sudo command to use. Must accept at least two arguments:
-        # the user name to execute commands as and the rest is the command to execute
-        # This will default to "sudo -u" if not specified anywhere.
-        # sudo = "doas -u";
-
-        # This is an optional list of arguments that will be passed to SSH.
-        # sshOpts = [ "-p" "2121" ];
-
-        # Fast connection to the node. If this is true, copy the whole closure instead of letting the node substitute.
-        # This defaults to `false`
-        fastConnection = false;
-
-        # If the previous profile should be re-activated if activation fails.
-        # This defaults to `true`
-        autoRollback = true;
-
-        # See the earlier section about Magic Rollback for more information.
-        # This defaults to `true`
-        magicRollback = true;
-
-        # The path which deploy-rs will use for temporary files, this is currently only used by `magicRollback` to create an inotify watcher in for confirmations
-        # If not specified, this will default to `/tmp`
-        # (if `magicRollback` is in use, this _must_ be writable by `user`)
-        # tempPath = "/home/someuser/.deploy-rs";
-
-        # Build the derivation on the target system.
-        # Will also fetch all external dependencies from the target system's substituters.
-        # This default to `false`
-        remoteBuild = false;
-
-        # Timeout for profile activation.
-        # This defaults to 240 seconds.
-        activationTimeout = 600;
-
-        # Timeout for profile activation confirmation.
-        # This defaults to 30 seconds.
-        confirmTimeout = 60;
-
-        # for now
-        # sshOpts = [ "-F" "ssh_config" ];
-        # TODO go through all nixosConfigurations actually ?
-        # If you require a signing key to push closures to your server, specify the path to it in the LOCAL_KEY environment variable.
-        nodes =
-          let
-            # system = "x86_64-linux";
-            genNode = attrs: {
-              inherit (attrs) hostname;
-              profiles.system = {
-                # remoteBuild = false;
-                user = "root";
-                hostname = attrs.hostname;
-                path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.${attrs.name};
-              };
-            };
-          in
-          {
-            neptune-no-secrets =
-              genNode {
-                name = "neptune";
-                # local-facing address neptune.local
-                # hostname = "neptune.local"; # temporary
-                hostname = "neptune.local"; # temporary
-              }
-              // {
-                # while working around require-sigs issue
-                # remoteBuild = true;
-
-                sshOpts = [
-                  # "-p12666"
-                  #NIXOS_NO_CHECK=1
-                  # "-oSendEnv=NIXOS_NO_CHECK"
-                  "-p22"
-                  # "-F" "ssh_config"
-                  # "-i/home/teto/.ssh/id_rsa"
-                  # "-p${toString secrets.router.sshPort}"
-                ];
-                user = "root";
-                sshUser = "teto";
-              };
-
-            router =
-              genNode {
-                name = "router";
-                # local-facing address
-                hostname = "router";
-              }
-              // {
-                # sshOpts = [ "-F" "ssh_config" ];
-                # sshUser = "root";
-                sshOpts = [
-                  # "-i/home/teto/.ssh/id_rsa"
-                  # "-p${toString secrets.router.sshPort}"
-                ];
-              };
-
-            #
-            jedha =
-              genNode {
-                name = "jedha";
-                # fetch from secrets
-                hostname = secrets.jedha.hostname;
-              }
-              // {
-                # interactiveSudo = true;
-                sshUser = "teto";
-              };
-
-            neotokyo =
-              genNode {
-                name = "neotokyo";
-                hostname = secrets.jakku.hostname;
-              }
-              // {
-                # sshOpts = [ "-t" ];
-                # interactiveSudo = true;
-                # user = "teto";
-              }
-              // {
-                # user = "teto";
-                sshUser = "teto";
-                # TODO should be picked up by ssh automatically
-                # sshOpts = [
-                #   "-i"
-                #   "~/.ssh/id_rsa"
-                #   # "-p${toString secrets.router.sshPort}"
-                # ];
-
-              };
-          };
+      deploy = import ./deploy.nix {
+        inherit secrets system;
+        flakeSelf = self;
       };
 
     };

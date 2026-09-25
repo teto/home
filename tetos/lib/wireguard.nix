@@ -23,6 +23,7 @@ let
 
   # map nixos configuration name
   # filter nixosConfigurations over tetos.wireguard ?
+  # shoudl be generated from nixosConfigurations
   clientPeers = [
     {
       # jedha
@@ -53,13 +54,13 @@ let
     10.100.0.1    nextcloud.vps
   '';
 
+  mkPeerIp = peerId: "10.100.0.${toString peerId}";
 in
 {
 
   inherit clientPeers serverPeer;
-  inherit vpnHosts;
-
-  mkPeerIp = peer: "10.100.0.${toString peer.id}";
+  # for now
+  inherit wgNetwork vpnHosts mkPeerIp;
 
   # load data from json
   mkWireguardPeer =
@@ -77,13 +78,14 @@ in
 
           # Send keepalives every 25 seconds. Important to keep NAT tables alive.
           persistentKeepalive = 25;
-          allowedIPs = if id == 1 then [ "10.100.0.${toString p.id}/32" ] else [ wgNetwork ];
+          # used to generate routing table, if central node (id ==1) we have routes towards all other peers
+          allowedIPs = if id == 1 then [ "${mkPeerIp p.id}/32" ] else [ wgNetwork ];
         };
     in
 
     {
       # Determines the IP address and subnet of the client's end of the tunnel interface.
-      ips = [ "10.100.0.${toString id}/24" ];
+      ips = [ "${mkPeerIp id}/24" ];
       listenPort = 51820; # to match firewall allowedUDPPorts (without this wg uses random port numbers)
 
       # Path to the private key file.

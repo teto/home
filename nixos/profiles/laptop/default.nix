@@ -5,8 +5,6 @@
   ...
 }:
 {
-  # package-sets.yubikey = true;
-
   # use tuned ?
   powerManagement = {
     powertop.enable = true;

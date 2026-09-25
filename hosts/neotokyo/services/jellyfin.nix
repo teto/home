@@ -4,13 +4,15 @@
   # dataDir ?
   # group ?
   # todo remove once we checked it worked against VPN
-  openFirewall = true;
+  openFirewall = false;
 
   #
   user = "jellyfin";
   group = "media";
 
   transcoding.enableSubtitleExtraction = true;
+
+  # dataDir =
   # TODO use "media" as group, same for transmission
   # group =
 

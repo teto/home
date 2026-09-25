@@ -8,11 +8,9 @@ let
     plugins = with pkgs; [
       rofi-calc
       rofi-bitwarden
-      rofi-pass
-
     ];
   };
 in
-myRofi.overrideAttrs ({
+myRofi.overrideAttrs {
   name = "rofi-matt-${rofi-unwrapped.version}";
-})
+}

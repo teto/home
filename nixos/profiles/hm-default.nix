@@ -21,8 +21,8 @@
 
   # shall we import all modules ?
   home-manager.sharedModules = [
-    # remote broken
-    flakeSelf.inputs.wayland-pipewire-idle-inhibit.homeModules.default
+    # deleted the input ? useless ?
+    # flakeSelf.inputs.wayland-pipewire-idle-inhibit.homeModules.default
     flakeSelf.inputs.sops-nix.homeManagerModules.sops
 
     flakeSelf.homeProfiles.readline
@@ -34,26 +34,26 @@
     # TODO it should autoload all of them ?
     flakeSelf.homeModules.bash
     flakeSelf.homeModules.fish
-    # flakeSelf.homeModules.fre
     flakeSelf.homeModules.fzf
+    flakeSelf.homeModules.less
     flakeSelf.homeModules.nvimpager
-    # flakeSelf.homeModules.cliphist
     flakeSelf.homeModules.neovim
-    # flakeSelf.homeModules.pimsync
     flakeSelf.homeModules.package-sets
     flakeSelf.homeModules.yazi
-    # flakeSelf.homeModules.zsh
 
     (
       # { ... }:
       {
         # to avoid warnings about incompatible stateVersions
         home.enableNixpkgsReleaseCheck = false;
+        programs.less.enableReadlineBindings = true;
+
       })
   ];
   home-manager.extraSpecialArgs = {
     secrets = lib.optionalAttrs withSecrets secrets;
     inherit
+      # TODO use nixosConfig version ?
       withSecrets
       flakeSelf
       dotfilesPath

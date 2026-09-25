@@ -64,7 +64,7 @@ in
     (defaultBuilderAttrs { })
     // builderAttrs
     // {
-      hostName = cfg.networking.domain;
+      hostName = cfg.networking.hostName;
       sshUser = "teto";
       sshKey = "${secretsFolder}/ssh/id_rsa";
       # I might need to set it ?

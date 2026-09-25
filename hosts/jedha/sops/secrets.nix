@@ -22,12 +22,11 @@
 
   };
 
-  "gitlab/apiToken" = {
-    mode = "400";
-    owner = config.users.users.teto.name;
-    group = config.users.users.teto.group;
-
-  };
+  # "gitlab/apiToken" = {
+  #   mode = "400";
+  #   owner = config.users.users.teto.name;
+  #   group = config.users.users.teto.group;
+  # };
 
   nix_extra_config = {
     mode = "400";

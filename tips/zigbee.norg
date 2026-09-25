@@ -1,4 +1,11 @@
 
+
+flash la cle conbee 2
+
+nix shell .#gcfflasher
+
+https://forum.phoscon.de/t/feature-request-better-distinction-between-firmware-and-deconz-version/179/9
+
 There are three sorts of Zigbee radios; Coordinator, Router and End Device.
 1. Coordinator is a hub or bridge, it's where the devices register.
 2. Routers are nodes in the mesh network. They can communicate back to the coordinator and also onwards to other nodes.
@@ -10,3 +17,10 @@ on zigbee2mqtt UI, one can see what role a device plays.
 
 
 When a device joins, the coordinator exposes the network key.
+
+
+* How to reset hardware:
+
+** scene switch
+
+press and hold button 1 (or the designated reset pin/button inside or on the unit) for about 7 to 10 seconds until the indicator light starts flashing rapidly.

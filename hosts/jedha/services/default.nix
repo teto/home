@@ -1,6 +1,4 @@
 {
-  config,
-  lib,
   pkgs,
   ...
 }:
@@ -24,9 +22,6 @@
   # just locate
   locate.enable = true;
   dbus.packages = [
-    # pkgs.deadd-notification-center # installed by systemd
-    pkgs.gcr # for pinentry
-    # pkgs.gnome.gdm
     # pkgs.gnome.gnome-control-center
   ];
 

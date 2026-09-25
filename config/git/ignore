@@ -1,21 +1,31 @@
 #  vim: set noet fenc=utf-8 ff=unix sts=0 sw=4 ts=4 foldmethod=marker :
 /.direnv
 *.env
+/result
 /.envrc
 .nvimlog
 *.log
+
+# Editor specific {{{
+######################
+*.workspace
+*.Rhistory
+Session.vim
+# }}}
 
 # ia-related files
 /.codex
 **/.codex
 **/.claude/settings.local.json
+# aider-chat workflow files
+/.aider*
+avante.md
+AGENTS.md
 
 # remove core files
 /core
 /core.*
 
-# aider-chat workflow files
-/.aider*
 
 .ccls-cache/
 /tags
@@ -25,9 +35,6 @@
 *.qcow2
 .nixos-test-history  # nixos test-driver repl history
 .*.vim
-
-# gp.nvim cache
-/.gp.md 
 
 __pad__
 
@@ -53,15 +60,7 @@ __pycache__/
 package.cache*
 .mypy_cache/
 .eggs/
-# haskell
 dist/*
-# }}}
-
-# Editor specific {{{
-######################
-*.workspace
-*.Rhistory
-Session.vim
 # }}}
 
 # Binaries {{{

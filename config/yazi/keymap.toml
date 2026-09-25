@@ -21,7 +21,10 @@
 # run = "plugin bookmarks delete_all"
 # desc = "Delete all bookmarks"
 # # }}}
-
+# [[mgr.prepend_keymap]]
+#   on   = [ "t", "d" ]
+#   run  = "tab_create"
+#   desc = "Create tab in startup directory"
 
 # you can see the mappings from yazi with ~
 # it even supports search !
@@ -47,8 +50,8 @@ prepend_keymap = [
    { on = [ "m" ], run = "plugin bookmarks save", desc = "Save current position as a bookmark" },
    { on = [ "'" ], run = "plugin bookmarks jump", desc = "Jump to a bookmark" },
    # ouch 
-   { on = ["C"], run = "plugin ouch" , desc = "Compress with ouch" }
-
+   { on = ["C"], run = "plugin ouch" , desc = "Compress with ouch" },
+  { on   = [ "t", "d" ], run  = "tab_create", desc = "Create tab in startup directory" }
    ]
 
 # on   = "R"

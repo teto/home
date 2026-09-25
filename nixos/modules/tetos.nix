@@ -11,15 +11,20 @@ in
   options = {
     tetos = {
       withSecrets = lib.mkEnableOption "withSecrets";
-      # custom = lib.mkOption {
+      # enableYubikey = lib.mkEnableOption "yubikey";
+      # one for wireguard
+      # secretsFolder = lib.mkOption {
       #   default = false;
-      #   type = lib.types.bool;
+      #   type = lib.types.str;
       #   description = ''
       #     Whether to enable Fish integration.
       #   '';
       # };
     };
   };
-  config = lib.mkIf cfg.enable {
-  };
+
+  # config = lib.mkIf cfg.enableYubikey {
+  #   # dictated by https://nixos.wiki/wiki/Yubikey
+  #
+  # };
 }

@@ -32,13 +32,15 @@
     KbdInteractiveAuthentication = false;
     # PasswordAuthentication = false;
     X11Forwarding = false;
-    PermitRootLogin = lib.mkForce "no";
+    PermitRootLogin = "no";
 
     # could not find it
     # HostKey = "/run/secrets/ssh_host_key";
 
     AllowUsers = [
       "teto"
+
+      # needed to push to repo
       "gitolite" # depend on gitolite service
     ];
     # KexAlgorithms =

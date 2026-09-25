@@ -5,62 +5,65 @@
   flakeSelf,
   ...
 }:
-with lib;
 
 let
   cfg = config.package-sets;
 
   system = pkgs.stdenv.hostPlatform.system;
+  # with lib;
+
+  inherit (lib) mkIf ignoreBroken;
 in
 {
 
   options = {
     package-sets = {
 
-      livecoding = mkEnableOption "live livecoding writing";
-      fonts = mkEnableOption "extra fonts";
-      desktop = mkEnableOption "desktop packages";
-      yubikey = mkEnableOption "yubikey packages";
-      server = mkEnableOption "server packages";
-      finance = mkEnableOption "finance packages";
+      domotic = lib.mkEnableOption "domotic";
+      livecoding = lib.mkEnableOption "live livecoding writing";
+      fonts = lib.mkEnableOption "extra fonts";
+      desktop = lib.mkEnableOption "desktop packages";
+      server = lib.mkEnableOption "server packages";
+      finance = lib.mkEnableOption "finance packages";
 
-      developer = mkEnableOption "Developer packages";
+      developer = lib.mkEnableOption "Developer packages";
+      jellyfin = lib.mkEnableOption "Jellyfin packages";
 
-      music-processing = mkEnableOption "Music processing, e.g. guitar recording";
+      music-processing = lib.mkEnableOption "Music processing, e.g. guitar recording";
 
-      kubernetes = mkEnableOption "Kubernetes packages";
-      subtitleUtils = mkEnableOption "Subtitle edition";
+      kubernetes = lib.mkEnableOption "Kubernetes packages";
+      subtitleUtils = lib.mkEnableOption "Subtitle edition";
 
-      scientificSoftware = mkEnableOption "Scientific packages";
+      scientificSoftware = lib.mkEnableOption "Scientific packages";
 
-      enableOfficePackages = mkEnableOption "office/heavy packages";
-      enableDesktopGUIPackages = mkEnableOption "Heavy desktop packages";
+      enableOfficePackages = lib.mkEnableOption "office/heavy packages";
+      enableDesktopGUIPackages = lib.mkEnableOption "Heavy desktop packages";
       # TODO convert into description
       # the kind of packages u don't want to compile
       # TODO les prendres depuis un channel avec des binaires ?
       # with flakeSelf.inputs.nixos-stable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 
-      enableIMPackages = mkEnableOption "IM packages";
-      wifi = mkEnableOption "wifi packages";
-      bluetooth = mkEnableOption "bluetooth";
-      energy = mkEnableOption "energy management packages";
-      enableGaming = mkEnableOption "Gaming packages";
-      waylandPackages = mkEnableOption "Wayland packages";
+      enableIMPackages = lib.mkEnableOption "IM packages";
+      wifi = lib.mkEnableOption "wifi packages";
+      bluetooth = lib.mkEnableOption "bluetooth";
+      energy = lib.mkEnableOption "energy management packages";
+      enableGaming = lib.mkEnableOption "Gaming packages";
+      waylandPackages = lib.mkEnableOption "Wayland packages";
 
-      llms = mkEnableOption "IA/Large language model packages";
-      # laptop = mkEnableOption "Laptop packages (energy + wifi)";
+      llms = lib.mkEnableOption "IA/Large language model packages";
+      # laptop = lib.mkEnableOption "Laptop packages (energy + wifi)";
 
-      japanese = mkEnableOption "Japanese stuff";
+      japanese = lib.mkEnableOption "Japanese stuff";
 
-      jujutsu = mkEnableOption "jujutsu";
+      jujutsu = lib.mkEnableOption "jujutsu";
 
     };
 
   };
 
   # this gets merged by default
-  config = mkMerge [
-    ({
+  config = lib.mkMerge [
+    {
       # INSTALLED whatever the config
       home.packages = with pkgs; [
         curl
@@ -69,18 +72,24 @@ in
         tree
         # zenith  # resources monitor
       ];
-    })
+    }
 
-    (mkIf cfg.bluetooth {
-      home.packages = with pkgs; [
-        pkgs.bluetuith
+    (mkIf cfg.domotic {
+      home.packages = [
+        (pkgs.writeShellScriptBin "hass-cli" ''
+          case "''${HASS_SERVER:-}" in
+            "" | *://*) ;;
+            *) export HASS_SERVER="http://$HASS_SERVER" ;;
+          esac
+
+          exec ${pkgs.home-assistant-cli}/bin/hass-cli "$@"
+        '')
       ];
     })
-
-    (mkIf cfg.yubikey {
-      home.packages = with pkgs; [
-        yubioath-flutter # not sure it's great yubikey-manager #
-        yubikey-manager
+    (mkIf cfg.bluetooth {
+      home.packages = [
+        pkgs.bluetuith
+        pkgs.bluetui
       ];
     })
 
@@ -94,12 +103,11 @@ in
     (mkIf cfg.jujutsu {
       home.packages =
         let
-          jj = pkgs.jujutsu; # replaced with the one from flake
           # jjui = flakeSelf.inputs.jjui.packages.${pkgs.stdenv.hostPlatform.system}.jjui;
           jjui = pkgs.jjui;
         in
         [
-          jj
+          # pkgs.jujutsu; # replaced with the one from flake
 
           # flakeSelf.inputs.jujutsu.packages.${pkgs.stdenv.hostPlatform.system}.jujutsu
           jjui
@@ -139,6 +147,9 @@ in
             dependencies = oa.dependencies ++ oa.optional-dependencies.gui;
           }))
 
+          pkgs.pi-coding-agent # to test as ACP provider for avante
+
+          pkgs.opencode # to test in avante.nvim
           # pkgs.python3Packages.vllm
           # pkgs.repomix # to upload a codebase to llm
         ];
@@ -150,7 +161,7 @@ in
         let
 
           # for 'convert' executable. Can convert PDF too
-          myImagemagick = pkgs.imagemagick.override ({ ghostscriptSupport = true; });
+          myImagemagick = pkgs.imagemagick.override { ghostscriptSupport = true; };
           # emmylua-ls = flakeSelf.inputs.emmylua.packages.${system}.emmylua_ls; # lua LSP written in rust
           # emmylua-check = flakeSelf.inputs.emmylua.packages.${system}.emmylua_check # lua LSP written in rust
           inherit (pkgs)
@@ -163,9 +174,11 @@ in
         [
           emmylua-ls
           emmylua-check
-          pkgs.brightnessctl # attempt to draw a bigger cursor pointer in sway
 
-          pkgs.phinger-cursors # attempt to draw a bigger cursor pointer in sway
+          # does noctalia need this ?
+          # pkgs.brightnessctl # attempt to draw a bigger cursor pointer in sway
+
+          # pkgs.phinger-cursors # attempt to draw a bigger cursor pointer in sway
 
           pkgs.ffmpeg # to transcribe audio
 
@@ -175,7 +188,7 @@ in
           pkgs.qimgv # qt image viewer
           pkgs.ristretto # gtk image viewer
 
-          pkgs.kooha # screen recorder
+          pkgs.kooha # screen recorder. Replaces peek
 
           # pkgs.termpdfpy # pdf in terminal , kinda broken
           # pkgs.fancy-cat  # zig pdf viewer in terminal (broken(
@@ -185,8 +198,8 @@ in
           # hopefully we can remove this from the environment
           # it's just that I can't setup latex correctly
           # pkgs.rofi-rbw-wayland
-          pkgs.ddcutil # to control external monitor background
-          pkgs.timg # to display images in terminal, to compare with imgcat ?
+          pkgs.ddcutil # to control external monitor background (todo should be a nixos module ?
+          pkgs.timg # to display images in terminal, to compare with imgcat ? viu ?
           myImagemagick
 
           # borken cos of pymupdf
@@ -199,22 +212,15 @@ in
           pkgs.qutebrowser # broken keyboard driven fantastic browser
           pkgs.nautilus # demande webkit/todo replace by nemo ?
           # mcomix # manga reader
-          pkgs.popcorntime
+          # pkgs.popcorntime
           pkgs.peaclock # show big clock in terminal
           # gnome.california # fails
-          # khard # see khal.nix instead ?
-          # libsecret  # to consult
-          # mujmap # to sync notmuch tags across jmap
           pkgs.vlc
-          # element-desktop # TODO this should go into nix profile install
-          # mcomix # manga reader
           # TODO
-          # apvlv # broken
           # buku # broken
           # gcalc
           # nomacs # image viewer
           # nyxt      # lisp browser
-          pulseaudioFull # for pactl
           # replace with rust-wormhole
           # requires xdmcp https://github.com/freedesktop/libXdmcp
           rmpc # rust mpd client with synced lyrics and cover display !
@@ -229,7 +235,6 @@ in
           usbutils
           bandwhich # to monitor per app bandwidth
           desktop-file-utils # to get desktop
-          dogedns # dns solver "dog"
           # doggo # dns solver "dog"
           evince # succeed where zathura/mupdf fail
           font-manager # pretty good font manager
@@ -254,7 +259,7 @@ in
 
           # ncpamixer # pulseaudio TUI mixer
           noti # send notifications when a command finishes
-          (ouch.override ({ enableUnfree = true; })) # to (de)compress files
+          (ouch.override { enableUnfree = true; }) # to (de)compress files
           # papis # library manager
           (lib.hiPrio pass-teto) # pass with extensions, override nova's
           pavucontrol
@@ -266,7 +271,6 @@ in
           rustic # rust client for restic. Backups should be compatible
           # rbw # Rust bitwarden unofficial client
           ripgrep
-          # rofi-pass # rofi-pass it's enabled in the HM module ?
           rofi-teto
           rsync
           seahorse # GUI to interact with gnome keyring
@@ -337,7 +341,6 @@ in
         vlc
         # pinta # photo editing
         # element-desktop # TODO this should go into nix profile install
-        popcorntime
 
       ];
 
@@ -399,6 +402,7 @@ in
           # dasht # ~ zeal but in terminal
           # defalt via hm
           # difftastic # smart diffs
+          dogedns # dns solver "dog"
           docker-credential-helpers # gives 'docker-credential-pass' for instance
 
           flamelens # rust
@@ -425,13 +429,14 @@ in
           # TODO pass to vim makeWrapperArgs
           # just in my branch :'(
           # git-remote-hg
-          # manix # nix doc, might be outdated
+          manix # nix doc, might be outdated
           mistral-vibe-custom
           net-tools # for netstat
           nix-output-monitor # 'nom'
 
           nix-diff
           nix-prefetch-git
+          nix-prefetch-github
           nix-tree
           nix-melt
           netcat-gnu # plain 'netcat' is the bsd one
@@ -476,6 +481,7 @@ in
 
           inotify-info # to debug filewatching issues, very nice
           inotify-tools # for inotify-wait notably
+          moor # to be used as pager
           ncurses.dev # for infocmp
           neovide
           nix-update # nix-update <ATTR> to update a software
@@ -498,6 +504,8 @@ in
           universal-ctags # there are many different ctags, be careful !
           uv # to install python packages
           unar # used to view archives by yazi (now using ouch ?)
+          viu # a console image viewer
+
           whois
           wget
           # sttr # to process strings (base64 etc)
@@ -626,7 +634,7 @@ in
         # Adobe Source Han Sans
         source-han-sans # sourceHanSansPackages.japanese
         fira-code-symbols # for ligatures
-        iosevka
+        (ignoreBroken iosevka)
       ];
 
     })
@@ -647,31 +655,33 @@ in
           # memento-with-ocr = memento.override ({ withOcr = true; });
           # sudachi-rs # a japanese tokenizer (can have sudachidict builtins)
 
-          sudachi-rs-full = pkgs.sudachi-rs.override ({
+          sudachi-rs-full = pkgs.sudachi-rs.override {
             sudachidict = pkgs.sudachidict.override {
               dict-type = "full";
             };
-          });
+          };
         in
         [
           # hakuneko # X only
           anki-miner
           clanki # SRS in cli
-          # memento-with-ocr
-          # pkgs.clanki
-
-          pkgs.python3Packages.videocr # to extract burn in subtitles
 
           # https://github.com/NixOS/nixpkgs/pull/368909
           pkgs.kakasi # convert kanjis into kanas etc
           pkgs.kanji-stroke-order-font # for memento, font that shows strike order (!!) cool when learning
           tagainijisho # japanese dict; like zkanji Qt based
+
           jiten # unfree, helpful for jap.nvim
           sudachi-rs-full
           # sudachidict # exists in small/medium/large
-        ];
 
-      # xdg.dataFile."jmdict".source = pkgs.jmdict;
+          pkgs.mokuro # generates .mokuro files with OCR-ed overlays. dope.
+          # pkgs.python3Packages.manga-ocr
+          # pkgs.python3Packages.videocr # to extract burn in subtitles
+          pkgs.videocr # translate hardcoded subtitles into soft subtitles
+          pkgs.subminer # mpv-related mining
+
+        ];
     })
 
     (mkIf cfg.music-processing {
@@ -688,6 +698,15 @@ in
         pkgs.cointop # crypto only
         pkgs.gloomberb # bun
         pkgs.wealthfolio # node
+        pkgs.stonks-cli
+        # pkgs.ticker # bof
+        # pkgs.mop # bof2
+      ];
+    })
+
+    (mkIf cfg.livecoding {
+      home.packages = [
+        pkgs.tsukumi
       ];
     })
 
@@ -706,8 +725,8 @@ in
     (mkIf (cfg.japanese && cfg.llms) {
 
       home.packages = [
-        # pkgs.mokuro
-        # pkgs.python3Packages.manga-ocr
+        pkgs.mokuro
+        pkgs.python3Packages.manga-ocr
       ];
 
     })

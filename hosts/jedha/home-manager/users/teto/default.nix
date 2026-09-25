@@ -3,8 +3,8 @@
   config,
   lib,
   pkgs,
-  withSecrets,
   flakeSelf,
+  withSecrets,
   ...
 }:
 let
@@ -58,7 +58,6 @@ in
 
     ./programs/neovim.nix
     # ./programs/noctalia.nix
-    # ./programs/waybar.nix # TODO resotre ?
     ./programs/zsh.nix
 
     ./services/llama-cpp.nix
@@ -69,6 +68,7 @@ in
     ./services/mpd.nix
     ./services/mpris.nix
   ]
+  # use lib.mkIf config.tetos.withSecrets ?
   ++ lib.optionals withSecrets [
     ./sops.nix
     ./ia.nix
@@ -77,8 +77,6 @@ in
   # services.opensnitch-ui.enable
 
   # xdg.configFile."zsh/zshrc.generated".source = ../../../config/zsh/zshrc;
-
-  # programs.nh.enable = true;
 
   # never tried
   # home.preferXdgDirectories = false;
@@ -103,11 +101,17 @@ in
     in
     llmDeps
     ++ [
+      # disable for now because of
+      # >   `/nix/store/klzrf7krj1whzms0cbk8hw7nyrn013c3-rag-service-env/bin/activate' and
+      # >   `/nix/store/pzvl9qcgq404rmd3jasn5hvwh3frp75r-deploy-rs-0.1.0/bin/activate'
+      flakeSelf.inputs.avante-nvim.packages.${pkgs.stdenv.hostPlatform.system}.ragService
+
       # llm-ls # needed by the neovim plugin
       cointop # bitcoin tracker
       # mdp # markdown CLI presenter
       # gthumb # image manager, great to tag pictures
 
+      unsloth-desktop
       jocalsend # for tests
 
       ethtool # to check wakeonlan capabilities
@@ -122,7 +126,7 @@ in
       (lib.ignoreBroken lact) # GPU controller, needs a daemon
 
       moor # test as pager
-      presenterm # for presentations from terminal/markdown (in rust, supports images, pretty cool)
+      # presenterm # for presentations from terminal/markdown (in rust, supports images, pretty cool)
 
       # sioyek # pdf reader
       tailspin # (broken) a log viewer based on less ("spin" or "tsspin" is the executable)
@@ -136,14 +140,10 @@ in
       nautilus # demande webkit/todo replace by nemo ?
       # hexyl # hex editor
       # simple-scan
-      # vifm
+      vifm
       # anyrun
-
       # bridge-utils# pour  brctl
-
       # vscode-css-languageserver # to showcase 'cssls' lsp server
-      videocr # to extract hardcorded subs
-
     ];
 
   package-sets = {
@@ -162,7 +162,6 @@ in
     music-processing = false;
   };
 
-  # package-sets.enableDesktopGUIPackages = true;
   home.stateVersion = "26.05";
 
   home.sessionVariables = {
@@ -170,8 +169,6 @@ in
     IPYTHONDIR = "$XDG_CONFIG_HOME/ipython";
     JUPYTER_CONFIG_DIR = "$XDG_CONFIG_HOME/jupyter";
     LLAMA_MODELS_DIR = "${config.home.homeDirectory}/llama-models";
-
-    LLM_LOCAL_PORT = 11111;
 
     DASHT_DOCSETS_DIR = "/mnt/ext/docsets";
     # $HOME/.local/share/Zeal/Zeal/docsets

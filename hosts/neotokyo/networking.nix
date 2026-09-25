@@ -15,26 +15,14 @@ lib.optionalAttrs (lib.debug.traceValFn (a: "SECRETS ? ${toString a}") withSecre
   # TODO fetch from secrets
   hostName = "neotokyo";
 
-  domain = if withSecrets then secrets.jakku.domain else "toto";
+  domain = "fr";
+  # if withSecrets then secrets.jakku.domain else "toto";
 
   useNetworkd = true;
   # useDHCP = true;
 
   # without these overrides, seems like nginx selects wrong server
-  extraHosts =
-    let
-      # interested in router mostly
-      peer = builtins.head lib.wireguard.clientPeers;
-    in
-    ''
-      ${lib.wireguard.mkPeerIp peer} ${peer.hostName} 
-      10.100.0.3    tatooine.vpn
-      10.100.0.3    jedha.vpn
-      10.100.0.4    home-assistant.vpn
-      10.100.0.1    jellyfin.vps
-      10.100.0.1    immich.vps
-      10.100.0.1    nextcloud.vps
-    '';
+  extraHosts = lib.wireguard.vpnHosts;
 
   firewall = {
     enable = true;

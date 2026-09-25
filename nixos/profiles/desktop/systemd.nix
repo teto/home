@@ -1,4 +1,4 @@
-# { config, ... }:
+{ lib, ... }:
 {
   # then coredumpctl debug will launch gdb !
   # boot.kernel.sysctl."kernel.core_pattern" = "core"; to disable.
@@ -25,4 +25,8 @@
   # waiting at each nix command.
   # See https://github.com/aws/aws-cli/issues/5623
   services.nix-daemon.serviceConfig.Environment = [ "AWS_EC2_METADATA_DISABLED=true" ];
+
+  # force restart
+  services.systemd-resolved.stopIfChanged = lib.mkForce true;
+
 }

@@ -9,10 +9,21 @@
 let
   # only do it for builders like jedha / jakku ? get hostname as key ?
   # aka do they have harmonia enabled ?
-  hostsConfigs = lib.mapAttrs (
-    _: nixosCfg:
-    lib.optionalAttrs nixosCfg.config.services.harmonia.cache.enable (lib.genSshClientConfig nixosCfg)
-  ) flakeSelf.nixosConfigurations;
+  hostsConfigs =
+    lib.mapAttrs
+      (
+        _: nixosCfg:
+        lib.genSshClientConfig nixosCfg
+        // {
+          User = "teto";
+        }
+      )
+      (
+        lib.filterAttrs (
+          _: nixosCfg:
+          nixosCfg.config.services.harmonia.cache.enable || nixosCfg.config.services.harmonia.cache.enable
+        ) flakeSelf.nixosConfigurations
+      );
 in
 
 {
@@ -37,7 +48,6 @@ in
       # GlobalKnownHostfiles = pkgs.writeText "global_known_host_files" ''
       #   ${flakeSelf.nixosConfigurations.neotokyo.config.networking.domain} ${builtins.readFile ../../../../../hosts/neotokyo/host_key.pub}
       #   '';
-
     };
 
   };

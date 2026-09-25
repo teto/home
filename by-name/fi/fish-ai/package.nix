@@ -28,14 +28,14 @@ let
 in
 python3Packages.buildPythonApplication {
   pname = "fish-ai";
-  version = "2.15.0-unstable-2026-08-19";
+  version = "2.15.1-unstable-2026-08-25";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "Realiserad";
     repo = "fish-ai";
-    rev = "82ffd5902d9547ede4d360a151f8d22763805f3e";
-    hash = "sha256-UnjihRU/bSBWX+lekqJDe+1yfq+Y9K/Zz/71JWC4XoY=";
+    rev = "d959cc6a779f0e2300a0f6074d2482df155ef375";
+    hash = "sha256-N9XC74yvmNmnSVlz132yulc0Q7EVQnHAi/i1Tv9v3wI=";
   };
 
   build-system = with python3Packages; [ setuptools ];

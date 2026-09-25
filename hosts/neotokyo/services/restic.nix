@@ -71,8 +71,15 @@
       # repositoryFile
       repositoryFile = config.sops.secrets."restic/nextcloud/repository".path;
 
+      paths = [
+        "${config.services.nextcloud.datadir}/data"
+      ];
+
       # s3:s3.us-east-005.backblazeb2.com/teto-vault
       environmentFile = config.sops.secrets."restic/nextcloud/backblaze_credentials".path;
+
+      # command or path
+      # dynamicFilesFrom
 
       # this is the restic password
       passwordFile = config.sops.secrets."restic/nextcloud/password".path;

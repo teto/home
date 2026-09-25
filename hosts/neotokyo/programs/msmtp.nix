@@ -1,18 +1,20 @@
-# {
-#   config,
-#   lib,
-#   pkgs,
-#   ...
-# }:
+{
+  config,
+  # lib,
+  # pkgs,
+  ...
+}:
 {
   enable = true;
   accounts = {
-    default = {
-      auth = true;
-      host = "smtp.example";
-      # not sure I need a password here ? sops.secrets
-      passwordeval = "cat /secrets/password.txt";
-      user = "someone";
-    };
+    # default = {
+    #   auth = true;
+    #   host = "smtp.example";
+    #   # not sure I need a password here ? sops.secrets
+    #   passwordeval = "cat /secrets/password.txt";
+    #   user = "someone";
+    # };
   };
+
+  extraConfig = config.home-manager.users.teto.programs.msmtp.configContent;
 }

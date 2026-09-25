@@ -159,16 +159,14 @@ let
   ];
 
   filetypePlugins = with pkgs.vimPlugins; [
-    { plugin = neomutt-vim; }
-    { plugin = pkgs.vimPlugins.hurl; }
-    { plugin = wmgraphviz-vim; }
+    # { plugin = neomutt-vim; }
+    # { plugin = pkgs.vimPlugins.hurl; }
+    # { plugin = wmgraphviz-vim; }
     # { plugin = fennel-vim; }
     { plugin = vim-toml; } # TODO use treesitter
     # { plugin = dhall-vim; }
     # { plugin = kmonad-vim; }
     { plugin = vim-just; }
-    # moonscript-vim
-    # idris-vim
   ];
 
   luaPlugins = with pkgs.vimPlugins; [
@@ -187,6 +185,7 @@ let
     # })
     { plugin = nui-nvim; }
     { plugin = nvim-colorizer-lua; }
+
     pkgs.vimPlugins.typescript-tools-nvim
 
     # pkgs.vimPlugins.gitlab-vim  # not
@@ -237,7 +236,7 @@ let
           --}}}
         '';
     })
-    (luaPlugin { plugin = sniprun; })
+    # (luaPlugin { plugin = sniprun; })
   ];
 
   extraPackages = with pkgs; [
@@ -287,16 +286,15 @@ let
     yamlfmt
   ];
 
-  # finalLua = nvimLua.override {
-  #   packageOverrides = flakeSelf.inputs.rikai-nvim.overlays.luaOverlay;
-  # };
-
   vimPlugins = pkgs.vimPlugins;
 in
 {
   enableBlink = true;
   enableMyDefaults = true;
-  useAsManViewer = true;
+
+  # neovim as pager is too slow, takes ages to parse configuration.nix
+  useAsManViewer = false;
+  buildSpells = true;
 
   # neovim-debug is too slow we should try to build it and rename executable to nvim-debug
   # so it can still help debugging
@@ -417,27 +415,15 @@ in
   enableFzfLua = true;
 
   # Some of these packages are only available in my lua overlay. Since those are used
-  #
-  extraLuaPackages = lp: [
+  extraLuaPackages =
+    lp:
+    [
 
-    # TODO should work with latest HM
-    # lp.lua-utils-nvim
-    # lp.pathlib-nvim
+      lp.nvim-nio # for rocks.nvim (installed via vim.pack so required)
+      # lp.fzy
 
-    # importing dependencies of rikai.nvim
-    # TODO: do it from overlay or look at the plugin itself
-    # lp.sqlite
-    lp.utf8
-    lp.lsqlite3 # should be taken care of automatically
-    # lp.lual
-    lp.alogger
-    lp.mega-cmdparse
-    lp.mega-logging # should not be needed ?
-
-    lp.nvim-nio # for rocks.nvim (installed via vim.pack so required)
-    # lp.fzy
-
-  ]
+    ]
+    ++ flakeSelf.inputs.rikai-nvim.packages.${pkgs.stdenv.hostPlatform.system}.rikai-nvim.propagatedBuildInputs
   # nvimLua.pkgs.rest-nvim.propagatedBuildInputs
   ;
 
@@ -469,7 +455,6 @@ in
       pkgs.typescript # for tsserver
       pkgs.stylua # for lua formatting
       # pkgs.gitlab-ci-ls # gitlab lsp
-
       # mcp-hub
     ];
 }

@@ -1,0 +1,8 @@
+{
+
+  yubico.authorizedYubiKeys = {
+    # ids =
+    # path =
+  };
+
+}

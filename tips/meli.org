@@ -1,0 +1,17 @@
+* chercher le backend classique via
+
+raw-search QUERY
+
+* marquer un mail comme lu
+meli supports the basic maildir flags: passed, replied, seen, trashed, draft and flagged.  Flags can be searched with the
+‘flags:’ prefix in a search query, and can be modified by
+
+flag (un)set FLAG
+
+
+* quitter un mail en cours d'ecriture 
+
+:close  pour fermer le tab d'edition de courriel
+
+en mode url, press g+number to open url
+

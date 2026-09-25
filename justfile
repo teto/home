@@ -70,17 +70,16 @@ nix-repl:
         --override-input nixpkgs {{ NIXPKGS_REPO }} \
         --override-input hm {{ HM_REPO }}
 
-# --log-format internal-json
-# nom can hide when there is a lock
-# |& nom
-# env('HOST')       -j 1 \
+# build nixosConfiguration to get its closure size
 build-nom hostname:
     nom build .#nixosConfigurations.{{ hostname }}.config.system.build.toplevel 
+    nix path-info ./result
 
-# nom build
-# nix flake update
-# nix build .#nixosConfigurations.$HOSTNAME.config.system.build.toplevel
 # nix store diff-closures /run/current-system ./result
+
+convert-currencies:
+    # installed from libqalculate
+    qalc --exrates '100 EUR to CHF' to update rates from net
 
 # backup my photo folder
 backup-photos $AWS_ACCESS_KEY_ID=`pass show self-hosting/backblaze-restic-backup-key/username` $AWS_SECRET_ACCESS_KEY=`pass show self-hosting/backblaze-restic-backup-key/password`:
@@ -297,8 +296,31 @@ bitwarden-sync-to-password-store:
     bw export
     pass-perso import pass bitwarden  <FILE>
 
+mk-neovim-spells:
+    nvim --headless -i NONE -u NONE +'mkspell! local/share/nvim/site/spell/computer' +'quit!'
+
 refresh-ssh-public-keys:
     ssh-keyscan -q -p4231 -ted25519 neotokyo.fr | cut -d' ' -f2,3 > host_key.pub
 
 eval-jedha-no-secrets:
     nix eval .#nixosConfigurations.jedha-no-secrets.config.system.build.toplevel
+
+hass-list-blueprints:
+    hass-cli -x -o yaml raw ws blueprint/list --json '{"domain":"script"}'
+
+# TODO move it to generated justfile (for remote/ )
+sync-secrets:
+    # -P => progress
+    # -a => --archive:  It is a quick way of saying you want recursion and want to preserve almost everything.  
+    # --delete
+    # This  tells  rsync  to delete extraneous files from the receiving side (those that
+    # don't exist on the sending side), but only for the directories that are being syn‐
+    # --delete-delay 
+    # --max-delete=0 to be warned
+    # Use the -n or --dry-run flag with -iv
+    # rsync -avhP -e ssh jedha:home/secrets ./secrets
+    rsync -avhP --dry-run -e ssh ./secrets/ tatooine:home/secrets 
+
+# see what is in the nix store
+inspect-current-generation:
+    nix-graph /run/current-system/sw

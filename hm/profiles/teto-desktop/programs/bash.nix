@@ -11,6 +11,7 @@ let
   # flakeSelf.deploy.nodes.jedha;
 in
 {
+  termTitle.enable = true;
 
   # goes to .profile
   sessionVariables = {
@@ -25,9 +26,11 @@ in
   historyFile = "${config.xdg.cacheHome}/bash_history";
 
   shellAliases = {
+    nix-stray-roots = ''nix-store --gc --print-roots | egrep -v "^(/nix/var|/proc|/run/\w+-system|\{memory)" | less'';
+    netstat_tcp = "netstat -ltnp";
 
     # nixpaste = "curl -F \"text=<-\" http://nixpaste.lbr.uno";
-    m = "neomutt"; # or meli ?
+    m = "meli";
     ns = "nix-shell";
 
     # ls aliases {{{

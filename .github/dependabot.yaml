@@ -1,6 +1,16 @@
 version: 2
 updates:
-  - package-ecosystem: github-actions
-    directory: /
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    target-branch: "master"
     schedule:
-      interval: weekly
+      interval: "weekly"
+    commit-message:
+      prefix: "ci:"
+  - package-ecosystem: "nix"
+    directory: "/"
+    target-branch: "master"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "flake:"

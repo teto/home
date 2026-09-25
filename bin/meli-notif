@@ -1,5 +1,8 @@
 #!/bin/sh
 title="$1"
 msg="$2"
-notify-send "HELLO from meli-notif"
-notify-send "meli" "$msg"
+wat="$3"
+#
+echo "$msg:$wat" > /tmp/test-meli.log
+# notify-send "HELLO from meli-notif"
+notify-send "meli" "$msg: $wat"

@@ -1,14 +1,3 @@
--- return the Sidebar
--- local s = require('avante').get()
--- local Highlights = require('avante.highlights')
--- local Utils = require('avante.utils')
--- local Config = require('avante.config')
--- if not sidebar then return nil, "No sidebar" end
-
--- if not Utils.is_valid_container(self.containers.result, true) then return end
--- look at transform_result_content / generate_display_content
--- vim.print(s.containers.result.winid)
-
 local M = {}
 
 -- local on_click_gp = function(_nb_of_clicks, _button, _modifiers)

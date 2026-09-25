@@ -4,6 +4,10 @@
   ...
 }:
 {
+  # it is necessary to use dnssec though :(
+  # hostId
+  hostName = "tatooine"; # Define your hostname.
+
   networkmanager = {
     enable = true;
   };
@@ -12,12 +16,8 @@
 
   hosts = {
     # a test, better would be to have nginx recognize another thing
-    "10.100.0.1" = [ "neotokyo.local" ];
+    # todo use from lib
+    # "10.100.0.1" = [ "neotokyo.local" ];
   };
 
-  firewall.allowedTCPPorts = lib.optional config.services.rmfakecloud.enable config.services.rmfakecloud.port;
-
-  firewall.allowedUDPPorts = [
-    51820 # wireguard
-  ];
 }

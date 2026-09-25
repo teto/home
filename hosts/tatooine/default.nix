@@ -48,6 +48,7 @@ in
 
     flakeSelf.nixosProfiles.disko-desktop
     flakeSelf.nixosProfiles.networkmanager
+    flakeSelf.nixosProfiles.wyoming
 
     # removed 'cos it clashed with disk-config but these are not the same
     # ./generated.nix
@@ -62,8 +63,9 @@ in
     flakeSelf.nixosProfiles.podman
     flakeSelf.nixosProfiles.experimental
     flakeSelf.nixosProfiles.steam
+    flakeSelf.nixosProfiles.bluetooth
 
-    flakeSelf.nixosProfiles.kanata
+    # flakeSelf.nixosProfiles.kanata
     # ./services/linkwarden.nix
 
     # ./networking/wireguard.nix
@@ -107,7 +109,6 @@ in
 
   home-manager.users = {
     teto = {
-      # TODO it should load the whole folder
       imports = [
         # custom modules
         ./home-manager/users/teto/default.nix
@@ -115,10 +116,15 @@ in
     };
   };
 
-  # it is necessary to use dnssec though :(
-  # hostId
-  networking.hostName = "tatooine"; # Define your hostname.
-  networking.domain = ".local";
+  # https://blog.matthewbrunelle.com/swap-zram-zswap-and-hibernate-on-nixos/
+  # hoping it preserves SSD ?
+  boot.zswap = {
+    enable = true;
+    compressor = "lz4";
+  };
+  boot.kernel.sysctl."vm.swappiness" = 100;
+
+  # system.nssDatabases.hosts = (lib.mkOrder 501 [ "resolve [!UNAVAIL=return]" ]);
 
   hardware = {
     enableAllFirmware = true;
@@ -126,10 +132,12 @@ in
     sane.enable = true;
 
     # cant be enabled with pipewire
-    # pulseaudio = {
-    #   enable = true;
-    #   package = pkgs.pulseaudioFull;
-    # };
+    pulseaudio = {
+      # Using PipeWire as the sound server conflicts with PulseAudio. This option requires `services.pulseaudio.enable` to be set to false
+      enable = false;
+      # for ad2p profle ?
+      package = pkgs.pulseaudioFull;
+    };
 
     # High quality BT calls
     # https://nixos.wiki/wiki/Bluetooth
@@ -139,24 +147,6 @@ in
       # package =
       # written to /etc/bluetooth/main.conf
       settings = {
-
-        General = {
-          Name = "toto";
-
-          # Shows battery charge of connected devices on supported
-          # Bluetooth adapters. Defaults to 'false'.
-          Experimental = true;
-
-          # to work with a2dp profile (seems outdated)
-          # unknown key
-          # Enable = "Source,Sink,Media,Socket";
-        };
-        Policy = {
-          # Enable all controllers when they are found. This includes
-          # adapters present on start as well as adapters that are plugged
-          # in later on. Defaults to 'true'.
-          AutoEnable = true;
-        };
       };
     };
     graphics = {
@@ -223,10 +213,16 @@ in
   # can conflict with gpg-agent depending on config
   system.stateVersion = "26.05";
 
-  services.journald.extraConfig = ''
+  # apparently deprecated / replaced by https://github.com/OHF-Voice/linux-voice-assistant
+  # which is not packaged (yet)
+  # services.wyoming.satellite = {
+  #   enable = true;
+  # };
+
+  services.journald.settings.Journal = {
     # alternatively one can run journalctl --vacuum-time=2d
-    SystemMaxUse=2G
-  '';
+    SystemMaxUse = "2G";
+  };
 
   # to remove "TSC_DEADLINE disabled due to Errata;
   # please update microcode to version: 0x22"

@@ -8,19 +8,20 @@
   ...
 }:
 let
+  sway = import ./sway.nix;
   firefox = pkgs.callPackage ./firefox.nix { };
   nix-builders = import ./nix-builder.nix { inherit flakeSelf lib secretsFolder; };
   neovim = import ./neovim.nix { inherit flakeSelf lib; };
   wireguard = import  ./wireguard.nix { inherit secrets flakeSelf lib secretsFolder; };
 
-  # myPkgs = pkgs;
-
+  # email = import ./mail.nix { inherit pkgs; };
 in
 {
   inherit
     nix-builders
     firefox
     neovim
+    sway
     ;
 
   inherit (neovim)
@@ -88,6 +89,12 @@ in
         flakeSelf.inputs.sops-nix.nixosModules.sops
         flakeSelf.inputs.hm.nixosModules.home-manager
 
+        # own module
+        flakeSelf.nixosModules.tetos
+        {
+            tetos.withSecrets = true;
+        }
+
       ]
       ++ modules;
 
@@ -140,6 +147,7 @@ in
 
   # generate a client ssh config from the server config
   # https://fmartingr.com/blog/2022/08/12/using-ssh-config-match-to-connect-to-a-host-using-multiple-ip-or-hostnames/
+  # Match localnetwork
   genSshClientConfig =
     # value is one of nixosConfigurations.<ENTRY>
     value:
@@ -147,26 +155,41 @@ in
       mcfg = value.config;
       sshCfg = mcfg.services.openssh;
       name = mcfg.networking.hostName;
+      hasDomain = mcfg.networking.domain != null;
     in
     builtins.trace "SSH config for ${name}" (
-      lib.optionalAttrs sshCfg.enable
+      lib.optionalAttrs sshCfg.enable 
         # lib.warn if "teto" is not in users.users
         {
           # or false) 
-          header = ''Match host="${mcfg.networking.hostName},${mcfg.networking.domain}${lib.optionalString (mcfg.tetos.wireguard.enable or false) ",${mcfg.networking.hostName}.vpn"}"'';
+          # use originalhost ?
+          header = ''Match host=${mcfg.networking.hostName}''
+          # let resolved handle expansion for now ?!
+          + lib.optionalString hasDomain ",${mcfg.networking.fqdn}"
+          # + lib.optionalString (mcfg.tetos.wireguard.enable or false) ",${mcfg.networking.hostName}.vpn"
+          ;
+
           # assumption ? or check/warn it has it ?
           # user = "teto";
           identityFile = "${secretsFolder}/ssh/id_rsa";
           port = builtins.head sshCfg.ports;
           identitiesOnly = true;
-          # extraOptions = {
           AddKeysToAgent = "yes";
 
+          # set domain to null ?
           # TODO  set it depending if hostName is FQDN ?
           # HostName = lib.throwIf (
           #   mcfg.networking.domain == null
           # ) "Missing domaing for ${name}" mcfg.networking.domain;
           # };
+
+          # allow customizations ?
+          Include = "${secretsFolder}/ssh/${mcfg.networking.hostName}";
+        }  // lib.optionalAttrs (!hasDomain) {
+          CanonicalizeFallbackLocal = true;
+          CanonicalizeHostname = true;
+          # done at resolve layer ?
+          # CanonicalDomains = [ "local" "vpn" ];
         }
     );
 

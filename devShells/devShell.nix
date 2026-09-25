@@ -62,10 +62,7 @@ pkgs.mkShell {
       # chntpw # broken to edit BCD (Boot configuration data) from windows
       efibootmgr
 
-      # yubikey deps
       smartmontools # for smartctl
-      pamtester # to test yubikey https://nixos.wiki/wiki/Yubikey
-      pam_u2f # pamu2fcfg > ~/.config/Yubico/u2f_keys
 
       magic-wormhole-rs # to transfer secrets
 

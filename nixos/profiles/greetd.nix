@@ -136,7 +136,7 @@
 
   };
 
-  programs.regreet.enable = false;
+  services.displayManager.regreet.enable = false;
 
   # environment.systemPackages = [
   #   pkgs.tuigreet

@@ -1,4 +1,15 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  flakeSelf,
+  ...
+}:
+let
+  ext_src = flakeSelf.inputs.vicinae-extensions;
+  exts = ext_src;
+  inherit (flakeSelf.inputs.vicinae.lib) mkVicinaeExtension;
+  extensions = exts.packages.${pkgs.stdenv.hostPlatform.system};
+in
 {
   enable = true;
   systemd.enable = true;
@@ -8,8 +19,6 @@
   # the website doesn't describe options, one has to checkout:
   # vicinae config default | less
   settings = {
-    # To do so, you simply need to add the files to import to the imports array. Files imported in this way are merged before the main user configuration file is considered and are never touched by vicinae directly, allowing them to be freely formatted and annotated with custom comments.
-    # Imported files are merged with the default config before the main user configuration file, which means that value present in the user configuration file will always override those that were imported.
     imports = [ "${config.xdg.configHome}/vicinae/manual.json" ];
     # Supports "navigate_back" or "close_window"
     escape_key_behavior = "navigate_back";
@@ -32,13 +41,13 @@
       # // Only suported on Hyprland for now.
       # // May require a server restart to disable properly.
       blur = {
-        "enabled" = true;
+        enabled = true;
       };
 
       # // Dims everything behind the vicinae window.
       # // Only supported on Hyprland for now.
       # // May require a server restart to disable properly.
-      "dim_around" = true;
+      dim_around = true;
     };
 
     "compact_mode" = {
@@ -75,66 +84,46 @@
   };
 
   extensions =
-    let
-      # TODO update extensions example + add imports
-      ext_src = pkgs.fetchFromGitHub {
-        owner = "vicinaehq";
-        repo = "extensions";
-        rev = "cf30b80f619282d45b1748eb76e784a4f875bb01";
-        sha256 = "sha256-KwNv+THKbNUey10q26NZPDMSzYTObRHaSDr81QP9CPY=";
-      };
-    in
+
     # "bluetooth" / "nix" / "wifi-commander" / "ssh"
     # https://www.raycast.com/capipo/pass
     # https://www.raycast.com/afok/password-store
     [
-      (config.lib.vicinae.mkRayCastExtension {
-        name = "dad-jokes";
-        rev = "b8c8fcd7ebd441a5452b396923f2a40e879565ba";
-        sha256 = "sha256-07IYIMKQjGlVWSDN1CX8wGOrx3Ob1beZeGmhaEMQYa4=";
-      })
       # broken with file-size-format
       # (config.lib.vicinae.mkRayCastExtension {
       #   name = "gif-search";
       #   rev = "4d417c2dfd86a5b2bea202d4a7b48d8eb3dbaeb1";
       #   sha256 = "sha256-G7il8T1L+P/2mXWJsb68n4BCbVKcrrtK8GnBNxzt73Q=";
       # })
-      (config.lib.vicinae.mkRayCastExtension {
-        name = "github";
-        rev = "238052eeb0e2fb9acb1f9418dd7178eafac5e5cf";
-        sha256 = "sha256-WjikX+a0h7Z65jhwclpjHLweEuPulG4wptGJiJfMT+0=";
-      })
-      # (config.lib.vicinae.mkRayCastExtension {
-      #   name = "base64";
-      #   rev = "9befbb8bad621365a0f2896a13f6fb26fecb8d55";
-      #   sha256 = "sha256-T/utRy3ptNlC+v3X9ebnzRuCLVlSkZnm7sRwikIVeAk=";
-      # })
-      # FIXME: broken build
-      # pm error code 1, tries to contact github
-      # > npm error path /build/bitwarden/node_modules/electron
-      # > npm error command failed
-      # > npm error command sh -c node install.js
-      # > npm error RequestError: getaddrinfo EAI_AGAIN github.com
-      # (config.lib.vicinae.mkRayCastExtension {
-      #   name = "bitwarden";
-      #   rev = "d7f68ce8eb9759f2c3a9c1bdfe5991b14f55c6f7";
-      #   sha256 = "sha256-YcjrBdqeNgC116LKzfPdz1AmupxwvkmwFBbzBDK7wCI=";
-      # })
-      (config.lib.vicinae.mkExtension {
-        name = "bluetooth";
-        src = "${ext_src}/extensions/bluetooth";
-      })
 
-      (config.lib.vicinae.mkExtension {
-        name = "pass";
-        src = "${ext_src}/extensions/pass";
-      })
-      # (config.lib.vicinae.mkRayCastExtension {
-      #
-      #   name = "gif-search";
-      #   sha256 = "sha256-G7il8T1L+P/2mXWJsb68n4BCbVKcrrtK8GnBNxzt73Q=";
-      #   rev = "4d417c2dfd86a5b2bea202d4a7b48d8eb3dbaeb1";
+      # it fails to build so got removed from overlay
+      # extensions.bluetooth
+      # (config.lib.vicinae.mkExtension {
+      #   name = "bluetooth";
+      #   src = "${ext_src}/extensions/bluetooth";
       # })
+
+      extensions.agenda
+      # extensions.base64
+      extensions.bitwarden
+      extensions.github
+      extensions.pass
+      extensions.nix
+      extensions.noctalia-shell-wallpaper-selector
+      extensions.ssh
+      extensions.supergenpass
+      # extensions.systemd
+      extensions.timer
+      extensions.wikipedia
+      extensions.reminders
+      extensions.otp
+
+      # (config.lib.vicinae.mkRayCastExtension {
+      #   name = "github";
+      #   rev = "238052eeb0e2fb9acb1f9418dd7178eafac5e5cf";
+      #   sha256 = "sha256-WjikX+a0h7Z65jhwclpjHLweEuPulG4wptGJiJfMT+0=";
+      # })
+
     ];
 
 }

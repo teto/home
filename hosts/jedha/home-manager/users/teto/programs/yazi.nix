@@ -1,11 +1,11 @@
-{
-  config,
-  pkgs,
-  options,
-  lib,
-  flakeSelf,
-  ...
-}:
+# {
+#   config,
+#   pkgs,
+#   options,
+#   lib,
+#   flakeSelf,
+#   ...
+# }:
 {
   programs.yazi = {
     enable = true;

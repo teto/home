@@ -51,6 +51,9 @@ in
     # "$HOME/.local/bin"
   ];
 
+  # just to test ~/.profile
+  # nix.useXdg = true;
+
   # broken on unstable because python2
   # services.opensnitch-ui.enable = false;
 
@@ -66,6 +69,7 @@ in
   package-sets = {
     livecoding = false;
     bluetooth = true;
+    finance = true;
 
     enableDesktopGUIPackages = true;
     enableIMPackages = true;

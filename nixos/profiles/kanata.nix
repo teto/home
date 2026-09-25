@@ -16,7 +16,7 @@ in
   ];
 
   services.kanata = {
-    enable = false;
+    # enable = false;
 
     keyboards = {
 

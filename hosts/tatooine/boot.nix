@@ -43,11 +43,6 @@
     # "mem_sleep_default=deep"
     "plymouth.use-simpledrm" # kesako ?
 
-    # "acpi_backlight=legacy"
-
-    # "acpi_osi=linux"
-
-    # "acpi_backlight=vendor"
     # "i915.enable_psr=0"  # disables a power saving feature that can cause flickering
     # "ahci.mobile_lpm_policy=3"
     # "rtc_cmos.use_acpi_alarm=1"

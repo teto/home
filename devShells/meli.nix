@@ -4,9 +4,14 @@
 pkgs.mkShell {
   name = "meli";
   buildInputs = with pkgs; [
+    cargo
+    rustc
     gnum4
     gcc
     # missing 'ruststylecheck'
+    pkg-config
+    openssl
+    perl
   ];
 
   shellHook = with pkgs; ''
@@ -18,5 +23,6 @@ pkgs.mkShell {
       }
 
     echo "Welcome to the meli development environment!"
+    export PATH="${lib.makeBinPath [ gnum4 ]}:$PATH"
   '';
 }

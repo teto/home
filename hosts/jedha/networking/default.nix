@@ -1,7 +1,7 @@
 # { config, lib, ... }:
 {
   hostName = "jedha";
-  domain = "jedha.local"; # Define your hostname.
+  domain = "home"; # ".local"; # Define your hostname.
 
   wireless = {
     scanOnLowSignal = false; # consume less energy and we dont roam anyway
@@ -14,6 +14,7 @@
       # we prefer to configure it with networkd
       "interface-name:enp11s0"
       #   "interface-name:r?-*"
+      "interface-name:wlan1" # to avoid putting mac
     ];
     wifi = {
       backend = "iwd";
@@ -45,30 +46,21 @@
     "10.100.0.1" = [ "neotokyo.local" ];
   };
 
-  # hosts = [];
+  resolvconf = {
+    # Whether DNS configuration is managed by resolvconf.
+    enable = false;
+    # creates problem with buffalo check if it blocks requests or what
+    # it is necessary to use dnssec though :(
+    dnsExtensionMechanism = false;
+    dnsSingleRequest = false;
+    # useLocalResolver = true; ?
+  };
 
-  # creates problem with buffalo check if it blocks requests or what
-  # it is necessary to use dnssec though :(
-  resolvconf.dnsExtensionMechanism = false;
-  resolvconf.dnsSingleRequest = false;
-
-  # osConfig.config.networking.firewall = lib.mkIf cfg.openFirewall {
-  #   allowedTCPPorts = [ cfg.port ];
-  # };
-
+  # sear
   interfaces.enp11s0 = {
     #wakeOnLan.policy
     wakeOnLan.enable = true;
   };
-
-  # .ipv4 = {
-  #   addresses = [
-  #                {
-  #                  # apipa system
-  #                  address = "169.254.1.10";
-  #                  prefixLength = 16;
-  #                  # metric = "800";
-  #                }
 
   # to allow wireshark to capture from netlink
   # networking.localCommands = ''
@@ -78,13 +70,6 @@
   #     ip link set dev nlmon0 up
   #   fi
   # '';
-
-  # 192.168.1.254
-  # defaultGateway = {
-  #   address = "131.211.84.1";
-  #   interface = "enp3s0";
-  #   source = "131.211.84.2";
-  # };
 
   # mostly to add blocklsit
   # hostFiles

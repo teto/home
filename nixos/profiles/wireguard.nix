@@ -1,6 +1,5 @@
+# TODO remove ?
 {
-  config,
-  lib,
   pkgs,
   secrets,
   ...
@@ -31,7 +30,8 @@ in
       # Note: The private key can also be included inline via the privateKey option,
       # but this makes the private key world-readable; thus, using privateKeyFile is
       # recommended.
-      privateKeyFile = "${secrets.secretsFolder}/wg.key";
+      # privateKeyFile = "${secrets.secretsFolder}/wg.key";
+      # hosts/neotokyo/default.nix|113 col 15| flakeSelf.nixosProfiles.wireguard
 
       peers = [
         # For a client configuration, one peer entry for the server will suffice.

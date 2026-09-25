@@ -2,10 +2,31 @@
   config,
   lib,
   secrets,
+  pkgs,
   # withSecrets,
   # , secretsFolder
   ...
 }:
+let
+  # /var/lib/gitolite/repositories/blog.git
+  buildBlog = pkgs.writeShellScriptBin "build-blog" ''
+    set -x
+    GIT_REPO="${config.services.gitolite.dataDir}/repositories/blog.git"
+    TMP_REPO=$(mktemp -d)
+    PUBLIC_WWW=/var/www/blog-generated
+    cd "$TMP_REPO" || exit 3
+    git --work-tree=. \
+        --git-dir="$GIT_REPO" \
+        checkout -f main
+
+    # --out-link "$PUBLIC_WWW" fails if link already exists
+    nix build . 
+    ln -sfnT "$(readlink -f ./result)" "$PUBLIC_WWW"
+
+  '';
+  # cp /var/www/blog-generated
+  # send mail eventually about result ?
+in
 {
   # enable = true;
   # TODO create folders for transmission/jellyfin in /media or /home/media
@@ -18,6 +39,8 @@
     # "d '/var/backup/postgresql' 0750 postgres backup - -"
 
     "d /var/www 0775 nginx www"
+
+    # is this needed ? created by build-blog ?
     "d /var/www/blog-generated 0775 nginx www"
   ];
 
@@ -57,7 +80,6 @@
 
         # ensure file is readable by `systemd-network` user
         PrivateKeyFile = config.sops.secrets.wg-private-key.path;
-        # PrivateKeyFile = "${secretsFolder}/wireguard/tatooine-private-key";
 
         # To automatically create routes for everything in AllowedIPs,
         # add RouteTable=main
@@ -112,6 +134,37 @@
     UMask = lib.mkForce "0027";
   };
 
+  services.build-blog = {
+    # serviceConfig =
+    enable = true;
+    description = "build my blog";
+    path = [
+      pkgs.git
+      pkgs.nix
+    ];
+    serviceConfig = {
+      # Type = "oneshot";
+      # User = "nextcloud";
+      Type = "oneshot";
+      TimeoutSec = 400;
+      # ExecCondition = "/run/current-system/systemd/bin/systemctl -q is-active nginx.service";
+
+      # so it can check out the repo
+      User = "gitolite";
+      # User = "teto";
+
+      ExecStart = "${lib.getExe buildBlog}";
+    };
+
+    unitConfig = {
+      # PartOf = "restic-backups-immich-db-to-backblaze.timer";
+      # todo pass failure
+      # %n ?
+      OnSuccess = "send-mail-to-teto@%n-success.service";
+      OnFailure = "send-mail-to-teto@%n-failure.service";
+    };
+  };
+
   services.restic-backups-immich-db-to-backblaze =
     lib.mkIf (config.services.restic.backups ? immich-db-to-backblaze)
       {
@@ -123,8 +176,8 @@
         unitConfig = {
           PartOf = "restic-backups-immich-db-to-backblaze.timer";
           # todo pass failure
-          OnSuccess = "send-mail-to-teto@success.service";
-          OnFailure = "send-mail-to-teto@failure.service";
+          OnSuccess = "send-mail-to-teto@%n-success.service";
+          OnFailure = "send-mail-to-teto@%n-failure.service";
         };
       };
 

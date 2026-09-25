@@ -21,8 +21,9 @@
     flakeSelf.nixosProfiles.nix-daemon
     flakeSelf.nixosProfiles.openssh
     flakeSelf.nixosProfiles.universal
+    flakeSelf.nixosProfiles.teto
+
     flakeSelf.nixosModules.default-hm
-    ../../nixos/accounts/teto/teto.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -40,7 +41,7 @@
   };
 
   networking.hostName = "neptune"; # Define your hostname.
-  networking.domain = "neptune.local"; # Define your hostname.
+  networking.domain = null;
 
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -185,7 +186,6 @@
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
-    # libreoffice # achieved via package-sets.enableOfficePackages
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wine
     wget

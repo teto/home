@@ -1,45 +1,32 @@
+# to list cards
+# ls -l /sys/class/drm/renderD*/device/driver
+# WLR_DRM_DEVICES
 {
   lib,
   pkgs,
   config,
-  dotfilesPath,
+  # dotfilesPath,
   ...
 }:
 let
-  # key modifier
-  mod = "Mod1";
-  mad = "Mod4";
+
+  inherit (lib.sway)
+    mod
+    mad
+    move_focused_wnd
+    bind_ws
+    wsAzertyBindings
+    wsQwertyBindings
+    ;
 
   rawTerm = "${pkgs.kitty}/bin/kitty";
 
   # Start terminals in a directory associated with the focused Sway workspace.
   # Add more workspace-number/directory pairs to the case statement as needed.
-  workspaceTerm = pkgs.writeShellApplication {
-    name = "kitty-for-workspace";
-    runtimeInputs = [
-      pkgs.jq
-      pkgs.sway
-    ];
-    text = ''
-      workspace="$(${pkgs.sway}/bin/swaymsg -t get_workspaces | ${pkgs.jq}/bin/jq -r '.[] | select(.focused) | .num')"
+  term = "${pkgs.kitty-workspace}/bin/kitty-for-workspace";
 
-      case "$workspace" in
-        3) directory="$HOME/nixpkgs" ;;
-        9) directory="$HOME/home" ;;
-        *) directory="$HOME" ;;
-      esac
-
-      exec ${rawTerm} --directory "$directory" "$@"
-    '';
-  };
-  term = "${workspaceTerm}/bin/kitty-for-workspace";
-  # we could go for xdg-terminal too
-  # term = "${pkgs.wezterm}/bin/wezterm";
-
-  rofi = pkgs.rofi-teto; # rofi-wayland;
+  rofi = pkgs.rofi-teto;
   sharedConfig = pkgs.callPackage ./wm-config.nix { inherit config; };
-
-  startNvimNotes = "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command 'kitty nvim +Notes'  ";
 in
 {
 
@@ -81,7 +68,70 @@ in
         names = [ "Inconsolata Normal" ];
         size = 12.0;
       };
-      modes = sharedConfig.modes // {
+      modes = {
+        monitors =
+          let
+            move_to_output = dir: fr: us: {
+              "$GroupFr+$mod+${fr}" = "move workspace to output ${dir}";
+              "$GroupUs+$mod+${us}" = "move workspace to output ${dir}";
+            };
+          in
+          {
+            Escape = "mode default";
+            Return = "mode default";
+          }
+          // move_to_output "left" "Left" "Left"
+          // move_to_output "left" "j" "j"
+          // move_to_output "right" "Right" "Right"
+          # // move_to_output "right" "m" "semicolumn"
+          // move_to_output "top" "Up" "Up"
+          // move_to_output "top" "k" "k"
+          // move_to_output "down" "down" "down"
+          // move_to_output "down" "l" "l";
+
+        # resize window (you can also use the mouse for that) {{{
+        resize = {
+          Escape = "mode default";
+          Return = "mode default";
+
+          # Pressing right will grow the window’s width.
+          # Pressing up will shrink the window’s height.
+          # Pressing down will grow the window’s height.
+          j = " resize grow down 10 px or 10 ppt";
+          "Shift+j" = "resize shrink down 10 px or 10 ppt";
+
+          k = " resize grow up  10 px or 10 ppt";
+          "Shift+k" = "resize shrink up 10 px or 10 ppt";
+
+          l = "resize grow right 10 px or 10 ppt";
+          "Shift+l" = "resize shrink right 10 px or 10 ppt";
+
+          h = "resize grow left 10 px or 10 ppt";
+          "Shift+h" = "resize shrink left 10 px or 10 ppt";
+
+          # semicolumn is not recognized by sway
+          # bindsym $GroupUs+semicolumn resize grow right 10 px or 10 ppt
+          # bindsym $GroupUs+Shift+semicolumn resize shrink right 10 px or 10 ppt
+
+          # same bindings, but for the arrow keys
+          #bindsym Right resize shrink width 10 px or 10 ppt
+          #bindsym Up resize grow height 10 px or 10 ppt
+          #bindsym Down resize shrink height 10 px or 10 ppt
+          #bindsym Left resize grow width 10 px or 10 ppt
+          Left = " resize grow left 10 px or 10 ppt";
+          "Shift+Left" = "resize shrink left 10 px or 10 ppt";
+
+          Up = " resize shrink up  10 px or 10 ppts";
+          "Shift+Up" = "resize grow up 10 px or 10 ppt";
+
+          Down = "resize grow down 10 px or 10 ppt";
+          "Shift+Down" = "resize shrink down 10 px or 10 ppt";
+
+          Right = "resize grow right 10 px or 10 ppt";
+          "Shift+Right" = "resize shrink right 10 px or 10 ppt";
+        };
+      }
+      // {
         monitors =
           let
             move_to_output = dir: fr: us: {
@@ -108,25 +158,6 @@ in
         # bindsym $mod+Up   exec  $(xdotool mousemove_relative --sync -- 0 -15)
         # }
 
-        # # Enter papis mode
-        # papis = {
-        #   # open documents
-        #   "$mod+o" = "exec python3 -m papis.main --pick-lib --set picktool dmenu open";
-        #   # edit documents
-        #   "$mod+e" = "exec python3 -m papis.main --pick-lib --set picktool dmenu --set editor gvim edit";
-        #   # open document's url
-        #    "$mod+b" = "exec python3 -m papis.main --pick-lib --set picktool dmenu browse";
-        # #   bindsym Ctrl+c mode "default"
-        #   "Escape" = ''mode "default"'';
-        # };
-
-        # rofi-scripts = {
-        #   # open documents
-        #   "$mod+l" = "sh j";
-        #   "Return" = ''mode "default"'';
-        #   "Escape" = ''mode "default"'';
-        # };
-
         # i3resurrect parts
         saveworkspace = {
           "1" = "exec $i3_resurrect save -w 1";
@@ -150,6 +181,13 @@ in
         hideEdgeBorders = "smart";
 
         commands = [
+          {
+            # always focus pinentry, (add to module)
+            criteria = {
+              app_id = "^pinentry-gnome3$";
+            };
+            command = "floating enable, move position center, focus";
+          }
           #  {
           #   criteria = { app_id = "xdg-desktop-portal-gtk"; };
           #   command = "floating enable";
@@ -164,17 +202,6 @@ in
           # for_window [window_type="dialog"] floating enable
           # for_window [window_type="menu"] floating enable
         ];
-      };
-      output = {
-        # todo put a better path
-        # example = { "HDMI-A-2" = { bg = "~/path/to/background.png fill"; }; };
-        #  Some outputs may have different names when disconnecting and reconnecting. To identify these, the name can be substituted for a string consisting of the make, model and serial which you can get from swaymsg -t get_outputs. Each value must be  sepa‐ rated by one space. For example:
-        #     output "Some Company ABC123 0x00000000" pos 1920 0
-        "*" = {
-          adaptive_sync = "off";
-          bg = "${dotfilesPath}/data/wallpapers/nebula.jpg fill";
-        };
-
       };
       input = {
         "type:keyboard" = {
@@ -199,16 +226,54 @@ in
       # ;config.xsession.windowManager.i3.config.keybindings
       keybindings =
         sharedConfig.sharedKeybindings
+        // (lib.concatMapAttrs (bind_ws "Fr") wsAzertyBindings)
+        // (lib.concatMapAttrs (bind_ws "Us") wsQwertyBindings)
+        // move_focused_wnd "left" "h" "h"
+        // move_focused_wnd "down" "j" "j"
+        // move_focused_wnd "up" "k" "k"
+        # semicolumn
+        // move_focused_wnd "right" "l" "l"
+
         // {
-          # triggers even when there is a window
-          # "--whole-window BTN_RIGHT" = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
+          # The side buttons move the window around
+          "button9" = "move left";
+          "button8" = "move right";
 
-          "${mad}+m" = ''exec "${dotfilesPath}/rofi-scripts/monitor_layout.sh"; mode default;'';
+          # change container layout (stacked, tabbed, default)
+          "$GroupFr+$mod+ampersand" = "layout toggle tabbed stacking";
+          "$GroupUs+$mod+1" = "layout toggle tabbed stacking";
 
-          "${mod}+p" = "exec ${pkgs.tessen}/bin/tessen --dmenu=rofi";
+          "$GroupFr+$mod+apostrophe" = "kill";
+          "$GroupUs+$mod+4" = "kill";
 
-          "$GroupFr+$mod+ampersand" = "layout toggle all";
-          "$GroupUs+$mod+1" = "layout toggle all";
+          "$mad+t" = "floating toggle";
+          "$mod+y" = "sticky toggle; exec ${lib.getExe pkgs.libnotify}";
+
+          # split in vertical orientation
+          "$mod+v" = "split toggle";
+
+          # different focus for windows
+          "$mod+$kleft" = "focus left";
+          "$mod+$kdown" = "focus down";
+          "$mod+$kup" = "focus up";
+          "$mod+$kright" = "focus right";
+
+          # toggle tiling / floating
+          "$mod+Shift+space" = "floating toggle";
+          # change focus between tiling / floating windows
+          "$mod+space" = "focus mode_toggle";
+
+          # alternatively, you can use the cursor keys:
+          "$mod+Shift+Left" = "move left";
+          "$mod+Shift+Down" = "move down";
+          "$mod+Shift+Up" = "move up";
+          "$mod+Shift+Right" = "move right";
+
+          "$mod+f" = "fullscreen";
+          "$mod+Shift+f" = "fullscreen global";
+          "$mod+button3" = "floating toggle";
+          "$mod+m" = ''mode "monitors'';
+          "$mod+r" = ''mode "resize"'';
 
           # start a terminal
           "${mod}+Return" = "exec --no-startup-id ${term}";
@@ -226,52 +291,14 @@ in
           # "${mod}+Tab" = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
           # TODO dwindow exclusively with WIN
           "${mad}+Tab" = "exec ${pkgs.swayr}/bin/swayr switch-window";
-          "${mad}+p" = "exec ${lib.getExe pkgs.wofi-pass} ";
-          "${mad}+w" = "exec \"${rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
-          # use sway-easyfocus
-          "${mad}+f" = "exec ${pkgs.sway-easyfocus}/bin/sway-easyfocus";
-          # "${mad}+w" = "exec ${pkgs.sway-easyfocus}/bin/sway-easyfocus";
+          # ca ne montre rien ?
+          # "${mad}+p" = "exec ${lib.getExe pkgs.wofi-pass} ";
+          # "${mad}+w" = "exec \"${rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
           # TODO bind
           # XF86Copy
 
-          # ideally we shouldn't care if it's firefox or not ?
-          "${mad}+a" = ''exec "${dotfilesPath}/bin/focus-firefox-media"'';
-          # TODO copy result and send notif
-          "${mad}+c" = ''exec "${dotfilesPath}/bin/ocr-jap" | ${sharedConfig.notify-send} 'Finished ocr' '';
-
-          # locker
-          # "${mod}+Ctrl+L"="exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy";
-
-          # TODO make it a command
+          # TODO make it a noctalia command
           "${mod}+Ctrl+L" = "exec ${pkgs.tetos.swaylockCmd} ";
-
-          # kitty nvim -c ":Neorg workspace notes"
-          # Notes is a custom command
-          "${mod}+F1" = startNvimNotes;
-
-          "${mad}+o" = startNvimNotes;
-
-          # replace by rmcp
-          "${mod}+F2" =
-            "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty ${lib.getExe' pkgs.rmpc "rmpc"}' ";
-
-          # replace with 'avante' alias ?
-          "${mod}+F3" =
-            ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 60 --height 50 --mark gp_nvim --command "kitty nvim -cLlmChat" '';
-
-          # "${mad}+m" =
-          #   "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command meli ";
-          #
-          "${mad}+n" = startNvimNotes;
-          # "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark neorg-notes --command 'kitty nvim +Notes'  ";
-
-          "${mod}+a" =
-            "exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 70 --height 60 --mark audio --command 'kitty ${lib.getExe' pkgs.rmpc "rmpc"}' ";
-
-          # TODO implement Travis/Pasting Voice recognized text
-          # "${mod}+F4" =
-          #   ''exec ${pkgs.sway-scratchpad}/bin/sway-scratchpad --width 60 --height 50 --mark gp_nvim --command "kitty nvim -c 'GpChat' " '';
-          #
 
           # TODO try with flameshot again ?
           # "--release Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy area";
@@ -280,29 +307,16 @@ in
           # for_window [con_mark="SCRATCHPAD_terminal"] border pixel 1
 
         }
-        // lib.optionalAttrs config.programs.vicinae.enable {
-          # vicinae://launch/clipboard/history
-          # https://docs.vicinae.com/deeplinks
-          "${mod}+Ctrl+h" = "exec ${pkgs.vicinae}/bin/vicinae vicinae://launch/clipboard/history";
-        }
-        // lib.optionalAttrs config.services.clipcat.enable {
-          "${mod}+Ctrl+h" =
-            "exec ${pkgs.clipcat}/bin/clipcat-menu -f rofi  | ${sharedConfig.notify-send} 'Failed running clipcat' ";
-        }
-        // lib.optionalAttrs config.services.cliphist.enable {
-          "${mod}+Ctrl+h" =
-            ''exec ${pkgs.cliphist}/bin/cliphist list | rofi -dmenu  -m -1 -p "Select item to copy" -lines 10 -width 35 | cliphist decode | wl-copy | ${sharedConfig.notify-send} 'Failed running cliphist' '';
-
-        }
-        // lib.optionalAttrs config.services.clipman.enable {
-          "${mod}+Ctrl+h" =
-            "exec ${pkgs.clipman}/bin/clipman pick -t rofi || ${sharedConfig.notify-send} 'Failed running clipman' ";
-        }
-        # todo bind
-        // lib.optionalAttrs config.services.swaync.enable {
-          "${mad}+l" = "${pkgs.swaynotificationcenter}/bin/swaync-client -t";
-          "${mod}+grave" = "${pkgs.swaynotificationcenter}/bin/swaync-client -t";
-        };
+      # // lib.optionalAttrs config.services.clipman.enable {
+      #   "${mod}+Ctrl+h" =
+      #     "exec ${pkgs.clipman}/bin/clipman pick -t rofi || ${sharedConfig.notify-send} 'Failed running clipman' ";
+      # }
+      # todo bind
+      # // lib.optionalAttrs config.services.swaync.enable {
+      #   "${mad}+l" = "${pkgs.swaynotificationcenter}/bin/swaync-client -t";
+      #   "${mod}+grave" = "${pkgs.swaynotificationcenter}/bin/swaync-client -t";
+      # }
+      ;
 
       startup = [
         # { command = "env RUST_BACKTRACE=1 RUST_LOG=swayr=debug swayrd > /tmp/swayrd.log 2>&1"; }
@@ -314,15 +328,37 @@ in
       ++ lib.optional config.services.cliphist.enable { command = "wl-paste --watch cliphist store"; };
     };
 
-    extraConfigEarly = sharedConfig.sharedExtraConfig;
+    # sharedExtraConfig =
+    extraConfigEarly = ''
+      set $GroupUs Group1
+      set $GroupFr Group2
 
-    # output HDMI-A-1 bg ~/wallpaper.png stretch
-    # TODO remove the config.shared stuff
-    # create option for the for_window popups
-    #       include ~/.config/i3/config.shared
+      set $mod Mod1
+      set $rmod Mod1
 
-    # timeout in ms
-    # include ~/.config/sway/manual.config
+      # to easily swap between i3/vim mode
+      set $kleft h
+      set $kdown j
+      set $kup k
+      set $kright l
+
+      set $term ${term}
+
+      set $w1 1:󰖯
+      set $w2 2:
+      set $w3 3:
+      set $w4 4:qemu
+      set $w5 5:misc
+      set $w6 6:irc
+      set $w7 7
+      set $w8 8
+      set $w9 9
+
+      # Mod4 => window key
+      set $mad Super_L
+
+    '';
+
     extraConfig = ''
        # as per https://github.com/swaywm/sway/wiki/Systemd-integration
        exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
@@ -331,58 +367,19 @@ in
       # host specific
       include ~/.config/sway/`hostname`/*
     '';
-    # exec swaymsg -t subscribe '["shutdown"]' && systemctl --user stop sway-session.target
-    # include ~/.config/sway/swayfx.txt
 
     extraOptions = [
       # "--verbose"
       # "--debug"
     ];
 
-    # eventually start foot --server
-    # TODO we should wrap sway with that ?
-    # some of these advised by https://github.com/flameshot-org/flameshot/blob/master/docs/Sway%20and%20wlroots%20support.md
-    # export MOZ_ENABLE_WAYLAND=1
-    # TODO put it in the wrapper started by the .desktop file !
-    # # according to https://www.reddit.com/r/swaywm/comments/11d89w2/some_workarounds_to_use_sway_with_nvidia/
-    # export XWAYLAND_NO_GLAMOR=1
-
-    # to list cards
-    # ls -l /sys/class/drm/renderD*/device/driver
-    # WLR_DRM_DEVICES
     #       export XDG_CURRENT_DESKTOP=sway
     # export XDG_SESSION_DESKTOP=sway
     #
-
-    #  # useful for electron based apps: slack / vscode
-    # export NIXOS_OZONE_WL=1
-    extraSessionCommands = ''
-      # needs qt5.qtwayland in systemPackages
-      export QT_QPA_PLATFORM=wayland
-      export SDL_VIDEODRIVER=wayland
-      export _JAVA_AWT_WM_NONREPARENTING=1
-      export SDL_VIDEODRIVER=wayland
-      export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-      # select first igpu then nvidia
-    '';
-    # see https://github.com/swaywm/sway/wiki#i-have-a-multi-gpu-setup-like-intelnvidia-or-intelamd-and-sway-does-not-start--some-video-cards-cannot-display--full-screen-images-etc-will-be-corrupted
-    # for multigpu setups
-    # The first card is used for actual rendering, and display buffers are copied to the secondary cards for any displays connected to them.
-    # export WLR_DRM_DEVICES=/dev/dri/card0:/dev/dri/card1
 
     # describe what it does
     wrapperFeatures = {
       gtk = true;
     };
   };
-
-  # include ~/.config/sway/config.shared
-  # this seems to be ignored ?!
-  xdg.configFile."sway/config".text =
-    lib.mkBefore "
-    # TOTO TODO # use sharedConfig.sharedExtraConfig; instead
-     include ~/.config/sway/conf.d/*.conf
-     include ~/.config/sway/noctalia
-     ";
-
 }

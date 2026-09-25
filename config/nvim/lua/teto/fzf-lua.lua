@@ -93,6 +93,14 @@ function M.register_keymaps()
         -- TODO combine or use global
         -- (currently the first picker options apply to all).
         fzf_lua.combine({
+            actions = {
+                ['alt-h'] = {
+                    -- The <leader>o popup now displays <Alt-h> with a dynamic “Include/Exclude hidden files” hint.
+                    -- do toggle_ignore as well ?
+                    fn = require('fzf-lua.actions').toggle_hidden,
+                    reuse = true,
+                },
+            },
             -- can be a table as well
             -- order matters
             -- files can appear several times

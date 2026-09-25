@@ -60,9 +60,17 @@ let
 
 in
 {
+  # does it make sense to harden it with ?
+  # fileSystems."/".options = [ "noexec" ];
 
   # bumping to 25.11 broke nextcloyud
   system.stateVersion = "25.05";
+
+  # to allow for passwordless sudo with deploy
+  # allowed commands restricted by sudo.extraRules
+  users.users.teto.extraGroups = [
+    "sudo"
+  ];
 
   boot.kernel.sysctl = {
     "fs.protected_fifos" = 2;
@@ -86,27 +94,30 @@ in
 
   tetos.wireguard = {
     enable = true;
+    id = 1;
+    privateKeyFile = config.sops.secrets.wg-private-key.path;
+    publicKey = "1uhd6iscyFt68twrVz+y4zvws5PzhpIuY4rrr4N/Ymk=";
+
   };
 
   # services.dbus.implementation = "dbus";
 
   imports = [
+    autoloadedProfiles
 
     ./ovh.nix
-
-    autoloadedProfiles
     ./disko-config.nix
-
-    flakeSelf.nixosProfiles.systemd-on-failure-service
+    flakeSelf.nixosProfiles.teto
 
     flakeSelf.inputs.disko.nixosModules.disko
-    flakeSelf.nixosModules.teto-nogui
     flakeSelf.nixosModules.default-hm
     flakeSelf.nixosModules.wireguard
 
     flakeSelf.nixosProfiles.wireguard
     flakeSelf.nixosProfiles.server
     flakeSelf.nixosProfiles.nix-daemon
+    flakeSelf.nixosProfiles.server
+    flakeSelf.nixosProfiles.systemd-on-failure-service
 
     ./hardware.nix
 
@@ -119,13 +130,6 @@ in
     # testing
     # ./services/hedgedoc.nix
 
-    # ../../nixos/modules/hercules-ci-agents.nix
-
-    flakeSelf.nixosProfiles.server
-
-    # TODO remove once nixbot succeeds
-    # flakeSelf.inputs.buildbot-nix.nixosModules.buildbot-master
-    # flakeSelf.inputs.buildbot-nix.nixosModules.buildbot-worker
     flakeSelf.inputs.nixbot.nixosModules.nixbot
   ];
 
@@ -159,6 +163,16 @@ in
 
   documentation.enable = false;
 
+  # just to remove warning
+  # swapDevices = [
+  #   {
+  #     device = "/swapfile";
+  #     size = 1000;
+  #   }
+  # ];
+
+  # lib.mkForce to remove the default ones
+  # lib.mkForce  removes cat
   environment.systemPackages = [
     # flakeSelf.inputs.transgression-tui.packages.${pkgs.stdenv.hostPlatform.system}.transgression-tui
     pkgs.tremc

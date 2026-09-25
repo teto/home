@@ -216,11 +216,17 @@ local opts = {
             --    "avante_files",
         },
         per_filetype = {
+            org = { inherit_defaults = true, 'orgmode' },
             -- sql = { 'dadbod' },
             -- -- optionally inherit from the `default` sources
             -- lua = { inherit_defaults = true, 'lazydev' }
         },
         providers = {
+            orgmode = {
+                name = 'Orgmode',
+                module = 'orgmode.org.autocompletion.blink',
+                fallbacks = { 'buffer' },
+            },
             -- ve:
 
             git = {

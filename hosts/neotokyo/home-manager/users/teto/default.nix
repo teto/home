@@ -72,6 +72,10 @@ in
     enableFzfLua = true;
     highlightOnYank = true;
     enableMyDefaults = true;
+
+    initLua = ''
+      vim.g.clipboard = 'osc52'
+    '';
   };
 
   programs.bash = {
@@ -90,19 +94,7 @@ in
   xdg.enable = true;
 
   # TODO set default ?
-  programs.fish.enable = true;
-
-  # todo set zsh as default
-  # programs.zsh = {
-  #   enable = true;
-  #   loginExtra = ''
-  #     cat "${pkgs.writeText "login-welcome" welcomeMessage}";
-  #   '';
-  #   # shellAliases = {
-  #   #   st = "systemctl-tui";
-  #   #   jctl = "journalctl -b0";
-  #   # };
-  # };
+  programs.fish.enable = false;
 
   home.file."justfile".source = ./justfile;
 }

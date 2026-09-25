@@ -14,12 +14,14 @@
       use-xdg-base-directories = true;
       preallocate-contents = true;
       warn-large-path-threshold = "10M";
-      log-lines = 20;
       use-registries = true;
       warn-dirty = true;
 
       # was problematic for a while
       use-cgroups = false;
+
+      # min-free = "${toString (100 * 1024 * 1024)}";
+      # max-free = "${toString (1024 * 1024 * 1024)}";
 
       # starting from nix 2.30
       trace-import-from-derivation = true;
@@ -29,7 +31,12 @@
       # keep-failed = false;
 
       # add pipe-operators ?
-      experimental-features = "auto-allocate-uids nix-command flakes cgroups";
+      experimental-features = [
+        "auto-allocate-uids"
+        "nix-command"
+        "flakes"
+        "cgroups"
+      ];
 
       substituters = [
       ];

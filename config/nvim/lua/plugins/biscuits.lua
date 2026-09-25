@@ -1,3 +1,4 @@
+-- bind require('nvim-biscuits').toggle_biscuits()
 require('nvim-biscuits').setup({
     default_config = {
         -- max_length = 12,
@@ -17,5 +18,12 @@ require('nvim-biscuits').setup({
         python = {
             disabled = true,
         },
+        markdown = {
+            disabled = true,
+        },
     },
 })
+
+vim.keymap.set('n', 'tb', function()
+    require('nvim-biscuits').toggle_biscuits()
+end, { desc = 'toggle nvim-biscuits' })

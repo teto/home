@@ -43,3 +43,5 @@
 -- })
 
 -- return M
+
+require('orgmode').setup({})

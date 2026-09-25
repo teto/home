@@ -39,8 +39,12 @@ in
       - https://discourse.nixos.org/t/setup-a-wildcard-certificate-with-acme-on-a-custom-domain-name-hosted-by-powerdns/15055/6
     */
     certs =
+      let
+        # fqdn = config.networking.fqdn
+        fqdn = secrets.jakku.fqdn;
+      in
       lib.optionalAttrs withSecrets {
-        "blog.${secrets.jakku.hostname}" = {
+        "blog.${fqdn}" = {
           # blog.${secrets.jakku.hostname}
           # webroot = acmeRoot;
           # email = secrets.jakku.email;
@@ -51,15 +55,17 @@ in
 
           extraDomainNames = [
             # "blog.${secrets.jakku.hostname}"
-            "www.${secrets.jakku.hostname}"
-            "${secrets.jakku.hostname}"
+            "www.${secrets.jakku.fqdn}"
+            "${secrets.jakku.fqdn}"
             # "nextcloud.vps" # acme can't register for unknown TLDs
           ];
         };
 
       }
+      # mkIf nextcloud
       // {
 
+        # "${config.services.nextcloud.hostName}"
         "nextcloud.vps" = {
           # look for step-ca
           server = stepcaServer;
@@ -70,12 +76,36 @@ in
         # todo then do the same for jellyfin ?
         "immich.vps" = {
           # look for step-ca
-          server = "https://localhost:${toString config.services.step-ca.port}/acme/acme/directory";
+          server = stepcaServer;
           webroot = "/var/lib/acme/acme-challenge/";
           enableDebugLogs = true;
         };
 
       };
+  };
+
+  # enabling it seems to create login issues ?
+  auditd.enable = true;
+  audit.enable = true;
+  audit.rules = [
+    # breaks
+    # "-a exit,always -F arch=b64 -S execve"
+  ];
+
+  polkit = {
+    enable = true;
+    extraConfig = ''
+      polkit.addRule(function(action, subject) {
+        if (
+          action.id == "org.freedesktop.systemd1.manage-units" &&
+          action.lookup("unit") == "build-blog.service" &&
+          action.lookup("verb") == "start" &&
+          subject.user == "gitolite"
+        ) {
+          return polkit.Result.YES;
+        }
+      });
+    '';
   };
 
   # Enable 'sudo' with SSH key
@@ -90,7 +120,15 @@ in
     {
       users = [ "teto" ];
       commands = [
-        { command = "/nix/store/*-activatable-nixos-system-*/activate-rs"; }
+        # runAs = "root"
+        # A command being either just a path to a binary to allow any arguments,
+        # the full command with arguments pre-set or with `""` used as the argument,
+        # not allowing arguments to the command at all.
+
+        {
+          command = "/nix/store/*-activatable-nixos-system-*/activate-rs";
+          options = [ "NOPASSWD" ];
+        }
         { command = "/run/current-system/sw/bin/rm /tmp/deploy-rs-canary-*"; }
 
       ];

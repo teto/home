@@ -9,7 +9,6 @@
 let
   inherit (lib)
     genBlockLua
-    luaPlugin
     ;
 
   luaRcBlocks = {
@@ -35,14 +34,16 @@ let
         luajit = pkgs.luajit-tetos;
       });
 
-  vim-listchars = pkgs.buildVimPlugin {
+  vim-listchars = pkgs.vimUtils.buildVimPlugin {
+    name = "vim-listchars-unstable";
+    # pname = "vim-listchars";
+    # version = "latest";
     src = pkgs.fetchFromGitHub {
       owner = "teto";
       repo = "vim-listchars";
-      "sha256" = "1qahbrnnxgq0sbidvxsdqqhghzbr9arwkqz06sz2jf1bgs1bfmn3";
-      "hash" = "sha256-w1a3gn4rOCm+NuDjybNKeX34IMZN993i0gC/bm1eUOE=";
+      rev = "c9839537f8a6a32726a504cc34113719a7dcd8fc";
+      hash = "sha256-w1a3gn4rOCm+NuDjybNKeX34IMZN993i0gC/bm1eUOE=";
     };
-
   };
 
   # nvimLua = config.programs.neovim.finalPackage.passthru.unwrapped.lua;
@@ -61,7 +62,6 @@ let
     lualine-nvim
 
     {
-      type = "lua";
       plugin = oil-nvim;
       config = ''
         require("oil").setup({
@@ -91,21 +91,20 @@ let
 
     vim-scriptease # create commands like :Messages
 
-    # ({
-    #   plugin = vim-listchars
-    #   config = ''
-    #   vim.keymap.set(
-    #       'n',
-    #       '<F11>',
-    #       '<Plug>(ToggleListchars)',
-    #       { desc = 'Change between different flavors of space/tab characters' }
-    #   )
-    #
-    #     '';
-    #  })
+    {
+      plugin = vim-listchars;
+      config = ''
+        vim.keymap.set(
+            'n',
+            '<F11>',
+            '<Plug>(ToggleListchars)',
+            { desc = 'Change between different flavors of space/tab characters' }
+        )
 
-    ({
-      type = "lua";
+      '';
+    }
+
+    {
       plugin = vim-sneak;
       config = ''
         -- n press 's' again to go to next result, like ';'
@@ -121,9 +120,9 @@ let
         let g:sneak#streak = 0
         ]]
       '';
-    })
+    }
 
-    (luaPlugin {
+    {
       plugin = vim-grepper;
       # careful these mappings are not applied as they arrive before the plug declaration
       config = ''
@@ -131,7 +130,7 @@ let
         vim.keymap.set('n', '<leader>rg', '<Cmd>Grepper -tool rg -open -switch<CR>')
         vim.keymap.set('n', '<leader>rgb', '<Cmd>Grepper -tool rg -open -switch -buffer<CR>', { remap = true })
       '';
-    })
+    }
 
     vim-nix # for NixEdit
     vim-rsi # the goat

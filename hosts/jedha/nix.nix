@@ -1,11 +1,8 @@
-{ secretsFolder, ... }:
 {
 
   settings = {
 
     trusted-public-keys = [
-      # (builtins.readFile ./tatooine-signing-key.pub)
-      # "tatooine-signing-key:T2TGDnv8CCFbIVd75Y+5oriAknm7FXJTLfdC3MOuMyg="
     ];
   };
 }

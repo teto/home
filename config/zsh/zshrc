@@ -154,7 +154,6 @@ autoload -z edit-command-line
 # zbell should recognize aliases
 # zmodload -i zsh/complist
 # todo should support 
-# ($EDITOR $PAGER 
 # zlong_ignore_cmds='"" "man" "v" "ssh" "nvim" "gd" "gf" "sops" "tig"'
 declare -A zlong_ignore_cmds=(
     "man"=true 

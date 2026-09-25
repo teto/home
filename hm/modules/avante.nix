@@ -26,7 +26,8 @@ in
 
     # programs.zsh.aliases
     home.shellAliases = {
-      avante = ''nvim -c "lua vim.defer_fn(function()require(\"avante.api\").zen_mode()end, 100)"'';
+      # now use an executable
+      # avante = ''nvim -c "lua vim.defer_fn(function()require(\"avante.api\").zen_mode()end, 100)"'';
     };
 
   };

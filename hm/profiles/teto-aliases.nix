@@ -15,12 +15,13 @@
     gd = "git diff";
     ga = "git add";
     gc = "git commit";
-    gcm = "git commit -m";
-    gca = "git commit -a";
+    # gcm = "git commit -m";
+    gcaned = "git commit -a --no-edit";
     gb = "git branch";
     gch = "git checkout";
     grv = "git remote -v";
     gpu = "git pull";
+    gpl = "git pull";
     gcl = "git clone";
     # gta="git tag -a -m";
     gbr = "git branch";

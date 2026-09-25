@@ -10,7 +10,7 @@
   cache = {
     enable = true;
     addSubstituter = true;
-    timeout = 3.0; # seconds
+    # timeout = 3.0; # seconds
 
     # listenAddresses = lib.mkOption {
     #   type = lib.types.listOf lib.types.str;

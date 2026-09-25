@@ -1,9 +1,12 @@
 {
   secretsFolder,
-  withSecrets,
+  osConfig,
   lib,
 }:
-lib.optionalAttrs withSecrets {
+# %r gets replaced with a runtime directory, use %% to specify a '%'
+# sign. Runtime dir is $XDG_RUNTIME_DIR on linux and $(getconf
+# DARWIN_USER_TEMP_DIR) on darwin.
+lib.optionalAttrs osConfig.tetos.withSecrets {
   # SECRETS appear in ~/.config/sops-nix/secrets/*
 
   # This will add secrets.yml to the nix store
@@ -28,10 +31,13 @@ lib.optionalAttrs withSecrets {
   # This is the actual specification of the secrets.
   secrets.github_token = {
     mode = "400";
-    # %r gets replaced with a runtime directory, use %% to specify a '%'
-    # sign. Runtime dir is $XDG_RUNTIME_DIR on linux and $(getconf
-    # DARWIN_USER_TEMP_DIR) on darwin.
     path = "%r/github_token";
+  };
+
+  secrets.openrouter-api-key = {
+    mode = "400";
+    key = "OPENROUTER_API_KEY";
+    path = "%r/openrouter-api.key";
   };
 
   # removed from secrets
