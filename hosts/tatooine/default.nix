@@ -46,6 +46,7 @@ in
     flakeSelf.inputs.disko.nixosModules.disko
     flakeSelf.inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen5
 
+    flakeSelf.nixosProfiles.adguardhome
     flakeSelf.nixosProfiles.disko-desktop
     flakeSelf.nixosProfiles.networkmanager
     flakeSelf.nixosProfiles.wyoming
@@ -73,8 +74,8 @@ in
     # usually inactive, just to test some stuff
   ];
 
-  environment.systemPackages = [
-  ];
+  # environment.systemPackages = [
+  # ];
 
   # services.vaultwarden = {
   #   enable = true;

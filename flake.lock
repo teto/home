@@ -1190,11 +1190,11 @@
     "meli-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1790320283,
-        "narHash": "sha256-A2XqIA3e77oFEuqgwoqFyi6JjCXk8h1BwzIQPKM54OI=",
+        "lastModified": 1790515714,
+        "narHash": "sha256-fZKqyTBTDCO9F3d0VfDtEZmnA2nOFtq0qrk0l4nWOZY=",
         "ref": "refs/heads/master",
-        "rev": "ed162e115b9634deedb35c3ae4df3cb5d1c525f3",
-        "revCount": 3240,
+        "rev": "bb6d59162509c4ab872465f1ca6536d556077f22",
+        "revCount": 3243,
         "type": "git",
         "url": "https://git.meli-email.org/meli/meli.git"
       },
@@ -1230,6 +1230,22 @@
       "original": {
         "type": "tarball",
         "url": "https://github.com/themoeway/jmdict-yomitan/releases/latest/download/JMdict_french.zip"
+      }
+    },
+    "mokuro": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1784464601,
+        "narHash": "sha256-fF7/XGIHkdVRoNXZT18PMzb09kL3rY72IL4Ujw835b0=",
+        "owner": "teto",
+        "repo": "mokuro",
+        "rev": "9f79b1281066f953ec6e5d1e7086c401fa8da159",
+        "type": "github"
+      },
+      "original": {
+        "owner": "teto",
+        "repo": "mokuro",
+        "type": "github"
       }
     },
     "mujmap": {
@@ -2191,6 +2207,7 @@
         "meli-src": "meli-src",
         "memento-dev": "memento-dev",
         "memento-kanjidict": "memento-kanjidict",
+        "mokuro": "mokuro",
         "mujmap": "mujmap",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "neovim-src": "neovim-src_2",

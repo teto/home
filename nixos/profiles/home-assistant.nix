@@ -100,13 +100,15 @@
       logger.default = "info";
       # Text to speech
       tts = {
+        # do we really want that ?
         platform = "google_translate";
       };
 
       # THE FILE DISAPPEARED !
       # script= "!include scripts.yaml";
       # scene= "!include scenes.yaml";
-      automation = "!include automations.yaml";
+      "automation ui" = "!include automations.yaml";
+
       # frontend must be mandatory
       frontend = {
         themes = "!include_dir_merge_named themes";
@@ -117,8 +119,8 @@
       #   server_host = "0.0.0.0";
       #   server_port = 8123;
       # };
-      # services.home-assistant.config."scene manual" = [];
-      # services.home-assistant.config."scene ui" = "!include scenes.yaml";
+      # "scene manual" = [];
+      # "scene ui" = "!include scenes.yaml";
     };
 
     # so that it can be overriden from the web interface

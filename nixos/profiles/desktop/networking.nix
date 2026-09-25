@@ -5,7 +5,6 @@
     # Note that configuring the MulticastDNS domain "local" as search or routing domain has the effect of routing lookups for this domain to classic unicast DNS.
     # This may be used to provide compatibility with legacy installations that use this domain in a unicast DNS context, against the IANA assignment of this domain to pure MulticastDNS purposes.
     # Search and routing domains are a unicast DNS concept, they cannot be used to resolve single-label lookups via MulticastDNS.
-    # "local"
     # freebox apparently uses "home" as dns now
     # https://www.geeek.org/freebox-dns-local-fonctionnement/
     "home"
