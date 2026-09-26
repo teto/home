@@ -201,31 +201,6 @@ in
 
   services.acpid.enable = true;
 
-  services.unbound = {
-    enable = false;
-    settings = {
-      server = {
-        interface = [
-          "127.0.0.1"
-          "10.42.42.42"
-        ];
-        access-control = [
-          "0.0.0.0/0 refuse"
-          "127.0.0.0/8 allow"
-          "${show bridgeNetwork} allow"
-        ];
-      };
-    };
-  };
-
-  # this takes a lot of space ! use cacti instead !
-  # services.munin-node = {
-  #     enable = true;
-  # #     extraConfig = ''
-  # #     allow ^63\.12\.23\.38$
-  # #     '';
-  # };
-
   # following the guide https://nixos.wiki/wiki/Systemd-networkd
 
   systemd.network = {

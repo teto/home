@@ -1,3 +1,10 @@
+/*
+small reminder about syntax
+
+- "@" is the zone’s root
+- "IN" means "INTERNET"
+
+*/
 {
   config,
   lib,
@@ -128,7 +135,7 @@ file = let
           $TTL 300
           @ IN SOA ns.${name}. hostmaster.${name}. (1 3600 600 86400 300)
           @ IN NS ns.${name}.
-
+          @  IN A 192.168.1.83
           piper           CNAME   jedha.home.
           faster-whisper  CNAME   jedha.home.
         '';

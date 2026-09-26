@@ -20,7 +20,7 @@
     # but resolv.conf settings are tailored for the sub listener !
     DNSStubListener = "no";
     # use the ones obtained by dhcp ?
-    UseDomains = true;
+    # UseDomains = false;
     # Domains = [ ]; # networking.domain
 
     # TODO fallback on
