@@ -1,6 +1,6 @@
 {
   # COMPARE with competitot "blocky"
-  enable = true;
+  # enable = true;
 
   # allow to change settings from webserver
   # mutableSettings = true;

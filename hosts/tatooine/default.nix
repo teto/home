@@ -74,8 +74,8 @@ in
     # usually inactive, just to test some stuff
   ];
 
-  environment.systemPackages = [
-  ];
+  # environment.systemPackages = [
+  # ];
 
   # services.vaultwarden = {
   #   enable = true;
