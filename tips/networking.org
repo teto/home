@@ -8,6 +8,9 @@ Look for config in /etc/systemd/network/
 resolvectl service _ssh._tcp local
 
 
+  * networkctl tricks
+
+@ prefix tells networkctl to find configuration mapped to this interface. Without it, it expects a file.
 just `networkctl` will list 
 o
 
@@ -16,6 +19,7 @@ networkctl up br0
 networkctl status <INTERFACE>
 
 networkctl edit @wlan0 --drop-in mdns
+
 
 * networkd
 

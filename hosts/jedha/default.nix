@@ -2,6 +2,7 @@
   flakeSelf,
   # modulesPath,
   withSecrets,
+  config,
   lib,
   pkgs,
   ...
@@ -220,6 +221,8 @@ in
   # to test bitwig
   xdg.portal.enable = true;
   services.flatpak.enable = true;
+
+  environment.systemPackages = [ config.services.hickory-dns.package ];
 
   # $out here is the profile generation
   # system.systemBuilderCommands = ''

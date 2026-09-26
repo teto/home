@@ -201,31 +201,6 @@ in
 
   services.acpid.enable = true;
 
-  services.unbound = {
-    enable = false;
-    settings = {
-      server = {
-        interface = [
-          "127.0.0.1"
-          "10.42.42.42"
-        ];
-        access-control = [
-          "0.0.0.0/0 refuse"
-          "127.0.0.0/8 allow"
-          "${show bridgeNetwork} allow"
-        ];
-      };
-    };
-  };
-
-  # this takes a lot of space ! use cacti instead !
-  # services.munin-node = {
-  #     enable = true;
-  # #     extraConfig = ''
-  # #     allow ^63\.12\.23\.38$
-  # #     '';
-  # };
-
   # following the guide https://nixos.wiki/wiki/Systemd-networkd
 
   systemd.network = {
@@ -238,7 +213,9 @@ in
       timeout = 20;
 
       # interfaces to be ignored when declaring online status
-      ignoredInterfaces = [ "enp1s0" ];
+      ignoredInterfaces = [ 
+        "enp1s0"  # ignored as upstream
+      ];
     };
 
     # example
@@ -264,7 +241,7 @@ in
     netdevs = {
 
       # man systemd.netdev
-      "br0" = {
+      br0 = {
         # match
         netdevConfig.Name = "br0";
         netdevConfig.Kind = "bridge";
@@ -302,7 +279,7 @@ in
         networkConfig.DHCP = "ipv4";
         networkConfig.IPv6AcceptRA = "no";
         networkConfig.LinkLocalAddressing = "ipv4";
-        networkConfig.IgnoreCarrierLoss = "3s";
+        # networkConfig.IgnoreCarrierLoss = "3s";
         networkConfig.Description = "WAN port";
         networkConfig.MulticastDNS = true;
         linkConfig.RequiredForOnline = true;
@@ -312,7 +289,7 @@ in
       #   matchConfig.Name = "lan";
       #   networkConfig.DHCP = "ipv4";
       # };
-      "br0" = {
+      br0 = {
         matchConfig.Name = "br0";
         # address = [
         # ];
@@ -354,6 +331,10 @@ in
         matchConfig.Name = "enp3s0";
         networkConfig.Bridge = "br0";
       };
+      "10-enp4s0" = {
+        matchConfig.Name = "enp4s0";
+        networkConfig.Bridge = "br0";
+      };
 
       # remove once we make sure everything works
       # "10-enp4s0" = {
@@ -370,6 +351,5 @@ in
 
   services.resolved.settings.Resolve.MulticastDNS = true;
 
-  # TODO bump it
   system.stateVersion = "26.05";
 }

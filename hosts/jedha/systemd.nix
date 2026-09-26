@@ -51,33 +51,34 @@
           Name = "enp11s0";
         };
         addresses = [
-          {
-            Address = "10.0.0.1/24";
-          }
+          # {
+          #   Address = "10.0.0.1/24";
+          # }
         ];
+
         # dhcpV4Config = {
         #   # UseDNS = true;
         #   # UseRoutes = true;
         # };
+
         networkConfig = {
+          DHCP = "yes";
           # only yes / no
-          DHCPServer = "yes";
+          # DHCPServer = "yes";
           # IPMasquerade = "ipv4";
           # RequiredForOnline = "no";
         };
 
-        dhcpServerConfig = {
+        # dhcpServerConfig = {
+        #   # Gateway = "10.0.0.1";
+        #   # DNS = "192.168.1.254";
+        #   # Weird that I would advertise this ?
+        #   # DNS = "1.1.1.1";
+        #   EmitDNS = true;
+        #   PoolOffset = 50;
+        #   PoolSize = 40;
+        # };
 
-          # Gateway = "10.0.0.1";
-          # DNS = "192.168.1.254";
-          # Weird that I would advertise this ?
-          DNS = "1.1.1.1";
-          EmitDNS = true;
-          PoolOffset = 50;
-          PoolSize = 40;
-
-        };
-        # Unmanaged=
 
         # dhcpServerStaticLeases = [
         #             {

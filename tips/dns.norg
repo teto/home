@@ -1,7 +1,25 @@
 resolvectl to dump config
 sudo systemd-resolve --interface=eno1 --set-dns=1.1.1.1 
 
+adguardhome
+hickory-dns
+
+hickory-dns --config ./hickory-dns.toml --zonedir .
 
 resolvectl query jedha.local
 
 The resolver is already returning both families; the ordering comes from libc’s getaddrinfo policy, not from networkd. I’m checking the native NixOS option so the change fits your configuration cleanly.
+
+
+Comment ecrire une zone:
+; Définition du TTL par défaut (en secondes) et de l'origine
+$TTL 86400
+$ORIGIN example.com.
+
+; Enregistrement SOA (Start of Authority) - Début d'autorité
+@   IN  SOA ns1.example.com. admin.example.com. (
+        2026092601 ; Numéro de série (AAAAJJMMPP)
+        3600       ; Rafraîchissement (Refresh)
+        1800       ; Nouvelle tentative (Retry)
+        604800     ; Expiration (Expire)
+        86400 )    ; TTL négatif minimum (Minimum TTL)

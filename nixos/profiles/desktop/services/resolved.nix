@@ -20,35 +20,29 @@
     # but resolv.conf settings are tailored for the sub listener !
     DNSStubListener = "no";
     # use the ones obtained by dhcp ?
-    UseDomains = true;
-    # Domains = [ "local" ]; # networking.domain
+    # UseDomains = false;
+    # Domains = [ ]; # networking.domain
 
     # TODO fallback on
     # man resolved.conf
     FallbackDNS = [
-      # we could use _gateway (solved by mymachines ?) depending on the order
-      # in nsswitch
+      # we could use _gateway (solved by mymachines ?) depending on the order in nsswitch
       "192.168.1.254"
-      "1.1.1.1"
-      "8.8.8.8"
     ];
 
     # this is windows resolution system
-    LLMNR = true; # blocks .local ?
+    LLMNR = false; # blocks .local ?
     # ReadEtcHosts=no,
   };
 
-  # MulticastDNS=
-  #   Takes  a  boolean argument or "resolve". Controls Multicast DNS support (RFC 6762[3])
-  #   on the local host. If true, enables full Multicast DNS responder  and  resolver  sup‐
-  #   port.  If  false,  disables both. If set to "resolve", only resolution support is en‐
-  #   abled, but responding is disabled. Note that systemd-networkd.service(8)  also  main‐
-  #   tains  per-link  Multicast DNS settings. Multicast DNS will be enabled on a link only
   # "resolve";
-  # services.resolved.dnsDelegates.example-org = {
+
+  #  *.dns-delegate files may be used to delegate DNS lookups in specific domains to specific DNS servers. See "systemd.dns-delegate"
+  # thus I should run a DNS server on local network for jedha stuff and so on
+  # services.resolved.dnsDelegates.jedha-home = {
   #   Delegate = {
   #     DNS = delegateAddress;
-  #     Domains = [ "delegated.example.org" ];
+  #     Domains = [ "jedha.home" ];
   #   };
   #
 }

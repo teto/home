@@ -13,6 +13,13 @@
   services.home-assistant = {
     enable = true;
 
+    config = {
+
+      # "automation manual" = "!include ${../home-assistant/automations/hue-dimmer1.yaml}";
+      
+      "automation manual" = "!include_dir_list ${../home-assistant/automations}";
+    };
+
     # TODO add
     # Error occurred loading flow for integration data_grand_lyon: No module named 'data_grand_lyon_ha'
 

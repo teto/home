@@ -226,8 +226,11 @@ in
 
     # TODO set it globally ?
     CDPATH = "$HOME/plugins";
+
+    # it's a pain with git/update config
     PAGER = "bat";
 
+    # or bat
     MANPAGER = "moor";
     # MANPAGER = "less -R -i --use-color -Dd+M -Du+C";
     # MANROFFOPT = "-c";
