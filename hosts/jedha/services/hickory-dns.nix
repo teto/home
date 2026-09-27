@@ -52,6 +52,7 @@ in
       "127.0.0.0/8"
       "192.168.1.0/24" 
     ];
+    listen_port = 153;
 
     # Exact-name zones avoid taking authority over unrelated .home names.
     # zones are freeform

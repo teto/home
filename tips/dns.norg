@@ -2,12 +2,32 @@ resolvectl to dump config
 sudo systemd-resolve --interface=eno1 --set-dns=1.1.1.1 
 
 adguardhome
-hickory-dns
+
+* hickory-dns
 
 hickory-dns --config ./hickory-dns.toml --zonedir .
 
-resolvectl query jedha.local
+* resolvectl tricks
 
+  # Service type + domain
+  resolvectl service _ldap._tcp example.com
+
+  # Equivalent fully qualified SRV name
+  resolvectl service _ldap._tcp.example.com
+
+  # Specific DNS-SD instance: SRV + TXT + target addresses
+  resolvectl service "My Printer" _ipp._tcp local
+
+** Investigate split-DNS routing rules
+
+ resolvectl query --type=NS example.org
+
+ /etc/systemd/resolved.conf
+ "systemd/dns-delegate.d/${name}.dns-delegate"
+
+** mdns
+
+resolvectl query jedha.local
 The resolver is already returning both families; the ordering comes from libc’s getaddrinfo policy, not from networkd. I’m checking the native NixOS option so the change fits your configuration cleanly.
 
 

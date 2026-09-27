@@ -50,7 +50,7 @@ let
     flavor = "fastmail.com";
 
     astroid = {
-      enable = false;
+      enable = true;
     };
 
     neomutt = {

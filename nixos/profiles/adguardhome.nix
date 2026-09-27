@@ -42,11 +42,11 @@
           answer = "10.100.0.1";
           enabled = true;
         }
-        {
-          domain = "*.jedha.home";
-          answer = "jedha.home"; # resolved via /etc/hosts
-          enabled = true;
-        }
+        # {
+        #   domain = "*.jedha.home";
+        #   answer = "jedha.home"; # resolved via /etc/hosts
+        #   enabled = true;
+        # }
       ];
     };
     # dhcp = {

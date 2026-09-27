@@ -17,7 +17,6 @@ settings.Resolve = {
   ResolveUnicastSingleLabel = true;
 
   UseDomains = true;
-  # Domains = [ ]; # does it use networking.domain ?
 
 };
 

@@ -28,7 +28,7 @@ let
   };
 
   # todo rely on a lib to manipulate network
-  show = at: "${at.address}/${toString at.prefixLength}";
+  # show = at: "${at.address}/${toString at.prefixLength}";
 
   # externalInterface = "wlan0";
 
@@ -48,6 +48,9 @@ in
     ./services/home-assistant.nix
     ./services/music-assistant.nix
     ./services/zigbee2mqtt.nix
+
+    # services.resolved.settings.Resolve.MulticastDNS = true;
+    ./services/resolved.nix
     # ./services/mqtt.nix
 
     # TODO replace with systemd mdns
@@ -86,9 +89,11 @@ in
   ];
 
   home-manager.users.root = {
-    # imports = [
+    imports = [
     #   flakeSelf.homeProfiles.neovim-minimal
-    # ];
+      flakeSelf.homeModules.neovim
+      flakeSelf.homeProfiles.readline
+    ];
     home.stateVersion = "26.05";
 
   };
@@ -153,20 +158,6 @@ in
       ];
     };
   };
-
-  # boot.kernel.sysctl = {
-  #   # to not provoke the kernel into crashing
-  #   # "net.ipv4.tcp_timestamps" = 0;
-  #   # "net.ipv4.ipv4.ip_forward" = 1;
-  #   # "net.ipv4.tcp_keepalive_time" = 60;
-  #   # "net.core.rmem_max" = 4194304;
-  #   # "net.core.wmem_max" = 1048576;
-  # };
-
-  # # creates problem with buffalo check if it blocks requests or what
-  # # it is necessary to use dnssec though :(
-  # networking.resolvconf.dnsExtensionMechanism = false;
-  # networking.resolvconf.dnsSingleRequest = false;
 
   powerManagement.cpuFreqGovernor = "ondemand";
 
@@ -336,20 +327,12 @@ in
         networkConfig.Bridge = "br0";
       };
 
-      # remove once we make sure everything works
-      # "10-enp4s0" = {
-      #   matchConfig.OriginalName = "enp4s0";
-      #   networkConfig.Bridge = "br0";
-      # };
-
     };
   };
 
   # systemd.services.systemd-networkd.environment.SYSTEMD_LOG_LEVEL = "debug";
 
   time.timeZone = "Europe/Paris";
-
-  services.resolved.settings.Resolve.MulticastDNS = true;
 
   system.stateVersion = "26.05";
 }
