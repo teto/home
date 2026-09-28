@@ -1216,6 +1216,7 @@ end, { desc = 'Ask without selecting anything' })
 
 -- neorgmode {{{
 
+local has_norg, norg = pcall(require, 'neorg')
 -- if has_norg then
 -- dont load because:
 -- || E5113: Lua chunk: /home/teto/plugins/neorg/lua/neorg/core/modules.lua:789: attempt to index a nil value
@@ -1223,7 +1224,7 @@ end, { desc = 'Ask without selecting anything' })
 -- || 	/home/teto/plugins/neorg/lua/neorg/core/modules.lua:789: in function 'create_event'
 -- || 	...o/plugins/neorg/lua/neorg/modules/core/dirman/module.lua:215: in function 'set_workspace'
 -- || 	...o/plugins/neorg/lua/neorg/modules/core/dirman/module.lua:119: in function 'load'
-
+require('teto.neorg')
 -- loaded from rocks-lazy
 -- require("lz.n").load {
 -- 	"neorg",
