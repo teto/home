@@ -137,6 +137,7 @@ file = let
           @  IN A 192.168.1.83
           piper           CNAME   jedha.home.
           faster-whisper  CNAME   jedha.home.
+          cache           CNAME   jedha.home.
         '';
           # @ IN CNAME piper.jedha.home. jedha.home.
           # @ IN CNAME faster-whisper.jedha.home. jedha.home.

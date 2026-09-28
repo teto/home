@@ -116,6 +116,9 @@ in
     [
       pkgs.pinentry-curses
 
+      # ffs this needs the daemon ?!
+      pkgs.avahi # for avahi-browse
+
       # for the noctalia OCR plugin
       pkgs.grim
       pkgs.slurp
