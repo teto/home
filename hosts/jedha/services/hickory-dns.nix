@@ -40,12 +40,13 @@ in
   settings = {
     # Bind separately from systemd-resolved's 127.0.0.53 stub.
     listen_addrs_ipv4 = [
-      "127.0.0.1" 
+      # "127.0.0.1" 
       # unbinding conflicts with resolved ?
       # "0.0.0.0" 
-
+      "192.168.1.83"
     ];
     listen_addrs_ipv6 = [ ];
+    listen_port = 153;
 
     # With only an allow list, every other client is refused
     allow_networks = [ 

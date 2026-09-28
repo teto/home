@@ -14,7 +14,7 @@
     DNSSEC = "no"; # "allow-downgrade";
     # conflicts with avahi
     MulticastDNS = true;
-    DNS = "127.0.0.1:53"; # defer to adguardhome ? port
+    # DNS = "127.0.0.1:53"; # defer to adguardhome ? port
     # Domains=~.
     # if "yes" resolved exposes a stub listener at "127.0.0.53"
     # but resolv.conf settings are tailored for the sub listener !
