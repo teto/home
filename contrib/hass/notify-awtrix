@@ -1,0 +1,5 @@
+action: awtrix_ng.notify
+target:
+  device_id: notify.salon_awtrix_ng_notification
+data:
+  message: Garage door has been open for 10 minutes.

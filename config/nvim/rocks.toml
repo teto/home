@@ -117,6 +117,11 @@ nvim-treesitter-context = "1.0.0"
 "yazi.nvim"= "14.0.0"
 "quicker.nvim" = "1.5.1"
 
+[plugins."feed.nvim" ]
+git = "neo451/feed.nvim"
+rev = "4e0903343c47b13aa5355ed267dbd58300bff8be"
+branch = "main"
+
 [plugins."rikai.nvim"]
 dev = true
 
