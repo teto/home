@@ -61,6 +61,7 @@
 
   # mkForce ?
   environment.systemPackages = with pkgs; [
+    speech-to-phrase
     # disabled for now to reduce memory print
     # flashrom # to be able to flash the bios see https://teklager.se/en/knowledge-base/apu-bios-upgrade/
     # dmidecode # to get version of the bios: dmidecode -t bios

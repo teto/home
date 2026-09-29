@@ -23,10 +23,11 @@ default:
     just --choose
 
 # update noctalia's config
+# TODO remove noctalia-update-settings.fish "justfile_directory()"
+# remove / filter some sections ?
 noctalia-update-config:
-    noctalia-update-settings "justfile_directory()"
-    # TODO reset nc if needed
-    noctalia config export > hosts/{{ HOSTNAME }}/home-manager/users/teto/programs/noctalia-shell-settings.json
+    # wallhavenApiKey
+    noctalia config export > hosts/{{ HOSTNAME }}/home-manager/users/teto/programs/noctalia-settings.toml
 
 # bootstrap router
 # --disk-encryption-keys
@@ -148,30 +149,16 @@ stow-config:
 stow-home:
     stow --dotfiles -t {{ home_directory() }} home
 
-# TODO remove ?
-
 # symlink bin/ dotfiles into $HOME
 stow-bin:
     mkdir -p "{{ data_directory() }}/../bin"
     stow -t "{{ data_directory() }}/../bin" bin
 
-# symlink e.g. aws credentials in their expected position
-# remove, done via nix
-# stow-secrets:
-#     ln -s {{ SECRETS_FOLDER }}/aws  {{ home_directory() }}/.aws
-#     ln -s {{ SECRETS_FOLDER }}/password-store  {{ home_directory() }}/.password-store
-#     # ln -s {{ justfile_directory() }}/
-
 # symlink to XDG_DATA_HOME
 stow-local:
     echo "Local: {{ data_local_directory() }}"
     echo "data_directory: {{ data_directory() }}"
-
-    # data_local_directory returns ~/.local/share
     stow -t {{ data_local_directory() }}/.. local
-    # it's a file so should not be here
-    # "{{ data_directory() }}/fzf-history"
-    mkdir -p  {{ data_directory() }}/newsbeuter
 
 # Build my router image
 
@@ -183,6 +170,7 @@ router-build:
     nix build .\#nixosConfigurations.router.config.system.build.toplevel
 
 # this shouldn't need to be done !
+# use systemd tmpfiles ?
 cache:
     #mkdir -p $(shell echo "${XDG_CACHE_HOME:-$HOME/.cache}/less")
     # todo should be done

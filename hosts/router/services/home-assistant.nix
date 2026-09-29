@@ -23,6 +23,7 @@
 
       # "automation manual" = "!include ${../home-assistant/automations/hue-dimmer1.yaml}";
       
+      #include_dir_merge_list
       "automation manual" = "!include_dir_list ${../home-assistant/automations}";
     };
 
