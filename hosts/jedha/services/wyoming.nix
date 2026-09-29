@@ -1,10 +1,12 @@
-{ flakeSelf, ... }:
+{ flakeSelf, lib, ... }:
 {
 
   _imports = [
     flakeSelf.nixosProfiles.wyoming
   ];
 
-  # faster-whisper.servers.medium-fr.server.uri = "tcp://${server}:10301";
+  # nginx owns the public Wyoming ports; backends are loopback-only.
+  piper.servers.fr.uri = "tcp://127.0.0.1:10201";
+  faster-whisper.servers.medium-fr.uri = "tcp://127.0.0.1:10302";
 
 }
