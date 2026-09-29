@@ -111,6 +111,7 @@
 
       # frontend must be mandatory
       frontend = {
+
         themes = "!include_dir_merge_named themes";
       };
 

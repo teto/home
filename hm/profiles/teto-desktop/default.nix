@@ -256,6 +256,9 @@ in
     ];
   };
 
+  # home.file.".local/share/vicinae/scripts".source =
+  #   config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/contrib/vicinae";
+
   package-sets = {
     desktop = true;
     energy = true;

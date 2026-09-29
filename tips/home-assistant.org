@@ -50,6 +50,7 @@ https://www.zigbee2mqtt.io/devices/RH3040.html
 
 ** fp300
 
+Brand new, defaults to matter ! need app to switch to zigbee
 https://smarthomescene.com/reviews/aqara-fp300-presence-multi-sensor-teardown-and-review/
 
 ** ZG-204ZH

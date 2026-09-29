@@ -1,0 +1,99 @@
+#!/usr/bin/env bash
+
+WLR_RANDR=$(which wlr-randr)
+
+MONITORS=( $( ${WLR_RANDR} | grep -E "^[^ ]+ " | awk '{print $1}' ) )
+
+
+NUM_MONITORS=${#MONITORS[@]}
+
+TITLES=()
+COMMANDS=()
+
+
+function gen_wlr_randr_only()
+{
+    selected=$1
+
+    cmd="wlr-randr --output ${MONITORS[$selected]} --on "
+
+    for entry in $(seq 0 $((${NUM_MONITORS}-1)))
+    do
+        if [ $selected != $entry ]
+        then
+            cmd="$cmd --output ${MONITORS[$entry]} --off"
+        fi
+    done
+
+    echo $cmd
+}
+
+
+
+declare -i index=0
+TILES[$index]="Cancel"
+COMMANDS[$index]="true"
+index+=1
+
+
+for entry in $(seq 0 $((${NUM_MONITORS}-1)))
+do
+    TILES[$index]="Only ${MONITORS[$entry]}"
+    COMMANDS[$index]=$(gen_wlr_randr_only $entry)
+    index+=1
+done
+
+##
+# Dual screen options
+##
+for entry_a in $(seq 0 $((${NUM_MONITORS}-1)))
+do
+    for entry_b in $(seq 0 $((${NUM_MONITORS}-1)))
+    do
+        if [ $entry_a != $entry_b ]
+        then
+            TILES[$index]="Dual Screen ${MONITORS[$entry_a]} -> ${MONITORS[$entry_b]}"
+            COMMANDS[$index]="wlr-randr --output ${MONITORS[$entry_b]} --on --pos 0,0 \
+                              --output ${MONITORS[$entry_a]} --on --pos 1920,0"
+
+            index+=1
+        fi
+    done
+done
+
+
+##
+# Clone monitors
+##
+for entry_a in $(seq 0 $((${NUM_MONITORS}-1)))
+do
+    for entry_b in $(seq 0 $((${NUM_MONITORS}-1)))
+    do
+        if [ $entry_a != $entry_b ]
+        then
+            TILES[$index]="Clone Screen ${MONITORS[$entry_a]} -> ${MONITORS[$entry_b]}"
+            COMMANDS[$index]="wlr-randr --output ${MONITORS[$entry_a]} --on --pos 0,0 \
+                              --output ${MONITORS[$entry_b]} --on --pos 0,0"
+
+            index+=1
+        fi
+    done
+done
+
+
+##
+#  Generate entries, where first is key.
+##
+function gen_entries()
+{
+    for a in $(seq 0 $(( ${#TILES[@]} -1 )))
+    do
+        echo $a ${TILES[a]}
+    done
+}
+
+# Call menu
+SEL=$( gen_entries | vicinae dmenu -n "Monitor Setup:" -s "Configure your monitors" | awk '{print $1}' )
+
+# Call wlr-randr
+$( ${COMMANDS[$SEL]} )

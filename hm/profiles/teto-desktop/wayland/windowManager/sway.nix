@@ -99,19 +99,21 @@ in
     };
 
     keybindings = {
+      # bind to noctalia plugin ?
       # "$mod+t" = "exec ${lib.getExe pkgs.voxinput} write; exec ${notify-send} 'voxinput write'";
-      # 2. Select a text box you want to speak into and use a global shortcut to run the following
-      # 3. Begin speaking, when you pause for a second or two your speach will be transcribed and typed into the active application.
       # "$mod+Shift+t" = "exec ${lib.getExe pkgs.voxinput} record; exec ${notify-send} 'voxinput record'";
+      # TODO copy result and send notif
+      "${mad}+c" = ''exec "${dotfilesPath}/bin/ocr-jap" && ${notify-send} 'Finished ocr' '';
 
+      # pb est qu'il fait 
       "${mad}+m" = ''exec "${dotfilesPath}/rofi-scripts/monitor_layout.sh"; mode default;'';
       # use sway-easyfocus
       "${mad}+f" = "exec ${pkgs.sway-easyfocus}/bin/sway-easyfocus";
+
       # ideally we shouldn't care if it's firefox or not ?
+      # should focus mpris instead ?
       "${mad}+a" = ''exec "${dotfilesPath}/bin/focus-firefox-media"'';
 
-      # TODO copy result and send notif
-      "${mad}+c" = ''exec "${dotfilesPath}/bin/ocr-jap" && ${notify-send} 'Finished ocr' '';
 
       "${mod}+Shift+1" = "exec qutebrowser";
 
@@ -144,6 +146,13 @@ in
 
       "${mod}+Ctrl+h" = "exec ${pkgs.vicinae}/bin/vicinae vicinae://launch/clipboard/history";
       "${mad}+w" = "exec ${pkgs.vicinae}/bin/vicinae deeplink vicinae://launch/wm/switch-windows";
+      "${mad}+Tab" = "exec ${pkgs.vicinae}/bin/vicinae deeplink vicinae://launch/wm/switch-windows";
+      "${mod}+Tab" = "exec ${pkgs.vicinae}/bin/vicinae toggle";
+
+        # TODO make it a noctalia command
+      "${mod}+Ctrl+L"  = "exec noctalia msg session lock";
+        # "${mod}+Ctrl+L" = "exec ${pkgs.tetos.swaylockCmd} ";
+
     }
     # // lib.optionalAttrs config.services.clipcat.enable {
     #   "${mod}+Ctrl+h" =

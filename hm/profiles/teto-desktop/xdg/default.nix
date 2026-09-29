@@ -18,14 +18,15 @@
   enable = true;
   mime.enable = true;
 
-  # TODO add our own vicinae module
+  # replace the generated vicinae config with a manual one 
   configFile."vicinae/settings.json".enable = false;
-  # You can still refer to its generated content via:
+  # You can still refer to the generated config via:
   configFile."vicinae/generated.json".source = config.xdg.configFile."vicinae/settings.json".source;
 
   configFile."just/justfile.generated".text = ''
     # WIP
   '';
+
   # # generate an addressbook that can be used later
   # home.file."bin-nix/generate-addressbook".text = ''
   #   #!/bin/sh

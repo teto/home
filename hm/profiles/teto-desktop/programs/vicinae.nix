@@ -19,12 +19,14 @@ in
   # the website doesn't describe options, one has to checkout:
   # vicinae config default | less
   settings = {
-    imports = [ "${config.xdg.configHome}/vicinae/manual.json" ];
+    imports = [ 
+      # "${config.xdg.configHome}/vicinae/manual.json" 
+    ];
     # Supports "navigate_back" or "close_window"
     escape_key_behavior = "navigate_back";
     # Available values are: 'twenty' | 'google' | 'none'
     # If this is set to 'none', favicon loading is disabled and a placeholder icon will be used when a favicon is expected.
-    favicon_service = "twenty";
+    favicon_service = "none";
     font.normal.size = 10;
     pop_to_root_on_close = false;
     search_files_in_root = false;
@@ -58,7 +60,7 @@ in
     # // that you preserve a similar aspect ratio.
     "size" = {
       # TODO can I use pourcentage ?
-      "width" = "0.5";
+      "width" = "0.7";
       "height" = 480;
     };
 
@@ -83,6 +85,8 @@ in
     # ],
   };
 
+
+  # Ideally there would be one for monitors but not yet
   extensions =
 
     # "bluetooth" / "nix" / "wifi-commander" / "ssh"
@@ -115,7 +119,7 @@ in
       # extensions.systemd
       extensions.timer
       extensions.wikipedia
-      extensions.reminders
+      # extensions.reminders
       extensions.otp
 
       # (config.lib.vicinae.mkRayCastExtension {
