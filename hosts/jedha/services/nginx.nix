@@ -35,6 +35,21 @@ in
 
   logError = "stderr";
 
+  # Wyoming uses raw TCP; each service needs its own public port.
+  streamConfig =
+    lib.optionalString config.services.wyoming.piper.servers.fr.enable ''
+      server {
+        listen 10200;
+        proxy_pass 127.0.0.1:10201;
+      }
+    ''
+    + lib.optionalString config.services.wyoming.faster-whisper.servers.medium-fr.enable ''
+      server {
+        listen 10301;
+        proxy_pass 127.0.0.1:10302;
+      }
+    '';
+
   # using avahi hotname
   virtualHosts = {
     harmonia = lib.mkIf config.services.harmonia.cache.enable {
@@ -87,22 +102,6 @@ in
       };
     };
 
-    faster-whisper = lib.mkIf (config.services.wyoming.faster-whisper.servers != [ ]) {
-      serverAliases = mkServerAliases "whisper";
-
-      enableACME = false;
-      forceSSL = false;
-
-      locations."/" = {
-        proxyPass = "http://localhost:10301";
-        proxyWebsockets = true;
-        extraConfig = ''
-          client_max_body_size 100M;
-        '';
-
-      };
-    };
-
     music-assistant = lib.mkIf config.services.music-assistant.enable {
       enableACME = false;
       forceSSL = false;
@@ -111,21 +110,6 @@ in
       locations."/" = {
         proxyPass = "http://localhost:8097";
         proxyWebsockets = true;
-      };
-    };
-
-    piper = lib.mkIf (config.services.wyoming.piper.servers != [ ]) {
-      enableACME = false;
-      forceSSL = false;
-      serverAliases = mkServerAliases "piper";
-
-      locations."/" = {
-        proxyPass = "http://localhost:10200";
-        proxyWebsockets = true;
-        extraConfig = ''
-          client_max_body_size 100M;
-        '';
-
       };
     };
 
