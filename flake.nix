@@ -151,7 +151,7 @@
     };
 
     meli-src = {
-      url = "git+https://git.meli-email.org/meli/meli.git";
+      url = "git+https://git.meli-email.org/meli/meli.git?ref=refs/pull/768/head";
       flake = false;
     };
 
