@@ -26,6 +26,7 @@ lib.optionalAttrs osConfig.tetos.withSecrets {
         # addresses = ${secrets.users.teto.email}
         #  '';
       };
+      noctalia.enable = true;
 
       pimsync = {
         enable = true;

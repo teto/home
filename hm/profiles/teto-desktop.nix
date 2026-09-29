@@ -33,7 +33,6 @@ in
     ./common.nix
     flakeSelf.homeProfiles.sway
     flakeSelf.homeProfiles.neovim
-    flakeSelf.inputs.noctalia-shell.homeModules.default
 
   ];
 

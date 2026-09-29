@@ -151,7 +151,7 @@
       };
 
       # The [Unit] section accepts an OnFailure option. This is a space-separated list of one or more units that are activated when this unit enters the “failed” state.
-      Unit.OnFailure = "desktop-notification@%i.service";
+      Unit.OnFailure = "desktop-notification@%n-failure.service";
       # PrivateTmp=true
     };
   };
