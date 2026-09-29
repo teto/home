@@ -42,6 +42,48 @@
       }
    },
    "providers": {
+      "@HarshNarayanJha/vicinae-extension-timer-0": {
+         "preferences": {
+            "presets": "5m Tea, 25m Pomodoro"
+         }
+      },
+      "@bl4zee1g/vicinae-extension-bitwarden-0": {
+         "preferences": {
+            "rbwPath": "rbw"
+         }
+      },
+      "@knoopx/vicinae-extension-github-0": {
+         "preferences": {
+            "defaultIssueFilter": "my",
+            "defaultRepositoryFilter": "my",
+            "numberOfResults": "50"
+         }
+      },
+      "@knoopx/vicinae-extension-nix-0": {
+         "preferences": {
+            "homeManagerOptionsUrl": "https://home-manager-options.extranix.com/data/options-master.json",
+            "searchUrl": "https://search.nixos.org/backend/latest-48-nixos-unstable/_search"
+         }
+      },
+      "@knoopx/vicinae-extension-supergenpass-0": {
+         "preferences": {
+            "hashMethod": "md5",
+            "length": "10",
+            "removeSubdomains": true
+         }
+      },
+      "@tinkerbells/vicinae-extension-pass-0": {
+         "preferences": {
+            "action": "paste",
+            "additionalPath": "",
+            "lastUsedTtl": "120",
+            "otpAfterPassword": true,
+            "passwordStorePath": "~/.password-store"
+         }
+      },
+      "@wy3z/vicinae-extension-reminders-0": {
+         "enabled": false
+      },
       "applications": {
          "enabled": true,
          "preferences": {
@@ -82,6 +124,15 @@
             "indexingPaths": [
                "/home/teto"
             ]
+         }
+      },
+      "snippets": {
+         "preferences": {
+            "enabled": true,
+            "keyDelay": "2",
+            "layout": "",
+            "prePasteDelay": "0",
+            "undo": true
          }
       }
    }

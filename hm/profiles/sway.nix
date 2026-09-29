@@ -285,20 +285,6 @@ in
           Menu = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
           "${mod}+Tab" = "exec ${pkgs.vicinae}/bin/vicinae toggle";
 
-          #### Windows key mappings
-          ##############################
-
-          # "${mod}+Tab" = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
-          # TODO dwindow exclusively with WIN
-          "${mad}+Tab" = "exec ${pkgs.swayr}/bin/swayr switch-window";
-          # ca ne montre rien ?
-          # "${mad}+p" = "exec ${lib.getExe pkgs.wofi-pass} ";
-          # "${mad}+w" = "exec \"${rofi}/bin/rofi -modi 'run,drun,window,ssh' -show window\"";
-          # TODO bind
-          # XF86Copy
-
-          # TODO make it a noctalia command
-          "${mod}+Ctrl+L" = "exec ${pkgs.tetos.swaylockCmd} ";
 
           # TODO try with flameshot again ?
           # "--release Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy area";
@@ -372,10 +358,6 @@ in
       # "--verbose"
       # "--debug"
     ];
-
-    #       export XDG_CURRENT_DESKTOP=sway
-    # export XDG_SESSION_DESKTOP=sway
-    #
 
     # describe what it does
     wrapperFeatures = {
