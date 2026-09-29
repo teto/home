@@ -36,17 +36,23 @@ in
   logError = "stderr";
 
   # Wyoming uses raw TCP; each service needs its own public port.
-  streamConfig =
-    lib.optionalString config.services.wyoming.piper.servers.fr.enable ''
+  streamConfig = let
+    piperSrv = config.services.wyoming.piper.servers.fr;
+    whisperSrv = config.services.wyoming.faster-whisper.servers.medium-fr;
+  in
+    # piper on 10200 a priori
+    lib.optionalString piperSrv.enable ''
       server {
-        listen 10200;
-        proxy_pass 127.0.0.1:10201;
+        listen 10222;
+        proxy_pass 127.0.0.1:10200;
       }
     ''
-    + lib.optionalString config.services.wyoming.faster-whisper.servers.medium-fr.enable ''
+    # 10301
+    # invalid host in upstream "tcp://0.0.0.0:10200
+    + lib.optionalString whisperSrv.enable ''
       server {
-        listen 10301;
-        proxy_pass 127.0.0.1:10302;
+        listen 10333;
+        proxy_pass 127.0.0.1:10301;
       }
     '';
 

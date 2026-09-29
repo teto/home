@@ -86,7 +86,8 @@ in
       voice = "fr_FR-mls-medium";
       # default = "en-us-ryan-medium";
       # voice = "fr_FR-semaine-medium";
-      uri = "tcp://${server}:10200";
+      
+      uri = "tcp://127.0.0.1:10200";
 
       # sets device ?
       useCUDA = pkgs.config.cudaSupport;
@@ -108,7 +109,7 @@ in
       sttLibrary = "faster-whisper";
       extraArgs = [ "--local-files-only" ];
       language = "fr";
-      uri = "tcp://${server}:10301";
+      uri = "tcp://127.0.0.1:10301";
       # device = "cuda";
       # initialPrompt = ''
       #          The following conversation takes place in the universe of
