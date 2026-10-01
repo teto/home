@@ -2,7 +2,7 @@
   flakeSelf,
   pkgs,
   # lib,
-  config,
+  # config,
   ...
 }:
 {
@@ -19,7 +19,8 @@
       pkgs.awtrix-ng-hass-integration
     # (config.services.home-assistant.package.python.pkgs.callPackage ./hass-node-red-module.nix {})
   ];
-    config = {
+  config = {
+      feedreader.urls = [ "https://nixos.org/blogs.xml" ];
 
       # "automation manual" = "!include ${../home-assistant/automations/hue-dimmer1.yaml}";
       
@@ -29,6 +30,9 @@
 
     # TODO add
     # Error occurred loading flow for integration data_grand_lyon: No module named 'data_grand_lyon_ha'
+    themes = with pkgs.home-assistant-themes; [
+      material-you-theme
+    ];
 
     blueprints = {
       automation = [

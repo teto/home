@@ -830,7 +830,6 @@ vim.api.nvim_set_hl(0, 'GitSignsChangeLn', {
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/hurl.nvim')
 -- useless, I need to tweak the lua path ?
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/lual')
--- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/feed.nvim')
 vim.g.mcphub = {
     config = vim.fn.expand('~/.config/mcphub/servers.json'), -- Absolute path to MCP Servers config file (will create if not exists)
     port = 37373, -- The port `mcp-hub` server listens to
