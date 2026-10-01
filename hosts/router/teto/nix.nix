@@ -1,10 +1,4 @@
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-{
   nix = {
 
     checkConfig = true;

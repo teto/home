@@ -50,7 +50,7 @@ let
     flavor = "fastmail.com";
 
     astroid = {
-      enable = false;
+      enable = true;
     };
 
     neomutt = {
@@ -87,6 +87,7 @@ let
               replied = "⏎";
             };
           };
+
           ignore = false;
           # usage boolean                         (optional) special usage of  this  mailbox.   Valid
           #                             values are:

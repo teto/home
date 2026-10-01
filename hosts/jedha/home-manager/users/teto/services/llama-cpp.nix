@@ -27,7 +27,8 @@ in
         "${dotfilesPath}/contrib/llama-presets.ini"
       ];
 
-      host = "0.0.0.0";
+      # since we expose it via nginx
+      host = "127.0.0.1";
     };
 
     embedding = {
@@ -40,7 +41,7 @@ in
         "${dotfilesPath}/contrib/llama-embed.ini"
       ];
 
-      host = "0.0.0.0";
+      host = "127.0.0.1";
 
     };
   };

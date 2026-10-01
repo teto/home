@@ -35,20 +35,48 @@ in
 
   logError = "stderr";
 
+  # Wyoming uses raw TCP; each service needs its own public port.
+  # doc for stream https://nginx.org/en/docs/stream/ngx_stream_upstream_module.html#server
+  # I can set the resolver here resolver 127.0.0.1 [::1]:5353;
+  # I could use socket paths as well
+  # service=name
+  #    enables resolving of DNS SRV records and sets the service name 
+  streamConfig = let
+    piperSrv = config.services.wyoming.piper.servers.fr;
+    whisperSrv = config.services.wyoming.faster-whisper.servers.medium-fr;
+  in
+    # piper on 10200 a priori
+    lib.optionalString piperSrv.enable ''
+      server {
+        listen 10222;
+        proxy_pass 127.0.0.1:10200;
+        fail_timeout 10s;
+      }
+    ''
+    # 10301
+    # invalid host in upstream "tcp://0.0.0.0:10200
+    + lib.optionalString whisperSrv.enable ''
+      server {
+        listen 10333;
+        proxy_pass 127.0.0.1:10301;
+      }
+    '';
+
   # using avahi hotname
   virtualHosts = {
-    harmonia = {
+    harmonia = lib.mkIf config.services.harmonia.cache.enable {
       enableACME = false;
       forceSSL = false;
+      serverAliases = mkServerAliases "cache";
 
       locations."/".extraConfig = ''
-        proxy_pass http://127.0.0.1:5000;
-        proxy_set_header Host $host;
-        proxy_redirect http:// https://;
-        proxy_http_version 1.1;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection $connection_upgrade;
+      proxy_pass http://127.0.0.1:5000;
+      #   proxy_set_header Host $host;
+      #   proxy_redirect http:// https://;
+      #   proxy_http_version 1.1;
+      #   proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      #   proxy_set_header Upgrade $http_upgrade;
+      #   proxy_set_header Connection $connection_upgrade;
       '';
     };
 
@@ -62,10 +90,10 @@ in
 
       locations."/" = {
         proxyPass = "http://localhost:${toString llama-cpp-service.port}";
-        proxyWebsockets = true;
-        extraConfig = ''
-          client_max_body_size 100M;
-        '';
+        proxyWebsockets = false;
+        # extraConfig = ''
+        #   client_max_body_size 100M;
+        # '';
 
       };
     };
@@ -86,22 +114,6 @@ in
       };
     };
 
-    faster-whisper = lib.mkIf (config.services.wyoming.faster-whisper.servers != [ ]) {
-      serverAliases = mkServerAliases "whisper";
-
-      enableACME = false;
-      forceSSL = false;
-
-      locations."/" = {
-        proxyPass = "http://localhost:10301";
-        proxyWebsockets = true;
-        extraConfig = ''
-          client_max_body_size 100M;
-        '';
-
-      };
-    };
-
     music-assistant = lib.mkIf config.services.music-assistant.enable {
       enableACME = false;
       forceSSL = false;
@@ -110,21 +122,6 @@ in
       locations."/" = {
         proxyPass = "http://localhost:8097";
         proxyWebsockets = true;
-      };
-    };
-
-    piper = lib.mkIf (config.services.wyoming.piper.servers != [ ]) {
-      enableACME = false;
-      forceSSL = false;
-      serverAliases = mkServerAliases "piper";
-
-      locations."/" = {
-        proxyPass = "http://localhost:10200";
-        proxyWebsockets = true;
-        extraConfig = ''
-          client_max_body_size 100M;
-        '';
-
       };
     };
 

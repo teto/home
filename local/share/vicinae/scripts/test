@@ -1,0 +1,7 @@
+#!/bin/sh
+# @vicinae.schemaVersion 1
+# @vicinae.title Open NixOS config
+# @vicinae.mode silent
+
+# you can validate it with "noctalia config validate"
+subl

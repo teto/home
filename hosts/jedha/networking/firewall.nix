@@ -2,6 +2,10 @@
 {
   allowedTCPPorts = [
     5028 # pour nix-cache-beacon
+    153
+
+    10222 # piper
+    10333 # whisper
   ]
   ++ lib.optional config.home-manager.users.teto.services.ollama.enable config.home-manager.users.teto.services.ollama.port
   ++ map (instance: instance.port) (
@@ -19,6 +23,8 @@
     8000 # http stream
   ];
 
-  allowedUDPPorts = [ ];
+  allowedUDPPorts = [ 
+    153 # hickory-dns
+  ];
 
 }

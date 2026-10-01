@@ -152,6 +152,7 @@
 
     meli-src = {
       url = "git+https://git.meli-email.org/meli/meli.git";
+      # url = "git+https://git.meli-email.org/meli/meli.git?ref=refs/pull/768/head";
       flake = false;
     };
 
@@ -198,6 +199,11 @@
     rocks-nvim = {
       url = "github:nvim-neorocks/rocks.nvim";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    mokuro = {
+      url = "github:teto/mokuro";
+      flake = false;
     };
 
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";

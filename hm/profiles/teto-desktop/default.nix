@@ -116,6 +116,9 @@ in
     [
       pkgs.pinentry-curses
 
+      # ffs this needs the daemon ?!
+      pkgs.avahi # for avahi-browse
+
       # for the noctalia OCR plugin
       pkgs.grim
       pkgs.slurp
@@ -226,8 +229,11 @@ in
 
     # TODO set it globally ?
     CDPATH = "$HOME/plugins";
+
+    # it's a pain with git/update config
     PAGER = "bat";
 
+    # or bat
     MANPAGER = "moor";
     # MANPAGER = "less -R -i --use-color -Dd+M -Du+C";
     # MANROFFOPT = "-c";
@@ -249,6 +255,9 @@ in
       "${dotfilesPath}/rofi-scripts"
     ];
   };
+
+  # home.file.".local/share/vicinae/scripts".source =
+  #   config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/contrib/vicinae";
 
   package-sets = {
     desktop = true;

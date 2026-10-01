@@ -1,0 +1,925 @@
+settingsVersion = 59
+
+[appLauncher]
+autoPasteClipboard = false
+clipboardWatchImageCommand = "wl-paste --type image --watch cliphist store"
+clipboardWatchTextCommand = "wl-paste --type text --watch cliphist store"
+clipboardWrapText = true
+customLaunchPrefix = ""
+customLaunchPrefixEnabled = false
+density = "default"
+enableClipPreview = true
+enableClipboardChips = true
+enableClipboardHistory = false
+enableClipboardSmartIcons = true
+enableSessionSearch = true
+enableSettingsSearch = true
+enableWindowsSearch = true
+iconMode = "tabler"
+ignoreMouseInput = false
+overviewLayer = false
+pinnedApps = []
+position = "center"
+screenshotAnnotationTool = ""
+showCategories = true
+showIconBackground = false
+sortByMostUsed = true
+terminalCommand = "alacritty -e"
+viewMode = "list"
+
+[audio]
+enable_overdrive = true
+mprisBlacklist = []
+preferredPlayer = ""
+spectrumFrameRate = 30
+spectrumMirrored = true
+visualizerType = "linear"
+volumeFeedback = false
+volumeFeedbackSoundFile = ""
+volumeOverdrive = false
+volumeStep = 5
+
+[bar]
+autoHideDelay = 500
+autoShowDelay = 150
+backgroundOpacity = 0.93000000000000005
+barType = "simple"
+capsuleColorKey = "none"
+capsuleOpacity = 1
+contentPadding = 2
+density = "spacious"
+displayMode = "always_visible"
+enableExclusionZoneInset = true
+fontScale = 1
+frameRadius = 12
+frameThickness = 8
+hideOnOverview = false
+marginHorizontal = 4
+marginVertical = 4
+middleClickAction = "controlCenter"
+middleClickCommand = ""
+middleClickFollowMouse = false
+monitors = []
+mouseWheelAction = "none"
+mouseWheelWrap = true
+outerCorners = true
+position = "top"
+reverseScroll = false
+rightClickAction = "controlCenter"
+rightClickCommand = ""
+rightClickFollowMouse = true
+screenOverrides = []
+showCapsule = true
+showOnWorkspaceSwitch = true
+showOutline = false
+useSeparateOpacity = false
+widgetSpacing = 6
+
+    [bar.widgets]
+    background_opacity = 0.3899999912828207
+    border = "hover"
+    capsule = true
+    center = [ "date", "inbox", "widget", "github", "temp" ]
+    end = [ "keyboard_layout", "clipboard", "network", "tray", "volume", "battery", "bar", "notifications" ]
+    margin_edge = 0
+    margin_ends = 0
+    panel_overlap = 0
+    radius = 0
+    scale = 1.350000012665987
+    start = [ "launcher", "ocr", "wallpaper", "workspaces", "status_3" ]
+    thickness = 30
+
+        [[bar.widgets.left]]
+        colorizeSystemIcon = "none"
+        colorizeSystemText = "none"
+        customIconPath = ""
+        enableColorization = false
+        icon = "rocket"
+        iconColor = "none"
+        id = "Launcher"
+        useDistroLogo = false
+
+        [[bar.widgets.left]]
+        colorizeDistroLogo = false
+        colorizeSystemIcon = "none"
+        colorizeSystemText = "none"
+        customIconPath = ""
+        enableColorization = false
+        icon = "noctalia"
+        id = "ControlCenter"
+        useDistroLogo = false
+
+        [[bar.widgets.left]]
+        characterCount = 10
+        colorizeIcons = false
+        emptyColor = "secondary"
+        enableScrollWheel = true
+        focusedColor = "primary"
+        followFocusedScreen = false
+        fontWeight = "bold"
+        groupedBorderOpacity = 1
+        hideUnoccupied = false
+        iconScale = 0.80000000000000004
+        id = "Workspace"
+        labelMode = "name"
+        occupiedColor = "secondary"
+        pillSize = 0.59999999999999998
+        showApplications = false
+        showApplicationsHover = false
+        showBadge = true
+        showLabelsOnlyWhenOccupied = true
+        unfocusedIconsOpacity = 1
+
+        [[bar.widgets.right]]
+        compactMode = false
+        diskPath = "/"
+        iconColor = "none"
+        id = "SystemMonitor"
+        showCpuCores = false
+        showCpuFreq = false
+        showCpuTemp = true
+        showCpuUsage = true
+        showDiskAvailable = false
+        showDiskUsage = false
+        showDiskUsageAsPercent = false
+        showGpuTemp = false
+        showLoadAverage = false
+        showMemoryAsPercent = false
+        showMemoryUsage = true
+        showNetworkStats = false
+        showSwapUsage = false
+        textColor = "none"
+        useMonospaceFont = true
+        usePadding = false
+
+        [[bar.widgets.right]]
+        blacklist = []
+        chevronColor = "none"
+        colorizeIcons = false
+        drawerEnabled = true
+        hidePassive = false
+        id = "Tray"
+        pinned = [ "Flameshot" ]
+
+        [[bar.widgets.right]]
+        displayMode = "onhover"
+        iconColor = "none"
+        id = "Volume"
+        middleClickCommand = "pwvucontrol || pavucontrol"
+        textColor = "none"
+
+        [[bar.widgets.right]]
+        applyToAllMonitors = false
+        displayMode = "onhover"
+        iconColor = "none"
+        id = "Brightness"
+        textColor = "none"
+
+        [[bar.widgets.right]]
+        deviceNativePath = "__default__"
+        displayMode = "graphic"
+        hideIfIdle = false
+        hideIfNotDetected = true
+        id = "Battery"
+        showNoctaliaPerformance = false
+        showPowerProfiles = false
+
+        [[bar.widgets.right]]
+        hideWhenZero = false
+        hideWhenZeroUnread = false
+        iconColor = "none"
+        id = "NotificationHistory"
+        showUnreadBadge = true
+        unreadBadgeColor = "primary"
+
+[brightness]
+backlightDeviceMappings = []
+brightnessStep = 5
+enableDdcSupport = false
+enable_ddcutil = true
+enforceMinimum = true
+
+[calendar]
+enabled = true
+refresh_minutes = 30
+
+    [calendar.account.fastmail]
+    color = "primary"
+    name = "fastmail"
+    path = "/home/teto/calendars/fastmail"
+    type = "vdir"
+
+    [calendar.account.home_nextcloud]
+    provider = "custom"
+    server_url = "https://caldav.fastmail.com/"
+    type = "caldav"
+    username = "matthieucoudron@fastmail.com"
+
+    [[calendar.cards]]
+    enabled = true
+    id = "calendar-header-card"
+
+    [[calendar.cards]]
+    enabled = true
+    id = "calendar-month-card"
+
+    [[calendar.cards]]
+    enabled = true
+    id = "weather-card"
+
+[colorSchemes]
+darkMode = true
+generationMethod = "tonal-spot"
+manualSunrise = "06:30"
+manualSunset = "18:30"
+monitorForColors = ""
+predefinedScheme = "Noctalia (default)"
+schedulingMode = "off"
+syncGsettings = true
+useWallpaperColors = false
+
+[controlCenter]
+diskPath = "/"
+position = "close_to_bar_button"
+
+    [[controlCenter.shortcuts.left]]
+    id = "Network"
+
+    [[controlCenter.shortcuts.left]]
+    id = "Bluetooth"
+
+    [[controlCenter.shortcuts.left]]
+    id = "WallpaperSelector"
+
+    [[controlCenter.shortcuts.left]]
+    id = "NoctaliaPerformance"
+
+    [[controlCenter.shortcuts.right]]
+    id = "Notifications"
+
+    [[controlCenter.shortcuts.right]]
+    id = "PowerProfile"
+
+    [[controlCenter.shortcuts.right]]
+    id = "KeepAwake"
+
+    [[controlCenter.shortcuts.right]]
+    id = "NightLight"
+
+    [[controlCenter.cards]]
+    enabled = true
+    id = "profile-card"
+
+    [[controlCenter.cards]]
+    enabled = true
+    id = "shortcuts-card"
+
+    [[controlCenter.cards]]
+    enabled = true
+    id = "audio-card"
+
+    [[controlCenter.cards]]
+    enabled = false
+    id = "brightness-card"
+
+    [[controlCenter.cards]]
+    enabled = true
+    id = "weather-card"
+
+    [[controlCenter.cards]]
+    enabled = true
+    id = "media-sysmon-card"
+
+[control_center]
+sidebar = "full"
+sidebar_section = "full"
+
+[desktopWidgets]
+enabled = false
+gridSnap = false
+gridSnapScale = false
+monitorWidgets = []
+overviewEnabled = true
+
+[desktop_widgets]
+enabled = false
+schema_version = 2
+widget_order = [
+    "desktop-widget-0000000000000001",
+    "desktop-widget-0000000000000002",
+    "desktop-widget-0000000000000003",
+    "desktop-widget-0000000000000004"
+]
+
+    [desktop_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = false
+
+    [desktop_widgets.widget.desktop-widget-0000000000000001]
+    box_height = 64.0
+    box_width = 208.0
+    cx = 64.0
+    cy = 32.0
+    output = "HDMI-A-1"
+    rotation = 0.0
+    type = "audio_visualizer"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000001.settings]
+        aspect_ratio = 2.5
+        bands = 32
+        show_when_idle = true
+
+    [desktop_widgets.widget.desktop-widget-0000000000000002]
+    box_height = 208.4765625
+    box_width = 383.8828125
+    cx = 2056.37890625
+    cy = 212.61328125
+    output = "HDMI-A-1"
+    rotation = 0.0
+    type = "weather"
+
+    [desktop_widgets.widget.desktop-widget-0000000000000003]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 2455.9609375
+    cy = 68.70703125
+    output = "HDMI-A-1"
+    rotation = 0.0
+    type = "clock"
+
+    [desktop_widgets.widget.desktop-widget-0000000000000004]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 2403.55859375
+    cy = 318.296875
+    output = "HDMI-A-1"
+    rotation = 0.0
+    type = "sysmon"
+
+[dock]
+animationSpeed = 1
+backgroundOpacity = 1
+colorizeIcons = false
+deadOpacity = 0.59999999999999998
+displayMode = "auto_hide"
+dockType = "floating"
+enabled = false
+floatingRatio = 1
+groupApps = false
+groupClickAction = "cycle"
+groupContextMenuMode = "extended"
+groupIndicatorStyle = "dots"
+inactiveIndicators = false
+indicatorColor = "primary"
+indicatorOpacity = 0.59999999999999998
+indicatorThickness = 3
+launcherIcon = ""
+launcherIconColor = "none"
+launcherPosition = "end"
+launcherUseDistroLogo = false
+monitors = []
+onlySameOutput = true
+pinnedApps = []
+pinnedStatic = false
+position = "bottom"
+showDockIndicator = false
+showLauncherIcon = false
+sitOnFrame = false
+size = 1
+
+[general]
+allowPanelsOnScreenWithoutBar = true
+allowPasswordWithFprintd = false
+animationDisabled = false
+animationSpeed = 1
+autoStartAuth = false
+avatarImage = "/home/teto/.face"
+boxRadiusRatio = 1
+clockFormat = "hh\\nmm"
+clockStyle = "custom"
+compactLockScreen = false
+dimmerOpacity = 0.20000000000000001
+enableBlurBehind = true
+enableLockScreenCountdown = true
+enableLockScreenMediaControls = false
+enableShadows = true
+forceBlackScreenCorners = false
+iRadiusRatio = 1
+language = ""
+lockOnSuspend = true
+lockScreenAnimations = false
+lockScreenBlur = 0
+lockScreenCountdownDuration = 10000
+lockScreenMonitors = []
+lockScreenTint = 0
+passwordChars = false
+radiusRatio = 1
+reverseScroll = false
+scaleRatio = 1
+screenRadiusRatio = 1
+shadowDirection = "bottom_right"
+shadowOffsetX = 2
+shadowOffsetY = 3
+showChangelogOnStartup = true
+showHibernateOnLockScreen = false
+showScreenCorners = false
+showSessionButtonsOnLockScreen = true
+smoothScrollEnabled = true
+telemetryEnabled = false
+
+    [general.keybinds]
+    keyDown = [ "Down" ]
+    keyEnter = [ "Return", "Enter" ]
+    keyEscape = [ "Esc" ]
+    keyLeft = [ "Left" ]
+    keyRemove = [ "Del" ]
+    keyRight = [ "Right" ]
+    keyUp = [ "Up" ]
+
+[hooks]
+colorGeneration = ""
+darkModeChange = ""
+enabled = false
+performanceModeDisabled = ""
+performanceModeEnabled = ""
+screenLock = ""
+screenUnlock = ""
+session = ""
+startup = ""
+wallpaperChange = ""
+
+[hot_corners]
+enabled = true
+
+[idle]
+behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
+customCommands = "[]"
+enabled = true
+fadeDuration = 5
+lockCommand = ""
+lockTimeout = 660
+resumeLockCommand = ""
+resumeScreenOffCommand = ""
+resumeSuspendCommand = ""
+screenOffCommand = ""
+screenOffTimeout = 600
+suspendCommand = ""
+suspendTimeout = 1800
+
+    [idle.behavior.lock]
+    action = "lock"
+    enabled = false
+    timeout = 600.0
+
+    [idle.behavior.lock-and-suspend]
+    action = "lock_and_suspend"
+    enabled = true
+    timeout = 900.0
+
+    [idle.behavior.screen-off]
+    action = "screen_off"
+    enabled = true
+    timeout = 660.0
+
+[location]
+address = "Lyon"
+analogClockInCalendar = false
+autoLocate = false
+firstDayOfWeek = -1
+hideWeatherCityName = false
+hideWeatherTimezone = false
+name = ""
+showCalendarEvents = true
+showCalendarWeather = true
+showWeekNumberInCalendar = false
+use12hourFormat = false
+useFahrenheit = false
+weatherEnabled = true
+weatherShowEffects = true
+weatherTaliaMascotAlways = false
+
+[lockscreen_widgets]
+enabled = false
+schema_version = 2
+widget_order = [ "lockscreen-login-box@eDP-1" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
+    box_height = 70.0
+    box_width = 400.0
+    cx = 1280.0
+    cy = 1321.0
+    output = "HDMI-A-1"
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        input_opacity = 1.0
+        input_radius = 6.0
+        show_login_button = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-2"]
+    box_height = 70.0
+    box_width = 400.0
+    cx = 960.0
+    cy = 961.0
+    output = "HDMI-A-2"
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-2".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        input_opacity = 1.0
+        input_radius = 6.0
+        show_login_button = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    box_height = 196.0
+    box_width = 720.0
+    cx = 960.0
+    cy = 1081.0
+    output = "eDP-1"
+    placement_height = 1200.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+[network]
+bluetoothAutoConnect = true
+bluetoothDetailsViewMode = "grid"
+bluetoothHideUnnamedDevices = false
+bluetoothRssiPollIntervalMs = 60000
+bluetoothRssiPollingEnabled = false
+disableDiscoverability = false
+networkPanelView = "wifi"
+wifiDetailsViewMode = "grid"
+
+[nightLight]
+autoSchedule = true
+dayTemp = "6500"
+enabled = false
+forced = false
+manualSunrise = "06:30"
+manualSunset = "18:30"
+nightTemp = "4000"
+
+[noctaliaPerformance]
+disableDesktopWidgets = true
+disableWallpaper = true
+
+[notification]
+filter_order = [ "filter" ]
+history_retention_hours = 11
+position = "top_center"
+scale = 1.5000000149011612
+
+    [notification.filter.filter]
+    allow_permanent = true
+    bypass_dnd = false
+    enabled = true
+    match = "nvim"
+    match_content = "invalid documentation value: vim.NIL"
+    play_sound = true
+    save_history = true
+    show_toast = true
+
+[notifications]
+backgroundOpacity = 1
+clearDismissed = true
+criticalUrgencyDuration = 15
+density = "default"
+enableBatteryToast = true
+enableKeyboardLayoutToast = true
+enableMarkdown = false
+enableMediaToast = false
+enabled = true
+location = "top_right"
+lowUrgencyDuration = 3
+monitors = []
+normalUrgencyDuration = 8
+overlayLayer = true
+respectExpireTimeout = false
+
+    [notifications.saveToHistory]
+    critical = true
+    low = true
+    normal = true
+
+    [notifications.sounds]
+    criticalSoundFile = ""
+    enabled = false
+    excludedApps = "discord,firefox,chrome,chromium,edge"
+    lowSoundFile = ""
+    normalSoundFile = ""
+    separateSounds = false
+    volume = 0.5
+
+[osd]
+autoHideMs = 2000
+backgroundOpacity = 1
+enabled = true
+enabledTypes = [ 0, 1, 2 ]
+location = "top_right"
+monitors = []
+overlayLayer = true
+
+    [osd.kinds]
+    media = false
+
+[plugin_settings."ahmedhossamdev/sticky-notes"]
+blur_strength = "light"
+default_color = "pink"
+font_size = 15
+panel_placement = "floating"
+save_path = "~/Nextcloud/sticky-notes"
+
+[plugin_settings."avivbintangaringga/nix-monitor"]
+update_check_interval = 20
+
+[plugin_settings."emrtnn/pass"]
+refresh_interval = 668
+
+[plugin_settings."fel/ocr"]
+languages = "jpn+fra"
+
+[plugin_settings."nirvam/bitdjinn"]
+currency = "eur"
+interval = 300
+panel_open_near_click = false
+
+[plugin_settings."noctalia/translator"]
+target_lang = "fr"
+
+[plugin_settings."pozzoo/hassio"]
+ha_token = ""
+ha_url = "router.home:8123"
+
+[plugins]
+autoUpdate = false
+auto_update = "none"
+enabled = [
+    "ahmedhossamdev/sticky-notes",
+    "mellotanica/launcher-pass",
+    "fel/ocr",
+    "emrtnn/pass",
+    "noctalia/bitwarden",
+    "noctalia/timer",
+    "hy4ri/github-notifications",
+    "piero-93/thinkpad-fan",
+    "gabedunn/voxtype",
+    "noctalia/translator"
+]
+notifyUpdates = true
+
+    [[plugins.source]]
+    kind = "git"
+    location = "https://github.com/noctalia-dev/official-plugins"
+    name = "official"
+
+    [[plugins.source]]
+    kind = "git"
+    location = "https://github.com/noctalia-dev/community-plugins"
+    name = "community"
+
+[sessionMenu]
+countdownDuration = 10000
+enableCountdown = true
+largeButtonsLayout = "single-row"
+largeButtonsStyle = true
+position = "center"
+showHeader = true
+showKeybinds = true
+
+    [[sessionMenu.powerOptions]]
+    action = "lock"
+    enabled = true
+    keybind = "1"
+
+    [[sessionMenu.powerOptions]]
+    action = "suspend"
+    enabled = true
+    keybind = "2"
+
+    [[sessionMenu.powerOptions]]
+    action = "hibernate"
+    enabled = true
+    keybind = "3"
+
+    [[sessionMenu.powerOptions]]
+    action = "reboot"
+    enabled = true
+    keybind = "4"
+
+    [[sessionMenu.powerOptions]]
+    action = "logout"
+    enabled = true
+    keybind = "5"
+
+    [[sessionMenu.powerOptions]]
+    action = "shutdown"
+    enabled = true
+    keybind = "6"
+
+    [[sessionMenu.powerOptions]]
+    action = "rebootToUefi"
+    enabled = true
+    keybind = "7"
+
+[shell]
+font_family = "FiraCode Nerd Font"
+settings_show_advanced = true
+
+    [shell.launcher]
+    compact = true
+    show_app_actions = true
+
+        [shell.launcher.providers.emoji]
+        global = true
+
+        [shell.launcher.providers.windows]
+        global = true
+
+    [shell.panel]
+    control_center_placement = "floating"
+
+    [shell.window_switcher]
+    mru = true
+
+[systemMonitor]
+batteryCriticalThreshold = 5
+batteryWarningThreshold = 20
+cpuCriticalThreshold = 90
+cpuWarningThreshold = 80
+criticalColor = ""
+diskAvailCriticalThreshold = 10
+diskAvailWarningThreshold = 20
+diskCriticalThreshold = 90
+diskWarningThreshold = 80
+enableDgpuMonitoring = false
+externalMonitor = "resources || missioncenter || jdsystemmonitor || corestats || system-monitoring-center || gnome-system-monitor || plasma-systemmonitor || mate-system-monitor || ukui-system-monitor || deepin-system-monitor || pantheon-system-monitor"
+gpuCriticalThreshold = 90
+gpuWarningThreshold = 80
+memCriticalThreshold = 90
+memWarningThreshold = 80
+swapCriticalThreshold = 90
+swapWarningThreshold = 80
+tempCriticalThreshold = 90
+tempWarningThreshold = 80
+useCustomColors = false
+warningColor = ""
+
+[templates]
+activeTemplates = []
+enableUserTheming = false
+
+[theme]
+builtin = "Rosé Pine"
+community_palette = "ADW"
+mode = "auto"
+source = "builtin"
+wallpaper_scheme = "m3-content"
+
+    [theme.templates]
+    builtin_ids = [ "btop", "gtk3", "gtk4", "ghostty", "helix", "kitty", "qt", "sway", "wezterm" ]
+    community_ids = [ "pywalfox", "neovim", "rofi", "vicinae", "bat", "opencode", "steam", "yazi", "zathura" ]
+
+[ui]
+boxBorderEnabled = false
+fontDefault = "Sans Serif"
+fontDefaultScale = 1
+fontFixed = "monospace"
+fontFixedScale = 1
+panelBackgroundOpacity = 0.93000000000000005
+panelsAttachedToBar = true
+scrollbarAlwaysVisible = true
+settingsPanelMode = "attached"
+settingsPanelSideBarCardStyle = false
+tooltipsEnabled = true
+translucentWidgets = false
+
+[wallpaper]
+automationEnabled = false
+directory = "/home/teto/Nextcloud/japonais"
+directory_dark = "/home/teto/Nextcloud/japonais"
+directory_light = "/home/teto/Nextcloud/japonais"
+enableMultiMonitorDirectories = false
+enabled = true
+favorites = []
+fillColor = "#000000"
+fillMode = "crop"
+fill_color = "primary"
+fill_mode = "center"
+hideWallpaperFilenames = false
+linkLightAndDarkWallpapers = true
+monitorDirectories = []
+overviewBlur = 0.40000000000000002
+overviewEnabled = false
+overviewTint = 0.59999999999999998
+panelPosition = "follow_bar"
+randomIntervalSec = 300
+setWallpaperOnAllMonitors = true
+showHiddenFiles = false
+skipStartupTransition = false
+solidColor = "#1a1a2e"
+sortOrder = "name"
+transitionDuration = 1500
+transitionEdgeSmoothness = 0.050000000000000003
+transitionType = [ "fade", "disc", "stripes", "wipe", "pixelate", "honeycomb" ]
+useOriginalImages = false
+useSolidColor = false
+useWallhaven = false
+viewMode = "single"
+wallhavenApiKey = ""
+wallhavenCategories = "111"
+wallhavenOrder = "desc"
+wallhavenPurity = "100"
+wallhavenQuery = ""
+wallhavenRatios = ""
+wallhavenResolutionHeight = ""
+wallhavenResolutionMode = "atleast"
+wallhavenResolutionWidth = ""
+wallhavenSorting = "relevance"
+wallpaperChangeMode = "random"
+
+    [wallpaper.automation]
+    enabled = true
+
+    [wallpaper.default]
+    path = "/home/teto/Nextcloud/japonais/Enlien6XMAA6Zdq.jpg"
+
+    [wallpaper.last]
+    path = "/home/teto/Nextcloud/japonais/Enlien6XMAA6Zdq.jpg"
+
+    [wallpaper.monitors.HDMI-A-1]
+    path = "/home/teto/Pictures/Wallpapers/wallhaven_8xj29k.jpg"
+
+    [wallpaper.monitors.HDMI-A-2]
+    path = "/home/teto/Pictures/Wallpapers/wallhaven_8xj29k.jpg"
+
+    [wallpaper.monitors.eDP-1]
+    path = "/home/teto/Nextcloud/japonais/Enlien6XMAA6Zdq.jpg"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/teto/Pictures/Wallpapers/wallhaven_8xj29k.jpg"
+    theme_mode = "auto"
+    wallpaper_scheme = "m3-monochrome"
+
+[widget.bar]
+type = "ahmedhossamdev/sticky-notes:bar"
+
+[widget.date]
+capsule = true
+format = "{:%H:%M}  {:%a %d}"
+
+[widget.github]
+type = "shangshui0302/github-kanban:github"
+
+[widget.inbox]
+type = "hy4ri/github-notifications:inbox"
+
+[widget.ocr]
+type = "fel/ocr:ocr"
+
+[widget.status_3]
+show_alt = true
+type = "gabedunn/voxtype:status"
+
+[widget.temp]
+capsule = true
+label_min_width = 4
+
+[widget.tray]
+drawer = true
+
+[widget.widget]
+type = "piero-93/thinkpad-fan:widget"
+
+[widget.workspaces]
+label_source = "name"

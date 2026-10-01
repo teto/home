@@ -24,9 +24,16 @@ require('feed').setup({
             tags = { 'japanese', 'nhk' },
         },
         {
-            'https://neovim.io/news.xml',
-            name = 'Neovim News',
-            tags = { 'tech', 'news' }, -- tags given are inherited by all its entries
+		 'https://www.kotoba.fr/feed/',
+            -- 'https://nhkeasier.com/feed/?no-furiganas',
+            -- 'https://nhkeasier.com/feed/',
+            name = 'Kotoba.fr',
+            tags = { 'japanese', 'nhk' },
         },
+        -- {
+        --     'https://neovim.io/news.xml',
+        --     name = 'Neovim News',
+        --     tags = { 'tech', 'news' }, -- tags given are inherited by all its entries
+        -- },
     },
 })

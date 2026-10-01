@@ -4,7 +4,12 @@ port par defaut= 8123
 presser 10 sec le bouton on/off du dimmer switch
 ne pas hesiter a entrer le numero de serie
 
+https://loickpiera.com/blog/eviter-duplication-home-assistant/
+
 HACS = Home Assistant Community Store.
+
+Type de pile:
+CR2450
 
 * setup local voice recognition
 
@@ -23,6 +28,8 @@ sudo -u hass /nix/store/j0d9289d0sg7f1l62vd1g3mfw4268dhl-homeassistant-2024.4.4/
   1. enable mqtt service (mosquitto for instance)
 
 	 Z igbee2MQTT:info  2019-11-09T12:19:56: Successfully interviewed '0x00158d0001dc126a', device has successfully been paired
+
+ ** capteur d'eau Slacky-DIY ZG-222ZA-z-SlD
  
 ** sonoff SNZB-02 
    Change celsius to fahreneit: double tap reset button https://www.zigbee2mqtt.io/devices/SNZB-02D.html
@@ -30,11 +37,31 @@ sudo -u hass /nix/store/j0d9289d0sg7f1l62vd1g3mfw4268dhl-homeassistant-2024.4.4/
 ** tuya  ZG-204ZM pir sensor
 
 
+variante: _TZE200_3towulqd
+Need to cleanup https://imgur.com/a/5pZtOlQ
+
 pour recharger les piles, suffit de faire glisser le derriere !
+Une review detailleee
+https://smarthomescene.com/reviews/zigbee-battery-powered-presence-sensor-zg-204zm-review/
+> I never saw the entity change state to small, no matter if you move or not, which is why I think it will not be able to differentiate between smaller and bigger movements.
 
 ** tuya RH3040 PIR (grosse tete)
 
 https://www.zigbee2mqtt.io/devices/RH3040.html
+
+
+** fp300
+
+Brand new, defaults to matter ! need app to switch to zigbee
+https://smarthomescene.com/reviews/aqara-fp300-presence-multi-sensor-teardown-and-review/
+
+** ZG-204ZH
+
+https://smarthomescene.com/reviews/tuya-zigbee-battery-presence-sensor-zg-204zh-review/
+
+** snzb-06p24
+
+https://smarthomescene.com/reviews/sonoff-senseguard-presence-sensor-snzb-06p24/
 
 * how to reset advices
 
@@ -48,8 +75,13 @@ https://www.philips-hue.com/en-gb/support/article/how-to-factory-reset-philips-h
 
 * integrations
 
+** yamaha
+
 https://www.home-assistant.io/integrations/yamaha_musiccast/
 
+** awtrix-ng 
+
+https://github.com/10der/awtrix-ng-hass-integration/tree/v0.2.3
 
 * hass-cli tips
 

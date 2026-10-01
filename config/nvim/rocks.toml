@@ -47,7 +47,7 @@ import = "lazy_specs/"
 # remove now that it's nix installed
 # "lualine.nvim" = "scm"
 
-# i seldomly use it
+# seldomly use it
 # "trouble.nvim" = "scm"
 
 "lsp_signature.nvim" = "0.3.1"
@@ -116,6 +116,11 @@ nvim-treesitter-context = "1.0.0"
 "grug-far.nvim"= "1.6.78"
 "yazi.nvim"= "14.0.0"
 "quicker.nvim" = "1.5.1"
+
+[plugins."feed.nvim" ]
+# git = "neo451/feed.nvim"
+git = "teto/feed.nvim"
+branch = "teto/fix-percent"
 
 [plugins."rikai.nvim"]
 dev = true
@@ -199,9 +204,9 @@ rev = "v0.37"
 git = "vlime/vlime"
 rev = "v0.4.0"
 
-[plugins.vlime]
-git = "vlime/vlime"
-rev = "v0.4.0"
+[plugins."satellite.nvim"]
+git = "lewis6991/satellite.nvim"
+rev = "v1.0.0"
 
 # [plugins."git-rebase-auto-diff.nvim"]
 # git = "yutkat/git-rebase-auto-diff.nvim"

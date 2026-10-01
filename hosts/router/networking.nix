@@ -1,11 +1,13 @@
 {
-  config,
   secrets,
   lib,
-  withSecrets,
   ...
 }:
 {
+
+  # extraHosts = ''
+  # '';
+
   networking = {
     useNetworkd = true;
     useDHCP = false;
@@ -13,7 +15,6 @@
 
     # networking.dhcpcd.enable = true;
     usePredictableInterfaceNames = true;
-    # networking.firewall.interfaces.enp1s0.allowedTCPPorts = [ 4949 ];
 
     wireguard.interfaces = {
       wg0 = lib.mkWireguardPeer {
@@ -26,11 +27,9 @@
 
     firewall = {
       enable = false;
+
       interfaces.br0.allowedTCPPorts = [ 53 ];
       interfaces.br0.allowedUDPPorts = [ 53 ];
-
-      # if home-assistant enabled, open
-      # 8123
     };
 
     wireless = {

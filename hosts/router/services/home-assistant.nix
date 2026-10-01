@@ -11,10 +11,28 @@
   ];
 
   services.home-assistant = {
-    enable = true;
+      enable = true;
+
+      # from https://discourse.nixos.org/t/trying-to-build-custom-homeassistant-component-leads-to-infinite-recursion/58602/4
+      #   Available components can be found below ‘pkgs.home-assistant-custom-components’.
+    customComponents = [
+      pkgs.awtrix-ng-hass-integration
+    # (config.services.home-assistant.package.python.pkgs.callPackage ./hass-node-red-module.nix {})
+  ];
+  config = {
+      feedreader.urls = [ "https://nixos.org/blogs.xml" ];
+
+      # "automation manual" = "!include ${../home-assistant/automations/hue-dimmer1.yaml}";
+      
+      #include_dir_merge_list
+      "automation manual" = "!include_dir_list ${../home-assistant/automations}";
+    };
 
     # TODO add
     # Error occurred loading flow for integration data_grand_lyon: No module named 'data_grand_lyon_ha'
+    themes = with pkgs.home-assistant-themes; [
+      material-you-theme
+    ];
 
     blueprints = {
       automation = [

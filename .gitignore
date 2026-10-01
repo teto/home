@@ -12,6 +12,7 @@
 /config/voxtype
 /config/git/config
 /config/git/allowed-signers
+/config/git/allowed_signers
 /config/gtk-3.0/*
 /config/ipython/*
 /config/jesseduffield/*

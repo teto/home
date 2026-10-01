@@ -1,0 +1,8 @@
+#!/bin/sh
+# @vicinae.schemaVersion 1
+# @vicinae.title Update monitor layout
+# @vicinae.mode silent
+
+# you can validate it with "noctalia config validate"
+monitor_layout
+

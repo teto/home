@@ -20,19 +20,6 @@
   flakeSelf,
   ...
 }:
-let
-
-  bridgeNetwork = {
-    address = "10.0.0.0";
-    prefixLength = 24;
-  };
-
-  # todo rely on a lib to manipulate network
-  show = at: "${at.address}/${toString at.prefixLength}";
-
-  # externalInterface = "wlan0";
-
-in
 {
   # pcengines/apu/
   imports = [
@@ -44,10 +31,14 @@ in
     ./disko-config.nix
     ./hardware.nix
     ./networking.nix
+    ./systemd/default.nix
     ./services/openssh.nix
     ./services/home-assistant.nix
     ./services/music-assistant.nix
     ./services/zigbee2mqtt.nix
+
+    # services.resolved.settings.Resolve.MulticastDNS = true;
+    ./services/resolved.nix
     # ./services/mqtt.nix
 
     # TODO replace with systemd mdns
@@ -70,6 +61,7 @@ in
 
   # mkForce ?
   environment.systemPackages = with pkgs; [
+    speech-to-phrase
     # disabled for now to reduce memory print
     # flashrom # to be able to flash the bios see https://teklager.se/en/knowledge-base/apu-bios-upgrade/
     # dmidecode # to get version of the bios: dmidecode -t bios
@@ -86,9 +78,11 @@ in
   ];
 
   home-manager.users.root = {
-    # imports = [
+    imports = [
     #   flakeSelf.homeProfiles.neovim-minimal
-    # ];
+      flakeSelf.homeModules.neovim
+      flakeSelf.homeProfiles.readline
+    ];
     home.stateVersion = "26.05";
 
   };
@@ -107,14 +101,10 @@ in
       pkgs.systemctl-tui
     ];
 
-    # wakeonlan ${secrets.jedha.ethernetMac}
-    # sudo wolli --iface enp2s0 9c:6b:00:8b:2a:c8 --broadcast 255.255.255.255
-
-    # wakeonlan ${secrets.jedha.ethernetMac}
     home.file."justfile".text = ''
       # reveiller le desktop
       wakejedha:
-        sudo wolli --iface enp2s0 ${secrets.jedha.ethernetMac}
+        sudo wolli --iface enp2s0 ${secrets.jedha.wiredMac}
 
       # flasher la cler (GCFFlasher -l)
       # selectionne le firmware  ici https://deconz.dresden-elektronik.de/deconz-firmware/
@@ -154,20 +144,6 @@ in
     };
   };
 
-  # boot.kernel.sysctl = {
-  #   # to not provoke the kernel into crashing
-  #   # "net.ipv4.tcp_timestamps" = 0;
-  #   # "net.ipv4.ipv4.ip_forward" = 1;
-  #   # "net.ipv4.tcp_keepalive_time" = 60;
-  #   # "net.core.rmem_max" = 4194304;
-  #   # "net.core.wmem_max" = 1048576;
-  # };
-
-  # # creates problem with buffalo check if it blocks requests or what
-  # # it is necessary to use dnssec though :(
-  # networking.resolvconf.dnsExtensionMechanism = false;
-  # networking.resolvconf.dnsSingleRequest = false;
-
   powerManagement.cpuFreqGovernor = "ondemand";
 
   # TODO why copy solene's blog explanation
@@ -201,175 +177,12 @@ in
 
   services.acpid.enable = true;
 
-  services.unbound = {
-    enable = false;
-    settings = {
-      server = {
-        interface = [
-          "127.0.0.1"
-          "10.42.42.42"
-        ];
-        access-control = [
-          "0.0.0.0/0 refuse"
-          "127.0.0.0/8 allow"
-          "${show bridgeNetwork} allow"
-        ];
-      };
-    };
-  };
-
-  # this takes a lot of space ! use cacti instead !
-  # services.munin-node = {
-  #     enable = true;
-  # #     extraConfig = ''
-  # #     allow ^63\.12\.23\.38$
-  # #     '';
-  # };
-
   # following the guide https://nixos.wiki/wiki/Systemd-networkd
 
-  systemd.network = {
-    enable = true;
-
-    wait-online.enable = false;
-
-    # SYSTEMD_LOG_LEVEL=debug
-    wait-online = {
-      timeout = 20;
-
-      # interfaces to be ignored when declaring online status
-      ignoredInterfaces = [ "enp1s0" ];
-    };
-
-    # example
-    # systemd.network.links."10-custom_name" = {
-    # matchConfig.MACAddress = "52:54:00:12:01:01";
-    # linkConfig.Name = "custom_name";
-    # };
-
-    links = {
-      "10-enp1s0" = {
-        matchConfig.OriginalName = "enp1s0";
-        # "ether", "loopback", "wlan", "wwan"
-        # matchConfig.Type = "ether";
-      };
-      # externalInterface / wanInterface
-      # "10-wlp5s0" = {
-      #   matchConfig.OriginalName = "wlan0";
-      #   # linkConfig.MTUBytes = "1442";
-      # };
-
-    };
-
-    netdevs = {
-
-      # man systemd.netdev
-      "br0" = {
-        # match
-        netdevConfig.Name = "br0";
-        netdevConfig.Kind = "bridge";
-        # interfaces = [ "enp2s0" "enp3s0" "enp4s0" ];
-        # bridgeConfig
-
-      };
-
-    };
-
-    # [NetDev]
-    # Name=br0
-    # Kind=bridge
-
-    networks = {
-      "50-wg0" = {
-        matchConfig.Name = "wg0";
-        networkConfig.MulticastDNS = false;
-      };
-
-      "10-enp1s0" = {
-        matchConfig.Name = "enp1s0";
-        networkConfig.DHCP = "ipv4";
-        # try ?
-        networkConfig.MulticastDNS = true;
-      };
-
-      "10-wireless-wan" = {
-        matchConfig.Name = "wlp5s0";
-        # [Match]
-        # Name=Nom de l'interface
-        # MACAddress=Adresse MAC de l'interface
-        # 04:f0:21:90:b2:78
-
-        networkConfig.DHCP = "ipv4";
-        networkConfig.IPv6AcceptRA = "no";
-        networkConfig.LinkLocalAddressing = "ipv4";
-        networkConfig.IgnoreCarrierLoss = "3s";
-        networkConfig.Description = "WAN port";
-        networkConfig.MulticastDNS = true;
-        linkConfig.RequiredForOnline = true;
-
-      };
-      # "10-wired-wan" = {
-      #   matchConfig.Name = "lan";
-      #   networkConfig.DHCP = "ipv4";
-      # };
-      "br0" = {
-        matchConfig.Name = "br0";
-        # address = [
-        # ];
-        networkConfig.Address = "10.0.0.1/${toString bridgeNetwork.prefixLength}";
-
-        # networkConfig.Gateway = "${bridgeNetwork.address}";
-        # networkConfig.DHCP = "ipv4";
-        networkConfig.DHCPServer = true;
-        networkConfig.IPMasquerade = "ipv4";
-        networkConfig.MulticastDNS = true;
-
-        dhcpServerConfig = {
-          PoolOffset = 100;
-          PoolSize = 40;
-          EmitDNS = true;
-          # ServerAddress
-          # EmitNTP
-          # EmitTimeZone
-          # SendOption
-
-          # DefaultLeaseTimeSec=, MaxLeaseTimeSec=
-          # the ISP box address
-
-          # nom DNS visible dans "Mode reseau" sur freebox os
-          DNS = "freebox-server";
-          # DNS = "192.168.1.1";
-        };
-
-        # lui meme
-        networkConfig.DHCP = "ipv4";
-
-      };
-
-      "10-enp2s0" = {
-        matchConfig.Name = "enp2s0";
-        networkConfig.Bridge = "br0";
-      };
-      "10-enp3s0" = {
-        matchConfig.Name = "enp3s0";
-        networkConfig.Bridge = "br0";
-      };
-
-      # remove once we make sure everything works
-      # "10-enp4s0" = {
-      #   matchConfig.OriginalName = "enp4s0";
-      #   networkConfig.Bridge = "br0";
-      # };
-
-    };
-  };
 
   # systemd.services.systemd-networkd.environment.SYSTEMD_LOG_LEVEL = "debug";
 
   time.timeZone = "Europe/Paris";
 
-  services.resolved.settings.Resolve.MulticastDNS = true;
-
-  # TODO bump it
   system.stateVersion = "26.05";
 }

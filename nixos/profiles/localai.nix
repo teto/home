@@ -3,10 +3,12 @@
   lib,
   pkgs,
   modulesPath,
+  flakeSelf,
   ...
 }:
 {
-  imports = [ "${modulesPath}/../../pkgs/by-name/lo/local-ai/module.nix" ];
+  imports = [ 
+  ];
 
   services.local-ai = {
 

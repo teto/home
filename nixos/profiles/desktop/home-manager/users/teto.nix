@@ -1,8 +1,8 @@
 {
-  config,
-  lib,
+  # config,
+  # lib,
   pkgs,
-  flakeSelf,
+  # flakeSelf,
   ...
 }:
 {
@@ -11,5 +11,6 @@
   ];
 
   home.packages = [
+    pkgs.hickory-dns # gives 'dns' executable
   ];
 }

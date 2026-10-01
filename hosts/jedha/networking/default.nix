@@ -39,9 +39,12 @@
     # };
   };
 
-  useNetworkd = true;
 
   hosts = {
+    # hickory-dns can't query separately jedha.home as it's the zone for my services
+    # coredns apparently can
+    # maybe I could have resolved
+    "192.168.1.83" = [ "jedha.home" ];
     # a test, better would be to have nginx recognize another thing
     "10.100.0.1" = [ "neotokyo.local" ];
   };
@@ -56,10 +59,14 @@
     # useLocalResolver = true; ?
   };
 
-  # sear
+  useNetworkd = true;
+
+  # coupled with useNetworkd, it creates a .network entry for each  interface,
+  # which can conflict with systemd.network
   interfaces.enp11s0 = {
     #wakeOnLan.policy
     wakeOnLan.enable = true;
+    useDHCP = true;
   };
 
   # to allow wireshark to capture from netlink
