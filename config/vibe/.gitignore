@@ -1,4 +1,5 @@
 logs/
+cache.toml
 instructions.md
 /vibehistory
 /trusted_folders.toml
