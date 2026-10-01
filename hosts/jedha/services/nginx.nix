@@ -36,6 +36,11 @@ in
   logError = "stderr";
 
   # Wyoming uses raw TCP; each service needs its own public port.
+  # doc for stream https://nginx.org/en/docs/stream/ngx_stream_upstream_module.html#server
+  # I can set the resolver here resolver 127.0.0.1 [::1]:5353;
+  # I could use socket paths as well
+  # service=name
+  #    enables resolving of DNS SRV records and sets the service name 
   streamConfig = let
     piperSrv = config.services.wyoming.piper.servers.fr;
     whisperSrv = config.services.wyoming.faster-whisper.servers.medium-fr;
@@ -45,6 +50,7 @@ in
       server {
         listen 10222;
         proxy_pass 127.0.0.1:10200;
+        fail_timeout 10s;
       }
     ''
     # 10301
@@ -84,10 +90,10 @@ in
 
       locations."/" = {
         proxyPass = "http://localhost:${toString llama-cpp-service.port}";
-        proxyWebsockets = true;
-        extraConfig = ''
-          client_max_body_size 100M;
-        '';
+        proxyWebsockets = false;
+        # extraConfig = ''
+        #   client_max_body_size 100M;
+        # '';
 
       };
     };
