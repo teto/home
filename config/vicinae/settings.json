@@ -81,9 +81,6 @@
             "passwordStorePath": "~/.password-store"
          }
       },
-      "@wy3z/vicinae-extension-reminders-0": {
-         "enabled": false
-      },
       "applications": {
          "enabled": true,
          "preferences": {

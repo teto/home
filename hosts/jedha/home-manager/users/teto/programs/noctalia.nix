@@ -2,6 +2,6 @@
 
   programs.noctalia = {
     enable = true;
-    settings = fromTOML (builtins.readFile ./noctalia-shell-settings.json);
+    settings = builtins.fromJSON (builtins.readFile ./noctalia-settings.toml);
   };
 }

@@ -81,21 +81,24 @@ in
 # type = "recursor"
 # roots = "default/root.zone"
     zones = [
-
-      # {
-# type = "blocklist"
-# lists = ["default/blocklist.txt", "default/blocklist2.txt"]
-# wildcard_match = true
-# min_wildcard_depth = 2
-# sinkhole_ipv4 = "192.0.2.1"
-# sinkhole_ipv6 = "::ffff:c0:0:2:1"
-# block_message = "This query has been blocked by the DNS server"
-# log_clients = false
-# }
-{
+      {
           zone = ".";
           zone_type = "External";
-          stores = {
+          stores = [
+            {
+            zone_type = "blocklist";
+            lists = [
+              "${pkgs.stevenblack-blocklist}/hosts"
+            ];
+            wildcard_match = true;
+            min_wildcard_depth = 2;
+            sinkhole_ipv4 = "0.0.0.0";
+            # sinkhole_ipv6 = "::ffff:c0:0:2:1";
+            block_message = "This query has been blocked by the DNS server";
+            log_clients = false;
+            }
+
+          {
             type = "forward";
             # Use the router directly, never /etc/resolv.conf (which points here).
             name_servers = [
@@ -108,8 +111,10 @@ in
                 ];
               }
             ];
-          };
-        }
+          }
+        ];
+    }
+
       {
           zone = "jedha.home";
           zone_type = "Primary";

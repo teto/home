@@ -30,6 +30,11 @@ sudo -u hass /nix/store/j0d9289d0sg7f1l62vd1g3mfw4268dhl-homeassistant-2024.4.4/
 	 Z igbee2MQTT:info  2019-11-09T12:19:56: Successfully interviewed '0x00158d0001dc126a', device has successfully been paired
 
  ** capteur d'eau Slacky-DIY ZG-222ZA-z-SlD
+
+
+** zbminir2
+
+Mode relais détaché: ZBMINIR2 est équipé du « mode relais détaché », permettant de fermer l'interrupteur externe tout en gardant les lumières intelligentes en ligne.
  
 ** sonoff SNZB-02 
    Change celsius to fahreneit: double tap reset button https://www.zigbee2mqtt.io/devices/SNZB-02D.html
