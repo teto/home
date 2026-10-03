@@ -954,7 +954,7 @@ vim.g.avante = {
     -- log_level =
     log_level = vim.log.levels.DEBUG,
 
-    -- seems ignored by acp ?
+    -- seems ignored by acp ? influences prompt building
     mode = 'legacy', -- Switch from "agentic" to "legacy"
 
     -- instructions_file =
@@ -1160,11 +1160,12 @@ vim.g.avante = {
         -- provider = 'google', -- tavily, serpapi, google, kagi, brave, or searxng
         proxy = nil, -- proxy support, e.g., http://127.0.0.1:7890
     },
-    -- disabled_tools = {
-    --     'web_search_tavily',
-    -- },
+    disabled_tools = {
+        'web_search_tavily',
+    },
     custom_tools = {
-        require('avante.llm_tools.web_search').web_search_google,
+        -- require('avante.llm_tools.web_search').web_search_google,
+        require('avante.llm_tools.web_search').web_search_firecrawl,
     },
     slash_commands = {
         -- it looks ignored ?

@@ -1,3 +1,12 @@
+
+
+* 119 domain search
+
+home.arpa
+
+sur la freebox en hexa pour home (faut terminer par 00)
+04686f6d6500
+
 To filter DHCP answers in Wireshark, use the following display filter:
 dhcp.option.dhcp == 2
 This filter shows only DHCP ACK (offer) packets, which are the responses from the DHCP server to clients.

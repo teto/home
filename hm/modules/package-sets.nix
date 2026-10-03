@@ -572,7 +572,7 @@ in
         wdisplays # to show
         # swaybg # to set wallpaper
         swayimg # imageviewer (f1 to see help)
-        # swaynotificationcenter # top cool depend de noctalia-shell ?
+        # swaynotificationcenter # replaced by noctalia
         sway-launcher-desktop # fzf-based launcher
         # waypaper # sets wallpapers
         wlprop # like xprop, determines window parameters
