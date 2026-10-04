@@ -6,6 +6,8 @@ small reminder about syntax
 
 */
 {
+  config,
+  lib,
   pkgs,
   ...
 }:
@@ -29,6 +31,17 @@ let
   #       )
   #     )
   # );
+
+        # default = toml.generate "hickory-dns.toml" (
+        #   lib.mapAttrs (
+        #     _: v:
+        #     if builtins.isList v then
+        #       map (v: if builtins.isAttrs v then lib.filterAttrs (_: v: v != null) v else v) v
+        #     else
+        #       v
+        #   ) (lib.filterAttrsRecursive (_: v: v != null) cfg.settings)
+        # );
+
 in
 {
   enable = true;
@@ -86,7 +99,7 @@ in
           zone_type = "External";
           stores = [
             {
-            zone_type = "blocklist";
+            type = "blocklist";
             lists = [
               "${pkgs.stevenblack-blocklist}/hosts"
             ];

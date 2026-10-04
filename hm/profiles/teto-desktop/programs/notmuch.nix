@@ -15,7 +15,7 @@
   # dont add "inbox" tag
   new.tags = [
     "unread"
-    "inbox"
+    "inbox" # do we need this ?
   ];
   # new.ignore =
   search.excludeTags = [ "spam" ];

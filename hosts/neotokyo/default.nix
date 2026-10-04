@@ -33,6 +33,7 @@ let
           ./services/restic.nix
           ./services/immich.nix
           ./services/step-ca.nix
+          ./services/stalwart.nix
           # ./services/buildbot-nix.nix
           ./services/nixbot.nix
           ./services/transmission.nix
@@ -113,7 +114,6 @@ in
     flakeSelf.nixosModules.default-hm
     flakeSelf.nixosModules.wireguard
 
-    flakeSelf.nixosProfiles.wireguard
     flakeSelf.nixosProfiles.server
     flakeSelf.nixosProfiles.nix-daemon
     flakeSelf.nixosProfiles.server

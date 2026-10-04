@@ -1,3 +1,4 @@
+-- <C-e> by defualt to cancel selection
 local b = require('blink.cmp')
 local opts = {
     -- enabled = function() return not vim.tbl_contains({ "lua", "markdown" }, vim.bo.filetype) end,
@@ -51,12 +52,13 @@ local opts = {
         list = {
             selection = {
                 -- annoying when it matches a long one
-                preselect = false,
+				-- how to cancel ?
+                preselect = true,
 
                 -- When `true`, inserts the completion item automatically when selecting it
                 -- You may want to bind a key to the `cancel` command (default <C-e>) when using this option,
                 -- which will both undo the selection and hide the completion menu
-                auto_insert = false,
+                auto_insert = true,
                 -- auto_insert = function(ctx) return ctx.mode ~= 'cmdline' end
             },
             -- autoselect = true,

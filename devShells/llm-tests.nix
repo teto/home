@@ -20,7 +20,8 @@ mkShell {
         ps.jupyter-console
         ps.transformers # for https://huggingface.co/learn/smol-course/unit1/2
         ps.trl # for https://huggingface.co/learn/smol-course/unit1/3?first_fine_tune=python
-        ps.trackio
+        # ps.trackio
+        ps.deepeval
       ]);
     in
 

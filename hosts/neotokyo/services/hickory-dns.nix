@@ -9,33 +9,28 @@ small reminder about syntax
   pkgs,
   ...
 }:
-let
-  jedhaIp = "192.168.1.83";
-  routerIp = "192.168.1.11";
-  freeboxIp = "192.168.1.254";
-in
 {
-  enable = true;
+  enable = false;
 
   # TODO pass extraFlags like zonedir to systemd service
   validateConfig = true;
 
   settings = {
     # Bind separately from systemd-resolved's 127.0.0.53 stub.
-    listen_addrs_ipv4 = [
-      # "127.0.0.1" 
-      # unbinding conflicts with resolved ?
-      # "0.0.0.0" 
-      routerIp
-    ];
+    # listen_addrs_ipv4 = [
+    #   # "127.0.0.1" 
+    #   # unbinding conflicts with resolved ?
+    #   # "0.0.0.0" 
+    #   # routerIp
+    # ];
     listen_addrs_ipv6 = [ ];
     listen_port = 153;
 
     # With only an allow list, every other client is refused
-    allow_networks = [ 
-      "127.0.0.0/8"
-      "192.168.1.0/24" 
-    ];
+    # allow_networks = [ 
+    #   "127.0.0.0/8"
+    #   "192.168.1.0/24" 
+    # ];
 
     # Exact-name zones avoid taking authority over unrelated .home names.
     # zones are freeform
@@ -68,16 +63,15 @@ in
           log_clients = false;
           }
 
-
-
           {
 
           type = "forward";
           # Use the router directly, never /etc/resolv.conf (which points here).
           name_servers = [
             {
-              ip = freeboxIp;
-              trust_negative_responses = false;
+              # use gandi NS server ?
+              ip = "2312";
+              trust_negative_responses = true;
               connections = [
                 { protocol.type = "udp"; }
                 { protocol.type = "tcp"; }
@@ -132,3 +126,4 @@ in
     ];
   };
 }
+

@@ -50,7 +50,6 @@ let
     XF86MonBrightnessUp = "exec ${brightnessScript}/bin/brightness-mgr up 10%";
     XF86MonBrightnessDown = "exec ${brightnessScript}/bin/brightness-mgr down 10%-";
 
-    # "XF86Display" = "exec " + ../../rofi-scripts/monitor_layout.sh ;
 
     Mod4 = "exec anyrun";
 
@@ -105,14 +104,15 @@ in
       # TODO copy result and send notif
       "${mad}+c" = ''exec "${dotfilesPath}/bin/ocr-jap" && ${notify-send} 'Finished ocr' '';
 
-      # pb est qu'il fait 
-      "${mad}+m" = ''exec "${dotfilesPath}/rofi-scripts/monitor_layout.sh"; mode default;'';
-      # use sway-easyfocus
-      "${mad}+f" = "exec ${pkgs.sway-easyfocus}/bin/sway-easyfocus";
-
       # ideally we shouldn't care if it's firefox or not ?
       # should focus mpris instead ?
       "${mad}+a" = ''exec "${dotfilesPath}/bin/focus-firefox-media"'';
+      "${mad}+m" = ''exec "${dotfilesPath}/bin/focus-firefox-media"'';
+      # "XF86Display" = "exec " + ../../rofi-scripts/monitor_layout.sh ;
+      "${mad}+shift+m" = ''exec "${dotfilesPath}/bin/monitor_layout"; mode default;'';
+      # use sway-easyfocus
+      "${mad}+f" = "exec ${pkgs.sway-easyfocus}/bin/sway-easyfocus";
+
 
 
       "${mod}+Shift+1" = "exec qutebrowser";

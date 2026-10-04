@@ -11,7 +11,9 @@ let
 
   cfg = config.services.mujmap;
 
-  mujmapAccounts = lib.filter (a: a.mujmap.enable) (lib.attrValues config.accounts.email.accounts);
+  mujmapAccounts = lib.filterAttrs (_: a: a.enable && a.mujmap.enable) (
+    config.accounts.email.accounts
+  );
 
   mujmapOptions =
     lib.optional (cfg.verbose) "--verbose"
@@ -82,11 +84,11 @@ in
           Service = {
             Type = "oneshot";
             SyslogIdentifier = mkMujmapServiceName name;
-            # TODO where should db be ?
+            # TODO where should db be ? should depend on account ?
             ExecStart = "${cfg.package}/bin/mujmap -C ${config.accounts.email.maildirBasePath}/fastmail sync ${lib.concatStringsSep " " mujmapOptions}";
           };
         }
-      ) config.accounts.email.accounts;
+      ) mujmapAccounts;
 
       # check all accounts
       systemd.user.timers = lib.mapAttrs' (
@@ -108,6 +110,6 @@ in
             WantedBy = [ "timers.target" ];
           };
         }
-      ) config.accounts.email.accounts;
+      ) mujmapAccounts;
     };
 }
