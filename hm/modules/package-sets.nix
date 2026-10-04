@@ -103,8 +103,8 @@ in
     (mkIf cfg.jujutsu {
       home.packages =
         let
-          # jjui = flakeSelf.inputs.jjui.packages.${pkgs.stdenv.hostPlatform.system}.jjui;
-          jjui = pkgs.jjui;
+          jjui = flakeSelf.inputs.jjui.packages.${pkgs.stdenv.hostPlatform.system}.jjui;
+          # jjui = pkgs.jjui;
         in
         [
           # pkgs.jujutsu; # replaced with the one from flake
@@ -402,6 +402,7 @@ in
           # dasht # ~ zeal but in terminal
           # defalt via hm
           # difftastic # smart diffs
+          dig # dns resolver
           dogedns # dns solver "dog"
           docker-credential-helpers # gives 'docker-credential-pass' for instance
 
@@ -582,13 +583,13 @@ in
         wl-gammactl # to control gamma
         wlr-randr # like xrandr
 
-        swayidle
-        swayr # window selector
+        # swayidle # noctalia does it
+        # swayr # window selector
         swaycons # show icon on windows
         # swayhide
         # sway-easyfocus # not packaged yet
         # swayrst #  https://github.com/Nama/swayrst # not packaged yet
-
+        # swaylock-effects # offers sexier
         # sway overview, draws layouts for each workspace: dope https://github.com/milgra/sov
         # sov
         # nwg-bar # locks nothing
@@ -596,7 +597,6 @@ in
         # nwg-menu
         # nwg-dock # a nice dock
 
-        swaylock-effects # offers sexier
         sway-contrib.grimshot # contains "grimshot" for instance
         pkgs.sway-scratchpad
 

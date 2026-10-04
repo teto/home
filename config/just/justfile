@@ -134,3 +134,8 @@ satellite:
     # You can silence all messages from Xwayland by setting the env var RUST_LOG=xwayland_process=off
     #  https://github.com/Supreeeme/xwayland-satellite/issues/154
     RUST_LOG=xwayland_process=off xwayland-satellite
+
+
+notif-awtrix:
+   hass-cli --verbose service call awtrix_ng.notify --arguments 'entity_id=notify.salon_awtrix_ng_notifications,message="hello"'
+

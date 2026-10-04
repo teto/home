@@ -168,6 +168,7 @@ in
       lux-cli
       # flakeSelf.inputs.lux.packages.${pkgs.stdenv.hostPlatform.system}.lux-cli
 
+      sonic-pi
       stow
       systemctl-tui
       timr-tui # rust clock
@@ -178,6 +179,7 @@ in
 
       tarts # fun TUI screensaver, cmatrix-like
 
+      yamaha-cli
       # flakeSelf.inputs.git-repo-manager.packages.${pkgs.stdenv.hostPlatform.system}.git-repo-manager
     ];
 
@@ -243,6 +245,7 @@ in
     TETOS_BUILDER_JEDHA = builder_jedha;
     TETOS_BUILDER_NIXCOMMUNITY = builder_nixcommunity;
     inherit (secrets) TAVILY_API_KEY;
+    inherit (secrets) FIRECRAWL_API_KEY;
   };
 
   # tetos.enableYubikey = true;

@@ -32,9 +32,10 @@ sudo -u hass /nix/store/j0d9289d0sg7f1l62vd1g3mfw4268dhl-homeassistant-2024.4.4/
  ** capteur d'eau Slacky-DIY ZG-222ZA-z-SlD
 
 
-** zbminir2
+** switch zbminir2
 
 Mode relais détaché: ZBMINIR2 est équipé du « mode relais détaché », permettant de fermer l'interrupteur externe tout en gardant les lumières intelligentes en ligne.
+https://sonoff.tech/en-fr/blogs/news/understanding-the-three-switch-trigger-modes-of-zbminir2
  
 ** sonoff SNZB-02 
    Change celsius to fahreneit: double tap reset button https://www.zigbee2mqtt.io/devices/SNZB-02D.html
@@ -70,7 +71,9 @@ https://smarthomescene.com/reviews/sonoff-senseguard-presence-sensor-snzb-06p24/
 
 * how to reset advices
 
-** philips play
+** philips hue bulb
+
+** philips hue play
 
 le plus simple est de se connecter via l'app HUE
 

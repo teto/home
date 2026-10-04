@@ -1,7 +1,5 @@
 { config, ... }:
 {
-  # _imports =
-  distributedBuilds = false;
 
   settings = {
     log-lines = 60;
@@ -15,8 +13,6 @@
 
     keep-failed = false;
     keep-derivations = true; # Idem
-
-    distributedBuilds = false;
 
 
     secret-key-files = config.sops.secrets."nix-signing-key".path;

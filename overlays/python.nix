@@ -5,6 +5,10 @@ rec {
     # Careful, we're using a different self and super here!
     packageOverrides = final: prev: {
 
+      deepeval = final.callPackage ../by-name/de/deepeval/package.nix {
+        python3Packages = final;
+      };
+
       # kergen = final.callPackage ./pkgs/kergen.nix { };
 
       # mininet-with-man = final.mininet.override ({ withManpage = true; });

@@ -27,7 +27,7 @@ in
     # true ?
     https = true;
 
-    package = pkgs.nextcloud34;
+    package = pkgs.nextcloud35;
 
     # so I used to have
     # ✗ PHP opcache: The PHP OPcache module is not properly configured. OPcache is not working as it should, opcache_get_status() returns false, please check configuration.

@@ -143,6 +143,15 @@ in
   };
 
   searchEngines = {
+    Kotoba = {
+      urls = [
+        {
+          template = "https://kotoba.fr/{searchTerms}";
+        }
+      ];
+      definedAliases = [ "ko" ];
+    };
+
     boardgamegeek = {
       urls = [
         {

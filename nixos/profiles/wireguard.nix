@@ -18,8 +18,9 @@ in
 
   # Enable WireGuard
   networking.wireguard.interfaces = {
+
     # "wg0" is the network interface name. You can name the interface arbitrarily.
-    wg = {
+    wg0 = {
       # Determines the IP address and subnet of the client's end of the tunnel interface.
       # TODO TO override on a per host basis
       # ips = [ "10.100.0.3/24" ];

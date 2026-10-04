@@ -305,7 +305,6 @@ in
       ;
 
       startup = [
-        # { command = "env RUST_BACKTRACE=1 RUST_LOG=swayr=debug swayrd > /tmp/swayrd.log 2>&1"; }
         { command = "env RUST_BACKTRACE=1 swaycons"; }
 
       ]
