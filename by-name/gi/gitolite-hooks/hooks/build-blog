@@ -1,11 +1,6 @@
 #!/usr/bin/env bash
 set -eu
 
-# git submodule can subtly break when not cd'ed into the correct folder first !!
-
-#!/usr/bin/env bash
-set -eu
-
 # https://lucymcphail.com/posts/deploying-this-blog-on-nixos/
 # inspired by https://medium.com/zerosum-dot-org/a-pure-git-deploy-workflow-with-jekyll-and-gitolite-b3a48f2ce06f 
 # GIT_REPO=$HOME/repositories/blog.git

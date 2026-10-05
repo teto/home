@@ -53,14 +53,15 @@
   # If you require a signing key to push closures to your server, specify the path to it in the LOCAL_KEY environment variable.
   nodes =
     let
-      # system = "x86_64-linux";
       genNode =
         { name, ... }@attrs:
         let
           nixosCfg = flakeSelf.nixosConfigurations.${name};
         in
         {
-          inherit (attrs) hostname;
+          hostname = nixosCfg.config.networking.fqdnOrHostName;
+
+          # inherit (attrs) hostname;
           profiles.system = {
             # remoteBuild = false;
             user = "root";
@@ -114,7 +115,6 @@
       neotokyo =
         genNode {
           name = "neotokyo";
-          hostname = secrets.jakku.fqdn;
         }
         // {
           sshUser = "teto";

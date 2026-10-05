@@ -113,6 +113,11 @@ in
       # use sway-easyfocus
       "${mad}+f" = "exec ${pkgs.sway-easyfocus}/bin/sway-easyfocus";
 
+# change container layout (stacked, tabbed, default)
+         "$GroupFr+$mod+ampersand" = "layout toggle tabbed stacking";
+         "$GroupUs+$mod+1" = "layout toggle tabbed stacking";
+      # "$GroupFr+$mod+ampersand" = "exec ${lib.getExe pkgs.sway-split-layout}";
+      # "$GroupUs+$mod+1" = "exec ${lib.getExe pkgs.sway-split-layout}";
 
 
       "${mod}+Shift+1" = "exec qutebrowser";

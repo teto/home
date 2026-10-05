@@ -28,13 +28,18 @@
     # italic_font = "auto";
     # bold_italic_font = "auto";
     confirm_os_window_close = 0;
-
-    font_size = 12;
+    # font_size = 12;
     url_style = "curly";
     enable_audio_bell = false;
-    include = "./manual.conf";
+
+    # does not support list
+    include = 
+      # generated. Path must match the one in wallust.toml
+      "./manual.conf"
+    ;
+
+    extraConfig = ''
+      include "themes/wallust.conf"
+      '';
   };
-  # extraConfig = ''
-  #   include ./manual.conf
-  # '';
 }

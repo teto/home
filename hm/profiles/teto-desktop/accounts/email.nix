@@ -180,7 +180,7 @@ let
         # not liked
         # conf_override = true;
 
-        notmuch_address_book_query = "--output=recipients --deduplicate=address date:6M..";
+        # notmuch_address_book_query = "--output=recipients --deduplicate=address date:6M..";
         # manual_refresh = false # defaults to false
         # TODO could be generated
         refresh_command = "systemctl start mujmap-fastmail";

@@ -27,11 +27,11 @@ let
 
   rofi = pkgs.rofi-teto;
   sharedConfig = pkgs.callPackage ./wm-config.nix { inherit config; };
+
 in
 {
 
   wayland.windowManager.sway = {
-    # enable = true;
 
     # creates a sway-session target that is started on wayland start
     systemd = {
@@ -51,6 +51,7 @@ in
       #     "XDG_SESSION_TYPE"
       #     "NIXOS_OZONE_WL"
       #   ];
+
     };
 
     config = {
@@ -239,9 +240,7 @@ in
           "button9" = "move left";
           "button8" = "move right";
 
-          # change container layout (stacked, tabbed, default)
-          "$GroupFr+$mod+ampersand" = "layout toggle tabbed stacking";
-          "$GroupUs+$mod+1" = "layout toggle tabbed stacking";
+          # Use tabs at workspace level, and vertical splits inside containers.
 
           "$GroupFr+$mod+apostrophe" = "kill";
           "$GroupUs+$mod+4" = "kill";

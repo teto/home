@@ -115,7 +115,7 @@
           M.tidal_boot = "${ghcEnv4Tidal}/tidal-1.10.1/BootTidal.hs"
         ''
         + lib.optionalString withSecrets ''
-          M.jakku_hostname = "${secrets.jakku.hostname}:${toString flakeSelf.nixosConfigurations.neotokyo.config.services.llama-cpp.settings.port}"
+          M.jakku_hostname = "${flakeSelf.nixosConfigurations.neotokyo.config.networking.fqdnOrHostName}:${toString flakeSelf.nixosConfigurations.neotokyo.config.services.llama-cpp.settings.port}"
           M.jakku_llama_api_secret = "${secrets.jakku.llama.api-key}"
           return M
         '';

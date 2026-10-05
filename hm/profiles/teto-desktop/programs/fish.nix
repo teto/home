@@ -97,12 +97,13 @@ in
 
     kssh = "kitten ssh";
     # abbr --add git-clone-url --position command --regex --function git_clone_url
-    "git-clone-url" = {
-      # position = "command";
-      # expansion = "--color";
-      regex = ".+\.git";
-      function = "git_clone_url";
-    };
+    # git-clone-url = {
+    #   # position = "command";
+    #   # expansion = "--color";
+    #   regex = ".+\.git$";
+    #   # expansion = "";
+    #   function = "git_clone_url";
+    # };
 
     # abbr --add --set-cursor -- build-nom 'nom build .#nixosConfigurations.%.config.system.build.toplevel'
     # expand on hosts ?

@@ -809,8 +809,7 @@ vim.cmd(('colorscheme %s'):format(theme))
 
 -- require('plugins.diffview')
 -- require('lsp-progress').setup()
--- todo restore
--- require('teto.cursorline')
+require('teto.cursorline')
 
 local mclipboard = require('teto.clipboard')
 
@@ -870,9 +869,9 @@ vim.keymap.set('n', ']]', function()
 end, { buffer = false })
 
 -- rikai {{{
-vim.keymap.set('n', ',jl', function()
-    vim.cmd([[ Rikai lookup ]])
-end, { buffer = false, desc = 'Japanese lookup' })
+-- vim.keymap.set('n', ',jl', function()
+--     vim.cmd([[ Rikai lookup ]])
+-- end, { buffer = false, desc = 'Japanese lookup' })
 
 vim.keymap.set({ 'n', 'v' }, '<D-j>', function()
     vim.cmd([[ Rikai lookup ]])

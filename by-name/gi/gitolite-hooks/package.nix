@@ -1,19 +1,8 @@
-{ symlinkJoin }:
-symlinkJoin {
-
-  name = "repo-specific";
+{ runCommand }:
+runCommand "repo-specific-hooks" {
   version = "0.1";
-  paths = [
-    # hooks/repo-specific
-    ./hooks
-  ];
-
-  postBuild = ''
-    mkdir -p $out/hooks/repo-specific
-    mv $out/post-receive $out/hooks/repo-specific
-  '';
-  # nativeBuildInputs = [ makeWrapper ];
-  #
-  # postBuild = ''
-
-}
+} ''
+  mkdir -p "$out/hooks/repo-specific"
+  install -m755 ${./hooks}/* "$out/hooks/repo-specific/"
+  patchShebangs "$out/hooks/repo-specific"
+''

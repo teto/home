@@ -140,7 +140,7 @@ in
           pkgs.python3Packages.huggingface-hub
 
           # pkgs.harbor-cli # for terminal-bench tests on llms
-          # pkgs.harbor # from my overlay
+          pkgs.harbor # from my overlay , for terminal-bench tests on llms
 
           # a competitor of "safetensors_explorer"
           (pkgs.python3Packages.gguf.overridePythonAttrs (oa: {
@@ -514,6 +514,7 @@ in
           xan # CLI csv helper
           # viddy # fileevent watcher
           watchman
+          visidata
 
           # wakeonlan # for
 

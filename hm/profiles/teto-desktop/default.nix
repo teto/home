@@ -2,7 +2,6 @@
   flakeSelf,
   pkgs,
   lib,
-  config,
   osConfig,
   # withSecrets,
   secretsFolder,
@@ -12,7 +11,7 @@
 }:
 
 let
-  inherit (lib) ignoreBroken;
+  # inherit (lib) ignoreBroken;
 
   mkRemoteBuilderDesc =
     if lib ? mkRemoteBuilderDesc then
@@ -233,7 +232,7 @@ in
     CDPATH = "$HOME/plugins";
 
     # it's a pain with git/update config
-    PAGER = "bat";
+    PAGER = "bat --style=numbers";
 
     # or bat
     MANPAGER = "moor";
@@ -246,6 +245,7 @@ in
     TETOS_BUILDER_NIXCOMMUNITY = builder_nixcommunity;
     inherit (secrets) TAVILY_API_KEY;
     inherit (secrets) FIRECRAWL_API_KEY;
+    inherit (secrets) CONFIDENT_AI_API_KEY;
   };
 
   # tetos.enableYubikey = true;

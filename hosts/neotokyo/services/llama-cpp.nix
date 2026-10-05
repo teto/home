@@ -14,7 +14,7 @@ in
   # flakeSelf.nixosProfiles.llama-cpp
   # ];
 
-  enable = true;
+  enable = false;
   openFirewall = true;
 
   settings = {

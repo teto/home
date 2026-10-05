@@ -38,10 +38,8 @@ echo "called at $(date) with args '$1'" > "$LOGFILE"
 
 url=$1
 echo "checking if url $url is in domains ?"
-# https://github.com/curl/trurl
 # use a separate profile for special links
 # we use https://github.com/curl/trurl to parse the url
-# trurl --get {scheme}  --url https://www.jinko.ai/teot
 protocol=$(trurl --get '{scheme}'  "$url")
 domain=$(trurl --get '{host}'  "$url")
 echo "protocol [$protocol] "

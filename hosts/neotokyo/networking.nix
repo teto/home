@@ -5,9 +5,12 @@
   flakeSelf,
   # , secretsFolder
   config,
-  withSecrets ? false,
+  withSecrets,
   ...
 }:
+let
+  hickoryPort = config.services.hickory-dns.settings.listen_port;
+in
 lib.optionalAttrs (lib.debug.traceValFn (a: "SECRETS ? ${toString a}") withSecrets) {
   domain = secrets.jakku.domain;
 
@@ -18,10 +21,11 @@ lib.optionalAttrs (lib.debug.traceValFn (a: "SECRETS ? ${toString a}") withSecre
     # flakeSelf.nixosProfiles.wireguard
   ];
 
+  inherit (secrets.jakku) hostName domain;
   # TODO fetch from secrets
-  hostName = "neotokyo";
+  # hostName = secrets.jakku.hostName;
+  # domain = 
 
-  domain = "fr";
   # if withSecrets then secrets.jakku.domain else "toto";
 
   useNetworkd = true;
@@ -36,12 +40,14 @@ lib.optionalAttrs (lib.debug.traceValFn (a: "SECRETS ? ${toString a}") withSecre
       51820 # wireguard
       # nope
       # config.networking.wireguard.interfaces.wg0.listenPort
-    ];
+    ]
+    ++ lib.optional config.services.hickory-dns.enable hickoryPort;
 
     allowedTCPPorts = [
       # This is just a test to see if I can access directly via wireguard
       5000
-    ];
+    ]
+    ++ lib.optional config.services.hickory-dns.enable hickoryPort;
   };
 
   nat = {
