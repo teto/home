@@ -55,15 +55,15 @@ in
       # use "gitolite-teto" as the user in the git remote
 
       # gitolite-admin is a hack just used for the blog
-      gitolite-as-teto = (lib.genSshClientConfig flakeSelf.nixosConfigurations.neotokyo) // {
-        header = "Match user gitolite host ${secrets.jakku.hostname}";
-        user = "gitolite";
-        identityFile = "${secretsFolder}/ssh/id_rsa";
-        # port = secrets.jakku.sshPort;
-
-        extraOptions = {
-        };
-      };
+      # gitolite-as-teto = lib.genSshClientConfig flakeSelf.nixosConfigurations.neotokyo // {
+      #   header = "Match user gitolite host ${secrets.jakku.hostname}";
+      #   user = "gitolite";
+      #   identityFile = "${secretsFolder}/ssh/id_rsa";
+      #   # port = secrets.jakku.sshPort;
+      #
+      #   extraOptions = {
+      #   };
+      # };
 
       # userKnownHostsFile
       github = {

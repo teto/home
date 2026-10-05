@@ -3,6 +3,7 @@
   withSecrets,
   secretsFolder,
   lib,
+  flakeSelf,
   pkgs,
   ...
 }:
@@ -29,7 +30,7 @@
       "https://cache.nixos-cuda.org"
       "https://nix-community.cachix.org"
     ]
-    ++ lib.optional withSecrets "https://cache.${secrets.jakku.hostname}.${secrets.jakku.domain}";
+    ++ lib.optional withSecrets "https://cache.${flakeSelf.nixosConfigurations.neotokyo.config.networking.fqdn}";
 
     trusted-substituters = [
       # "https://haskell-language-server.cachix.org"
@@ -38,7 +39,6 @@
     trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
-
     ]
     ++
       lib.optional withSecrets

@@ -7,16 +7,16 @@
 
 buildGoModule rec {
   pname = "yamaha-cli";
-  version = "0-unstable-2026-10-04";
+  version = "0.2.0";
 
   src = fetchFromGitHub {
     owner = "ljagiello";
     repo = "yamaha-cli";
-    rev = "ee8f34a62837044b9b63e1436c9264c328dcf91e";
-    hash = "sha256-V4Z/6gKM5ZWGPbf+yR5ZKRtdv1lJGa0npi2j1omqh4g=";
+    rev = "refs/tags/v${version}";
+    hash = "sha256-AVplVz6NVb3HltYUOTFGLNQgzdsH8KgYdGmjYz6CbJQ=";
   };
 
-  vendorHash = "sha256-X70MY6k1TPrOoVHsZ0jW//zKsJuE3FKqOKGT5W6u06o=";
+  vendorHash = "sha256-KW2TQ1uPkD4FhH1G7Mbpd47QRiPKk5KZ1PiHhM1WwB0=";
 
   subPackages = [ "cmd/yamaha" ];
 

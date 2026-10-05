@@ -147,7 +147,7 @@ require('lualine').setup({
             winbar = {
                 -- 'Avante',
                 'help',
-                'markdown',
+                -- 'markdown',
                 'qf',
                 'AvanteInput',
                 'AvanteSelectedFiles',

@@ -31,10 +31,11 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-    furigana-url = {
-      url = "https://github.com/Doublevil/JmdictFurigana/releases/download/2.3.1%2B2024-11-25/JmdictFurigana.json.tar.gz";
-      flake = false;
-    };
+    # i dont use it
+    # furigana-url = {
+    #   url = "https://github.com/Doublevil/JmdictFurigana/releases/download/2.3.1%2B2024-11-25/JmdictFurigana.json.tar.gz";
+    #   flake = false;
+    # };
 
     # harmonia = {
     #   url = "github:nix-community/harmonia";
@@ -81,6 +82,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # bash plugin to replace readline
     flyline = {
       url = "github:HalFrgrd/flyline";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -90,10 +92,10 @@
 
     flake-utils.url = "github:numtide/flake-utils";
 
-    git-repo-manager = {
-      url = "github:hakoerber/git-repo-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # git-repo-manager = {
+    #   url = "github:hakoerber/git-repo-manager";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     haumea = {
       url = "github:nix-community/haumea";
@@ -104,6 +106,7 @@
       url = "github:teto/home-manager/scratch";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     jjui = {
       url = "github:idursun/jjui";
       inputs.nixpkgs.follows = "nixpkgs";

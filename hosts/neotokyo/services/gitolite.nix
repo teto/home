@@ -1,35 +1,23 @@
+/**
+one needs to setup the post-receive hook on the server
+https://medium.com/zerosum-dot-org/a-pure-git-deploy-workflow-with-jekyll-and-gitolite-b3a48f2ce06f
+https://github.com/vanderlee/gitolite-hooks/blob/master/post-receive.deploy
+
+*/
 {
   config,
   pkgs,
-  # lib,
-  # dotfilesPath,
   ...
 }:
-# let
-
-# adminHooks = pkgs.in
 {
 
-  # one needs to setup the post-receive hook on the server
-  # https://medium.com/zerosum-dot-org/a-pure-git-deploy-workflow-with-jekyll-and-gitolite-b3a48f2ce06f
-  # https://github.com/vanderlee/gitolite-hooks/blob/master/post-receive.deploy
-  # https://gitolite.com/gitolite/cookbook.html#v36-variation-repo-specific-hooks
-
-  # git clone gitolite@host:gitolite-admin.git
 
   # users.users.gitolite.extraGroups = [
   #   "www"
   #   "nginx"
   # ];
 
-  # enable gitolite
   enable = true;
-  # read
-  # services.gitolite.adminPubkey and declarative configuration (repos/extraConfig) are mutually exclusive.
-  # adminPubkey = builtins.readFile ./neotokyo-gitolite.pub;
-  # group = "";
-  # user
-  # enableGitAnnex = false;
 
   # by default dataLib -> /var/lib/gitolite
   # dataDir = /home/teto/gitolite;
@@ -57,7 +45,7 @@
       ];
       # gitConfig =
       options = {
-        "hook.post-receive" = "post-receive";
+        "hook.post-receive" = "build-blog";
       };
     };
 
@@ -69,18 +57,19 @@
         }
       ];
       # gitConfig =
-      # options = {
-      #   "hook.post-receive" = "post-receive";
-      # };
+      # TODO build CV so it can be used on the blog
+      options = {
+        "hook.post-receive" = "build-cv";
+      };
     };
 
   };
 
   # perl code
   # https://gitolite.com/gitolite/cookbook.html#adding-other-non-update-hooks
-  # LOCAL_CODE => "$ENV{HOME}/local",
-  # /var/lib/gitolite/.gitolite/local/hooks/repo-specific/post-receive
-  # $RC{LOCAL_CODE} =  "$rc{GL_ADMIN_BASE}/local",
+
+  # https://gitolite.com/gitolite/cookbook.html#v36-variation-repo-specific-hooks advises to set 
+  # LOCAL_CODE to store repo-specific hooks
   # /hooks/multi-hook-driver
   # my $driver = $rc{MULTI_HOOK_DRIVER} || "$rc{LOCAL_CODE}/hooks/multi-hook-driver";
   extraGitoliteRc = ''
@@ -97,7 +86,8 @@
   # option hook.post-receive = post-receive
 
   # hooks deployed to every  repo
+  # TODO remove it on 
   commonHooks = [
-    "${pkgs.gitolite-hooks}/hooks/repo-specific/post-receive"
+    # "${pkgs.gitolite-hooks}/hooks/repo-specific/post-receive"
   ];
 }

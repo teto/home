@@ -47,19 +47,17 @@ in
       # action_alias kitty_scrollback_nvim kitten /path/to/your/install/kitty-scrollback.nvim/python/kitty_scrollback_nvim.py
       # ~/.local/share/nvim/site/pack/hm/start/kitty-scrollback.nvim
       extraConfig = ''
-        # generated. Path must match the one in wallust.toml
-        include themes/wallust.conf
         # kitty-scrollback.nvim Kitten alias
-        # we could reference ~/.local/share/nvim/site/pack/hm/start/kitty-scrollback.nvim instead
         action_alias kitty_scrollback_nvim kitten ${pkgs.vimPlugins.kitty-scrollback-nvim}/python/kitty_scrollback_nvim.py
 
         # Browse scrollback buffer in nvim
         map kitty_mod+h kitty_scrollback_nvim ./tmp
-        # Browse output of the last shell command in nvim
-        # map kitty_mod+g kitty_scrollback_nvim --config ksb_builtin_last_cmd_output
-        # Show clicked command output in nvim
-        mouse_map ctrl+shift+right press ungrabbed combine : mouse_select_command_output : kitty_scrollback_nvim --config ksb_builtin_last_visited_cmd_output
       '';
+      # 
+        # # Browse output of the last shell command in nvim
+        # # map kitty_mod+g kitty_scrollback_nvim --config ksb_builtin_last_cmd_output
+        # # Show clicked command output in nvim
+        # mouse_map ctrl+shift+right press ungrabbed combine : mouse_select_command_output : kitty_scrollback_nvim --config ksb_builtin_last_visited_cmd_output
     };
   };
 }

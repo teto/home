@@ -8,25 +8,25 @@
   ...
 }:
 let
-  haumea = flakeSelf.inputs.haumea;
+  # haumea = flakeSelf.inputs.haumea;
 
-  autoloadedProfiles =
-    { pkgs, ... }@args:
-    haumea.lib.load {
-      src = lib.fileset.toSource {
-        root = ./.;
-        fileset = ./programs/noctalia.nix;
-      };
-
-      inputs = args // {
-        osConfig = config;
-        # inputs = flakeSelf.inputs;
-      };
-      transformer = [
-        haumea.lib.transformers.liftDefault
-        (haumea.lib.transformers.hoistLists "_imports" "imports")
-      ];
-    };
+  # autoloadedProfiles =
+  #   { pkgs, ... }@args:
+  #   haumea.lib.load {
+  #     src = lib.fileset.toSource {
+  #       root = ./.;
+  #       fileset = ./programs/noctalia.nix;
+  #     };
+  #
+  #     inputs = args // {
+  #       osConfig = config;
+  #       # inputs = flakeSelf.inputs;
+  #     };
+  #     transformer = [
+  #       haumea.lib.transformers.liftDefault
+  #       (haumea.lib.transformers.hoistLists "_imports" "imports")
+  #     ];
+  #   };
 in
 {
 

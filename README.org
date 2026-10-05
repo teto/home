@@ -11,8 +11,9 @@ This repo contains the configurations for my machines/servers.
 
 I make it public because:
 - I believe in libre software
+- the flake exposes several packages that are not in nixpkgs
 - this makes sharing snippets easier
-- as well as bootstrapping, no need for github login
+- avoid github login when bootstrapping
 
 Dont expect to be able to use this repo as is: it is a spaghetti of hacks, commented code and relies on forks of nixpkgs and home-manager.
 
@@ -21,7 +22,7 @@ Dont expect to be able to use this repo as is: it is a spaghetti of hacks, comme
 - My main difficulty when deploying machines is handling secrets. I dont want to put git secrets - even cyphered - online.
 This is why my *nixosConfigurations* can be built __with__ and __without__ secrets depending on a boolean `withSecrets` forwarded via `specialArgs`.
 This lets me deploy a machine with most of my customizations before migrating my secrets and run a final deployement with all secrets available.
-My secrets are handled with [[sops-nix-github][sops-nix]] and not gitted (no way I would put those public).
+Secrets are handled with [[sops-nix-github][sops-nix]] and not gitted (no way I would put those public).
 - the flake exposes `nixosModules` along with `homeModules`. I name configurations that can be shared between hosts "profiles" (some would call it "roles") so the flake exposes `nixosProfiles` as well as `homeProfiles`
 - nix packages/modules/profiles are autoloaded according to the folder hierarchy. This is made possible by [[haumea][haumea]].
 I dont necessarily recommand haumea though because it can lead to some hard to diagnose error messages and while elegant it makes sideeffects harder to track down IMO.
@@ -33,24 +34,19 @@ If you scroll a bit, you will find sparse tutorials on how to deploy both on a L
 * home
 
 This folder contains my customizations for:
-- [[https://dystroy.org/broot/][broot]] file explorer
 - [[https://github.com/jarun/Buku][buku]]: a cli bookmark manager
 - clerk (to control mpd via rofi)
 - [[https://github.com/FontManager/font-manager][font-manager]] the best font manager I could find
 - [[https://fcitx-im.org/wiki/Fcitx_5][fcitx5]] (input method mechanims, e.g. to type japanese from your qwerty keyboard)
 - [[https://github.com/rycee/home-manager/][home-manager]] to generate dotfiles from nix
-- htop / btop
-- [[https://gitlab.freedesktop.org/emersion/kanshi]][[kanshi]]: a monitor manager for wayland
+- btop
 - [[way-displays]][[]] in the same vein
-- [[https://github.com/Alexays/Waybar][waybar]] sway bar
 - [[https://github.com/pimutils/khard][khard]] (a carddav CLI)
 - [[https://github.com/pimutils/khal][khal]] (a calendar CLI)
 - mpd (configuration files to run this music server as a user)
   - [[rmpc][https://github.com/mierak/rmpc/]] A fantastic rust+tui player
   - [[euphonica][https://github.com/htkhiem/euphonica]] a beautiful gtk gui
-  - ncmpcpp (mpd console player)
-- [[https://marlam.de/msmtp/news][msmtp]] (MSA: Mail Sending Agent)
-- [[https://mierak.github.io/rmpc/]][rmcp]] (mpd console player)
+  - [[https://mierak.github.io/rmpc/]][rmcp]] (mpd console player)
 - [[https://github.com/neovim/neovim][neovim]] (fork of vim)
 - [[https://newsboat.org/][newboat]] (RSS reader, fork of newsbeuter)
 - [[www.notmuch.org][notmuch]] (to tag mails)
@@ -59,12 +55,9 @@ This folder contains my customizations for:
    - [[https://github.com/astroidmail/astroid][astroid]] (MUA with a GUI)
    - [[https://neomutt.org][neomutt]] (Mail User Agent)
 - [[qutebrowser][www.qutebrowser.org]] (vim like browser)
-- [[https://github.com/DaveDavenport/rofi][rofi]] (a dmenu-like interactive prompt, works with clerk/i3 etc...)
 - [[https://starship.rs/][starship]] (prompt manager)
-- nssxiv (image viewer)
 - [[www.swaywm.com][sway]] (wayland window manager)
 - [[https://sw.kovidgoyal.net/kitty/][kitty]] (terminal)
-- [[https://wezfurlong.org/][wezterm]] (terminal)
 - [[https://github.com/jonas/tig][tig]] (a git history reader)
 - tmux (terminal multiplexer)
 - [[https://github.com/tio/tio][tio]] a serial device tool
@@ -73,7 +66,7 @@ This folder contains my customizations for:
 - [[https://www.visidata.org/][visidata]] (for data analysis, csv/json/pcap/... reader)
 - [[https://weechat.org/][weechat]] (Irc client)
 - [[https://github.com/sxyazi/yazi][yazi]] a TUI file manager in rust, much faster than ranger or joshuto, just amazing
-- zsh (alternative to bash)
+- fish / zsh (alternative to bash)
 
 
 * nixos-anywhere install via PXE

@@ -28,6 +28,7 @@ in
       ];
 
       # since we expose it via nginx
+      # _outbound
       host = "127.0.0.1";
     };
 

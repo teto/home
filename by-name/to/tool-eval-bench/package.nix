@@ -1,3 +1,5 @@
+# looks at model itself, does not test an agent
+# eg it brings its own tools
 {
   lib,
   fetchFromGitHub,

@@ -9,16 +9,7 @@ writeShellApplication {
   runtimeInputs = [
     jq
     sway
+    kitty
   ];
-  text = ''
-    workspace="$(${sway}/bin/swaymsg -t get_workspaces | ${jq}/bin/jq -r '.[] | select(.focused) | .num')"
-
-    case "$workspace" in
-      3) directory="$HOME/nixpkgs" ;;
-      9) directory="$HOME/home" ;;
-      *) directory="$HOME" ;;
-    esac
-
-    exec  ${kitty}/bin/kitty --directory "$directory" "$@"
-  '';
+  text = builtins.readFile ./kitty-for-workspace.sh;
 }

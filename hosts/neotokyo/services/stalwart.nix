@@ -1,6 +1,12 @@
-{ config, secrets, withSecrets, ... }:
+{
+  config,
+  secrets,
+  withSecrets,
+  ...
+}:
 let
   forwardingAddress = secrets.accounts.mail.fastmail_perso.email;
+  certificateName = "blog.${config.networking.fqdn}";
 in
 {
   enable = withSecrets && true;
@@ -8,8 +14,20 @@ in
   stateVersion = "26.05";
   openFirewall = true;
 
+  # systemd reads the ACME files as root and exposes them only to Stalwart.
+  credentials = {
+    tls_cert = "${config.security.acme.certs.${certificateName}.directory}/fullchain.pem";
+    tls_key = "${config.security.acme.certs.${certificateName}.directory}/key.pem";
+  };
+
   settings = {
     server.hostname = config.networking.fqdn;
+    certificate.public = {
+      cert = "%{file:/run/credentials/stalwart.service/tls_cert}%";
+      private-key = "%{file:/run/credentials/stalwart.service/tls_key}%";
+      # SMTP clients commonly omit SNI.
+      default = true;
+    };
     server.listener.smtp = {
       bind = [ "[::]:25" ];
       protocol = "smtp";
@@ -37,6 +55,11 @@ in
     # Deliver to Fastmail's published MX servers, with normal MX failover.
     queue.strategy.route = "'mx'";
 
+    # This forwarding-only server has no DKIM identity for its own reports.
+    # Do not generate aggregate mail referencing nonexistent default signers.
+    report.tls.aggregate.send = false;
+    report.dmarc.aggregate.send = false;
+
     queue.limiter.inbound = [
       {
         # Connection attempts per source IP.
@@ -53,7 +76,10 @@ in
       {
         # Checked at RCPT after rewriting; applies to each message transaction.
         enable = true;
-        key = [ "remote_ip" "rcpt" ];
+        key = [
+          "remote_ip"
+          "rcpt"
+        ];
         rate = "60/1h";
       }
       {

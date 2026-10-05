@@ -1,6 +1,15 @@
 port par defaut= 8123
 /var/lib/hass
 
+un bouton qui utilise zigbee sans-fil pour envoyer des commandes est appele
+"dummy switch"
+
+"Gang" est le terme pour bouton
+
+"without Relay Clicking Noise"
+"several gangs but one relay"
+Also said as "3 buttons 1 channel"
+
 presser 10 sec le bouton on/off du dimmer switch
 ne pas hesiter a entrer le numero de serie
 
@@ -36,6 +45,10 @@ sudo -u hass /nix/store/j0d9289d0sg7f1l62vd1g3mfw4268dhl-homeassistant-2024.4.4/
 
 Mode relais détaché: ZBMINIR2 est équipé du « mode relais détaché », permettant de fermer l'interrupteur externe tout en gardant les lumières intelligentes en ligne.
 https://sonoff.tech/en-fr/blogs/news/understanding-the-three-switch-trigger-modes-of-zbminir2
+
+** switch zbm5-2c-86w
+
+https://www.domadoo.fr/fr/produits-zigbee/7946-sonoff-interrupteur-mural-zigbee-2-canaux-blanc-zbm5-2c-86w.html
  
 ** sonoff SNZB-02 
    Change celsius to fahreneit: double tap reset button https://www.zigbee2mqtt.io/devices/SNZB-02D.html
@@ -56,12 +69,16 @@ https://smarthomescene.com/reviews/zigbee-battery-powered-presence-sensor-zg-204
 https://www.zigbee2mqtt.io/devices/RH3040.html
 
 
-** fp300
+** tuya ts00013
+
+switch 3 boutons encastrable, 
+
+** fp300 (Pir aqara)
 
 Brand new, defaults to matter ! need app to switch to zigbee
 https://smarthomescene.com/reviews/aqara-fp300-presence-multi-sensor-teardown-and-review/
 
-** ZG-204ZH
+** ZG-204ZH (sonoff)
 
 https://smarthomescene.com/reviews/tuya-zigbee-battery-presence-sensor-zg-204zh-review/
 

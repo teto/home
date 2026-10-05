@@ -19,6 +19,8 @@ on zigbee2mqtt UI, one can see what role a device plays.
 When a device joins, the coordinator exposes the network key.
 
 
+un binding permet de se passer du coordinateur: aka l'automatisation va fonctionner meme sans coordinateur ?
+
 * How to reset hardware:
 
 ** scene switch

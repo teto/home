@@ -10,7 +10,6 @@ let
 
   # I want to be able to access those services
   mkServerAliases = prefix: [
-    "${prefix}.home"
     "${prefix}.local"
     "${prefix}.vpn"
     "${prefix}.${fqdn}"
@@ -31,6 +30,8 @@ in
 
   # Enable status page reachable from localhost on http://127.0.0.1/nginx_status.
   statusPage = true;
+
+  # doesn't work properly ?
   validateConfigFile = true;
 
   logError = "stderr";
@@ -46,11 +47,11 @@ in
     whisperSrv = config.services.wyoming.faster-whisper.servers.medium-fr;
   in
     # piper on 10200 a priori
+    #         fail_timeout 10s;
     lib.optionalString piperSrv.enable ''
       server {
         listen 10222;
         proxy_pass 127.0.0.1:10200;
-        fail_timeout 10s;
       }
     ''
     # 10301

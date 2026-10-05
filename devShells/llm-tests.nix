@@ -5,6 +5,7 @@
   mkShell,
   python3,
   just,
+  pkgs,
 }:
 mkShell {
 
@@ -29,6 +30,7 @@ mkShell {
       # allKernels
       just
       pyEnv
+      pkgs.tool-eval-bench
       # -notebook
 
       # ghcEnv needs to be in PATH else ihaskell can't find it

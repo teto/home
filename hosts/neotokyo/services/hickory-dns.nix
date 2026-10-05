@@ -7,10 +7,12 @@ small reminder about syntax
 */
 {
   pkgs,
+  secrets,
+  config,
   ...
 }:
 {
-  enable = false;
+  enable = true;
 
   # TODO pass extraFlags like zonedir to systemd service
   validateConfig = true;
@@ -23,7 +25,7 @@ small reminder about syntax
     #   # "0.0.0.0" 
     #   # routerIp
     # ];
-    listen_addrs_ipv6 = [ ];
+    # listen_addrs_ipv6 = [ ];
     listen_port = 153;
 
     # With only an allow list, every other client is refused
@@ -51,7 +53,7 @@ small reminder about syntax
         zone_type = "External";
         stores = [
           {
-          zone_type = "blocklist";
+          type = "blocklist";
           lists = [
             "${pkgs.stevenblack-blocklist}/hosts"
           ];
@@ -70,7 +72,7 @@ small reminder about syntax
           name_servers = [
             {
               # use gandi NS server ?
-              ip = "2312";
+              ip = "217.70.177.39";
               trust_negative_responses = true;
               connections = [
                 { protocol.type = "udp"; }
@@ -82,8 +84,8 @@ small reminder about syntax
         ];
       }
 
-      {
-          zone = "jedha.home";
+      (let fqdn = config.networking.fqdn; in {
+          zone = fqdn;
           zone_type = "Primary";
           # Source of Authority is mandatory ?
           # @ IN SOA ns.${name}. hostmaster.${name}. (1 3600 600 86400 300)
@@ -100,20 +102,22 @@ small reminder about syntax
           #         86400 )    ; TTL négatif minimum (Minimum TTL)
           file = let 
 
-            # use @ to refer to current ?
+            # use @ to refer to current thanks to $ORIGIN
               genZone = name: pkgs.writeText "${name}.zone" ''
-                    $ORIGIN jedha.home.
+                    $ORIGIN ${name}.
                     $TTL 300
                     @ IN SOA ns.${name}. hostmaster.${name}. (1 3600 600 86400 300)
                     @ IN NS ns.${name}.
-                    @  IN A ${jedhaIp}
+                    @  IN A ${secrets.jakku.ipv4}
 
-                    piper           CNAME   jedha.home.
-                    faster-whisper  CNAME   jedha.home.
-                    cache           CNAME   jedha.home.
-                    llamacpp        CNAME   jedha.home.
-                    @               SRV     .
+                    blog           CNAME   ${name}.
+                    www            CNAME   ${name}.
+                    nixbot         CNAME   ${name}.
+                    status         CNAME   ${name}.
+                    cache          CNAME   ${name}.
                   '';
+                                      # @               SRV     .
+
 #                   ; _Service._Proto.Name TTL Class SRV Priority Weight Port Target
 # server          SRV     1 1 443 alias
 
@@ -121,8 +125,8 @@ small reminder about syntax
                     # @ IN CNAME faster-whisper.jedha.home. jedha.home.
 
           in 
-            genZone "jedha";
-        }
+            genZone fqdn;
+        })
     ];
   };
 }

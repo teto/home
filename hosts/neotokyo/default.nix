@@ -24,21 +24,24 @@ let
           ./systemd.nix
           ./networking.nix
           ./security.nix
-          ./programs/msmtp.nix
+
+          ./programs
+
+          # reste nginx et nextcloud a basculer
           ./services/openssh.nix
           ./services/gitolite.nix
           ./services/llama-cpp.nix
           ./services/harmonia.nix
+          ./services/hickory-dns.nix
           ./services/jellyfin.nix
           ./services/restic.nix
           ./services/immich.nix
           ./services/step-ca.nix
           ./services/stalwart.nix
-          # ./services/buildbot-nix.nix
           ./services/nixbot.nix
           ./services/transmission.nix
           ./services/headscale.nix
-          # ./services/vaultwarden.nix
+
           # ./services/linkwarden.nix
         ];
       };
@@ -162,6 +165,15 @@ in
   };
 
   documentation.enable = false;
+
+  # The existing public certificate also covers networking.fqdn.
+  security.acme.certs."blog.${config.networking.fqdn}".reloadServices =
+    lib.mkIf config.services.stalwart.enable
+      [ "stalwart.service" ];
+  systemd.services.stalwart = lib.mkIf config.services.stalwart.enable {
+    requires = [ "acme-blog.${config.networking.fqdn}.service" ];
+    after = [ "acme-blog.${config.networking.fqdn}.service" ];
+  };
 
   # just to remove warning
   # swapDevices = [

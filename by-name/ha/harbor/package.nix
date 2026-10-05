@@ -54,7 +54,7 @@ python3Packages.buildPythonApplication rec {
     filelock
     httpx
     jinja2
-    # litellm # was compromised 
+    litellm # was compromised 
     packaging
     pathspec
     platformdirs

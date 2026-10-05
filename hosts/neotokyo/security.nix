@@ -40,8 +40,8 @@ in
     */
     certs =
       let
-        # fqdn = config.networking.fqdn
-        fqdn = secrets.jakku.fqdn;
+        fqdn = config.networking.fqdn;
+        # fqdn = secrets.jakku.fqdn;
       in
       lib.optionalAttrs withSecrets {
         "blog.${fqdn}" = {
@@ -55,8 +55,8 @@ in
 
           extraDomainNames = [
             # "blog.${secrets.jakku.hostname}"
-            "www.${secrets.jakku.fqdn}"
-            "${secrets.jakku.fqdn}"
+            "www.${fqdn}"
+            "${fqdn}"
             # "nextcloud.vps" # acme can't register for unknown TLDs
           ];
         };

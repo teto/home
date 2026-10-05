@@ -1,37 +1,33 @@
-local saved_color
+local saved_color = vim.api.nvim_get_hl(0, { name = 'CursorLine', link = false })
 
--- Function to check diagnostics and set CursorLine color
-local function check_diagnostics_and_set_cursorline()
-    -- Get the count of diagnostics with error severity
-    local has_error = vim.diagnostic.count(0, { severity = vim.diagnostic.severity.ERROR })[1]
-    -- > 0
-
-    -- TODO log it instead
-    -- vim.notify("Updating cursorline with errors ? ".. tostring(has_error))
-
-    -- Change CursorLine color based on presence of errors
-    if has_error then
-        vim.api.nvim_set_hl(0, 'CursorLine', { bg = '#FF0000' }) -- Red if error
-    else
-        -- should restore the original color
-        -- vim.print("Restoring CursorLine color", saved_color)
-
-        vim.api.nvim_set_hl(0, 'CursorLine', saved_color) -- Green otherwise
+-- Reflect the worst diagnostic in the current buffer, even away from its line.
+local function update_cursorline()
+    local counts = vim.diagnostic.count(0)
+    local color
+    if (counts[vim.diagnostic.severity.ERROR] or 0) > 0 then
+        color = '#FF0000'
+    elseif (counts[vim.diagnostic.severity.WARN] or 0) > 0 then
+        color = '#FFFF00'
     end
+
+    local highlight = vim.deepcopy(saved_color)
+    if color then
+        highlight.bg = color
+    end
+    vim.api.nvim_set_hl(0, 'CursorLine', highlight)
 end
 
--- Configure autocommand
--- DiagnosticChanged instead ?
--- vim.api.nvim_create_autocmd('CursorHold', {
---   pattern = '*',
---   callback = check_diagnostics_and_set_cursorline,
--- })
+local group = vim.api.nvim_create_augroup('DiagnosticCursorLine', { clear = true })
+vim.api.nvim_create_autocmd({ 'DiagnosticChanged', 'BufEnter', 'WinEnter', 'VimEnter' }, {
+    group = group,
+    callback = update_cursorline,
+})
+vim.api.nvim_create_autocmd('ColorScheme', {
+    group = group,
+    callback = function()
+        saved_color = vim.api.nvim_get_hl(0, { name = 'CursorLine', link = false })
+        update_cursorline()
+    end,
+})
 
--- vim.api.nvim_create_autocmd({'ColorScheme', 'VimEnter' }, {
---   pattern = '*',
---   callback = function ()
--- 	saved_color =  vim.api.nvim_get_hl(0, { name = 'CursorLine'})
--- 	-- vim.print("Saved color")
--- 	-- vim.print("Saved color", saved_color)
---   end,
--- })
+update_cursorline()
