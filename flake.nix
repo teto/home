@@ -66,8 +66,8 @@
     };
 
     avante-nvim = {
-      # url = "github:teto/avante.nvim";
-      url = "path:/home/teto/plugins/avante2";
+      url = "github:teto/avante.nvim";
+      # url = "path:/home/teto/plugins/avante2";
       # flake = false;
       inputs.nixpkgs.follows = "nixpkgs";
     };
