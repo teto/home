@@ -22,7 +22,7 @@
   '';
 
   # Keep authored skills editable outside the Nix store.
-  etc."codex/skills".source = "/home/teto/cv/skills";
+  etc."codex/skills".source = "/home/teto/perso/skills";
 
   etc."lemurs/wayland/sway-systemd" = {
     mode = "755";

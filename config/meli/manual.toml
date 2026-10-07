@@ -127,9 +127,16 @@ commands = [
 #page_up = "PageUp"
 #page_down = "PageDown"
 
-# [composing]
+[composing]
 # #required for sending e-mail
 # editor_command = 'nvim +/^$' # optional, by default $EDITOR is used.
+store_sent_mail = true
+# attribution_format_string
+forward_as_attachment = "ask"
+# reply_prefix_list_to_strip
+# reply_prefix
+# custom_compose_hooks
+# allow_reply_to_self
 
 #[pgp]
 #auto_sign = false # always sign sent messages

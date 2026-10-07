@@ -22,8 +22,6 @@ in
   admins = [ "github:teto" ];
   github = {
     enable = true;
-    # GitHub App configuration.
-    # appId = 0; # FIXME: replace with the App ID obtained from GitHub
     # appSecretKeyFile = pkgs.writeText "app-secret.key" "00000000000000000000"; # FIXME: replace with the App private key; use a secret manager
     # # The webhook secret configured in the GitHub App settings.
     # webhookSecretFile = pkgs.writeText "webhookSecret" "00000000000000000000"; # FIXME: use a secret manager

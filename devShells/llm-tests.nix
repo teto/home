@@ -23,6 +23,8 @@ mkShell {
         ps.trl # for https://huggingface.co/learn/smol-course/unit1/3?first_fine_tune=python
         # ps.trackio
         ps.deepeval
+        # 
+        ps.inspect-ai
       ]);
     in
 
