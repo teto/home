@@ -1189,19 +1189,6 @@
         "type": "github"
       }
     },
-    "memento-kanjidict": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1790330526,
-        "narHash": "sha256-qXu1MGVCsSXp2w5xKEMz+nMkH+sYkl1vVaAgX1/qWHE=",
-        "type": "tarball",
-        "url": "https://github.com/themoeway/jmdict-yomitan/releases/latest/download/JMdict_french.zip"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://github.com/themoeway/jmdict-yomitan/releases/latest/download/JMdict_french.zip"
-      }
-    },
     "mokuro": {
       "flake": false,
       "locked": {
@@ -2174,7 +2161,6 @@
         "luals-luassert-addon": "luals-luassert-addon",
         "meli-src": "meli-src",
         "memento-dev": "memento-dev",
-        "memento-kanjidict": "memento-kanjidict",
         "mokuro": "mokuro",
         "mujmap": "mujmap",
         "neovim-nightly-overlay": "neovim-nightly-overlay",

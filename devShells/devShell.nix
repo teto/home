@@ -5,16 +5,31 @@
   ...
 }:
 let
-  myLisp = pkgs.sbcl.withPackages (
-    ps: with ps; [
-      # lips utilities (logging etc)
-      # https://alexandria.common-lisp.dev/draft/alexandria.html
-      alexandria
-      adopt # for parsers
-      clingon # cli parser
-      linedit
-    ]
-  );
+  myLisp =
+    (pkgs.sbcl.withPackages (
+      ps: with ps; [
+        # lips utilities (logging etc)
+        # https://alexandria.common-lisp.dev/draft/alexandria.html
+        alexandria
+        adopt # for parsers
+        clingon # cli parser
+        linedit
+      ]
+    )).overrideAttrs
+      (old: {
+        # ASDF uses empty colon-separated fields to inherit its configuration;
+        # makeBinaryWrapper rejects them as if these variables were PATH.
+        nativeBuildInputs = map (
+          input: if input == pkgs.makeBinaryWrapper then pkgs.makeWrapper else input
+        ) old.nativeBuildInputs;
+        # The upstream registry-to-translation conversion assumes every entry
+        # ends in //, which no longer holds. Keep precompiled store files in place.
+        installPhase =
+          pkgs.lib.replaceStrings
+            [ ''--prefix ASDF_OUTPUT_TRANSLATIONS : "$(echo $CL_SOURCE_REGISTRY | sed s,//:,::,g):"'' ]
+            [ ''--set ASDF_OUTPUT_TRANSLATIONS "${builtins.storeDir}:${builtins.storeDir}:"'' ]
+            old.installPhase;
+      });
 in
 pkgs.mkShell {
   name = "dotfiles-shell";

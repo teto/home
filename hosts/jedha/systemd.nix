@@ -25,12 +25,11 @@
     }
     // lib.mkIf config.services.netdata.enable {
       netdata.path = [ pkgs.linuxPackages.nvidia_x11 ];
-
     }
     // (
       let
         # port ?
-        hassUri = flakeSelf.nixosConfigurations.router.config.services.home-assistant.uri;
+        hassHost = flakeSelf.nixosConfigurations.router.config.services.home-assistant.uri;
         # toString slib.ports.home-assistant
         hassPort = 8123;
       in
@@ -38,7 +37,7 @@
         # copied from https://github.com/NixOS/nixpkgs/pull/544252
         # lib.recursiveUpdate slib.systemd.serviceDefaults {
         speech-to-phrase = {
-          after = [ "home-assistant.service" ];
+          # after = [ "home-assistant.service" ];
           script = lib.concatStringsSep " " [
             (lib.getExe pkgs.speech-to-phrase)
             "--models-dir"
@@ -48,14 +47,15 @@
             # "--custom-sentences-dir" ""
             "--uri 'tcp://127.0.0.1:10400'"
             "--hass-websocket-uri"
-            "ws://127.0.0.1:${hassPort}/api/websocket"
+            "ws://${hassHost}:${hassPort}/api/websocket"
             "--retrain-on-start"
             "--retrain-on-connect"
             "--retrain-seconds"
             "300"
           ];
           serviceConfig = {
-            EnvironmentFile = config.sops.templates."speech-to-phrase/environment".path;
+            # 
+            # EnvironmentFile = config.sops.templates."speech-to-phrase/environment".path;
             Group = "speech-to-phrase";
             StateDirectory = "speech-to-phrase";
             User = "speech-to-phrase";

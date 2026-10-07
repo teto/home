@@ -1,6 +1,5 @@
 {
   lib,
-  secrets,
   config,
   withSecrets,
   flakeSelf,
