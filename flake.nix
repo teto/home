@@ -44,10 +44,11 @@
 
     jellyhaj.url = "github:owo-uwu-nyaa/jellyhaj";
 
-    memento-kanjidict = {
-      url = "https://github.com/themoeway/jmdict-yomitan/releases/latest/download/JMdict_french.zip";
-      flake = false;
-    };
+    # not used
+    # memento-kanjidict = {
+    #   url = "https://github.com/themoeway/jmdict-yomitan/releases/latest/download/JMdict_french.zip";
+    #   flake = false;
+    # };
 
     nixos-anywhere = {
       url = "github:nix-community/nixos-anywhere";
