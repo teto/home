@@ -79,7 +79,7 @@
 
   home-manager.users.root = {
     imports = [
-    #   flakeSelf.homeProfiles.neovim-minimal
+      #   flakeSelf.homeProfiles.neovim-minimal
       flakeSelf.homeModules.neovim
       flakeSelf.homeProfiles.readline
     ];
@@ -178,7 +178,6 @@
   services.acpid.enable = true;
 
   # following the guide https://nixos.wiki/wiki/Systemd-networkd
-
 
   # systemd.services.systemd-networkd.environment.SYSTEMD_LOG_LEVEL = "debug";
 

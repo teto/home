@@ -1,4 +1,4 @@
 { mokuro, flakeSelf }:
-mokuro.overrideAttrs { 
+mokuro.overrideAttrs {
   src = flakeSelf.inputs.mokuro;
 }

@@ -40,7 +40,7 @@ in
   home.packages = [
     pkgs.just # to run justfile
     pkgs.nix-diff
-    pkgs.wireguard-tools 
+    pkgs.wireguard-tools
   ];
 
   home.stateVersion = "26.05";

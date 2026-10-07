@@ -7,7 +7,7 @@
   ...
 }:
 {
-  imports = [ 
+  imports = [
   ];
 
   services.local-ai = {

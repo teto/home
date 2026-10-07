@@ -24,7 +24,7 @@ lib.optionalAttrs (lib.debug.traceValFn (a: "SECRETS ? ${toString a}") withSecre
   inherit (secrets.jakku) hostName domain;
   # TODO fetch from secrets
   # hostName = secrets.jakku.hostName;
-  # domain = 
+  # domain =
 
   # if withSecrets then secrets.jakku.domain else "toto";
 
@@ -60,13 +60,15 @@ lib.optionalAttrs (lib.debug.traceValFn (a: "SECRETS ? ${toString a}") withSecre
   # https://wiki.nixos.org/wiki/WireGuard#Peer_setup
   wireguard.interfaces = {
     # "wg0" is the network interface name. You can name the interface arbitrarily.
-    wg = (lib.mkWireguardPeer {
-      id = 1;
-      privateKeyFile = config.sops.secrets.wg-private-key.path;
-    }) // {
-      listenPort = 51820; # to match firewall allowedUDPPorts (without this wg uses random port numbers)
+    wg =
+      (lib.mkWireguardPeer {
+        id = 1;
+        privateKeyFile = config.sops.secrets.wg-private-key.path;
+      })
+      // {
+        listenPort = 51820; # to match firewall allowedUDPPorts (without this wg uses random port numbers)
 
-    };
+      };
 
   };
 }

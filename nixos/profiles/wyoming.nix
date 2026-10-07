@@ -86,7 +86,7 @@ in
       voice = "fr_FR-mls-medium";
       # default = "en-us-ryan-medium";
       # voice = "fr_FR-semaine-medium";
-      
+
       uri = "tcp://127.0.0.1:10200";
 
       # sets device ?

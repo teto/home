@@ -50,7 +50,6 @@ let
     XF86MonBrightnessUp = "exec ${brightnessScript}/bin/brightness-mgr up 10%";
     XF86MonBrightnessDown = "exec ${brightnessScript}/bin/brightness-mgr down 10%-";
 
-
     Mod4 = "exec anyrun";
 
     XF86AudioNext = "exec ${mpc} next; exec notify-send --icon=forward -h string:synchronous:mpd 'Audio next'";
@@ -113,12 +112,11 @@ in
       # use sway-easyfocus
       "${mad}+f" = "exec ${pkgs.sway-easyfocus}/bin/sway-easyfocus";
 
-# change container layout (stacked, tabbed, default)
-         "$GroupFr+$mod+ampersand" = "layout toggle tabbed stacking";
-         "$GroupUs+$mod+1" = "layout toggle tabbed stacking";
+      # change container layout (stacked, tabbed, default)
+      "$GroupFr+$mod+ampersand" = "layout toggle tabbed stacking";
+      "$GroupUs+$mod+1" = "layout toggle tabbed stacking";
       # "$GroupFr+$mod+ampersand" = "exec ${lib.getExe pkgs.sway-split-layout}";
       # "$GroupUs+$mod+1" = "exec ${lib.getExe pkgs.sway-split-layout}";
-
 
       "${mod}+Shift+1" = "exec qutebrowser";
 
@@ -154,9 +152,9 @@ in
       "${mad}+Tab" = "exec ${pkgs.vicinae}/bin/vicinae deeplink vicinae://launch/wm/switch-windows";
       "${mod}+Tab" = "exec ${pkgs.vicinae}/bin/vicinae toggle";
 
-        # TODO make it a noctalia command
-      "${mod}+Ctrl+L"  = "exec noctalia msg session lock";
-        # "${mod}+Ctrl+L" = "exec ${pkgs.tetos.swaylockCmd} ";
+      # TODO make it a noctalia command
+      "${mod}+Ctrl+L" = "exec noctalia msg session lock";
+      # "${mod}+Ctrl+L" = "exec ${pkgs.tetos.swaylockCmd} ";
 
     }
     # // lib.optionalAttrs config.services.clipcat.enable {

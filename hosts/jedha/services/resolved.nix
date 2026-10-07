@@ -1,4 +1,4 @@
-  # Also provide Hickory's `dns` and `resolve` command-line clients.
+# Also provide Hickory's `dns` and `resolve` command-line clients.
 { config, lib, ... }:
 {
   settings.Resolve = {
@@ -10,12 +10,14 @@
     # Specific routes win over DHCP search domains, including for .local aliases.
     # this overrides the default derived from networking.search !!!
     # NixOS uses networking.search only as the default for that option
-    Domains = config.networking.search ++ [
-      "~."
-    ]
-    ++ map (zone: "~${zone.zone}") (
-      lib.filter (zone: zone.zone_type == "Primary") config.services.hickory-dns.settings.zones
-    );
+    Domains =
+      config.networking.search
+      ++ [
+        "~."
+      ]
+      ++ map (zone: "~${zone.zone}") (
+        lib.filter (zone: zone.zone_type == "Primary") config.services.hickory-dns.settings.zones
+      );
     ResolveUnicastSingleLabel = true;
 
     UseDomains = true;
@@ -23,13 +25,12 @@
 
   };
 
-    dnsDelegates.jedha = {
+  dnsDelegates.jedha = {
     Delegate = {
       # 153
-        DNS = "192.168.1.83:${toString config.services.hickory-dns.settings.listen_port}";
-        Domains = [ "jedha.home" ];
-      };
+      DNS = "192.168.1.83:${toString config.services.hickory-dns.settings.listen_port}";
+      Domains = [ "jedha.home" ];
+    };
   };
-
 
 }

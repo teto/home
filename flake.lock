@@ -10,14 +10,17 @@
         "uv2nix": "uv2nix"
       },
       "locked": {
-        "lastModified": 1790337689,
-        "narHash": "sha256-JWTT7ogMP8UYc+X6nq+xva8T9CYwn3c9J0ufSw6jtK4=",
-        "path": "/home/teto/plugins/avante2",
-        "type": "path"
+        "lastModified": 1790086474,
+        "narHash": "sha256-U/EkX/yLSN6gBuCS6jSe2w0wOPU4lFptxfi/js0c2WQ=",
+        "owner": "teto",
+        "repo": "avante.nvim",
+        "rev": "18316361891e59f3d18732fea0b1fe68c8be56e9",
+        "type": "github"
       },
       "original": {
-        "path": "/home/teto/plugins/avante2",
-        "type": "path"
+        "owner": "teto",
+        "repo": "avante.nvim",
+        "type": "github"
       }
     },
     "blueprint": {
@@ -985,11 +988,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1789770317,
-        "narHash": "sha256-f2lxQQ5GtB+TWA9xvzgchsFdEjCMlsjeWTJTfWC088A=",
+        "lastModified": 1791373553,
+        "narHash": "sha256-IAM31m8PoNWSt9Lxu6RJgBLbomdHy3o1c///ruiZvgs=",
         "owner": "teto",
         "repo": "home-manager",
-        "rev": "ff1f09773e5837ab6cb8cc844c63b0e3bbe50ce6",
+        "rev": "100fd489a722cdccdf02f9504a77604c3e807e0b",
         "type": "github"
       },
       "original": {
@@ -1851,11 +1854,11 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1790275677,
-        "narHash": "sha256-y2XURQyfFb9PAImkOH7ms3xeyxWFybCUuKUKAzLQrCg=",
+        "lastModified": 1791313114,
+        "narHash": "sha256-ncMy2TlpEmJxn1V/p8xhLwcsuas0+WBCg5Q8bGgshbw=",
         "owner": "teto",
         "repo": "nixpkgs",
-        "rev": "23631cb3cfe89922a882e88d34d625356e05bd54",
+        "rev": "65d58d367c2a5030feb076ce431c958c2a877495",
         "type": "github"
       },
       "original": {

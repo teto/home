@@ -110,8 +110,7 @@
       "automation ui" = "!include automations.yaml";
 
       # frontend must be mandatory
-      frontend = {
-
+      frontend = lib.optionalAttrs (config.services.home-assistant.themes == [ ]) {
         themes = "!include_dir_merge_named themes";
       };
 

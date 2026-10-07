@@ -22,8 +22,8 @@ in
       timeout = 20;
 
       # interfaces to be ignored when declaring online status
-      ignoredInterfaces = [ 
-        "enp1s0"  # ignored as upstream
+      ignoredInterfaces = [
+        "enp1s0" # ignored as upstream
       ];
     };
 

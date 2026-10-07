@@ -1,8 +1,7 @@
 /**
-one needs to setup the post-receive hook on the server
-https://medium.com/zerosum-dot-org/a-pure-git-deploy-workflow-with-jekyll-and-gitolite-b3a48f2ce06f
-https://github.com/vanderlee/gitolite-hooks/blob/master/post-receive.deploy
-
+  one needs to setup the post-receive hook on the server
+  https://medium.com/zerosum-dot-org/a-pure-git-deploy-workflow-with-jekyll-and-gitolite-b3a48f2ce06f
+  https://github.com/vanderlee/gitolite-hooks/blob/master/post-receive.deploy
 */
 {
   config,
@@ -10,7 +9,6 @@ https://github.com/vanderlee/gitolite-hooks/blob/master/post-receive.deploy
   ...
 }:
 {
-
 
   # users.users.gitolite.extraGroups = [
   #   "www"
@@ -68,7 +66,7 @@ https://github.com/vanderlee/gitolite-hooks/blob/master/post-receive.deploy
   # perl code
   # https://gitolite.com/gitolite/cookbook.html#adding-other-non-update-hooks
 
-  # https://gitolite.com/gitolite/cookbook.html#v36-variation-repo-specific-hooks advises to set 
+  # https://gitolite.com/gitolite/cookbook.html#v36-variation-repo-specific-hooks advises to set
   # LOCAL_CODE to store repo-specific hooks
   # /hooks/multi-hook-driver
   # my $driver = $rc{MULTI_HOOK_DRIVER} || "$rc{LOCAL_CODE}/hooks/multi-hook-driver";
@@ -86,7 +84,7 @@ https://github.com/vanderlee/gitolite-hooks/blob/master/post-receive.deploy
   # option hook.post-receive = post-receive
 
   # hooks deployed to every  repo
-  # TODO remove it on 
+  # TODO remove it on
   commonHooks = [
     # "${pkgs.gitolite-hooks}/hooks/repo-specific/post-receive"
   ];

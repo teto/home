@@ -52,7 +52,7 @@ local opts = {
         list = {
             selection = {
                 -- annoying when it matches a long one
-				-- how to cancel ?
+                -- how to cancel ?
                 preselect = true,
 
                 -- When `true`, inserts the completion item automatically when selecting it

@@ -1,6 +1,4 @@
-/*
-can test RAG, agents from end to end
-*/
+# can test RAG, agents from end to end
 {
   lib,
   fetchFromGitHub,
