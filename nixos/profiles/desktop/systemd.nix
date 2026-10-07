@@ -29,40 +29,38 @@
   # force restart / do it only if enabled
   services.systemd-resolved.stopIfChanged = lib.mkForce true;
 
-
-    # "desktop-notification@" = {
-    #   description = "Log success for %i";
-    #
-    #
-    #   Service = {
-    #     Type = "oneshot";
-    #     SyslogIdentifier = "notify-%i";
-    #     ExecStart =
-    #       let
-    #         myScript = pkgs.writeScript "notify-and-wait" ''
-    #           #!${pkgs.stdenv.shell}
-    #
-    #           notify_and_wait() {
-    #             ADDRESS=$1
-    #             USERID=''${ADDRESS#/run/user/}
-    #             # gnome-shell doesn't respect the timeout from notify-send,
-    #             # hence the additional timeout command to make sure we exit
-    #             # before the end of time
-    #             if [ "$result" = "interrupt" ]; then
-    #               /run/wrappers/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" \
-    #                 ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning "Interrupted" "Process failed"
-    #               exit 1
-    #             fi
-    #           }
-    #           for ADDRESS in /run/user/*; do
-    #             notify_and_wait "$ADDRESS" &
-    #           done
-    #         '';
-    #         # %n => full unit name
-    #       in
-    #       "${myScript} %n";
-    #   };
-    # };
-
+  # "desktop-notification@" = {
+  #   description = "Log success for %i";
+  #
+  #
+  #   Service = {
+  #     Type = "oneshot";
+  #     SyslogIdentifier = "notify-%i";
+  #     ExecStart =
+  #       let
+  #         myScript = pkgs.writeScript "notify-and-wait" ''
+  #           #!${pkgs.stdenv.shell}
+  #
+  #           notify_and_wait() {
+  #             ADDRESS=$1
+  #             USERID=''${ADDRESS#/run/user/}
+  #             # gnome-shell doesn't respect the timeout from notify-send,
+  #             # hence the additional timeout command to make sure we exit
+  #             # before the end of time
+  #             if [ "$result" = "interrupt" ]; then
+  #               /run/wrappers/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" \
+  #                 ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning "Interrupted" "Process failed"
+  #               exit 1
+  #             fi
+  #           }
+  #           for ADDRESS in /run/user/*; do
+  #             notify_and_wait "$ADDRESS" &
+  #           done
+  #         '';
+  #         # %n => full unit name
+  #       in
+  #       "${myScript} %n";
+  #   };
+  # };
 
 }

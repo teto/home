@@ -44,7 +44,6 @@
     "desktop-notification@" = {
       Unit.Description = "Log success for %i";
 
-
       Service = {
         Type = "oneshot";
         SyslogIdentifier = "notify-%i";

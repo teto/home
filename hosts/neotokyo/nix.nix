@@ -14,7 +14,6 @@
     keep-failed = false;
     keep-derivations = true; # Idem
 
-
     secret-key-files = config.sops.secrets."nix-signing-key".path;
     # TODO read from file ?
     trusted-public-keys = [

@@ -1,4 +1,9 @@
-{ lib, pkgs, flakeSelf, ... }:
+{
+  lib,
+  pkgs,
+  flakeSelf,
+  ...
+}:
 {
   systemPackages =
     let
@@ -64,7 +69,7 @@
     hass    8123/tcp
   '';
 
-etc."security/limits.conf".text = ''
+  etc."security/limits.conf".text = ''
     #[domain]        [type]  [item]  [value]
     teto  soft  core  unlimited
     teto  soft  memlock 128

@@ -491,7 +491,6 @@
             pass-perso
             memento-whisper
             sway-scratchpad
-            gpt4all-cuda
             termscp-matt
             pimsync-dev
             # rsync-yazi
@@ -526,11 +525,6 @@
       # those help debug in repl
       inherit (self) inputs;
       inherit tetosPkgs;
-
-      # Tell Nix what schemas to use.
-      schemas = self.inputs.flake-schemas.schemas
-      # // other-schemas.schemas
-      ;
 
       # TODO import from hosts/ via lib.importFiles
       # autoload from hosts

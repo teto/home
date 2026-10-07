@@ -39,7 +39,6 @@
     # };
   };
 
-
   hosts = {
     # hickory-dns can't query separately jedha.home as it's the zone for my services
     # coredns apparently can

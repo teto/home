@@ -24,7 +24,7 @@ require('feed').setup({
             tags = { 'japanese', 'nhk' },
         },
         {
-		 'https://www.kotoba.fr/feed/',
+            'https://www.kotoba.fr/feed/',
             -- 'https://nhkeasier.com/feed/?no-furiganas',
             -- 'https://nhkeasier.com/feed/',
             name = 'Kotoba.fr',

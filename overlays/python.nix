@@ -9,6 +9,10 @@ rec {
         python3Packages = final;
       };
 
+      inspect-ai = final.callPackage ../by-name/in/inspect-ai/package.nix {
+        python3Packages = final;
+      };
+
       # kergen = final.callPackage ./pkgs/kergen.nix { };
 
       # mininet-with-man = final.mininet.override ({ withManpage = true; });

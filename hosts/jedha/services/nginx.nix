@@ -41,11 +41,12 @@ in
   # I can set the resolver here resolver 127.0.0.1 [::1]:5353;
   # I could use socket paths as well
   # service=name
-  #    enables resolving of DNS SRV records and sets the service name 
-  streamConfig = let
-    piperSrv = config.services.wyoming.piper.servers.fr;
-    whisperSrv = config.services.wyoming.faster-whisper.servers.medium-fr;
-  in
+  #    enables resolving of DNS SRV records and sets the service name
+  streamConfig =
+    let
+      piperSrv = config.services.wyoming.piper.servers.fr;
+      whisperSrv = config.services.wyoming.faster-whisper.servers.medium-fr;
+    in
     # piper on 10200 a priori
     #         fail_timeout 10s;
     lib.optionalString piperSrv.enable ''
@@ -71,13 +72,13 @@ in
       serverAliases = mkServerAliases "cache";
 
       locations."/".extraConfig = ''
-      proxy_pass http://127.0.0.1:5000;
-      #   proxy_set_header Host $host;
-      #   proxy_redirect http:// https://;
-      #   proxy_http_version 1.1;
-      #   proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-      #   proxy_set_header Upgrade $http_upgrade;
-      #   proxy_set_header Connection $connection_upgrade;
+        proxy_pass http://127.0.0.1:5000;
+        #   proxy_set_header Host $host;
+        #   proxy_redirect http:// https://;
+        #   proxy_http_version 1.1;
+        #   proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        #   proxy_set_header Upgrade $http_upgrade;
+        #   proxy_set_header Connection $connection_upgrade;
       '';
     };
 

@@ -1,52 +1,49 @@
-/*
-*/
 { config, flakeSelf, ... }:
 {
   services.resolved = {
-  # conflicts with adguardhome
-  enable = true;
+    # conflicts with adguardhome
+    enable = true;
 
-  # ideally set it to false ?
-  settings.Resolve = {
-    DNSSEC = "no"; # "allow-downgrade";
+    # ideally set it to false ?
+    settings.Resolve = {
+      DNSSEC = "no"; # "allow-downgrade";
 
-    # conflicts with avahi
-    MulticastDNS = true;
-# "192.168.1.83:153";
-    DNS = "127.0.0.1:53"; # defer to adguardhome ? port
+      # conflicts with avahi
+      MulticastDNS = true;
+      # "192.168.1.83:153";
+      DNS = "127.0.0.1:53"; # defer to adguardhome ? port
 
-    # Domains=~.
-    # if "yes" resolved exposes a stub listener at "127.0.0.53"
-    # but resolv.conf settings are tailored for the sub listener !
-    DNSStubListener = "no";
-    # use the ones obtained by dhcp ?
-    # UseDomains = false;
-    # Domains = [ ]; # networking.domain
+      # Domains=~.
+      # if "yes" resolved exposes a stub listener at "127.0.0.53"
+      # but resolv.conf settings are tailored for the sub listener !
+      DNSStubListener = "no";
+      # use the ones obtained by dhcp ?
+      # UseDomains = false;
+      # Domains = [ ]; # networking.domain
 
-    # TODO fallback on
-    # man resolved.conf
-    FallbackDNS = [
-      # we could use _gateway (solved by mymachines ?) depending on the order in nsswitch
-      "192.168.1.254"
-    ];
+      # TODO fallback on
+      # man resolved.conf
+      FallbackDNS = [
+        # we could use _gateway (solved by mymachines ?) depending on the order in nsswitch
+        "192.168.1.254"
+      ];
 
-    # this is windows resolution system
-    LLMNR = false; # blocks .local ?
-    # ReadEtcHosts=no,
+      # this is windows resolution system
+      LLMNR = false; # blocks .local ?
+      # ReadEtcHosts=no,
 
-  # "resolve";
+      # "resolve";
 
-  #  *.dns-delegate files may be used to delegate DNS lookups in specific domains to specific DNS servers. See "systemd.dns-delegate"
-  # thus I should run a DNS server on local network for jedha stuff and so on
-  # services.resolved.dnsDelegates.jedha-home = {
-  };
-  dnsDelegates.jedha = {
-    Delegate = {
-      # 153
+      #  *.dns-delegate files may be used to delegate DNS lookups in specific domains to specific DNS servers. See "systemd.dns-delegate"
+      # thus I should run a DNS server on local network for jedha stuff and so on
+      # services.resolved.dnsDelegates.jedha-home = {
+    };
+    dnsDelegates.jedha = {
+      Delegate = {
+        # 153
         DNS = "192.168.1.83:${toString flakeSelf.nixosConfigurations.jedha.config.services.hickory-dns.settings.listen_port}";
         Domains = [ "jedha.home" ];
       };
-  };
+    };
   };
 }
-

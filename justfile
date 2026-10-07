@@ -316,4 +316,4 @@ inspect-current-generation:
 # install awtrix-ng firmware
 # https://blueforcer.github.io/awtrix-ng/esp32/getting-started/flashing/
 flash-ulanzi-tc001:
-  esptool --chip esp32 --port /dev/ttyUSB0 --baud 460800 write-flash 0x0 usb-awtrix-ng-4mb.bin
+    esptool --chip esp32 --port /dev/ttyUSB0 --baud 460800 write-flash 0x0 usb-awtrix-ng-4mb.bin

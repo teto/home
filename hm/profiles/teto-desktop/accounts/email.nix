@@ -37,7 +37,6 @@ let
     signByDefault = false;
   };
 
-
   # foundermail = {
   #   userName = secrets.accounts.mail.foundermail.address;
   #   realName = "Matt";

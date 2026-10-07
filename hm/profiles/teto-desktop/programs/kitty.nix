@@ -33,13 +33,12 @@
     enable_audio_bell = false;
 
     # does not support list
-    include = 
+    include =
       # generated. Path must match the one in wallust.toml
-      "./manual.conf"
-    ;
+      "./manual.conf";
 
     extraConfig = ''
       include "themes/wallust.conf"
-      '';
+    '';
   };
 }

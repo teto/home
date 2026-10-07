@@ -1,4 +1,2 @@
-{
-  # copy from home-assistant
-
-}
+{ home-assistant }:
+home-assistant

@@ -18,7 +18,7 @@
   enable = true;
   mime.enable = true;
 
-  # replace the generated vicinae config with a manual one 
+  # replace the generated vicinae config with a manual one
   configFile."vicinae/settings.json".enable = false;
   # You can still refer to the generated config via:
   configFile."vicinae/generated.json".source = config.xdg.configFile."vicinae/settings.json".source;

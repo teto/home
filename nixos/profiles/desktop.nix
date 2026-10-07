@@ -14,7 +14,7 @@ let
       # TODO replace the traced path with lib.fileset.toSource once this loader
       # can receive a path rooted in the flake source.
 
-      inputs =  args // {
+      inputs = args // {
         inputs = flakeSelf.inputs;
       };
       transformer = [

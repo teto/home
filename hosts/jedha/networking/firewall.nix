@@ -23,7 +23,7 @@
     8000 # http stream
   ];
 
-  allowedUDPPorts = [ 
+  allowedUDPPorts = [
     153 # hickory-dns
   ];
 

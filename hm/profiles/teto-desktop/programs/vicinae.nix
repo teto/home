@@ -19,8 +19,8 @@ in
   # the website doesn't describe options, one has to checkout:
   # vicinae config default | less
   settings = {
-    imports = [ 
-      # "${config.xdg.configHome}/vicinae/manual.json" 
+    imports = [
+      # "${config.xdg.configHome}/vicinae/manual.json"
     ];
     # Supports "navigate_back" or "close_window"
     escape_key_behavior = "navigate_back";
@@ -84,7 +84,6 @@ in
     #         "files:search"
     # ],
   };
-
 
   # Ideally there would be one for monitors but not yet
   extensions =

@@ -284,7 +284,6 @@ in
           Menu = "exec ${rofi}/bin/rofi -modi 'drun' -show drun";
           "${mod}+Tab" = "exec ${pkgs.vicinae}/bin/vicinae toggle";
 
-
           # TODO try with flameshot again ?
           # "--release Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy area";
           "--release Print" = "exec ${pkgs.flameshot}/bin/flameshot gui";

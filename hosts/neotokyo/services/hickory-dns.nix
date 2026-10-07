@@ -1,9 +1,8 @@
 /*
-small reminder about syntax
+  small reminder about syntax
 
-- "@" is the zone’s root
-- "IN" means "INTERNET"
-
+  - "@" is the zone’s root
+  - "IN" means "INTERNET"
 */
 {
   pkgs,
@@ -20,18 +19,18 @@ small reminder about syntax
   settings = {
     # Bind separately from systemd-resolved's 127.0.0.53 stub.
     # listen_addrs_ipv4 = [
-    #   # "127.0.0.1" 
+    #   # "127.0.0.1"
     #   # unbinding conflicts with resolved ?
-    #   # "0.0.0.0" 
+    #   # "0.0.0.0"
     #   # routerIp
     # ];
     # listen_addrs_ipv6 = [ ];
     listen_port = 153;
 
     # With only an allow list, every other client is refused
-    # allow_networks = [ 
+    # allow_networks = [
     #   "127.0.0.0/8"
-    #   "192.168.1.0/24" 
+    #   "192.168.1.0/24"
     # ];
 
     # Exact-name zones avoid taking authority over unrelated .home names.
@@ -40,51 +39,54 @@ small reminder about syntax
     # https://hickory-dns.org/config/#running-the-server
     # A forwarder is an External zone with a forward store. Use zone = "." to forward every query, or a narrower name to forward only that part of the tree.
 
-
-# [[zones.stores]]
-# type = "recursor"
-# roots = "default/root.zone"
+    # [[zones.stores]]
+    # type = "recursor"
+    # roots = "default/root.zone"
     zones = [
 
       # use stevenblack-blocklist
-      # blocklist est au format de 
+      # blocklist est au format de
       {
         zone = ".";
         zone_type = "External";
         stores = [
           {
-          type = "blocklist";
-          lists = [
-            "${pkgs.stevenblack-blocklist}/hosts"
-          ];
-          wildcard_match = true;
-          min_wildcard_depth = 2;
-          sinkhole_ipv4 = "0.0.0.0";
-          # sinkhole_ipv6 = "::ffff:c0:0:2:1";
-          block_message = "This query has been blocked by the DNS server";
-          log_clients = false;
+            type = "blocklist";
+            lists = [
+              "${pkgs.stevenblack-blocklist}/hosts"
+            ];
+            wildcard_match = true;
+            min_wildcard_depth = 2;
+            sinkhole_ipv4 = "0.0.0.0";
+            # sinkhole_ipv6 = "::ffff:c0:0:2:1";
+            block_message = "This query has been blocked by the DNS server";
+            log_clients = false;
           }
 
           {
 
-          type = "forward";
-          # Use the router directly, never /etc/resolv.conf (which points here).
-          name_servers = [
-            {
-              # use gandi NS server ?
-              ip = "217.70.177.39";
-              trust_negative_responses = true;
-              connections = [
-                { protocol.type = "udp"; }
-                { protocol.type = "tcp"; }
-              ];
-            }
-          ];
+            type = "forward";
+            # Use the router directly, never /etc/resolv.conf (which points here).
+            name_servers = [
+              {
+                # use gandi NS server ?
+                ip = "217.70.177.39";
+                trust_negative_responses = true;
+                connections = [
+                  { protocol.type = "udp"; }
+                  { protocol.type = "tcp"; }
+                ];
+              }
+            ];
           }
         ];
       }
 
-      (let fqdn = config.networking.fqdn; in {
+      (
+        let
+          fqdn = config.networking.fqdn;
+        in
+        {
           zone = fqdn;
           zone_type = "Primary";
           # Source of Authority is mandatory ?
@@ -100,34 +102,37 @@ small reminder about syntax
           #         1800       ; Nouvelle tentative (Retry)
           #         604800     ; Expiration (Expire)
           #         86400 )    ; TTL négatif minimum (Minimum TTL)
-          file = let 
+          file =
+            let
 
-            # use @ to refer to current thanks to $ORIGIN
-              genZone = name: pkgs.writeText "${name}.zone" ''
-                    $ORIGIN ${name}.
-                    $TTL 300
-                    @ IN SOA ns.${name}. hostmaster.${name}. (1 3600 600 86400 300)
-                    @ IN NS ns.${name}.
-                    @  IN A ${secrets.jakku.ipv4}
+              # use @ to refer to current thanks to $ORIGIN
+              genZone =
+                name:
+                pkgs.writeText "${name}.zone" ''
+                  $ORIGIN ${name}.
+                  $TTL 300
+                  @ IN SOA ns.${name}. hostmaster.${name}. (1 3600 600 86400 300)
+                  @ IN NS ns.${name}.
+                  @  IN A ${secrets.jakku.ipv4}
 
-                    blog           CNAME   ${name}.
-                    www            CNAME   ${name}.
-                    nixbot         CNAME   ${name}.
-                    status         CNAME   ${name}.
-                    cache          CNAME   ${name}.
-                  '';
-                                      # @               SRV     .
+                  blog           CNAME   ${name}.
+                  www            CNAME   ${name}.
+                  nixbot         CNAME   ${name}.
+                  status         CNAME   ${name}.
+                  cache          CNAME   ${name}.
+                '';
+              # @               SRV     .
 
-#                   ; _Service._Proto.Name TTL Class SRV Priority Weight Port Target
-# server          SRV     1 1 443 alias
+              #                   ; _Service._Proto.Name TTL Class SRV Priority Weight Port Target
+              # server          SRV     1 1 443 alias
 
-                    # @ IN CNAME piper.jedha.home. jedha.home.
-                    # @ IN CNAME faster-whisper.jedha.home. jedha.home.
+              # @ IN CNAME piper.jedha.home. jedha.home.
+              # @ IN CNAME faster-whisper.jedha.home. jedha.home.
 
-          in 
+            in
             genZone fqdn;
-        })
+        }
+      )
     ];
   };
 }
-
