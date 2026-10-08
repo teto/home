@@ -542,9 +542,9 @@
                     config.tetos.withSecrets = lib.mkForce false;
                   }
                 ];
-                # specialArgs = {
-                #   withSecrets = false;
-                # };
+                specialArgs = {
+                  withSecrets = false;
+                };
               }
             );
 

@@ -4,7 +4,6 @@
   secrets,
   lib,
   withSecrets,
-  pkgs,
   ...
 }:
 let
@@ -41,7 +40,6 @@ in
     certs =
       let
         fqdn = config.networking.fqdn;
-        # fqdn = secrets.jakku.fqdn;
       in
       lib.optionalAttrs withSecrets {
         "blog.${fqdn}" = {

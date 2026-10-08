@@ -54,7 +54,7 @@
             "300"
           ];
           serviceConfig = {
-            # 
+            #
             # EnvironmentFile = config.sops.templates."speech-to-phrase/environment".path;
             Group = "speech-to-phrase";
             StateDirectory = "speech-to-phrase";
