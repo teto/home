@@ -23,12 +23,27 @@
     "/share/applications"
   ];
 
+  etc."codex/config.toml".text = ''
+    check_for_update_on_startup = false
+    developer_instructions = """
+    Use rg for searching files.
+    Keep responses concise.
+    Run relevant checks after modifying code.
+    """
+  '';
+
   etc."codex/requirements.toml".text = ''
     check_for_update_on_startup = false
   '';
 
   # Keep authored skills editable outside the Nix store.
   etc."codex/skills".source = "/home/teto/perso/skills";
+
+  # You can test the command with
+  # codex execpolicy check --pretty --rules ~/.codex/rules/default.rules -- gh pr view 7888
+  # https://learn.chatgpt.com/docs/agent-configuration/rules
+  etc."codex/rules".source = "/home/teto/perso/codex-rules";
+
 
   etc."lemurs/wayland/sway-systemd" = {
     mode = "755";

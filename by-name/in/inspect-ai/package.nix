@@ -6,19 +6,6 @@
 }:
 
 let
-  # The fork requires a newer release than pinned Nixpkgs provides.
-  nest-asyncio2 = python3Packages.nest-asyncio2.overridePythonAttrs (old: rec {
-    version = "1.7.4";
-    src = fetchFromGitHub {
-      owner = "Chaoses-Ib";
-      repo = "nest-asyncio2";
-      tag = "v${version}";
-      hash = "sha256-qNetaOdR4icUXWncat4vITwnjmx5MhAgUz0t61Bvztc=";
-    };
-    meta = old.meta // {
-      changelog = "https://github.com/Chaoses-Ib/nest-asyncio2/releases/tag/v${version}";
-    };
-  });
   zipfile-zstd = python3Packages.callPackage ./zipfile-zstd.nix { };
   tokenizerUrl = "https://openaipublic.blob.core.windows.net/encodings/o200k_base.tiktoken";
   tokenizer = fetchurl {
