@@ -5,9 +5,9 @@
 # alias nf='nix flake'
 # alias nb1='nix build --option builders "$TETOS_BUILDER_NIXCOMMUNITY" -j0'
 # alias n1='nix develop --option builders "$TETOS_BUILDER_NIXCOMMUNITY" -j0'
-# alias n2='nix develop --option builders "$TETOS_1" -j0'
 
 alias J=jjui
+
 #
 alias nrc="nix repl --expr 'import <nixpkgs> { config.cudaSupport = true; config.allowUnfree = true; }'"
 
@@ -35,6 +35,8 @@ alias nl="nix log "
 # alias jctl="journalctl -b0"
 
 # git aliases
+alias gc='git commit --verbose'
+alias gca='git commit --verbose --all --no-ed'
 alias gap="git add -p"
 alias grc="git rebase --continue"
 alias gra="git rebase --abort"
@@ -74,14 +76,6 @@ alias gpf="git push --force-with-lease"
 # }}}
 
 # oftenly used programs {{{
-# alias c="cat"
-# alias v="nvim"
-# alias vf="nvim \$(fzf)"
-# view uses vim as a pager
-# alias l="nvim +view"
-# alias s="sxiv"
-# parce que apvlv est plus libre que zathura
-# alias z="apvlv"
 alias q="qutebrowser"
 # }}}
 
@@ -93,5 +87,5 @@ alias nm="nm -l"
 
 # kitty aliases {{{
 alias ks="kitten ssh"
-alias kcat="kitten icat"
+alias kat="kitten icat"
 # }}}

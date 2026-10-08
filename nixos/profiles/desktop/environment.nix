@@ -2,6 +2,7 @@
   lib,
   pkgs,
   flakeSelf,
+  withSecrets,
   ...
 }:
 {
@@ -13,9 +14,9 @@
     in
     [
       pkgs.noto-fonts-cjk-sans
-      resticWrapper
-      flakeSelf.nixosConfigurations.neotokyo.config.services.restic.backups.immich-db-to-backblaze.generatedWrapper
-    ];
+
+    ]
+    ++ lib.optional withSecrets resticWrapper;
 
   pathsToLink = [
     "/share/xdg-desktop-portal"

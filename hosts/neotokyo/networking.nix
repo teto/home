@@ -2,7 +2,7 @@
   lib,
   # pkgs,
   secrets,
-  flakeSelf,
+  # flakeSelf,
   # , secretsFolder
   config,
   withSecrets,
@@ -11,20 +11,13 @@
 let
   hickoryPort = config.services.hickory-dns.settings.listen_port;
 in
-lib.optionalAttrs (lib.debug.traceValFn (a: "SECRETS ? ${toString a}") withSecrets) {
-  domain = secrets.jakku.domain;
-
-}
-// {
-
+{
   _imports = [
-    # flakeSelf.nixosProfiles.wireguard
   ];
 
-  inherit (secrets.jakku) hostName domain;
   # TODO fetch from secrets
-  # hostName = secrets.jakku.hostName;
-  # domain =
+  hostName = "neokoyo-no-secrets";
+  domain = "domain-no-secrets";
 
   # if withSecrets then secrets.jakku.domain else "toto";
 
@@ -72,3 +65,13 @@ lib.optionalAttrs (lib.debug.traceValFn (a: "SECRETS ? ${toString a}") withSecre
 
   };
 }
+# override hostname if secrets enabled
+//
+  lib.optionalAttrs
+    (lib.debug.traceValFn (
+      a: "neotokyo SECRETS ? ${toString a}. If yes overriding hostName"
+    ) withSecrets)
+    {
+      inherit (secrets.jakku) hostName domain;
+
+    }

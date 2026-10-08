@@ -92,7 +92,7 @@ in
         # own module
         flakeSelf.nixosModules.tetos
         {
-            tetos.withSecrets = true;
+            tetos.withSecrets = withSecrets;
         }
 
       ]
@@ -219,4 +219,30 @@ in
   ignoreBroken =
     x: builtins.traceVerbose "${x.name} disabled because broken it used to be broken" pkgs.hello;
 
+
+  genYaziVFSServer =
+    # value is one of nixosConfigurations.<ENTRY>
+    value:
+    let
+      mcfg = value.config;
+      sshCfg = mcfg.services.openssh;
+      name = mcfg.networking.hostName;
+    in
+    builtins.trace "YAZI config for ${name}"
+
+      # header = ''Match host="${mcfg.networking.hostName},${mcfg.networking.domain}${lib.optionalString (mcfg.tetos.wireguard.enable or false) ",${mcfg.networking.hostName}.vpn"}"'';
+      # assumption ? or check/warn it has it ?
+      # identityFile = "${secretsFolder}/ssh/id_rsa";
+      # host = "${mcfg.networking.hostName}";
+      # .${mcfg.networking.domain}"
+      ''
+        [sftp.${name}]
+        host = "${mcfg.networking.hostName}"
+        user = "teto"
+        port = ${toString (builtins.head sshCfg.ports)}
+      ''
+  # relies on SSH_AUTH_SOCK by default
+  # key_file = "~/.ssh/id_rsa"
+  # or identity_agent
+  ;
 }
