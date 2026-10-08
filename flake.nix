@@ -85,7 +85,7 @@
 
     # bash plugin to replace readline
     flyline = {
-      url = "github:HalFrgrd/flyline";
+      url = "github:HalFrgrd/flyline?ref=pull/974/head";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -151,12 +151,6 @@
 
     memento-dev = {
       url = "github:ripose-jp/Memento";
-      flake = false;
-    };
-
-    meli-src = {
-      url = "git+https://git.meli-email.org/meli/meli.git";
-      # url = "git+https://git.meli-email.org/meli/meli.git?ref=refs/pull/768/head";
       flake = false;
     };
 
@@ -488,7 +482,7 @@
             pass-import-high-password-length
             jmdict
             meli-git
-            pass-perso
+            # pass-perso
             memento-whisper
             sway-scratchpad
             termscp-matt
@@ -633,8 +627,10 @@
         local = import ./overlays/pkgs/default.nix;
         haskell = import ./overlays/haskell.nix;
         overrides = import ./overlays/overrides.nix {
-          inherit secretsFolder lib;
-          flakeSelf = self;
+          inherit 
+            # secretsFolder
+            lib;
+            flakeSelf = self;
         };
         python = import ./overlays/python.nix;
         lua = import ./overlays/lua.nix;

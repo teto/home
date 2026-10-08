@@ -718,15 +718,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1789934755,
-        "narHash": "sha256-bKFTAAN+A3Po0PnVv1XYQyLWqBQT3btYUUuFu7jcCXA=",
+        "lastModified": 1788090263,
+        "narHash": "sha256-YY3NjnZ43hfSZ7Opo/AgkJsFxbGOIBFOTwzLU1BFs/4=",
         "owner": "HalFrgrd",
         "repo": "flyline",
-        "rev": "3b9e900f628a9da1211030016ca765fdfa2533dc",
+        "rev": "aae68bb4acb43d7462bbe4abffedd6e2b10bd889",
         "type": "github"
       },
       "original": {
         "owner": "HalFrgrd",
+        "ref": "pull/974/head",
         "repo": "flyline",
         "type": "github"
       }
@@ -1155,22 +1156,6 @@
         "owner": "Bilal2453",
         "repo": "luvit-meta",
         "type": "github"
-      }
-    },
-    "meli-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1791201488,
-        "narHash": "sha256-5uJqnYxNO3iFbwDGwMU57zk7Q8TufvllYliqAf0sHvY=",
-        "ref": "refs/heads/master",
-        "rev": "14640216cae074c0d4c6340c62854605f9186737",
-        "revCount": 3330,
-        "type": "git",
-        "url": "https://git.meli-email.org/meli/meli.git"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://git.meli-email.org/meli/meli.git"
       }
     },
     "memento-dev": {
@@ -2159,7 +2144,6 @@
         "llama-cpp": "llama-cpp",
         "luals-busted-addon": "luals-busted-addon",
         "luals-luassert-addon": "luals-luassert-addon",
-        "meli-src": "meli-src",
         "memento-dev": "memento-dev",
         "mokuro": "mokuro",
         "mujmap": "mujmap",

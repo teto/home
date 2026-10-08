@@ -5,6 +5,7 @@
   ...
 }:
 {
+  enable = true;
   includes = [
 
     { path = config.xdg.configHome + "/git/manual.gitconfig"; }

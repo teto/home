@@ -205,8 +205,7 @@ in
     # in
     # ["${script}/bin/pass-show" accountName];
     [
-      "${pkgs.pass-perso}/bin/pass-perso"
-      # "${dotfilesPath}/bin/pass-perso"
+      "${lib.getExe pkgs.pass-perso}"
       "show"
       accountName
     ];
