@@ -426,7 +426,7 @@ in
     # (mkIf cfg.teal.enable { programs.neovim.plugins = cfg.teal.plugins; })
 
     (lib.mkIf cfg.fennel.enable {
-      programs.neovim.plugins = with pkgs.vimPlugins; [
+      programs.neovim.plugins = [
 
         # https://github.com/Olical/nfnl
         # vimPlugins.nfnl
@@ -485,6 +485,7 @@ in
     })
 
     {
+      # to make it work without wrapping
       programs.neovim.initLua = lib.mkOrder 0 ''vim.env.PATH = "${lib.makeBinPath config.programs.neovim.extraInitLuaPackages}:"..vim.env.PATH'';
     }
   ];
