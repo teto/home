@@ -402,7 +402,6 @@
                   "mistral-vibe"
 
                   "ec2-api-tools"
-                  "jiten" # japanese software recognition tool / use sudachi instead
                   "google-chrome"
                   # "slack"
                   "steam"

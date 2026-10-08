@@ -29,8 +29,10 @@ local function update_cursorline()
         local mappings = {}
         for mapping in vim.wo[win].winhighlight:gmatch('[^,]+') do
             if mapping:match('^CursorLine:') then
-                if mapping ~= 'CursorLine:DiagnosticCursorLineError'
-                    and mapping ~= 'CursorLine:DiagnosticCursorLineWarn' then
+                if
+                    mapping ~= 'CursorLine:DiagnosticCursorLineError'
+                    and mapping ~= 'CursorLine:DiagnosticCursorLineWarn'
+                then
                     saved_mappings[win] = mapping
                 end
             else

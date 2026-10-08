@@ -1,6 +1,4 @@
 {
-  config,
-  pkgs,
   lib,
   # secrets, # for email
   ...
@@ -11,7 +9,7 @@
   # home.file.".ssh/allowed_signers".text = "* ${builtins.readFile ../../perso/keys/id_rsa.pub}";
 
   programs.git = {
-    enable = true;
+    # enable = true;
 
     includes = [
       # everything under ~/yourworkfolder/ is company code, so use the other user/email/gpg key, etc

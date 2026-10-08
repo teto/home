@@ -1,7 +1,9 @@
 {
 
   enable = true;
-  enableGitIntegration = true;
+
+  # set pager
+  enableGitIntegration = false;
   enableJujutsuIntegration = true;
   # options = {
   #   decorations = {

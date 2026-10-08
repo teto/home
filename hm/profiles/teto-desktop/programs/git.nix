@@ -36,4 +36,7 @@
     key = "88A4D2369454E51E"; # new key
   };
 
+  # lib.hm.git.diffPagerConfig pagerCommand
+  # iniContent =
+
 }
