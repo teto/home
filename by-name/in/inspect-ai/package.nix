@@ -1,11 +1,24 @@
 {
   lib,
-  fetchPypi,
+  fetchFromGitHub,
   fetchurl,
   python3Packages,
 }:
 
 let
+  # The fork requires a newer release than pinned Nixpkgs provides.
+  nest-asyncio2 = python3Packages.nest-asyncio2.overridePythonAttrs (old: rec {
+    version = "1.7.4";
+    src = fetchFromGitHub {
+      owner = "Chaoses-Ib";
+      repo = "nest-asyncio2";
+      tag = "v${version}";
+      hash = "sha256-qNetaOdR4icUXWncat4vITwnjmx5MhAgUz0t61Bvztc=";
+    };
+    meta = old.meta // {
+      changelog = "https://github.com/Chaoses-Ib/nest-asyncio2/releases/tag/v${version}";
+    };
+  });
   zipfile-zstd = python3Packages.callPackage ./zipfile-zstd.nix { };
   tokenizerUrl = "https://openaipublic.blob.core.windows.net/encodings/o200k_base.tiktoken";
   tokenizer = fetchurl {
@@ -18,12 +31,14 @@ python3Packages.buildPythonPackage rec {
   version = "0.3.277";
   pyproject = true;
 
-  # The PyPI source release includes the prebuilt Inspect View frontend.
-  src = fetchPypi {
-    pname = "inspect_ai";
-    inherit version;
-    hash = "sha256-PpsBIB1KSDgpv00JKzuGZbxBCCWKyL0EPE+gkPBnNJw=";
+  src = fetchFromGitHub {
+    owner = "teto";
+    repo = "inspect_ai";
+    rev = "ba238b00c6da2b61da97577bf839370b1674e847";
+    hash = "sha256-OKFzT8fNxKtineTWKRZrTkeuJbmZntgjl79g5CnZTu0=";
   };
+
+  env.SETUPTOOLS_SCM_PRETEND_VERSION = version;
 
   build-system = with python3Packages; [
     setuptools
@@ -75,7 +90,6 @@ python3Packages.buildPythonPackage rec {
     ]
     ++ lib.optional (python3Packages.pythonOlder "3.14") zipfile-zstd;
 
-  # Upstream does not include its test suite in the source release.
   # Exercise evaluation, scoring, log serialization, and the packaged viewer.
   doInstallCheck = true;
   installCheckPhase = ''
