@@ -1,11 +1,83 @@
 {
   lib,
   fetchFromGitHub,
+  fetchPypi,
   fetchurl,
   python3Packages,
 }:
 
 let
+  oslash = python3Packages.buildPythonPackage rec {
+    pname = "oslash";
+    version = "0.6.3";
+    pyproject = true;
+    src = fetchPypi {
+      pname = "OSlash";
+      inherit version;
+      hash = "sha256-horrWKZW8u07c9ndar44eyC3T8lBPT6GU7YVsVv3KPM=";
+    };
+    build-system = [ python3Packages.setuptools ];
+    dependencies = [ python3Packages.typing-extensions ];
+    postPatch = ''
+      # The deprecated setup.py test runner is unnecessary for wheel builds.
+      substituteInPlace setup.py --replace-fail "setup_requires=['pytest-runner']," ""
+      substituteInPlace versioneer.py \
+        --replace-fail 'configparser.SafeConfigParser()' 'configparser.ConfigParser()' \
+        --replace-fail 'parser.readfp(f)' 'parser.read_file(f)'
+    '';
+    pythonImportsCheck = [ "oslash" ];
+    meta.license = lib.licenses.mit;
+  };
+  jsonrpcserver = python3Packages.buildPythonPackage rec {
+    pname = "jsonrpcserver";
+    version = "5.0.9";
+    pyproject = true;
+    src = fetchPypi {
+      inherit pname version;
+      hash = "sha256-px+yz6GFQcgJNfYJh/knVdlNdBQSSMdDiEe5bu5cRII=";
+    };
+    build-system = [ python3Packages.setuptools ];
+    dependencies = [
+      python3Packages.jsonschema
+      oslash
+    ];
+    pythonImportsCheck = [ "jsonrpcserver" ];
+    meta.license = lib.licenses.mit;
+  };
+  inspectSrc = fetchFromGitHub {
+    owner = "teto";
+    repo = "inspect_ai";
+    # teto/fixes
+    rev = "f7ab982a0f0a0aa1e0da4269fa10d0df4804acf7";
+    hash = "sha256-k344jcf5DQo9Z73I84fsZgo6fI2+L9EMML7oVZzCdug=";
+  };
+  inspect-sandbox-tools = python3Packages.buildPythonPackage {
+    pname = "inspect-sandbox-tools";
+    version = "1.2.1";
+    pyproject = true;
+    src = inspectSrc;
+    sourceRoot = "source/src/inspect_sandbox_tools";
+    build-system = [ python3Packages.setuptools ];
+    dependencies = with python3Packages; [
+      aiohttp
+      httpx
+      jsonrpcserver
+      packaging
+      pydantic
+      returns
+      semver
+      tenacity
+      psutil
+    ];
+    pythonImportsCheck = [ "inspect_sandbox_tools._cli.main" ];
+    doInstallCheck = true;
+    installCheckPhase = ''
+      runHook preInstallCheck
+      "$out/bin/inspect-sandbox-tools" --help > /dev/null
+      runHook postInstallCheck
+    '';
+    meta.mainProgram = "inspect-sandbox-tools";
+  };
   # These run inside the target sandbox, whose architecture/libc may differ
   # from the host. Keep their bytes intact for upstream digest verification.
   sandboxTools =
@@ -35,13 +107,7 @@ python3Packages.buildPythonPackage rec {
   version = "0.3.277-unstable-2026-10-09";
   pyproject = true;
 
-  src = fetchFromGitHub {
-    owner = "teto";
-    repo = "inspect_ai";
-    # teto/fixes
-    rev = "f7ab982a0f0a0aa1e0da4269fa10d0df4804acf7";
-    hash = "sha256-k344jcf5DQo9Z73I84fsZgo6fI2+L9EMML7oVZzCdug=";
-  };
+  src = inspectSrc;
 
   # Python package metadata requires a PEP 440 version.
   env.SETUPTOOLS_SCM_PRETEND_VERSION = lib.replaceStrings [ "-unstable-" "-" ] [ ".dev" "" ] version;
@@ -56,6 +122,10 @@ python3Packages.buildPythonPackage rec {
 
   dontStrip = true;
 
+  postInstall = ''
+    ln -s ${inspect-sandbox-tools}/bin/inspect-sandbox-tools "$out/bin/inspect-sandbox-tools"
+  '';
+
   build-system = with python3Packages; [
     setuptools
     setuptools-scm
@@ -64,6 +134,7 @@ python3Packages.buildPythonPackage rec {
   dependencies =
     with python3Packages;
     [
+      inspect-sandbox-tools
       agent-client-protocol
       aiobotocore
       anyio
@@ -120,6 +191,7 @@ python3Packages.buildPythonPackage rec {
       python ${./smoke-test.py}
     "$out/bin/inspect" --version
     "$out/bin/inspect" eval --help > /dev/null
+    "$out/bin/inspect-sandbox-tools" --help > /dev/null
     runHook postInstallCheck
   '';
 
