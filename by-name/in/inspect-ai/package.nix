@@ -15,17 +15,19 @@ let
 in
 python3Packages.buildPythonPackage rec {
   pname = "inspect-ai";
-  version = "0.3.277";
+  version = "0.3.277-unstable-2026-10-09";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "teto";
     repo = "inspect_ai";
-    rev = "ba238b00c6da2b61da97577bf839370b1674e847";
-    hash = "sha256-OKFzT8fNxKtineTWKRZrTkeuJbmZntgjl79g5CnZTu0=";
+    # teto/fixes
+    rev = "f7ab982a0f0a0aa1e0da4269fa10d0df4804acf7";
+    hash = "sha256-k344jcf5DQo9Z73I84fsZgo6fI2+L9EMML7oVZzCdug=";
   };
 
-  env.SETUPTOOLS_SCM_PRETEND_VERSION = version;
+  # Python package metadata requires a PEP 440 version.
+  env.SETUPTOOLS_SCM_PRETEND_VERSION = lib.replaceStrings [ "-unstable-" "-" ] [ ".dev" "" ] version;
 
   build-system = with python3Packages; [
     setuptools
