@@ -6,6 +6,23 @@
 }:
 
 let
+  # These run inside the target sandbox, whose architecture/libc may differ
+  # from the host. Keep their bytes intact for upstream digest verification.
+  sandboxTools =
+    lib.mapAttrsToList
+      (
+        name: hash:
+        fetchurl {
+          inherit name hash;
+          url = "https://inspect-sandbox-tools.s3.us-east-2.amazonaws.com/${name}";
+        }
+      )
+      {
+        inspect-sandbox-tools-amd64-v33 = "sha256-1Bss05VfDG7IqlCw8uM+hF2/tEdQx/wZKgAqNBmYq8M=";
+        inspect-sandbox-tools-amd64-musl-v33 = "sha256-DhteF25Ro8ZfkqQU7rWXaZlUncSSJr7TS0Pu4Nq8lWs=";
+        inspect-sandbox-tools-arm64-v33 = "sha256-PFRTasadvfkA53uH9ccDCqdrrextGi9lk/cmvwwaZIM=";
+        inspect-sandbox-tools-arm64-musl-v33 = "sha256-jS8RyRjoVAmldewH7bRUh9EOl9tgFD7WwKA+rg+ZvWo=";
+      };
   zipfile-zstd = python3Packages.callPackage ./zipfile-zstd.nix { };
   tokenizerUrl = "https://openaipublic.blob.core.windows.net/encodings/o200k_base.tiktoken";
   tokenizer = fetchurl {
@@ -28,6 +45,16 @@ python3Packages.buildPythonPackage rec {
 
   # Python package metadata requires a PEP 440 version.
   env.SETUPTOOLS_SCM_PRETEND_VERSION = lib.replaceStrings [ "-unstable-" "-" ] [ ".dev" "" ] version;
+
+  postPatch = ''
+    mkdir -p src/inspect_ai/binaries
+    ${lib.concatMapStringsSep "\n" (binary: ''
+      install -m755 ${binary} src/inspect_ai/binaries/${binary.name}
+    '') sandboxTools}
+    (cd src/inspect_ai/binaries && sha256sum -c ../tool/_sandbox_tools_utils/SHA256SUMS)
+  '';
+
+  dontStrip = true;
 
   build-system = with python3Packages; [
     setuptools
