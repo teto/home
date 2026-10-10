@@ -1,16 +1,9 @@
 {
   lib,
-  flakeSelf,
+  # flakeSelf,
+  secretsFolder
 }:
 final: prev:
-let
-  # see https://github.com/NixOS/nixpkgs/issues/29605#issuecomment-332474682
-  # In lib/sources.nix we have "cleanSource = builtins.filterSource cleanSourceFilter;"
-  # TODO builtins.filterSource (p: t: lib.cleanSourceFilter p t && baseNameOf p != "build")
-  # filter-cmake = builtins.filterSource (
-  #   p: t: prev.lib.cleanSourceFilter p t && baseNameOf p != "build"
-  # );
-in
 {
   tetos = {
     # TODO pass icon
@@ -23,11 +16,6 @@ in
     # ${notify-send} --icon=speaker_no_sound -e -h boolean:audio-toggle:1 -h string:synchronous:audio-volume -u low 'Toggling audio';
     # ''
     ;
-
-    # -f --image ~/.config/wallpapers/snow_woods.jpg"
-    # swaylockCmd = prev.writeShellScript "lock-screen" ''
-    #   ${final.swaylock-effects}/bin/swaylock
-    # '';
   };
 
   pass-import-high-password-length = final.passExtensions.pass-import.overrideAttrs {
@@ -43,110 +31,29 @@ in
 
   backblaze-b2-tetos = final.backblaze-b2.override { execName = "b2"; };
 
-  # replaced by native yazi ?
-  # rsync-yazi = myPkgs.yaziPlugins.mkYaziPlugin {
-  #   pname = "rsync.yazi";
-  #   version = "g${self.inputs.rsync-yazi-plugin.shortRev}";
-  #   src = self.inputs.rsync-yazi-plugin;
-  # };
-
-  buildFirefoxXpiAddon =
-    {
-      stdenv ? final.stdenv,
-      fetchurl ? final.fetchurl,
-      pname,
-      version,
-      addonId,
-      url,
-      sha256,
-      meta,
-      ...
-    }:
-    stdenv.mkDerivation {
-      name = "${pname}-${version}";
-
-      inherit meta;
-
-      src = fetchurl { inherit url sha256; };
-
-      preferLocalBuild = true;
-      allowSubstitutes = true;
-
-      passthru = {
-        inherit addonId;
-      };
-
-      buildCommand = ''
-        dst="$out/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
-        mkdir -p "$dst"
-        install -v -m644 "$src" "$dst/${addonId}.xpi"
-      '';
-    };
-
   firefox-addons = import ./firefox/generated.nix {
     # inherit (lib.firefox)       buildFirefoxXpiAddon;
     inherit lib;
-    inherit (final)
-      buildFirefoxXpiAddon
-      fetchurl
-      stdenv
-      ;
+    # inherit (final)
+    #   # fetchurl
+    #   stdenv ;
   };
-
-  immich-no-ad = prev.immich.overrideAttrs {
-    # # overrides
-    # hideBuyButton ? false,
-    postPatch = ''
-      substituteInPlace src/lib/components/shared-components/side-bar/purchase-info.svelte \
-        --replace-fail "showBuyButton = getButtonVisibility()" "showBuyButton = false"
-    '';
-  };
-
-  mujmap-unstable =
-    let
-      mujmap = flakeSelf.inputs.mujmap.packages.${final.stdenv.hostPlatform.system}.mujmap;
-      fixConsoleVersion = ''
-        sed -i \
-          -e '/^features = \["std"\]$/d' \
-          -e 's/, features = \["std"\]//' \
-          Cargo.toml
-        substituteInPlace Cargo.toml \
-          --replace-fail 'version = "0.16"' 'version = "0.15"'
-      '';
-    in
-    mujmap.overrideAttrs (oldAttrs: {
-      postPatch = (oldAttrs.postPatch or "") + fixConsoleVersion;
-      buildPhase = builtins.replaceStrings [ "--locked" ] [ "--offline" ] oldAttrs.buildPhase;
-      checkPhase = builtins.replaceStrings [ "--locked" ] [ "--offline" ] oldAttrs.checkPhase;
-      cargoArtifacts = oldAttrs.cargoArtifacts.overrideAttrs (oldCargoAttrs: {
-        postPatch = (oldCargoAttrs.postPatch or "") + fixConsoleVersion;
-        buildPhase = builtins.replaceStrings [ "--locked" ] [ "--offline" ] oldCargoAttrs.buildPhase;
-      });
-    });
 
   # in the source code we have:
   # PREFIX="${PASSWORD_STORE_DIR:-$HOME/.password-store}"
   # EXTENSIONS="${PASSWORD_STORE_EXTENSIONS_DIR:-$PREFIX/.extensions}"
-  # symlink the secrets fodler instead
-  pass-perso = final.pass-teto;
-
-  # final.writeShellApplication {
-  #   name = "pass-perso";
-  #   runtimeInputs = [
-  #     # final.pass-teto
-  #   ];
-  #   text = ''
-  #     export PASSWORD_STORE_DIR="${secretsFolder}/password-store-perso"
-  #     ${final.pass-teto}/bin/pass $@
-  #   '';
-  #   checkPhase = ":";
-  # };
-
-  # neomutt-dev = prev.lib.warn "neomutt override" (
-  #   prev.neomutt.overrideAttrs {
-  #     src = flakeSelf.inputs.neomutt-src;
-  #   }
-  # );
+  # cant put into by-name because of secretsFolder
+  pass-perso = final.writeShellApplication {
+    name = "pass-perso";
+    runtimeInputs = [
+      # final.pass-teto
+    ];
+    text = ''
+      export PASSWORD_STORE_DIR="${secretsFolder}/password-store-perso"
+      ${final.pass-teto}/bin/pass $@
+    '';
+    checkPhase = ":";
+  };
 
   protocol-local = prev.protocol.overrideAttrs (oldAttrs: {
     src = fetchGit { url = "https://github.com/teto/protocol"; };
@@ -155,16 +62,6 @@ in
   termscp-matt = prev.termscp.overrideAttrs (oa: {
     cargoBuildFlags = "--no-default-features";
   });
-
-  # this exists in ml-tests, let's upstream some of the changes first
-  # jupyter4ihaskell = myPkgs.jupyter-teto;
-  # jupyter-teto = python3.withPackages(ps: [
-  #  ps.notebook
-  #  ps.jupyter-client
-  # ]);
-
-  # # TODO get lua interpreter to select the good lua packages
-  # nvimLua = config.programs.neovim.finalPackage.passthru.unwrapped.lua;
 
   # xdg-utils = prev.xdg-utils.overrideAttrs(oa: {
   #   pname = "xdg-utils-custom";

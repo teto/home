@@ -1,6 +1,5 @@
 # mujmap
 { flakeSelf, stdenv }:
-# mujmap-unstable =
 let
   mujmap = flakeSelf.inputs.mujmap.packages.${stdenv.hostPlatform.system}.mujmap;
   fixConsoleVersion = ''

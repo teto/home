@@ -1,9 +1,11 @@
 {
-  buildFirefoxXpiAddon,
-  fetchurl,
+  # fetchurl,
   lib,
-  stdenv,
+  # stdenv,
 }:
+let 
+  inherit (lib) buildFirefoxXpiAddon;
+in
 {
   "10ten-ja-reader" = buildFirefoxXpiAddon {
     pname = "10ten-ja-reader";

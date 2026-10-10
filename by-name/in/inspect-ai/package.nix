@@ -48,8 +48,8 @@ let
     owner = "teto";
     repo = "inspect_ai";
     # teto/fixes
-    rev = "f7ab982a0f0a0aa1e0da4269fa10d0df4804acf7";
-    hash = "sha256-k344jcf5DQo9Z73I84fsZgo6fI2+L9EMML7oVZzCdug=";
+    rev = "45df4001c4ffc19400af5951d2fdbf331a9a7b55";
+    hash = "sha256-d8GiJmkrGNq0nQJN70A5W9TVOzuTLm0D1VSMhpEvNao=";
   };
   inspect-sandbox-tools = python3Packages.buildPythonPackage {
     pname = "inspect-sandbox-tools";

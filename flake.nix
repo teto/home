@@ -628,9 +628,10 @@
         haskell = import ./overlays/haskell.nix;
         overrides = import ./overlays/overrides.nix {
           inherit 
-            # secretsFolder
+            # for pass-perso
+            secretsFolder
             lib;
-            flakeSelf = self;
+            # flakeSelf = self;
         };
         python = import ./overlays/python.nix;
         lua = import ./overlays/lua.nix;
