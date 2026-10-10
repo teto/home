@@ -4,7 +4,7 @@
   # stdenv,
 }:
 let 
-  inherit (lib) buildFirefoxXpiAddon;
+  inherit (lib.firefox) buildFirefoxXpiAddon;
 in
 {
   "10ten-ja-reader" = buildFirefoxXpiAddon {

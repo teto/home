@@ -245,7 +245,7 @@ in
           # imv # image viewer
           lazygit # kinda like tig
           libnotify
-          (lib.ignoreBroken moc-wrapped) # music player
+          (lib.ignoreBroken moc-teto) # music player
           mupdf.bin # evince does better too
 
           ## Alternatives to consider:
@@ -322,7 +322,7 @@ in
         carl # cargo cal
         # python3Packages.subliminal # to download subtitles
         immich-cli
-        mujmap-unstable # to sync notmuch tags across jmap
+        mujmap-dev # to sync notmuch tags across jmap
         # (lib.ignoreBroken oculante) # image viewer
         # (lib.ignoreBroken calcure)
         # signal-desktop # installe a la main

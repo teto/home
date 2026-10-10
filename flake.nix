@@ -302,6 +302,7 @@
     let
       # lib = lib.extend (_: _: self.inputs.hm.lib // builtins.trace "${lib.neovim.toto}" lib);
 
+      # extended hm-lib Lib
       lib = self.inputs.nixpkgs.lib.extend (
         prev: _:
         self.inputs.hm.lib
@@ -383,7 +384,6 @@
                 legacyPkgs = nixpkgs.legacyPackages.${system};
                 pkgName = legacyPkgs.lib.getName pkg;
               in
-              # if legacyPkgs.lib.hasPrefix "cuda" pkgName then
               if hasCudaLicense "cuda" pkgName then
                 true
               else
@@ -412,6 +412,12 @@
                 ];
           };
         };
+
+      libExtended = nixpkgs.lib.exend(final: prev: {
+
+        # add tetos lib
+
+      });
 
       tetosPkgs = pkgImport self.inputs.nixpkgs false;
       tetosPkgsCuda = pkgImport self.inputs.nixpkgs true;
@@ -461,7 +467,6 @@
         };
 
       formatter = treefmtEval.config.build.wrapper;
-      # formatter = self.packages.${system}.treefmt-home;
 
       packages =
         self.inputs.neovim-nightly-overlay.packages.${system}
@@ -481,13 +486,9 @@
           inherit (tetosPkgs)
             pass-import-high-password-length
             jmdict
-            meli-git
-            # pass-perso
             memento-whisper
-            sway-scratchpad
+            # sway-scratchpad
             termscp-matt
-            pimsync-dev
-            # rsync-yazi
             ;
 
           # tetosPkgs.neovim-unwrapped;
@@ -623,8 +624,6 @@
       # TODO autoload overlays
       overlays = {
 
-        # TODO
-        local = import ./overlays/pkgs/default.nix;
         haskell = import ./overlays/haskell.nix;
         overrides = import ./overlays/overrides.nix {
           inherit 

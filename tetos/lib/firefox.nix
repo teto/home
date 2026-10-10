@@ -8,8 +8,8 @@ in
 {
   buildFirefoxXpiAddon =
     {
-      stdenv, # ? final.stdenv,
-      fetchurl, # ? final.fetchurl,
+      stdenv  ? pkgs.stdenv,
+      fetchurl ? pkgs.fetchurl,
       pname,
       version,
       addonId,
