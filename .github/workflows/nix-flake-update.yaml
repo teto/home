@@ -1,4 +1,4 @@
-name: "Update Flake Packages ❄️"
+name: "❄️ Update nix packages: meli-teto"
 on:
   workflow_dispatch:
   schedule:
@@ -12,6 +12,6 @@ jobs:
       - name: Install Nix
         uses: cachix/install-nix-action@v31
       - name: Update flake packages
-        uses: selfuryon/nix-update-action@v1.1.0
+        uses: gepbird/nix-update-action@v3.1.2
         with:
           packages: "meli-teto"

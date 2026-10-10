@@ -66,6 +66,15 @@ in
   #   "alt-s".erase = true;
   #   "alt-s".operate = "preset";
   # };
+  shellAliases = {
+    # ls = "lsd -lt";
+    ll = "lsd -l";
+    la = "lsd -A";
+    lt = "lsd --tree";
+    lla = "lsd -lA";
+    llt = "lsd -l --tree";
+
+  };
 
   # interactiveShellInit
   # shellInit

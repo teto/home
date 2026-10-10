@@ -114,6 +114,10 @@ let
           # subscribe => watch mailbox for update
           # subscribe = true;
         };
+        jobs = {
+          query = "tag:job or tag:freelance";
+
+        };
         Drafts = {
           query = "tag:draft";
           # subscribe = true;
@@ -133,15 +137,11 @@ let
         };
       };
       # "INBOX" = {  query="tag:inbox and not tag:killed", subscribe = true }
-      # "Drafts" = {  query="tag:draft", subscribe = true }
-      # "Sent" = {  query="from:username@server.tld from:username2@server.tld", subscribe = true }
 
       settings = {
 
         # until https://git.meli-email.org/meli/meli/issues/700 gets fixed
         # manual_refresh = true;
-        #  "systemctl start mujmap-fastmail"
-        # refresh_command = "just -g mail-sync";
 
         # could be generated from the module
         # manpage says:
@@ -170,10 +170,6 @@ let
               shortcut = "d";
             }
           ];
-
-          # D =  "tag add trash";
-          # { command = [ "tag add trash", "flag set trash" ], shortcut = "d" } ]
-          # D =
         };
 
         # not liked

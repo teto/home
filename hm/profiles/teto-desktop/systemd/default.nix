@@ -49,18 +49,13 @@
         SyslogIdentifier = "notify-%i";
         ExecStart =
           let
+            # DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus" \
+            # USERID=''${ADDRESS#/run/user/}
             myScript = pkgs.writeScript "notify-and-wait" ''
               #!${pkgs.stdenv.shell}
 
               message="$1"
-                # USERID=''${ADDRESS#/run/user/}
-                # gnome-shell doesn't respect the timeout from notify-send,
-                # hence the additional timeout command to make sure we exit
-                # before the end of time
-                # if [ "$result" = "interrupt" ]; then
-                DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus" \
-                  ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning "Process failed" "Message: $message"
-              # notify_and_wait "$ADDRESS" &
+              ${pkgs.libnotify}/bin/notify-send -t 60000 -i dialog-warning "Process failed" "Message: $message"
             '';
             # %n => full unit name
           in
@@ -85,7 +80,7 @@
 
       Unit = {
         # TODO add notmuch_CONFIG ?
-        OnFailure = "desktop-notification@%n.service";
+        # OnFailure = "desktop-notification@%n.service";
         After = "gpg-agent.socket";
         Wants = "gpg-agent.socket";
       };
