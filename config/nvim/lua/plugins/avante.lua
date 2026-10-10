@@ -183,6 +183,16 @@ else
     -- notify of a failed nix_deps
 end
 
+
+-- configuration  used with
+opts.providers['jedha-inspect'] =
+ -- todo get the port from the environment
+ --  and ensure that your agent targets the model name “inspect"
+  -- use whatever port is used in the proxy, default is 13131
+ -- OPENAI_BASE_URL=http://localhost:13131/v1
+  mk_llama_provider('localhost:13131', "inspect", {
+  })
+
 -- for _, model in ipairs(local_models) do
 -- opts.providers['gemma-4'] =
 --     mk_llama_provider('localhost', 'unsloth/gemma-4-E4B-it-GGUF', { __inherited_from = 'openai' })

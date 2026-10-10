@@ -14,6 +14,7 @@ up.auto-track-bookmarks = 'glob:*'
 # gh-readonly-queue
 # backport
 
+
 [aliases]
 # `jj l` shows commits on the working-copy commit's (anonymous) bookmark
 # compared to the `main` bookmark
@@ -212,13 +213,14 @@ commit_id = "green"
 # push = "gh"
 # Prevent pushing work in progress or anything explicitly labeled "private"
 private-commits = "description('wip:*') | description('private:*')"
+colocate = true
 
 
 [fsmonitor]
 backend = "watchman"
 
 [snapshot]
-max-new-file-size = "10MiB"
+max-new-file-size = "2MiB"
 # FIXME (upstream): why isn't this on by default?
 auto-update-stale = true
 

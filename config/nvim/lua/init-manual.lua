@@ -853,7 +853,7 @@ vim.keymap.set('n', '[[', function()
         wrap = true,
         -- severity
         -- on_jump
-        severity = vim.diagnostic.severity.HINT,
+        severity = { min = vim.diagnostic.severity.WARN }
     })
 end, { buffer = false })
 
@@ -864,7 +864,7 @@ vim.keymap.set('n', ']]', function()
         -- on_jump = function()
         --     vim.notify('hello world')
         -- end,
-        severity = vim.diagnostic.severity.HINT,
+        severity = { min = vim.diagnostic.severity.WARN }
     })
 end, { buffer = false })
 
@@ -956,7 +956,7 @@ vim.g.avante = {
     -- seems ignored by acp ? influences prompt building
     mode = 'legacy', -- Switch from "agentic" to "legacy"
 
-    -- instructions_file =
+    -- instructions_file = "avante.md"
 
     -- can be a function as well
     -- avante is very talkative by default

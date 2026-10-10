@@ -76,7 +76,7 @@ python3Packages.buildPythonApplication rec {
     yfinance
   ];
 
-  pythonRelaxDeps = [ "rich" ];
+  pythonRelaxDeps = [ "openai" "rich" ];
 
   pythonImportsCheck = [ "stonks_cli" ];
 

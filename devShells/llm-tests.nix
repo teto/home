@@ -46,6 +46,12 @@ mkShell {
       # run python-Python-data-env
       # iPythonKernel.runtimePackages
     ];
-  shellHook = "";
+    shellHook = "
+
+      export LLAMA_CPP_PYTHON_BASE_URL=http://localhost:9931/v1
+      export LLAMA_CPP_PYTHON_MODEL=qwen3.6-dense 
+      export LLAMA_CPP_PYTHON_API_KEY=toto
+
+    ";
 
 }
