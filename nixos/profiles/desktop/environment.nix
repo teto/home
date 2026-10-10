@@ -44,7 +44,6 @@
   # https://learn.chatgpt.com/docs/agent-configuration/rules
   etc."codex/rules".source = "/home/teto/perso/codex-rules";
 
-
   etc."lemurs/wayland/sway-systemd" = {
     mode = "755";
     # sway creates systemd.user.targets.sway-session

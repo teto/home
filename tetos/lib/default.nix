@@ -99,14 +99,14 @@ in
       ++ modules;
 
       specialArgs = {
+        inherit dotfilesPath secretsFolder;
+        inherit flakeSelf;
         inherit
           withSecrets
           secrets
           hostname
           lib
           ;
-        inherit dotfilesPath secretsFolder;
-        inherit flakeSelf;
       };
 
     };

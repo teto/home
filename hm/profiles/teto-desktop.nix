@@ -9,6 +9,7 @@
 let
 
   haumea = flakeSelf.inputs.haumea;
+
   autoloadedModule =
     { pkgs, ... }@args:
     haumea.lib.load {
@@ -30,7 +31,7 @@ in
 
   imports = [
     autoloadedModule
-    ./common.nix
+    flakeSelf.homeProfiles.common
     flakeSelf.homeProfiles.sway
     flakeSelf.homeProfiles.neovim
 

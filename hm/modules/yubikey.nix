@@ -35,6 +35,8 @@ in
     # };
 
     home.packages = with pkgs; [
+      # https://github.com/NixOS/nixpkgs/pull/572336#event-33266493198
+      yb # secure blob storage on a YubiKey
       pamtester # to test yubikey
       pam_u2f # pamu2fcfg > ~/.config/Yubico/u2f_keys
       yubioath-flutter # not sure it's great yubikey-manager #

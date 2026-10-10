@@ -161,7 +161,7 @@ end
 local valid_file, nix_deps = pcall(require, 'generated-by-nix')
 
 -- so it inherited the model
-local res = mk_llama_provider('jedha:9931', jedha_default_model, {
+local res = mk_llama_provider('llamacpp.jedha.home', jedha_default_model, {
 
     -- check default prompt w/o
     disable_tools = false,
@@ -182,6 +182,14 @@ if valid_file and nix_deps.jakku_hostname or false then
 else
     -- notify of a failed nix_deps
 end
+
+-- configuration  used with
+opts.providers['jedha-inspect'] =
+    -- todo get the port from the environment
+    --  and ensure that your agent targets the model name “inspect"
+    -- use whatever port is used in the proxy, default is 13131
+    -- OPENAI_BASE_URL=http://localhost:13131/v1
+    mk_llama_provider('localhost:13131', 'inspect', {})
 
 -- for _, model in ipairs(local_models) do
 -- opts.providers['gemma-4'] =

@@ -19,7 +19,14 @@ return {
         name = 'To loclist',
         cmd = function()
             vim.notify('To qflist')
-            vim.diagnostic.setloclist()
+            local opts = {
+
+                title = 'Diagnostics from menu',
+                format = function(d)
+                    return d.message .. '( ' .. d.source .. ')'
+                end,
+            }
+            vim.diagnostic.setloclist(opts)
             -- vim.diagnostic.setqflist()
         end,
     },

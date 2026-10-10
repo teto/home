@@ -60,6 +60,15 @@ see https://nixos.wiki/wiki/Binary_Cache:
 nix path-info -r /nix/store/sb7nbfcc1ca6j0d0v18f7qzwlsyvi8fz-ocaml-4.10.0 --store https://cache.nixos.org/
 
 * about flakes
+
+
+** use with gitlab
+```
+nix flake show 'git+https://gitlab.com/K900/nix-drv-index.git'
+```
+
+Your original `gitlab:` URL received HTTP 403 from GitLab’s API. The `git+https:` URL bypasses that API and fetches through Git directly. It successfully shows the `nix-drv-index` package and development shell.
+
 ** how to build a nixosConfiguration 
 
    #+BEGIN_SRC shell

@@ -4,7 +4,7 @@
     enable = true;
     verbose = true;
 
-    package = pkgs.mujmap-unstable;
+    package = pkgs.mujmap-dev;
   };
 
   # let noctalia deal with it ?

@@ -78,7 +78,7 @@ in
             Description = "mujmap mailbox synchronization";
             # OnSuccess = "send-mail-to-teto@success.service";
             # reference a system-level one
-            OnFailure = "desktop-notification@%n.service";
+            OnFailure = "desktop-notification@%n";
           };
 
           Service = {
