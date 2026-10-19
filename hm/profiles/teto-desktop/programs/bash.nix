@@ -1,8 +1,6 @@
 {
   config,
-  flakeSelf,
   lib,
-  secretsFolder,
   ...
 }:
 let
@@ -16,6 +14,7 @@ in
   # goes to .profile
   sessionVariables = {
 
+    # used when calling "history"
     HISTTIMEFORMAT = "%d.%m.%y %T ";
     # CAREFUL
     # HISTFILE="$XDG_CACHE_HOME/bash_history";
@@ -26,18 +25,12 @@ in
   historyFile = "${config.xdg.cacheHome}/bash_history";
 
   shellAliases = {
-    nix-stray-roots = ''nix-store --gc --print-roots | egrep -v "^(/nix/var|/proc|/run/\w+-system|\{memory)" | less'';
+    # provided as bin
+    # nix-stray-roots = ''nix-store --gc --print-roots | egrep -v "^(/nix/var|/proc|/run/\w+-system|\{memory)" | less'';
     netstat_tcp = "netstat -ltnp";
 
-    # nixpaste = "curl -F \"text=<-\" http://nixpaste.lbr.uno";
-    m = "meli";
-    ns = "nix-shell";
-
-    # ls aliases {{{
-    ld = "eza -lD";
-    lf = "eza -lF --color=always | grep -v /";
-    lh = "eza -dl .* --group-directories-first";
-    # }}}
+    # m = "meli";
+    # ns = "nix-shell";
 
     #mostly for testin
     # dfh="df --human-readable";
@@ -54,14 +47,18 @@ in
     lt = "eza -al --sort=modified";
     # we have to add -g (--group) else it's hidden by default
     ll = lib.mkForce "eza -al -g --group-directories-first";
+    # ls aliases {{{
+    # ld = "eza -lD";
+    # lf = "eza -lF --color=always | grep -v /";
+    # lh = "eza -dl .* --group-directories-first";
+    # }}}
 
   };
 
   # source_if_exists
   #     source $XDG_CONFIG_HOME/bash/lib.sh
   initExtra = ''
-    source $XDG_CONFIG_HOME/bash/aliases.sh
-    source $XDG_CONFIG_HOME/bash/bashrc.sh || true
+    source $XDG_CONFIG_HOME/bash/bashrc.sh || echo "Fix or create a ~/.config/bash/bashrc.sh to silence this warning"
   '';
 
 }

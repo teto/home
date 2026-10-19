@@ -31,7 +31,7 @@
     };
   };
 
-  externalEditor = ''
+  settings.editor = ''
     ${pkgs.kitty}/bin/kitty nvim -c 'set ft=mail' '+set fileencoding=utf-8' '+set ff=unix' '+set enc=utf-8' '+set fo+=w' %1
   '';
   # };

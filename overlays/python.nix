@@ -2,8 +2,7 @@ final: prev:
 
 let
   inherit (final) fetchFromGitHub;
-in
-rec {
+
   python3 = prev.python3.override {
     # Careful, we're using a different self and super here!
     packageOverrides = final: prev: {
@@ -40,7 +39,10 @@ rec {
       # https://github.com/gradio-app/trackio
     };
   };
+in
+{
 
+  inherit python3;
   python3Packages = python3.pkgs;
 
 }
