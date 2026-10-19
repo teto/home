@@ -17,7 +17,6 @@
   # theme = "solarized_alternate";
   # theme = "purple";
   # lines= ;
-  location = "center";
 
   plugins = with pkgs; [
     rofi-emoji
@@ -34,11 +33,15 @@
   # - trigger a nixos rebuild ?
   # - start services ?
   # - powermenu
-  modes = [
+  settings = {
+
+    location = "center";
+    modes = [
     # modes: [ combi ];
     # combi-modes: [ window, drun, run ];
 
-  ];
+    ];
+  };
 
   # TODO use walllust's '~/.cache/wallust/colors.rasi'
   # theme = "${config.xdg.cacheHome}/wallust/colors.rasi";

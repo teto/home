@@ -103,6 +103,7 @@ in
   manual.manpages.enable = true;
 
   home.pointerCursor = {
+    enable = true;
     sway.enable = true;
     name = "Vanilla-DMZ";
     package = pkgs.vanilla-dmz;

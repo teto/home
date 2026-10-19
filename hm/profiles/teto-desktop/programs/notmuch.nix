@@ -12,13 +12,16 @@
   # - teto profile: notmuch: Must have a user primary email address set.
   enable = osConfig.tetos.withSecrets;
 
-  # dont add "inbox" tag
-  new.tags = [
-    "unread"
-    "inbox" # do we need this ?
-  ];
-  # new.ignore =
-  search.excludeTags = [ "spam" ];
+  settings = {
+
+    search.exclude_tags = [ "spam" ];
+    # dont add "inbox" tag
+    new.tags = [
+      "unread"
+      "inbox" # do we need this ?
+    ];
+    # new.ignore =
+  };
 
   # or we could use mkOutOfStoreSymlink ?
   # database.hook_dir
