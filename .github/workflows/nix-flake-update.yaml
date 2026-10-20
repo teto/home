@@ -3,6 +3,9 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "0 10 * * 0" # https://crontab.guru/#0_10_*_*_0
+permissions:
+  contents: write
+  pull-requests: write
 jobs:
   updateFlakePackages:
     runs-on: ubuntu-latest
