@@ -47,7 +47,7 @@
       };
     };
 
-    cv = {
+    perso = {
       access = [
         {
           perm = "RW+";

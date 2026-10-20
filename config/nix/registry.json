@@ -42,6 +42,17 @@
         "path": "/home/teto/home",
         "type": "path"
       }
+    },
+    {
+      "from": {
+        "id": "lux",
+        "type": "indirect"
+      },
+      "to": {
+        "owner": "lumen-oss",
+        "repo": "lux",
+        "type": "github"
+      }
     }
   ],
   "version": 2

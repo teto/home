@@ -112,12 +112,26 @@ in
 
   home.packages =
     with pkgs;
+    let 
+      lux-cli-teto = flakeSelf.inputs.lux.packages.${pkgs.stdenv.hostPlatform.system}.lux-cli;
+
+      # lux-cli-teto = lux-cli;
+
+      mistral-vibe-custom = pkgs.mistral-vibe;
+    in
 
     [
+      codex # openai agent
+      codex-acp # originated from zed-industries, used in avante
+
+      lux-cli-teto
       pkgs.pinentry-curses
+      mistral-vibe-custom
 
       # ffs this needs the daemon ?!
       pkgs.avahi # for avahi-browse
+
+      pkgs.gcan # replaces nix-stray-roots ! run "gcan tui"
 
       # for the noctalia OCR plugin
       pkgs.grim
@@ -165,8 +179,6 @@ in
       # kaggle # kaggle interface
       # python3Packages.kaggle
 
-      lux-cli
-      # flakeSelf.inputs.lux.packages.${pkgs.stdenv.hostPlatform.system}.lux-cli
 
       sonic-pi
       stow
@@ -183,6 +195,7 @@ in
       # flakeSelf.inputs.git-repo-manager.packages.${pkgs.stdenv.hostPlatform.system}.git-repo-manager
 
       waytator # capture screening
+      pkgs.nmap # network scanner
     ];
 
   home.shell = {

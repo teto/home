@@ -1,14 +1,12 @@
 {
-  config,
-  lib,
-  pkgs,
   ...
 }:
 {
 
   # advertised on 8927 ?
   services.music-assistant = {
-    enable = true;
+    # this is shit
+    enable = false;
 
     extraOptions = [
       "--log-level"

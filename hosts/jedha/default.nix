@@ -88,6 +88,18 @@ in
     };
   };
 
+  # Upmpdcli's local-library server needs both discovery and HTTP access.
+  networking.firewall = lib.mkIf config.services.upmpdcli.enable {
+    allowedUDPPorts = [ 1900 ];
+    allowedTCPPorts = with config.services.upmpdcli.configuration; [ upnpport uprclport ];
+  };
+
+  systemd.services.upmpdcli = lib.mkIf config.services.upmpdcli.enable {
+    # The library plugin launches recollindex; OpenHome uses Python and OpenSSL.
+    path = [ pkgs.recoll pkgs.python3 pkgs.openssl pkgs.diffutils ];
+    unitConfig.RequiresMountsFor = [ config.services.upmpdcli.configuration.uprclmediadirs ];
+  };
+
   boot =
     let
       kernelPkgs = pkgs.linuxKernel.packages.linux_7_2;

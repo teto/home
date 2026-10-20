@@ -8,11 +8,11 @@
     flakeSelf.nixosProfiles.avahi
   ];
 
-  enable = false;
-
+  enable = true;
   openFirewall = true;
 
   debug = true;
+
 
   # allowInterfaces = [
   #   "wlp10s0"
