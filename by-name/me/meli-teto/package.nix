@@ -8,7 +8,7 @@
 meli.overrideAttrs (old: rec {
   pname = old.pname + "-tetos";
   # Track development commits with: nix-update -F meli-teto --version=branch
-  version = "0.8.13-unstable-2026-10-08";
+  version = "0.8.13";
   src = fetchgit {
     url = "https://git.meli-email.org/meli/meli.git";
     rev = "7cf9e3c24cd60ffadbde47abf309ae0bca52cfe9";
