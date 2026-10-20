@@ -132,13 +132,6 @@ in
     enableRedistributableFirmware = true;
     sane.enable = true;
 
-    # cant be enabled with pipewire
-    pulseaudio = {
-      # Using PipeWire as the sound server conflicts with PulseAudio. This option requires `services.pulseaudio.enable` to be set to false
-      enable = false;
-      # for ad2p profle ?
-      package = pkgs.pulseaudioFull;
-    };
 
     # High quality BT calls
     # https://nixos.wiki/wiki/Bluetooth

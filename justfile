@@ -64,6 +64,9 @@ bootstrap-vps target:
     -i secrets/ssh/id_rsa \
     --debug
 
+bump-meli:
+  nix-update -F --version=branch=master meli-teto
+
 # just to save the command
 
 nix-repl:
@@ -317,3 +320,8 @@ inspect-current-generation:
 # https://blueforcer.github.io/awtrix-ng/esp32/getting-started/flashing/
 flash-ulanzi-tc001:
     esptool --chip esp32 --port /dev/ttyUSB0 --baud 460800 write-flash 0x0 usb-awtrix-ng-4mb.bin
+
+
+# check dlna servers on the network
+scan-upnp:
+    nmap --script=broadcast-upnp-info 192.168.0.0/16

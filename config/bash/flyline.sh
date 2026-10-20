@@ -1,12 +1,14 @@
 # https://github.com/HalFrgrd/flyline/blob/master/examples/settings.sh
 # terminal is advised for kitty
 flyline set-cursor --backend terminal
-flyline mouse --mode enabled
+# simple/disabled/smart
+# flyline mouse --mode smart
 flyline editor --show-inline-history false
 flyline editor --select-with-mouse false
 flyline history --backend flyline
 
-flyline set-cursor --backend flyline --style "#33ccff" --effect fade --effect-easing in-out-sine --interpolate-easing out-elastic --interpolate 2
+# it flickers
+# flyline set-cursor --backend flyline --style "#33ccff" --effect fade --effect-easing in-out-sine --interpolate-easing out-elastic --interpolate 2
 
 # Codex: change 
 flyline set-agent-mode \
@@ -47,20 +49,7 @@ PROMPT_RULER_FINAL=''
 # flyline settings vim_mode true
 # flyline vim_mode
 
-flyline create-prompt-widget animation --name "MY_ANIMATION" --fps 10  ⣾ ⣷ ⣯ ⣟ ⡿ ⢿ ⣻ ⣽
-
-
-# This replaces any instance of "john" with the animation, so it will animate every time "john" appears in the prompt.
-# flyline create-prompt-widget animation --name "john" --ping-pong --fps 8 \
-#     john \
-#     john \
-#     john \
-#     John \
-#     jOhn \
-#     joHn \
-#     johN \
-#     john \
-#     john
+# flyline create-prompt-widget animation --name "MY_ANIMATION" --fps 10  ⣾ ⣷ ⣯ ⣟ ⡿ ⢿ ⣻ ⣽
 
 
 # Experiment with higher frame rates for smooth transitions:

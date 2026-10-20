@@ -2,6 +2,8 @@
 /.direnv
 *.env
 /result
+# for other outputs
+/result-*
 /.envrc
 .nvimlog
 *.log

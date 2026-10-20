@@ -8,7 +8,7 @@
   ];
 
   enable = true;
-
+  openFirewall = true;
   debug = true;
 
   # allowInterfaces = [
@@ -20,30 +20,35 @@
   # solved on mDNS, all other domains are resolved via unicast DNS. I
 
   settings = {
+    publish = {
+        publish-domain = true;
+        disable-publishing = false;
+        disable-user-service-publishing = false;
+        publish-addresses = true;
+      };
 
-    # server = {
+    server = {
+      use-ipv6 = false; # bug with multiple hostnames
     #   # Set the host name avahi-daemon tries to register on the LAN. If omited defaults to the system host name as set with the sethostname() system call.
     #   # secrets.jedha.hostname;
     #   # host-name = "jedha";
     #   # enable-dbus = true;
     #
-    # };
+    };
   };
 
   # /etc/mdns.allow
-  ipv6 = false; # bug with multiple hostnames
   nssmdns4 = true;
   # allows to resolve for other domains such as .lan / .home
   nssmdnsFull = true;
-  openFirewall = true;
   # services.avahi.settings.server.browse-domains
 
-  publish = {
-    enable = true;
-    workstation = true;
-    domain = true;
-    addresses = true;
-    # publish-a-on-ipv6 = false;
-  };
+  # publish = {
+  #   enable = true;
+  #   workstation = true;
+  #   domain = true;
+  #   addresses = true;
+  #   # publish-a-on-ipv6 = false;
+  # };
 
 }

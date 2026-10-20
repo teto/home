@@ -1,10 +1,14 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   enable = true;
+
+  # wether to export MPD_HOST / PORT
+  # enableSessionVariables = true;
+
   # dataDir = xdg.dataDir
   # playlistDirectory =
   # extraConfig =
-  # extraArgs =
+  # extraArgs = []
   network = {
     # port
     startWhenNeeded = false;
@@ -12,12 +16,19 @@
     listenAddress = "any";
   };
 
-  # where 
-    # audio_output {
-    #         type            "pipewire"
-    #         name            "PipeWire Sound Server"
-    # }
+  # where
   extraConfig = ''
+    audio_output {
+            type            "pipewire"
+            name            "PipeWire dnla"
+            target          "audiocast"
+    }
+
+    audio_output {
+            type            "pipewire"
+            name            "PipeWire Local"
+    }
     include "${config.xdg.configHome}/mpd/manual.conf"
   '';
+
 }

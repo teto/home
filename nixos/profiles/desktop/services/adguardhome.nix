@@ -8,7 +8,7 @@
 
   # default is 3000
   # annoys
-  port = 8084;
+  # port = 8084;
 
   # https://github.com/AdguardTeam/AdGuardHome/wiki/Configuration#configuration-file
   #   settingsFormat = pkgs.formats.yaml { };

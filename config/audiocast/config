@@ -1,0 +1,7 @@
+[audiocast]
+name = Espace Musical
+mode = app
+# GET http://192.168.1.164:49154/MediaRenderer/desc.xml
+url = http://192.168.1.164:49154
+sink = audiocast
+sink_description = AudioCast (DLNA)
