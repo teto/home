@@ -64,6 +64,9 @@ bootstrap-vps target:
     -i secrets/ssh/id_rsa \
     --debug
 
+bump-meli:
+  nix-update -F --version=branch=master meli-teto
+
 # just to save the command
 
 nix-repl:
