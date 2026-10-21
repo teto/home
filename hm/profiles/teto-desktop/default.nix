@@ -125,7 +125,7 @@ in
       pkgs.tesseract
 
       # pkgs.up # live preview of pipes
-      pkgs.peek # GIF recorder  BROKEN
+      # pkgs.peek # GIF recorder  BROKEN use kooha instead
       # pkgs.sequoia-sq # gpg rust replacement ? exe is called "sq"
       pkgs.sshfs # to download
       pkgs.alsa-utils # for alsamixer
@@ -181,6 +181,8 @@ in
 
       yamaha-cli
       # flakeSelf.inputs.git-repo-manager.packages.${pkgs.stdenv.hostPlatform.system}.git-repo-manager
+
+      waytator # capture screening
     ];
 
   home.shell = {
