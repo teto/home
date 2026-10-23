@@ -10,16 +10,16 @@
     # domainName = "local";
     # allows applications to resolve names in the ‘.local’ domain by transparently querying the Avahi daemon.
     nssmdns4 = true;
-    openFirewall = true;
-    publish = {
-      enable = true;
-      workstation = true;
-      domain = true;
-      addresses = true;
-      hinfo = true; # just to test: expose hardware info
-      userServices = true;
-      # userServices
-    };
+    # openFirewall = true;
+    # publish = {
+    #   enable = true;
+    #   workstation = true;
+    #   domain = true;
+    #   addresses = true;
+    #   hinfo = true; # just to test: expose hardware info
+    #   userServices = true;
+    #   # userServices
+    # };
 
     # https://linux.die.net/man/5/avahi-daemon.conf
     settings = {
@@ -32,10 +32,15 @@
         # *** WARNING: Detected another IPv4 mDNS stack running on this host. This makes mDNS unreliable and is thus not recommended. ***
         # this prevents the service from starting, maybe it conflicts with networkd
         # disallow-other-stacks = true;
+
+        # browse-domains = [];
       };
 
       publish = {
         publish-a-on-ipv6 = false;
+        disable-publishing = false;
+        disable-user-service-publishing = false;
+        publish-addresses = true;
         # publish-dns-servers
       };
 

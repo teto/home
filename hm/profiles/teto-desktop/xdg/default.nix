@@ -97,12 +97,14 @@
     # '';
 
     # source alias as well ?
+    # .sh
     "bash/bashrc".text = ''
-      source manual.sh
+      script_dir="$(cd -- "$(dirname -- "''${BASH_SOURCE[0]}")" && pwd)"
+      source "$script_dir/manual.sh"
       ''
       # check if flyline defined too ?
       + lib.optionalString osConfig.programs.flyline.enable '' 
-        source flyline.sh
+        source "$script_dir/flyline.sh"
 
         '';
 

@@ -1,5 +1,5 @@
 INSPECT_LOG_DIR
-
+INSPECT_DISPLAY=plain 
 
 list of tests
 
@@ -13,5 +13,9 @@ https://meridianlabs-ai.github.io/inspect_harbor/agents.html
 inspect log dump logs/2026-10-10T20-44-23-00-00_capitals_evn4outSE2XayrQeN5vL2W.eval | fx
 
 * hooks 
+
+  worth exploring for setup/teardown of environment
+
+https://inspect.aisi.org.uk/extensions-hooks.html
 
   on_sample_start
