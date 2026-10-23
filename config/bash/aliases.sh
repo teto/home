@@ -5,6 +5,7 @@
 # alias nf='nix flake'
 # alias nb1='nix build --option builders "$TETOS_BUILDER_NIXCOMMUNITY" -j0'
 # alias n1='nix develop --option builders "$TETOS_BUILDER_NIXCOMMUNITY" -j0'
+alias v=nvim
 
 alias J=jjui
 

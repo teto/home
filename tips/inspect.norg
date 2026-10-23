@@ -1,0 +1,17 @@
+INSPECT_LOG_DIR
+
+
+list of tests
+
+https://inspect.aisi.org.uk/evals/
+
+https://meridianlabs-ai.github.io/inspect_harbor/agents.html
+--solver path/to/custom/agent.py@custom_agent \
+
+* see the logs
+
+inspect log dump logs/2026-10-10T20-44-23-00-00_capitals_evn4outSE2XayrQeN5vL2W.eval | fx
+
+* hooks 
+
+  on_sample_start

@@ -193,12 +193,9 @@ in
   };
 
   home.shellAliases = {
+    v = "nvim";
     # use nix-sweep instead ?
-    nix-stray-roots = ''nix-store --gc --print-roots | egrep -v "^(/nix/var|/proc|/run/\w+-system|\{memory)" | less'';
-
     # add --remote-build if you meet signature issues
-    # pass as shellAbbr
-    # deploy-neotokyo = "deploy '.#neotokyo' -s --interactive-sudo=true -- --override-input nixpkgs /home/teto/nixpkgs";
 
     # lg = "lazygit";
     y = "yazi";

@@ -17,8 +17,10 @@
     #   Available components can be found below ‘pkgs.home-assistant-custom-components’.
     customComponents = [
       pkgs.awtrix-ng-hass-integration
+      pkgs.ha_mcp_tools
       # (config.services.home-assistant.package.python.pkgs.callPackage ./hass-node-red-module.nix {})
     ];
+
     config = {
       feedreader.urls = [ "https://nixos.org/blogs.xml" ];
 
