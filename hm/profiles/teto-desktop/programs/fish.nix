@@ -6,13 +6,13 @@
 let
   tideItemJj = pkgs.fishPlugins.buildFishPlugin {
     pname = "tide-item-jj";
-    version = "unstable-2026-05-27";
+    version = "unstable-2026-09-01";
 
     src = pkgs.fetchFromGitHub {
       owner = "lucasadelino";
       repo = "tide-item-jj";
-      rev = "e1150b7332b85149b468cb10c2844f082f33975b";
-      hash = "sha256-vLSrHPoytZ/kXQh0Bp/4AWe8YLlyufRjepfXUAuWCB8=";
+      rev = "2eff634fc27d3591f6580d3a9d40055ad3852276";
+      hash = "sha256-E14NGa1NsRaHoL1s3sW7DSpVb0epCZd6zwiAhnXjZqg=";
     };
   };
 
@@ -194,7 +194,6 @@ in
       body = ''
         nix develop ~/home#$(basename $PWD)"
       '';
-
 
     };
 
