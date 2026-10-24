@@ -14,7 +14,7 @@
   # TODO sendMailCommand
   # I don't want it to trigger
   # P => main_window.poll
-  extraConfig = {
+  settings = {
     poll.interval = 0;
     # TODO use "killed"
     startup.queries = {

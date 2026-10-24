@@ -4,7 +4,7 @@
 }:
 # don't enable it since it will override my zle-keymap-select binding
 {
-  enable = true;
+  enable = false;
   # enableZshIntegration = true;
   # enableBashIntegration = lib.mkForce true;
   enableFishIntegration = false;

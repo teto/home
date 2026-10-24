@@ -30,7 +30,6 @@
     # };
   };
 
-  browseDomains = [ ];
   # /etc/mdns.allow
   ipv6 = false; # bug with multiple hostnames
   nssmdns4 = true;
