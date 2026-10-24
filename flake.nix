@@ -483,6 +483,8 @@
           nvim =
             self.nixosConfigurations.tatooine.config.home-manager.users.teto.programs.neovim.finalPackage;
 
+          inherit (self.inputs.jujutsu.packages.${system}) jujutsu;
+
           inherit (tetosPkgs)
             pass-import-high-password-length
             jmdict
