@@ -12,11 +12,12 @@
     listenAddress = "any";
   };
 
+  # where 
+    # audio_output {
+    #         type            "pipewire"
+    #         name            "PipeWire Sound Server"
+    # }
   extraConfig = ''
     include "${config.xdg.configHome}/mpd/manual.conf"
-    audio_output {
-            type            "pipewire"
-            name            "PipeWire Sound Server"
-    }
   '';
 }
