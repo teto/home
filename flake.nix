@@ -413,13 +413,11 @@
           };
         };
 
-      libExtended = nixpkgs.lib.exend (
-        final: prev: {
-
-          # add tetos lib
-
-        }
-      );
+      # libExtended = nixpkgs.lib.exend (
+      #   final: prev: {
+      #     # add tetos lib
+      #   }
+      # );
 
       tetosPkgs = pkgImport self.inputs.nixpkgs false;
       tetosPkgsCuda = pkgImport self.inputs.nixpkgs true;

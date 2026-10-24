@@ -189,6 +189,15 @@ in
 
   functions = {
 
+    ndh = {
+
+      body = ''
+        nix develop ~/home#$(basename $PWD)"
+      '';
+
+
+    };
+
     # onProcessExit
     my_chpwd = {
 

@@ -39,11 +39,11 @@
     # overwriteProtocol = "https";
   };
 
-  extraApps = with config.services.nextcloud.package.packages.apps; {
-    # inherit news; # removed 'cos gives a wrong error
-    inherit memories;
-    inherit previewgenerator;
-  };
+  # extraApps = with config.services.nextcloud.package.packages.apps; {
+  #   # inherit news; # removed 'cos gives a wrong error
+  #   # inherit memories;
+  #   # inherit previewgenerator;
+  # };
 
   # Creating Nextcloud users and configure mail adresses
   # systemd.services.nextcloud-add-user = {

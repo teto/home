@@ -1,6 +1,15 @@
 
 jj bookmark advance
 
+
+* get the first commit with conflict 
+
+ jj log -r 'roots(::@ & conflicts())'
+
+* Merge the whole 
+
+jj duplicate '::pr-531687/mozc-update ~ ::scratch' --onto scratch
+
 * jj log slow
 
   `jj debug index-changed-paths` to speed things up ?

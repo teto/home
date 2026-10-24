@@ -103,6 +103,7 @@ in
   manual.manpages.enable = true;
 
   home.pointerCursor = {
+    enable = true;
     sway.enable = true;
     name = "Vanilla-DMZ";
     package = pkgs.vanilla-dmz;
@@ -124,7 +125,7 @@ in
       pkgs.tesseract
 
       # pkgs.up # live preview of pipes
-      pkgs.peek # GIF recorder  BROKEN
+      # pkgs.peek # GIF recorder  BROKEN use kooha instead
       # pkgs.sequoia-sq # gpg rust replacement ? exe is called "sq"
       pkgs.sshfs # to download
       pkgs.alsa-utils # for alsamixer
@@ -180,6 +181,8 @@ in
 
       yamaha-cli
       # flakeSelf.inputs.git-repo-manager.packages.${pkgs.stdenv.hostPlatform.system}.git-repo-manager
+
+      waytator # capture screening
     ];
 
   home.shell = {
@@ -190,12 +193,9 @@ in
   };
 
   home.shellAliases = {
+    v = "nvim";
     # use nix-sweep instead ?
-    nix-stray-roots = ''nix-store --gc --print-roots | egrep -v "^(/nix/var|/proc|/run/\w+-system|\{memory)" | less'';
-
     # add --remote-build if you meet signature issues
-    # pass as shellAbbr
-    # deploy-neotokyo = "deploy '.#neotokyo' -s --interactive-sudo=true -- --override-input nixpkgs /home/teto/nixpkgs";
 
     # lg = "lazygit";
     y = "yazi";
