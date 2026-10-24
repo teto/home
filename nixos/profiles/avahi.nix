@@ -6,7 +6,6 @@
 }:
 {
   services.avahi = {
-    allowPointToPoint = false;
     # domainName = "local";
     # allows applications to resolve names in the ‘.local’ domain by transparently querying the Avahi daemon.
     nssmdns4 = true;
@@ -25,6 +24,15 @@
     settings = {
 
       server = {
+
+    # List of non-local DNS domains to be browsed.
+        browse-domains = [
+          # "0pointer.de"
+          # "zeroconf.org"
+        ];
+
+        allow-point-to-point = false;
+
         use-ipv4 = true; # bug with multiple hostnames
         use-ipv6 = false; # bug with multiple hostnames
 
@@ -71,11 +79,5 @@
       # must be a string
 
     };
-
-    # List of non-local DNS domains to be browsed.
-    browseDomains = [
-      # "0pointer.de"
-      # "zeroconf.org"
-    ];
   };
 }

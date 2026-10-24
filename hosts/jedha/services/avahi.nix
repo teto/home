@@ -26,6 +26,7 @@
       host-name = "jedha";
       # enable-dbus = true;
       browse-domains = [ ];
+      use-ipv6 = false; # bug with multiple hostnames
     };
 
     publish = {
@@ -37,7 +38,6 @@
     };
 
 
-  ipv6 = false; # bug with multiple hostnames
   nssmdns4 = true;
   # publish = {
   #   enable = true;
