@@ -14,21 +14,31 @@ flyline set-agent-mode \
     --trigger-prefix ': ' \
     --command 'codex -a never exec -m GPT-5.1-Codex-Mini --skip-git-repo-check --ephemeral --color always'
 
+
 # Antigravity:
 # flyline set-agent-mode \
 #     --system-prompt "Be concise. Answer with a JSON array of at most 3 items with objects containing: command and description. Command will be a Bash command. " \
 #     --trigger-prefix ': ' \
 #     --command 'agy --model "Gemini 3.7 Flash (Low)" --prompt'
 
+flyline create-prompt-widget mouse-mode --name MOUSE_MODE "${ANSI_GREEN}M" "${ANSI_BRIGHT_RED}X"
+flyline create-prompt-widget last-command-duration --name FLYLINE_LAST_COMMAND_DUR
+
+
 # precmd_functions+=(set_ps1)
+# Now you can use this animation in your prompt. For example:
+PS1='\u@\h:\w MOUSE_MODE \n$ '
+PS2=">"
 # RPS1=" ${ANSI_YELLOW}\t${ANSI_RESET}"
-RPS1=" End"
-PS1_FILL="-"
+RPS1="..."
+# PS1_FILL="-"
+# to differentiate between 2 prompts
 PROMPT_RULER="─"
 
-PS1_FINAL="Started at ${ANSI_YELLOW}\D{%Y-%m-%d %H:%M:%S}> ${ANSI_RESET}"
+# PS1_FINAL="Started at ${ANSI_YELLOW}\D{%Y-%m-%d %H:%M:%S}> ${ANSI_RESET}"
+PS1_FINAL="Finished in FLYLINE_LAST_COMMAND_DUR"
 # duration it took
-RPS1_FINAL='Final'
+RPS1_FINAL="Finished in FLYLINE_LAST_COMMAND_DUR"
 PS1_FILL_FINAL=''
 PROMPT_RULER_FINAL=''
 
@@ -39,8 +49,6 @@ PROMPT_RULER_FINAL=''
 
 flyline create-prompt-widget animation --name "MY_ANIMATION" --fps 10  ⣾ ⣷ ⣯ ⣟ ⡿ ⢿ ⣻ ⣽
 
-# Now you can use this animation in your prompt. For example:
-# PS1='\u@\h:\w MY_ANIMATION'
 
 # This replaces any instance of "john" with the animation, so it will animate every time "john" appears in the prompt.
 # flyline create-prompt-widget animation --name "john" --ping-pong --fps 8 \
