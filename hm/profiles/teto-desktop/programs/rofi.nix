@@ -12,7 +12,6 @@
   # package = pkgs.rofi-wayland;
   package = pkgs.rofi-teto;
 
-  terminal = "${pkgs.kitty}/bin/kitty";
   # borderWidth = 1;
   # theme = "solarized_alternate";
   # theme = "purple";
@@ -34,6 +33,7 @@
   # - start services ?
   # - powermenu
   settings = {
+    terminal = "${pkgs.kitty}/bin/kitty";
 
     location = "center";
     modes = [
@@ -41,16 +41,6 @@
     # combi-modes: [ window, drun, run ];
 
     ];
-  };
-
-  # TODO use walllust's '~/.cache/wallust/colors.rasi'
-  # theme = "${config.xdg.cacheHome}/wallust/colors.rasi";
-  # purple or material
-  # theme = "";
-
-  # -drun-match-fields
-  # -plugin-path
-  extraConfig = {
 
     # If you disable sorting and history is enabled, then the most used should show up more to the top.
     # available: normal, regex, glob, fuzzy, prefix
@@ -86,8 +76,16 @@
     kb-entry-history-down = "Control+n";
   };
 
+  # -drun-match-fields
+  # -plugin-path
+
   # extraConfig = {
   #
   #   "?import" = "manual.rasi";
   # };
+
+  # TODO use walllust's '~/.cache/wallust/colors.rasi'
+  # theme = "${config.xdg.cacheHome}/wallust/colors.rasi";
+  # purple or material
+  # theme = "";
 }
