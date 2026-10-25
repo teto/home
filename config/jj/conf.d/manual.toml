@@ -217,7 +217,8 @@ colocate = true
 
 
 [fsmonitor]
-backend = "watchman"
+# watchman
+backend = "none"
 
 [snapshot]
 max-new-file-size = "2MiB"

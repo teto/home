@@ -32,7 +32,8 @@ in
     (lib.mkIf config.services.netdata.enable {
       netdata.path = [ pkgs.linuxPackages.nvidia_x11 ];
     })
-    (lib.mkIf true {
+    # disabled because ha-mcp broken
+    (lib.mkIf false {
         ha-mcp = {
           description = "Home Assistant MCP server";
           wantedBy = [ "multi-user.target" ];
