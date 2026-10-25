@@ -106,7 +106,7 @@ in
       # >   `/nix/store/pzvl9qcgq404rmd3jasn5hvwh3frp75r-deploy-rs-0.1.0/bin/activate'
       flakeSelf.inputs.avante-nvim.packages.${pkgs.stdenv.hostPlatform.system}.ragService
 
-      ha-mcp # mcp server for home-assistant
+      (ignoreBroken ha-mcp) # mcp server for home-assistant
 
       # llm-ls # needed by the neovim plugin
       cointop # bitcoin tracker

@@ -7,6 +7,12 @@
   secrets,
   ...
 }:
+let
+  # port ?
+  hassHost = flakeSelf.nixosConfigurations.router.config.networking.fqdnOrHostName;
+  # toString slib.ports.home-assistant
+  hassPort = 8123;
+in
 {
 
   # SHould be a level instead ?
@@ -26,14 +32,7 @@
     (lib.mkIf config.services.netdata.enable {
       netdata.path = [ pkgs.linuxPackages.nvidia_x11 ];
     })
-    (
-      let
-        # port ?
-        hassHost = flakeSelf.nixosConfigurations.router.config.networking.fqdnOrHostName;
-        # toString slib.ports.home-assistant
-        hassPort = 8123;
-      in
-      {
+    (lib.mkIf true {
         ha-mcp = {
           description = "Home Assistant MCP server";
           wantedBy = [ "multi-user.target" ];

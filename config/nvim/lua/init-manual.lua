@@ -1351,9 +1351,9 @@ vim.api.nvim_create_autocmd({ 'User' }, {
     callback = function()
         vim.notify('Got an answer')
         -- Leave the event callback before closing all windows, including modified buffers.
-        vim.schedule(function()
-            vim.cmd('qall!')
-        end)
+        -- vim.schedule(function()
+        --     vim.cmd('qall!')
+        -- end)
     end,
 })
 

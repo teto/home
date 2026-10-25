@@ -112,8 +112,15 @@ in
 
   home.packages =
     with pkgs;
+    let 
+      lux-cli-teto = flakeSelf.inputs.lux.packages.${pkgs.stdenv.hostPlatform.system}.lux-cli;
+
+      # lux-cli-teto = lux-cli;
+
+    in
 
     [
+      lux-cli-teto
       pkgs.pinentry-curses
 
       # ffs this needs the daemon ?!
@@ -165,8 +172,6 @@ in
       # kaggle # kaggle interface
       # python3Packages.kaggle
 
-      lux-cli
-      # flakeSelf.inputs.lux.packages.${pkgs.stdenv.hostPlatform.system}.lux-cli
 
       sonic-pi
       stow
