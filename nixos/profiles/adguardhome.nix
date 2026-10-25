@@ -9,9 +9,6 @@
     # mutableSettings = true;
     # openFirewall = false;
 
-    # default is 3000
-    # annoys
-    port = 8084;
 
     # mutableSettings = true;
     # extraArgs = [];
@@ -20,6 +17,9 @@
     #   settingsFormat = pkgs.formats.yaml { };
     # careful this can easily break
     settings = {
+      # default is 3000
+      # annoying: let it be defined in users of the profile
+      # http.address = "localhost:8084";
       # List of DNS servers used for initial hostname resolution in case an upstream server name is a hostname.
       dns.bootstrap_dns = [
         "127.0.0.1"
