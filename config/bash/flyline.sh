@@ -6,7 +6,8 @@ flyline editor --show-inline-history false
 flyline editor --select-with-mouse false
 flyline history --backend flyline
 
-flyline set-cursor --backend flyline --style "#33ccff" --effect fade --effect-easing in-out-sine --interpolate-easing out-elastic --interpolate 2
+# it flickers
+# flyline set-cursor --backend flyline --style "#33ccff" --effect fade --effect-easing in-out-sine --interpolate-easing out-elastic --interpolate 2
 
 # Codex: change 
 flyline set-agent-mode \
