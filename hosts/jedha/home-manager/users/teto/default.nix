@@ -101,6 +101,7 @@ in
     in
     llmDeps
     ++ [
+      btop-cuda # for jedha
       flakeSelf.inputs.avante-nvim.packages.${pkgs.stdenv.hostPlatform.system}.ragService
 
       (lib.ignoreBroken ha-mcp) # mcp server for home-assistant
@@ -111,7 +112,7 @@ in
       # gthumb # image manager, great to tag pictures
 
       unsloth-desktop
-      jocalsend # for tests
+      # jocalsend # for tests
 
       ethtool # to check wakeonlan capabilities
       # footswitch # to control foot pedals (use module instead)
@@ -133,13 +134,11 @@ in
       wally-cli # to flash ergodox keyboards
       wine
 
-      nix-sweep # smarter nix-gc
-
       # take the version from stable ?
       nautilus # demande webkit/todo replace by nemo ?
       # hexyl # hex editor
       # simple-scan
-      vifm
+
       # anyrun
       # bridge-utils# pour  brctl
       # vscode-css-languageserver # to showcase 'cssls' lsp server

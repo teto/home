@@ -1,7 +1,5 @@
+# advertise for amp
 {
-  # config,
-  # lib,
-  # pkgs,
   ...
 }:
 {

@@ -19,6 +19,7 @@ in
   options = {
     package-sets = {
 
+      universal = lib.mkEnableOption "basic";
       domotic = lib.mkEnableOption "domotic";
       livecoding = lib.mkEnableOption "live livecoding writing";
       fonts = lib.mkEnableOption "extra fonts";
@@ -66,7 +67,6 @@ in
     {
       # INSTALLED whatever the config
       home.packages = with pkgs; [
-        curl
         # gitFull # to get send-email
         # gnumake
         tree
@@ -112,6 +112,8 @@ in
           # flakeSelf.inputs.jujutsu.packages.${pkgs.stdenv.hostPlatform.system}.jujutsu
           jjui
           pkgs.blazingjj
+          flakeSelf.inputs.jj-gh.packages.${system}.default
+
 
           # pkgs.gg-jj
           # pkgs.lazyjj
@@ -272,7 +274,7 @@ in
           rustic # rust client for restic. Backups should be compatible
           # rbw # Rust bitwarden unofficial client
           ripgrep
-          rofi-teto
+          # rofi-teto # not needed
           rsync
           seahorse # GUI to interact with gnome keyring
           sd # rust cli for search & replace
@@ -283,7 +285,7 @@ in
           tray-tui # make tray menus accessible to CLI
           unzip
           viu # a console image viewer
-          wireshark
+          wireshark-qt
           wiremix # pipewire handler
           wttrbar # for meteo
           xarchiver # to unpack/pack files
@@ -371,17 +373,8 @@ in
         let
           # mcp-servers = [ pkgs.github-mcp-server ];
 
-          zeal-custom = pkgs.zeal.overrideAttrs (oa: {
-
-            # export QMLSCENE_DEVICE=software
-            postInstall = ''
-              wrapProgram $out/bin/zeal --set-default QMLSCENE_DEVICE software
-            '';
-
-          });
-
+          zeal-custom = pkgs.zeal-teto;
           # anthropic agent
-          mistral-vibe-custom = pkgs.mistral-vibe;
         in
         # mcp-servers
         [
@@ -393,12 +386,11 @@ in
           # bmm # rust bookmark manager (not package yet)
           # bfs # breadth first version of ls https://github.com/tavianator/bfs
           binutils
-          btop-cuda # for jedha
           bubblewrap # sandboxing
+
           # cargo # should be project-dependant
-          codex # openai agent
-          codex-acp # originated from zed-industries, used in avante
           # (ignoreBroken claude-code) # anthropic agent
+          curl
 
           # dasht # ~ zeal but in terminal
           # defalt via hm
@@ -423,7 +415,6 @@ in
           lurk # a rust strace
           lsof # to see open files
 
-          flakeSelf.inputs.jj-gh.packages.${system}.default
 
           # flakeSelf.inputs.starship-jj.packages.${system}.default # custom.jj for starship
           libossp_uuid # for the 'libuuid' executable
@@ -432,7 +423,6 @@ in
           # just in my branch :'(
           # git-remote-hg
           manix # nix doc, might be outdated
-          mistral-vibe-custom
           net-tools # for netstat
           nix-output-monitor # 'nom'
 
@@ -487,6 +477,7 @@ in
           ncurses.dev # for infocmp
           neovide
           nix-update # nix-update <ATTR> to update a software
+          nix-sweep # smarter nix-gc
           nixpkgs-review # to help review nix packages
           nvimpager
           # patchutils # for interdiff
@@ -504,8 +495,9 @@ in
           tig
           tmux # when connecting via ssh
           universal-ctags # there are many different ctags, be careful !
-          uv # to install python packages
+          uv   # to install python packages
           unar # used to view archives by yazi (now using ouch ?)
+          vifm
           viu # a console image viewer
 
           whois
@@ -517,8 +509,6 @@ in
           watchman
           visidata
 
-          # wakeonlan # for
-
           # flakeSelf.inputs.rippkgs.packages.${pkgs.stdenv.hostPlatform.system}.rippkgs
           # flakeSelf.inputs.rippkgs.packages.${pkgs.stdenv.hostPlatform.system}.rippkgs-index
         ];
@@ -526,7 +516,7 @@ in
     })
     (mkIf cfg.scientificSoftware {
       home.packages = with pkgs; [
-
+        bcal
         eva # calculette in a REPL
         numbat # fancy calculator, child of 'insect'
         fend # rust unit convertor
@@ -558,10 +548,6 @@ in
 
     (mkIf cfg.waylandPackages {
       home.packages = with pkgs; [
-        # cliphist
-
-        # foot # terminal
-        # use it with $ grim -g "$(slurp)"
         grim # replace scrot/flameshot
         kanshi # autorandr-like
         kickoff # transparent launcher for wlr-root
@@ -593,16 +579,12 @@ in
         # swaylock-effects # offers sexier
         # sway overview, draws layouts for each workspace: dope https://github.com/milgra/sov
         # sov
-        # nwg-bar # locks nothing
-        # nwg-drawer # launcher
-        # nwg-menu
-        # nwg-dock # a nice dock
 
         sway-contrib.grimshot # contains "grimshot" for instance
         pkgs.sway-scratchpad
 
         shotman # -c region
-        tessen # handle passwords
+        # tessen # handle passwords
         # wayprompt
         wev # equivalent of xev, to find the name of keys for instance
         wshowkeys
