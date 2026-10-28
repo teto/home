@@ -285,7 +285,7 @@ in
           tray-tui # make tray menus accessible to CLI
           unzip
           viu # a console image viewer
-          wireshark-qt
+          wireshark
           wiremix # pipewire handler
           wttrbar # for meteo
           xarchiver # to unpack/pack files
