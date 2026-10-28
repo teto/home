@@ -31,11 +31,15 @@ in
     mpdhost = "127.0.0.1";
     mpdport = 6600;
     ownqueue = 1;
-    openhome = 1;
+    # seems to be a weird protocol that lets programs such as bubbleupnp or linn kazoo 
+    # control the playlist
+    openhome = 0;
     upnpav = 1;
 
     # The Yamaha browses MediaServers; the renderer alone is insufficient.
     msfriendlyname = "UpMpd Music";
+
+    # initialize UPRCL local music server when upmpdcli starts, instead of waiting until a client first browses the library.
     uprclautostart = 1;
     uprclmediadirs = "/mnt/ext/music";
     uprclport = 9090;
