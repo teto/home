@@ -58,7 +58,7 @@ in
   # source_if_exists
   #     source $XDG_CONFIG_HOME/bash/lib.sh
   initExtra = ''
-    source $XDG_CONFIG_HOME/bash/bashrc.sh || echo "Fix or create a ~/.config/bash/bashrc.sh to silence this warning"
+    source $XDG_CONFIG_HOME/bash/manual.sh || echo "Fix or create a ~/.config/bash/manual.sh to silence this warning"
   '';
 
 }

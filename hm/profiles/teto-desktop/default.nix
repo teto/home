@@ -145,6 +145,8 @@ in
       pkgs.alsa-utils # for alsamixer
       pkgs.lm_sensors # for `sensors` executable
       flakeSelf.inputs.deploy-rs.packages.${stdenv.hostPlatform.system}.deploy-rs
+
+      flakeSelf.inputs.rikai-nvim.packages.${stdenv.hostPlatform.system}.kokoro
       pciutils # for lspci
       timg
       ncurses.dev # for infocmp

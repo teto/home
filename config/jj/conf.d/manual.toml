@@ -1,9 +1,6 @@
 # how core contributors configure jj: https://github.com/jj-vcs/jj/discussions/5812
 "$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json"
 
-# [revsets]
-# # By default, show the current stack of work.
-# log = 'stack(@)'
 [remotes]
 # jj config set --user remotes.origin.auto-track-bookmarks 'glob:*'
 # TODO ignore backport PRs ?
@@ -55,6 +52,9 @@ tug = ["bookmark", "move", "--from", "closest_bookmark(@)", "--to", "closest_pus
 rebase-all = ["rebase", "-s", "all:roots(trunk()..mutable())", "-d", "trunk()"]
 
 
+[revsets]
+# # By default, show the current stack of work.
+log = 'present(@) | ancestors(immutable_heads().., 5) | trunk()'
 [revset-aliases]
 # TODO override immutable to ignore mine not in trunk
 # "immutable_heads()" = "builtin_immutable_heads() | (trunk().. & ~mine())"
