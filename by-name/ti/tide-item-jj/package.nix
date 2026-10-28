@@ -1,7 +1,7 @@
 { fishPlugins, fetchFromGitHub }:
 fishPlugins.buildFishPlugin {
   pname = "tide-item-jj";
-  version = "unstable-2026-09-01";
+  version = "0-unstable-2026-09-01";
 
   src = fetchFromGitHub {
     owner = "lucasadelino";
