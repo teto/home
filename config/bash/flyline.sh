@@ -1,7 +1,8 @@
 # https://github.com/HalFrgrd/flyline/blob/master/examples/settings.sh
 # terminal is advised for kitty
 flyline set-cursor --backend terminal
-flyline mouse --mode enabled
+# simple/disabled/smart
+# flyline mouse --mode smart
 flyline editor --show-inline-history false
 flyline editor --select-with-mouse false
 flyline history --backend flyline
