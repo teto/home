@@ -8,6 +8,7 @@
 
   environment.systemPackages = [
     # pkgs.wayland-pipewire-idle-inhibit # broken not sure how to use it yet
+    pkgs.pulseaudioFull # to run pactl list modules short | grep -i raop
   ];
 
   # to avoid the "can't find pactl" at launch (if exists ?) should go into hm profile too
