@@ -16,7 +16,7 @@
     listenAddress = "any";
   };
 
-  # where
+  # can't it autodiscover these ?! annoying to have to specify
   extraConfig = ''
     audio_output {
             type            "pipewire"
