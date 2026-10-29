@@ -25,6 +25,8 @@ stdenvNoCC.mkDerivation {
 
   dontBuild = true;
 
+  patches = [ ./retry-discovery.patch ];
+
   postPatch = ''
     patchShebangs audiocast-stream
   '';

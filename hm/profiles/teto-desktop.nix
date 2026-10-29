@@ -34,7 +34,7 @@ in
     flakeSelf.homeProfiles.common
     flakeSelf.homeProfiles.sway
     flakeSelf.homeProfiles.neovim
-
+    flakeSelf.homeModules.audiocast
   ];
 
   home.file.".password-store".source =

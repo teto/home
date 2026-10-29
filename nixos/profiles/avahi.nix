@@ -1,3 +1,10 @@
+/*
+
+guide:
+avahi-browse-domains 
+
+
+*/
 {
   config,
   pkgs,
@@ -6,19 +13,10 @@
 }:
 {
   services.avahi = {
+    enable = true;
     # domainName = "local";
     # allows applications to resolve names in the ‘.local’ domain by transparently querying the Avahi daemon.
     nssmdns4 = true;
-    # openFirewall = true;
-    # publish = {
-    #   enable = true;
-    #   workstation = true;
-    #   domain = true;
-    #   addresses = true;
-    #   hinfo = true; # just to test: expose hardware info
-    #   userServices = true;
-    #   # userServices
-    # };
 
     # https://linux.die.net/man/5/avahi-daemon.conf
     settings = {

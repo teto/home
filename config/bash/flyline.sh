@@ -49,20 +49,7 @@ PROMPT_RULER_FINAL=''
 # flyline settings vim_mode true
 # flyline vim_mode
 
-flyline create-prompt-widget animation --name "MY_ANIMATION" --fps 10  ⣾ ⣷ ⣯ ⣟ ⡿ ⢿ ⣻ ⣽
-
-
-# This replaces any instance of "john" with the animation, so it will animate every time "john" appears in the prompt.
-# flyline create-prompt-widget animation --name "john" --ping-pong --fps 8 \
-#     john \
-#     john \
-#     john \
-#     John \
-#     jOhn \
-#     joHn \
-#     johN \
-#     john \
-#     john
+# flyline create-prompt-widget animation --name "MY_ANIMATION" --fps 10  ⣾ ⣷ ⣯ ⣟ ⡿ ⢿ ⣻ ⣽
 
 
 # Experiment with higher frame rates for smooth transitions:

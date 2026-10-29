@@ -34,7 +34,8 @@ let
   '';
 in
 {
-  enable = true;
+  # I understood this wrong. It lets an mpd client discover media via upnp while I wanted to do the opposite
+  enable = false;
   configuration = {
     # https://www.lesbonscomptes.com/upmpdcli/pages/upmpdcli-manual.html
     friendlyname = "UpMpd";

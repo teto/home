@@ -1,0 +1,17 @@
+--- a/audiocast-stream
++++ b/audiocast-stream
+@@ -423,6 +423,8 @@
+     else:
+-        log('discovering renderer "%s" over SSDP...' % RENDERER_NAME)
+-        control_url = discover_renderer(RENDERER_NAME)
+-        if not control_url:
+-            log('ERROR: renderer "%s" not found on the network' % RENDERER_NAME)
+-            return 1
++        while True:
++            log('discovering renderer "%s" over SSDP...' % RENDERER_NAME)
++            control_url = discover_renderer(RENDERER_NAME)
++            if control_url:
++                break
++            log('renderer "%s" not found; retrying in 30 seconds'
++                % RENDERER_NAME)
++            time.sleep(30)
