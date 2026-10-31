@@ -1,6 +1,21 @@
 
 jj bookmark advance
 
+
+
+
+* elided revisions
+
+  https://docs.jj-vcs.dev/latest/faq/#what-are-elided-revisions-in-the-output-of-jj-log-how-can-i-display-them
+
+* get the first commit with conflict 
+
+ jj log -r 'roots(::@ & conflicts())'
+
+* Merge the whole 
+
+jj duplicate '::pr-531687/mozc-update ~ ::scratch' --onto scratch
+
 * jj log slow
 
   `jj debug index-changed-paths` to speed things up ?
@@ -12,7 +27,12 @@ Answer directly from brice:
 
 visible commits: `jj log -r 'all()`
 
-`jj help -k revsets`
+
+y pas de commande pour voir la valeur de builtin_log :
+  `present(@) | ancestors(immutable_heads().., 2) | trunk()`
+
+a part: `jj help -k revsets`
+
 
 * git blame <=> jj file annotate 
 

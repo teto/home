@@ -1,10 +1,14 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   enable = true;
+
+  # wether to export MPD_HOST / PORT
+  # enableSessionVariables = true;
+
   # dataDir = xdg.dataDir
   # playlistDirectory =
   # extraConfig =
-  # extraArgs =
+  # extraArgs = []
   network = {
     # port
     startWhenNeeded = false;
@@ -12,11 +16,22 @@
     listenAddress = "any";
   };
 
+  # can't it autodiscover these ?! annoying to have to specify
   extraConfig = ''
-    include "${config.xdg.configHome}/mpd/manual.conf"
+    # Restore the saved queue, but do not start playing after MPD starts.
+    restore_paused "yes"
+
     audio_output {
             type            "pipewire"
-            name            "PipeWire Sound Server"
+            name            "PipeWire dnla"
+            target          "audiocast"
     }
+
+    audio_output {
+            type            "pipewire"
+            name            "PipeWire Local"
+    }
+    include "${config.xdg.configHome}/mpd/manual.conf"
   '';
+
 }

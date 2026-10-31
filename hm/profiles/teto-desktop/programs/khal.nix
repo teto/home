@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
-  enable = true;
+  # disableed because khal broken
+  enable = false;
 
   package = pkgs.khal.overrideAttrs (oa: {
 

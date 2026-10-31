@@ -1194,9 +1194,9 @@ end
 -- avante {{{
 require('plugins.avante')
 
-local avante = require('teto.avante')
+local my_avante = require('teto.avante')
 
-avante.setup_autocmd()
+my_avante.setup_autocmd()
 
 -- HACK around sway-scratchpad limitation where one can't esapce quotes so alleviate the need for that via a proxy command
 vim.api.nvim_create_user_command('LlmChat', function()
@@ -1344,3 +1344,16 @@ end
 
 -- _local
 vim.opt.spellfile = vim.fs.joinpath(vim.fn.stdpath('data'), 'site/spell/computer.utf-8.add')
+
+vim.api.nvim_create_autocmd({ 'User' }, {
+    pattern = 'AvanteViewBufferUpdated',
+    desc = 'Quit Neovim after receiving an Avante answer',
+    callback = function()
+        vim.notify('Got an answer')
+        -- Leave the event callback before closing all windows, including modified buffers.
+        -- vim.schedule(function()
+        --     vim.cmd('qall!')
+        -- end)
+    end,
+})
+

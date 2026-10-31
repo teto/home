@@ -40,15 +40,13 @@ in
     flakeSelf.nixosModules.nvd
     flakeSelf.nixosModules.tetos
 
+    flakeSelf.nixosProfiles.pipewire
+    # ./pipewire.nix
     flakeSelf.nixosProfiles.universal
     flakeSelf.nixosProfiles.avahi
     flakeSelf.nixosProfiles.nix-daemon
     flakeSelf.nixosModules.sudo
     flakeSelf.nixosModules.wireguard
-
-    # ./ntp.nix
-
-    ./pipewire.nix
 
     # TODO autoload it ?
     # ./desktop/sops.nix

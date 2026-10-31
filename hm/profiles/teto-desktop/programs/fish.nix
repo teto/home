@@ -4,18 +4,6 @@
   ...
 }:
 let
-  tideItemJj = pkgs.fishPlugins.buildFishPlugin {
-    pname = "tide-item-jj";
-    version = "unstable-2026-05-27";
-
-    src = pkgs.fetchFromGitHub {
-      owner = "lucasadelino";
-      repo = "tide-item-jj";
-      rev = "e1150b7332b85149b468cb10c2844f082f33975b";
-      hash = "sha256-vLSrHPoytZ/kXQh0Bp/4AWe8YLlyufRjepfXUAuWCB8=";
-    };
-  };
-
   fishPluginFromVendor =
     plugin:
     pkgs.runCommand "${plugin.pname or plugin.name}-hm-fish-plugin" { } ''
@@ -189,6 +177,14 @@ in
 
   functions = {
 
+    ndh = {
+
+      body = ''
+        nix develop ~/home#$(basename $PWD)"
+      '';
+
+    };
+
     # onProcessExit
     my_chpwd = {
 
@@ -346,7 +342,7 @@ in
     }
     {
       name = "tide-item-jj";
-      src = fishPluginFromVendor tideItemJj;
+      src = fishPluginFromVendor pkgs.tide-item-jj;
     }
     {
       #   fishPlugins.fzf-fish  # to compare with fzf-git-sh

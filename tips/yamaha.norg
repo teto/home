@@ -1,0 +1,30 @@
+R-N800 
+_airplay._tcp.local & _raop._tcp.local
+
+will show you what's supported:
+
+@code.begin
+❯ yamaha input 
+current  input         type       notes
+         napster       service    account setup, link
+         spotify       service    link
+         qobuz         service    account setup, link
+         tidal         service    link
+         deezer        service    account setup, link
+         amazon_music  service    account setup, link
+         airplay       airplay
+         mc_link       link       rename
+*        server        server     link, rename
+         net_radio     radio      link, rename
+         bluetooth     bluetooth  link
+         tuner         tuner      link, rename
+         optical1      physical   link, rename
+         optical2      physical   link, rename
+         coaxial1      physical   link, rename
+         coaxial2      physical   link, rename
+         line1         physical   link, rename
+         line2         physical   link, rename
+         line_cd       physical   link, rename
+         phono         physical   link, rename
+         usb_dac       physical   link, rename
+@code.end

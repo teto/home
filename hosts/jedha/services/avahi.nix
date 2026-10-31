@@ -8,9 +8,11 @@
     flakeSelf.nixosProfiles.avahi
   ];
 
-  enable = false;
+  enable = true;
+  openFirewall = true;
 
   debug = true;
+
 
   # allowInterfaces = [
   #   "wlp10s0"
@@ -23,21 +25,26 @@
       # secrets.jedha.hostname;
       host-name = "jedha";
       # enable-dbus = true;
+      browse-domains = [ ];
+      use-ipv6 = false; # bug with multiple hostnames
+    };
+
+    publish = {
+        disable-publishing = false;
+        disable-user-service-publishing = false;
+        publish-addresses = true;
+      };
 
     };
-  };
 
-  browseDomains = [ ];
 
-  ipv6 = false; # bug with multiple hostnames
   nssmdns4 = true;
-  openFirewall = true;
-  publish = {
-    enable = true;
-    workstation = true;
-    domain = true;
-    addresses = true;
-    # publish-a-on-ipv6 = false;
-  };
+  # publish = {
+  #   enable = true;
+  #   workstation = true;
+  #   domain = true;
+  #   addresses = true;
+  #   # publish-a-on-ipv6 = false;
+  # };
 
 }

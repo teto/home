@@ -22,6 +22,7 @@
     mode = null; # "enabled";
   };
 
+  # kitten quick-access-terminal
   settings = {
     update_check_interval = 0; # set to 0 to disable (in hours)
     # bold_font = "auto";
@@ -37,8 +38,10 @@
       # generated. Path must match the one in wallust.toml
       "./manual.conf";
 
-    extraConfig = ''
-      include "themes/wallust.conf"
-    '';
   };
+
+  # include "themes/wallust.conf"
+  extraConfig = ''
+    include themes/noctalia.conf
+  '';
 }
