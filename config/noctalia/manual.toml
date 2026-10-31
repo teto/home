@@ -98,7 +98,7 @@ widget_order = [ "lockscreen-login-box@HDMI-A-2", "lockscreen-login-box@HDMI-A-1
     type = "login_box"
 
         [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
-        background_color = "surface_variant"
+        background_color = "surface_container"
         background_opacity = 0.88
         background_radius = 12.0
         input_opacity = 1.0
@@ -115,7 +115,7 @@ widget_order = [ "lockscreen-login-box@HDMI-A-2", "lockscreen-login-box@HDMI-A-1
     type = "login_box"
 
         [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-2".settings]
-        background_color = "surface_variant"
+        background_color = "surface_container"
         background_opacity = 0.88
         background_radius = 12.0
         input_opacity = 1.0

@@ -7,7 +7,8 @@
     package = pkgs.mujmap-dev;
   };
 
-  audiocast.enable = true;
+  # nope !
+  # audiocast.enable = false;
 
   # let noctalia deal with it ?
   network-manager-applet.enable = true;

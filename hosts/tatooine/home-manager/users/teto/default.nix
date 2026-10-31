@@ -71,6 +71,8 @@ in
     bluetooth = true;
     finance = true;
 
+    jellyfin = true;
+
     enableDesktopGUIPackages = true;
     enableIMPackages = true;
     scientificSoftware = true;

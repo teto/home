@@ -52,11 +52,10 @@ let
 
     Mod4 = "exec anyrun";
 
+    # should be mpris command instead ?
     XF86AudioNext = "exec ${mpc} next; exec notify-send --icon=forward -h string:synchronous:mpd 'Audio next'";
     XF86AudioPrev = "exec ${mpc} next; exec notify-send --icon=backward -h string:synchronous:mpd 'Audio previous'";
     XF86AudioPlay = "exec ${mpc} toggle; exec notify-send --icon=play-pause -h string:synchronous:mpd 'mpd' 'Audio Pause' -e ";
-    # XF86AudioPlay = "exec ${pkgs.vlc}/bin/vlc; exec ${notify-send} --icon=media-playback-stop-symbolic -u low 'test'";
-
     XF86AudioStop = "exec ${mpc} stop; exec notify-send --icon=stop -h string:synchronous:mpd 'Stopped Audio' -e";
   };
 

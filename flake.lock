@@ -1248,6 +1248,22 @@
         "type": "github"
       }
     },
+    "mkdocs-catppuccin": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1767028711,
+        "narHash": "sha256-YVIZAtQT2B4Xs2sBaszvyyukm+1klCJdRpsc/BYV1gw=",
+        "owner": "ruslanlap",
+        "repo": "mkdocs-catppuccin",
+        "rev": "fd8ac6106b5b6d32922cd80cbc3d221622a17408",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ruslanlap",
+        "repo": "mkdocs-catppuccin",
+        "type": "github"
+      }
+    },
     "mokuro": {
       "flake": false,
       "locked": {
@@ -1564,6 +1580,29 @@
         "type": "github"
       }
     },
+    "nixflix": {
+      "inputs": {
+        "mkdocs-catppuccin": "mkdocs-catppuccin",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "treefmt-nix": "treefmt-nix_4",
+        "vpn-confinement": "vpn-confinement"
+      },
+      "locked": {
+        "lastModified": 1793295624,
+        "narHash": "sha256-BZTLgxPS10cMKy0kVXBYPome8G9YJGqjuWSEj2+hoHc=",
+        "owner": "kiriwalawren",
+        "repo": "nixflix",
+        "rev": "8402435b337f5f94e971f4b585d92d8a81eedceb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kiriwalawren",
+        "repo": "nixflix",
+        "type": "github"
+      }
+    },
     "nixos-anywhere": {
       "inputs": {
         "disko": "disko_2",
@@ -1573,7 +1612,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "treefmt-nix": "treefmt-nix_4"
+        "treefmt-nix": "treefmt-nix_5"
       },
       "locked": {
         "lastModified": 1792567263,
@@ -2195,7 +2234,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "treefmt-nix": "treefmt-nix_5"
+        "treefmt-nix": "treefmt-nix_6"
       },
       "locked": {
         "lastModified": 1793215771,
@@ -2266,6 +2305,7 @@
         "nix-index-database": "nix-index-database",
         "nix-update": "nix-update",
         "nixbot": "nixbot",
+        "nixflix": "nixflix",
         "nixos-anywhere": "nixos-anywhere",
         "nixos-hardware": "nixos-hardware",
         "nixos-stable": "nixos-stable_2",
@@ -2278,7 +2318,7 @@
         "rocks-nvim": "rocks-nvim",
         "sops-nix": "sops-nix",
         "transgression-tui": "transgression-tui",
-        "treefmt-nix": "treefmt-nix_6",
+        "treefmt-nix": "treefmt-nix_7",
         "vicinae": "vicinae",
         "vicinae-extensions": "vicinae-extensions",
         "yazi": "yazi"
@@ -2631,7 +2671,7 @@
     "treefmt-nix_4": {
       "inputs": {
         "nixpkgs": [
-          "nixos-anywhere",
+          "nixflix",
           "nixpkgs"
         ]
       },
@@ -2652,7 +2692,7 @@
     "treefmt-nix_5": {
       "inputs": {
         "nixpkgs": [
-          "rikai-nvim",
+          "nixos-anywhere",
           "nixpkgs"
         ]
       },
@@ -2671,6 +2711,27 @@
       }
     },
     "treefmt-nix_6": {
+      "inputs": {
+        "nixpkgs": [
+          "rikai-nvim",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1791885023,
+        "narHash": "sha256-C3alQ2MEt0zVrUSho5NUDo3jmhbff72++bfwoqT9Omo=",
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "rev": "0d6d739a833ba9a9c93034862e4a7b061a062a1c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "treefmt-nix_7": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
@@ -2821,6 +2882,21 @@
       "original": {
         "owner": "mrcjkb",
         "repo": "vimcats",
+        "type": "github"
+      }
+    },
+    "vpn-confinement": {
+      "locked": {
+        "lastModified": 1791310298,
+        "narHash": "sha256-SpqEEuyrkzTqjIHwHrZE+Rs6ez2tzIeYkSY67zp6fcQ=",
+        "owner": "Maroka-chan",
+        "repo": "VPN-Confinement",
+        "rev": "cc37bcf5000e237709e725a9cda010a5cbce3111",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Maroka-chan",
+        "repo": "VPN-Confinement",
         "type": "github"
       }
     },
