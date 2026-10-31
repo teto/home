@@ -102,7 +102,11 @@ in
     llmDeps
     ++ [
       btop-cuda # for jedha
-      flakeSelf.inputs.avante-nvim.packages.${pkgs.stdenv.hostPlatform.system}.ragService
+      brush # a rust implementation of bash
+
+
+      # creates conflicts since it brings python and several executables
+      # flakeSelf.inputs.avante-nvim.packages.${pkgs.stdenv.hostPlatform.system}.ragService
 
       (lib.ignoreBroken ha-mcp) # mcp server for home-assistant
 
@@ -142,6 +146,10 @@ in
       # anyrun
       # bridge-utils# pour  brctl
       # vscode-css-languageserver # to showcase 'cssls' lsp server
+
+      rura  # to build shell pipelines
+      termusic  # terminal music
+ 
     ];
 
   package-sets = {

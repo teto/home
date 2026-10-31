@@ -15,3 +15,11 @@ avahi exposes several tools such as:
 
 TODO advertise ssh server ?
 home-assistant ?
+
+* types de reponse
+
+_raop._tcp: _raop (Remote Audio Output Protocol) : C'est le nom du protocole d'origine utilisé pour la diffusion audio sans fil (souvent appelé le protocole AirTunes, l'ancêtre d'AirPlay).
+  _airplay._tcp: nouvelle version
+  _sendspin._tcp => Sendspin open-source multi-room audio streaming protocol
+_device-info._tcp
+ _hid._udp : telecommande

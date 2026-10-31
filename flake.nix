@@ -393,6 +393,7 @@
                 true
               else
                 builtins.elem pkgName [
+                  "antigravity-cli"
                   "Oracle_VM_VirtualBox_Extension_Pack"
                   "Oracle_VirtualBox_Extension_Pack"
                   "jocalsend"
