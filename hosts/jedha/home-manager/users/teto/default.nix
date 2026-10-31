@@ -102,7 +102,9 @@ in
     llmDeps
     ++ [
       btop-cuda # for jedha
-      flakeSelf.inputs.avante-nvim.packages.${pkgs.stdenv.hostPlatform.system}.ragService
+
+      # creates conflicts since it brings python and several executables
+      # flakeSelf.inputs.avante-nvim.packages.${pkgs.stdenv.hostPlatform.system}.ragService
 
       (lib.ignoreBroken ha-mcp) # mcp server for home-assistant
 
