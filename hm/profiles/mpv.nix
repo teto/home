@@ -43,4 +43,9 @@
     ];
 
   };
+
+  home.packages = [
+
+    # pkgs.mpv-music
+  ];
 }

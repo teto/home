@@ -62,6 +62,7 @@ in
 
   };
 
+
   # this gets merged by default
   config = lib.mkMerge [
     {
@@ -139,7 +140,7 @@ in
           # python3Packages.unsloth # broken
 
           # pkgs.aider-chat # breaks
-          pkgs.python3Packages.huggingface-hub
+          # pkgs.python3Packages.huggingface-hub # conflicts
 
           # pkgs.harbor-cli # for terminal-bench tests on llms
           # often broken, keep it in project-specific stuff
@@ -152,7 +153,7 @@ in
 
           pkgs.pi-coding-agent # to test as ACP provider for avante
 
-          pkgs.opencode # to test in avante.nvim
+          # pkgs.opencode # to test in avante.nvim
           # pkgs.python3Packages.vllm
           # pkgs.repomix # to upload a codebase to llm
         ];
@@ -297,6 +298,8 @@ in
           xwayland-satellite # to launch X applications within wayland (and without a full Xwayland ?)
           yt-dlp # to download youtube videos
 
+          waytator # to capture screen videos
+
         ];
 
     })
@@ -354,6 +357,7 @@ in
         wirelesstools # to get iwconfig
         iw
         wavemon
+        # netui # nice UI not merged yet
 
         # aircrack-ng # TODO move to hacking package-set
       ];
@@ -480,20 +484,23 @@ in
           nix-sweep # smarter nix-gc
           nixpkgs-review # to help review nix packages
           nvimpager
+          netwatch # to monitor network
           # patchutils # for interdiff
           perf-tools # to interpret
 
           # rainfrog # database exploration
-          trurl # used to parse url in the firefox-router executable
+
 
           process-compose # docker-compose - like
           # rpl # to replace strings across files
+          repgrep # replace matches found by rg
           strace
           snitch # interactively watch connections
           shfmt # shell format
           tio # serial console reader
           tig
           tmux # when connecting via ssh
+          trurl # used to parse url in the firefox-router executable
           universal-ctags # there are many different ctags, be careful !
           uv   # to install python packages
           unar # used to view archives by yazi (now using ouch ?)
@@ -698,12 +705,14 @@ in
         # MUSIC ONLY
         # jellyfin-tui # nice
         pkgs.gelly # gtk+rust music player GUI
+        # pkgs.rufin
         # pkgs.feishin # GUI
         # pkgs.jellycli # could not login :/
 
 
         # VIDEO compatible
         # - Jellyfin MPV Shim
+        pkgs.tsukimi # gtk+rust music player GUI
         pkgs.jellyfin-desktop
         pkgs.jellyfin-mpv-shim
         # jellyhaj # not upstreamed yet 

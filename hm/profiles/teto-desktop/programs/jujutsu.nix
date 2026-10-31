@@ -10,7 +10,7 @@
 
   enable = true;
 
-  package = flakeSelf.inputs.jujutsu.packages.${pkgs.stdenv.hostPlatform.system}.jujutsu;
+  # package = flakeSelf.inputs.jujutsu.packages.${pkgs.stdenv.hostPlatform.system}.jujutsu;
 
   # only available when jj-gh module imported
   gh = {

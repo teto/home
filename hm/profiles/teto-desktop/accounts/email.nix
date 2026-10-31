@@ -1,3 +1,4 @@
+# hylki at the time seemed like a promising GUI
 {
   config,
   pkgs,

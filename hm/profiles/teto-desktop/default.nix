@@ -118,11 +118,16 @@ in
       # lux-cli-teto = lux-cli;
 
       mistral-vibe-custom = pkgs.mistral-vibe;
+
+      kodi-teto = pkgs.kodi-tetos;
     in
 
     [
+      kodi-teto 
       codex # openai agent
       codex-acp # originated from zed-industries, used in avante
+
+      gupnp-tools # upnp toolset, ssdp discovery
 
       lux-cli-teto
       pkgs.pinentry-curses
@@ -183,7 +188,7 @@ in
       # python3Packages.kaggle
 
 
-      sonic-pi
+      sonic-pi  # for live music coding
       stow
       systemctl-tui
       timr-tui # rust clock
@@ -193,7 +198,8 @@ in
       # pkgs.vlc # to see it in popcorn
       pkgs.vlc4 # to see it in popcorn
 
-      tarts # fun TUI screensaver, cmatrix-like
+      # tarts # fun TUI screensaver, cmatrix-like
+      pkgs.streamlink # to pipe streams into mpv/vlc
 
       yamaha-cli
       # flakeSelf.inputs.git-repo-manager.packages.${pkgs.stdenv.hostPlatform.system}.git-repo-manager
@@ -260,9 +266,12 @@ in
     TETOS_BUILDER_NEOTOKYO = builder_neotokyo;
     TETOS_BUILDER_JEDHA = builder_jedha;
     TETOS_BUILDER_NIXCOMMUNITY = builder_nixcommunity;
-    inherit (secrets) TAVILY_API_KEY;
-    inherit (secrets) FIRECRAWL_API_KEY;
-    inherit (secrets) CONFIDENT_AI_API_KEY;
+    inherit (secrets) 
+      TAVILY_API_KEY
+      FIRECRAWL_API_KEY
+      CONFIDENT_AI_API_KEY
+      SOFYA_API_KEY
+      ;
   };
 
   # tetos.enableYubikey = true;
