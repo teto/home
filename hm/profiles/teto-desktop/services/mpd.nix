@@ -18,6 +18,9 @@
 
   # can't it autodiscover these ?! annoying to have to specify
   extraConfig = ''
+    # Restore the saved queue, but do not start playing after MPD starts.
+    restore_paused "yes"
+
     audio_output {
             type            "pipewire"
             name            "PipeWire dnla"

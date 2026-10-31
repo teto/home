@@ -218,7 +218,7 @@ in
           # pkgs.popcorntime
           pkgs.peaclock # show big clock in terminal
           # gnome.california # fails
-          pkgs.vlc
+          pkgs.vlc4
           # TODO
           # buku # broken
           # gcalc
@@ -341,7 +341,7 @@ in
 
     (mkIf cfg.enableDesktopGUIPackages {
       home.packages = with pkgs; [
-        vlc
+        # vlc
         # pinta # photo editing
         # element-desktop # TODO this should go into nix profile install
 
@@ -691,7 +691,29 @@ in
         pkgs.tsukumi
       ];
     })
+  (mkIf cfg.jellyfin {
 
+      home.packages = [
+
+        # MUSIC ONLY
+        # jellyfin-tui # nice
+        pkgs.gelly # gtk+rust music player GUI
+        # pkgs.feishin # GUI
+        # pkgs.jellycli # could not login :/
+
+
+        # VIDEO compatible
+        # - Jellyfin MPV Shim
+        pkgs.jellyfin-desktop
+        pkgs.jellyfin-mpv-shim
+        # jellyhaj # not upstreamed yet 
+        # fladder # nice GUI
+        # jftui too minimalistic
+        # pkgs.jellyflix # nice
+        # pkgs.plezy # nice GUI
+      ];
+
+    })
     (mkIf cfg.livecoding {
 
       home.packages = [
