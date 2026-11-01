@@ -745,7 +745,6 @@ vim.pack.add({
     -- bug in rocks.nvim when trying to debug feed.nvim
     -- so I install it here https://github.com/lumen-oss/rocks.nvim/issues/706
     -- lua deps gotten via nix
-    -- 'https://github.com/neo451/feed.nvim',
 
     -- 'https://github.com/elanmed/fzf-lua-frecency.nvim', -- to rocks
 
@@ -1356,4 +1355,34 @@ vim.api.nvim_create_autocmd({ 'User' }, {
         -- end)
     end,
 })
+
+--
+--
+--
+--
+-- ╭─
+-- test
+--
+--
+--
+-- ╰─
+
+
+vim.api.nvim_create_autocmd(
+  'PackChanged',
+  {
+    callback = function(ev)
+      local name, kind = ev.data.spec.name, ev.data.kind
+	  print("package name ", name)
+	  vim.print("spec ", ev.data.spec)
+	  -- vim.print("version ", ev.data.spec.version)
+
+	  -- print("package kind ", kind)
+      -- if name == 'avante.nvim' and (kind == 'install' or kind == 'update') then
+      --   -- Call `:AvanteBuild` to download prebuilt libraries
+      --   vim.system({ 'make' }, { cwd = ev.data.path }):wait()
+      -- end
+    end
+  }
+)
 

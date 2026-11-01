@@ -3895,7 +3895,7 @@
 #satip-channellist-url=
 
 # IP Address (string)
-sout-dlna-ip=192.168.1.254
+sout-dlna-ip=192.168.1.193
 
 # UPnP Renderer port (integer)
 sout-dlna-port=5000
@@ -4833,7 +4833,7 @@ metadata-network-access=1
 #global-key-leave-fullscreen=
 
 # Exit fullscreen (string)
-#key-leave-fullscreen=Esc
+key-leave-fullscreen=Échap
 
 # Play/Pause (string)
 #global-key-play-pause=
@@ -4845,13 +4845,13 @@ metadata-network-access=1
 #global-key-pause=
 
 # Pause only (string)
-#key-pause=Browser Stop
+key-pause=Arrêter le navigateur
 
 # Play only (string)
 #global-key-play=
 
 # Play only (string)
-#key-play=Browser Refresh
+key-play=Rafraîchir le navigateur
 
 # Faster (string)
 #global-key-faster=
@@ -4977,31 +4977,31 @@ metadata-network-access=1
 #global-key-nav-activate=
 
 # Activate (string)
-#key-nav-activate=Enter
+key-nav-activate=Entrée
 
 # Navigate up (string)
 #global-key-nav-up=
 
 # Navigate up (string)
-#key-nav-up=Up
+key-nav-up=Haut
 
 # Navigate down (string)
 #global-key-nav-down=
 
 # Navigate down (string)
-#key-nav-down=Down
+key-nav-down=Bas
 
 # Navigate left (string)
 #global-key-nav-left=
 
 # Navigate left (string)
-#key-nav-left=Left
+key-nav-left=Gauche
 
 # Navigate right (string)
 #global-key-nav-right=
 
 # Navigate right (string)
-#key-nav-right=Right
+key-nav-right=Droite
 
 # Go to the DVD menu (string)
 #global-key-disc-menu=
@@ -5319,13 +5319,13 @@ metadata-network-access=1
 #global-key-viewpoint-fov-in=
 
 # Shrink the viewpoint field of view (360°) (string)
-#key-viewpoint-fov-in=Page Up
+key-viewpoint-fov-in=Page précédente
 
 # Expand the viewpoint field of view (360°) (string)
 #global-key-viewpoint-fov-out=
 
 # Expand the viewpoint field of view (360°) (string)
-#key-viewpoint-fov-out=Page Down
+key-viewpoint-fov-out=Page suivante
 
 # Roll the viewpoint clockwise (360°) (string)
 #global-key-viewpoint-roll-clock=

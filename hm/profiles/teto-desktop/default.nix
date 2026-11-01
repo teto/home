@@ -183,7 +183,7 @@ in
       # python3Packages.kaggle
 
 
-      sonic-pi
+      sonic-pi  # for live music coding
       stow
       systemctl-tui
       timr-tui # rust clock
@@ -193,7 +193,8 @@ in
       # pkgs.vlc # to see it in popcorn
       pkgs.vlc4 # to see it in popcorn
 
-      tarts # fun TUI screensaver, cmatrix-like
+      # tarts # fun TUI screensaver, cmatrix-like
+      pkgs.streamlink # to pipe streams into mpv/vlc
 
       yamaha-cli
       # flakeSelf.inputs.git-repo-manager.packages.${pkgs.stdenv.hostPlatform.system}.git-repo-manager
