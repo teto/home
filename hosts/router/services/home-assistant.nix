@@ -19,6 +19,9 @@
       pkgs.awtrix-ng-hass-integration
       pkgs.ha_mcp_tools
       # (config.services.home-assistant.package.python.pkgs.callPackage ./hass-node-red-module.nix {})
+      pkgs.rtetempo
+
+      # TODO add washing machine one
     ];
 
     config = {

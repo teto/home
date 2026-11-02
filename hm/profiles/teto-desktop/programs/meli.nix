@@ -12,7 +12,7 @@
 
   # there is meli-teto as well
   # package = pkgs.meli-git;
-  package = pkgs.meli-teto;
+  # package = pkgs.meli-teto;
 
   includes = [
     # use fullpath because it's easier to copy/paste

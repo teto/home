@@ -1,7 +1,7 @@
 {
   bun,
   cacert,
-  electron_42,
+  electron_43,
   fetchFromGitHub,
   ffmpeg,
   lib,
@@ -17,7 +17,7 @@
 
 let
   pname = "subminer";
-  version = "0.19.1";
+  version = "0.21.1";
 
   mainSrc = fetchFromGitHub {
     owner = "ksyasuda";
@@ -121,7 +121,7 @@ let
 
     outputHashAlgo = "sha256";
     outputHashMode = "recursive";
-    outputHash = "sha256-AVQOqkEYlBTQAEkFE29basrxWSjOpMffO6yOiYJnDro=";
+    outputHash = "sha256-qVxhpAUFSbpnm+1b6A1znI5mGokerdSTbZUHobzJZvo=";
   };
 
   runtimePath = lib.makeBinPath [
@@ -166,8 +166,8 @@ stdenv.mkDerivation {
     bun run build
     node_modules/.bin/electron-builder --dir \
       --linux dir \
-      -c.electronDist=${electron_42.dist} \
-      -c.electronVersion=${electron_42.version} \
+      -c.electronDist=${electron_43.dist} \
+      -c.electronVersion=${electron_43.version} \
       -c.npmRebuild=false \
       --publish never
 

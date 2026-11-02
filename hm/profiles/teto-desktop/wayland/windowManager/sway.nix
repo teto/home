@@ -15,7 +15,7 @@ let
 
   brightnessScript = pkgs.tetos-brightness;
   wpctl = "${pkgs.wireplumber}/bin/wpctl";
-  mpc = "${pkgs.mpc}/bin/mpc";
+  playerctl = "${pkgs.playerctl}/bin/playerctl";
 
   # pkgs.writeShellApplication
   getIntegerVolume = pkgs.writeShellScript "get-volume-as-integer" ''
@@ -52,11 +52,17 @@ let
 
     Mod4 = "exec anyrun";
 
-    # should be mpris command instead ?
-    XF86AudioNext = "exec ${mpc} next; exec notify-send --icon=forward -h string:synchronous:mpd 'Audio next'";
-    XF86AudioPrev = "exec ${mpc} next; exec notify-send --icon=backward -h string:synchronous:mpd 'Audio previous'";
-    XF86AudioPlay = "exec ${mpc} toggle; exec notify-send --icon=play-pause -h string:synchronous:mpd 'mpd' 'Audio Pause' -e ";
-    XF86AudioStop = "exec ${mpc} stop; exec notify-send --icon=stop -h string:synchronous:mpd 'Stopped Audio' -e";
+    # mpd version
+    # XF86AudioNext = "exec ${mpc} next; exec notify-send --icon=forward -h string:synchronous:mpd 'Audio next'";
+    # XF86AudioPrev = "exec ${mpc} next; exec notify-send --icon=backward -h string:synchronous:mpd 'Audio previous'";
+    # XF86AudioPlay = "exec ${mpc} toggle; exec notify-send --icon=play-pause -h string:synchronous:mpd 'mpd' 'Audio Pause' -e ";
+    # XF86AudioStop = "exec ${mpc} stop; exec notify-send --icon=stop -h string:synchronous:mpd 'Stopped Audio' -e";
+
+    # mpris controls
+    XF86AudioNext = "exec ${playerctl} next";
+    XF86AudioPrev = "exec ${playerctl} previous";
+    XF86AudioPlay = "exec ${playerctl} play-pause";
+    XF86AudioStop = "exec ${playerctl} stop";
   };
 
 in
