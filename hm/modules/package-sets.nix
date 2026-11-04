@@ -152,7 +152,7 @@ in
 
           pkgs.pi-coding-agent # to test as ACP provider for avante
 
-          pkgs.opencode # to test in avante.nvim
+          # pkgs.opencode # to test in avante.nvim
           # pkgs.python3Packages.vllm
           # pkgs.repomix # to upload a codebase to llm
         ];

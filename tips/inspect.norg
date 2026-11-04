@@ -1,7 +1,12 @@
 INSPECT_LOG_DIR
 INSPECT_DISPLAY=plain 
 
+
 list of tests
+
+* list tasks
+
+inspect list tasks security
 
 https://inspect.aisi.org.uk/evals/
 
@@ -12,6 +17,11 @@ https://meridianlabs-ai.github.io/inspect_harbor/agents.html
 
 inspect log dump logs/2026-10-10T20-44-23-00-00_capitals_evn4outSE2XayrQeN5vL2W.eval | fx
 
+  inspect trace anomalies
+
+ "Centaur" mode implies human assistance
+  mini_swe_agent
+
 * hooks 
 
   worth exploring for setup/teardown of environment
@@ -19,3 +29,5 @@ inspect log dump logs/2026-10-10T20-44-23-00-00_capitals_evn4outSE2XayrQeN5vL2W.
 https://inspect.aisi.org.uk/extensions-hooks.html
 
   on_sample_start
+
+  inspect view starts a nice server to look at traces/logs

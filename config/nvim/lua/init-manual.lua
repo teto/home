@@ -948,7 +948,8 @@ end, { desc = 'Go to file, create if missing' })
 -- Outside of the fork it kills the plugin so careful
 -- normally overriden by setup call
 vim.g.avante = {
-    debug = true, -- print error messages
+	-- -- print error messages, set to false to avoid issues with inspect_ai
+    debug = false, 
     -- log_level =
     log_level = vim.log.levels.DEBUG,
 

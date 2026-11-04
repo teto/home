@@ -149,6 +149,10 @@ stdenv.mkDerivation {
     cp -R ${bunDeps}/stats/node_modules ./stats/node_modules
     cp -R ${bunDeps}/vendor/texthooker-ui/node_modules ./vendor/texthooker-ui/node_modules
     cp -R ${bunDeps}/vendor/subminer-yomitan/node_modules ./vendor/subminer-yomitan/node_modules
+    chmod -R u+w vendor/subminer-yomitan/node_modules
+    printf '%s\n' \
+      ed62739fdaef4b4b3c5eca48aa73a4899b71930958a902212cba4a0a0f221cf4 \
+      > vendor/subminer-yomitan/node_modules/.subminer-package-lock-hash
     chmod -R u+w node_modules stats/node_modules vendor/*/node_modules
     patchShebangs node_modules stats/node_modules vendor/*/node_modules
     for executable in node_modules/.bin/* stats/node_modules/.bin/* vendor/*/node_modules/.bin/*; do
