@@ -12,6 +12,9 @@
     enable = true;
   };
 
+  # use new framework
+  nftables.enable = true;
+
   useNetworkd = true;
 
   hosts = {

@@ -67,6 +67,10 @@ bootstrap-vps target:
 bump-meli:
   nix-update -F --version=branch=master meli-teto
 
+discover-upnp-renderers:
+ gssdp-discover --timeout=5 \
+   --target=urn:schemas-upnp-org:device:MediaRenderer:1
+
 # just to save the command
 
 nix-repl:

@@ -1,27 +1,12 @@
-# advertise for amp
+{ config, ... }:
 {
-  ...
-}:
-{
-  enable = true;
-  # announceInterval = 60;
-  openFirewall = true;
-
-
-  # there are udp errors when it binds to wireguard network ?
-
-  settings = {
-    # port=8200;
-    # enable_subtitles
-    friendly_name = "jedha";
-    # inotify = "yes";
-    log_level = "warn";
-    media_dir = [ 
-      # can be prefixed with V/A, to filter audio/video
-      "/mnt/ext/music" 
-    ];
-    inotify = "yes";
-    # db_dir =
+  enable = false;
+  environment = {
+    N8N_HOST = "127.0.0.1";
+    N8N_PROTOCOL = "https";
+    N8N_LISTEN_ADDRESS = "127.0.0.1";
+    # .local / .vpn / fqdn
+    WEBHOOK_URL = "https://n8n.${config.networking.hostName}";
   };
-}
 
+}

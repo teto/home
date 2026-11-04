@@ -36,6 +36,9 @@
   # add wireguard peers
   extraHosts = lib.wireguard.vpnHosts;
 
+  # apparently the recommended backend
+  nftables.enable = true;
+
   # networking.firewall.checkReversePath = false; # for nixops
   firewall = {
     allowedTCPPorts =
@@ -53,6 +56,7 @@
 
     allowedUDPPorts = [
       # we can do without ?
+      # TODO configure it via tetos module
       5353 # mdns via resolved or avahi
     ];
   };

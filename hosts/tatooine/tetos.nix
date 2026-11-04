@@ -6,7 +6,10 @@
   withSecrets,
   ...
 }:
-lib.optionalAttrs withSecrets {
+{
+  allowUpnp = true;
+
+} // lib.optionalAttrs withSecrets {
   wireguard = {
     id = 2;
     publicKey = "HPrWcZUuJMsxc+qDrN08IC9GJoy/c1UofmvmTC/bm3U=";
@@ -16,4 +19,4 @@ lib.optionalAttrs withSecrets {
       flakeSelf.nixosConfigurations.neotokyo
     ];
   };
-}
+} 

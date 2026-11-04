@@ -28,6 +28,10 @@ vim.opt.showbreak = ''
 
 -- vim.wo.cursorline = false
 vim.wo.foldcolumn = '3' -- auto
+-- |fold-expr|	expr	    'foldexpr' gives the fold level of a line.
+-- could work well, react onto 
+vim.wo.foldmethod = "expr"
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
 -- E5113: Lua chunk: [string "vim/_core/options"]:167: Invalid 'foldcolumn': expected a valid type, got Integer
 -- stack traceback: [C]: in function 'nvim_set_option_value'

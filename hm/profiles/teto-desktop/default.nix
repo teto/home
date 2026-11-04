@@ -118,11 +118,16 @@ in
       # lux-cli-teto = lux-cli;
 
       mistral-vibe-custom = pkgs.mistral-vibe;
+
+      kodi-teto = pkgs.kodi-tetos;
     in
 
     [
+      kodi-teto 
       codex # openai agent
       codex-acp # originated from zed-industries, used in avante
+
+      gupnp-tools # upnp toolset, ssdp discovery
 
       lux-cli-teto
       pkgs.pinentry-curses
