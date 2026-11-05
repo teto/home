@@ -11,6 +11,6 @@ kodiWithPackages.overrideAttrs (oldAttrs: {
   nativeBuildInputs = (oldAttrs.nativeBuildInputs or [ ]) ++ [ makeWrapper ];
 
   postFixup = (oldAttrs.postFixup or "") + ''
-    wrapProgram $out/bin/kodi --set DISPLAY :0
+    wrapProgram $out/bin/kodi --set DISPLAY ':0'
   '';
 })

@@ -1165,6 +1165,7 @@ vim.g.avante = {
     custom_tools = {
         -- require('avante.llm_tools.web_search').web_search_google,
         require('avante.llm_tools.web_search').web_search_firecrawl,
+        require('avante.llm_tools.web_search').web_search_sofya,
     },
     slash_commands = {
         -- it looks ignored ?

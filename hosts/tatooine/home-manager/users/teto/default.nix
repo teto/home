@@ -64,7 +64,6 @@ in
     # pkgs.claude-code
     flakeSelf.inputs.nixos-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.llama-cpp
     pkgs.batctl # to control battery thresholds
-    pkgs.kodi
   ];
 
   package-sets = {

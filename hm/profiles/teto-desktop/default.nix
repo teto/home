@@ -266,9 +266,12 @@ in
     TETOS_BUILDER_NEOTOKYO = builder_neotokyo;
     TETOS_BUILDER_JEDHA = builder_jedha;
     TETOS_BUILDER_NIXCOMMUNITY = builder_nixcommunity;
-    inherit (secrets) TAVILY_API_KEY;
-    inherit (secrets) FIRECRAWL_API_KEY;
-    inherit (secrets) CONFIDENT_AI_API_KEY;
+    inherit (secrets) 
+      TAVILY_API_KEY
+      FIRECRAWL_API_KEY
+      CONFIDENT_AI_API_KEY
+      SOFYA_API_KEY
+      ;
   };
 
   # tetos.enableYubikey = true;
