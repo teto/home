@@ -103,6 +103,7 @@ in
     ++ [
       btop-cuda # for jedha
 
+
       # creates conflicts since it brings python and several executables
       # flakeSelf.inputs.avante-nvim.packages.${pkgs.stdenv.hostPlatform.system}.ragService
 
@@ -144,6 +145,10 @@ in
       # anyrun
       # bridge-utils# pour  brctl
       # vscode-css-languageserver # to showcase 'cssls' lsp server
+
+      rura  # to build shell pipelines
+      termusic  # terminal music
+ 
     ];
 
   package-sets = {

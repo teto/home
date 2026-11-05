@@ -62,6 +62,7 @@ in
 
   };
 
+
   # this gets merged by default
   config = lib.mkMerge [
     {
@@ -297,6 +298,8 @@ in
           xwayland-satellite # to launch X applications within wayland (and without a full Xwayland ?)
           yt-dlp # to download youtube videos
 
+          waytator # to capture screen videos
+
         ];
 
     })
@@ -354,6 +357,7 @@ in
         wirelesstools # to get iwconfig
         iw
         wavemon
+        netui # nice UI
 
         # aircrack-ng # TODO move to hacking package-set
       ];
@@ -698,12 +702,14 @@ in
         # MUSIC ONLY
         # jellyfin-tui # nice
         pkgs.gelly # gtk+rust music player GUI
+        # pkgs.rufin
         # pkgs.feishin # GUI
         # pkgs.jellycli # could not login :/
 
 
         # VIDEO compatible
         # - Jellyfin MPV Shim
+        pkgs.tsukimi # gtk+rust music player GUI
         pkgs.jellyfin-desktop
         pkgs.jellyfin-mpv-shim
         # jellyhaj # not upstreamed yet 

@@ -1347,11 +1347,13 @@ vim.opt.spellfile = vim.fs.joinpath(vim.fn.stdpath('data'), 'site/spell/computer
 
 vim.api.nvim_create_autocmd({ 'User' }, {
     pattern = 'AvanteViewBufferUpdated',
-    desc = 'Quit Neovim after receiving an Avante answer',
+    desc = 'Notify user on LLM answer',
     callback = function()
-        vim.notify('Got an answer')
+        vim.notify('avante: LLM answered')
         -- Leave the event callback before closing all windows, including modified buffers.
         -- vim.schedule(function()
+			-- config/nvim/lua/init-manual.lua:p:hconfig/nvim/lua/init-manual.lua
+			--
         --     vim.cmd('qall!')
         -- end)
     end,
