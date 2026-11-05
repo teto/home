@@ -185,7 +185,17 @@ stdenv.mkDerivation {
     cp -R release/linux-unpacked/. "$out/lib/subminer/"
 
     makeWrapper "$out/lib/subminer/SubMiner" "$out/bin/subminer-app" \
-      --prefix PATH : ${runtimePath}
+      --prefix PATH : ${runtimePath} \
+      --run '
+        for arg do
+          case "$arg" in
+            --start|--ensure-linux-runtime-plugin-assets)
+              set -- --no-sandbox "$@"
+              break
+              ;;
+          esac
+        done
+      '
     install -Dm755 dist/launcher/subminer "$out/bin/subminer"
     wrapProgram "$out/bin/subminer" \
       --prefix PATH : ${runtimePath} \
