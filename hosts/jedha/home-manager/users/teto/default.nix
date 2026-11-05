@@ -102,6 +102,7 @@ in
     llmDeps
     ++ [
       btop-cuda # for jedha
+      brush # a rust implementation of bash
 
 
       # creates conflicts since it brings python and several executables

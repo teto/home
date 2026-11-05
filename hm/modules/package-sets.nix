@@ -357,7 +357,7 @@ in
         wirelesstools # to get iwconfig
         iw
         wavemon
-        netui # nice UI
+        # netui # nice UI not merged yet
 
         # aircrack-ng # TODO move to hacking package-set
       ];
@@ -484,20 +484,23 @@ in
           nix-sweep # smarter nix-gc
           nixpkgs-review # to help review nix packages
           nvimpager
+          netwatch # to monitor network
           # patchutils # for interdiff
           perf-tools # to interpret
 
           # rainfrog # database exploration
-          trurl # used to parse url in the firefox-router executable
+
 
           process-compose # docker-compose - like
           # rpl # to replace strings across files
+          repgrep # replace matches found by rg
           strace
           snitch # interactively watch connections
           shfmt # shell format
           tio # serial console reader
           tig
           tmux # when connecting via ssh
+          trurl # used to parse url in the firefox-router executable
           universal-ctags # there are many different ctags, be careful !
           uv   # to install python packages
           unar # used to view archives by yazi (now using ouch ?)
