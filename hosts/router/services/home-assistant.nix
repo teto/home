@@ -24,8 +24,17 @@
       # TODO add washing machine one
     ];
 
+    customLovelaceModules = with pkgs.home-assistant-custom-lovelace-modules; [
+# pkgs/servers/home-assistant/custom-lovelace-modules/easy-floorplan/package.nix
+      easy-floorplan
+    ];
+
+    # TODO reduce list ?
+    # defaultIntegrations = [
+    # ];
+
     config = {
-      feedreader.urls = [ "https://nixos.org/blogs.xml" ];
+      # feedreader.urls = [ "https://nixos.org/blogs.xml" ];
 
       # "automation manual" = "!include ${../home-assistant/automations/hue-dimmer1.yaml}";
 
@@ -38,6 +47,8 @@
     themes = with pkgs.home-assistant-themes; [
       material-you-theme
     ];
+
+
 
     blueprints = {
       automation = [

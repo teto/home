@@ -2474,7 +2474,7 @@
 #sout-chromecast-http-port=8010
 
 # Performance warning (integer)
-#sout-renderer-show-perf-warning=1
+sout-renderer-show-perf-warning=0
 
 # Enable Audio passthrough (boolean)
 #sout-chromecast-audio-passthrough=0
