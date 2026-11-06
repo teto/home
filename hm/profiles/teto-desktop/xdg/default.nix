@@ -3,6 +3,7 @@
   lib,
   config,
   dotfilesPath,
+  osConfig,
   # secretsFolder,
   secrets,
   withSecrets,
@@ -95,6 +96,18 @@
     #   TETO_PERSONAL_EMAIL=${secrets.accounts.mail.fastmail_perso.login}
     # '';
 
+    # source alias as well ?
+    # .sh
+    "bash/bashrc".text = ''
+      script_dir="$(cd -- "$(dirname -- "''${BASH_SOURCE[0]}")" && pwd)"
+      source "$script_dir/manual.sh"
+      ''
+      # check if flyline defined too ?
+      + lib.optionalString osConfig.programs.flyline.enable '' 
+        source "$script_dir/flyline.sh"
+
+        '';
+
     "nvim/lua/generated-by-nix.lua" =
       let
         # hitting this limit https://github.com/luarocks/luarocks/issues/1797
@@ -133,26 +146,27 @@
         luacurlPkg = luaInterpreter.pkgs.lua-curl;
 
         luarocksConfigAttr =
-          pkgs.lua.pkgs.luaLib.generateLuarocksConfig ({ externalDeps = [ pkgs.curl.dev ]; })
+          pkgs.lua.pkgs.luaLib.generateLuarocksConfig { externalDeps = [ pkgs.curl.dev ]; }
           // {
+            # take it from ?
             lua_version = "5.1";
           };
 
         luarocksConfigAttr2 = lib.recursiveUpdate luarocksConfigAttr {
           rocks_trees = [
-            ({
+            {
               name = "rocks.nvim";
               # TODO reference xdg
               root = "/home/teto/.local/share/nvim/rocks";
-            })
-            ({
+            }
+            {
               name = "rocks-generated.nvim";
               root = "${luarocksStore}";
-            })
-            ({
+            }
+            {
               name = "lua-curl";
               root = "${luacurlPkg}";
-            })
+            }
             # ${sqlite.out}/lib/libsqlite3${stdenv.hostPlatform.extensions.sharedLibrary}
             # {
             #   name = "sqlite.lua";

@@ -11,7 +11,6 @@
   resumeDevice = "/dev/disk/by-uuid/febbd1a4-c36a-489d-ab5c-b4e9281ab892";
   # ou bien resume=UUID=febbd1a4-c36a-489d-ab5c-b4e9281ab892 ?
 
-  initrd.systemd.enable = true;
   initrd.availableKernelModules = [
     # "aesni_intel"
     "cryptd"

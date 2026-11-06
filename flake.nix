@@ -124,10 +124,10 @@
     nix-cache-beacon.url = "github:adisbladis/nix-cache-beacon";
     nix-cache-beacon.inputs.nixpkgs.follows = "nixpkgs";
 
-    # lux = {
-    #   url = "github:nvim-neorocks/lux";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    lux = {
+      url = "github:nvim-neorocks/lux";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # mcp-hub = {
     #   url = "github:ravitemer/mcp-hub";
@@ -266,6 +266,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixflix = {
+      url = "github:kiriwalawren/nixflix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     vicinae = {
       url = "github:vicinaehq/vicinae";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -388,6 +393,7 @@
                 true
               else
                 builtins.elem pkgName [
+                  "antigravity-cli"
                   "Oracle_VM_VirtualBox_Extension_Pack"
                   "Oracle_VirtualBox_Extension_Pack"
                   "jocalsend"
@@ -413,13 +419,11 @@
           };
         };
 
-      libExtended = nixpkgs.lib.exend (
-        final: prev: {
-
-          # add tetos lib
-
-        }
-      );
+      # libExtended = nixpkgs.lib.exend (
+      #   final: prev: {
+      #     # add tetos lib
+      #   }
+      # );
 
       tetosPkgs = pkgImport self.inputs.nixpkgs false;
       tetosPkgsCuda = pkgImport self.inputs.nixpkgs true;
@@ -484,6 +488,8 @@
           # generates a infinite trace right now
           nvim =
             self.nixosConfigurations.tatooine.config.home-manager.users.teto.programs.neovim.finalPackage;
+
+          inherit (self.inputs.jujutsu.packages.${system}) jujutsu;
 
           inherit (tetosPkgs)
             pass-import-high-password-length

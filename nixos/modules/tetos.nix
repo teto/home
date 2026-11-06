@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -20,11 +19,13 @@ in
       #     Whether to enable Fish integration.
       #   '';
       # };
+
+      allowUpnp = lib.mkEnableOption "allowUpnp";
     };
   };
 
-  # config = lib.mkIf cfg.enableYubikey {
-  #   # dictated by https://nixos.wiki/wiki/Yubikey
-  #
-  # };
+  config = lib.mkIf cfg.allowUpnp {
+    # SSDP discovery probes should target  o
+    networking.firewall.allowedUDPPorts = [ 1900 ];
+  };
 }

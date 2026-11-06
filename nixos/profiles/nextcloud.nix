@@ -26,7 +26,8 @@ in
       dbtype = "pgsql";
       # Further forces Nextcloud to use HTTPS
       # loaded via sops
-      adminpassFile = "/run/secrets/${nextcloudAdminPasswordSopsPath}";
+      # deprecated, nextcloud doesn't require admin from now on
+      # adminpassFile = "/run/secrets/${nextcloudAdminPasswordSopsPath}";
       # TODO change it
       # adminUser = "root";
       # dbpassFile =

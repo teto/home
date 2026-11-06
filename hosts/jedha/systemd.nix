@@ -7,13 +7,19 @@
   secrets,
   ...
 }:
+let
+  # port ?
+  hassHost = flakeSelf.nixosConfigurations.router.config.networking.fqdnOrHostName;
+  # toString slib.ports.home-assistant
+  hassPort = 8123;
+in
 {
 
   # SHould be a level instead ?
   # enableStrictShellChecks = true;
 
-  services =
-    lib.mkIf config.services.pixiecore.enable {
+  services = lib.mkMerge [
+    (lib.mkIf config.services.pixiecore.enable {
       # force manual start ?!
       pixiecore.wantedBy = lib.mkForce [ ];
 
@@ -22,18 +28,36 @@
       systemd-tmpfiles-setup.serviceConfig = {
         LogLevelMax = "debug"; # or "info" for less verbose output
       };
-    }
-    // lib.mkIf config.services.netdata.enable {
+    })
+    (lib.mkIf config.services.netdata.enable {
       netdata.path = [ pkgs.linuxPackages.nvidia_x11 ];
-    }
-    // (
-      let
-        # port ?
-        hassHost = flakeSelf.nixosConfigurations.router.config.services.home-assistant.uri;
-        # toString slib.ports.home-assistant
-        hassPort = 8123;
-      in
-      {
+    })
+    # disabled because ha-mcp broken
+    (lib.mkIf false {
+        ha-mcp = {
+          description = "Home Assistant MCP server";
+          wantedBy = [ "multi-user.target" ];
+          wants = [ "network-online.target" ];
+          after = [ "network-online.target" ];
+          environment = {
+            HOMEASSISTANT_URL = "http://${hassHost}:${toString hassPort}";
+            HOME = "/var/lib/ha-mcp";
+            MCP_HOST = "127.0.0.1";
+            MCP_PORT = "8086";
+          };
+          serviceConfig = {
+            ExecStart = lib.getExe' pkgs.ha-mcp "ha-mcp-web";
+            # Root-owned file containing HOMEASSISTANT_TOKEN=<long-lived access token>.
+            EnvironmentFile = "/var/lib/ha-mcp/environment";
+            DynamicUser = true;
+            StateDirectory = "ha-mcp";
+            WorkingDirectory = "/var/lib/ha-mcp";
+            Restart = "on-failure";
+            RestartSec = 5;
+            UMask = "0077";
+          };
+        };
+
         # copied from https://github.com/NixOS/nixpkgs/pull/544252
         # lib.recursiveUpdate slib.systemd.serviceDefaults {
         speech-to-phrase = {
@@ -47,7 +71,7 @@
             # "--custom-sentences-dir" ""
             "--uri 'tcp://127.0.0.1:10400'"
             "--hass-websocket-uri"
-            "ws://${hassHost}:${hassPort}/api/websocket"
+            "ws://${hassHost}:${toString hassPort}/api/websocket"
             "--retrain-on-start"
             "--retrain-on-connect"
             "--retrain-seconds"
@@ -64,7 +88,8 @@
         };
 
       }
-    );
+    )
+  ];
 
   # just to test
   # https://www.freedesktop.org/software/systemd/man/latest/systemd-sysupdate.html

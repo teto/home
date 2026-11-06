@@ -1,8 +1,6 @@
 {
   flakeSelf,
   lib,
-  secretsFolder,
-  pkgs,
   ...
 }:
 let
@@ -68,10 +66,6 @@ let
               # had compilation issues with it
               zfs = lib.mkForce false;
             };
-
-            # to automatically run disko ?
-            # environment.etc."bashrc.local".text = ''
-            #   '';
 
             networking.hostName = "bootstrap";
 

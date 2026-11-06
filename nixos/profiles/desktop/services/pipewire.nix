@@ -30,6 +30,15 @@
   alsa.enable = true;
   pulse.enable = true;
   jack.enable = true;
+  # Discover AirPlay (RAOP) speakers as PipeWire output sinks.
+  raopOpenFirewall = true;
+  extraConfig.pipewire."10-airplay" = {
+    "context.modules" = [
+      {
+        name = "libpipewire-module-raop-discover";
+      }
+    ];
+  };
   # config.pipewire = {
   #   "properties" = {
   #     default.clock.allowed-rates = [ 44100 48000 96000 ];

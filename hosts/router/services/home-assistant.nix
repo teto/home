@@ -14,13 +14,27 @@
     enable = true;
 
     # from https://discourse.nixos.org/t/trying-to-build-custom-homeassistant-component-leads-to-infinite-recursion/58602/4
-    #   Available components can be found below ‘pkgs.home-assistant-custom-components’.
+    #   Available components can be found below 'pkgs.home-assistant-custom-components'.
     customComponents = [
       pkgs.awtrix-ng-hass-integration
+      pkgs.home-assistant-custom-components.ha_mcp_tools
       # (config.services.home-assistant.package.python.pkgs.callPackage ./hass-node-red-module.nix {})
+      pkgs.rtetempo
+
+      # TODO add washing machine one
     ];
+
+    customLovelaceModules = with pkgs.home-assistant-custom-lovelace-modules; [
+# pkgs/servers/home-assistant/custom-lovelace-modules/easy-floorplan/package.nix
+      easy-floorplan
+    ];
+
+    # TODO reduce list ?
+    # defaultIntegrations = [
+    # ];
+
     config = {
-      feedreader.urls = [ "https://nixos.org/blogs.xml" ];
+      # feedreader.urls = [ "https://nixos.org/blogs.xml" ];
 
       # "automation manual" = "!include ${../home-assistant/automations/hue-dimmer1.yaml}";
 
@@ -33,6 +47,8 @@
     themes = with pkgs.home-assistant-themes; [
       material-you-theme
     ];
+
+
 
     blueprints = {
       automation = [
