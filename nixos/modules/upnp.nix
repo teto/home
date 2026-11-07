@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 let
    cfg = config.programs.upnp;
 in {
@@ -15,9 +15,15 @@ in {
     };
   };
   config = lib.mkIf cfg.enable {
-  };
-}
-{
     networking.firewall.allowedUDPPorts = lib.mkIf cfg.openFirewall [ 1900 ];
+
+    networking.firewall.allowedTCPPorts = lib.mkIf cfg.openFirewall [8200];
+# # SSDP multicast discovery port (UDP)
+# sudo ufw allow 1900/udp comment 'DLNA SSDP'
+#
+# # MiniDLNA HTTP streaming & web status port (TCP)
+# sudo ufw allow 8200/tcp comment 'MiniDLNA HTTP'
+
+  };
 }
 

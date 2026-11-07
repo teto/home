@@ -13,7 +13,7 @@ buildHomeAssistantComponent rec {
     inherit owner;
     repo = "hass-tarif-edf";
     rev = "0acb9c4f036833675c25ff279106b7b4d5229e95";
-    hash = lib.fakeHash;
+    hash = "sha256-jWFE9mOIdoEUvLNRHcCnEyemPkNRuLW/gM7BBgBVoZY=";
   };
 
   meta = {
