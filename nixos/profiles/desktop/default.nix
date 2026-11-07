@@ -2,6 +2,7 @@
 {
   fonts.enableDefaultPackages = true;
 
+
   console = {
     # seems like a kernel bug resets it https://github.com/NixOS/nixpkgs/issues/413128
     earlySetup = true;

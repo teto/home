@@ -1,9 +1,14 @@
 # advertise for amp
+# sudo chmod -R o+rX /srv/media
+# sudo chmod -R o+rX /srv/media
+# sudo setfacl -m u:minidlna:--x /home/teto
+# sudo setfacl -R -m u:minidlna:r-X /home/teto/Music
+# sudo setfacl -m d:u:minidlna:r-X /home/teto/Music
 {
   ...
 }:
 {
-  enable = true;
+  enable = false;
   # announceInterval = 60;
   # to receive sssdp answers
   openFirewall = true;
@@ -22,7 +27,12 @@
       "/home/teto/videos"
       "/home/teto/Music"
     ];
-    inotify = "yes";
+
+    # Network interface to bind (optional; self-discovers if commented out)
+    # to avoid erros on wireguard if
+    network_interface="wlp2s0"; 
+    # to remove warnings
+    inotify = "no";
     # db_dir =
   };
 }
