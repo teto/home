@@ -1,0 +1,360 @@
+path: default_view
+title: Tempo
+icon: mdi:transmission-tower
+badges: []
+cards:
+  - square: false
+    type: grid
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            entity: sensor.rte_tempo_couleur_actuelle
+            name: |
+              [[[
+                var firstDay = "Aujourd'hui";
+
+                if (new Date().getHours() < 12 && states['binary_sensor.rte_tempo_heures_creuses'].state === 'on')
+                { // Jusque midi pour se mettre à jour (passer en HC) !
+                  // Sans cette gestion, entre 0h00 et 6h00 les jours sont faux, c'est demain !
+                  firstDay = "Hier";
+                }
+              return firstDay;
+              ]]]
+            show_label: true
+            label: |
+              [[[
+                var date = new Date();
+                if (date.getHours() < 12 && states['binary_sensor.rte_tempo_heures_creuses'].state === 'on')
+                { // Jusque midi pour se mettre à jour (passer en HC) !
+                  // Sans cette gestion, entre 0h00 et 6h00 les jours
+                  // sont faux, c'est demain !
+                  date.setDate(date.getDate() - 1);
+                }
+                var dayOfWeek = date.toLocaleString('fr-FR', { weekday: 'short' });
+                var day = ('0' + date.getDate()).slice(-2);
+                var month = date.toLocaleString('fr-FR', { month: 'short' });
+                var color = states['sensor.rte_tempo_couleur_actuelle'].state;
+                var color_text = (color === 'unavailable') ? "(Non disponible)" : "Jour " + color;
+                // Tarifs
+                var tarifs_hc = 'Non disponible';
+                var tarifs_hc_unit = '';
+                var tarifs_hp = 'Non disponible';
+                var tarifs_hp_unit = '';
+                if (color !== 'unavailable')
+                {
+                   var tarifs_hc_val = (states['sensor.tarif_' + color.toLowerCase() + '_tempo_heures_creuses_ttc'].state);
+                   if (tarifs_hc_val != 0.0)
+                   {
+                      tarifs_hc_unit = states['sensor.tarif_' + color.toLowerCase() + '_tempo_heures_creuses_ttc'].attributes['unit_of_measurement'].replace('EUR', '€');
+                      tarifs_hc = tarifs_hc_val.replace('.', ',');
+                   }
+                   var tarifs_hp_val = (states['sensor.tarif_' + color.toLowerCase() + '_tempo_heures_pleines_ttc'].state);
+                   if (tarifs_hp_val != 0.0)
+                   {
+                      tarifs_hp_unit = states['sensor.tarif_' + color.toLowerCase() + '_tempo_heures_pleines_ttc'].attributes['unit_of_measurement'].replace('EUR', '€');
+                      tarifs_hp = tarifs_hp_val.replace('.', ',');
+                   }
+                }
+                return `${dayOfWeek} <span style="font-size: 1.5em;">${day}</span> ${month}<hr style="margin: 1px 0 8px; border-top: 1px solid rgba(0, 0, 0, 0.2);">Tarif HC : ${tarifs_hc} ${tarifs_hc_unit}<br/>Tarif HP : ${tarifs_hp} ${tarifs_hp_unit}`;
+              ]]]
+            styles:
+              card:
+                - height: 130px
+                - background-color: |
+                    [[[
+                      var color = states['sensor.rte_tempo_couleur_actuelle'].state.toLowerCase();
+                      return (color === 'rouge') ? '#c62828' : 
+                            (color === 'blanc') ? '#ffffff' : 
+                            (color === 'bleu') ? '#1565c0' : 
+                            'var(--card-background-color)';
+                    ]]]
+                - color: |
+                    [[[
+                      return (states['sensor.rte_tempo_couleur_actuelle'].state.toLowerCase() === 'blanc') ? 'black' : 'white';
+                    ]]]
+                - border-radius: 20px
+                - padding: 16px
+                - font-size: 1.2em
+                - text-align: center
+                - box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.3)
+              grid:
+                - grid-template-areas: "\"n\" \"l\""
+                - grid-template-rows: 1fr min-content
+              name:
+                - font-weight: bold
+                - font-size: 1.2em
+              label:
+                - font-size: 0.9em
+                - justify-self: center
+                - align-self: center
+                - margin-top: 10px
+          - type: custom:button-card
+            entity: sensor.rte_tempo_prochaine_couleur
+            name: |
+              [[[
+                var secondDay = "Demain";
+
+                if (new Date().getHours() < 12 && states['binary_sensor.rte_tempo_heures_creuses'].state === 'on')
+                { // Jusque midi pour se mettre à jour (passer en HC) !
+                  // Sans cette gestion, entre 0h00 et 6h00 les jours sont faux, c'est demain !
+                  secondDay = "Aujourd'hui";
+                }
+              return secondDay;
+              ]]]
+            show_label: true
+            label: |
+              [[[
+                var date = new Date();
+                date.setDate(date.getDate() + 1);
+                if (date.getHours() < 12 && states['binary_sensor.rte_tempo_heures_creuses'].state === 'on')
+                { // Jusque midi pour se mettre à jour (passer en HC) !
+                  // Sans cette gestion, entre 0h00 et 6h00 les jours
+                  // sont faux, c'est après demain !
+                  date.setDate(date.getDate() - 1);
+                }
+                var dayOfWeek = date.toLocaleString('fr-FR', { weekday: 'short' });
+                var day = ('0' + date.getDate()).slice(-2);
+                var month = date.toLocaleString('fr-FR', { month: 'short' });
+                var color = states['sensor.rte_tempo_prochaine_couleur'].state;
+                var color_text = (color === 'unavailable') ? "(Non disponible)" : "Jour " + color;
+                // Tarifs
+                var tarifs_hc = 'Non disponible';
+                var tarifs_hc_unit = '';
+                var tarifs_hp = 'Non disponible';
+                var tarifs_hp_unit = '';
+                
+                if (color !== 'unavailable')
+                {
+                   var tarifs_hc_val = (states['sensor.tarif_' + color.toLowerCase() + '_tempo_heures_creuses_ttc'].state);
+                   if (tarifs_hc_val != 0.0)
+                   {
+                      tarifs_hc_unit = states['sensor.tarif_' + color.toLowerCase() + '_tempo_heures_creuses_ttc'].attributes['unit_of_measurement'].replace('EUR', '€');
+                      tarifs_hc = tarifs_hc_val.replace('.', ',');
+                   }
+                   var tarifs_hp_val = (states['sensor.tarif_' + color.toLowerCase() + '_tempo_heures_pleines_ttc'].state);
+                   if (tarifs_hp_val != 0.0)
+                   {
+                      tarifs_hp_unit = states['sensor.tarif_' + color.toLowerCase() + '_tempo_heures_pleines_ttc'].attributes['unit_of_measurement'].replace('EUR', '€');
+                      tarifs_hp = tarifs_hp_val.replace('.', ',');
+                   }
+                }
+                return `${dayOfWeek} <span style="font-size: 1.5em;">${day}</span> ${month}<hr style="margin: 1px 0 8px; border-top: 1px solid rgba(0, 0, 0, 0.2);">Tarif HC : ${tarifs_hc} ${tarifs_hc_unit}<br/>Tarif HP : ${tarifs_hp} ${tarifs_hp_unit}`;
+              ]]]
+            styles:
+              card:
+                - height: 130px
+                - background-color: |
+                    [[[
+                      var color = states['sensor.rte_tempo_prochaine_couleur'].state.toLowerCase();
+                      return (color === 'rouge') ? '#c62828' :
+                            (color === 'blanc') ? '#fFfFfF' : 
+                            (color === 'bleu') ? '#1565c0' :
+                            (color === 'unavailable') ? 'orange' :
+                            'var(--card-background-color)';
+                    ]]]
+                - color: |
+                    [[[
+                      return (states['sensor.rte_tempo_prochaine_couleur'].state.toLowerCase() === 'blanc') ? 'black' : 'white';
+                    ]]]
+                - border-radius: 20px
+                - padding: 16px
+                - font-size: 1.2em
+                - text-align: center
+                - box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.3)
+              grid:
+                - grid-template-areas: "\"n\" \"l\""
+                - grid-template-rows: 1fr min-content
+              name:
+                - font-weight: bold
+                - font-size: 1.3em
+              label:
+                - font-size: 0.9em
+                - justify-self: center
+                - align-self: center
+                - margin-top: 10px
+      - type: markdown
+        content: "**La couleur du lendemain est actualisée tous les jours dès 6\_h.**\nPour plus d'information, visiter le site [Tempo EDF](https://particulier.edf.fr/fr/accueil/gestion-contrat/options/tempo.html#/).\n\nLes Heures Pleines sont de 6\_h à 22\_h.\nLes Heures Creuses sont de 22\_h à 6\_h.\n"
+      - type: grid
+        square: false
+        columns: 1
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: markdown
+                card_mod:
+                  style:
+                    ha-markdown: |
+                      ha-card
+                      {
+                        {% if is_state('binary_sensor.rte_tempo_heures_creuses', 'on') %}
+                          border-style: solid;
+                          border-radius: 12px;
+                          border-color: #ADD6FF;
+                          background: #ADD6FF;
+                        {% endif %}
+                      }
+                content: >-
+                  {# Calcul HC Bleu #} {% set tarifs_hc_bleu = 'Indisponible' %}
+                  {% set unit_hc_bleu = '' %} {% set tarifs_hc_val_bleu =
+                  states['sensor.tarif_bleu_tempo_heures_creuses_ttc'].state %}
+                  {% if tarifs_hc_val_bleu != '0.0' %} {% set tarifs_hc_bleu =
+                  tarifs_hc_val_bleu.replace('.', ',') %} {# {% set unit_hc_bleu
+                  =
+                  states['sensor.tarif_bleu_tempo_heures_creuses_ttc'].attributes['unit_of_measurement'].replace('EUR',
+                  '€') %} #} {% endif %} {# Calcul HC Blanc #} {% set
+                  tarifs_hc_blanc = 'Indisponible' %} {% set unit_hc_blanc = ''
+                  %} {% set tarifs_hc_val_blanc =
+                  states['sensor.tarif_blanc_tempo_heures_creuses_ttc'].state %}
+                  {% if tarifs_hc_val_blanc != '0.0' %} {% set tarifs_hc_blanc =
+                  tarifs_hc_val_blanc.replace('.', ',') %} {# {% set
+                  unit_hc_blanc =
+                  states['sensor.tarif_blanc_tempo_heures_creuses_ttc'].attributes['unit_of_measurement'].replace('EUR',
+                  '€') %} #} {% endif %} {# Calcul HC Rouge #} {% set
+                  tarifs_hc_rouge = 'Indisponible' %} {% set unit_hc_rouge = ''
+                  %} {% set tarifs_hc_val_rouge =
+                  states['sensor.tarif_rouge_tempo_heures_creuses_ttc'].state %}
+                  {% if tarifs_hc_val_rouge != '0.0' %} {% set tarifs_hc_rouge =
+                  tarifs_hc_val_rouge.replace('.', ',') %} {# {% set
+                  unit_hc_rouge =
+                  states['sensor.tarif_rouge_tempo_heures_creuses_ttc'].attributes['unit_of_measurement'].replace('EUR',
+                  '€') %} #} {% endif %}
+
+                  **<center>Tarif HC</center>** <center>({{
+                  states['sensor.tarif_bleu_tempo_heures_creuses_ttc'].attributes['unit_of_measurement'].replace('EUR',
+                  '€') }})</center> <br/> 🔵 {% if
+                  states['sensor.rte_tempo_couleur_actuelle'].state == 'Bleu'
+                  %}<b>{{ tarifs_hc_bleu }} {{ unit_hc_bleu }}</b>{% else %}{{
+                  tarifs_hc_bleu }} {{ unit_hc_bleu }}{% endif %}<br/> ⚪️ {% if
+                  states['sensor.rte_tempo_couleur_actuelle'].state == 'Blanc'
+                  %}<b>{{ tarifs_hc_blanc }} {{ unit_hc_blanc }}</b>{% else %}{{
+                  tarifs_hc_blanc }} {{ unit_hc_blanc }}{% endif %}<br/> 🔴 {%
+                  if states['sensor.rte_tempo_couleur_actuelle'].state ==
+                  'Rouge' %}<b>{{ tarifs_hc_rouge }} {{ unit_hc_rouge }}</b>{%
+                  else %}{{ tarifs_hc_rouge }} {{ unit_hc_rouge }}{% endif
+                  %}<br/>
+              - type: markdown
+                content: >-
+                  {% set rel =
+                  ((as_timestamp(states['sensor.rte_tempo_heures_creuses_changement'].state)
+                  | float) - as_timestamp(now())) %}
+
+                  {% set duration = 'Maintenant' %}
+
+                  {% if (rel / 3600.0) >= 2.0 %}
+
+                  {% set duration = 'Dans ' + ((rel / 3600.0) | round(0) |
+                  string) + ' heures' %}
+
+                  {% elif (rel / 3600.0) >= 1.0 %}
+
+                  {% set duration = 'Dans une heure' %}
+
+                  {% elif rel / 3600.0 > 0.0 and ((rel / 60.0) | round(0)) > 1.0
+                  %}
+
+                  {% set duration = 'Dans ' + ((rel / 60.0) | round(0) | string)
+                  + ' minutes' %}
+
+                  {% elif rel / 3600.0 > 0.0 %}
+
+                  {% set duration = 'Dans une minute' %}
+
+                  {% endif %}
+
+                  **<center>Changement</center>**<br/><center><font
+                  color="#44739E"><ha-icon
+                  icon="mdi:clock"></ha-icon></font><br/></center> <br/>
+                  <center>{{ duration }}</center><center>**{{
+                  states['sensor.edf_prix_courant'].state }} {{
+                  states['sensor.edf_prix_courant'].attributes['unit_of_measurement'].replace('EUR',
+                  '€') }}**</center>
+              - type: markdown
+                card_mod:
+                  style:
+                    ha-markdown: |
+                      ha-card
+                      {
+                        {% if is_state('binary_sensor.rte_tempo_heures_creuses', 'off') %}
+                          border-style: solid;
+                          border-radius: 12px;
+                          border-color: #FFB6AD;
+                          background: #FFB6AD;
+                        {% endif %}
+                      }
+                content: >-
+                  {# Calcul HP Bleu #} {% set tarifs_hp_bleu = 'Indisponible' %}
+                  {% set unit_hp_bleu = '' %} {% set tarifs_hp_val_bleu =
+                  states['sensor.tarif_bleu_tempo_heures_pleines_ttc'].state %}
+                  {% if tarifs_hp_val_bleu != '0.0' %} {% set tarifs_hp_bleu =
+                  tarifs_hp_val_bleu.replace('.', ',') %} {# {% set unit_hp_bleu
+                  =
+                  states['sensor.tarif_bleu_tempo_heures_pleines_ttc'].attributes['unit_of_measurement'].replace('EUR',
+                  '€') %} #} {% endif %} {% set tarifs_hp_blanc = 'Indisponible'
+                  %} {# Calcul HP Blanc #} {% set unit_hp_blanc = '' %} {% set
+                  tarifs_hp_val_blanc =
+                  states['sensor.tarif_blanc_tempo_heures_pleines_ttc'].state %}
+                  {% if tarifs_hp_val_blanc != '0.0' %} {% set tarifs_hp_blanc =
+                  tarifs_hp_val_blanc.replace('.', ',') %} {# {% set
+                  unit_hp_blanc =
+                  states['sensor.tarif_blanc_tempo_heures_pleines_ttc'].attributes['unit_of_measurement'].replace('EUR',
+                  '€') %} #} {% endif %} {% set tarifs_hp_rouge = 'Indisponible'
+                  %} {# Calcul HP Rouge #} {% set unit_hp_rouge = '' %} {% set
+                  tarifs_hp_val_rouge =
+                  states['sensor.tarif_rouge_tempo_heures_pleines_ttc'].state %}
+                  {% if tarifs_hp_val_rouge != '0.0' %} {% set tarifs_hp_rouge =
+                  tarifs_hp_val_rouge.replace('.', ',') %} {# {% set
+                  unit_hp_rouge =
+                  states['sensor.tarif_rouge_tempo_heures_pleines_ttc'].attributes['unit_of_measurement'].replace('EUR',
+                  '€') %} #} {% endif %}
+
+                  **<center>Tarif HP</center>** <center>({{
+                  states['sensor.tarif_bleu_tempo_heures_pleines_ttc'].attributes['unit_of_measurement'].replace('EUR',
+                  '€') }})</center> <br/> 🔵 {% if
+                  states['sensor.rte_tempo_couleur_actuelle'].state == 'Bleu'
+                  %}<b>{{ tarifs_hp_bleu }} {{ unit_hp_bleu }}</b>{% else %}{{
+                  tarifs_hp_bleu }} {{ unit_hp_bleu }}{% endif %}<br/> ⚪️ {% if
+                  states['sensor.rte_tempo_couleur_actuelle'].state == 'Blanc'
+                  %}<b>{{ tarifs_hp_blanc }} {{ unit_hp_blanc }}</b>{% else %}{{
+                  tarifs_hp_blanc }} {{ unit_hp_blanc }}{% endif %}<br/> 🔴 {%
+                  if states['sensor.rte_tempo_couleur_actuelle'].state ==
+                  'Rouge' %}<b>{{ tarifs_hp_rouge }} {{ unit_hp_rouge }}</b>{%
+                  else %}{{ tarifs_hp_rouge }} {{ unit_hp_rouge }}{% endif
+                  %}<br/>
+      - type: markdown
+        content: >-
+          {% set n = now() %}
+
+          {% set year = n.year %}
+
+          {% if n.month < 9 %}
+
+          {% set year = year - 1 %}
+
+          {% endif %}
+
+
+          **Jours restants**
+
+          Pour la période du 1er septembre {{ year }} au 31 août {{ year + 1 }}
+
+
+          La journée de demain est déjà prise en compte dans les décomptes
+          affichés.
+      - type: horizontal-stack
+        cards:
+          - type: markdown
+            content: |
+              **Jours bleus**
+              🔵 {{states('sensor.rte_tempo_cycle_jours_restants_bleu')}}/301
+          - type: markdown
+            content: |
+              **Jours blancs**
+              ⚪️ {{states('sensor.rte_tempo_cycle_jours_restants_blanc')}}/43
+          - type: markdown
+            content: |
+              **Jours rouges**
+              🔴 {{states('sensor.rte_tempo_cycle_jours_restants_rouge')}}/22
+    columns: 1
+type: masonry
+
