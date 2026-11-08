@@ -3,7 +3,7 @@
   ...
 }:
 {
-  enable = true;
+  enable = false;
   # announceInterval = 60;
   openFirewall = true;
 
