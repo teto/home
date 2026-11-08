@@ -117,7 +117,7 @@ in
 
       # lux-cli-teto = lux-cli;
 
-      mistral-vibe-custom = pkgs.mistral-vibe;
+      mistral-vibe-custom = lib.ignoreBroken pkgs.mistral-vibe;
 
       kodi-teto = pkgs.kodi-tetos;
     in
@@ -158,7 +158,7 @@ in
 
       # josm # openstreetmap editor (java)
 
-      jellyfin-tui
+      (lib.ignoreBroken jellyfin-tui)
       gh-dash
       pi-coding-agent # to test as ACP provider for avante
       # bottles  # to install games
