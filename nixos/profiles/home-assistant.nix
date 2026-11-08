@@ -17,17 +17,23 @@
     #   # "deconz" # interface for zigbee conbee II
     # ];
 
+
     package = pkgs.home-assistant.override {
 
       extraPackages = ps: [
         ps.psycopg2
-        ps.hass-nabucasa # to be able to login to cloud
+        # disabled because of ? 
+        # Detected that integration ‘cloud’ attempted to create another Zeroconf instance. Please use the shared Zeroconf via await 
+        # https://community.home-assistant.io/t/cloud-attempted-to-create-another-zeroconf-instance-when-adding-http-configuration/861908
+        # # enables several default components
+        # ps.hass-nabucasa # to be able to login to cloud
         ps.zlib-ng # to remove warning
       ];
       # look at https://www.home-assistant.io/integrations/
       # pkgs/servers/home-assistant/component-packages.nix
       # flow could not be loaded: {"message":"Invalid handler specified"}
       extraComponents = [
+        # # enables several default components. DO NOT REMOVE (?)
         "alexa" # while trying to use 'alexa' as wakeword
         "recorder" # to plot history of devices
 
@@ -67,7 +73,8 @@
     config = {
       assist_pipeline = { };
       # bluetooth = {};  # NO
-      default_config = { }; # enables several default components
+      # # enables several default components. DO NOT REMOVE (?)
+      default_config = { }; 
       # map = {};  # show a local map
       network = { };
       homeassistant = {

@@ -133,7 +133,7 @@ deploy-router:
     # deploy .\#router  -s  --auto-rollback false --magic-rollback false
     #     nix
     # run `nix path-info -Sh ./result` to see first if you have enough place
-    deploy .\#router  -s  --interactive-sudo=true
+    deploy .\#router  -s  --interactive-sudo=true  # --boot
 
 # [confirm("prompt")]
 deploy-neotokyo: (deploy "neotokyo")

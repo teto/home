@@ -204,6 +204,8 @@ in
     # TODO ?
     # snippets.enable = true;
 
+    # overrode  osc52 autodetection
+    #         vim.opt.clipboard='unnamedplus'
     initLua = lib.mkBefore (
       ''
         vim.g.mapleader = ' '
@@ -216,7 +218,6 @@ in
         vim.opt.autoindent = true
         vim.opt.expandtab = true
         vim.opt.relativenumber = true
-        vim.opt.clipboard='unnamedplus'
 
         vim.keymap.set('n', '<Leader><Leader>', '<Cmd>b#<CR>', { desc = 'Focus alternate buffer' })
       ''
