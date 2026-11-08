@@ -272,7 +272,7 @@ in
           qiv # image viewer doesnt work on wayland, needs adjustements ?
           qtpass
           restic # to backup photos to backblaze
-          rustic # rust client for restic. Backups should be compatible
+          (ignoreBroken rustic) # rust client for restic. Backups should be compatible
           # rbw # Rust bitwarden unofficial client
           ripgrep
           # rofi-teto # not needed
@@ -484,7 +484,7 @@ in
           nix-sweep # smarter nix-gc
           nixpkgs-review # to help review nix packages
           nvimpager
-          netwatch # to monitor network
+          (ignoreBroken netwatch) # to monitor network
           # patchutils # for interdiff
           perf-tools # to interpret
 
@@ -511,7 +511,7 @@ in
           wget
           # sttr # to process strings (base64 etc)
           zeal-custom # doc for developers
-          xan # CLI csv helper
+          (ignoreBroken xan) # CLI csv helper
           # viddy # fileevent watcher
           watchman
           visidata
@@ -686,7 +686,7 @@ in
       home.packages = [
         pkgs.cointop # crypto only
         pkgs.gloomberb # bun
-        pkgs.wealthfolio # node
+        (lib.ignoreBroken pkgs.wealthfolio) # node
         pkgs.stonks-cli
         # pkgs.ticker # bof
         # pkgs.mop # bof2

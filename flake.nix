@@ -191,7 +191,7 @@
 
     jj-gh = {
       url = "github:mrjones2014/jj-gh";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
     rocks-nvim = {
@@ -290,7 +290,7 @@
 
     yazi = {
       url = "github:sxyazi/yazi";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -474,6 +474,7 @@
 
       formatter = treefmtEval.config.build.wrapper;
 
+      legacyPackages = tetosPkgs;
       packages =
         self.inputs.neovim-nightly-overlay.packages.${system}
         # strip of

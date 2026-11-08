@@ -148,7 +148,7 @@ in
       # vscode-css-languageserver # to showcase 'cssls' lsp server
 
       rura  # to build shell pipelines
-      termusic  # terminal music
+      # termusic  # terminal music
  
     ];
 
