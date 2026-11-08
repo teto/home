@@ -29,7 +29,7 @@ in
       pkgs.home-assistant-custom-components.ha_mcp_tools
       # (config.services.home-assistant.package.python.pkgs.callPackage ./hass-node-red-module.nix {})
       pkgs.rtetempo
-
+      pkgs.home-assistant-custom-components.uix
       # TODO add washing machine one
     ];
 
@@ -37,7 +37,8 @@ in
 # pkgs/servers/home-assistant/custom-lovelace-modules/easy-floorplan/package.nix
       easy-floorplan
       button-card
-      card-mod
+      # home-assistant-custom-lovelace-modules.sankey-chart
+
     ];
 
     # TODO reduce list ?
@@ -45,13 +46,13 @@ in
     # ];
 
     config = {
-      lovelace.dashboards.rtetempo = {
-        mode = "yaml";
-        filename = "rtetempo-dashboard.yaml";
-        title = "Tempo";
-        icon = "mdi:transmission-tower";
-        show_in_sidebar = true;
-      };
+      # lovelace.dashboards.rtetempo = {
+      #   mode = "yaml";
+      #   filename = "rtetempo-dashboard.yaml";
+      #   title = "Tempo";
+      #   icon = "mdi:transmission-tower";
+      #   show_in_sidebar = true;
+      # };
 
       # feedreader.urls = [ "https://nixos.org/blogs.xml" ];
 

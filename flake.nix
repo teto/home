@@ -167,7 +167,7 @@
 
     # todo update for ci ?
     nixpkgs = {
-      url = "github:teto/nixpkgs/scratch";
+      url = "github:teto/nixpkgs?ref=teto/unstable";
       # url = "/home/teto/nixpkgs";
     };
 
