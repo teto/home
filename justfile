@@ -141,7 +141,7 @@ deploy-neotokyo: (deploy "neotokyo")
 deploy nixosConfig:
     # --magic-rollback false --auto-rollback=false
     echo "add --remote-build if you meet signature issues"
-    deploy .#{{ nixosConfig }} -s --interactive-sudo=true -- --override-input nixpkgs {{ NIXPKGS_REPO }}
+    deploy .#{{ nixosConfig }} -s --interactive-sudo=true -- --override-input nixpkgs {{ NIXPKGS_REPO }} 
 
 # regenerate my email contacts
 # (to speed up alot autocompletion)

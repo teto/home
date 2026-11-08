@@ -102,7 +102,7 @@ in
 
   boot =
     let
-      kernelPkgs = pkgs.linuxKernel.packages.linux_7_2;
+      kernelPkgs = pkgs.linuxKernel.packages.linux_7_3;
     in
     {
       consoleLogLevel = 6;

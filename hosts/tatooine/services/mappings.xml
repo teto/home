@@ -1,0 +1,87 @@
+<extension-mimetype ignore-unknown="no">
+ <map from="avi" to="video/x-msvideo"/>
+ <map from="flv" to="video/x-flv"/>
+ <map from="mkv" to="video/x-matroska"/>
+ <map from="m2t" to="video/mp2t"/>
+ <map from="m2ts" to="video/mp2t"/>
+ <map from="mp4" to="video/mp4"/>
+ <map from="mov" to="video/quicktime"/>
+ <map from="mts" to="video/mp2t"/>
+ <map from="ts"  to="video/mp2t"/>
+ <map from="wmv" to="video/x-ms-wmv"/>
+ <map from="mpa" to="video/mpeg"/>
+ <map from="mpe" to="video/mpeg"/>
+ <map from="mpeg" to="video/mpeg"/>
+ <map from="mpg" to="video/mpeg"/>
+ <map from="mpv2" to="video/mpeg"/>
+ <map from="ogv" to="video/ogg"/>
+ <map from="ogm" to="video/ogg"/>
+ <map from="wmv" to="video/x-ms-wmv"/>
+ <map from="wmv" to="video/x-ms-wmv"/>
+
+ <map from="flac" to="audio/x-flac"/>
+ <map from="mka" to="audio/x-matroska"/>
+ <map from="mp2" to="audio/mpeg"/>
+ <map from="mp3" to="audio/mpeg"/>
+ <map from="oga" to="audio/ogg"/>
+ <map from="wma" to="audio/x-ms-wma"/>
+
+ <map from="jpe" to="image/jpeg"/>
+ <map from="jpeg" to="image/jpeg"/>
+ <map from="jpg" to="image/jpeg"/>
+ <map from="gif" to="image/gif"/>
+ <map from="png" to="image/png"/>
+
+ <map from="ogg" to="application/ogg"/>
+ <map from="ogx" to="application/ogg"/>
+ <!-- /freebox V6 -->
+
+ <map from="3gp" to="video/3gpp"/>
+ <map from="asf" to="video/x-ms-asf"/>
+ <map from="asr" to="video/x-ms-asf"/>
+ <map from="asx" to="video/x-ms-asf"/>
+ <map from="lsf" to="video/x-la-asf"/>
+ <map from="lsx" to="video/x-la-asf"/>
+ <map from="movie" to="video/x-sgi-movie"/>
+ <map from="qt" to="video/quicktime"/>
+ <map from="rv" to="video/vnd.rn-realvideo"/>
+ <map from="wm"  to="video/x-ms-wm"/>
+ <map from="wmx" to="video/x-ms-wmx"/>
+ <map from="wvx" to="video/x-ms-wvx"/>
+
+ <map from="aif" to="audio/x-aiff"/>
+ <map from="aifc" to="audio/x-aiff"/>
+ <map from="aiff" to="audio/x-aiff"/>
+ <map from="au" to="audio/basic"/>
+ <map from="kar" to="audio/midi"/>
+
+ </extension-mimetype>
+       <mimetype-dlnatransfermode>
+        <map from="application/ogg" to="Streaming" />
+        <map from="application/x-srt" to="Background" />
+        <map from="audio/*" to="Streaming" />
+        <map from="image/*" to="Interactive" />
+        <map from="srt" to="Background" />
+        <map from="text/*" to="Background" />
+        <map from="video/*" to="Streaming" />
+      </mimetype-dlnatransfermode>
+            <contenttype-dlnaprofile>
+        <map from="asf" to="VC_ASF_AP_L2_WMA" />
+        <map from="avi" to="AVI" />
+        <map from="dsd" to="DSF" />
+        <map from="flac" to="FLAC" />
+        <map from="jpg" to="JPEG_LRG" />
+        <map from="mka" to="MKV" />
+        <map from="mkv" to="MKV" />
+        <map from="mp3" to="MP3" />
+        <map from="mp4" to="AVC_MP4_EU" />
+        <map from="mpeg" to="MPEG_PS_PAL" />
+        <map from="ogg" to="OGG" />
+        <map from="pcm" to="LPCM" />
+        <map from="png" to="PNG_LRG" />
+        <map from="wma" to="WMAFULL" />
+      </contenttype-dlnaprofile>
+      <ignore-extensions>
+        <add-file name="part" />
+        <add-file name="tmp" />
+      </ignore-extensions>

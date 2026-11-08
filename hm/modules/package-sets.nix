@@ -272,7 +272,7 @@ in
           qiv # image viewer doesnt work on wayland, needs adjustements ?
           qtpass
           restic # to backup photos to backblaze
-          rustic # rust client for restic. Backups should be compatible
+          (ignoreBroken rustic) # rust client for restic. Backups should be compatible
           # rbw # Rust bitwarden unofficial client
           ripgrep
           # rofi-teto # not needed
@@ -484,7 +484,7 @@ in
           nix-sweep # smarter nix-gc
           nixpkgs-review # to help review nix packages
           nvimpager
-          netwatch # to monitor network
+          (ignoreBroken netwatch) # to monitor network
           # patchutils # for interdiff
           perf-tools # to interpret
 
@@ -511,7 +511,7 @@ in
           wget
           # sttr # to process strings (base64 etc)
           zeal-custom # doc for developers
-          xan # CLI csv helper
+          (ignoreBroken xan) # CLI csv helper
           # viddy # fileevent watcher
           watchman
           visidata
@@ -666,8 +666,7 @@ in
 
           pkgs.mokuro # generates .mokuro files with OCR-ed overlays. dope.
           # pkgs.python3Packages.manga-ocr
-          # pkgs.python3Packages.videocr # to extract burn in subtitles
-          pkgs.videocr # translate hardcoded subtitles into soft subtitles
+          # pkgs.videocr # translate hardcoded subtitles into soft subtitles
           pkgs.subminer # mpv-related mining
 
         ];
@@ -686,7 +685,7 @@ in
       home.packages = [
         pkgs.cointop # crypto only
         pkgs.gloomberb # bun
-        pkgs.wealthfolio # node
+        (lib.ignoreBroken pkgs.wealthfolio) # node
         pkgs.stonks-cli
         # pkgs.ticker # bof
         # pkgs.mop # bof2
@@ -704,7 +703,7 @@ in
 
         # MUSIC ONLY
         # jellyfin-tui # nice
-        pkgs.gelly # gtk+rust music player GUI
+        (ignoreBroken pkgs.gelly) # gtk+rust music player GUI
         # pkgs.rufin
         # pkgs.feishin # GUI
         # pkgs.jellycli # could not login :/
@@ -712,7 +711,7 @@ in
 
         # VIDEO compatible
         # - Jellyfin MPV Shim
-        pkgs.tsukimi # gtk+rust music player GUI
+        (ignoreBroken pkgs.tsukimi) # gtk+rust music player GUI
         pkgs.jellyfin-desktop
         pkgs.jellyfin-mpv-shim
         # jellyhaj # not upstreamed yet 

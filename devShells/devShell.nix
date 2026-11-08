@@ -59,7 +59,7 @@ pkgs.mkShell {
       openssl # to inspect certificates
       treefmt-home # use formatter instead ?
       ripgrep
-      rustic # testing against restic
+      # rustic # testing against restic
       secretspec # to decrypt secrets
 
       steghide # for steganography
