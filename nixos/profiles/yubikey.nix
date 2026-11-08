@@ -1,3 +1,5 @@
+# smartcard service for yubikey
+# can conflict with gpg-agent depending on config
 { pkgs, ... }:
 {
   pam = {

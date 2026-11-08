@@ -19,6 +19,8 @@ in
   services.home-assistant = {
     enable = true;
 
+    # configCheck = true;
+
     # from https://discourse.nixos.org/t/trying-to-build-custom-homeassistant-component-leads-to-infinite-recursion/58602/4
     #   Available components can be found below 'pkgs.home-assistant-custom-components'.
     customComponents = [

@@ -166,7 +166,6 @@ in
     # to prevent the "failed to load regulatory.db" ?
     # see https://wireless.wiki.kernel.org/en/developers/regulatory
     udev.packages = [
-      pkgs.yubikey-personalization
       pkgs.brightnessctl
     ];
 
@@ -203,8 +202,6 @@ in
 
   services.flatpak.enable = true;
 
-  # smartcard service for yubikey
-  # can conflict with gpg-agent depending on config
   system.stateVersion = "26.05";
 
   # apparently deprecated / replaced by https://github.com/OHF-Voice/linux-voice-assistant

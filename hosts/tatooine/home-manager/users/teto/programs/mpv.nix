@@ -3,7 +3,7 @@
 
     scripts = [
       # as python
-      pkgs.mpvDLNA
+      # pkgs.mpvDLNA
     ];
 
 }
