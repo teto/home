@@ -1,5 +1,10 @@
+nice article https://blog.infected.systems/posts/2026-11-03-i-deleted-all-my-ssh-keys/
 
 yubikey-oath
 security.pam.services.<name>.u2fAuth   
 
 gpg --card-status
+
+
+ssh-keygen -t ed25519-sk -O resident -O application="ssh:yournamehere" -f ~/.ssh/id_ed25519-sk
+

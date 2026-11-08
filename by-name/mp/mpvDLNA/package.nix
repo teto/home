@@ -16,6 +16,8 @@ in
 stdenvNoCC.mkDerivation {
   pname = "mpvDLNA";
   inherit version;
+  scriptName = "mpvDLNA";
+
   src = fetchFromGitHub {
     owner = "chachmu";
     repo = "mpvDLNA";
