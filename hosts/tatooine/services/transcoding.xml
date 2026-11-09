@@ -17,6 +17,10 @@
         <buffer size="1048576" chunk-size="131072" fill-size="262144" />
       </profile>
       <mimetype-profile-mappings>
-<!-- enable freebox ones -->
-
+         <!-- enable freebox ones -->
+         <transcode mimetype="video/x-flv" using="freebox-h264" />
+         <transcode mimetype="application/ogg" using="freebox-h264" />
+         <transcode mimetype="video/x-matroska" using="freebox-h264" />
+         <transcode mimetype="video/x-msvideo" using="freebox-h264" />
+         <transcode mimetype="audio/ogg" using="freebox-aac" />
       </mimetype-profile-mappings>

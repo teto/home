@@ -245,6 +245,8 @@ let
     editorconfig-checker # used in null-ls
     fswatch # better file watching starting with 0.10
     # go # for gitlab.nvim, we can probably ditch it afterwards
+
+    lemminx  # 
     luajitPackages.luacheck
 
     luau-lsp
@@ -261,11 +263,6 @@ let
     # prettier sadly can't use buildNpmPackage because no lockfile https://github.com/NixOS/nixpkgs/issues/229475
     # dockerfile-language-server
 
-    # pandoc is used by a bunch of plugins, including feed.nvim
-    # while I wish feed.nvim would be packaged with it
-    # for markdown preview, should be in the package closure instead
-    pandoc
-
     # pythonPackages.pdftotext  # should appear only in RC ? broken
     # nil # a nix lsp, can be debugged with NIL_LOG_PATH and NIL_LOG=nil=debug
     nixd # another nix LSP
@@ -277,6 +274,11 @@ let
     lua-language-server # emmylua-ls still kinda broken
     gopls # LSP for go
     marksman # markdown LSP server
+
+    # pandoc is used by a bunch of plugins, including feed.nvim
+    # while I wish feed.nvim would be packaged with it
+    # for markdown preview, should be in the package closure instead
+    pandoc
 
     pyright # python lsp
 

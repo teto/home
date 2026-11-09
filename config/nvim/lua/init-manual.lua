@@ -729,6 +729,7 @@ vim.lsp.enable('yamlls')
 vim.lsp.enable('just')
 vim.lsp.enable('nixd')
 vim.lsp.enable('ruff')
+vim.lsp.enable('lemminx')
 -- vim.lsp.enable('nil_ls')
 -- vim.lsp.enable('cssls')
 

@@ -666,8 +666,7 @@ in
 
           pkgs.mokuro # generates .mokuro files with OCR-ed overlays. dope.
           # pkgs.python3Packages.manga-ocr
-          # pkgs.python3Packages.videocr # to extract burn in subtitles
-          pkgs.videocr # translate hardcoded subtitles into soft subtitles
+          # pkgs.videocr # translate hardcoded subtitles into soft subtitles
           pkgs.subminer # mpv-related mining
 
         ];
@@ -704,7 +703,7 @@ in
 
         # MUSIC ONLY
         # jellyfin-tui # nice
-        pkgs.gelly # gtk+rust music player GUI
+        (ignoreBroken pkgs.gelly) # gtk+rust music player GUI
         # pkgs.rufin
         # pkgs.feishin # GUI
         # pkgs.jellycli # could not login :/
@@ -712,7 +711,7 @@ in
 
         # VIDEO compatible
         # - Jellyfin MPV Shim
-        pkgs.tsukimi # gtk+rust music player GUI
+        (ignoreBroken pkgs.tsukimi) # gtk+rust music player GUI
         pkgs.jellyfin-desktop
         pkgs.jellyfin-mpv-shim
         # jellyhaj # not upstreamed yet 
