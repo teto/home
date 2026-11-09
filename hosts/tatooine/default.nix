@@ -202,7 +202,6 @@ in
 
   services.flatpak.enable = true;
 
-  system.stateVersion = "26.05";
 
   # apparently deprecated / replaced by https://github.com/OHF-Voice/linux-voice-assistant
   # which is not packaged (yet)
@@ -218,4 +217,7 @@ in
   # to remove "TSC_DEADLINE disabled due to Errata;
   # please update microcode to version: 0x22"
   # hardware.cpu.intel.updateMicrocode = true;
+
+  nixpkgs.hostPlatform = "x86_64-linux";
+  system.stateVersion = "26.05";
 }

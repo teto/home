@@ -152,6 +152,7 @@ let
 
   treesitterPlugins = [
     # pkgs.vimPlugins.nvim-treesitter-textobjects
+    pkgs.vimPlugins.nvim-treesitter-parsers.html # for avante-nvim
     pkgs.vimPlugins.nvim-treesitter-parsers.nix
     pkgs.vimPlugins.nvim-treesitter-parsers.hurl
     pkgs.vimPlugins.nvim-treesitter-parsers.python

@@ -2,7 +2,6 @@
 {
 
   pki.certificateFiles = [
-    # same as on neotokyo
     # ./root_ca.crt
     ../../profiles/desktop/root_ca.crt
 

@@ -133,7 +133,7 @@ deploy-router:
     # deploy .\#router  -s  --auto-rollback false --magic-rollback false
     #     nix
     # run `nix path-info -Sh ./result` to see first if you have enough place
-    deploy .\#router  -s  --interactive-sudo=true  # --boot
+    deploy .\#router  -s  # --boot
 
 # [confirm("prompt")]
 deploy-neotokyo: (deploy "neotokyo")
@@ -141,7 +141,7 @@ deploy-neotokyo: (deploy "neotokyo")
 deploy nixosConfig:
     # --magic-rollback false --auto-rollback=false
     echo "add --remote-build if you meet signature issues"
-    deploy .#{{ nixosConfig }} -s --interactive-sudo=true -- --override-input nixpkgs {{ NIXPKGS_REPO }} 
+    deploy .#{{ nixosConfig }} -s -- --override-input nixpkgs {{ NIXPKGS_REPO }} 
 
 # regenerate my email contacts
 # (to speed up alot autocompletion)

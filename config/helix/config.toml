@@ -10,6 +10,7 @@ inline-diagnostics.cursor-line = "disable"
 inline-diagnostics.other-lines = "disable"
 trim-trailing-whitespace = true
 gutters = ["diagnostics", "diff"]
+line-number = "relative"
 [editor.cursor-shape]
 insert = "bar"
 normal = "block"

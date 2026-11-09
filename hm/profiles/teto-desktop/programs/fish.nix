@@ -177,6 +177,31 @@ in
 
   functions = {
 
+    # Run Claude Code against the llama.cpp server on dev-ia (hosts/wsl/services/llamacpp.nix)
+    # llama-server exposes an Anthropic-compatible /v1/messages endpoint.
+    # Usage: claude-spark [--model <alias>] [claude args...]
+    claude-spark = {
+      description = "Claude Code backed by llama.cpp on dev-ia:9931";
+      body = ''
+        set -l model qwen3.6-dense
+        if test (count $argv) -ge 2; and test "$argv[1]" = --model
+          set model $argv[2]
+          set -e argv[1..2]
+        end
+        ANTHROPIC_BASE_URL=http://dev-ia.ixeal.local:9931 \
+        ANTHROPIC_AUTH_TOKEN=local \
+        ANTHROPIC_API_KEY= \
+        ANTHROPIC_MODEL=$model \
+        ANTHROPIC_DEFAULT_OPUS_MODEL=$model \
+        ANTHROPIC_DEFAULT_SONNET_MODEL=$model \
+        ANTHROPIC_DEFAULT_HAIKU_MODEL=$model \
+        CLAUDE_CODE_SUBAGENT_MODEL=$model \
+        CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1 \
+        API_TIMEOUT_MS=600000 \
+        claude $argv
+      '';
+    };
+
     ndh = {
 
       body = ''

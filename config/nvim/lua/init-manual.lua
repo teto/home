@@ -25,6 +25,9 @@ require('vim._core.ui2').enable({
     },
 })
 
+vim.g.markdown_folding = 1
+vim.g.markdown_enable_folding = 1
+
 local stdpath_config = vim.fn.stdpath('config')
 
 -- otherwise it hijacks my mappings
@@ -950,7 +953,7 @@ end, { desc = 'Go to file, create if missing' })
 -- normally overriden by setup call
 vim.g.avante = {
 	-- -- print error messages, set to false to avoid issues with inspect_ai
-    debug = false, 
+    debug = false,
     -- log_level =
     log_level = vim.log.levels.DEBUG,
 
@@ -1012,6 +1015,7 @@ vim.g.avante = {
         -- check https://github.com/yetone/avante.nvim/pull/3141
         acp_follow_agent_locations = true,
 
+		show_token_usage = true,
         enable_token_counting = true,
         show_inference_timings = true, -- this is from my fork ?
         -- auto_approve_tool_permissions = {"bash", "replace_in_file"}, -- Auto-approve specific tools only
@@ -1031,6 +1035,16 @@ vim.g.avante = {
         provider = 'fzf_lua',
     },
     providers = {
+		rtx_spark = {
+            __inherited_from = 'openai',
+			-- ixeal-spark
+            endpoint = 'http://dev-ia.ixeal.local:9931/v1',
+			model =  'qwen3.6-dense',
+            -- model = 'deepseek/deepseek-v4-flash-0731',
+			api_key_name = "", -- Local server without authentication
+			-- use_response_api = false, -- use chat completions api-
+
+		},
         openrouter = {
             -- see also https://github.com/avante-corp/avante.nvim/issues/2310
             __inherited_from = 'openai',
@@ -1090,6 +1104,7 @@ vim.g.avante = {
     windows = {
         position = 'right',
         fillchars = 'eob: ',
+		-- wrap = false,
         -- TODO remove
         sidebar_header = {
             enabled = true, -- true, false to enable/disable the header

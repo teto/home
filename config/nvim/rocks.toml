@@ -122,8 +122,8 @@ nvim-treesitter-context = "1.0.0"
 git = "teto/feed.nvim"
 branch = "teto/fix-percent"
 
-[plugins."rikai.nvim"]
-dev = true
+# [plugins."rikai.nvim"]
+# dev = true
 
 [plugins."hacker.nvim"]
 git = "letieu/hacker.nvim"

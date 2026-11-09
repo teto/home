@@ -66,9 +66,11 @@ in
 
     flakeSelf.homeModules.avante
     flakeSelf.homeModules.firefox
+    flakeSelf.homeModules.flyline
     flakeSelf.homeModules.fzf
     flakeSelf.homeModules.kitty
     flakeSelf.homeModules.memento
+    flakeSelf.homeModules.microsoft
     flakeSelf.homeModules.nixpkgs-monitor
     flakeSelf.homeModules.package-sets
     flakeSelf.homeModules.services-mujmap
@@ -117,7 +119,7 @@ in
 
       # lux-cli-teto = lux-cli;
 
-      mistral-vibe-custom = lib.ignoreBroken pkgs.mistral-vibe;
+      mistral-vibe-custom = pkgs.hello; # lib.ignoreBroken pkgs.mistral-vibe;
 
       kodi-teto = pkgs.kodi-tetos;
     in
@@ -158,7 +160,7 @@ in
 
       # josm # openstreetmap editor (java)
 
-      (lib.ignoreBroken jellyfin-tui)
+      # (lib.ignoreBroken jellyfin-tui)
       gh-dash
       pi-coding-agent # to test as ACP provider for avante
       # bottles  # to install games
@@ -189,7 +191,7 @@ in
 
 
       sonic-pi  # for live music coding
-      stow
+      stow  # tool to create symlinks
       systemctl-tui
       timr-tui # rust clock
 
@@ -255,7 +257,9 @@ in
     CDPATH = "$HOME/plugins";
 
     # it's a pain with git/update config
-    PAGER = "bat --style=numbers";
+    # removed args because for instance systemctl-tui doesn't accept args 
+    # --style=numbers 
+    PAGER = "bat";
 
     # or bat
     MANPAGER = "moor";
