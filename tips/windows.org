@@ -1,3 +1,28 @@
+* have caps lock send control
+
+winget install Microsoft.PowerToy
+
+* kill process associated with a port
+
+
+Stop-Process -Id (Get-NetTCPConnection -LocalPort 12666).OwningProcess
+
+
+* allow sshing from another computer
+
+
+# Windows Defender Firewall
+New-NetFirewallRule -DisplayName "WSL SSH" -Direction Inbound -Protocol TCP -LocalPort 22 -Action Allow
+
+# Hyper-V firewall (applies to WSL in mirrored mode)
+New-NetFirewallHyperVRule -Name "WSL-SSH" -DisplayName "WSL SSH" -Direction Inbound `
+  -VMCreatorId '{40E0AC32-46A5-438A-A0B2-2B479E8F2E90}' -Protocol TCP -LocalPorts 22
+
+
+I rarely use windows anymore and so sometimes q
+retreive network config
+
+ipconfig
 
 * bcd = boot configuration data
 

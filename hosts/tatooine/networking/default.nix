@@ -1,6 +1,7 @@
 {
-  config,
-  lib,
+  # config,
+  # lib,
+  pkgs,
   ...
 }:
 {
@@ -10,12 +11,18 @@
 
   networkmanager = {
     enable = true;
+
+    plugins = [ pkgs.networkmanager-openvpn ];
   };
 
   # use new framework
   nftables.enable = true;
 
   useNetworkd = true;
+
+  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
+  # useDHCP = lib.mkDefault true;
+
 
   hosts = {
 
