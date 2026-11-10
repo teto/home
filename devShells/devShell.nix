@@ -103,11 +103,14 @@ pkgs.mkShell {
             # TODO generate the mail headers
             cat contrib/2025-05-04-21.38.53.mail | msmtp --read-envelope-from --read-recipients -afastmail ${secrets.users.teto.email}
       '';
+
       # in ~/.inputrc
       # "\C-xe":   rlwrap-call-editor            # CTRL-x e
       #  (asdf:load-system 'clingon)
     in
     # RUSTIC_REPOSITORY
+    # ln -sf ${generatedJustfile} justfile.generated
+
     ''
       export SOPS_AGE_KEY_FILE=$PWD/secrets/age.key
       # TODO rely on scripts/load-restic.sh now ?
@@ -116,7 +119,6 @@ pkgs.mkShell {
       export RUSTIC_REPOSITORY=$(cat ~/.config/sops-nix/restic/teto-bucket)
       source config/bash/aliases.sh
 
-      ln -sf ${generatedJustfile} justfile.generated
       echo "Run just ..."
       echo "To work with sbcl:"
       echo '* (load (sb-ext:posix-getenv "ASDF"))'
