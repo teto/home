@@ -3,3 +3,18 @@ wsl --update
 
 
 wsl --install --from-file nixos.wsl
+
+* networking
+
+# Windows Defender Firewall
+New-NetFirewallRule -DisplayName "WSL SSH" -Direction Inbound -Protocol TCP -LocalPort 12666 -Action Allow
+
+# Hyper-V firewall (applies to WSL in mirrored mode)
+New-NetFirewallHyperVRule -Name "WSL-SSH" -DisplayName "WSL SSH" -Direction Inbound `
+  -VMCreatorId '{40E0AC32-46A5-438A-A0B2-2B479E8F2E90}' -Protocol TCP -LocalPorts 12666
+
+
+WSL shuts down a little while after your last terminal closes, and then SSH stops working. A simple fix is a Task Scheduler task that runs at logon with:
+
+wsl.exe -d Ubuntu -- sleep infinity
+
