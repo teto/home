@@ -69,6 +69,7 @@ in
     flakeSelf.homeModules.fzf
     flakeSelf.homeModules.kitty
     flakeSelf.homeModules.memento
+    flakeSelf.homeModules.microsoft
     flakeSelf.homeModules.nixpkgs-monitor
     flakeSelf.homeModules.package-sets
     flakeSelf.homeModules.services-mujmap

@@ -1,6 +1,7 @@
 {
   flakeSelf,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -21,7 +22,9 @@ let
   # TODO enable mdns / avahi and give him host name "bootstrap.local"
   # TODO expose as nixos configuration
   sys = lib.nixosSystem {
-    system = "x86_64-linux";
+    # system = "x86_64-linux";
+    system = "aarch64-linux";
+    # nixpkgs.hostPlatform = "aarch64-linux";
     modules = [
       (
         {
@@ -111,8 +114,10 @@ in
   services.pixiecore = {
     # enable = false; # enable it per host
     debug = true;
+    # one of “api”, “boot”, “quick”
+    package = pkgs.pixiecore-arm64;
     mode = "boot";
-
+# enp1s0f0
     # extraArguments = ;
     # listen
     # cmdLine = ;
@@ -125,14 +130,14 @@ in
     # mode = "boot"; / "quick"
 
     # https://carlosvaz.com/posts/ipxe-booting-with-nixos/
-    # kernel = "https://boot.netboot.xyz";
+    kernel = "https://boot.netboot.xyz";
     # kernel = "${netboot}/bzImage";
 
     # TODO use local file system and build it instead
     # # imports = [ (modulesPath + "/installer/netboot/netboot-minimal.nix") ];
-    kernel = "${build.kernel}/bzImage";
-    initrd = "${build.netbootRamdisk}/initrd";
-    cmdLine = "init=${build.toplevel}/init loglevel=4";
+    # kernel = "${build.kernel}/bzImage";
+    # initrd = "${build.netbootRamdisk}/initrd";
+    # cmdLine = "init=${build.toplevel}/init loglevel=4";
 
     # debug = true;
 

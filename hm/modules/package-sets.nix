@@ -393,7 +393,7 @@ in
           bubblewrap # sandboxing
 
           # cargo # should be project-dependant
-          # (ignoreBroken claude-code) # anthropic agent
+          claude-code # anthropic agent
           curl
 
           # dasht # ~ zeal but in terminal

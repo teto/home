@@ -1,0 +1,5 @@
+wsl --install --no-distribution | Ubuntu-26.04
+wsl --update
+
+
+wsl --install --from-file nixos.wsl

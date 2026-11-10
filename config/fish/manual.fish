@@ -70,6 +70,12 @@ abbr -a -g scu systemctl --user
 abbr -a -g jr journalctl
 abbr -a -g jru journalctl --user
 
+function bell_on_failure --on-event fish_postexec
+    if test $status -ne 0
+        printf '\a'
+    end
+end
+
 # tide config
 # set tide_cmd_duration_threshold 3000
 

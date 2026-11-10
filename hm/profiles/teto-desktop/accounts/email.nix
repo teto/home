@@ -237,13 +237,27 @@ let
     msmtp.enable = true;
     notmuch.enable = true;
 
-    userName = secrets.accounts.mail.gmail_perso.address;
+    userName = secrets.accounts.mail.ixeal.address;
     realName = "Matt";
-    address = secrets.accounts.mail.gmail_perso.address;
+    address = secrets.accounts.mail.ixeal.address;
     flavor = "gmail.com";
     smtp.tls.useStartTls = true;
 
     passwordCommand = getPasswordCommand "perso/gmail";
+  };
+
+  ixeal = {
+    msmtp.enable = true;
+    notmuch.enable = true;
+
+    userName = secrets.accounts.mail.gmail_perso.address;
+    realName = "Matthieu Coudron";
+    address = secrets.accounts.mail.gmail_perso.address;
+    smtp.tls.useStartTls = true;
+
+    passwordCommand = getPasswordCommand "ixeal/outlook";
+
+    flavor = "outlook.office365.com";
   };
 
 in
@@ -253,6 +267,7 @@ in
     lib.optionalAttrs (builtins.traceVerbose osConfig.tetos.withSecrets osConfig.tetos.withSecrets)
       {
         inherit
+          ixeal
           gmail
           fastmail
           ;

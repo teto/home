@@ -1090,6 +1090,7 @@ vim.g.avante = {
     windows = {
         position = 'right',
         fillchars = 'eob: ',
+		-- wrap = false,
         -- TODO remove
         sidebar_header = {
             enabled = true, -- true, false to enable/disable the header
