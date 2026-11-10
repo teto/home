@@ -34,6 +34,7 @@
     # TODO it should autoload all of them ?
     flakeSelf.homeModules.bash
     flakeSelf.homeModules.fish
+    flakeSelf.homeModules.flyline
     flakeSelf.homeModules.fzf
     flakeSelf.homeModules.less
     flakeSelf.homeModules.nvimpager

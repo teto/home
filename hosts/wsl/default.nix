@@ -15,7 +15,10 @@
     flakeSelf.nixosProfiles.teto
 
     flakeSelf.nixosModules.default-hm
+    flakeSelf.inputs.flyline.nixosModules.default
   ];
+
+  programs.flyline.enable = true;
 
   wsl = {
     enable = true;

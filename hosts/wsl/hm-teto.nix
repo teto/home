@@ -24,4 +24,6 @@
   };
 
 };
+
+programs.flyline.enable = true;
 }
