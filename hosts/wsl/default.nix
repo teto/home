@@ -58,9 +58,12 @@
       flakeSelf.homeProfiles.common
       flakeSelf.homeProfiles.neovim
       flakeSelf.homeProfiles.teto-zsh
+
+      ./hm-teto.nix
     ];
     home.stateVersion = "26.05";
   };
+
 
   programs.neovim = {
 
