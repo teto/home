@@ -62,17 +62,18 @@
       flakeSelf.homeProfiles.neovim
       flakeSelf.homeProfiles.teto-zsh
 
+      flakeSelf.homeModules.neovim
       ./hm-teto.nix
     ];
     home.stateVersion = "26.05";
-  };
 
+    programs.neovim = {
 
-  programs.neovim = {
-
-    enableRocks = true;
-    highlightOnYank = true;
-    enableFzfLua = true;
+      enableRocks = true;
+      highlightOnYank = true;
+      enableFzfLua = true;
+      # enableBlink = true;
+    };
   };
 
   system.stateVersion = "26.05";

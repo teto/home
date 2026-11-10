@@ -83,6 +83,8 @@ pkgs.mkShell {
 
       rlwrap # poor solution to wrap sbcl
 
+      stow # tool to create symlinks, useful for "just stow-config"
+
       wormhole-rs # "wormhole-rs send"
       wireguard-tools # for 'wg'
 
