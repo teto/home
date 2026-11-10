@@ -18,3 +18,11 @@ WSL shuts down a little while after your last terminal closes, and then SSH stop
 
 wsl.exe -d Ubuntu -- sleep infinity
 
+
+  wsl --shutdown
+
+
+
+* 
+
+activer le mode reseau miroir

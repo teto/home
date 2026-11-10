@@ -314,24 +314,23 @@
 
       # extended hm-lib Lib
       lib = self.inputs.nixpkgs.lib.extend (
-        prev: _:
+        prev: final:
         self.inputs.hm.lib
         // (import ./tetos/lib {
-          pkgs = tetosPkgs;
+          # or final ?
+          pkgs = final;
           inherit dotfilesPath secretsFolder secrets;
           flakeSelf = self;
           lib = prev;
         })
       );
 
-      system = "x86_64-linux";
+      # system = "x86_64-linux";
       dotfilesPath = "/home/teto/home";
       secretsFolder = "/home/teto/home/secrets";
 
       secrets = import ./nixpkgs/secrets.nix;
 
-      # Eval the treefmt modules from ./treefmt.nix
-      treefmtEval = treefmt-nix.lib.evalModule tetosPkgs ./tetos/treefmt.nix;
 
       # loads packages in by-name/
       byNamePkgsOverlay = import "${nixpkgs}/pkgs/top-level/by-name-overlay.nix" ./by-name;
@@ -348,10 +347,28 @@
       #     directory = ./pkgs;
       #   };
 
+
+      # libExtended = nixpkgs.lib.exend (
+      #   final: prev: {
+      #     # add tetos lib
+      #   }
+      # );
+
+    in
+    flake-utils.lib.eachSystem [ "aarch64-linux" "x86_64-linux" ] (system:  let
+      tetosPkgs = pkgImport system self.inputs.nixpkgs false;
+      # tetosPkgsCuda = pkgImport self.inputs.nixpkgs true;
+      unstablePkgs = pkgImport system self.inputs.nixos-unstable false;
+
+
+      # system
       pkgImport =
+          system':
+
         src: cudaSupport:
         import src {
-          inherit system;
+          system = system';
+
           overlays = (src.lib.attrValues self.overlays) ++ [
             (final: prev: {
               # expose it for byNamePkgsOverlay
@@ -423,19 +440,11 @@
                 ];
           };
         };
-
-      # libExtended = nixpkgs.lib.exend (
-      #   final: prev: {
-      #     # add tetos lib
-      #   }
-      # );
-
-      tetosPkgs = pkgImport self.inputs.nixpkgs false;
-      tetosPkgsCuda = pkgImport self.inputs.nixpkgs true;
-      unstablePkgs = pkgImport self.inputs.nixos-unstable false;
+      # Eval the treefmt modules from ./treefmt.nix
+      treefmtEval = treefmt-nix.lib.evalModule tetosPkgs ./tetos/treefmt.nix;
 
     in
-    flake-utils.lib.eachSystem [ "x86_64-linux" ] (system: {
+    {
 
       # todo create a bootstrap devShell
       # https://github.com/numtide/blueprint/blob/0ed984d51a3031065925ab08812a5434f40b93d4/lib/default.nix#L547
@@ -533,7 +542,7 @@
     // {
       # those help debug in repl
       inherit (self) inputs;
-      inherit tetosPkgs;
+      # inherit tetosPkgs;
 
       # TODO import from hosts/ via lib.importFiles
       # autoload from hosts
@@ -559,7 +568,9 @@
           nixosConfigs = lib.importDirectories ./hosts (
             # dirname => hostname
             hostname: val:
-            lib.nameValuePair hostname (
+            lib.nameValuePair hostname (let
+              enableCuda = hostname == "jedha";
+            in
               lib.mkNixosSystem {
                 inherit hostname;
                 # ideally we would return both versions
@@ -569,7 +580,8 @@
                 ];
 
                 # encode it in name or
-                pkgs = if hostname == "jedha" then tetosPkgsCuda else tetosPkgs;
+                # pkgs = pkgImport system self.inputs.nixpkgs enableCuda;
+                # pkgs = if  then tetosPkgsCuda else tetosPkgs;
               }
             )
           );
@@ -602,8 +614,9 @@
 
             modules = [
               {
-              networking.hostName = lib.mkForce "ixeal-spark";
-            }
+                nixpkgs.hostPlatform = lib.mkForce "aarch64-linux";
+                networking.hostName = lib.mkForce "ixeal-spark";
+              }
             ];
           };
           ixeal-matthieu = nixosConfigs.wsl.extendModules {
@@ -674,7 +687,10 @@
       # the 'deploy' entry is used by 'deploy-rs' to deploy our nixosConfigurations
       # if it doesn't work you can always fall back to the vanilla nixos-rebuild:
       deploy = import ./deploy.nix {
-        inherit secrets system;
+        inherit
+          secrets 
+          # system
+            ;
         flakeSelf = self;
       };
 

@@ -66,7 +66,8 @@
             # remoteBuild = false;
             user = "root";
             hostname = nixosCfg.config.networking.fqdnOrHostName; # attrs.hostname;
-            path = flakeSelf.inputs.deploy-rs.lib.${system}.activate.nixos nixosCfg;
+            # path = flakeSelf.inputs.deploy-rs.lib.${system}.activate.nixos nixosCfg;
+            # path = flakeSelf.inputs.deploy-rs.lib.${system}.activate.nixos nixosCfg;
 
           };
         };
