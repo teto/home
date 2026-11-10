@@ -27,7 +27,7 @@
     wslConf.network.hostname = "wsl";
   };
 
-  networking.hostName = "ixeal-matthieu";
+  networking.hostName = "wsl";
   networking.domain = null;
 
   time.timeZone = "Europe/Paris";

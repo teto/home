@@ -1,3 +1,9 @@
+* have caps lock send control
+
+winget install Microsoft.PowerToy
+
+* 
+
 I rarely use windows anymore and so sometimes q
 retreive network config
 

@@ -66,6 +66,7 @@ in
 
     flakeSelf.homeModules.avante
     flakeSelf.homeModules.firefox
+    flakeSelf.homeModules.flyline
     flakeSelf.homeModules.fzf
     flakeSelf.homeModules.kitty
     flakeSelf.homeModules.memento

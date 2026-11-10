@@ -602,7 +602,7 @@
 
             modules = [
               {
-              networking.hostName = "ixeal-spark";
+              networking.hostName = lib.mkForce "ixeal-spark";
             }
             ];
           };
@@ -610,7 +610,7 @@
 
             modules = [
               {
-              networking.hostName = "ixeal-matthieu";
+              networking.hostName = lib.mkForce "ixeal-matthieu";
             }
             ];
           };

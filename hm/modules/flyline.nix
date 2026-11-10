@@ -35,7 +35,7 @@ in {
       flyline editor --show-inline-history false
       flyline editor --select-with-mouse false
       flyline history --backend flyline
-      source ${./config/bash/flyline.sh}
+      source ${../../config/bash/flyline.sh}
 
       '';
   };
