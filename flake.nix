@@ -595,7 +595,27 @@
           #     )
           # );
         in
-        nixosConfigs // nixosConfigsWithoutSecrets;
+        nixosConfigs // nixosConfigsWithoutSecrets // {
+
+
+          ixeal-spark = nixosConfigs.wsl.extendModules {
+
+            modules = [
+              {
+              networking.hostName = "ixeal-spark";
+            }
+            ];
+          };
+          ixeal-matthieu = nixosConfigs.wsl.extendModules {
+
+            modules = [
+              {
+              networking.hostName = "ixeal-matthieu";
+            }
+            ];
+          };
+
+        };
 
       # TODO scan hm/{modules, profiles} folder
       homeProfiles = lib.importFiles ./hm/profiles // {

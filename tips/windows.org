@@ -1,3 +1,7 @@
+I rarely use windows anymore and so sometimes q
+retreive network config
+
+ipconfig
 
 * bcd = boot configuration data
 

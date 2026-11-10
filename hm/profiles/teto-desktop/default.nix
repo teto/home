@@ -190,7 +190,7 @@ in
 
 
       sonic-pi  # for live music coding
-      stow
+      stow  # tool to create symlinks
       systemctl-tui
       timr-tui # rust clock
 
