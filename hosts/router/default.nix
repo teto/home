@@ -87,6 +87,8 @@
 
   };
 
+  nixpkgs.hostPlatform = "x86_64-linux";
+
   # TODO use from flake or from unstable
   # services.opensnitch-ui.enable
   home-manager.users.teto = {

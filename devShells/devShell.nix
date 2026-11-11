@@ -57,7 +57,11 @@ pkgs.mkShell {
       # nodejs # what for ?
       # termscp-matt
       openssl # to inspect certificates
-      treefmt-home # use formatter instead ?
+
+      # TODO restore comes from the overlay
+      # treefmt-home # use formatter instead ? 
+      # pkgs.git-branch-monitor
+
       ripgrep
       # rustic # testing against restic
       secretspec # to decrypt secrets
@@ -89,7 +93,6 @@ pkgs.mkShell {
       wireguard-tools # for 'wg'
 
       lazyrsync # to exchange secrets
-      pkgs.git-branch-monitor
     ]
     ++ [
       # removed because it was using IFD and we use firefox policies instead
@@ -99,16 +102,12 @@ pkgs.mkShell {
   # TODO set SOPS_A
   shellHook =
     let
-      # --from ${}
+      # this required secrets which is bad on new system
       generatedJustfile = pkgs.writeText "justfile.generated" ''
         test-msmtp-send-mail:
             # TODO generate the mail headers
             cat contrib/2025-05-04-21.38.53.mail | msmtp --read-envelope-from --read-recipients -afastmail ${secrets.users.teto.email}
       '';
-
-      # in ~/.inputrc
-      # "\C-xe":   rlwrap-call-editor            # CTRL-x e
-      #  (asdf:load-system 'clingon)
     in
     # RUSTIC_REPOSITORY
     # ln -sf ${generatedJustfile} justfile.generated

@@ -356,92 +356,13 @@
 
     in
     flake-utils.lib.eachSystem [ "aarch64-linux" "x86_64-linux" ] (system:  let
-      tetosPkgs = pkgImport system self.inputs.nixpkgs false;
+      # tetosPkgs = pkgImport system self.inputs.nixpkgs false;
       # tetosPkgsCuda = pkgImport self.inputs.nixpkgs true;
-      unstablePkgs = pkgImport system self.inputs.nixos-unstable false;
+      unstablePkgs = self.inputs.nixos-unstable.legacyPackages.${system};
+      # tetosPkgs = unstablePkgs;
+      # tetosPkgs = self.nixosConfigurations.tatooine.pkgs;
+      tetosPkgs = self.inputs.nixos-unstable.legacyPackages.${system};
 
-
-      # system
-      pkgImport =
-          system':
-
-        src: cudaSupport:
-        import src {
-          system = system';
-
-          overlays = (src.lib.attrValues self.overlays) ++ [
-            (final: prev: {
-              # expose it for byNamePkgsOverlay
-              inherit treefmt-nix;
-              # for pimsync-dev to see flakeSelf
-              flakeSelf = self;
-            })
-            byNamePkgsOverlay
-            # autoloadedPkgsOverlay
-          ];
-
-          config = {
-            # on desktop
-            inherit cudaSupport;
-            # nvidia.acceptLicense = true;
-            # cudaCapabilities = [ "8.9" ]; # can speed up some builds ?
-            checkMeta = false;
-            # showDerivationWarnings = ["maintainerless"];
-
-            allowUnfree = true;
-            # this list makes me wanna vomit (except steam maybe because they do good for linux),
-            # and sublime because guy has to eat
-            allowUnfreePredicate =
-              pkg:
-              let
-                ensureList = x: if builtins.isList x then x else [ x ];
-                hasCudaLicense =
-                  package:
-                  builtins.all (
-                    license:
-                    license.free
-                    || builtins.elem license.shortName [
-                      "CUDA EULA"
-                      "cuDNN EULA"
-                      "cuSPARSELt EULA"
-                      "cuTENSOR EULA"
-                      "NVidia OptiX EULA"
-                    ]
-                  ) (ensureList package.meta.license);
-                legacyPkgs = nixpkgs.legacyPackages.${system};
-                pkgName = legacyPkgs.lib.getName pkg;
-              in
-              if hasCudaLicense "cuda" pkgName then
-                true
-              else
-                builtins.elem pkgName [
-                  "antigravity-cli"
-                  "Oracle_VM_VirtualBox_Extension_Pack"
-                  "Oracle_VirtualBox_Extension_Pack"
-                  "jocalsend"
-                  "codeium"
-                  "claude-code"
-                  "mistral-vibe"
-
-                  "ec2-api-tools"
-                  "google-chrome"
-                  # "slack"
-                  "steam"
-                  "steam-original"
-                  "steam-runtime"
-                  "steam-run"
-                  "steam-unwrapped"
-                  "sublimetext3"
-                  "vault"
-                  "vscode"
-                  "vscode-extension-ms-vsliveshare-vsliveshare"
-                  "xmind"
-                  "zoom"
-                ];
-          };
-        };
-      # Eval the treefmt modules from ./treefmt.nix
-      treefmtEval = treefmt-nix.lib.evalModule tetosPkgs ./tetos/treefmt.nix;
 
     in
     {
@@ -480,20 +401,29 @@
           default = tetosPkgs.callPackage ./devShells/devShell.nix {
             inherit secrets self;
           };
-          inherit (unstablePkgs)
-            nhs910
-            nhs912
-            ;
+
+          # TOdO restore need overlay
+          # inherit (unstablePkgs)
+          #   nhs912
+            # ;
         };
 
-      formatter = treefmtEval.config.build.wrapper;
+      #   formatter = let
+      #         # Eval the treefmt modules from ./treefmt.nix
+      # treefmtEval = treefmt-nix.lib.evalModule tetosPkgs ./tetos/treefmt.nix;
+      #   in
+      #
+      #
+      #     treefmtEval.config.build.wrapper;
 
       legacyPackages = tetosPkgs;
-      packages =
+
+      packages = let 
+        # tetosPkgs = self.nixosConfigurations.tatooine.pkgs;
+      in
         self.inputs.neovim-nightly-overlay.packages.${system}
         # strip of
-        // (removeAttrs (byNamePkgsOverlay tetosPkgs { }) [ "_internalCallByNamePackageFile" ])
-        # // (autoloadedPkgsOverlay tetosPkgs { })
+        # // (removeAttrs (byNamePkgsOverlay tetosPkgs { }) [ "_internalCallByNamePackageFile" ])
         // {
           /*
             my own nvim with
@@ -501,31 +431,31 @@
           */
 
           # generates a infinite trace right now
-          nvim =
-            self.nixosConfigurations.tatooine.config.home-manager.users.teto.programs.neovim.finalPackage;
+          # nvim =
+          #   self.nixosConfigurations.tatooine.config.home-manager.users.teto.programs.neovim.finalPackage;
 
           inherit (self.inputs.jujutsu.packages.${system}) jujutsu;
 
-          inherit (tetosPkgs)
-            pass-import-high-password-length
-            jmdict
-            memento-whisper
-            # sway-scratchpad
-            termscp-matt
-            ;
+          # inherit (tetosPkgs)
+          #   pass-import-high-password-length
+          #   jmdict
+          #   memento-whisper
+          #   # sway-scratchpad
+          #   termscp-matt
+          #   ;
 
-          # tetosPkgs.neovim-unwrapped;
-          neovim-unwrapped =
-            # "neovim-debug" / "neovim-developer"
-            self.inputs.neovim-nightly-overlay.packages."${system}".neovim.override {
-              # we want to take the luajit with our overlay of lua packages
-              luajit = tetosPkgs.luajit;
-            };
+          # # tetosPkgs.neovim-unwrapped;
+          # neovim-unwrapped =
+          #   # "neovim-debug" / "neovim-developer"
+          #   self.inputs.neovim-nightly-overlay.packages."${system}".neovim.override {
+          #     # we want to take the luajit with our overlay of lua packages
+          #     luajit = tetosPkgs.luajit;
+          #   };
 
-          inherit (unstablePkgs)
-            nhs912
-            ;
-
+          # inherit (unstablePkgs)
+          #   nhs912
+          #   ;
+          #
         };
 
       # TODO run evals and treefmt checks
@@ -535,7 +465,7 @@
         # formatting = treefmtEval.${tetosPkgs.system}.config.build.check self;
 
         # not a derivation
-        formatting = treefmtEval.config.build.check self;
+        # formatting = treefmtEval.config.build.check self;
       };
 
     })
@@ -565,7 +495,8 @@
               }
             );
 
-          nixosConfigs = lib.importDirectories ./hosts (
+            nixosConfigs = let 
+              nixosConfigs' = lib.importDirectories ./hosts (
             # dirname => hostname
             hostname: val:
             lib.nameValuePair hostname (let
@@ -573,10 +504,23 @@
             in
               lib.mkNixosSystem {
                 inherit hostname;
+                cudaSupport = enableCuda;
+
                 # ideally we would return both versions
                 withSecrets = true;
                 modules = [
                   (./hosts + "/${hostname}")
+                ];
+
+                overlays = (lib.attrValues self.overlays) ++ [
+                  (final: prev: {
+                    # expose it for byNamePkgsOverlay
+                    inherit treefmt-nix;
+                    # for pimsync-dev to see flakeSelf
+                    flakeSelf = self;
+                  })
+                  byNamePkgsOverlay
+                  # autoloadedPkgsOverlay
                 ];
 
                 # encode it in name or
@@ -585,31 +529,7 @@
               }
             )
           );
-
-          nixosConfigsWithoutSecrets = lib.mapAttrs' disableSecrets nixosConfigs;
-          #   lib.importDirectories ./hosts (
-          #   hostname: val:
-          #   lib.nameValuePair "${hostname}-no-secrets"
-          #     # dirname => hostname
-          #     (
-          #       lib.mkNixosSystem {
-          #         inherit hostname;
-          #         # ideally we would return both versions
-          #         withSecrets = false;
-          #         modules = [
-          #           (./hosts + "/${hostname}")
-          #         ];
-          #
-          #         # encode it in name or
-          #         # pkgs = tetosPkgs;
-          #         pkgs = if hostname == "jedha" then tetosPkgsCuda else tetosPkgs;
-          #       }
-          #     )
-          # );
-        in
-        nixosConfigs // nixosConfigsWithoutSecrets // {
-
-
+        in nixosConfigs' // {
           ixeal-spark = nixosConfigs.wsl.extendModules {
 
             modules = [
@@ -619,16 +539,23 @@
               }
             ];
           };
+
+          # laptop
           ixeal-matthieu = nixosConfigs.wsl.extendModules {
 
             modules = [
               {
+              nixpkgs.hostPlatform = "x86_64-linux";
               networking.hostName = lib.mkForce "ixeal-matthieu";
             }
             ];
           };
+          };
 
-        };
+          nixosConfigsWithoutSecrets = lib.mapAttrs' disableSecrets nixosConfigs;
+        in
+        nixosConfigs // nixosConfigsWithoutSecrets;
+
 
       # TODO scan hm/{modules, profiles} folder
       homeProfiles = lib.importFiles ./hm/profiles // {

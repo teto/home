@@ -183,6 +183,8 @@ in
   #   }
   # ];
 
+  nixpkgs.hostPlatform = "x86_64-linux";
+
   # lib.mkForce to remove the default ones
   # lib.mkForce  removes cat
   environment.systemPackages = [
