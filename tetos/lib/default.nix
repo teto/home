@@ -150,7 +150,7 @@ in
   in
     # set it via nixpkgs.system.
     # nixpkgs.pkgs
-    lib.nixosSystem (lib.recursiveUpdate (builtins.removeAttrs attrs ["withSecrets" "hostname" "cudaSupport" "overlays"] ) {
+    lib.nixosSystem (lib.recursiveUpdate (removeAttrs attrs ["withSecrets" "hostname" "cudaSupport" "overlays"] ) {
       # system = "x86_64-linux";
       # inherit pkgs;
       modules = [

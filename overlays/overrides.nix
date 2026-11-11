@@ -28,15 +28,13 @@ final: prev: {
 
   };
 
-  backblaze-b2-tetos = final.backblaze-b2.override { execName = "b2"; };
-
-  firefox-addons = import ./firefox/generated.nix {
-    # inherit (lib.firefox)       buildFirefoxXpiAddon;
-    inherit lib;
-    # inherit (final)
-    #   # fetchurl
-    #   stdenv ;
-  };
+  # firefox-addons = import ./firefox/generated.nix {
+  #   # inherit (lib.firefox)       buildFirefoxXpiAddon;
+  #   inherit lib;
+  #   # inherit (final)
+  #   #   # fetchurl
+  #   #   stdenv ;
+  # };
 
   # in the source code we have:
   # PREFIX="${PASSWORD_STORE_DIR:-$HOME/.password-store}"

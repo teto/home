@@ -172,7 +172,7 @@ in
     sketchy = lib.mkForce {
       extensions.packages = with pkgs; [
         # firefox-addons.argent-x # renamed to "ready wallet" ? has disappeared from mozilla store...
-        firefox-addons.metamask
+        # firefox-addons.metamask
       ];
       # isDefault = false;
       id = 10;
