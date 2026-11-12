@@ -13,7 +13,7 @@ let
     lib.mapAttrs
       (
         _: nixosCfg:
-        lib.genSshClientConfig nixosCfg
+        flakeSelf.tetosLib.genSshClientConfig nixosCfg
         // {
           User = "teto";
         }

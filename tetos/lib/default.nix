@@ -2,7 +2,7 @@
   pkgs,
   flakeSelf,
   lib,
-  dotfilesPath,
+  # dotfilesPath,
   secretsFolder,
   secrets,
   ...
@@ -15,7 +15,7 @@ let
   wireguard = import  ./wireguard.nix { inherit secrets flakeSelf lib secretsFolder; };
   # email = import ./mail.nix { inherit pkgs; };
   firefox = import ./firefox.nix ;
-  pure = import ./pure.nix ;
+  pure = import ./pure.nix { inherit lib; } ;
 
 in
 {

@@ -317,13 +317,24 @@
         lib = rawLib;
       };
 
+      # mkLib = nixpkgs:
+      #   nixpkgs.lib.extend
+      #   (final: prev: (import ./tetos/lib final) // hm.lib);
+      #
+      # lib = (mkLib nixpkgs);
+      lib = nixpkgs.lib.extend(
+        (final: prev: (tetosLib ) // self.inputs.hm.lib)
+        );
+
       # hack for now to get mkNixosSystem
-      # tetosLib = import ./tetos/lib/default.nix {
-      #       pkgs = {}; # hack wont be used
-      #       inherit dotfilesPath secretsFolder secrets;
-      #       flakeSelf = self;
-      #       lib = rawLib;
-      # };
+      tetosLib = import ./tetos/lib/default.nix {
+            pkgs = self.inputs.nixpkgs;
+            inherit dotfilesPath secretsFolder secrets;
+            flakeSelf = self;
+            lib = nixpkgs.lib;
+      };
+
+      # tetosLib = self.nixosConfigurations.tatooine.pkgs.lib;
 
       # rawLib = tetosLib;
       # pureLib = tetosLib;
@@ -362,22 +373,9 @@
       #     directory = ./pkgs;
       #   };
 
-
-      # libExtended = nixpkgs.lib.exend (
-      #   final: prev: {
-      #     # add tetos lib
-      #   }
-      # );
-
     in
     flake-utils.lib.eachSystem [ "aarch64-linux" "x86_64-linux" ] (system:  let
-      # tetosPkgs = pkgImport system self.inputs.nixpkgs false;
-      # tetosPkgsCuda = pkgImport self.inputs.nixpkgs true;
-      # unstablePkgs = self.inputs.nixos-unstable.legacyPackages.${system};
-      # tetosPkgs = unstablePkgs;
-      # tetosPkgs = self.nixosConfigurations.tatooine.pkgs;
-      tetosPkgs = self.inputs.nixos-unstable.legacyPackages.${system};
-
+     tetosPkgs = self.inputs.nixos-unstable.legacyPackages.${system};
 
     in
     {
@@ -519,6 +517,8 @@
               enableCuda = hostname == "jedha";
             in
               pureLib.mkNixosSystem {
+                inherit lib;
+                # lib = tetosLib;
                 inherit hostname;
                 cudaSupport = enableCuda;
 
@@ -535,12 +535,13 @@
                 ];
 
                 overlays = (rawLib.attrValues self.overlays) ++ [
-                  (final: prev: {
+                  (final: prev: rec {
                     # expose it for byNamePkgsOverlay
                     inherit treefmt-nix;
                     # for pimsync-dev to see flakeSelf
                     flakeSelf = self;
 
+                    tetosLib = lib;
                     # how to extend lib
                     # https://notashelf.dev/posts/extended-nixpkgs-lib#extending-nixpkgslib
                     # define tetosLib
@@ -552,7 +553,7 @@
                         pkgs = final;
                         inherit dotfilesPath secretsFolder secrets;
                         flakeSelf = self;
-                        lib = finalLib;
+                        lib = prevLib;
                       })
                     );
 
@@ -565,6 +566,7 @@
                 # pkgs = pkgImport system self.inputs.nixpkgs enableCuda;
                 # pkgs = if  then tetosPkgsCuda else tetosPkgs;
                 specialArgs = {
+                  # lib should be overriden there
                   inherit dotfilesPath secretsFolder;
                   flakeSelf = self;
                   withSecrets = true;
@@ -613,6 +615,8 @@
         # teto-desktop = ./hm/profiles/teto-desktop.nix;
       };
 
+      inherit tetosLib;
+
       homeModules = pureLib.importFiles ./hm/modules // {
         nixpkgs-monitor = import ./hm/modules/services/nixpkgs-monitor.nix;
       };
@@ -621,7 +625,7 @@
         teto = nixos/users/teto/teto.nix;
       };
 
-      nixosModules = pureLib.importFiles ./nixos/modules // {
+      nixosModules = tetosLib.importFiles ./nixos/modules // {
         default-hm = self.nixosProfiles.hm-default;
       };
 

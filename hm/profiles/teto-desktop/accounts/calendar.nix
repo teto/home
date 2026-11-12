@@ -6,6 +6,18 @@
   osConfig,
   ...
 }:
+let 
+  # temporary solution since it's not portable
+  getPassword =
+    accountName:
+    [
+      "${lib.getExe pkgs.pass-perso}"
+      "show"
+      accountName
+    ];
+
+
+in
 
 lib.optionalAttrs osConfig.tetos.withSecrets {
   basePath = "${config.home.homeDirectory}/calendars";
@@ -87,7 +99,7 @@ lib.optionalAttrs osConfig.tetos.withSecrets {
         userName = secrets.accounts.mail.fastmail_perso.email;
 
         # needs to be an app-specific password/token
-        passwordCommand = (lib.getPassword "perso/fastmail_mc/caldav_password")
+        passwordCommand = (getPassword "perso/fastmail_mc/caldav_password")
         # "pass-perso show perso/fastmail_mc/password"
         ;
       };
