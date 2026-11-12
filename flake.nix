@@ -580,12 +580,14 @@
             )
           );
         in nixosConfigs' // {
+          # ixeal-spark 
           ixeal-spark = nixosConfigs.wsl.extendModules {
 
             modules = [
               {
                 nixpkgs.hostPlatform = rawLib.mkForce "aarch64-linux";
-                networking.hostName = rawLib.mkForce "ixeal-spark";
+                networking.hostName = rawLib.mkForce "dev-ia";
+                networking.domain = rawLib.mkForce "ixeal.local";
               }
             ];
           };
@@ -597,6 +599,7 @@
               {
               nixpkgs.hostPlatform = "x86_64-linux";
               networking.hostName = rawLib.mkForce "ixeal-matthieu";
+              networking.domain = rawLib.mkForce "ixeal.local";
             }
             ];
           };
@@ -667,6 +670,7 @@
       deploy = import ./deploy.nix {
         inherit
           secrets 
+          lib
             ;
         flakeSelf = self;
       };

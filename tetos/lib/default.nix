@@ -162,8 +162,6 @@ in
     in
     builtins.trace "YAZI config for ${name}"
 
-      # header = ''Match host="${mcfg.networking.hostName},${mcfg.networking.domain}${lib.optionalString (mcfg.tetos.wireguard.enable or false) ",${mcfg.networking.hostName}.vpn"}"'';
-      # assumption ? or check/warn it has it ?
       # identityFile = "${secretsFolder}/ssh/id_rsa";
       # host = "${mcfg.networking.hostName}";
       # .${mcfg.networking.domain}"
