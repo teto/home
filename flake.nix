@@ -514,7 +514,7 @@
             hostname: val:
             rawLib.nameValuePair hostname (let
               # or ixeal-spark
-              enableCuda = hostname == "jedha";
+              enableCuda = hostname == "jedha" || hostname == "dev-ia";
             in
               pureLib.mkNixosSystem {
                 inherit lib;
@@ -559,12 +559,9 @@
 
                   })
                   byNamePkgsOverlay
-                  # autoloadedPkgsOverlay
                 ];
 
                 # encode it in name or
-                # pkgs = pkgImport system self.inputs.nixpkgs enableCuda;
-                # pkgs = if  then tetosPkgsCuda else tetosPkgs;
                 specialArgs = {
                   # lib should be overriden there
                   inherit dotfilesPath secretsFolder;

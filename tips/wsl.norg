@@ -22,6 +22,9 @@ wsl.exe -d Ubuntu -- sleep infinity
   wsl --shutdown
 
 
+* activer le ping
+
+* installer powertoys pour emplacer caps lock par ctrl
 
 * 
 

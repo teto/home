@@ -1012,6 +1012,7 @@ vim.g.avante = {
         -- check https://github.com/yetone/avante.nvim/pull/3141
         acp_follow_agent_locations = true,
 
+		show_token_usage = true,
         enable_token_counting = true,
         show_inference_timings = true, -- this is from my fork ?
         -- auto_approve_tool_permissions = {"bash", "replace_in_file"}, -- Auto-approve specific tools only
@@ -1031,6 +1032,14 @@ vim.g.avante = {
         provider = 'fzf_lua',
     },
     providers = {
+		rtx_spark = {
+            __inherited_from = 'openai',
+			-- ixeal-spark
+            endpoint = 'dev-ia.ixeal.local:9931/v1',
+			model =  'qwen3.6-dense',
+            -- model = 'deepseek/deepseek-v4-flash-0731',
+
+		},
         openrouter = {
             -- see also https://github.com/avante-corp/avante.nvim/issues/2310
             __inherited_from = 'openai',

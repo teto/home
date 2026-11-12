@@ -40,6 +40,7 @@
     neovim
     systemctl-tui
     wget
+    btop-cuda # for jedha
   ];
 
   home-manager.users.teto = {
