@@ -10,7 +10,11 @@
 let
   cfg = config.tetos.wireguard;
 
-  inherit (lib.wireguard) mkPeerIp wgNetwork;
+  # hack around 
+  wgLib = import ../../tetos/lib/wireguard.nix {
+    inherit secrets;
+  };
+  inherit (wgLib) mkPeerIp wgNetwork;
 in
 {
   options = {

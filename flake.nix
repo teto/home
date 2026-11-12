@@ -312,7 +312,7 @@
     let
       # lib = lib.extend (_: _: self.inputs.hm.lib // builtins.trace "${lib.neovim.toto}" lib);
 
-      # rawLib = self.inputs.nixpkgs.lib;
+      rawLib = self.inputs.nixpkgs.lib;
       pureLib = import ./tetos/lib/pure.nix {
         lib = rawLib;
       };
@@ -325,7 +325,7 @@
       #       lib = rawLib;
       # };
 
-      rawLib = tetosLib;
+      # rawLib = tetosLib;
       # pureLib = tetosLib;
 
       # extended hm-lib Lib
@@ -518,13 +518,19 @@
               # or ixeal-spark
               enableCuda = hostname == "jedha";
             in
-              tetosLib.mkNixosSystem {
+              pureLib.mkNixosSystem {
                 inherit hostname;
                 cudaSupport = enableCuda;
 
                 # ideally we would return both versions
                 withSecrets = true;
                 modules = [
+                  self.inputs.sops-nix.nixosModules.sops
+                  self.inputs.hm.nixosModules.home-manager
+
+                  # own module
+                  self.nixosModules.tetos
+
                   (./hosts + "/${hostname}")
                 ];
 
@@ -538,17 +544,17 @@
                     # how to extend lib
                     # https://notashelf.dev/posts/extended-nixpkgs-lib#extending-nixpkgslib
                     # define tetosLib
-                    # lib = prev.lib.extend (
-                    #   prevLib: finalLib:
-                    #   self.inputs.hm.lib
-                    #   // (import ./tetos/lib {
-                    #     # or final ?
-                    #     pkgs = final;
-                    #     inherit dotfilesPath secretsFolder secrets;
-                    #     flakeSelf = self;
-                    #     lib = prevLib;
-                    #   })
-                    # );
+                    lib = prev.lib.extend (
+                      prevLib: finalLib:
+                      self.inputs.hm.lib
+                      // (import ./tetos/lib {
+                        # or final ?
+                        pkgs = final;
+                        inherit dotfilesPath secretsFolder secrets;
+                        flakeSelf = self;
+                        lib = finalLib;
+                      })
+                    );
 
                   })
                   byNamePkgsOverlay
@@ -558,6 +564,16 @@
                 # encode it in name or
                 # pkgs = pkgImport system self.inputs.nixpkgs enableCuda;
                 # pkgs = if  then tetosPkgsCuda else tetosPkgs;
+                specialArgs = {
+                  inherit dotfilesPath secretsFolder;
+                  flakeSelf = self;
+                  withSecrets = true;
+                  inherit
+                    secrets
+                    hostname
+                    ;
+                };
+
               }
             )
           );
