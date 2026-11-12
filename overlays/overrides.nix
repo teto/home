@@ -28,6 +28,15 @@ final: prev: {
 
   };
 
+  /*
+    convert a package to null because used to be borken
+
+    null wont work
+  */
+  # todo add to lib
+  ignoreBroken =
+    x: builtins.traceVerbose "${x.name} disabled because broken it used to be broken" prev.hello;
+
   # firefox-addons = import ./firefox/generated.nix {
   #   # inherit (lib.firefox)       buildFirefoxXpiAddon;
   #   inherit lib;

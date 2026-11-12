@@ -22,8 +22,8 @@ let
   # TODO enable mdns / avahi and give him host name "bootstrap.local"
   # TODO expose as nixos configuration
   sys = lib.nixosSystem {
-    # system = "x86_64-linux";
-    system = "aarch64-linux";
+    system = "x86_64-linux";
+    # system = "aarch64-linux";
     # nixpkgs.hostPlatform = "aarch64-linux";
     modules = [
       (

@@ -16,7 +16,8 @@
       pkgs.noto-fonts-cjk-sans
 
     ]
-    ++ lib.optional withSecrets resticWrapper;
+    # ++ lib.optional withSecrets resticWrapper
+    ;
 
   pathsToLink = [
     "/share/xdg-desktop-portal"

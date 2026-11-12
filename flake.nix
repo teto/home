@@ -500,6 +500,7 @@
             # dirname => hostname
             hostname: val:
             lib.nameValuePair hostname (let
+              # or ixeal-spark
               enableCuda = hostname == "jedha";
             in
               lib.mkNixosSystem {
@@ -529,7 +530,7 @@
               }
             )
           );
-        in nixosConfigs' // {
+        in removeAttrs nixosConfigs' ["neotokyo"] // {
           ixeal-spark = nixosConfigs.wsl.extendModules {
 
             modules = [

@@ -9,12 +9,13 @@
 }:
 let
   sway = import ./sway.nix;
-  firefox = pkgs.callPackage ./firefox.nix { };
+  # doesnt like the pkgs
   nix-builders = import ./nix-builder.nix { inherit flakeSelf lib secretsFolder; };
   neovim = import ./neovim.nix { inherit flakeSelf lib; };
   wireguard = import  ./wireguard.nix { inherit secrets flakeSelf lib secretsFolder; };
-
   # email = import ./mail.nix { inherit pkgs; };
+  firefox = import ./firefox.nix ;
+
 in
 {
   inherit
@@ -281,14 +282,6 @@ in
       "show"
       accountName
     ];
-
-  /*
-    convert a package to null because used to be borken
-
-    null wont work
-  */
-  ignoreBroken =
-    x: builtins.traceVerbose "${x.name} disabled because broken it used to be broken" pkgs.hello;
 
 
   genYaziVFSServer =
