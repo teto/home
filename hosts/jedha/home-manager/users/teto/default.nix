@@ -108,7 +108,7 @@ in
       # creates conflicts since it brings python and several executables
       # flakeSelf.inputs.avante-nvim.packages.${pkgs.stdenv.hostPlatform.system}.ragService
 
-      (lib.ignoreBroken ha-mcp) # mcp server for home-assistant
+      # (lib.ignoreBroken ha-mcp) # mcp server for home-assistant
 
       # llm-ls # needed by the neovim plugin
       cointop # bitcoin tracker
@@ -127,7 +127,7 @@ in
 
       jaq # jq in rust
 
-      (lib.ignoreBroken lact) # GPU controller, needs a daemon
+      # (lib.ignoreBroken lact) # GPU controller, needs a daemon
 
       moor # test as pager
       # presenterm # for presentations from terminal/markdown (in rust, supports images, pretty cool)

@@ -312,20 +312,35 @@
     let
       # lib = lib.extend (_: _: self.inputs.hm.lib // builtins.trace "${lib.neovim.toto}" lib);
 
-      # extended hm-lib Lib
-      lib = self.inputs.nixpkgs.lib.extend (
-        prev: final:
-        self.inputs.hm.lib
-        // (import ./tetos/lib {
-          # or final ?
-          pkgs = final;
-          inherit dotfilesPath secretsFolder secrets;
-          flakeSelf = self;
-          lib = prev;
-        })
-      );
+      # rawLib = self.inputs.nixpkgs.lib;
+      pureLib = import ./tetos/lib/pure.nix {
+        lib = rawLib;
+      };
 
-      # system = "x86_64-linux";
+      # hack for now to get mkNixosSystem
+      # tetosLib = import ./tetos/lib/default.nix {
+      #       pkgs = {}; # hack wont be used
+      #       inherit dotfilesPath secretsFolder secrets;
+      #       flakeSelf = self;
+      #       lib = rawLib;
+      # };
+
+      rawLib = tetosLib;
+      # pureLib = tetosLib;
+
+      # extended hm-lib Lib
+      # tetosLib = self.inputs.nixpkgs.lib.extend (
+      #   prev: final:
+      #   self.inputs.hm.lib
+      #   // (import ./tetos/lib {
+      #     # or final ?
+      #     pkgs = final;
+      #     inherit dotfilesPath secretsFolder secrets;
+      #     flakeSelf = self;
+      #     lib = prev;
+      #   })
+      # );
+
       dotfilesPath = "/home/teto/home";
       secretsFolder = "/home/teto/home/secrets";
 
@@ -358,7 +373,7 @@
     flake-utils.lib.eachSystem [ "aarch64-linux" "x86_64-linux" ] (system:  let
       # tetosPkgs = pkgImport system self.inputs.nixpkgs false;
       # tetosPkgsCuda = pkgImport self.inputs.nixpkgs true;
-      unstablePkgs = self.inputs.nixos-unstable.legacyPackages.${system};
+      # unstablePkgs = self.inputs.nixos-unstable.legacyPackages.${system};
       # tetosPkgs = unstablePkgs;
       # tetosPkgs = self.nixosConfigurations.tatooine.pkgs;
       tetosPkgs = self.inputs.nixos-unstable.legacyPackages.${system};
@@ -373,17 +388,17 @@
         let
           # Load all devShells from the devShells/ directory
           devShellFiles = builtins.attrNames (
-            lib.filterAttrs (n: _: lib.hasSuffix ".nix" n) (builtins.readDir ./devShells)
+            rawLib.filterAttrs (n: _: rawLib.hasSuffix ".nix" n) (builtins.readDir ./devShells)
           );
 
           # Function to load and combine devShells
-          loadDevShells = lib.genAttrs' devShellFiles (
+          loadDevShells = rawLib.genAttrs' devShellFiles (
             file:
             let
-              path = lib.traceValFn (x: file) ./devShells/${file};
+              path = rawLib.traceValFn (x: file) ./devShells/${file};
               shell = tetosPkgs.callPackage path (
                 { }
-                // lib.optionalAttrs (file == "devShell.nix") {
+                // rawLib.optionalAttrs (file == "devShell.nix") {
                   inherit secrets self;
                 }
               );
@@ -474,7 +489,7 @@
       inherit (self) inputs;
       # inherit tetosPkgs;
 
-      # TODO import from hosts/ via lib.importFiles
+      # TODO import from hosts/ via pureLib.importFiles
       # autoload from hosts
       # todo map over the attributes to regenerate them without secrets
       # adjust the hostnames accordingly ?
@@ -482,11 +497,11 @@
         let
           disableSecrets =
             name: val:
-            lib.nameValuePair "${name}-no-secrets" (
+            rawLib.nameValuePair "${name}-no-secrets" (
               val.extendModules {
                 modules = [
                   {
-                    config.tetos.withSecrets = lib.mkForce false;
+                    config.tetos.withSecrets = rawLib.mkForce false;
                   }
                 ];
                 specialArgs = {
@@ -496,14 +511,14 @@
             );
 
             nixosConfigs = let 
-              nixosConfigs' = lib.importDirectories ./hosts (
+              nixosConfigs' = pureLib.importDirectories ./hosts (
             # dirname => hostname
             hostname: val:
-            lib.nameValuePair hostname (let
+            rawLib.nameValuePair hostname (let
               # or ixeal-spark
               enableCuda = hostname == "jedha";
             in
-              lib.mkNixosSystem {
+              tetosLib.mkNixosSystem {
                 inherit hostname;
                 cudaSupport = enableCuda;
 
@@ -513,12 +528,28 @@
                   (./hosts + "/${hostname}")
                 ];
 
-                overlays = (lib.attrValues self.overlays) ++ [
+                overlays = (rawLib.attrValues self.overlays) ++ [
                   (final: prev: {
                     # expose it for byNamePkgsOverlay
                     inherit treefmt-nix;
                     # for pimsync-dev to see flakeSelf
                     flakeSelf = self;
+
+                    # how to extend lib
+                    # https://notashelf.dev/posts/extended-nixpkgs-lib#extending-nixpkgslib
+                    # define tetosLib
+                    # lib = prev.lib.extend (
+                    #   prevLib: finalLib:
+                    #   self.inputs.hm.lib
+                    #   // (import ./tetos/lib {
+                    #     # or final ?
+                    #     pkgs = final;
+                    #     inherit dotfilesPath secretsFolder secrets;
+                    #     flakeSelf = self;
+                    #     lib = prevLib;
+                    #   })
+                    # );
+
                   })
                   byNamePkgsOverlay
                   # autoloadedPkgsOverlay
@@ -530,13 +561,13 @@
               }
             )
           );
-        in removeAttrs nixosConfigs' ["neotokyo"] // {
+        in nixosConfigs' // {
           ixeal-spark = nixosConfigs.wsl.extendModules {
 
             modules = [
               {
-                nixpkgs.hostPlatform = lib.mkForce "aarch64-linux";
-                networking.hostName = lib.mkForce "ixeal-spark";
+                nixpkgs.hostPlatform = rawLib.mkForce "aarch64-linux";
+                networking.hostName = rawLib.mkForce "ixeal-spark";
               }
             ];
           };
@@ -547,34 +578,34 @@
             modules = [
               {
               nixpkgs.hostPlatform = "x86_64-linux";
-              networking.hostName = lib.mkForce "ixeal-matthieu";
+              networking.hostName = rawLib.mkForce "ixeal-matthieu";
             }
             ];
           };
           };
 
-          nixosConfigsWithoutSecrets = lib.mapAttrs' disableSecrets nixosConfigs;
+          nixosConfigsWithoutSecrets = rawLib.mapAttrs' disableSecrets nixosConfigs;
         in
         nixosConfigs // nixosConfigsWithoutSecrets;
 
 
       # TODO scan hm/{modules, profiles} folder
-      homeProfiles = lib.importFiles ./hm/profiles // {
+      homeProfiles = pureLib.importFiles ./hm/profiles // {
         # TODO importdir should check for default.nix
         neovim = ./hm/profiles/neovim;
 
         # teto-desktop = ./hm/profiles/teto-desktop.nix;
       };
 
-      homeModules = lib.importFiles ./hm/modules // {
+      homeModules = pureLib.importFiles ./hm/modules // {
         nixpkgs-monitor = import ./hm/modules/services/nixpkgs-monitor.nix;
       };
 
-      nixosProfiles = lib.importFiles ./nixos/profiles // {
+      nixosProfiles = pureLib.importFiles ./nixos/profiles // {
         teto = nixos/users/teto/teto.nix;
       };
 
-      nixosModules = lib.importFiles ./nixos/modules // {
+      nixosModules = pureLib.importFiles ./nixos/modules // {
         default-hm = self.nixosProfiles.hm-default;
       };
 
@@ -604,7 +635,6 @@
           inherit
             # for pass-perso
             secretsFolder
-            lib
             ;
           # flakeSelf = self;
         };
@@ -617,7 +647,6 @@
       deploy = import ./deploy.nix {
         inherit
           secrets 
-          # system
             ;
         flakeSelf = self;
       };

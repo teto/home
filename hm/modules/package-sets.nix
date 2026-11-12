@@ -249,7 +249,7 @@ in
           # imv # image viewer
           lazygit # kinda like tig
           libnotify
-          (lib.ignoreBroken moc-teto) # music player
+          # (lib.ignoreBroken moc-teto) # music player
           mupdf.bin # evince does better too
 
           ## Alternatives to consider:
@@ -272,7 +272,7 @@ in
           qiv # image viewer doesnt work on wayland, needs adjustements ?
           qtpass
           restic # to backup photos to backblaze
-          (ignoreBroken rustic) # rust client for restic. Backups should be compatible
+          # (ignoreBroken rustic) # rust client for restic. Backups should be compatible
           # rbw # Rust bitwarden unofficial client
           ripgrep
           # rofi-teto # not needed
@@ -484,7 +484,7 @@ in
           nix-sweep # smarter nix-gc
           nixpkgs-review # to help review nix packages
           nvimpager
-          (ignoreBroken netwatch) # to monitor network
+          # (ignoreBroken netwatch) # to monitor network
           # patchutils # for interdiff
           perf-tools # to interpret
 
@@ -511,7 +511,7 @@ in
           wget
           # sttr # to process strings (base64 etc)
           zeal-custom # doc for developers
-          (ignoreBroken xan) # CLI csv helper
+          # (ignoreBroken xan) # CLI csv helper
           # viddy # fileevent watcher
           watchman
           visidata
@@ -527,7 +527,7 @@ in
         eva # calculette in a REPL
         numbat # fancy calculator, child of 'insect'
         fend # rust unit convertor
-        (ignoreBroken pcalc) # cool calc, see numbat too
+        # (ignoreBroken pcalc) # cool calc, see numbat too
 
         graphviz
       ];
@@ -548,7 +548,7 @@ in
           };
         in
         [
-          (ignoreBroken my_lutris)
+          # (ignoreBroken my_lutris)
         ];
 
     })
@@ -624,7 +624,7 @@ in
         # Adobe Source Han Sans
         source-han-sans # sourceHanSansPackages.japanese
         fira-code-symbols # for ligatures
-        (ignoreBroken iosevka)
+        # (ignoreBroken iosevka)
       ];
 
     })
@@ -685,7 +685,7 @@ in
       home.packages = [
         pkgs.cointop # crypto only
         pkgs.gloomberb # bun
-        (lib.ignoreBroken pkgs.wealthfolio) # node
+        # (lib.ignoreBroken pkgs.wealthfolio) # node
         pkgs.stonks-cli
         # pkgs.ticker # bof
         # pkgs.mop # bof2
@@ -703,7 +703,7 @@ in
 
         # MUSIC ONLY
         # jellyfin-tui # nice
-        (ignoreBroken pkgs.gelly) # gtk+rust music player GUI
+        # (ignoreBroken pkgs.gelly) # gtk+rust music player GUI
         # pkgs.rufin
         # pkgs.feishin # GUI
         # pkgs.jellycli # could not login :/
@@ -711,7 +711,7 @@ in
 
         # VIDEO compatible
         # - Jellyfin MPV Shim
-        (ignoreBroken pkgs.tsukimi) # gtk+rust music player GUI
+        # (ignoreBroken pkgs.tsukimi) # gtk+rust music player GUI
         pkgs.jellyfin-desktop
         pkgs.jellyfin-mpv-shim
         # jellyhaj # not upstreamed yet 

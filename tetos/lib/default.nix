@@ -15,6 +15,7 @@ let
   wireguard = import  ./wireguard.nix { inherit secrets flakeSelf lib secretsFolder; };
   # email = import ./mail.nix { inherit pkgs; };
   firefox = import ./firefox.nix ;
+  pure = import ./pure.nix ;
 
 in
 {
@@ -23,6 +24,7 @@ in
     firefox
     neovim
     sway
+    wireguard
     ;
 
   inherit (neovim)
@@ -35,17 +37,21 @@ in
     nixosConfToBuilderAttr
     ;
 
-  inherit wireguard;
 
   inherit (wireguard) 
     mkWireguardPeer
     ;
 
+  inherit (pure)
+      importFiles 
+      importDirectories
+      ;
 
 
     nixpkgsMonitorEmailNotifier = 
     fromEmail:
     destinationEmail:
+    # by name 
     pkgs.writeShellScript "notify-advancement" ''
 
     branch_name="$1"
@@ -71,8 +77,6 @@ in
   '';
 
 
-
-
   /**
     default system
     modules: List
@@ -82,9 +86,6 @@ in
       modules, # array
       withSecrets, # bool
       hostname,
-      # pkgs = self.inputs.nixos-unstable.legacyPackages.${system}.pkgs;
-      # pkgs,
-      # system,
       overlays,
       cudaSupport
     }@attrs:
@@ -184,39 +185,6 @@ in
 
     });
 
-  /**
-    Maps over folders in folder
-  */
-  importDirectories = folder: transformEntry:
-    
-    let
-      # transformEntry = lib.id;
-      pred = key: val: val == "directory";
-
-      folders = lib.mapAttrs' transformEntry (lib.filterAttrs pred (builtins.readDir folder));
-    in
-      folders;
-
-  importFiles =
-    folder:
-    let
-      genKey = str: lib.replaceStrings [ ".nix" ] [ "" ] (baseNameOf (toString str));
-
-      pred = name: val: lib.strings.hasSuffix ".nix" name;
-
-      transformEntry =
-        filename: val:
-        let
-          key = genKey filename;
-          val' = folder + "/${filename}";
-        in
-
-        lib.nameValuePair key val';
-
-      listOfModules = lib.mapAttrs' transformEntry (lib.filterAttrs pred (builtins.readDir folder));
-
-    in
-    listOfModules;
 
   # generate a client ssh config from the server config
   # https://fmartingr.com/blog/2022/08/12/using-ssh-config-match-to-connect-to-a-host-using-multiple-ip-or-hostnames/
@@ -282,6 +250,14 @@ in
       "show"
       accountName
     ];
+
+  /*
+    convert a package to null because used to be borken
+
+    null wont work
+  */
+  ignoreBroken =
+    x: builtins.traceVerbose "${x.name} disabled because broken it used to be broken" pkgs.hello;
 
 
   genYaziVFSServer =
