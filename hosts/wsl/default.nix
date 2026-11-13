@@ -6,6 +6,7 @@
   lib,
   pkgs,
   flakeSelf,
+  config,
   ...
 }:
 {
@@ -21,19 +22,26 @@
     flakeSelf.inputs.flyline.nixosModules.default
   ];
 
+  networking.hostName = lib.mkDefault "wsl";
+  networking.domain = null;
+
+  time.timeZone = "Europe/Paris";
+
   programs.flyline.enable = true;
 
   wsl = {
     enable = true;
     defaultUser = "teto";
     startMenuLaunchers = true;
+    useWindowsDriver = true; # else "mkWslLib" use would complain
     wslConf.network.hostname = "wsl";
   };
 
-  networking.hostName = "wsl";
-  networking.domain = null;
+  programs.nix-ld = {
+    enable = true;
+    libraries = [ config.wsl.wslLib ];
+  };
 
-  time.timeZone = "Europe/Paris";
 
   environment.systemPackages = with pkgs; [
     claude-code
@@ -74,8 +82,12 @@
 
   # to test vllm
   virtualisation.docker = {
+
     enable = true;
     enableOnBoot = true;
+
+    daemon.settings.features.cdi = true;
+
     # listenOptions = [
     # "0.0.0.0:80"
     # ];
@@ -83,6 +95,16 @@
     # liveRestore
   };
 
+  # advice taken from https://github.com/nix-community/NixOS-WSL/pull/586/changes
+  # to enable nvidia passtru in docker ?
+  hardware.nvidia.package = config.wsl.wslLib;
+
+  hardware.nvidia-container-toolkit = {
+    enable = true;
+    mount-nvidia-executables = false;
+    suppressNvidiaDriverAssertion = true;
+    # disable-hooks = [];
+  };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 

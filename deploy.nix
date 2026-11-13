@@ -69,6 +69,10 @@ in
   # This will default to "sudo -u" if not specified anywhere.
   # sudo = "doas -u";
 
+
+  # and override per-node
+  interactiveSudo = true;
+
   # This is an optional list of arguments that will be passed to SSH.
   # sshOpts = [ "-p" "2121" ];
 

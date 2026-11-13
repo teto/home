@@ -4,6 +4,12 @@ wsl --update
 
 wsl --install --from-file nixos.wsl
 
+
+* dont install nvidia drivers in it !
+
+  nvidia-smi provided by 
+
+
 dont forget to create .wslconfig in home folder to set mirror networking
 
 * verifier si wsl tourne:
