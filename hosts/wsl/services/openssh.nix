@@ -6,7 +6,7 @@
     ports = [ 12666 ];
     # for sshfs edit or scp
     allowSFTP = true;
-    startWhenNeeded = true;
+    startWhenNeeded = false;
     settings = {
       LogLevel = "VERBOSE";
       KbdInteractiveAuthentication = false;

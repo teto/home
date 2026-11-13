@@ -72,6 +72,18 @@
     ];
   };
 
+  # to test vllm
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = true;
+    # listenOptions = [
+    # "0.0.0.0:80"
+    # ];
+    # logDriver =
+    # liveRestore
+  };
+
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   system.stateVersion = "26.05";
