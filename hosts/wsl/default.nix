@@ -43,7 +43,7 @@
     wget
     btop-cuda # for jedha
 
-    vllm # to test
+    # vllm # broken on arm
   ];
 
   home-manager.users.teto = {
@@ -65,6 +65,11 @@
       enableFzfLua = true;
       # enableBlink = true;
     };
+
+    home.packages = [
+      pkgs.ripgrep
+
+    ];
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
