@@ -1,7 +1,7 @@
 {
   bun,
   cacert,
-  electron_42,
+  electron_43,
   fetchFromGitHub,
   ffmpeg,
   lib,
@@ -17,7 +17,7 @@
 
 let
   pname = "subminer";
-  version = "0.19.1";
+  version = "0.21.1";
 
   mainSrc = fetchFromGitHub {
     owner = "ksyasuda";
@@ -121,7 +121,7 @@ let
 
     outputHashAlgo = "sha256";
     outputHashMode = "recursive";
-    outputHash = "sha256-AVQOqkEYlBTQAEkFE29basrxWSjOpMffO6yOiYJnDro=";
+    outputHash = "sha256-qVxhpAUFSbpnm+1b6A1znI5mGokerdSTbZUHobzJZvo=";
   };
 
   runtimePath = lib.makeBinPath [
@@ -149,6 +149,10 @@ stdenv.mkDerivation {
     cp -R ${bunDeps}/stats/node_modules ./stats/node_modules
     cp -R ${bunDeps}/vendor/texthooker-ui/node_modules ./vendor/texthooker-ui/node_modules
     cp -R ${bunDeps}/vendor/subminer-yomitan/node_modules ./vendor/subminer-yomitan/node_modules
+    chmod -R u+w vendor/subminer-yomitan/node_modules
+    printf '%s\n' \
+      ed62739fdaef4b4b3c5eca48aa73a4899b71930958a902212cba4a0a0f221cf4 \
+      > vendor/subminer-yomitan/node_modules/.subminer-package-lock-hash
     chmod -R u+w node_modules stats/node_modules vendor/*/node_modules
     patchShebangs node_modules stats/node_modules vendor/*/node_modules
     for executable in node_modules/.bin/* stats/node_modules/.bin/* vendor/*/node_modules/.bin/*; do
@@ -166,8 +170,8 @@ stdenv.mkDerivation {
     bun run build
     node_modules/.bin/electron-builder --dir \
       --linux dir \
-      -c.electronDist=${electron_42.dist} \
-      -c.electronVersion=${electron_42.version} \
+      -c.electronDist=${electron_43.dist} \
+      -c.electronVersion=${electron_43.version} \
       -c.npmRebuild=false \
       --publish never
 
@@ -181,7 +185,17 @@ stdenv.mkDerivation {
     cp -R release/linux-unpacked/. "$out/lib/subminer/"
 
     makeWrapper "$out/lib/subminer/SubMiner" "$out/bin/subminer-app" \
-      --prefix PATH : ${runtimePath}
+      --prefix PATH : ${runtimePath} \
+      --run '
+        for arg do
+          case "$arg" in
+            --start|--ensure-linux-runtime-plugin-assets)
+              set -- --no-sandbox "$@"
+              break
+              ;;
+          esac
+        done
+      '
     install -Dm755 dist/launcher/subminer "$out/bin/subminer"
     wrapProgram "$out/bin/subminer" \
       --prefix PATH : ${runtimePath} \

@@ -32,7 +32,7 @@ in
   imports = [
     autoloadedTeto
     flakeSelf.homeProfiles.teto-desktop
-    flakeSelf.homeProfiles.experimental # for voxtype
+    flakeSelf.homeProfiles.experimental
     flakeSelf.homeProfiles.neovim
     flakeSelf.homeProfiles.sway
 
@@ -70,6 +70,8 @@ in
     livecoding = false;
     bluetooth = true;
     finance = true;
+
+    jellyfin = true;
 
     enableDesktopGUIPackages = true;
     enableIMPackages = true;

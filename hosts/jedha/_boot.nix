@@ -37,7 +37,7 @@
     "sr_mod"
 
   ];
-  boot.kernelModules = [ "kvm-intel" ];
+  boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
   boot.supportedFilesystems = [
     "vfat"
@@ -95,4 +95,5 @@
   # nix.settings.max-jobs = lib.mkDefault 4;
   # Often used values: "ondemand", "powersave", "performance"
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

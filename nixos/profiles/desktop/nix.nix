@@ -1,5 +1,5 @@
 {
-  secrets,
+  # secrets,
   withSecrets,
   secretsFolder,
   lib,
@@ -30,7 +30,8 @@
       "https://cache.nixos-cuda.org"
       "https://nix-community.cachix.org"
     ]
-    ++ lib.optional withSecrets "https://cache.${flakeSelf.nixosConfigurations.neotokyo.config.networking.fqdn}";
+    ++ lib.optional withSecrets "https://cache.${flakeSelf.nixosConfigurations.neotokyo.config.networking.fqdn}"
+    ;
 
     trusted-substituters = [
       # "https://haskell-language-server.cachix.org"

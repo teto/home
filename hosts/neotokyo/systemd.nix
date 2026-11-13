@@ -72,7 +72,7 @@ in
     netdevs."50-wg0" = {
       netdevConfig = {
         Kind = "wireguard";
-        Name = "wg0";
+        Name = "wg";
       };
 
       wireguardConfig = {

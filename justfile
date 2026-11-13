@@ -64,6 +64,14 @@ bootstrap-vps target:
     -i secrets/ssh/id_rsa \
     --debug
 
+bump-meli:
+  nix-update -F --version=branch=master meli-teto
+
+# urn:schemas-upnp-org:device:MediaRenderer:1
+discover-upnp-renderers:
+ gssdp-discover --timeout=5 \
+   --target=urn:schemas-upnp-org:device:MediaRenderer:1
+
 # just to save the command
 
 nix-repl:
@@ -125,7 +133,7 @@ deploy-router:
     # deploy .\#router  -s  --auto-rollback false --magic-rollback false
     #     nix
     # run `nix path-info -Sh ./result` to see first if you have enough place
-    deploy .\#router  -s  --interactive-sudo=true
+    deploy .\#router  -s  # --boot
 
 # [confirm("prompt")]
 deploy-neotokyo: (deploy "neotokyo")
@@ -133,7 +141,7 @@ deploy-neotokyo: (deploy "neotokyo")
 deploy nixosConfig:
     # --magic-rollback false --auto-rollback=false
     echo "add --remote-build if you meet signature issues"
-    deploy .#{{ nixosConfig }} -s --interactive-sudo=true -- --override-input nixpkgs {{ NIXPKGS_REPO }}
+    deploy .#{{ nixosConfig }} -s -- --override-input nixpkgs {{ NIXPKGS_REPO }} 
 
 # regenerate my email contacts
 # (to speed up alot autocompletion)
@@ -317,3 +325,8 @@ inspect-current-generation:
 # https://blueforcer.github.io/awtrix-ng/esp32/getting-started/flashing/
 flash-ulanzi-tc001:
     esptool --chip esp32 --port /dev/ttyUSB0 --baud 460800 write-flash 0x0 usb-awtrix-ng-4mb.bin
+
+
+# check dlna servers on the network
+scan-upnp:
+    nmap --script=broadcast-upnp-info 192.168.0.0/16

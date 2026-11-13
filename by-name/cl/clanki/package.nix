@@ -3,7 +3,6 @@
   python3Packages,
   fetchFromGitHub,
   anki ? null,
-  flakeSelf,
 }:
 
 python3Packages.buildPythonPackage {

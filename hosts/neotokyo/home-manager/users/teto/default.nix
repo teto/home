@@ -74,9 +74,9 @@ in
     highlightOnYank = true;
     enableMyDefaults = true;
 
-    initLua = ''
-      vim.g.clipboard = 'osc52'
-    '';
+    # initLua = ''
+    #   vim.g.clipboard = 'osc52'
+    # '';
   };
 
   programs.bash = {

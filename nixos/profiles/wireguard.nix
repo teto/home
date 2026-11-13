@@ -32,7 +32,6 @@ in
       # but this makes the private key world-readable; thus, using privateKeyFile is
       # recommended.
       # privateKeyFile = "${secrets.secretsFolder}/wg.key";
-      # hosts/neotokyo/default.nix|113 col 15| flakeSelf.nixosProfiles.wireguard
 
       peers = [
         # For a client configuration, one peer entry for the server will suffice.

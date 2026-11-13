@@ -40,25 +40,25 @@ in
       ];
 
       programs.firefox.policies = lib.firefox.commonPolicies // {
-        BlockAboutConfig = false;
-        AppAutoUpdate = true;
 
-        AutofillAddressEnabled = false;
-        AutofillCreditCardEnabled = false;
 
         # DefaultDownloadDirectory
-        DisableFirefoxStudies = true;
         # DisableFormHistory;
+        # OfferToSaveLoginsDefault =
+        # TranslateEnabled =
+        # buggy see https://github.com/nix-community/home-manager/issues/5821
+        AppAutoUpdate = true;
+        AutofillAddressEnabled = false;
+        AutofillCreditCardEnabled = false;
+        BlockAboutConfig = false;
+        Bookmarks = { };
+        DisableFirefoxStudies = true;
         DisablePocket = true;
         DisableTelemetry = true;
         DisplayMenuBar = "default-off";
         HardwareAcceleration = true;
-        # buggy see https://github.com/nix-community/home-manager/issues/5821
         NoDefaultBookmarks = true;
-        # OfferToSaveLoginsDefault =
-        # TranslateEnabled =
         PDFjs = false;
-        Bookmarks = { };
       };
     }
     (

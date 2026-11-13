@@ -1,8 +1,63 @@
 {
   flakeSelf,
   secrets,
-  system,
+  lib,
 }:
+let 
+
+  # old legacy one
+  genNode =
+    { name, ... }@attrs:
+    let
+      nixosCfg = flakeSelf.nixosConfigurations.${name};
+    in
+      genNodeFromConfig name nixosCfg;
+    # {
+    #   hostname = nixosCfg.config.networking.fqdnOrHostName;
+    #
+    #   # inherit (attrs) hostname;
+    #   profiles.system = {
+    #     # remoteBuild = false;
+    #     user = "root";
+    #     hostname = nixosCfg.config.networking.fqdnOrHostName; # attrs.hostname;
+    #     # path = flakeSelf.inputs.deploy-rs.lib.${system}.activate.nixos nixosCfg;
+    #     # path = flakeSelf.inputs.deploy-rs.lib.${system}.activate.nixos nixosCfg;
+    #
+    #   };
+    # };
+
+  genNodeFromConfig =
+    name:
+    nixosCfg:
+    let
+      system = nixosCfg.pkgs.stdenv.hostPlatform.system;
+      isIxeal = builtins.traceVerbose "deploy-rs: checking name ${name}" lib.hasPrefix "ixeal" name;
+          # hostname: hostname == "wsl";
+    in
+    {
+      hostname = nixosCfg.config.networking.fqdnOrHostName;
+
+      # inherit (attrs) hostname;
+      profiles.system = {
+        # remoteBuild = false;
+        user = "root";
+        hostname = nixosCfg.config.networking.fqdnOrHostName; # attrs.hostname;
+        path = flakeSelf.inputs.deploy-rs.lib.${system}.activate.nixos nixosCfg;
+
+      };
+    } // lib.optionalAttrs isIxeal {
+      remoteBuild = true;
+      interactiveSudo = false;
+    };
+
+
+  hostsConfigs = lib.flip lib.mapAttrs (lib.filterAttrs (
+    name: val:
+    builtins.trace "deploy-rs target node : ${name} has secrets ? ${toString val.config.tetos.withSecrets}" val.config.tetos.withSecrets
+  ) flakeSelf.nixosConfigurations) genNodeFromConfig;
+
+
+in
 {
   # This is the user that the profile will be deployed to (will use sudo if not the same as above).
   # If `sshUser` is specified, this will be the default (though it will _not_ default to your own username)
@@ -13,6 +68,10 @@
   # the user name to execute commands as and the rest is the command to execute
   # This will default to "sudo -u" if not specified anywhere.
   # sudo = "doas -u";
+
+
+  # and override per-node
+  interactiveSudo = true;
 
   # This is an optional list of arguments that will be passed to SSH.
   # sshOpts = [ "-p" "2121" ];
@@ -37,6 +96,7 @@
   # Build the derivation on the target system.
   # Will also fetch all external dependencies from the target system's substituters.
   # This default to `false`
+  # depends
   remoteBuild = false;
 
   # Timeout for profile activation.
@@ -53,25 +113,11 @@
   # If you require a signing key to push closures to your server, specify the path to it in the LOCAL_KEY environment variable.
   nodes =
     let
-      genNode =
-        { name, ... }@attrs:
-        let
-          nixosCfg = flakeSelf.nixosConfigurations.${name};
-        in
-        {
-          hostname = nixosCfg.config.networking.fqdnOrHostName;
-
-          # inherit (attrs) hostname;
-          profiles.system = {
-            # remoteBuild = false;
-            user = "root";
-            hostname = nixosCfg.config.networking.fqdnOrHostName; # attrs.hostname;
-            path = flakeSelf.inputs.deploy-rs.lib.${system}.activate.nixos nixosCfg;
-
-          };
-        };
     in
-    {
+    hostsConfigs // {
+      # Keep the deploy-rs node name aligned with the configured machine hostname.
+      "dev-ia" = hostsConfigs.ixeal-spark;
+
       neptune-no-secrets =
         genNode {
           name = "neptune";

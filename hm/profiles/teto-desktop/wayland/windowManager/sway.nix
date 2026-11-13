@@ -15,7 +15,7 @@ let
 
   brightnessScript = pkgs.tetos-brightness;
   wpctl = "${pkgs.wireplumber}/bin/wpctl";
-  mpc = "${pkgs.mpc}/bin/mpc";
+  playerctl = "${pkgs.playerctl}/bin/playerctl";
 
   # pkgs.writeShellApplication
   getIntegerVolume = pkgs.writeShellScript "get-volume-as-integer" ''
@@ -52,12 +52,17 @@ let
 
     Mod4 = "exec anyrun";
 
-    XF86AudioNext = "exec ${mpc} next; exec notify-send --icon=forward -h string:synchronous:mpd 'Audio next'";
-    XF86AudioPrev = "exec ${mpc} next; exec notify-send --icon=backward -h string:synchronous:mpd 'Audio previous'";
-    XF86AudioPlay = "exec ${mpc} toggle; exec notify-send --icon=play-pause -h string:synchronous:mpd 'mpd' 'Audio Pause' -e ";
-    # XF86AudioPlay = "exec ${pkgs.vlc}/bin/vlc; exec ${notify-send} --icon=media-playback-stop-symbolic -u low 'test'";
+    # mpd version
+    # XF86AudioNext = "exec ${mpc} next; exec notify-send --icon=forward -h string:synchronous:mpd 'Audio next'";
+    # XF86AudioPrev = "exec ${mpc} next; exec notify-send --icon=backward -h string:synchronous:mpd 'Audio previous'";
+    # XF86AudioPlay = "exec ${mpc} toggle; exec notify-send --icon=play-pause -h string:synchronous:mpd 'mpd' 'Audio Pause' -e ";
+    # XF86AudioStop = "exec ${mpc} stop; exec notify-send --icon=stop -h string:synchronous:mpd 'Stopped Audio' -e";
 
-    XF86AudioStop = "exec ${mpc} stop; exec notify-send --icon=stop -h string:synchronous:mpd 'Stopped Audio' -e";
+    # mpris controls
+    XF86AudioNext = "exec ${playerctl} next";
+    XF86AudioPrev = "exec ${playerctl} previous";
+    XF86AudioPlay = "exec ${playerctl} play-pause";
+    XF86AudioStop = "exec ${playerctl} stop";
   };
 
 in
@@ -84,17 +89,9 @@ in
         accel_profile = "adaptive";
       };
     };
-    output = {
-      # todo put a better path
-      # example = { "HDMI-A-2" = { bg = "~/path/to/background.png fill"; }; };
-      #  Some outputs may have different names when disconnecting and reconnecting. To identify these, the name can be substituted for a string consisting of the make, model and serial which you can get from swaymsg -t get_outputs. Each value must be  sepa‐ rated by one space. For example:
-      #     output "Some Company ABC123 0x00000000" pos 1920 0
-      # "*" = {
-      #   adaptive_sync = "off";
-      #   bg = "${dotfilesPath}/data/wallpapers/nebula.jpg fill";
-      # };
 
-    };
+    # configured per-host
+    # output = { };
 
     keybindings = {
       # bind to noctalia plugin ?
@@ -107,8 +104,10 @@ in
       # should focus mpris instead ?
       "${mad}+a" = ''exec "${dotfilesPath}/bin/focus-firefox-media"'';
       "${mad}+m" = ''exec "${dotfilesPath}/bin/focus-firefox-media"'';
+
       # "XF86Display" = "exec " + ../../rofi-scripts/monitor_layout.sh ;
       "${mad}+shift+m" = ''exec "${dotfilesPath}/bin/monitor_layout"; mode default;'';
+
       # use sway-easyfocus
       "${mad}+f" = "exec ${pkgs.sway-easyfocus}/bin/sway-easyfocus";
 

@@ -1,4 +1,4 @@
-{ lib, secrets, ... }:
+{ secrets, ... }:
 let
   # my_conf = head (builtins.filter (e: e.hostname == my_hostname) peers);
   wgNetwork = "10.100.0.0/24";
@@ -41,6 +41,11 @@ let
       # router
       id = 4;
       publicKey = "3dWxfxRgzHuxzKK5Ez+u/mVcxfONt51ndaaVjYk+e2Q=";
+    }
+    {
+      # freebox
+      id = 5;
+      publicKey = "DbYbZFNLSxji4vfOS9Ep8u0ObIOVUR1R5SDOSzHOfwo";
     }
   ];
 

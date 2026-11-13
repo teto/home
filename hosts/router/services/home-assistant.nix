@@ -1,10 +1,16 @@
 {
   flakeSelf,
+  config,
+  lib,
   pkgs,
-  # lib,
-  # config,
   ...
 }:
+let
+  rtetempoDashboard = pkgs.writeText "rtetempo-dashboard.yaml" ''
+    views:
+      - ${lib.replaceStrings [ "\n" ] [ "\n    " ] (builtins.readFile ../../../rtetempocard.txt)}
+  '';
+in
 {
   imports = [
     flakeSelf.nixosProfiles.home-assistant
@@ -13,14 +19,42 @@
   services.home-assistant = {
     enable = true;
 
+    # configCheck = true;
+
     # from https://discourse.nixos.org/t/trying-to-build-custom-homeassistant-component-leads-to-infinite-recursion/58602/4
-    #   Available components can be found below ‘pkgs.home-assistant-custom-components’.
+    #   Available components can be found below 'pkgs.home-assistant-custom-components'.
     customComponents = [
       pkgs.awtrix-ng-hass-integration
+      pkgs.tarif-edf
+      pkgs.home-assistant-custom-components.ha_mcp_tools
       # (config.services.home-assistant.package.python.pkgs.callPackage ./hass-node-red-module.nix {})
+      pkgs.rtetempo
+      pkgs.home-assistant-custom-components.uix
+      # TODO add washing machine one
     ];
+
+    customLovelaceModules = with pkgs.home-assistant-custom-lovelace-modules; [
+# pkgs/servers/home-assistant/custom-lovelace-modules/easy-floorplan/package.nix
+      easy-floorplan
+      button-card
+      # home-assistant-custom-lovelace-modules.sankey-chart
+
+    ];
+
+    # TODO reduce list ?
+    # defaultIntegrations = [
+    # ];
+
     config = {
-      feedreader.urls = [ "https://nixos.org/blogs.xml" ];
+      # lovelace.dashboards.rtetempo = {
+      #   mode = "yaml";
+      #   filename = "rtetempo-dashboard.yaml";
+      #   title = "Tempo";
+      #   icon = "mdi:transmission-tower";
+      #   show_in_sidebar = true;
+      # };
+
+      # feedreader.urls = [ "https://nixos.org/blogs.xml" ];
 
       # "automation manual" = "!include ${../home-assistant/automations/hue-dimmer1.yaml}";
 
@@ -33,6 +67,8 @@
     themes = with pkgs.home-assistant-themes; [
       material-you-theme
     ];
+
+
 
     blueprints = {
       automation = [
@@ -85,4 +121,8 @@
       # script = {
     };
   };
+
+  systemd.tmpfiles.rules = [
+    "L+ ${config.services.home-assistant.configDir}/rtetempo-dashboard.yaml - - - - ${rtetempoDashboard}"
+  ];
 }

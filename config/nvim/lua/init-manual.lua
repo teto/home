@@ -729,6 +729,7 @@ vim.lsp.enable('yamlls')
 vim.lsp.enable('just')
 vim.lsp.enable('nixd')
 vim.lsp.enable('ruff')
+vim.lsp.enable('lemminx')
 -- vim.lsp.enable('nil_ls')
 -- vim.lsp.enable('cssls')
 
@@ -745,7 +746,6 @@ vim.pack.add({
     -- bug in rocks.nvim when trying to debug feed.nvim
     -- so I install it here https://github.com/lumen-oss/rocks.nvim/issues/706
     -- lua deps gotten via nix
-    -- 'https://github.com/neo451/feed.nvim',
 
     -- 'https://github.com/elanmed/fzf-lua-frecency.nvim', -- to rocks
 
@@ -949,7 +949,8 @@ end, { desc = 'Go to file, create if missing' })
 -- Outside of the fork it kills the plugin so careful
 -- normally overriden by setup call
 vim.g.avante = {
-    debug = true, -- print error messages
+	-- -- print error messages, set to false to avoid issues with inspect_ai
+    debug = true,
     -- log_level =
     log_level = vim.log.levels.DEBUG,
 
@@ -1011,6 +1012,7 @@ vim.g.avante = {
         -- check https://github.com/yetone/avante.nvim/pull/3141
         acp_follow_agent_locations = true,
 
+		show_token_usage = true,
         enable_token_counting = true,
         show_inference_timings = true, -- this is from my fork ?
         -- auto_approve_tool_permissions = {"bash", "replace_in_file"}, -- Auto-approve specific tools only
@@ -1030,6 +1032,16 @@ vim.g.avante = {
         provider = 'fzf_lua',
     },
     providers = {
+		rtx_spark = {
+            __inherited_from = 'openai',
+			-- ixeal-spark
+            endpoint = 'http://dev-ia.ixeal.local:9931/v1',
+			model =  'qwen3.6-dense',
+            -- model = 'deepseek/deepseek-v4-flash-0731',
+			api_key_name = "", -- Local server without authentication
+			-- use_response_api = false, -- use chat completions api-
+
+		},
         openrouter = {
             -- see also https://github.com/avante-corp/avante.nvim/issues/2310
             __inherited_from = 'openai',
@@ -1089,6 +1101,7 @@ vim.g.avante = {
     windows = {
         position = 'right',
         fillchars = 'eob: ',
+		-- wrap = false,
         -- TODO remove
         sidebar_header = {
             enabled = true, -- true, false to enable/disable the header
@@ -1165,6 +1178,7 @@ vim.g.avante = {
     custom_tools = {
         -- require('avante.llm_tools.web_search').web_search_google,
         require('avante.llm_tools.web_search').web_search_firecrawl,
+        require('avante.llm_tools.web_search').web_search_sofya,
     },
     slash_commands = {
         -- it looks ignored ?
@@ -1194,9 +1208,9 @@ end
 -- avante {{{
 require('plugins.avante')
 
-local avante = require('teto.avante')
+local my_avante = require('teto.avante')
 
-avante.setup_autocmd()
+my_avante.setup_autocmd()
 
 -- HACK around sway-scratchpad limitation where one can't esapce quotes so alleviate the need for that via a proxy command
 vim.api.nvim_create_user_command('LlmChat', function()
@@ -1344,3 +1358,48 @@ end
 
 -- _local
 vim.opt.spellfile = vim.fs.joinpath(vim.fn.stdpath('data'), 'site/spell/computer.utf-8.add')
+
+vim.api.nvim_create_autocmd({ 'User' }, {
+    pattern = 'AvanteViewBufferUpdated',
+    desc = 'Notify user on LLM answer',
+    callback = function()
+        vim.notify('avante: LLM answered')
+        -- Leave the event callback before closing all windows, including modified buffers.
+        -- vim.schedule(function()
+			-- config/nvim/lua/init-manual.lua:p:hconfig/nvim/lua/init-manual.lua
+			--
+        --     vim.cmd('qall!')
+        -- end)
+    end,
+})
+
+--
+--
+--
+--
+-- ╭─
+-- test
+--
+--
+--
+-- ╰─
+
+
+vim.api.nvim_create_autocmd(
+  'PackChanged',
+  {
+    callback = function(ev)
+      local name, kind = ev.data.spec.name, ev.data.kind
+	  print("package name ", name)
+	  vim.print("spec ", ev.data.spec)
+	  -- vim.print("version ", ev.data.spec.version)
+
+	  -- print("package kind ", kind)
+      -- if name == 'avante.nvim' and (kind == 'install' or kind == 'update') then
+      --   -- Call `:AvanteBuild` to download prebuilt libraries
+      --   vim.system({ 'make' }, { cwd = ev.data.path }):wait()
+      -- end
+    end
+  }
+)
+

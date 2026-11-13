@@ -2,19 +2,21 @@
   pkgs,
   flakeSelf,
   lib,
-  dotfilesPath,
+  # dotfilesPath,
   secretsFolder,
   secrets,
   ...
 }:
 let
   sway = import ./sway.nix;
-  firefox = pkgs.callPackage ./firefox.nix { };
+  # doesnt like the pkgs
   nix-builders = import ./nix-builder.nix { inherit flakeSelf lib secretsFolder; };
   neovim = import ./neovim.nix { inherit flakeSelf lib; };
   wireguard = import  ./wireguard.nix { inherit secrets flakeSelf lib secretsFolder; };
-
   # email = import ./mail.nix { inherit pkgs; };
+  firefox = import ./firefox.nix ;
+  pure = import ./pure.nix { inherit lib; } ;
+
 in
 {
   inherit
@@ -22,6 +24,7 @@ in
     firefox
     neovim
     sway
+    wireguard
     ;
 
   inherit (neovim)
@@ -34,17 +37,21 @@ in
     nixosConfToBuilderAttr
     ;
 
-  inherit wireguard;
 
   inherit (wireguard) 
     mkWireguardPeer
     ;
 
+  inherit (pure)
+      importFiles 
+      importDirectories
+      ;
 
 
     nixpkgsMonitorEmailNotifier = 
     fromEmail:
     destinationEmail:
+    # by name 
     pkgs.writeShellScript "notify-advancement" ''
 
     branch_name="$1"
@@ -70,80 +77,6 @@ in
   '';
 
 
-  /**
-    default system
-    modules: List
-  */
-  mkNixosSystem =
-    {
-      modules, # array
-      withSecrets, # bool
-      hostname,
-      # pkgs = self.inputs.nixos-unstable.legacyPackages.${system}.pkgs;
-      pkgs,
-    }:
-    lib.nixosSystem {
-      system = "x86_64-linux";
-      inherit pkgs;
-      modules = [
-        flakeSelf.inputs.sops-nix.nixosModules.sops
-        flakeSelf.inputs.hm.nixosModules.home-manager
-
-        # own module
-        flakeSelf.nixosModules.tetos
-        {
-            tetos.withSecrets = withSecrets;
-        }
-
-      ]
-      ++ modules;
-
-      specialArgs = {
-        inherit dotfilesPath secretsFolder;
-        inherit flakeSelf;
-        inherit
-          withSecrets
-          secrets
-          hostname
-          lib
-          ;
-      };
-
-    };
-
-  /**
-    Maps over folders in folder
-  */
-  importDirectories = folder: transformEntry:
-    
-    let
-      # transformEntry = lib.id;
-      pred = key: val: val == "directory";
-
-      folders = lib.mapAttrs' transformEntry (lib.filterAttrs pred (builtins.readDir folder));
-    in
-      folders;
-
-  importFiles =
-    folder:
-    let
-      genKey = str: lib.replaceStrings [ ".nix" ] [ "" ] (baseNameOf (toString str));
-
-      pred = name: val: lib.strings.hasSuffix ".nix" name;
-
-      transformEntry =
-        filename: val:
-        let
-          key = genKey filename;
-          val' = folder + "/${filename}";
-        in
-
-        lib.nameValuePair key val';
-
-      listOfModules = lib.mapAttrs' transformEntry (lib.filterAttrs pred (builtins.readDir folder));
-
-    in
-    listOfModules;
 
   # generate a client ssh config from the server config
   # https://fmartingr.com/blog/2022/08/12/using-ssh-config-match-to-connect-to-a-host-using-multiple-ip-or-hostnames/
@@ -229,8 +162,6 @@ in
     in
     builtins.trace "YAZI config for ${name}"
 
-      # header = ''Match host="${mcfg.networking.hostName},${mcfg.networking.domain}${lib.optionalString (mcfg.tetos.wireguard.enable or false) ",${mcfg.networking.hostName}.vpn"}"'';
-      # assumption ? or check/warn it has it ?
       # identityFile = "${secretsFolder}/ssh/id_rsa";
       # host = "${mcfg.networking.hostName}";
       # .${mcfg.networking.domain}"

@@ -10,7 +10,7 @@
 
   enable = true;
 
-  package = flakeSelf.inputs.jujutsu.packages.${pkgs.stdenv.hostPlatform.system}.jujutsu;
+  # package = flakeSelf.inputs.jujutsu.packages.${pkgs.stdenv.hostPlatform.system}.jujutsu;
 
   # only available when jj-gh module imported
   gh = {
@@ -34,6 +34,9 @@
       name = "teto";
     };
     ui = {
+      # jj splits puts the cursor in a f**** position, we need $line to restore 
+      # sane behavior https://github.com/jj-vcs/jj/pull/10269/changes
+      editor = ["nvim" "+$line"];
       default-command = "status";
       merge-editor = "nvim";
       # Enable pagination for commands that support it (default)

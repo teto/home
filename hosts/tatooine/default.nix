@@ -132,13 +132,6 @@ in
     enableRedistributableFirmware = true;
     sane.enable = true;
 
-    # cant be enabled with pipewire
-    pulseaudio = {
-      # Using PipeWire as the sound server conflicts with PulseAudio. This option requires `services.pulseaudio.enable` to be set to false
-      enable = false;
-      # for ad2p profle ?
-      package = pkgs.pulseaudioFull;
-    };
 
     # High quality BT calls
     # https://nixos.wiki/wiki/Bluetooth
@@ -173,7 +166,6 @@ in
     # to prevent the "failed to load regulatory.db" ?
     # see https://wireless.wiki.kernel.org/en/developers/regulatory
     udev.packages = [
-      pkgs.yubikey-personalization
       pkgs.brightnessctl
     ];
 
@@ -210,9 +202,6 @@ in
 
   services.flatpak.enable = true;
 
-  # smartcard service for yubikey
-  # can conflict with gpg-agent depending on config
-  system.stateVersion = "26.05";
 
   # apparently deprecated / replaced by https://github.com/OHF-Voice/linux-voice-assistant
   # which is not packaged (yet)
@@ -228,4 +217,7 @@ in
   # to remove "TSC_DEADLINE disabled due to Errata;
   # please update microcode to version: 0x22"
   # hardware.cpu.intel.updateMicrocode = true;
+
+  nixpkgs.hostPlatform = "x86_64-linux";
+  system.stateVersion = "26.05";
 }

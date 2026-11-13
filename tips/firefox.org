@@ -1,3 +1,8 @@
+
+Extensions:
+
+* detach tab => ctrl+shift+space to detach tab into new window !
+
 Changing results on the fly
 
 By default, when you type search terms in the address bar, the list under it shows search suggestions from the default search engine, and pages (bookmarks, history, open tabs) where every search term is part of the title, part of a tag or part of the web address (URL).

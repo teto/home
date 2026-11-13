@@ -378,7 +378,6 @@ launcherIcon = ""
 launcherIconColor = "none"
 launcherPosition = "end"
 launcherUseDistroLogo = false
-monitors = []
 onlySameOutput = true
 pinnedApps = []
 pinnedStatic = false

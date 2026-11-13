@@ -183,15 +183,18 @@ in
   #   }
   # ];
 
+  nixpkgs.hostPlatform = "x86_64-linux";
+
   # lib.mkForce to remove the default ones
   # lib.mkForce  removes cat
   environment.systemPackages = [
     # flakeSelf.inputs.transgression-tui.packages.${pkgs.stdenv.hostPlatform.system}.transgression-tui
-    pkgs.tremc
+    pkgs.tremc # torrent client
     pkgs.restic # testing against restic
     pkgs.sops
     # pkgs.rustic # testing against restic
     pkgs.backblaze-b2-tetos # b2 backup tool
+    pkgs.util-linux # for iname
     pkgs.msmtp # to send mails
     pkgs.systemctl-tui
     pkgs.nixpkgs-review

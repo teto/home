@@ -13,7 +13,7 @@ let
     lib.mapAttrs
       (
         _: nixosCfg:
-        lib.genSshClientConfig nixosCfg
+        flakeSelf.tetosLib.genSshClientConfig nixosCfg
         // {
           User = "teto";
         }
@@ -46,7 +46,6 @@ in
     extraOptionOverrides = lib.optionalAttrs withSecrets {
       # TODO i might as well have saved the whole ssh-keyscan ?!
       # GlobalKnownHostfiles = pkgs.writeText "global_known_host_files" ''
-      #   ${flakeSelf.nixosConfigurations.neotokyo.config.networking.domain} ${builtins.readFile ../../../../../hosts/neotokyo/host_key.pub}
       #   '';
     };
 

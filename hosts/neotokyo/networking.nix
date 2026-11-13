@@ -47,7 +47,7 @@ in
     enable = true;
     enableIPv6 = true;
     externalInterface = "ens3";
-    internalInterfaces = [ "wg0" ];
+    internalInterfaces = [ "wg" ];
   };
 
   # https://wiki.nixos.org/wiki/WireGuard#Peer_setup

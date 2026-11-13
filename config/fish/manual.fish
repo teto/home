@@ -3,19 +3,9 @@
 # This file is sourced by the Nix-generated fish config
 # Add your custom fish configuration here that you want to manage outside of Nix
 
-# Show today's date in Japanese when starting an interactive shell.
+# Show today's date using the Japanese locale when starting an interactive shell.
 function fish_greeting
-    set -l weekdays 月 火 水 木 金 土 日
-    set -l weekday_readings げつようび かようび すいようび もくようび きんようび どようび にちようび
-    set -l month_readings いちがつ にがつ さんがつ しがつ ごがつ ろくがつ しちがつ はちがつ くがつ じゅうがつ じゅういちがつ じゅうにがつ
-    set -l day_readings \
-        ついたち ふつか みっか よっか いつか むいか なのか ようか ここのか とおか \
-        じゅういちにち じゅうににち じゅうさんにち じゅうよっか じゅうごにち じゅうろくにち じゅうしちにち じゅうはちにち じゅうくにち はつか \
-        にじゅういちにち にじゅうににち にじゅうさんにち にじゅうよっか にじゅうごにち にじゅうろくにち にじゅうしちにち にじゅうはちにち にじゅうくにち さんじゅうにち さんじゅういちにち
-    set -l today (date '+%-m%n%-d%n%u')
-
-    printf '%s月%s日（%s曜日）\n' $today[1] $today[2] $weekdays[$today[3]]
-    printf '%s %s（%s）\n' $month_readings[$today[1]] $day_readings[$today[2]] $weekday_readings[$today[3]]
+    bash -c 'function fish_greeting_date() { local LC_TIME=ja_JP.utf8; date +%x; }; fish_greeting_date'
 end
 
 # Save all commands to history, including failed ones 
@@ -79,6 +69,12 @@ abbr -a -g sc systemctl
 abbr -a -g scu systemctl --user
 abbr -a -g jr journalctl
 abbr -a -g jru journalctl --user
+
+function bell_on_failure --on-event fish_postexec
+    if test $status -ne 0
+        printf '\a'
+    end
+end
 
 # tide config
 # set tide_cmd_duration_threshold 3000

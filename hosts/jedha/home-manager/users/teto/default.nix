@@ -101,10 +101,14 @@ in
     in
     llmDeps
     ++ [
-      # disable for now because of
-      # >   `/nix/store/klzrf7krj1whzms0cbk8hw7nyrn013c3-rag-service-env/bin/activate' and
-      # >   `/nix/store/pzvl9qcgq404rmd3jasn5hvwh3frp75r-deploy-rs-0.1.0/bin/activate'
+      btop-cuda # for jedha
+      brush # a rust implementation of bash
+
+
+      # creates conflicts since it brings python and several executables
       flakeSelf.inputs.avante-nvim.packages.${pkgs.stdenv.hostPlatform.system}.ragService
+
+      # (lib.ignoreBroken ha-mcp) # mcp server for home-assistant
 
       # llm-ls # needed by the neovim plugin
       cointop # bitcoin tracker
@@ -112,7 +116,7 @@ in
       # gthumb # image manager, great to tag pictures
 
       unsloth-desktop
-      jocalsend # for tests
+      # jocalsend # for tests
 
       ethtool # to check wakeonlan capabilities
       # footswitch # to control foot pedals (use module instead)
@@ -123,7 +127,7 @@ in
 
       jaq # jq in rust
 
-      (lib.ignoreBroken lact) # GPU controller, needs a daemon
+      # (lib.ignoreBroken lact) # GPU controller, needs a daemon
 
       moor # test as pager
       # presenterm # for presentations from terminal/markdown (in rust, supports images, pretty cool)
@@ -134,16 +138,18 @@ in
       wally-cli # to flash ergodox keyboards
       wine
 
-      nix-sweep # smarter nix-gc
-
       # take the version from stable ?
       nautilus # demande webkit/todo replace by nemo ?
       # hexyl # hex editor
       # simple-scan
-      vifm
+
       # anyrun
       # bridge-utils# pour  brctl
       # vscode-css-languageserver # to showcase 'cssls' lsp server
+
+      rura  # to build shell pipelines
+      # termusic  # terminal music
+ 
     ];
 
   package-sets = {

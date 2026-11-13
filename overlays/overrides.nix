@@ -1,5 +1,4 @@
 {
-  lib,
   # flakeSelf,
   secretsFolder,
 }:
@@ -28,15 +27,22 @@ final: prev: {
 
   };
 
-  backblaze-b2-tetos = final.backblaze-b2.override { execName = "b2"; };
+  /*
+    convert a package to null because used to be borken
 
-  firefox-addons = import ./firefox/generated.nix {
-    # inherit (lib.firefox)       buildFirefoxXpiAddon;
-    inherit lib;
-    # inherit (final)
-    #   # fetchurl
-    #   stdenv ;
-  };
+    null wont work
+  */
+  # todo add to lib
+  # ignoreBroken =
+  #   x: builtins.traceVerbose "${x.name} disabled because broken it used to be broken" prev.hello;
+
+  # firefox-addons = import ./firefox/generated.nix {
+  #   # inherit (lib.firefox)       buildFirefoxXpiAddon;
+  #   inherit lib;
+  #   # inherit (final)
+  #   #   # fetchurl
+  #   #   stdenv ;
+  # };
 
   # in the source code we have:
   # PREFIX="${PASSWORD_STORE_DIR:-$HOME/.password-store}"

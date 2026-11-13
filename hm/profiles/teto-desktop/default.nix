@@ -66,9 +66,11 @@ in
 
     flakeSelf.homeModules.avante
     flakeSelf.homeModules.firefox
+    flakeSelf.homeModules.flyline
     flakeSelf.homeModules.fzf
     flakeSelf.homeModules.kitty
     flakeSelf.homeModules.memento
+    flakeSelf.homeModules.microsoft
     flakeSelf.homeModules.nixpkgs-monitor
     flakeSelf.homeModules.package-sets
     flakeSelf.homeModules.services-mujmap
@@ -103,6 +105,7 @@ in
   manual.manpages.enable = true;
 
   home.pointerCursor = {
+    enable = true;
     sway.enable = true;
     name = "Vanilla-DMZ";
     package = pkgs.vanilla-dmz;
@@ -111,12 +114,31 @@ in
 
   home.packages =
     with pkgs;
+    let 
+      lux-cli-teto = flakeSelf.inputs.lux.packages.${pkgs.stdenv.hostPlatform.system}.lux-cli;
+
+      # lux-cli-teto = lux-cli;
+
+      mistral-vibe-custom = pkgs.hello; # lib.ignoreBroken pkgs.mistral-vibe;
+
+      kodi-teto = pkgs.kodi-tetos;
+    in
 
     [
+      kodi-teto 
+      codex # openai agent
+      codex-acp # originated from zed-industries, used in avante
+
+      gupnp-tools # upnp toolset, ssdp discovery
+
+      lux-cli-teto
       pkgs.pinentry-curses
+      mistral-vibe-custom
 
       # ffs this needs the daemon ?!
       pkgs.avahi # for avahi-browse
+
+      pkgs.gcan # replaces nix-stray-roots ! run "gcan tui"
 
       # for the noctalia OCR plugin
       pkgs.grim
@@ -124,18 +146,21 @@ in
       pkgs.tesseract
 
       # pkgs.up # live preview of pipes
-      pkgs.peek # GIF recorder  BROKEN
+      # pkgs.peek # GIF recorder  BROKEN use kooha instead
       # pkgs.sequoia-sq # gpg rust replacement ? exe is called "sq"
       pkgs.sshfs # to download
       pkgs.alsa-utils # for alsamixer
       pkgs.lm_sensors # for `sensors` executable
       flakeSelf.inputs.deploy-rs.packages.${stdenv.hostPlatform.system}.deploy-rs
+
+      flakeSelf.inputs.rikai-nvim.packages.${stdenv.hostPlatform.system}.kokoro
       pciutils # for lspci
       timg
       ncurses.dev # for infocmp
 
       # josm # openstreetmap editor (java)
 
+      # (lib.ignoreBroken jellyfin-tui)
       gh-dash
       pi-coding-agent # to test as ACP provider for avante
       # bottles  # to install games
@@ -164,22 +189,25 @@ in
       # kaggle # kaggle interface
       # python3Packages.kaggle
 
-      lux-cli
-      # flakeSelf.inputs.lux.packages.${pkgs.stdenv.hostPlatform.system}.lux-cli
 
-      sonic-pi
-      stow
+      sonic-pi  # for live music coding
+      stow  # tool to create symlinks
       systemctl-tui
       timr-tui # rust clock
 
       # cups-pk-helper # to add printer through gnome control center
       pkgs.lm_sensors # to see CPU temperature (command 'sensors')
-      pkgs.vlc # to see it in popcorn
+      # pkgs.vlc # to see it in popcorn
+      pkgs.vlc4 # to see it in popcorn
 
-      tarts # fun TUI screensaver, cmatrix-like
+      # tarts # fun TUI screensaver, cmatrix-like
+      pkgs.streamlink # to pipe streams into mpv/vlc
 
       yamaha-cli
       # flakeSelf.inputs.git-repo-manager.packages.${pkgs.stdenv.hostPlatform.system}.git-repo-manager
+
+      waytator # capture screening
+      pkgs.nmap # network scanner
     ];
 
   home.shell = {
@@ -190,12 +218,9 @@ in
   };
 
   home.shellAliases = {
+    v = "nvim";
     # use nix-sweep instead ?
-    nix-stray-roots = ''nix-store --gc --print-roots | egrep -v "^(/nix/var|/proc|/run/\w+-system|\{memory)" | less'';
-
     # add --remote-build if you meet signature issues
-    # pass as shellAbbr
-    # deploy-neotokyo = "deploy '.#neotokyo' -s --interactive-sudo=true -- --override-input nixpkgs /home/teto/nixpkgs";
 
     # lg = "lazygit";
     y = "yazi";
@@ -243,9 +268,12 @@ in
     TETOS_BUILDER_NEOTOKYO = builder_neotokyo;
     TETOS_BUILDER_JEDHA = builder_jedha;
     TETOS_BUILDER_NIXCOMMUNITY = builder_nixcommunity;
-    inherit (secrets) TAVILY_API_KEY;
-    inherit (secrets) FIRECRAWL_API_KEY;
-    inherit (secrets) CONFIDENT_AI_API_KEY;
+    inherit (secrets) 
+      TAVILY_API_KEY
+      FIRECRAWL_API_KEY
+      CONFIDENT_AI_API_KEY
+      SOFYA_API_KEY
+      ;
   };
 
   # tetos.enableYubikey = true;

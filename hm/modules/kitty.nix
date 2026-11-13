@@ -52,7 +52,10 @@ in
 
         # Browse scrollback buffer in nvim
         map kitty_mod+h kitty_scrollback_nvim ./tmp
-      '';
+        # Browse output of the last shell command in nvim
+        map kitty_mod+g kitty_scrollback_nvim --config ksb_builtin_last_cmd_output
+        '';
+
       #
       # # Browse output of the last shell command in nvim
       # # map kitty_mod+g kitty_scrollback_nvim --config ksb_builtin_last_cmd_output

@@ -87,6 +87,7 @@
 
   };
 
+
   # TODO use from flake or from unstable
   # services.opensnitch-ui.enable
   home-manager.users.teto = {
@@ -183,5 +184,6 @@
 
   time.timeZone = "Europe/Paris";
 
+  nixpkgs.hostPlatform = "x86_64-linux";
   system.stateVersion = "26.05";
 }

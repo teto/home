@@ -1,5 +1,6 @@
 {
-  enable = true;
+  # broken
+  enable = false;
   wayland.display = "wayland-1";
 
   loadModels = [ "base.en" ];
