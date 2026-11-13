@@ -2,6 +2,10 @@
 
 winget install Microsoft.PowerToy
 
+* kill process associated with a port
+
+
+Stop-Process -Id (Get-NetTCPConnection -LocalPort 12666).OwningProcess
 
 
 * allow sshing from another computer

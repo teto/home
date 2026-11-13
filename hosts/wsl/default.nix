@@ -50,6 +50,7 @@
     systemctl-tui
     wget
     btop-cuda # for jedha
+    config.services.llama-cpp.package
 
     # vllm # broken on arm
   ];
