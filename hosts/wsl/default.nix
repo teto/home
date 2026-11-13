@@ -36,11 +36,14 @@
   time.timeZone = "Europe/Paris";
 
   environment.systemPackages = with pkgs; [
+    claude-code
     git
     neovim
     systemctl-tui
     wget
     btop-cuda # for jedha
+
+    vllm # to test
   ];
 
   home-manager.users.teto = {
