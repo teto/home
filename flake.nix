@@ -520,7 +520,7 @@
                 inherit lib;
                 # lib = tetosLib;
                 inherit hostname;
-                cudaSupport = enableCuda;
+                cudaSupport = builtins.traceVerbose "Enabling cuda for ${hostname} ? ${toString enableCuda}" enableCuda;
 
                 # ideally we would return both versions
                 withSecrets = true;

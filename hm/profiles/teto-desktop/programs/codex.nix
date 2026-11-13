@@ -1,7 +1,5 @@
 {
-
-
-  enable = true;
+  enable = false;
   enableMcpIntegration = true;
   settings = {
     model_providers.llamacpp = {
@@ -12,13 +10,14 @@
       supports_websockets = false;
     };
 
-    profiles.llamacpp = {
-      model = "local-model";
-      model_provider = "llamacpp";
-    };
   };
   # CODEX_HOME/AGENTS.md.
   # context = "";
+
+  profiles.llamacpp = {
+    model = "local-model";
+    model_provider = "llamacpp";
+  };
 
   hooks = {
     PreToolUse = [

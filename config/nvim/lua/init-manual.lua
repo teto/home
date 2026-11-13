@@ -1035,11 +1035,11 @@ vim.g.avante = {
 		rtx_spark = {
             __inherited_from = 'openai',
 			-- ixeal-spark
-            endpoint = 'dev-ia.ixeal.local:9931/v1',
+            endpoint = 'http://dev-ia.ixeal.local:9931/v1',
 			model =  'qwen3.6-dense',
             -- model = 'deepseek/deepseek-v4-flash-0731',
 			api_key_name = "", -- Local server without authentication
-			use_response_api = false, -- use chat completions api-
+			-- use_response_api = false, -- use chat completions api-
 
 		},
         openrouter = {
