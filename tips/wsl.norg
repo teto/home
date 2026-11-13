@@ -4,6 +4,12 @@ wsl --update
 
 wsl --install --from-file nixos.wsl
 
+dont forget to create .wslconfig in home folder to set mirror networking
+
+* verifier si wsl tourne:
+
+  wsl --list --verbose
+
 * networking
 
 # Windows Defender Firewall
@@ -29,3 +35,8 @@ wsl.exe -d Ubuntu -- sleep infinity
 * 
 
 activer le mode reseau miroir
+
+* autostart wsl 
+
+demarrer le "Task Scheduler" via: 
+  "taskschd.msc"

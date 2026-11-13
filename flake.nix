@@ -514,7 +514,7 @@
             hostname: val:
             rawLib.nameValuePair hostname (let
               # or ixeal-spark
-              enableCuda = hostname == "jedha" || hostname == "dev-ia";
+              enableCuda = hostname == "jedha" || hostname == "wsl";
             in
               pureLib.mkNixosSystem {
                 inherit lib;

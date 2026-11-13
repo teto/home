@@ -950,7 +950,7 @@ end, { desc = 'Go to file, create if missing' })
 -- normally overriden by setup call
 vim.g.avante = {
 	-- -- print error messages, set to false to avoid issues with inspect_ai
-    debug = false, 
+    debug = true,
     -- log_level =
     log_level = vim.log.levels.DEBUG,
 
@@ -1038,6 +1038,8 @@ vim.g.avante = {
             endpoint = 'dev-ia.ixeal.local:9931/v1',
 			model =  'qwen3.6-dense',
             -- model = 'deepseek/deepseek-v4-flash-0731',
+			api_key_name = "", -- Local server without authentication
+			use_response_api = false, -- use chat completions api-
 
 		},
         openrouter = {

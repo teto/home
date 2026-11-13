@@ -27,10 +27,12 @@ let
     # };
 
   genNodeFromConfig =
-    _name:
+    name:
     nixosCfg:
     let
       system = nixosCfg.pkgs.stdenv.hostPlatform.system;
+      isIxeal = builtins.traceVerbose "deploy-rs: checking name ${name}" lib.hasPrefix "ixeal" name;
+          # hostname: hostname == "wsl";
     in
     {
       hostname = nixosCfg.config.networking.fqdnOrHostName;
@@ -43,6 +45,9 @@ let
         path = flakeSelf.inputs.deploy-rs.lib.${system}.activate.nixos nixosCfg;
 
       };
+    } // lib.optionalAttrs isIxeal {
+      remoteBuild = true;
+      interactiveSudo = false;
     };
 
 
