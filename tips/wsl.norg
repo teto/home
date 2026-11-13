@@ -1,9 +1,25 @@
+
+Doc officielle https://learn.microsoft.com/fr-fr/windows/wsl/wsl-config
+
+* in nixos-wsl
+
+  TODO:
+  - disable X11 mounts
+  - 
+
+  in .wslconfig 
+  I could disable firewall
+
 wsl --install --no-distribution | Ubuntu-26.04
 wsl --update
 
 
 wsl --install --from-file nixos.wsl
 
+
+* /proc/meminfo voit une valeur erronee de la memoire:
+
+  ajuste "memory=" under [wsl2] in %UserProfile%\.wslconfig
 
 * dont install nvidia drivers in it !
 
