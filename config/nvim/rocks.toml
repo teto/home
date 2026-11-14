@@ -101,7 +101,7 @@ volt= "scm"
 # how to get rid of it:
 
 # hopefully loads only for markdown
-"render-markdown.nvim" = "8.13.0"
+"render-markdown.nvim" = "8.14.0"
 
 # disabled because of this bug https://github.com/neovim/neovim/issues/37317
 # possible fix at https://github.com/Bekaboo/dropbar.nvim/pull/280
