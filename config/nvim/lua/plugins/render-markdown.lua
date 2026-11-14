@@ -1,5 +1,8 @@
 -- https://github.com/MeanderingProgrammer/render-markdown.nvim
-require('render-markdown').setup({
+
+local has_avante, avante_cfg = pcall(require,'avante.config')
+
+local opts = {
     -- enabled = true,
     -- debounce = 100,
     log_level = 'error',
@@ -170,7 +173,15 @@ require('render-markdown').setup({
         -- warning   = { raw = '[!WARNING]',   rendered = '󰀪 Warning',   highlight = 'RenderMarkdownWarn',    category = 'github'   },
         -- caution   = { raw = '[!CAUTION]',   rendered = '󰳦 Caution',   highlight = 'RenderMarkdownError',   category = 'github'   },
 		-- .. Utils.icon("🤔 ")
-        thought   = { raw = '[!THOUGHT]',   rendered = 'Thought content 🤔 ',   highlight =  'RenderMarkdownSuccess',  category = 'github'   },
+        -- thought   = { raw = '[!THOUGHT]',   rendered = 'Thought content 🤔 ',   highlight =  'RenderMarkdownSuccess',  category = 'github'   },
 	}
 
-})
+}
+
+if has_avante and avante_cfg.render_markdown_avante_config or false then
+  -- for now we favor avante config
+  opts = vim.tbl_extend('force', opts, avante_cfg.render_markdown_avante_config())
+end
+
+
+require('render-markdown').setup(opts)

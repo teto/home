@@ -25,8 +25,8 @@ require('vim._core.ui2').enable({
     },
 })
 
-vim.g.markdown_folding = 1
-vim.g.markdown_enable_folding = 1
+-- vim.g.markdown_folding = 1
+-- vim.g.markdown_enable_folding = 1
 
 local stdpath_config = vim.fn.stdpath('config')
 
@@ -214,7 +214,7 @@ vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
 -- set it before loading vim plugins like autosession
 -- ,localoptions folds
-vim.o.sessionoptions = 'buffers,folds,curdir,help,tabpages,winsize,winpos'
+vim.o.sessionoptions = 'buffers,folds,tabpages,skiprtp,winsize,winpos'
 
 -- require("vim.lsp._watchfiles")._watchfunc = require("vim._watch").watch
 -- local ffi = require 'ffi'

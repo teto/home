@@ -10,15 +10,15 @@
         "uv2nix": "uv2nix"
       },
       "locked": {
-        "lastModified": 1793205366,
-        "narHash": "sha256-vPm4v4KsHVBl/v9XfMpujjPZwT3AiH5u8NKu8MMJggo=",
-        "owner": "teto",
+        "lastModified": 1794489202,
+        "narHash": "sha256-ZfJV9P6Yfl6gb45dzu/WcqDTevJo7rY97vxo0GDnbXg=",
+        "owner": "avante-corp",
         "repo": "avante.nvim",
-        "rev": "b0182f866046e973b3538275cd3f196e302b4c49",
+        "rev": "4d18d589a759634f1d44a3b7cda6551f5d800052",
         "type": "github"
       },
       "original": {
-        "owner": "teto",
+        "owner": "avante-corp",
         "repo": "avante.nvim",
         "type": "github"
       }
@@ -2238,11 +2238,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1791170410,
-        "narHash": "sha256-pyru9MpuXRiyq0Bd4q0nHpL4T6HCuZT4B+alcgAYE4A=",
+        "lastModified": 1793585423,
+        "narHash": "sha256-Fzdew7s0V4PHsBX0GDQ+1Zcd4HejuqAh9rAjSP9M6JQ=",
         "owner": "pyproject-nix",
         "repo": "build-system-pkgs",
-        "rev": "953d35d03a51dbecaf3feb3fb679eb63e90ebeb4",
+        "rev": "461a6a8540307fb9c05b8f6ad29e9720d2a621db",
         "type": "github"
       },
       "original": {
@@ -2259,11 +2259,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1788394333,
-        "narHash": "sha256-xYOP0Xym1eVGUaHFx+eJEaycFGoiCbst3fZf0xFHP78=",
+        "lastModified": 1793240426,
+        "narHash": "sha256-NPWgb6H4arnWyTKvYIys5U0xqd5QY74Z+lyTJA+7XGY=",
         "owner": "pyproject-nix",
         "repo": "pyproject.nix",
-        "rev": "6a8a7881d75b6f98967e7b8069f4ead331384301",
+        "rev": "bf7d4b1d6de61db02fd4e748395634f03006e5de",
         "type": "github"
       },
       "original": {
@@ -2828,11 +2828,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1790341335,
-        "narHash": "sha256-wFnDm/o/4OebDlpGFyVXP8DLUx0/gR/jUFuGqmTwsQg=",
+        "lastModified": 1793272761,
+        "narHash": "sha256-3CE1CEwprYlHRlRVkXDkhqec0jjF9Cti7tdk8vVDsCM=",
         "owner": "pyproject-nix",
         "repo": "uv2nix",
-        "rev": "a24323e9e6ecbbf305c238845ff6c612d50467c0",
+        "rev": "c361746c7d630d98b972378290547c8d35542a7a",
         "type": "github"
       },
       "original": {
