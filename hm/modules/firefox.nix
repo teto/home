@@ -41,7 +41,6 @@ in
 
       programs.firefox.policies = lib.firefox.commonPolicies // {
 
-
         # DefaultDownloadDirectory
         # DisableFormHistory;
         # OfferToSaveLoginsDefault =

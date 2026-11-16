@@ -34,61 +34,60 @@ in
     })
     # disabled because ha-mcp broken
     (lib.mkIf false {
-        ha-mcp = {
-          description = "Home Assistant MCP server";
-          wantedBy = [ "multi-user.target" ];
-          wants = [ "network-online.target" ];
-          after = [ "network-online.target" ];
-          environment = {
-            HOMEASSISTANT_URL = "http://${hassHost}:${toString hassPort}";
-            HOME = "/var/lib/ha-mcp";
-            MCP_HOST = "127.0.0.1";
-            MCP_PORT = "8086";
-          };
-          serviceConfig = {
-            ExecStart = lib.getExe' pkgs.ha-mcp "ha-mcp-web";
-            # Root-owned file containing HOMEASSISTANT_TOKEN=<long-lived access token>.
-            EnvironmentFile = "/var/lib/ha-mcp/environment";
-            DynamicUser = true;
-            StateDirectory = "ha-mcp";
-            WorkingDirectory = "/var/lib/ha-mcp";
-            Restart = "on-failure";
-            RestartSec = 5;
-            UMask = "0077";
-          };
+      ha-mcp = {
+        description = "Home Assistant MCP server";
+        wantedBy = [ "multi-user.target" ];
+        wants = [ "network-online.target" ];
+        after = [ "network-online.target" ];
+        environment = {
+          HOMEASSISTANT_URL = "http://${hassHost}:${toString hassPort}";
+          HOME = "/var/lib/ha-mcp";
+          MCP_HOST = "127.0.0.1";
+          MCP_PORT = "8086";
         };
-
-        # copied from https://github.com/NixOS/nixpkgs/pull/544252
-        # lib.recursiveUpdate slib.systemd.serviceDefaults {
-        speech-to-phrase = {
-          # after = [ "home-assistant.service" ];
-          script = lib.concatStringsSep " " [
-            (lib.getExe pkgs.speech-to-phrase)
-            "--models-dir"
-            "\"$STATE_DIRECTORY/models\""
-            "--train-dir"
-            "\"$STATE_DIRECTORY/train\""
-            # "--custom-sentences-dir" ""
-            "--uri 'tcp://127.0.0.1:10400'"
-            "--hass-websocket-uri"
-            "ws://${hassHost}:${toString hassPort}/api/websocket"
-            "--retrain-on-start"
-            "--retrain-on-connect"
-            "--retrain-seconds"
-            "300"
-          ];
-          serviceConfig = {
-            #
-            # EnvironmentFile = config.sops.templates."speech-to-phrase/environment".path;
-            Group = "speech-to-phrase";
-            StateDirectory = "speech-to-phrase";
-            User = "speech-to-phrase";
-            # TODO: hardening
-          };
+        serviceConfig = {
+          ExecStart = lib.getExe' pkgs.ha-mcp "ha-mcp-web";
+          # Root-owned file containing HOMEASSISTANT_TOKEN=<long-lived access token>.
+          EnvironmentFile = "/var/lib/ha-mcp/environment";
+          DynamicUser = true;
+          StateDirectory = "ha-mcp";
+          WorkingDirectory = "/var/lib/ha-mcp";
+          Restart = "on-failure";
+          RestartSec = 5;
+          UMask = "0077";
         };
+      };
 
-      }
-    )
+      # copied from https://github.com/NixOS/nixpkgs/pull/544252
+      # lib.recursiveUpdate slib.systemd.serviceDefaults {
+      speech-to-phrase = {
+        # after = [ "home-assistant.service" ];
+        script = lib.concatStringsSep " " [
+          (lib.getExe pkgs.speech-to-phrase)
+          "--models-dir"
+          "\"$STATE_DIRECTORY/models\""
+          "--train-dir"
+          "\"$STATE_DIRECTORY/train\""
+          # "--custom-sentences-dir" ""
+          "--uri 'tcp://127.0.0.1:10400'"
+          "--hass-websocket-uri"
+          "ws://${hassHost}:${toString hassPort}/api/websocket"
+          "--retrain-on-start"
+          "--retrain-on-connect"
+          "--retrain-seconds"
+          "300"
+        ];
+        serviceConfig = {
+          #
+          # EnvironmentFile = config.sops.templates."speech-to-phrase/environment".path;
+          Group = "speech-to-phrase";
+          StateDirectory = "speech-to-phrase";
+          User = "speech-to-phrase";
+          # TODO: hardening
+        };
+      };
+
+    })
   ];
 
   # just to test

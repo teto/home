@@ -1,8 +1,15 @@
-# 
-{ config, lib, pkgs, osConfig ? null, ... }:
+#
+{
+  config,
+  lib,
+  pkgs,
+  osConfig ? null,
+  ...
+}:
 let
-   cfg = config.programs.flyline;
-in {
+  cfg = config.programs.flyline;
+in
+{
   options = {
     programs.flyline = {
 
@@ -37,6 +44,6 @@ in {
       flyline history --backend flyline
       source ${../../config/bash/flyline.sh}
 
-      '';
+    '';
   };
 }

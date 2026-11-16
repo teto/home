@@ -114,7 +114,7 @@ in
 
   home.packages =
     with pkgs;
-    let 
+    let
       lux-cli-teto = flakeSelf.inputs.lux.packages.${pkgs.stdenv.hostPlatform.system}.lux-cli;
 
       # lux-cli-teto = lux-cli;
@@ -125,7 +125,7 @@ in
     in
 
     [
-      kodi-teto 
+      kodi-teto
       codex # openai agent
       codex-acp # originated from zed-industries, used in avante
 
@@ -189,9 +189,8 @@ in
       # kaggle # kaggle interface
       # python3Packages.kaggle
 
-
-      sonic-pi  # for live music coding
-      stow  # tool to create symlinks
+      sonic-pi # for live music coding
+      stow # tool to create symlinks
       systemctl-tui
       timr-tui # rust clock
 
@@ -257,8 +256,8 @@ in
     CDPATH = "$HOME/plugins";
 
     # it's a pain with git/update config
-    # removed args because for instance systemctl-tui doesn't accept args 
-    # --style=numbers 
+    # removed args because for instance systemctl-tui doesn't accept args
+    # --style=numbers
     PAGER = "bat";
 
     # or bat
@@ -270,7 +269,7 @@ in
     TETOS_BUILDER_NEOTOKYO = builder_neotokyo;
     TETOS_BUILDER_JEDHA = builder_jedha;
     TETOS_BUILDER_NIXCOMMUNITY = builder_nixcommunity;
-    inherit (secrets) 
+    inherit (secrets)
       TAVILY_API_KEY
       FIRECRAWL_API_KEY
       CONFIDENT_AI_API_KEY

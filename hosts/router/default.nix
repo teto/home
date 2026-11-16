@@ -87,7 +87,6 @@
 
   };
 
-
   # TODO use from flake or from unstable
   # services.opensnitch-ui.enable
   home-manager.users.teto = {

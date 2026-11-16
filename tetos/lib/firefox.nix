@@ -2,7 +2,6 @@
 let
   #   install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
 
-
 in
 {
   # buildFirefoxXpiAddon =

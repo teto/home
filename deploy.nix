@@ -3,7 +3,7 @@
   secrets,
   lib,
 }:
-let 
+let
 
   # old legacy one
   genNode =
@@ -11,28 +11,27 @@ let
     let
       nixosCfg = flakeSelf.nixosConfigurations.${name};
     in
-      genNodeFromConfig name nixosCfg;
-    # {
-    #   hostname = nixosCfg.config.networking.fqdnOrHostName;
-    #
-    #   # inherit (attrs) hostname;
-    #   profiles.system = {
-    #     # remoteBuild = false;
-    #     user = "root";
-    #     hostname = nixosCfg.config.networking.fqdnOrHostName; # attrs.hostname;
-    #     # path = flakeSelf.inputs.deploy-rs.lib.${system}.activate.nixos nixosCfg;
-    #     # path = flakeSelf.inputs.deploy-rs.lib.${system}.activate.nixos nixosCfg;
-    #
-    #   };
-    # };
+    genNodeFromConfig name nixosCfg;
+  # {
+  #   hostname = nixosCfg.config.networking.fqdnOrHostName;
+  #
+  #   # inherit (attrs) hostname;
+  #   profiles.system = {
+  #     # remoteBuild = false;
+  #     user = "root";
+  #     hostname = nixosCfg.config.networking.fqdnOrHostName; # attrs.hostname;
+  #     # path = flakeSelf.inputs.deploy-rs.lib.${system}.activate.nixos nixosCfg;
+  #     # path = flakeSelf.inputs.deploy-rs.lib.${system}.activate.nixos nixosCfg;
+  #
+  #   };
+  # };
 
   genNodeFromConfig =
-    name:
-    nixosCfg:
+    name: nixosCfg:
     let
       system = nixosCfg.pkgs.stdenv.hostPlatform.system;
       isIxeal = builtins.traceVerbose "deploy-rs: checking name ${name}" lib.hasPrefix "ixeal" name;
-          # hostname: hostname == "wsl";
+      # hostname: hostname == "wsl";
     in
     {
       hostname = nixosCfg.config.networking.fqdnOrHostName;
@@ -45,17 +44,16 @@ let
         path = flakeSelf.inputs.deploy-rs.lib.${system}.activate.nixos nixosCfg;
 
       };
-    } // lib.optionalAttrs isIxeal {
+    }
+    // lib.optionalAttrs isIxeal {
       remoteBuild = true;
       interactiveSudo = false;
     };
-
 
   hostsConfigs = lib.flip lib.mapAttrs (lib.filterAttrs (
     name: val:
     builtins.trace "deploy-rs target node : ${name} has secrets ? ${toString val.config.tetos.withSecrets}" val.config.tetos.withSecrets
   ) flakeSelf.nixosConfigurations) genNodeFromConfig;
-
 
 in
 {
@@ -68,7 +66,6 @@ in
   # the user name to execute commands as and the rest is the command to execute
   # This will default to "sudo -u" if not specified anywhere.
   # sudo = "doas -u";
-
 
   # and override per-node
   interactiveSudo = true;
@@ -114,7 +111,8 @@ in
   nodes =
     let
     in
-    hostsConfigs // {
+    hostsConfigs
+    // {
       # Keep the deploy-rs node name aligned with the configured machine hostname.
       "dev-ia" = hostsConfigs.ixeal-spark;
 

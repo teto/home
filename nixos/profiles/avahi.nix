@@ -1,9 +1,6 @@
 /*
-
-guide:
-avahi-browse-domains 
-
-
+  guide:
+  avahi-browse-domains
 */
 {
   config,
@@ -23,7 +20,7 @@ avahi-browse-domains
 
       server = {
 
-    # List of non-local DNS domains to be browsed.
+        # List of non-local DNS domains to be browsed.
         browse-domains = [
           # "0pointer.de"
           # "zeroconf.org"

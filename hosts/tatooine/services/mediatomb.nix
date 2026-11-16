@@ -1,6 +1,6 @@
 # it's gerbera in fact
 { pkgs, ... }:
-let 
+let
   #       <mappings>
   # freeboxRevolution6Mappings = ''
   #       <extension-mimetype ignore-unknown="no">
@@ -68,78 +68,77 @@ in
 
   # to avoid having to rewire the permissions
   group = "minidlna";
-  interface="wlp2s0";
+  interface = "wlp2s0";
   # we should use subsitute for the VLC/ffmpedg commands
-#   postInstall = ''
-#   substitute $src/config.in $out/config \
-#     --replace-fail '@X@' "$X"
-# '';
-#
-# For standard placeholders such as @out@ or @bash@, nixpkgs also provides substituteAll, which replaces them from the build environment or an attribute set.
-transcoding = ''<transcoding enabled="yes" >
-      <profile name="freebox-h264" enabled="yes" type="external">
-        <mimetype>video/mpeg</mimetype>
-        <accept-url>no</accept-url>
-        <first-resource>yes</first-resource>
-        <accept-ogg-theora>no</accept-ogg-theora>
-        <agent command="${pkgs.ffmpeg}/bin/ffmpeg"
-          arguments="-i %in -c:v libx264 -preset veryfast -crf 23 -c:a aac -b:a 192k -f mpegts %out" />
-        <buffer size="14400000" chunk-size="512000" fill-size="120000" />
-      </profile>
-      <profile name="freebox-aac" enabled="yes" type="external">
-        <mimetype>audio/aac</mimetype>
-        <accept-url>no</accept-url>
-        <first-resource>yes</first-resource>
-        <accept-ogg-theora>no</accept-ogg-theora>
-        <agent command="${pkgs.ffmpeg}/bin/ffmpeg"
-          arguments="-i %in -vn -c:a aac -b:a 192k -f adts %out" />
-        <buffer size="1048576" chunk-size="131072" fill-size="262144" />
-      </profile>
-      <mimetype-profile-mappings>
-         <!-- enable freebox ones -->
-         <transcode mimetype="video/x-flv" using="freebox-h264" />
-         <transcode mimetype="application/ogg" using="freebox-h264" />
-         <transcode mimetype="video/x-matroska" using="freebox-h264" />
-         <transcode mimetype="video/x-msvideo" using="freebox-h264" />
-         <transcode mimetype="audio/ogg" using="freebox-aac" />
-      </mimetype-profile-mappings>
-      </transcoding>
-      '';
+  #   postInstall = ''
+  #   substitute $src/config.in $out/config \
+  #     --replace-fail '@X@' "$X"
+  # '';
+  #
+  # For standard placeholders such as @out@ or @bash@, nixpkgs also provides substituteAll, which replaces them from the build environment or an attribute set.
+  transcoding = ''
+    <transcoding enabled="yes" >
+          <profile name="freebox-h264" enabled="yes" type="external">
+            <mimetype>video/mpeg</mimetype>
+            <accept-url>no</accept-url>
+            <first-resource>yes</first-resource>
+            <accept-ogg-theora>no</accept-ogg-theora>
+            <agent command="${pkgs.ffmpeg}/bin/ffmpeg"
+              arguments="-i %in -c:v libx264 -preset veryfast -crf 23 -c:a aac -b:a 192k -f mpegts %out" />
+            <buffer size="14400000" chunk-size="512000" fill-size="120000" />
+          </profile>
+          <profile name="freebox-aac" enabled="yes" type="external">
+            <mimetype>audio/aac</mimetype>
+            <accept-url>no</accept-url>
+            <first-resource>yes</first-resource>
+            <accept-ogg-theora>no</accept-ogg-theora>
+            <agent command="${pkgs.ffmpeg}/bin/ffmpeg"
+              arguments="-i %in -vn -c:a aac -b:a 192k -f adts %out" />
+            <buffer size="1048576" chunk-size="131072" fill-size="262144" />
+          </profile>
+          <mimetype-profile-mappings>
+             <!-- enable freebox ones -->
+             <transcode mimetype="video/x-flv" using="freebox-h264" />
+             <transcode mimetype="application/ogg" using="freebox-h264" />
+             <transcode mimetype="video/x-matroska" using="freebox-h264" />
+             <transcode mimetype="video/x-msvideo" using="freebox-h264" />
+             <transcode mimetype="audio/ogg" using="freebox-aac" />
+          </mimetype-profile-mappings>
+          </transcoding>
+  '';
 
-
-# from-file="${./transcoding.xml}" />'';
+  # from-file="${./transcoding.xml}" />'';
 
   mappings = ''<mappings from-file="${./mappings.xml}" />'';
 
-
-#   # https://www.universfreebox.com/article/13461/Freebox-Revolution-Quels-sont-les-formats-audios-et-videos-supportes
-# # Les codecs vidéos :
-# #  H.264 ;
-# #  MPEG2 ;
-# #  MS-MPEG4 (DivX 3) ;
-# #  MPEG4 (DivX 4, DivX 5, DivX 6, Xvid) ;
-# #  VC1.
-# #
-# # Les codecs audios :
-# # en decode :
-# #  AAC, ;
-# #  M Dolby Digital (downmix 2.0) ;
-# #  Dolby Digital Plus(downmix 2.0)
-# #  DTS core (downmix 2.0) ;
-# #  FLAC ;
-# #  MP2 ;
-# #  MP3 ;
-# #  Vorbis.
-# #
-# # en passthrough (via la sortie HDMI) :
-# #  AAC ;
-# #  Dolby Digital ;
-# #  Dolby Digital Plus ;
-# #  Dolby Digital TrueHD ;
-# #  DTS ;
-# #  DTS-HD (MA et HRA). 
-# # d'apres
-# # https://www.universfreebox.com/article/13461/Freebox-Revolution-Quels-sont-les-formats-audios-et-videos-supportes
+  #   # https://www.universfreebox.com/article/13461/Freebox-Revolution-Quels-sont-les-formats-audios-et-videos-supportes
+  # # Les codecs vidéos :
+  # #  H.264 ;
+  # #  MPEG2 ;
+  # #  MS-MPEG4 (DivX 3) ;
+  # #  MPEG4 (DivX 4, DivX 5, DivX 6, Xvid) ;
+  # #  VC1.
+  # #
+  # # Les codecs audios :
+  # # en decode :
+  # #  AAC, ;
+  # #  M Dolby Digital (downmix 2.0) ;
+  # #  Dolby Digital Plus(downmix 2.0)
+  # #  DTS core (downmix 2.0) ;
+  # #  FLAC ;
+  # #  MP2 ;
+  # #  MP3 ;
+  # #  Vorbis.
+  # #
+  # # en passthrough (via la sortie HDMI) :
+  # #  AAC ;
+  # #  Dolby Digital ;
+  # #  Dolby Digital Plus ;
+  # #  Dolby Digital TrueHD ;
+  # #  DTS ;
+  # #  DTS-HD (MA et HRA).
+  # # d'apres
+  # # https://www.universfreebox.com/article/13461/Freebox-Revolution-Quels-sont-les-formats-audios-et-videos-supportes
 
   # Configured the Freebox transcode profiles through services.mediatomb.transcodingProfiles and MIME mappings in mediatomb.nix (hosts/tatooine/services/mediatomb.nix). Video transcodes to H.264/AAC in MPEG-TS; Ogg audio transcodes to AAC.
   #
@@ -178,19 +177,18 @@ transcoding = ''<transcoding enabled="yes" >
 
   # 49152 already used by mdp
   port = 49153;
-  mediaDirectories=  [
-      {
-        hidden-files = false;
-        path = "/home/teto/videos";
-        recursive = true;
-      }
-      {
-        hidden-files = false;
-        path = "/home/teto/Music";
-        recursive = true;
-      }
+  mediaDirectories = [
+    {
+      hidden-files = false;
+      path = "/home/teto/videos";
+      recursive = true;
+    }
+    {
+      hidden-files = false;
+      path = "/home/teto/Music";
+      recursive = true;
+    }
 
-    ];
-
+  ];
 
 }

@@ -34,9 +34,12 @@
       name = "teto";
     };
     ui = {
-      # jj splits puts the cursor in a f**** position, we need $line to restore 
+      # jj splits puts the cursor in a f**** position, we need $line to restore
       # sane behavior https://github.com/jj-vcs/jj/pull/10269/changes
-      editor = ["nvim" "+$line"];
+      editor = [
+        "nvim"
+        "+$line"
+      ];
       default-command = "status";
       merge-editor = "nvim";
       # Enable pagination for commands that support it (default)

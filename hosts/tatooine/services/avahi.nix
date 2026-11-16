@@ -21,19 +21,19 @@
 
   settings = {
     publish = {
-        publish-domain = true;
-        disable-publishing = false;
-        disable-user-service-publishing = false;
-        publish-addresses = true;
-      };
+      publish-domain = true;
+      disable-publishing = false;
+      disable-user-service-publishing = false;
+      publish-addresses = true;
+    };
 
     server = {
       use-ipv6 = false; # bug with multiple hostnames
-    #   # Set the host name avahi-daemon tries to register on the LAN. If omited defaults to the system host name as set with the sethostname() system call.
-    #   # secrets.jedha.hostname;
-    #   # host-name = "jedha";
-    #   # enable-dbus = true;
-    #
+      #   # Set the host name avahi-daemon tries to register on the LAN. If omited defaults to the system host name as set with the sethostname() system call.
+      #   # secrets.jedha.hostname;
+      #   # host-name = "jedha";
+      #   # enable-dbus = true;
+      #
     };
   };
 

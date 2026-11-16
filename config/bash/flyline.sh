@@ -10,12 +10,11 @@ flyline history --backend flyline
 # it flickers
 # flyline set-cursor --backend flyline --style "#33ccff" --effect fade --effect-easing in-out-sine --interpolate-easing out-elastic --interpolate 2
 
-# Codex: change 
+# Codex: change
 flyline set-agent-mode \
-    --system-prompt "Be concise. Answer with a JSON array of at most 3 items with objects containing: command and description. Command will be a Bash command. " \
-    --trigger-prefix ': ' \
-    --command 'codex -a never exec -m GPT-5.1-Codex-Mini --skip-git-repo-check --ephemeral --color always'
-
+  --system-prompt "Be concise. Answer with a JSON array of at most 3 items with objects containing: command and description. Command will be a Bash command. " \
+  --trigger-prefix ': ' \
+  --command 'codex -a never exec -m GPT-5.1-Codex-Mini --skip-git-repo-check --ephemeral --color always'
 
 # Antigravity:
 # flyline set-agent-mode \
@@ -25,7 +24,6 @@ flyline set-agent-mode \
 
 flyline create-prompt-widget mouse-mode --name MOUSE_MODE "${ANSI_GREEN}M" "${ANSI_BRIGHT_RED}X"
 flyline create-prompt-widget last-command-duration --name FLYLINE_LAST_COMMAND_DUR
-
 
 # precmd_functions+=(set_ps1)
 # Now you can use this animation in your prompt. For example:
@@ -50,7 +48,6 @@ PROMPT_RULER_FINAL=''
 # flyline vim_mode
 
 # flyline create-prompt-widget animation --name "MY_ANIMATION" --fps 10  ⣾ ⣷ ⣯ ⣟ ⡿ ⢿ ⣻ ⣽
-
 
 # Experiment with higher frame rates for smooth transitions:
 # flyline create-prompt-widget animation --name "john" --fps 24 \
@@ -117,4 +114,4 @@ PROMPT_RULER_FINAL=''
 #     '\e[38;2;255;0;63m\u' \
 #     '\e[38;2;255;0;47m\u' \
 #     '\e[38;2;255;0;31m\u' \
-#     '\e[38;2;255;0;15m\u' 
+#     '\e[38;2;255;0;15m\u'

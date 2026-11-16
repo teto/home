@@ -30,6 +30,8 @@ let
             [ ''--set ASDF_OUTPUT_TRANSLATIONS "${builtins.storeDir}:${builtins.storeDir}:"'' ]
             old.installPhase;
       });
+
+  treefmt-home = self.inputs.treefmt-nix.lib.mkWrapper pkgs (import ../tetos/treefmt.nix);
 in
 pkgs.mkShell {
   name = "dotfiles-shell";
@@ -59,7 +61,7 @@ pkgs.mkShell {
       openssl # to inspect certificates
 
       # TODO restore comes from the overlay
-      # treefmt-home # use formatter instead ? 
+      treefmt-home # use formatter instead ?
       # pkgs.git-branch-monitor
 
       ripgrep

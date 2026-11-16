@@ -53,7 +53,6 @@ in
       # we need to override this here so we can push to gitolite repos as simple users
       # use "gitolite-teto" as the user in the git remote
 
-
       # userKnownHostsFile
       github = {
         header = "match host github.com";

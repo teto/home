@@ -60,7 +60,7 @@
       dotfilesPath
       secretsFolder
       ;
-      # lib = lib.extend (_: _: config.home-manager.lib );
+    # lib = lib.extend (_: _: config.home-manager.lib );
     # inherit lib;
     # https://github.com/nix-community/home-manager/issues/5980
   };

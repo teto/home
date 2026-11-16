@@ -3,7 +3,8 @@
   /**
     Maps over folders in folder
   */
-  importDirectories = folder: transformEntry:
+  importDirectories =
+    folder: transformEntry:
 
     let
       # transformEntry = lib.id;
@@ -11,7 +12,7 @@
 
       folders = lib.mapAttrs' transformEntry (lib.filterAttrs pred (builtins.readDir folder));
     in
-      folders;
+    folders;
 
   importFiles =
     folder:
@@ -47,107 +48,115 @@
       cudaSupport,
       ...
     }@attrs:
-  let
-    nixpkgsConfig = {
-            # on desktop
-            inherit cudaSupport;
-            # nvidia.acceptLicense = true;
-            # cudaCapabilities = [ "8.9" ]; # can speed up some builds ?
-            checkMeta = false;
-            # showDerivationWarnings = ["maintainerless"];
-            permittedInsecurePackages = [
-              "qutebrowser-3.7.0"
+    let
+      nixpkgsConfig = {
+        # on desktop
+        inherit cudaSupport;
+        # nvidia.acceptLicense = true;
+        # cudaCapabilities = [ "8.9" ]; # can speed up some builds ?
+        checkMeta = false;
+        # showDerivationWarnings = ["maintainerless"];
+        permittedInsecurePackages = [
+          "qutebrowser-3.7.0"
+        ];
+        allowUnfree = true;
+        # this list makes me wanna vomit (except steam maybe because they do good for linux),
+        # and sublime because guy has to eat
+        allowUnfreePredicate =
+          pkg:
+          let
+            ensureList = x: if builtins.isList x then x else [ x ];
+            hasCudaLicense =
+              package:
+              builtins.all (
+                license:
+                license.free
+                || builtins.elem license.shortName [
+                  "CUDA EULA"
+                  "cuDNN EULA"
+                  "cuSPARSELt EULA"
+                  "cuTENSOR EULA"
+                  "NVidia OptiX EULA"
+                ]
+              ) (ensureList package.meta.license);
+            pkgName = lib.getName pkg;
+          in
+          if hasCudaLicense "cuda" pkgName then
+            true
+          else
+            builtins.elem pkgName [
+              "antigravity-cli"
+              "Oracle_VM_VirtualBox_Extension_Pack"
+              "Oracle_VirtualBox_Extension_Pack"
+              "jocalsend"
+              "codeium"
+              "claude-code"
+              "mistral-vibe"
+
+              "ec2-api-tools"
+              "google-chrome"
+              # "slack"
+              "steam"
+              "steam-original"
+              "steam-runtime"
+              "steam-run"
+              "steam-unwrapped"
+              "sublimetext3"
+              "vault"
+              "vscode"
+              "vscode-extension-ms-vsliveshare-vsliveshare"
+              "xmind"
+              "zoom"
             ];
-            allowUnfree = true;
-            # this list makes me wanna vomit (except steam maybe because they do good for linux),
-            # and sublime because guy has to eat
-            allowUnfreePredicate =
-              pkg:
-              let
-                ensureList = x: if builtins.isList x then x else [ x ];
-                hasCudaLicense =
-                  package:
-                  builtins.all (
-                    license:
-                    license.free
-                    || builtins.elem license.shortName [
-                      "CUDA EULA"
-                      "cuDNN EULA"
-                      "cuSPARSELt EULA"
-                      "cuTENSOR EULA"
-                      "NVidia OptiX EULA"
-                    ]
-                  ) (ensureList package.meta.license);
-                pkgName = lib.getName pkg;
-              in
-              if hasCudaLicense "cuda" pkgName then
-                true
-              else
-                builtins.elem pkgName [
-                  "antigravity-cli"
-                  "Oracle_VM_VirtualBox_Extension_Pack"
-                  "Oracle_VirtualBox_Extension_Pack"
-                  "jocalsend"
-                  "codeium"
-                  "claude-code"
-                  "mistral-vibe"
+      };
 
-                  "ec2-api-tools"
-                  "google-chrome"
-                  # "slack"
-                  "steam"
-                  "steam-original"
-                  "steam-runtime"
-                  "steam-run"
-                  "steam-unwrapped"
-                  "sublimetext3"
-                  "vault"
-                  "vscode"
-                  "vscode-extension-ms-vsliveshare-vsliveshare"
-                  "xmind"
-                  "zoom"
-                ];
-          };
-
-  in
+    in
     # set it via nixpkgs.system.
     # nixpkgs.pkgs
-    lib.nixosSystem (lib.recursiveUpdate (removeAttrs attrs ["withSecrets" "hostname" "cudaSupport" "overlays"] ) {
-      # system = "x86_64-linux";
-      # inherit pkgs;
-      modules = [
-        # flakeSelf.inputs.sops-nix.nixosModules.sops
-        # flakeSelf.inputs.hm.nixosModules.home-manager
-        #
-        # # own module
-        # flakeSelf.nixosModules.tetos
-
+    lib.nixosSystem (
+      lib.recursiveUpdate
+        (removeAttrs attrs [
+          "withSecrets"
+          "hostname"
+          "cudaSupport"
+          "overlays"
+        ])
         {
-          nixpkgs.overlays = overlays ++ [
+          # system = "x86_64-linux";
+          # inherit pkgs;
+          modules = [
+            # flakeSelf.inputs.sops-nix.nixosModules.sops
+            # flakeSelf.inputs.hm.nixosModules.home-manager
+            #
+            # # own module
+            # flakeSelf.nixosModules.tetos
 
-            # define our own lib
+            {
+              nixpkgs.overlays = overlays ++ [
 
-          ];
-          nixpkgs.config = nixpkgsConfig;
-          # nixpkgs.hostPlatform.
-          tetos.withSecrets = withSecrets;
+                # define our own lib
+
+              ];
+              nixpkgs.config = nixpkgsConfig;
+              # nixpkgs.hostPlatform.
+              tetos.withSecrets = withSecrets;
+            }
+
+          ]
+          ++ modules;
+
+          # specialArgs = {
+          #   inherit dotfilesPath secretsFolder;
+          #   inherit flakeSelf;
+          #   inherit
+          #     withSecrets
+          #     secrets
+          #     hostname
+          #     lib
+          #     ;
+          # };
+
         }
-
-      ]
-      ++ modules;
-
-      # specialArgs = {
-      #   inherit dotfilesPath secretsFolder;
-      #   inherit flakeSelf;
-      #   inherit
-      #     withSecrets
-      #     secrets
-      #     hostname
-      #     lib
-      #     ;
-      # };
-
-    });
-
+    );
 
 }
