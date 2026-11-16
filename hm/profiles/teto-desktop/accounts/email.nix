@@ -244,9 +244,9 @@ let
     msmtp.enable = true;
     notmuch.enable = true;
 
-    userName = secrets.accounts.mail.ixeal.address;
+    userName = secrets.accounts.mail.gmail_perso.address;
     realName = "Matt";
-    address = secrets.accounts.mail.ixeal.address;
+    address = secrets.accounts.mail.gmail_perso.address;
     flavor = "gmail.com";
     smtp.tls.useStartTls = true;
 
@@ -257,9 +257,9 @@ let
     msmtp.enable = true;
     notmuch.enable = true;
 
-    userName = secrets.accounts.mail.gmail_perso.address;
+    userName = secrets.accounts.mail.ixeal.address;
     realName = "Matthieu Coudron";
-    address = secrets.accounts.mail.gmail_perso.address;
+    address = secrets.accounts.mail.ixeal.address;
     smtp.tls.useStartTls = true;
 
     passwordCommand = getPasswordCommand "ixeal/outlook";

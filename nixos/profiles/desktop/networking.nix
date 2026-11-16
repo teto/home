@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 {
   # when under ndots in hostname, try resolution with those
   search = [
@@ -31,6 +31,29 @@
       # "::ffff:169.254.0.0/112" = 2;
 
     };
+  };
+
+
+  networkmanager = {
+    
+    # logLevel = "TRACE";
+    plugins = [ pkgs.networkmanager-openvpn ];
+
+    # can prevent switch
+    #   ensureProfiles = {
+    #   environmentFiles = [ "/etc/NetworkManager/vpn.env" ];
+    #   profiles.work-vpn = {
+    #     connection = {
+    #       id = "ixeal-declarative-vpn";
+    #       type = "vpn";
+    #       autoconnect = false;
+    #     };
+    #     vpn = {
+    #       service-type = "org.freedesktop.NetworkManager.openvpn";
+    #       # Add OpenVPN properties here if you want to define them directly.
+    #     };
+    #   };
+    # };
   };
 
   # add wireguard peers
