@@ -2,8 +2,8 @@
 # build the tarball with:
 #   sudo nix run .#nixosConfigurations.wsl.config.system.build.tarballBuilder
 # then on windows: wsl --install --from-file nixos.wsl
-# One WSL catch: inside WSL, /proc/meminfo shows the VM's memory (about 16 GB right now), not the host's RAM. 
-# Once the fix is in, llama.cpp may think the GPU has less free memory than it does. 
+# One WSL catch: inside WSL, /proc/meminfo shows the VM's memory (about 16 GB right now), not the host's RAM.
+# Once the fix is in, llama.cpp may think the GPU has less free memory than it does.
 # If models stop fitting or get split onto the CPU, raise the VM's memory with memory= under [wsl2] in %UserProfile%\.wslconfig. Or revert this change and keep the cudaMemGetInfo fallback, which already works.
 {
   lib,
@@ -42,7 +42,7 @@
       gpu = {
         enabled = true;
         appendLibPath = true;
-        };
+      };
       boot = {
         # Set a command to run when a new WSL instance launches. This example starts the Docker container service.
         # bash echo "hello " ?
@@ -57,7 +57,6 @@
     libraries = [ config.wsl.wslLib ];
   };
 
-
   environment.systemPackages = with pkgs; [
     claude-code
     git
@@ -70,13 +69,12 @@
     # vllm # broken on arm
   ];
 
-
-  # cuda fixes else we get 
+  # cuda fixes else we get
   # ggml_cuda_init: CUDA driver version is insufficient for CUDA runtime version
   environment.sessionVariables.LD_LIBRARY_PATH = [ "/usr/lib/wsl/lib" ];
- 
+
   systemd.services.llama-cpp = {
-    # else 
+    # else
     environment.LD_LIBRARY_PATH = "/usr/lib/wsl/lib";
     serviceConfig.ProcSubset = lib.mkForce "all";
   };

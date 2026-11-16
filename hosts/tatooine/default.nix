@@ -132,7 +132,6 @@ in
     enableRedistributableFirmware = true;
     sane.enable = true;
 
-
     # High quality BT calls
     # https://nixos.wiki/wiki/Bluetooth
     bluetooth = {
@@ -201,7 +200,6 @@ in
   # };
 
   services.flatpak.enable = true;
-
 
   # apparently deprecated / replaced by https://github.com/OHF-Voice/linux-voice-assistant
   # which is not packaged (yet)

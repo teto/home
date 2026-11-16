@@ -952,7 +952,7 @@ end, { desc = 'Go to file, create if missing' })
 -- Outside of the fork it kills the plugin so careful
 -- normally overriden by setup call
 vim.g.avante = {
-	-- -- print error messages, set to false to avoid issues with inspect_ai
+    -- -- print error messages, set to false to avoid issues with inspect_ai
     debug = false,
     -- log_level =
     log_level = vim.log.levels.DEBUG,
@@ -1015,7 +1015,7 @@ vim.g.avante = {
         -- check https://github.com/yetone/avante.nvim/pull/3141
         acp_follow_agent_locations = true,
 
-		show_token_usage = true,
+        show_token_usage = true,
         enable_token_counting = true,
         show_inference_timings = true, -- this is from my fork ?
         -- auto_approve_tool_permissions = {"bash", "replace_in_file"}, -- Auto-approve specific tools only
@@ -1035,16 +1035,15 @@ vim.g.avante = {
         provider = 'fzf_lua',
     },
     providers = {
-		rtx_spark = {
+        rtx_spark = {
             __inherited_from = 'openai',
-			-- ixeal-spark
+            -- ixeal-spark
             endpoint = 'http://dev-ia.ixeal.local:9931/v1',
-			model =  'qwen3.6-dense',
+            model = 'qwen3.6-dense',
             -- model = 'deepseek/deepseek-v4-flash-0731',
-			api_key_name = "", -- Local server without authentication
-			-- use_response_api = false, -- use chat completions api-
-
-		},
+            api_key_name = '', -- Local server without authentication
+            -- use_response_api = false, -- use chat completions api-
+        },
         openrouter = {
             -- see also https://github.com/avante-corp/avante.nvim/issues/2310
             __inherited_from = 'openai',
@@ -1104,7 +1103,7 @@ vim.g.avante = {
     windows = {
         position = 'right',
         fillchars = 'eob: ',
-		-- wrap = false,
+        -- wrap = false,
         -- TODO remove
         sidebar_header = {
             enabled = true, -- true, false to enable/disable the header
@@ -1369,8 +1368,8 @@ vim.api.nvim_create_autocmd({ 'User' }, {
         vim.notify('avante: LLM answered')
         -- Leave the event callback before closing all windows, including modified buffers.
         -- vim.schedule(function()
-			-- config/nvim/lua/init-manual.lua:p:hconfig/nvim/lua/init-manual.lua
-			--
+        -- config/nvim/lua/init-manual.lua:p:hconfig/nvim/lua/init-manual.lua
+        --
         --     vim.cmd('qall!')
         -- end)
     end,
@@ -1387,22 +1386,17 @@ vim.api.nvim_create_autocmd({ 'User' }, {
 --
 -- ╰─
 
-
-vim.api.nvim_create_autocmd(
-  'PackChanged',
-  {
+vim.api.nvim_create_autocmd('PackChanged', {
     callback = function(ev)
-      local name, kind = ev.data.spec.name, ev.data.kind
-	  print("package name ", name)
-	  vim.print("spec ", ev.data.spec)
-	  -- vim.print("version ", ev.data.spec.version)
+        local name, kind = ev.data.spec.name, ev.data.kind
+        print('package name ', name)
+        vim.print('spec ', ev.data.spec)
+        -- vim.print("version ", ev.data.spec.version)
 
-	  -- print("package kind ", kind)
-      -- if name == 'avante.nvim' and (kind == 'install' or kind == 'update') then
-      --   -- Call `:AvanteBuild` to download prebuilt libraries
-      --   vim.system({ 'make' }, { cwd = ev.data.path }):wait()
-      -- end
-    end
-  }
-)
-
+        -- print("package kind ", kind)
+        -- if name == 'avante.nvim' and (kind == 'install' or kind == 'update') then
+        --   -- Call `:AvanteBuild` to download prebuilt libraries
+        --   vim.system({ 'make' }, { cwd = ev.data.path }):wait()
+        -- end
+    end,
+})

@@ -34,7 +34,7 @@ in
     ];
 
     customLovelaceModules = with pkgs.home-assistant-custom-lovelace-modules; [
-# pkgs/servers/home-assistant/custom-lovelace-modules/easy-floorplan/package.nix
+      # pkgs/servers/home-assistant/custom-lovelace-modules/easy-floorplan/package.nix
       easy-floorplan
       button-card
       # home-assistant-custom-lovelace-modules.sankey-chart
@@ -67,8 +67,6 @@ in
     themes = with pkgs.home-assistant-themes; [
       material-you-theme
     ];
-
-
 
     blueprints = {
       automation = [

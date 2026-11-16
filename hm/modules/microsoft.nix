@@ -1,8 +1,14 @@
 # enable this module to work in a microsoft environment
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
-   cfg = config.microsoft;
-in {
+  cfg = config.microsoft;
+in
+{
   options = {
     microsoft = {
       enable = lib.mkEnableOption "microsoft";

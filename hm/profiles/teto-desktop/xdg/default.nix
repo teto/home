@@ -101,12 +101,12 @@
     "bash/bashrc".text = ''
       script_dir="$(cd -- "$(dirname -- "''${BASH_SOURCE[0]}")" && pwd)"
       source "$script_dir/manual.sh"
-      ''
-      # check if flyline defined too ?
-      + lib.optionalString osConfig.programs.flyline.enable '' 
-        source "$script_dir/flyline.sh"
+    ''
+    # check if flyline defined too ?
+    + lib.optionalString osConfig.programs.flyline.enable ''
+      source "$script_dir/flyline.sh"
 
-        '';
+    '';
 
     "nvim/lua/generated-by-nix.lua" =
       let

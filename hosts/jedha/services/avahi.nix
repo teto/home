@@ -13,7 +13,6 @@
 
   debug = true;
 
-
   # allowInterfaces = [
   #   "wlp10s0"
   # ];
@@ -30,13 +29,12 @@
     };
 
     publish = {
-        disable-publishing = false;
-        disable-user-service-publishing = false;
-        publish-addresses = true;
-      };
-
+      disable-publishing = false;
+      disable-user-service-publishing = false;
+      publish-addresses = true;
     };
 
+  };
 
   nssmdns4 = true;
   # publish = {

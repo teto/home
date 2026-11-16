@@ -2,15 +2,15 @@
   services.llama-cpp = {
     enable = true;
     # host = "0.0.0.0";
-    openFirewall =  true;
+    openFirewall = true;
 
     # make sure we have the cuda version
-    # package = 
+    # package =
 
     settings = {
       # models-dir = "/home/teto/llama-models";
-# ; only keep  '--models-max' loaded in memory
-# models-max = 1;
+      # ; only keep  '--models-max' loaded in memory
+      # models-max = 1;
       models-preset = "${./spark-presets.ini}";
 
       # batch-size = 512;
@@ -26,8 +26,7 @@
       # top-k = 20;
       # top-p = 0.95;
       # ubatch-size = 256;
-      };
+    };
   };
-
 
 }

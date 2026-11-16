@@ -7,7 +7,6 @@
   # announceInterval = 60;
   openFirewall = true;
 
-
   # there are udp errors when it binds to wireguard network ?
 
   settings = {
@@ -16,9 +15,9 @@
     friendly_name = "jedha";
     # inotify = "yes";
     log_level = "warn";
-    media_dir = [ 
+    media_dir = [
       # can be prefixed with V/A, to filter audio/video
-      "/mnt/ext/music" 
+      "/mnt/ext/music"
     ];
     inotify = "yes";
     # db_dir =

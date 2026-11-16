@@ -1,6 +1,6 @@
 -- https://github.com/MeanderingProgrammer/render-markdown.nvim
 
-local has_avante, avante_cfg = pcall(require,'avante.config')
+local has_avante, avante_cfg = pcall(require, 'avante.config')
 
 local opts = {
     -- enabled = true,
@@ -15,7 +15,7 @@ local opts = {
         enabled = true,
         -- Modes to disable anti conceal feature.
         disabled_modes = false,
-	   },
+    },
     padding = {
         -- Highlight to use when adding whitespace, should blend in with background.
         highlight = 'RenderMarkdownPadding',
@@ -23,7 +23,7 @@ local opts = {
     completions = {
         -- Settings for blink.cmp completions source
         blink = { enabled = true },
-	},
+    },
     heading = {
         -- Useful context to have when evaluating values.
         -- | level    | the number of '#' in the heading marker         |
@@ -44,13 +44,13 @@ local opts = {
         -- | function | `value(context)`              |
         -- | string[] | `cycle(value, context.level)` |
         icons = {
-		  '󰲡 ',
-		  '󰲣 ',
-		  '󰲥 ',
-		  '󰲧 ',
-		  '󰲩 ',
-		  '󰲫 '
-		 },
+            '󰲡 ',
+            '󰲣 ',
+            '󰲥 ',
+            '󰲧 ',
+            '󰲩 ',
+            '󰲫 ',
+        },
         -- Determines how icons fill the available space.
         -- | eol     | '#'s are concealed and icon is placed at right most column   |
         -- | right   | '#'s are concealed and icon is appended to right side        |
@@ -166,22 +166,20 @@ local opts = {
         -- | scope_highlight | optional highlight for item associated with tag |
         tag = {},
     },
-	callout = {
+    callout = {
         -- note      = { raw = '[!NOTE]',      rendered = '󰋽 Note',      highlight = 'RenderMarkdownInfo',    category = 'github'   },
         -- tip       = { raw = '[!TIP]',       rendered = '󰌶 Tip',       highlight = 'RenderMarkdownSuccess', category = 'github'   },
         -- important = { raw = '[!IMPORTANT]', rendered = '󰅾 Important', highlight = 'RenderMarkdownHint',    category = 'github'   },
         -- warning   = { raw = '[!WARNING]',   rendered = '󰀪 Warning',   highlight = 'RenderMarkdownWarn',    category = 'github'   },
         -- caution   = { raw = '[!CAUTION]',   rendered = '󰳦 Caution',   highlight = 'RenderMarkdownError',   category = 'github'   },
-		-- .. Utils.icon("🤔 ")
+        -- .. Utils.icon("🤔 ")
         -- thought   = { raw = '[!THOUGHT]',   rendered = 'Thought content 🤔 ',   highlight =  'RenderMarkdownSuccess',  category = 'github'   },
-	}
-
+    },
 }
 
 if has_avante and avante_cfg.render_markdown_avante_config or false then
-  -- for now we favor avante config
-  opts = vim.tbl_extend('force', opts, avante_cfg.render_markdown_avante_config())
+    -- for now we favor avante config
+    opts = vim.tbl_extend('force', opts, avante_cfg.render_markdown_avante_config())
 end
-
 
 require('render-markdown').setup(opts)

@@ -10,7 +10,7 @@
 let
   cfg = config.tetos.wireguard;
 
-  # hack around 
+  # hack around
   wgLib = import ../../tetos/lib/wireguard.nix {
     inherit secrets;
   };

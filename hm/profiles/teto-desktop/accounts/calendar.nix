@@ -6,17 +6,14 @@
   osConfig,
   ...
 }:
-let 
+let
   # temporary solution since it's not portable
   # refactor into tetosLib
-  getPassword =
-    accountName:
-    [
-      "${lib.getExe pkgs.pass-perso}"
-      "show"
-      accountName
-    ];
-
+  getPassword = accountName: [
+    "${lib.getExe pkgs.pass-perso}"
+    "show"
+    accountName
+  ];
 
 in
 

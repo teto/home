@@ -14,7 +14,6 @@ vim.opt.showbreak = ''
 -- - update_content
 -- - on_state_change
 
-
 -- local sidebar = require('avante').get()
 
 -- vim.api.nvim_create_autocmd('WinEnter', {
@@ -29,8 +28,8 @@ vim.opt.showbreak = ''
 -- vim.wo.cursorline = false
 vim.wo.foldcolumn = '3' -- auto
 -- |fold-expr|	expr	    'foldexpr' gives the fold level of a line.
--- could work well, react onto 
-vim.wo.foldmethod = "expr"
+-- could work well, react onto
+vim.wo.foldmethod = 'expr'
 vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
 -- E5113: Lua chunk: [string "vim/_core/options"]:167: Invalid 'foldcolumn': expected a valid type, got Integer

@@ -65,12 +65,12 @@ bootstrap-vps target:
     --debug
 
 bump-meli:
-  nix-update -F --version=branch=master meli-teto
+    nix-update -F --version=branch=master meli-teto
 
 # urn:schemas-upnp-org:device:MediaRenderer:1
 discover-upnp-renderers:
- gssdp-discover --timeout=5 \
-   --target=urn:schemas-upnp-org:device:MediaRenderer:1
+    gssdp-discover --timeout=5 \
+      --target=urn:schemas-upnp-org:device:MediaRenderer:1
 
 # just to save the command
 
@@ -325,7 +325,6 @@ inspect-current-generation:
 # https://blueforcer.github.io/awtrix-ng/esp32/getting-started/flashing/
 flash-ulanzi-tc001:
     esptool --chip esp32 --port /dev/ttyUSB0 --baud 460800 write-flash 0x0 usb-awtrix-ng-4mb.bin
-
 
 # check dlna servers on the network
 scan-upnp:

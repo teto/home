@@ -1,12 +1,12 @@
 /*
-upmpdcli is a bridge: it receives UPnP commands and controls an MPD server. The UPnP player itself doesn’t play the song; MPD fetches and plays it. So when you choose a track in rmpd, it    
-  should change playback if rmpd and upmpdcli are controlling the same MPD instance
- 
-  • MPD browsing UPnP servers: MPD has a built-in UPnP/DLNA database plugin (available in MPD 0.19+ configured with --enable-upnp) that lets MPD act as a client to browse and stream music from UPnP media servers. You browse the server's folder and directory trees using a standard MPD client, though direct tag-based queries (like artist/album/genre database searches) and saving playlists directly can have limitations.
-• Using MPD as a UPnP Renderer (upmpdcli): If you want to send music from an external UPnP control point (such as BubbleUPnP on your phone) to MPD, you use a front-end like upmpdcli. In this setup, the control point talks UPnP to upmpdcli, which translates the commands into the MPD protocol to populate and control the local MPD playlist.
+  upmpdcli is a bridge: it receives UPnP commands and controls an MPD server. The UPnP player itself doesn’t play the song; MPD fetches and plays it. So when you choose a track in rmpd, it
+    should change playback if rmpd and upmpdcli are controlling the same MPD instance
 
-mpd now has a plugin that can play music from upnp server 
-https://www.lesbonscomptes.com/pages/mpd-upnp.html#_introduction
+    • MPD browsing UPnP servers: MPD has a built-in UPnP/DLNA database plugin (available in MPD 0.19+ configured with --enable-upnp) that lets MPD act as a client to browse and stream music from UPnP media servers. You browse the server's folder and directory trees using a standard MPD client, though direct tag-based queries (like artist/album/genre database searches) and saving playlists directly can have limitations.
+  • Using MPD as a UPnP Renderer (upmpdcli): If you want to send music from an external UPnP control point (such as BubbleUPnP on your phone) to MPD, you use a front-end like upmpdcli. In this setup, the control point talks UPnP to upmpdcli, which translates the commands into the MPD protocol to populate and control the local MPD playlist.
+
+  mpd now has a plugin that can play music from upnp server
+  https://www.lesbonscomptes.com/pages/mpd-upnp.html#_introduction
 */
 
 { pkgs, lib, ... }:
@@ -44,7 +44,7 @@ in
     mpdport = 6600;
     # try to see if I can control it myself
     ownqueue = 0;
-    # seems to be a weird protocol that lets programs such as bubbleupnp or linn kazoo 
+    # seems to be a weird protocol that lets programs such as bubbleupnp or linn kazoo
     # control the playlist. The client can disconnect after playlist  was created
     openhome = 0;
     upnpav = 1;

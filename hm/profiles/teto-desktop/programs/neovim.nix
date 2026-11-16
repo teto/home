@@ -247,7 +247,7 @@ let
     fswatch # better file watching starting with 0.10
     # go # for gitlab.nvim, we can probably ditch it afterwards
 
-    lemminx  # 
+    lemminx
     luajitPackages.luacheck
 
     luau-lsp

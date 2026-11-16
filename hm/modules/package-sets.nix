@@ -62,7 +62,6 @@ in
 
   };
 
-
   # this gets merged by default
   config = lib.mkMerge [
     {
@@ -114,7 +113,6 @@ in
           jjui
           pkgs.blazingjj
           flakeSelf.inputs.jj-gh.packages.${system}.default
-
 
           # pkgs.gg-jj
           # pkgs.lazyjj
@@ -419,7 +417,6 @@ in
           lurk # a rust strace
           lsof # to see open files
 
-
           # flakeSelf.inputs.starship-jj.packages.${system}.default # custom.jj for starship
           libossp_uuid # for the 'libuuid' executable
 
@@ -490,7 +487,6 @@ in
 
           # rainfrog # database exploration
 
-
           process-compose # docker-compose - like
           # rpl # to replace strings across files
           repgrep # replace matches found by rg
@@ -502,7 +498,7 @@ in
           tmux # when connecting via ssh
           trurl # used to parse url in the firefox-router executable
           universal-ctags # there are many different ctags, be careful !
-          uv   # to install python packages
+          uv # to install python packages
           unar # used to view archives by yazi (now using ouch ?)
           vifm
           viu # a console image viewer
@@ -697,7 +693,7 @@ in
         pkgs.tsukumi
       ];
     })
-  (mkIf cfg.jellyfin {
+    (mkIf cfg.jellyfin {
 
       home.packages = [
 
@@ -708,13 +704,12 @@ in
         # pkgs.feishin # GUI
         # pkgs.jellycli # could not login :/
 
-
         # VIDEO compatible
         # - Jellyfin MPV Shim
         # (ignoreBroken pkgs.tsukimi) # gtk+rust music player GUI
         pkgs.jellyfin-desktop
         pkgs.jellyfin-mpv-shim
-        # jellyhaj # not upstreamed yet 
+        # jellyhaj # not upstreamed yet
         # fladder # nice GUI
         # jftui too minimalistic
         # pkgs.jellyflix # nice

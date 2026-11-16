@@ -1,7 +1,8 @@
 { config, lib, ... }:
 let
   cfg = config.services.minidlna;
-  mediaDirs = map (dir:
+  mediaDirs = map (
+    dir:
     let
       prefix = builtins.match "^[A-Za-z]:(.*)$" dir;
     in

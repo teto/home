@@ -9,7 +9,6 @@
     # mutableSettings = true;
     # openFirewall = false;
 
-
     # mutableSettings = true;
     # extraArgs = [];
 

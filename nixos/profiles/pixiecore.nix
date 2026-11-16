@@ -117,7 +117,7 @@ in
     # one of “api”, “boot”, “quick”
     package = pkgs.pixiecore-arm64;
     mode = "boot";
-# enp1s0f0
+    # enp1s0f0
     # extraArguments = ;
     # listen
     # cmdLine = ;

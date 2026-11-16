@@ -1,3 +1,3 @@
 {
-  groups.minidlna = {};
+  groups.minidlna = { };
 }

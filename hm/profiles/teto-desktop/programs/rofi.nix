@@ -37,8 +37,8 @@
 
     location = "center";
     modes = [
-    # modes: [ combi ];
-    # combi-modes: [ window, drun, run ];
+      # modes: [ combi ];
+      # combi-modes: [ window, drun, run ];
 
     ];
 

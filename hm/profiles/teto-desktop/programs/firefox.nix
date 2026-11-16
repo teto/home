@@ -203,7 +203,6 @@ let
     google.metaData.alias = "@g"; # builtin engines only support specifying one additional alias
   };
 
-  
 in
 {
   # _imports = [
@@ -289,19 +288,18 @@ in
       # extraConfig =
       id = 0;
 
-      userChrome =
-             ''
-               /* Hide tab bar in FF Quantum */
-               @-moz-document url(chrome://browser/content/browser.xul), url(chrome://browser/content/browser.xhtml) {
-                 #TabsToolbar {
-                   visibility: collapse !important;
-                   margin-bottom: 21px !important;
-                 }
+      userChrome = ''
+        /* Hide tab bar in FF Quantum */
+        @-moz-document url(chrome://browser/content/browser.xul), url(chrome://browser/content/browser.xhtml) {
+          #TabsToolbar {
+            visibility: collapse !important;
+            margin-bottom: 21px !important;
+          }
 
-               }
-             '';
+        }
+      '';
 
-      # userContent = 
+      # userContent =
       #        ''
       #          /* Hide scrollbar in FF Quantum */
       #          *{scrollbar-width:none !important}

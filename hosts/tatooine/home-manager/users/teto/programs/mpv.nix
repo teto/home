@@ -1,9 +1,9 @@
-{ pkgs, ...}:
+{ pkgs, ... }:
 {
 
-    scripts = [
-      # as python
-      # pkgs.mpvDLNA
-    ];
+  scripts = [
+    # as python
+    # pkgs.mpvDLNA
+  ];
 
 }

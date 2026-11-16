@@ -1,11 +1,13 @@
 { kodi, makeWrapper }:
 
 let
-  kodiWithPackages = kodi.withPackages (p: with p; [
-    jellyfin
-    # pvr-iptvsimple
-    vfs-sftp
-  ]);
+  kodiWithPackages = kodi.withPackages (
+    p: with p; [
+      jellyfin
+      # pvr-iptvsimple
+      vfs-sftp
+    ]
+  );
 in
 kodiWithPackages.overrideAttrs (oldAttrs: {
   nativeBuildInputs = (oldAttrs.nativeBuildInputs or [ ]) ++ [ makeWrapper ];
