@@ -137,7 +137,8 @@ in
           # After = [ "graphical-session.target" ];
           # PartOf = [ "graphical-session.target" ];
           X-Restart-Triggers = [
-            "${dotfilesPath}/contrib/llama-presets.ini"
+            # does not belong here
+            # "${dotfilesPath}/contrib/llama-presets.ini"
           ];
 
         };

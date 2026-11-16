@@ -6,6 +6,10 @@
 # grep.patternType = perl
 # feature.experimental = true
 
+[clone]
+# often triggers issues
+defaultRemoteName = "up";
+
 
 [absorb]
 	maxStack=50

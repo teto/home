@@ -28,7 +28,7 @@
 
     # may generate problems
     wifi.scanRandMacAddress = false;
-    wifi.powersave = false;
+    # wifi.powersave = false;
 
     # for vpn dns
     # appendNameServers = [ ];
