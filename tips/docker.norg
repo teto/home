@@ -1,3 +1,10 @@
+* pass gpus
+
+  - `--gpus all`
+  - `--gpus device=0`
+  - devicej
+
+  --gpu-memory-utilization defaults to 0.9
 
 * reference 
 

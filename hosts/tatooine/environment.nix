@@ -5,6 +5,8 @@
     # cups-pk-helper # to add printer through gnome control center
     pkgs.lm_sensors # to see CPU temperature (command 'sensors')
     pkgs.btop
+
+    # pkgs.vllm
   ];
 
   # /etc/mdns.allow, unused without mdns specfic enablement

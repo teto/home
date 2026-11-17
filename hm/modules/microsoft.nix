@@ -1,4 +1,5 @@
-# enable this module to work in a microsoft environment
+# enable this module to work with a microsoft environment
+# 
 {
   config,
   lib,
@@ -25,6 +26,7 @@ in
 
     home.packages = [
       pkgs.teams-for-linux
+      pkgs.remmina
     ];
   };
 }

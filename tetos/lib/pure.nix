@@ -49,19 +49,6 @@
       ...
     }@attrs:
     let
-      nixpkgsConfig = {
-        # on desktop
-        inherit cudaSupport;
-        # nvidia.acceptLicense = true;
-        # cudaCapabilities = [ "8.9" ]; # can speed up some builds ?
-        checkMeta = false;
-        # showDerivationWarnings = ["maintainerless"];
-        permittedInsecurePackages = [
-          "qutebrowser-3.7.0"
-        ];
-        allowUnfree = true;
-        # this list makes me wanna vomit (except steam maybe because they do good for linux),
-        # and sublime because guy has to eat
         allowUnfreePredicate =
           pkg:
           let
@@ -108,6 +95,25 @@
               "xmind"
               "zoom"
             ];
+
+      nixpkgsConfig = {
+        # on desktop
+        inherit cudaSupport;
+        # nvidia.acceptLicense = true;
+        # cudaCapabilities = [ "13.0" ]; # can speed up some builds ?
+        checkMeta = false;
+        # showDerivationWarnings = ["maintainerless"];
+        permittedInsecurePackages = [
+          "qutebrowser-3.7.0"
+        ];
+        allowUnfree = true;
+        # this list makes me wanna vomit (except steam maybe because they do good for linux),
+        # and sublime because guy has to eat
+        inherit allowUnfreePredicate;
+
+           problems.handlers = {
+             # vllm.broken = "warn"; # or "ignore"
+           };
       };
 
     in

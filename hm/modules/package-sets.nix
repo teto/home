@@ -138,7 +138,7 @@ in
           # python3Packages.unsloth # broken
 
           # pkgs.aider-chat # breaks
-          # pkgs.python3Packages.huggingface-hub # conflicts
+          pkgs.huggingface-cli # conflicts
 
           # pkgs.harbor-cli # for terminal-bench tests on llms
           # often broken, keep it in project-specific stuff

@@ -2,8 +2,17 @@
 
 winget install Microsoft.PowerToy
 
+* autocompletion dans powerline
+
+faut psreadline
+TODO copy/paste
+
+
 * kill process associated with a port
 
+
+Start-Service sshd
+Set-service sshd -StartupType Automatic
 
 Stop-Process -Id (Get-NetTCPConnection -LocalPort 12666).OwningProcess
 

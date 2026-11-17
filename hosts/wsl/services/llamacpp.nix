@@ -1,7 +1,14 @@
+/* Started as system service 
+
+*/ 
 {
+
+  # https://github.com/ggml-org/llama.cpp/blob/master/docs/preset.md:
+  # only global section is read from it so we still need models-preset
+  environment.etc."llama.cpp/config.ini.template".source = ./spark-presets.ini;
+
   services.llama-cpp = {
     enable = true;
-    # host = "0.0.0.0";
     openFirewall = true;
 
     # make sure we have the cuda version

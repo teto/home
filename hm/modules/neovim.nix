@@ -314,6 +314,7 @@ in
     })
 
     (lib.mkIf cfg.enableRocks {
+
       programs.neovim.plugins = [
         pkgs.vimPlugins.lz-n
         pkgs.vimPlugins.rocks-nvim
@@ -329,15 +330,86 @@ in
       #         luaInterpreter = pkgs.lua51Packages.lua;
       # "${luaInterpreter.pkgs.luarocks_bootstrap}/bin/luarocks"
 
+
+    # "nvim/lua/generated-by-nix.lua" =
+    # could use toLua or buildLuarocksConfig
+    # pkgs.lua.pkgs.luaLib.generateLuarocksConfig
+    xdg.configFile."nvim/luarocks-config-generated.lua" =
+      let
+        luaInterpreter = config.programs.neovim.package.lua;
+        luarocksStore = luaInterpreter.pkgs.luarocks;
+        luacurlPkg = luaInterpreter.pkgs.lua-curl;
+
+        luarocksConfigAttr =
+          pkgs.lua.pkgs.luaLib.generateLuarocksConfig { externalDeps = [ pkgs.curl.dev ]; }
+          // {
+            # take it from ?
+            lua_version = "5.1";
+          };
+
+        luarocksConfigAttr2 = lib.recursiveUpdate luarocksConfigAttr {
+          rocks_trees = [
+            {
+              name = "rocks.nvim";
+              # TODO reference xdg
+              root = "/home/teto/.local/share/nvim/rocks";
+            }
+            {
+              name = "rocks-generated.nvim";
+              root = "${luarocksStore}";
+            }
+            {
+              name = "lua-curl";
+              root = "${luacurlPkg}";
+            }
+            # ${sqlite.out}/lib/libsqlite3${stdenv.hostPlatform.extensions.sharedLibrary}
+            # {
+            #   name = "sqlite.lua";
+            #   root = "${luaInterpreter.pkgs.sqlite}";
+            # }
+            {
+              name = "lsqlite3";
+              root = "${luaInterpreter.pkgs.lsqlite3}";
+            }
+          ];
+
+          # we need variables for lib-curl.lua to be installable
+          variables = {
+
+          };
+
+        };
+
+        luarocksConfigStr = (lib.generators.toLua { asBindings = false; } luarocksConfigAttr2);
+
+      in
+      {
+        enable = true;
+        text = "return ${luarocksConfigStr}";
+      };
+
       programs.neovim.initLua =
         let
           luaInterpreter = pkgs.lua51Packages.lua;
         in
         ''
+          local stdpath_config = vim.fn.stdpath('config')
+
+          local custom_luarocks_config_filename = stdpath_config .. '/luarocks-config-generated.lua'
+          local luarocks_config_fn, errmsg = loadfile(custom_luarocks_config_filename)
+
+          if luarocks_config_fn == nil then
+              print('Could not load ' .. errmsg)
+          end
+
           vim.g.rocks_nvim = {
               -- use nix_deps.luarocks_executable coming from nixpkgs
               -- TODO removing this generates errors at runtime :'(
-              luarocks_binary = "${luaInterpreter.pkgs.luarocks_bootstrap}/bin/luarocks"
+              luarocks_binary = "${luaInterpreter.pkgs.luarocks_bootstrap}/bin/luarocks",
+              -- /home/teto/.local/share/nvim/rocks/luarocks-config.lua
+              ---@diagnostic disable-next-line: need-check-nil
+              luarocks_config = luarocks_config_fn(),
+
           }
         '';
     })

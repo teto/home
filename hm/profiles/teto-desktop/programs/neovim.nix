@@ -330,7 +330,7 @@ in
 
       # -- testing order 700
       # (lib.mkOrder 0 ''vim.env.PATH = "${lib.makeBinPath config.programs.neovim.extraInitLuaPackages}:"..vim.env.PATH'')
-      (lib.mkOrder 0 "vim.g.nixpkgs_set_rtp = false") # hack
+      # (lib.mkOrder 0 "vim.g.nixpkgs_set_rtp = false") # hack
       # (lib.mkOrder 700 "-- testing order 700 ")
       (lib.mkAfter "require('init-manual') ")
     ];
