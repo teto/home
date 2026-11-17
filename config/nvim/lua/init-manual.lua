@@ -1035,10 +1035,20 @@ vim.g.avante = {
         provider = 'fzf_lua',
     },
     providers = {
-        rtx_spark = {
+		-- todo rtx_spark_llama
+        rtx_spark_llama = {
             __inherited_from = 'openai',
-            -- ixeal-spark
-            endpoint = 'http://dev-ia.ixeal.local:9931/v1',
+            -- ixeal-spark .ixeal.local
+            endpoint = 'http://dev-ia:9931/v1',
+            model = 'qwen3.6-dense',
+            -- model = 'deepseek/deepseek-v4-flash-0731',
+            api_key_name = '', -- Local server without authentication
+            -- use_response_api = false, -- use chat completions api-
+        },
+        rtx_spark_vllm = {
+            __inherited_from = 'openai',
+            -- ixeal-spark .ixeal.local
+            endpoint = 'http://dev-ia:8000/v1',
             model = 'qwen3.6-dense',
             -- model = 'deepseek/deepseek-v4-flash-0731',
             api_key_name = '', -- Local server without authentication

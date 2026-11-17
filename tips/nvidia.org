@@ -16,6 +16,8 @@ nvidia-smi version shows:
 - UMD = User Mode Driver
 - nvcc --version
 
+
+nvidia-smi -L to show GPU UUID
 https://linuxize.com/post/nvidia-smi-command-in-linux/
 
 CUDA 13.5 => R620

@@ -127,6 +127,7 @@
           M.sqlite_clib_path = "${pkgs.sqlite.out}/lib/libsqlite3${pkgs.stdenv.hostPlatform.extensions.sharedLibrary}"
           M.tidal_boot = "${ghcEnv4Tidal}/tidal-1.10.1/BootTidal.hs"
         ''
+        # setup llama's coordinates
         + lib.optionalString withSecrets ''
           M.jakku_hostname = "${flakeSelf.nixosConfigurations.neotokyo.config.networking.fqdnOrHostName}:${toString flakeSelf.nixosConfigurations.neotokyo.config.services.llama-cpp.settings.port}"
           M.jakku_llama_api_secret = "${secrets.jakku.llama.api-key}"
@@ -135,63 +136,6 @@
       };
 
     # "nvim/lua/hm-generated.lua".text = config.programs.neovim.initLua;
-
-    # "nvim/lua/generated-by-nix.lua" =
-    # could use toLua or buildLuarocksConfig
-    # pkgs.lua.pkgs.luaLib.generateLuarocksConfig
-    "nvim/luarocks-config-generated.lua" =
-      let
-        luaInterpreter = config.programs.neovim.package.lua;
-        luarocksStore = luaInterpreter.pkgs.luarocks;
-        luacurlPkg = luaInterpreter.pkgs.lua-curl;
-
-        luarocksConfigAttr =
-          pkgs.lua.pkgs.luaLib.generateLuarocksConfig { externalDeps = [ pkgs.curl.dev ]; }
-          // {
-            # take it from ?
-            lua_version = "5.1";
-          };
-
-        luarocksConfigAttr2 = lib.recursiveUpdate luarocksConfigAttr {
-          rocks_trees = [
-            {
-              name = "rocks.nvim";
-              # TODO reference xdg
-              root = "/home/teto/.local/share/nvim/rocks";
-            }
-            {
-              name = "rocks-generated.nvim";
-              root = "${luarocksStore}";
-            }
-            {
-              name = "lua-curl";
-              root = "${luacurlPkg}";
-            }
-            # ${sqlite.out}/lib/libsqlite3${stdenv.hostPlatform.extensions.sharedLibrary}
-            # {
-            #   name = "sqlite.lua";
-            #   root = "${luaInterpreter.pkgs.sqlite}";
-            # }
-            {
-              name = "lsqlite3";
-              root = "${luaInterpreter.pkgs.lsqlite3}";
-            }
-          ];
-
-          # we need variables for lib-curl.lua to be installable
-          variables = {
-
-          };
-
-        };
-
-        luarocksConfigStr = (lib.generators.toLua { asBindings = false; } luarocksConfigAttr2);
-
-      in
-      {
-        enable = true;
-        text = "return ${luarocksConfigStr}";
-      };
   };
 
 }

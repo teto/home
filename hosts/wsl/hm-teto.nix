@@ -2,9 +2,47 @@
   config,
   lib,
   pkgs,
+  flakeSelf,
   ...
 }:
 {
+
+  imports = [
+      flakeSelf.homeModules.neovim
+      flakeSelf.homeModules.neovim
+
+      flakeSelf.homeProfiles.teto-aliases
+      flakeSelf.homeProfiles.common
+      flakeSelf.homeProfiles.neovim
+      flakeSelf.homeProfiles.tmux
+      # flakeSelf.homeProfiles.teto-zsh
+  ];
+  
+  home.packages = [
+    pkgs.ripgrep
+    pkgs.just
+  ];
+
+  programs.tmux = {
+    enable = true;
+  };
+
+  programs.fish = {
+    enable = true;
+    shellAbbrs = {
+      js = {
+        # command "nh" ou bien nixos- ?
+        # name = "tetos-sw";
+        setCursor = true;
+        expansion = ''
+          nh os switch ~/home -- --keep-going --override-input nixpkgs ~/nixpkgs \
+            --override-input hm ~/hm #% --option builders "$TETOS_BUILDER_JEDHA" -j0 '';
+
+      };
+    };
+  };
+
+
   programs.git = {
     enable = true;
     includes = [
@@ -30,5 +68,21 @@
 
   };
 
-  programs.flyline.enable = true;
+
+    # so it can be easily referenced from llama-bench
+    # xdg.configFile."llama.cpp/config.ini".source = ./services/spark-presets.ini;
+
+    programs.flyline.enable = true;
+
+    programs.neovim = {
+
+      enableRocks = true;
+      highlightOnYank = true;
+      enableFzfLua = true;
+      # enableBlink = true;
+
+      initLua = ''
+        require('init-manual')
+        '';
+    };
 }

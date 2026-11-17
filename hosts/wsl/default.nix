@@ -10,19 +10,23 @@
   pkgs,
   flakeSelf,
   config,
+  withSecrets,
+  secrets,
   ...
 }:
 {
   imports = [
+    flakeSelf.inputs.flyline.nixosModules.default
     flakeSelf.inputs.nixos-wsl.nixosModules.default
+
+    flakeSelf.nixosModules.default-hm
+
     flakeSelf.nixosProfiles.nix-daemon
     flakeSelf.nixosProfiles.teto
 
     ./services/llamacpp.nix
     ./services/openssh.nix
 
-    flakeSelf.nixosModules.default-hm
-    flakeSelf.inputs.flyline.nixosModules.default
   ];
 
   networking.hostName = lib.mkDefault "wsl";
@@ -57,10 +61,17 @@
     libraries = [ config.wsl.wslLib ];
   };
 
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs;
+  let 
+    myNeovim = neovim.overrideAttrs{
+      waylandSupport = false;
+    };
+    in [
     claude-code
     git
-    neovim
+    pkgs.huggingface-cli # hf ...
+    pkgs.claude-code
+    myNeovim
     systemctl-tui
     wget
     btop-cuda # for jedha
@@ -71,7 +82,13 @@
 
   # cuda fixes else we get
   # ggml_cuda_init: CUDA driver version is insufficient for CUDA runtime version
-  environment.sessionVariables.LD_LIBRARY_PATH = [ "/usr/lib/wsl/lib" ];
+  environment.sessionVariables = {
+    LD_LIBRARY_PATH = [ "/usr/lib/wsl/lib" ];
+  } // lib.optionalAttrs withSecrets {
+
+    HF_TOKEN = secrets.HF_TOKEN;
+
+  };
 
   systemd.services.llama-cpp = {
     # else
@@ -81,28 +98,11 @@
 
   home-manager.users.teto = {
     imports = [
-      flakeSelf.homeProfiles.teto-aliases
-      flakeSelf.homeProfiles.common
-      flakeSelf.homeProfiles.neovim
-      flakeSelf.homeProfiles.teto-zsh
 
-      flakeSelf.homeModules.neovim
       ./hm-teto.nix
     ];
     home.stateVersion = "26.05";
 
-    programs.neovim = {
-
-      enableRocks = true;
-      highlightOnYank = true;
-      enableFzfLua = true;
-      # enableBlink = true;
-    };
-
-    home.packages = [
-      pkgs.ripgrep
-
-    ];
   };
 
   # to test vllm

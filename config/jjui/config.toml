@@ -20,9 +20,12 @@ hijack_askpass= true
 
 [ui]
 auto_refresh_interval=4
-theme = "wallust"
 tracer.enabled = true
+# theme = "wallust"
 
+[ui.theme]
+dark = "wallust"
+light = "light"
 
 # [[actions]]
 # name = "bookmark-create-modal"

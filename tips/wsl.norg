@@ -15,7 +15,16 @@ wsl --update
 
 
 wsl --install --from-file nixos.wsl
+  [wsl2]                                                                                                                                                                                      
+  networkingMode=mirrored                                                                                                                                                              
+  # default is 50% of host                                                                                                                                                                    
+  memory=24GB                                                                                                                                                                                 
+  gpuSupport = true                                                                                                                                                                           
+                                                                                                                                                                                               
+                                                                                                                                                                                               
+                                  
 
+  ```
 
 * /proc/meminfo voit une valeur erronee de la memoire:
 

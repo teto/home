@@ -1,0 +1,54 @@
+# jjui light theme (One Light inspired palette)
+# bg #FAFAFA | fg #383A42 | dimmed #A0A1A7 | blue #4078F2 | green #50A14F
+# orange #986801 | magenta #A626A4 | yellow #C18401 | red #E45649
+
+"text" = { fg = "#383A42", bg = "#FAFAFA" }
+"dimmed" = { fg = "#A0A1A7" }
+"selected" = { fg = "#FAFAFA", bg = "#4078F2", bold = true }
+"border" = { fg = "#A0A1A7" }
+"title" = { fg = "#50A14F", bold = true }
+"shortcut" = { fg = "#986801", bold = true }
+"matched" = { fg = "#A626A4", bold = true, underline = true }
+
+"source_marker" = { fg = "#FAFAFA", bg = "#C18401", bold = true }
+"target_marker" = { fg = "#FAFAFA", bg = "#E45649", bold = true }
+
+"revset title" = { fg = "#50A14F", bold = true }
+"revset text" = { fg = "#383A42", bg = "#FAFAFA", bold = true }
+"revset completion selected" = { fg = "#FAFAFA", bg = "#4078F2", bold = true }
+"revset completion matched" = { fg = "#A626A4", bold = true }
+"revset completion dimmed" = { fg = "#A0A1A7" }
+
+"revisions" = { fg = "#383A42", bg = "#FAFAFA" }
+"revisions selected" = { fg = "#FAFAFA", bg = "#4078F2", bold = true }
+"revisions dimmed" = { fg = "#A0A1A7" }
+
+"status" = { fg = "#383A42", bg = "#EAEAEB" }
+"status title" = { fg = "#FAFAFA", bg = "#50A14F", bold = true }
+"status shortcut" = { fg = "#986801", bold = true }
+"status dimmed" = { fg = "#A0A1A7" }
+
+"evolog" = { fg = "#383A42", bg = "#FAFAFA" }
+"evolog selected" = { fg = "#FAFAFA", bg = "#A626A4", bold = true }
+
+"menu" = { fg = "#383A42", bg = "#F0F0F1" }
+"menu title" = { fg = "#50A14F", bold = true }
+"menu selected" = { fg = "#FAFAFA", bg = "#4078F2", bold = true }
+"menu border" = { fg = "#A0A1A7" }
+"menu matched" = { fg = "#A626A4", bold = true, underline = true }
+"menu shortcut" = { fg = "#986801", bold = true }
+"menu dimmed" = { fg = "#A0A1A7" }
+
+"help" = { fg = "#383A42", bg = "#F0F0F1" }
+"help title" = { fg = "#50A14F", bold = true, underline = true }
+"help border" = { fg = "#A0A1A7" }
+
+"confirmation" = { fg = "#383A42", bg = "#F0F0F1" }
+"confirmation selected" = { fg = "#FAFAFA", bg = "#E45649", bold = true }
+"confirmation border" = { fg = "#E45649" }
+
+"preview" = { fg = "#383A42", bg = "#FAFAFA" }
+"preview border" = { fg = "#A0A1A7" }
+
+"undo" = { fg = "#383A42", bg = "#FAFAFA" }
+"undo confirmation selected" = { fg = "#FAFAFA", bg = "#A626A4", bold = true }

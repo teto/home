@@ -129,6 +129,9 @@ in
       codex # openai agent
       codex-acp # originated from zed-industries, used in avante
 
+      claude-agent-acp # to work with avante
+      pi-acp # not merge yet
+
       gupnp-tools # upnp toolset, ssdp discovery
 
       lux-cli-teto

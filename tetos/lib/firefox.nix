@@ -176,7 +176,6 @@ in
   # https://discourse.nixos.org/t/how-do-you-pin-a-firefox-extensions-add-on-to-the-firefox-toolbar/36081
   # browser.uiCustomization.state
   myDefaultSettings = {
-    #
     "browser.aboutConfig.showWarning" = "false";
     "browser.download.autohideButton" = "false";
     "browser.newtabpage.activity-stream.topSitesRows" = 3;
@@ -208,6 +207,7 @@ in
 
     # support arbitrary TLDs
     # https://blog.hardill.me.uk/2024/06/07/firefox-with-a-private-tld/
+    "browser.fixup.domainsuffixwhitelist.intranet" = true;
     "browser.fixup.domainsuffixwhitelist.vpn" = true;
     "browser.fixup.domainsuffixwhitelist.vps" = true;
     "browser.fixup.domainsuffixwhitelist.home" = true;
@@ -222,10 +222,12 @@ in
     "sidebar.revamp" = true;
     "sidebar.verticalTabs" = true;
 
+    # adjust
     "mousewheel.default.delta_multiplier_x" = 20;
     "mousewheel.default.delta_multiplier_y" = 20;
     "mousewheel.default.delta_multiplier_z" = 20;
 
+    # breaks mistral
     "browser.send_pings" = false;
 
     "browser.startup.page" = 3;

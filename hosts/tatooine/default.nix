@@ -43,6 +43,7 @@ in
 {
   imports = [
     laptopAutoloaded
+
     flakeSelf.inputs.disko.nixosModules.disko
     flakeSelf.inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen5
 
@@ -51,12 +52,8 @@ in
     flakeSelf.nixosProfiles.networkmanager
     flakeSelf.nixosProfiles.wyoming
 
-    # removed 'cos it clashed with disk-config but these are not the same
-    # ./generated.nix
-
     # useful for uv
     flakeSelf.nixosProfiles.nix-ld
-
     # flakeSelf.nixosProfiles.hedgedoc
     # flakeSelf.nixosProfiles.rmfakecloud # useless without hacking remarkable
     flakeSelf.nixosProfiles.desktop
@@ -73,6 +70,7 @@ in
     # flakeSelf.nixosProfiles.home-assistant
     # usually inactive, just to test some stuff
   ];
+
 
   # environment.systemPackages = [
   # ];

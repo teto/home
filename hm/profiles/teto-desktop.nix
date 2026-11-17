@@ -31,11 +31,15 @@ in
 
   imports = [
     autoloadedModule
+    flakeSelf.homeModules.microsoft
     flakeSelf.homeProfiles.common
     flakeSelf.homeProfiles.sway
     flakeSelf.homeProfiles.neovim
     # flakeSelf.homeModules.audiocast
   ];
+
+  # AIE !
+  microsoft.enable = true;
 
   home.file.".password-store".source =
     config.lib.file.mkOutOfStoreSymlink "${secretsFolder}/password-store-perso";

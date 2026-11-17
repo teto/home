@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+# { pkgs, ... }:
 {
   programs.tmux = {
     shortcut = "a";

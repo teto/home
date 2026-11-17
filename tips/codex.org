@@ -1,0 +1,3 @@
+codex --profile toto 
+
+to switch to one of the providers in "model_providers"

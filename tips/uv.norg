@@ -1,2 +1,4 @@
 
 set UV_PYTHON
+
+uv venv --python 3.13
