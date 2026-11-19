@@ -376,8 +376,9 @@
       system:
       let
         # todo rename to unstablePkgs
-        tetosPkgs = self.inputs.nixos-unstable.legacyPackages.${system};
+        unstablePkgs = self.inputs.nixos-unstable.legacyPackages.${system};
 
+        tetosPkgs = self.nixosConfigurations.tatooine.pkgs;
       in
       {
 
@@ -395,7 +396,7 @@
               file:
               let
                 path = rawLib.traceValFn (x: file) ./devShells/${file};
-                shell = tetosPkgs.callPackage path (
+                shell = unstablePkgs.callPackage path (
                   { }
                   // rawLib.optionalAttrs (file == "devShell.nix") {
                     inherit secrets self;
@@ -412,7 +413,7 @@
 
           loadDevShells
           // {
-            default = tetosPkgs.callPackage ./devShells/devShell.nix {
+            default = unstablePkgs.callPackage ./devShells/devShell.nix {
               inherit secrets self;
             };
 
@@ -422,23 +423,22 @@
             # ;
           };
 
-        #   formatter = let
-        #         # Eval the treefmt modules from ./treefmt.nix
-        # treefmtEval = treefmt-nix.lib.evalModule tetosPkgs ./tetos/treefmt.nix;
-        #   in
-        #
-        #
-        #     treefmtEval.config.build.wrapper;
+        formatter =
+          let
+            # Eval the treefmt modules from ./treefmt.nix
+            treefmtEval = treefmt-nix.lib.evalModule tetosPkgs ./tetos/treefmt.nix;
+          in
+          treefmtEval.config.build.wrapper;
 
         legacyPackages = tetosPkgs;
 
         packages =
-          let
-            tetosPkgs = self.nixosConfigurations.tatooine.pkgs;
-          in
+          # let
+          #   tetosPkgs = self.nixosConfigurations.tatooine.pkgs;
+          # in
           self.inputs.neovim-nightly-overlay.packages.${system}
           # strip of
-          # // (removeAttrs (byNamePkgsOverlay tetosPkgs { }) [ "_internalCallByNamePackageFile" ])
+          // (removeAttrs (byNamePkgsOverlay tetosPkgs { }) [ "_internalCallByNamePackageFile" ])
           // {
             /*
               my own nvim with
@@ -476,7 +476,6 @@
         # https://github.com/nix-community/nixos-images/blob/56b52791312edeade1e6bd853ce56c778f363d50/flake.nix#L53
         checks =
           let
-            tetosPkgs = self.nixosConfigurations.tatooine.pkgs;
           in
           {
             # formatting = treefmtEval.${tetosPkgs.system}.config.build.check self;
