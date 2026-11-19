@@ -42,22 +42,7 @@
 
     # logLevel = "TRACE";
     plugins = [ pkgs.networkmanager-openvpn ];
-
-    # can prevent switch
-    #   ensureProfiles = {
-    #   environmentFiles = [ "/etc/NetworkManager/vpn.env" ];
-    #   profiles.work-vpn = {
-    #     connection = {
-    #       id = "ixeal-declarative-vpn";
-    #       type = "vpn";
-    #       autoconnect = false;
-    #     };
-    #     vpn = {
-    #       service-type = "org.freedesktop.NetworkManager.openvpn";
-    #       # Add OpenVPN properties here if you want to define them directly.
-    #     };
-    #   };
-    # };
+    # the ixeal VPN now lives in ./services/openvpn.nix (openvpn-ixeal.service)
   };
 
   # add wireguard peers

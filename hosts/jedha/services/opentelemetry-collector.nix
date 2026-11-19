@@ -1,6 +1,6 @@
 {
-
-  enable = true;
+  # to capture llm stuff
+  enable = false;
 
   settings =
     let
