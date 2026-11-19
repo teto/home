@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 {
   # when under ndots in hostname, try resolution with those
   search = [
@@ -33,9 +38,8 @@
     };
   };
 
-
   networkmanager = {
-    
+
     # logLevel = "TRACE";
     plugins = [ pkgs.networkmanager-openvpn ];
 

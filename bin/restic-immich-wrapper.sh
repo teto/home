@@ -12,8 +12,8 @@ RESTIC_REPOSITORY_FILE="$HOME/.config/sops-nix/secrets/restic/neotokyo-immich-bu
 
 # create by hand
 if [ ! -f "$RESTIC_REPOSITORY_FILE" ]; then
-  echo "Il faut créer ce fichier a la mano vu que c'est temporaire; on ne va pas exposer ce fichier en permanence !"
-  exit 1
+ echo "Il faut créer ce fichier a la mano vu que c'est temporaire; on ne va pas exposer ce fichier en permanence !"
+ exit 1
 fi
 
 $@
