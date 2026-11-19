@@ -65,6 +65,12 @@ action = "ui.preview_scroll_up"
 scope = "ui.preview"
 desc = "scroll up" 
 
+[[bindings]]
+key = "|"
+action = "revisions.split_parallel"
+scope = "revisions"
+desc = "split parallel"
+
 [revisions]
 # log_batching = false
 # template = 'builtin_log_compact' # overrides jj's templates.log
