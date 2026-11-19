@@ -125,6 +125,10 @@ in
     in
 
     [
+      flakeSelf.inputs.deploy-rs.packages.${stdenv.hostPlatform.system}.deploy-rs
+      flakeSelf.inputs.nix-cache-beacon.packages.${stdenv.hostPlatform.system}.default
+      flakeSelf.inputs.rikai-nvim.packages.${stdenv.hostPlatform.system}.kokoro # tts
+
       kodi-teto
       codex # openai agent
       codex-acp # originated from zed-industries, used in avante
@@ -154,9 +158,7 @@ in
       pkgs.sshfs # to download
       pkgs.alsa-utils # for alsamixer
       pkgs.lm_sensors # for `sensors` executable
-      flakeSelf.inputs.deploy-rs.packages.${stdenv.hostPlatform.system}.deploy-rs
 
-      flakeSelf.inputs.rikai-nvim.packages.${stdenv.hostPlatform.system}.kokoro
       pciutils # for lspci
       timg
       ncurses.dev # for infocmp
