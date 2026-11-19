@@ -17,6 +17,8 @@ jobs:
         with:
           # TODO reference the flake one ?
           nix_path: "nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/nixos-unstable.tar.gz"
+      # workaround this issue 
+      # https://github.com/gepbird/nix-update-action/issues/2#event-35747316493
       - name: Fetch nixpkgs source
         run: nix flake archive --json nixpkgs > /dev/null
       - name: Update flake packages
