@@ -23,9 +23,10 @@ in
       port = 9931;
       extraFlags = [
         "-v"
-        # will load ~/.config/llama.cpp/config.ini instead
-        # "--models-preset"
-        # "${dotfilesPath}/contrib/llama-presets.ini"
+        # load generic defaults from ~/.config/llama.cpp/config.ini
+        # but per-model is at
+        "--models-preset"
+        "${dotfilesPath}/config/llamacpp/presets.ini"
       ];
 
       # since we expose it via nginx
