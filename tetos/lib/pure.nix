@@ -49,52 +49,52 @@
       ...
     }@attrs:
     let
-        allowUnfreePredicate =
-          pkg:
-          let
-            ensureList = x: if builtins.isList x then x else [ x ];
-            hasCudaLicense =
-              package:
-              builtins.all (
-                license:
-                license.free
-                || builtins.elem license.shortName [
-                  "CUDA EULA"
-                  "cuDNN EULA"
-                  "cuSPARSELt EULA"
-                  "cuTENSOR EULA"
-                  "NVidia OptiX EULA"
-                ]
-              ) (ensureList package.meta.license);
-            pkgName = lib.getName pkg;
-          in
-          if hasCudaLicense "cuda" pkgName then
-            true
-          else
-            builtins.elem pkgName [
-              "antigravity-cli"
-              "Oracle_VM_VirtualBox_Extension_Pack"
-              "Oracle_VirtualBox_Extension_Pack"
-              "jocalsend"
-              "codeium"
-              "claude-code"
-              "mistral-vibe"
+      allowUnfreePredicate =
+        pkg:
+        let
+          ensureList = x: if builtins.isList x then x else [ x ];
+          hasCudaLicense =
+            package:
+            builtins.all (
+              license:
+              license.free
+              || builtins.elem license.shortName [
+                "CUDA EULA"
+                "cuDNN EULA"
+                "cuSPARSELt EULA"
+                "cuTENSOR EULA"
+                "NVidia OptiX EULA"
+              ]
+            ) (ensureList package.meta.license);
+          pkgName = lib.getName pkg;
+        in
+        if hasCudaLicense "cuda" pkgName then
+          true
+        else
+          builtins.elem pkgName [
+            "antigravity-cli"
+            "Oracle_VM_VirtualBox_Extension_Pack"
+            "Oracle_VirtualBox_Extension_Pack"
+            "jocalsend"
+            "codeium"
+            "claude-code"
+            "mistral-vibe"
 
-              "ec2-api-tools"
-              "google-chrome"
-              # "slack"
-              "steam"
-              "steam-original"
-              "steam-runtime"
-              "steam-run"
-              "steam-unwrapped"
-              "sublimetext3"
-              "vault"
-              "vscode"
-              "vscode-extension-ms-vsliveshare-vsliveshare"
-              "xmind"
-              "zoom"
-            ];
+            "ec2-api-tools"
+            "google-chrome"
+            # "slack"
+            "steam"
+            "steam-original"
+            "steam-runtime"
+            "steam-run"
+            "steam-unwrapped"
+            "sublimetext3"
+            "vault"
+            "vscode"
+            "vscode-extension-ms-vsliveshare-vsliveshare"
+            "xmind"
+            "zoom"
+          ];
 
       nixpkgsConfig = {
         # on desktop
@@ -111,9 +111,9 @@
         # and sublime because guy has to eat
         inherit allowUnfreePredicate;
 
-           problems.handlers = {
-             # vllm.broken = "warn"; # or "ignore"
-           };
+        problems.handlers = {
+          # vllm.broken = "warn"; # or "ignore"
+        };
       };
 
     in

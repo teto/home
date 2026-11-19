@@ -5,9 +5,9 @@ SERVICE="ollama"
 
 # Check if the service is active
 if systemctl is-active --quiet "$SERVICE"; then
-  STATUS="running"
+ STATUS="running"
 else
-  STATUS="stopped"
+ STATUS="stopped"
 fi
 
 # Output JSON

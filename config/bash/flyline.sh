@@ -12,9 +12,9 @@ flyline history --backend flyline
 
 # Codex: change
 flyline set-agent-mode \
-  --system-prompt "Be concise. Answer with a JSON array of at most 3 items with objects containing: command and description. Command will be a Bash command. " \
-  --trigger-prefix ': ' \
-  --command 'codex -a never exec -m GPT-5.1-Codex-Mini --skip-git-repo-check --ephemeral --color always'
+ --system-prompt "Be concise. Answer with a JSON array of at most 3 items with objects containing: command and description. Command will be a Bash command. " \
+ --trigger-prefix ': ' \
+ --command 'codex -a never exec -m GPT-5.1-Codex-Mini --skip-git-repo-check --ephemeral --color always'
 
 # Antigravity:
 # flyline set-agent-mode \

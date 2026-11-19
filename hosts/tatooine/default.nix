@@ -71,7 +71,6 @@ in
     # usually inactive, just to test some stuff
   ];
 
-
   # environment.systemPackages = [
   # ];
 

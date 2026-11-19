@@ -3,12 +3,12 @@
 
 #!/bin/bash
 printHelp() {
-  echo "Use: $0 <PASSWORDSTORE_DB_FOLDER>"
-  exit 1
+ echo "Use: $0 <PASSWORDSTORE_DB_FOLDER>"
+ exit 1
 }
 
 if [ $# -lt 1 ]; then
-  printHelp
+ printHelp
 fi
 
 dbpath="$1"

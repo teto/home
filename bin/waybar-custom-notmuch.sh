@@ -20,9 +20,9 @@ text="$count"
 # check if systemctl start --user mujmap-fastmail.service is running
 
 jq --compact-output \
-  --null-input \
-  --arg text "$text" \
-  --arg class "unmuted" \
-  '{"text": $text, "tooltip": "tooltip", "class": $class}'
+ --null-input \
+ --arg text "$text" \
+ --arg class "unmuted" \
+ '{"text": $text, "tooltip": "tooltip", "class": $class}'
 
 # fi

@@ -61,30 +61,33 @@
     libraries = [ config.wsl.wslLib ];
   };
 
-  environment.systemPackages = with pkgs;
-  let 
-    myNeovim = neovim.overrideAttrs{
-      waylandSupport = false;
-    };
-    in [
-    claude-code
-    git
-    # pkgs.huggingface-cli # hf ...
-    pkgs.claude-code
-    myNeovim
-    systemctl-tui
-    wget
-    btop-cuda # for jedha
-    config.services.llama-cpp.package
+  environment.systemPackages =
+    with pkgs;
+    let
+      myNeovim = neovim.overrideAttrs {
+        waylandSupport = false;
+      };
+    in
+    [
+      claude-code
+      git
+      # pkgs.huggingface-cli # hf ...
+      pkgs.claude-code
+      myNeovim
+      systemctl-tui
+      wget
+      btop-cuda # for jedha
+      config.services.llama-cpp.package
 
-    # vllm # broken on arm
-  ];
+      # vllm # broken on arm
+    ];
 
   # cuda fixes else we get
   # ggml_cuda_init: CUDA driver version is insufficient for CUDA runtime version
   environment.sessionVariables = {
     LD_LIBRARY_PATH = [ "/usr/lib/wsl/lib" ];
-  } // lib.optionalAttrs withSecrets {
+  }
+  // lib.optionalAttrs withSecrets {
 
     HF_TOKEN = secrets.HF_TOKEN;
 

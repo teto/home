@@ -8,16 +8,16 @@
 {
 
   imports = [
-      flakeSelf.homeModules.neovim
-      flakeSelf.homeModules.neovim
+    flakeSelf.homeModules.neovim
+    flakeSelf.homeModules.neovim
 
-      flakeSelf.homeProfiles.teto-aliases
-      flakeSelf.homeProfiles.common
-      flakeSelf.homeProfiles.neovim
-      flakeSelf.homeProfiles.tmux
-      # flakeSelf.homeProfiles.teto-zsh
+    flakeSelf.homeProfiles.teto-aliases
+    flakeSelf.homeProfiles.common
+    flakeSelf.homeProfiles.neovim
+    flakeSelf.homeProfiles.tmux
+    # flakeSelf.homeProfiles.teto-zsh
   ];
-  
+
   home.packages = [
     pkgs.ripgrep
     pkgs.just
@@ -41,7 +41,6 @@
       };
     };
   };
-
 
   programs.git = {
     enable = true;
@@ -68,21 +67,20 @@
 
   };
 
+  # so it can be easily referenced from llama-bench
+  # xdg.configFile."llama.cpp/config.ini".source = ./services/spark-presets.ini;
 
-    # so it can be easily referenced from llama-bench
-    # xdg.configFile."llama.cpp/config.ini".source = ./services/spark-presets.ini;
+  programs.flyline.enable = true;
 
-    programs.flyline.enable = true;
+  programs.neovim = {
 
-    programs.neovim = {
+    enableRocks = true;
+    highlightOnYank = true;
+    enableFzfLua = true;
+    # enableBlink = true;
 
-      enableRocks = true;
-      highlightOnYank = true;
-      enableFzfLua = true;
-      # enableBlink = true;
-
-      initLua = ''
-        require('init-manual')
-        '';
-    };
+    initLua = ''
+      require('init-manual')
+    '';
+  };
 }

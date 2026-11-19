@@ -1035,7 +1035,7 @@ vim.g.avante = {
         provider = 'fzf_lua',
     },
     providers = {
-		-- todo rtx_spark_llama
+        -- todo rtx_spark_llama
         rtx_spark_llama = {
             __inherited_from = 'openai',
             -- ixeal-spark .ixeal.local

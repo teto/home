@@ -1,5 +1,5 @@
 # enable this module to work with a microsoft environment
-# 
+#
 {
   config,
   lib,

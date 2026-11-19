@@ -1,6 +1,4 @@
-/* Started as system service 
-
-*/ 
+# Started as system service
 {
 
   # https://github.com/ggml-org/llama.cpp/blob/master/docs/preset.md:

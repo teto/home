@@ -10,9 +10,9 @@
 domain=${1:-cache.nixos.org}
 
 run() {
-  echo "> $*"
-  "$@" |& sed -e "s/^/    /"
-  printf "Exit: %s\n\n\n" "$?"
+ echo "> $*"
+ "$@" |& sed -e "s/^/    /"
+ printf "Exit: %s\n\n\n" "$?"
 }
 
 curl_w="
@@ -26,29 +26,29 @@ time_total:         %{time_total}
 "
 
 curl_test() {
-  curl -w "$curl_w" -v -o /dev/null "$@"
+ curl -w "$curl_w" -v -o /dev/null "$@"
 }
 
 ix() {
-  url=$(cat | curl -F 'f:1=<-' ix.io 2>/dev/null)
-  echo "Pasted at: $url"
+ url=$(cat | curl -F 'f:1=<-' ix.io 2>/dev/null)
+ echo "Pasted at: $url"
 }
 
 (
-  echo "domain=$domain"
-  run dig -t A "$domain"
-  run ping -c1 "$domain"
-  run ping -4 -c1 "$domain"
-  run ping -6 -c1 "$domain"
-  run mtr -c 20 -w -r "$domain"
-  run curl_test -4 "http://$domain/"
-  run curl_test -6 "http://$domain/"
-  run curl_test -4 "https://$domain/"
-  run curl_test -6 "https://$domain/"
-  run curl -I -4 "https://$domain/"
-  run curl -I -4 "https://$domain/"
-  run curl -I -4 "https://$domain/"
-  run curl -I -6 "https://$domain/"
-  run curl -I -6 "https://$domain/"
-  run curl -I -6 "https://$domain/"
+ echo "domain=$domain"
+ run dig -t A "$domain"
+ run ping -c1 "$domain"
+ run ping -4 -c1 "$domain"
+ run ping -6 -c1 "$domain"
+ run mtr -c 20 -w -r "$domain"
+ run curl_test -4 "http://$domain/"
+ run curl_test -6 "http://$domain/"
+ run curl_test -4 "https://$domain/"
+ run curl_test -6 "https://$domain/"
+ run curl -I -4 "https://$domain/"
+ run curl -I -4 "https://$domain/"
+ run curl -I -4 "https://$domain/"
+ run curl -I -6 "https://$domain/"
+ run curl -I -6 "https://$domain/"
+ run curl -I -6 "https://$domain/"
 ) | tee /dev/stderr | ix

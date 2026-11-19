@@ -330,63 +330,62 @@ in
       #         luaInterpreter = pkgs.lua51Packages.lua;
       # "${luaInterpreter.pkgs.luarocks_bootstrap}/bin/luarocks"
 
+      # "nvim/lua/generated-by-nix.lua" =
+      # could use toLua or buildLuarocksConfig
+      # pkgs.lua.pkgs.luaLib.generateLuarocksConfig
+      xdg.configFile."nvim/luarocks-config-generated.lua" =
+        let
+          luaInterpreter = config.programs.neovim.package.lua;
+          luarocksStore = luaInterpreter.pkgs.luarocks;
+          luacurlPkg = luaInterpreter.pkgs.lua-curl;
 
-    # "nvim/lua/generated-by-nix.lua" =
-    # could use toLua or buildLuarocksConfig
-    # pkgs.lua.pkgs.luaLib.generateLuarocksConfig
-    xdg.configFile."nvim/luarocks-config-generated.lua" =
-      let
-        luaInterpreter = config.programs.neovim.package.lua;
-        luarocksStore = luaInterpreter.pkgs.luarocks;
-        luacurlPkg = luaInterpreter.pkgs.lua-curl;
+          luarocksConfigAttr =
+            pkgs.lua.pkgs.luaLib.generateLuarocksConfig { externalDeps = [ pkgs.curl.dev ]; }
+            // {
+              # take it from ?
+              lua_version = "5.1";
+            };
 
-        luarocksConfigAttr =
-          pkgs.lua.pkgs.luaLib.generateLuarocksConfig { externalDeps = [ pkgs.curl.dev ]; }
-          // {
-            # take it from ?
-            lua_version = "5.1";
+          luarocksConfigAttr2 = lib.recursiveUpdate luarocksConfigAttr {
+            rocks_trees = [
+              {
+                name = "rocks.nvim";
+                # TODO reference xdg
+                root = "/home/teto/.local/share/nvim/rocks";
+              }
+              {
+                name = "rocks-generated.nvim";
+                root = "${luarocksStore}";
+              }
+              {
+                name = "lua-curl";
+                root = "${luacurlPkg}";
+              }
+              # ${sqlite.out}/lib/libsqlite3${stdenv.hostPlatform.extensions.sharedLibrary}
+              # {
+              #   name = "sqlite.lua";
+              #   root = "${luaInterpreter.pkgs.sqlite}";
+              # }
+              {
+                name = "lsqlite3";
+                root = "${luaInterpreter.pkgs.lsqlite3}";
+              }
+            ];
+
+            # we need variables for lib-curl.lua to be installable
+            variables = {
+
+            };
+
           };
 
-        luarocksConfigAttr2 = lib.recursiveUpdate luarocksConfigAttr {
-          rocks_trees = [
-            {
-              name = "rocks.nvim";
-              # TODO reference xdg
-              root = "/home/teto/.local/share/nvim/rocks";
-            }
-            {
-              name = "rocks-generated.nvim";
-              root = "${luarocksStore}";
-            }
-            {
-              name = "lua-curl";
-              root = "${luacurlPkg}";
-            }
-            # ${sqlite.out}/lib/libsqlite3${stdenv.hostPlatform.extensions.sharedLibrary}
-            # {
-            #   name = "sqlite.lua";
-            #   root = "${luaInterpreter.pkgs.sqlite}";
-            # }
-            {
-              name = "lsqlite3";
-              root = "${luaInterpreter.pkgs.lsqlite3}";
-            }
-          ];
+          luarocksConfigStr = (lib.generators.toLua { asBindings = false; } luarocksConfigAttr2);
 
-          # we need variables for lib-curl.lua to be installable
-          variables = {
-
-          };
-
+        in
+        {
+          enable = true;
+          text = "return ${luarocksConfigStr}";
         };
-
-        luarocksConfigStr = (lib.generators.toLua { asBindings = false; } luarocksConfigAttr2);
-
-      in
-      {
-        enable = true;
-        text = "return ${luarocksConfigStr}";
-      };
 
       programs.neovim.initLua =
         let
