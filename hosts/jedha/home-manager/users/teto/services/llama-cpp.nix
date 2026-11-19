@@ -26,7 +26,8 @@ in
         # load generic defaults from ~/.config/llama.cpp/config.ini
         # but per-model is at
         "--models-preset"
-        "${dotfilesPath}/config/llamacpp/presets.ini"
+        # could be xdgConfig
+        "${dotfilesPath}/config/llama.cpp/presets.ini"
       ];
 
       # since we expose it via nginx
