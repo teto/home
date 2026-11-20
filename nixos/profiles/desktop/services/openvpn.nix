@@ -36,7 +36,7 @@ lib.optionalAttrs withSecrets {
           client
           dev tun
           proto tcp-client
-          remote ${secrets.accounts.ixeal.vpnHost1} 443
+          remote ${secrets.accounts.ixeal.vpnHostNew} 443
           nobind
           float
           persist-key

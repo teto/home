@@ -19,6 +19,7 @@
   ];
 
   home.packages = [
+    pkgs.lazydocker
     pkgs.ripgrep
     pkgs.just
   ];
