@@ -32,6 +32,17 @@ in
     (lib.mkIf config.services.netdata.enable {
       netdata.path = [ pkgs.linuxPackages.nvidia_x11 ];
     })
+
+    (lib.mkIf config.networking.wireless.iwd.enable {
+          iwd.serviceConfig.ExecStart = [
+      ""  # an empty entry first clears the original start command
+      # wlan1 is the mediatek wifi card that is buggy on linux .
+      # ignore it to avoid networkmanager warnings
+      # it can't be set in the configuration file
+      "${config.networking.wireless.iwd.package}/libexec/iwd --nointerfaces wlan1"
+    ];
+    })
+
     # disabled because ha-mcp broken
     (lib.mkIf false {
       ha-mcp = {
