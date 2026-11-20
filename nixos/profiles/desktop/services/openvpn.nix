@@ -26,6 +26,12 @@ lib.optionalAttrs withSecrets {
         autoStart = false;
 
         # TODO add pull_filter
+        # • For the desktop OpenVPN setup, the announcement comes from update-systemd-resolved: the VPN’s up script adds its DNS servers and domains to systemd-resolved for the tunnel interface
+        #   (openvpn.nix (nixos/profiles/desktop/services/openvpn.nix:8)). To ignore specific pushed settings, add OpenVPN pull-filter ignore rules inside the config block. For example:
+        #
+        #   pull-filter ignore "dhcp-option DNS"
+        #   pull-filter ignore "dhcp-option DOMAIN"
+        #   pull-filter ignore "dhcp-option DOMAIN-SEARCH"
         config = ''
           client
           dev tun
@@ -43,11 +49,10 @@ lib.optionalAttrs withSecrets {
           tls-version-min 1.2
           data-ciphers AES-256-GCM
           auth-nocache
-
           ping 10
           ping-restart 60
           reneg-sec 28800
-
+          pull-filter ignore "dhcp-option DNS 192.168.1.61"
           pull-filter ignore "route 192.168.1.0"
           # run update-systemd-resolved before the tun device goes away
           down-pre

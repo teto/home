@@ -1,5 +1,14 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 {
+  # montray-server: health checks published to montray-ui (tray)
+  # /etc/montray-server.yml is in environment.nix
+  # DynamicUser lets systemd allocate the `_montray` user from the unit, no users.users needed
+  packages = [ pkgs.montray.server ];
+  services.montray-server = {
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig.DynamicUser = true;
+  };
+
   # then coredumpctl debug will launch gdb !
   # boot.kernel.sysctl."kernel.core_pattern" = "core"; to disable.
   # security.pam.loginLimits

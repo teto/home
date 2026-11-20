@@ -13,6 +13,8 @@
 
   # allowInterfaces = [
   #   "wlp10s0"
+  # wlp2s0
+  # enp1s0f0
   # ];
 
   # enable-wide-area= Takes a boolean value ("yes" or "no"). Enable wide-area DNS-SD, aka
@@ -29,6 +31,7 @@
 
     server = {
       use-ipv6 = false; # bug with multiple hostnames
+      allow-interfaces = ["enp1s0f0" "wlp2s0" ];
       #   # Set the host name avahi-daemon tries to register on the LAN. If omited defaults to the system host name as set with the sethostname() system call.
       #   # secrets.jedha.hostname;
       #   # host-name = "jedha";
