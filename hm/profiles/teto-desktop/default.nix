@@ -196,7 +196,7 @@ in
 
       sonic-pi # for live music coding
       stow # tool to create symlinks
-      systemctl-tui
+      systemctl-tui-unstable
       timr-tui # rust clock
 
       # cups-pk-helper # to add printer through gnome control center

@@ -7,6 +7,10 @@ winget install Microsoft.PowerToy
 faut psreadline
 TODO copy/paste
 
+* check winget permissions
+
+reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\AppInstaller 2>$null
+winget --info     # at the bottom, lists "Admin Settings"/policies that are active
 
 * kill process associated with a port
 

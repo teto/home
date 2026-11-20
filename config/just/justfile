@@ -116,9 +116,9 @@ switch-remote: (nixos-rebuild "switch" "--option builders \"$TETOS_BUILDER_NIXCO
 
 rollback: (nixos-rebuild "switch" "--rollback")
 
-llama-list-models:
+llama-list-models server="llamacpp.jedha.home":
     http --auth-type=bearer --auth "toto" \
-       get http://llamacpp.jedha.home/v1/models
+       get http://{{server}}/v1/models
     # http get llamacpp.jedha.vpn/models
 
 # builders, le path: envoye le dossier git avec, pas ouf

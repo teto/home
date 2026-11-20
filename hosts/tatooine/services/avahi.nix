@@ -26,6 +26,7 @@
       publish-domain = true;
       disable-publishing = false;
       disable-user-service-publishing = false;
+      # for reverse lookups
       publish-addresses = true;
     };
 
@@ -43,7 +44,7 @@
   # /etc/mdns.allow
   nssmdns4 = true;
   # allows to resolve for other domains such as .lan / .home
-  nssmdnsFull = true;
+  nssmdnsFull = false;
   # services.avahi.settings.server.browse-domains
 
   # publish = {
