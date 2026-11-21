@@ -8,6 +8,8 @@
 
   inputs = {
 
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
+
     nixbot.url = "github:Mic92/nixbot";
     nixbot.inputs.nixpkgs.follows = "nixpkgs";
 

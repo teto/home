@@ -48,9 +48,6 @@ in
     flakeSelf.homeProfiles.wezterm
     # flakeSelf.homeModules.gnome-shell
 
-    flakeSelf.homeModules.neovim
-    flakeSelf.homeModules.nextcloud-client
-    flakeSelf.homeModules.llama-cpp
 
     ./calendars.nix
     ./sway.nix

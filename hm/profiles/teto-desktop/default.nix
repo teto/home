@@ -129,6 +129,10 @@ in
       flakeSelf.inputs.nix-cache-beacon.packages.${stdenv.hostPlatform.system}.default
       flakeSelf.inputs.rikai-nvim.packages.${stdenv.hostPlatform.system}.kokoro # tts
 
+      flakeSelf.homeModules.neovim
+      flakeSelf.homeModules.nextcloud-client
+      flakeSelf.homeModules.llama-cpp
+
       kodi-teto
       codex # openai agent
       codex-acp # originated from zed-industries, used in avante

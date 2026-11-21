@@ -4,6 +4,8 @@
 
 <~buffer>Ctrl+^ will make you switch to the chosen buffer
 
+to paste bypassing neovim rules:
+<C-r><C-o>=readfile("/home/teto/doc-mp.txt")<CR>
 
 Ctrl O while in insert mode goes to normal mode for one action
 

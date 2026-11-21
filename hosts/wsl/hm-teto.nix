@@ -9,7 +9,6 @@
 
   imports = [
     flakeSelf.homeModules.neovim
-    flakeSelf.homeModules.neovim
 
     flakeSelf.homeProfiles.teto-aliases
     flakeSelf.homeProfiles.common
