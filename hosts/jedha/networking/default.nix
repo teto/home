@@ -15,6 +15,9 @@
       "interface-name:enp11s0"
       #   "interface-name:r?-*"
       "interface-name:wlan1" # to avoid putting mac
+      # wg0 is created by systemd-networkd (networking.wireguard); if NM manages it,
+      # "disconnecting" it in the applet flushes its IPs and NM has no profile to bring it back
+      "interface-name:wg0"
     ];
     wifi = {
       backend = "iwd";

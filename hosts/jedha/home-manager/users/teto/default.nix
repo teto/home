@@ -55,6 +55,7 @@ in
 
     ./programs/neovim.nix
     # ./programs/noctalia.nix
+    ./programs/noctalia-widgets.nix
     ./programs/zsh.nix
 
     ./services/llama-cpp.nix
