@@ -60,6 +60,7 @@ let
 in
 {
   imports = [
+
     flakeSelf.inputs.jj-gh.homeManagerModules.default
     flakeSelf.inputs.chroncal.homeModules.default
     flakeSelf.inputs.nix-index-database.homeModules.nix-index
@@ -69,8 +70,11 @@ in
     flakeSelf.homeModules.flyline
     flakeSelf.homeModules.fzf
     flakeSelf.homeModules.kitty
+    flakeSelf.homeModules.llama-cpp
     flakeSelf.homeModules.memento
     flakeSelf.homeModules.microsoft
+    flakeSelf.homeModules.neovim
+    flakeSelf.homeModules.nextcloud-client
     flakeSelf.homeModules.nixpkgs-monitor
     flakeSelf.homeModules.package-sets
     flakeSelf.homeModules.services-mujmap
@@ -128,10 +132,6 @@ in
       flakeSelf.inputs.deploy-rs.packages.${stdenv.hostPlatform.system}.deploy-rs
       flakeSelf.inputs.nix-cache-beacon.packages.${stdenv.hostPlatform.system}.default
       flakeSelf.inputs.rikai-nvim.packages.${stdenv.hostPlatform.system}.kokoro # tts
-
-      flakeSelf.homeModules.neovim
-      flakeSelf.homeModules.nextcloud-client
-      flakeSelf.homeModules.llama-cpp
 
       kodi-teto
       codex # openai agent

@@ -1,0 +1,34 @@
+#Requires -RunAsAdministrator
+
+$ErrorActionPreference = 'Stop'
+
+$editionId = (Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion').EditionID
+if ($editionId -like 'Core*') {
+    throw 'Windows Home cannot accept incoming Remote Desktop connections. Use Windows Pro, Enterprise, Education, or Server.'
+}
+
+$firewallRuleNames = @(
+    'RemoteDesktop-UserMode-In-TCP'
+    'RemoteDesktop-UserMode-In-UDP'
+)
+
+# Check the built-in rules before changing system settings.
+$firewallRules = foreach ($name in $firewallRuleNames) {
+    Get-NetFirewallRule -Name $name
+}
+
+Set-ItemProperty `
+    -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server' `
+    -Name fDenyTSConnections `
+    -Value 0
+
+# Require Network Level Authentication for incoming connections.
+Set-ItemProperty `
+    -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' `
+    -Name UserAuthentication `
+    -Value 1
+
+# Permit RDP on private and domain networks, not public networks.
+$firewallRules | Set-NetFirewallRule -Enabled True -Profile Domain, Private
+
+Write-Host 'Remote Desktop is enabled. The firewall allows it on Private and Domain networks.'

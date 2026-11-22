@@ -6,7 +6,7 @@
 {
 
   # actually accessed via llama-swap instead ?
-  services.llama-cpp.instances = {
+  instances = {
 
     default = {
 

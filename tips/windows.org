@@ -2,6 +2,11 @@
 
 winget install Microsoft.PowerToy
 
+
+* 
+
+winget configure --file .\contrib\winget.json
+
 * autocompletion dans powerline
 
 faut psreadline
