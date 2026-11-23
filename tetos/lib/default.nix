@@ -48,33 +48,10 @@ in
       ;
 
 
-    nixpkgsMonitorEmailNotifier = 
-    fromEmail:
-    destinationEmail:
-    # by name 
-    pkgs.writeShellScript "notify-advancement" ''
-
-    branch_name="$1"
-    old_revision="$2"
-    new_revision="$3"
-    timestamp="$4"
-
-    title="$branch_name advanced (from $HOSTNAME)";
-
-    # strip leading spaces else msmtp will complain
-    message=$(cat <<EOF
-    From: ${fromEmail}
-    To: ${destinationEmail}
-    Subject: $title
-
-
-    New revision: $new_revision
-    Previous revision: $old_revision
-    EOF
-    )
-
-    echo "$message" | ${lib.getExe pkgs.msmtp} --read-envelope-from --read-recipients -afastmail 
-  '';
+    # nixpkgsMonitorEmailNotifier = 
+    # fromEmail:
+    # destinationEmail:
+    # # by name 
 
 
 

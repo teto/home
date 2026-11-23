@@ -56,7 +56,9 @@ in
       enable = true;
       # TODO send a mail
       on-branch-advance-cmd = lib.optionalDrvAttr withSecrets (
-        lib.nixpkgsMonitorEmailNotifier "${user}+neotokyo@${domain}" secrets.users.teto.email
+        "${pkgs.notify-nixpkgs-advancement} ${user}+neotokyo@${domain} ${secrets.users.teto.email}"
+
+        # lib.nixpkgsMonitorEmailNotifier "${user}+neotokyo@${domain}" secrets.users.teto.email
       );
       monitorCommand = "${lib.getExe pkgs.git-branch-monitor}";
     };

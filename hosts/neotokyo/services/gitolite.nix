@@ -47,6 +47,15 @@
       };
     };
 
+    ixeal = {
+      access = [
+        {
+          perm = "RW+";
+          users = [ "teto" ];
+        }
+      ];
+    };
+
     perso = {
       access = [
         {

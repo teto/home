@@ -120,7 +120,7 @@ pkgs.mkShell {
       export RESTIC_REPOSITORY_FILE=~/.config/sops-nix/restic/teto-bucket
       export RESTIC_PASSWORD_FILE=
       export RUSTIC_REPOSITORY=$(cat ~/.config/sops-nix/restic/teto-bucket)
-      source config/bash/aliases.sh
+      source "$XDG_CONFIG_HOME"/bash/aliases.sh
 
       echo "Run just ..."
       echo "To work with sbcl:"
