@@ -5,6 +5,7 @@
   pkgs,
   flakeSelf,
   withSecrets,
+  dotfilesPath,
   ...
 }:
 let
@@ -35,6 +36,8 @@ in
   # ++++ set -gx __DIRENV_INSTANT_ENV_FILE /home/teto/.cache/direnv-instant/6b72ed9c0367a2e2/env
   # bash: set: -g : option non valable
   programs.direnv-instant.enable = false;
+
+  xdg.configHome = "${dotfilesPath}/config";
 
   imports = [
     flakeSelf.homeProfiles.teto-desktop

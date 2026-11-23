@@ -9,3 +9,6 @@ delivery = "system"
 
 [ui]
 status_indicators = "symbols"
+
+[keys]
+prefix = "ctrl+a"
