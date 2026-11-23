@@ -6,6 +6,7 @@
   packages = [ pkgs.montray.server ];
   services.montray-server = {
     wantedBy = [ "multi-user.target" ];
+    path = [ pkgs.bash pkgs.coreutils ];
     serviceConfig.DynamicUser = true;
   };
 
