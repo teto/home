@@ -1,5 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, flakeSelf, ... }:
 {
+  # _imports = [
+  #   flakeSelf.nixosProfiles.docling-serve
+  # ];
   fonts.enableDefaultPackages = true;
 
   console = {

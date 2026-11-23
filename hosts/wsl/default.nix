@@ -21,6 +21,7 @@
 
     flakeSelf.nixosModules.default-hm
 
+    flakeSelf.nixosProfiles.docling-serve
     flakeSelf.nixosProfiles.nix-daemon
     flakeSelf.nixosProfiles.teto
 

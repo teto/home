@@ -133,6 +133,7 @@ in
       flakeSelf.inputs.nix-cache-beacon.packages.${stdenv.hostPlatform.system}.default
       flakeSelf.inputs.rikai-nvim.packages.${stdenv.hostPlatform.system}.kokoro # tts
 
+      pkgs.polkit_gnome
       kodi-teto
       codex # openai agent
       codex-acp # originated from zed-industries, used in avante

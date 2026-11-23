@@ -39,6 +39,7 @@ in
     flakeSelf.inputs.nix-cache-beacon.nixosModules.nix-cache-beacon
     flakeSelf.nixosModules.nvd
     flakeSelf.nixosModules.tetos
+    flakeSelf.nixosProfiles.docling-serve
 
     flakeSelf.nixosProfiles.pipewire
     # ./pipewire.nix
