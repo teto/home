@@ -32,13 +32,15 @@ lib.optionalAttrs withSecrets {
         #   pull-filter ignore "dhcp-option DNS"
         #   pull-filter ignore "dhcp-option DOMAIN"
         #   pull-filter ignore "dhcp-option DOMAIN-SEARCH"
+          # mssfix 1400 mtu
+          # max-mss headers         float
         config = ''
           client
           dev tun
-          proto tcp-client
+          # tcp-client
+          proto udp
           remote ${secrets.accounts.ixeal.vpnHostNew} 443
           nobind
-          float
           persist-key
           persist-tun
 
