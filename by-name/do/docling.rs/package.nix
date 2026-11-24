@@ -8,6 +8,7 @@
   openssl,
   pkg-config,
   rustPlatform,
+  sqlite,
   stdenv,
 }:
 
@@ -24,7 +25,12 @@ rustPlatform.buildRustPackage rec {
 
   cargoLock.lockFile = "${src}/Cargo.lock";
 
-  cargoBuildFlags = [ "-p" "docling-cli" ];
+  cargoBuildFlags = [
+    "-p"
+    "docling-cli"
+    "-p"
+    "docling-rag"
+  ];
   buildFeatures = [ "ort-load-dynamic" "serve" ];
 
   nativeBuildInputs = [
@@ -35,14 +41,17 @@ rustPlatform.buildRustPackage rec {
   buildInputs = [
     oniguruma
     openssl
+    sqlite
   ];
 
   doCheck = false;
 
   postInstall = ''
-    wrapProgram $out/bin/docling-rs \
-      --set-default ORT_DYLIB_PATH "${onnxruntime}/lib/libonnxruntime${stdenv.hostPlatform.extensions.sharedLibrary}" \
-      --prefix PATH : "${lib.makeBinPath [ ffmpeg-headless ]}"
+    for bin in docling-rs docling-rag; do
+      wrapProgram "$out/bin/$bin" \
+        --set-default ORT_DYLIB_PATH "${onnxruntime}/lib/libonnxruntime${stdenv.hostPlatform.extensions.sharedLibrary}" \
+        --prefix PATH : "${lib.makeBinPath [ ffmpeg-headless ]}"
+    done
   '';
 
   meta = {

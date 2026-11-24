@@ -115,14 +115,16 @@ in
     # enable = false; # enable it per host
     debug = true;
     # one of “api”, “boot”, “quick”
+
+    # 
     package = pkgs.pixiecore-arm64;
     mode = "boot";
+    # dhcpNoBind = true; # Use existing DHCP server.
     # enp1s0f0
     # extraArguments = ;
     # listen
     # cmdLine = ;
 
-    dhcpNoBind = true; # Use existing DHCP server.
 
     quick = "ubuntu";
     openFirewall = true;

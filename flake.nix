@@ -599,6 +599,7 @@
                 ];
               };
 
+              
               # laptop
               ixeal-matthieu = nixosConfigs.wsl.extendModules {
 

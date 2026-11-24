@@ -911,6 +911,8 @@ vim.g.tidal_boot = nix_deps.tidal_boot .. 'BootTidal.hs'
 
 -- require("jj").setup({})
 
+local p7address = "192.168.6.184"
+
 vim.keymap.set('n', 'gF', function()
     local file = vim.fn.expand('<cfile>')
     if file == '' then
@@ -1041,14 +1043,28 @@ vim.g.avante = {
             -- ixeal-spark .ixeal.local
             endpoint = 'http://dev-ia:9931/v1',
             model = 'qwen3.6-dense',
-            -- model = 'deepseek/deepseek-v4-flash-0731',
             api_key_name = '', -- Local server without authentication
             -- use_response_api = false, -- use chat completions api-
         },
         rtx_spark_vllm = {
             __inherited_from = 'openai',
-            -- ixeal-spark .ixeal.local
             endpoint = 'http://dev-ia:8000/v1',
+            model = 'qwen3.6-dense',
+            -- model = 'deepseek/deepseek-v4-flash-0731',
+            api_key_name = '', -- Local server without authentication
+            -- use_response_api = false, -- use chat completions api-
+        },
+        p7_llama = {
+            __inherited_from = 'openai',
+            endpoint = 'http://'.. p7address .. ':9931/v1',
+            model = 'qwen3.6-dense',
+            -- model = 'deepseek/deepseek-v4-flash-0731',
+            api_key_name = '', -- Local server without authentication
+            -- use_response_api = false, -- use chat completions api-
+        },
+        p7_vllm = {
+            __inherited_from = 'openai',
+            endpoint = 'http://'.. p7address .. ':8000/v1',
             model = 'qwen3.6-dense',
             -- model = 'deepseek/deepseek-v4-flash-0731',
             api_key_name = '', -- Local server without authentication

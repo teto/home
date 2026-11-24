@@ -38,6 +38,7 @@ use_mouse = true
 theme = "nord" # or "light"
 force_text_presentation = true
 # use in 'save-attachment' command
+# save-attachment-picker / Used with add-attachment-file-picker when composing new mail.
 file_picker_command = "vifm --choose-dir - --delimiter ''"
 
 [notifications]

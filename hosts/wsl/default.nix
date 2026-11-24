@@ -70,7 +70,6 @@
       };
     in
     [
-      claude-code
       git
       # pkgs.huggingface-cli # hf ...
       pkgs.claude-code

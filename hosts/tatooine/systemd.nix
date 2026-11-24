@@ -22,4 +22,29 @@
       ExecStart = "${pkgs.alsa-utils}/bin/alsactl init";
     };
   };
+
+  network.networks."20-enp1s0f0-pixiecore" = {
+    matchConfig.Name = "enp1s0f0";
+    address = [ "10.42.0.1/24" ];
+    networkConfig.DHCPServer = true;
+    dhcpServerConfig = {
+      PoolOffset = 100;
+      PoolSize = 100;
+    };
+  };
+
+    # networks =
+      # lib.optionalAttrs withSecrets {
+      #   "10-disable-wlan1" = {
+      #     matchConfig.PermanentMACAddress = "${secrets.jedha.mediatekMacAddress}";
+      #     linkConfig.ActivationPolicy = "always-down";
+      #   };
+      # }
+      # //
+      #
+      # {
+      #   "50-wg0" = {
+      #     matchConfig.Name = "wg0";
+      #     networkConfig.MulticastDNS = false;
+      #   };
 }

@@ -4,4 +4,6 @@
   ];
   enable = false;
   port = 8089;
+
+  # dhcpNoBind = true; # Use existing DHCP server.
 }

@@ -114,6 +114,7 @@ in
     hostsConfigs
     // {
       # Keep the deploy-rs node name aligned with the configured machine hostname.
+      # passer une config  --cores 2 --max-jobs 1 --cores 4 
       "dev-ia" = hostsConfigs.ixeal-spark;
 
       neptune-no-secrets =

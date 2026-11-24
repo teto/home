@@ -9,7 +9,7 @@ let
   server = "${config.networking.hostName}.local";
 in
 {
-  enable = true;
+  enable = false;
   recommendedTlsSettings = false;
 
   # using avahi hotname

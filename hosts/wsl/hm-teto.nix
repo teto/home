@@ -14,10 +14,11 @@
     flakeSelf.homeProfiles.common
     flakeSelf.homeProfiles.neovim
     flakeSelf.homeProfiles.tmux
-    # flakeSelf.homeProfiles.teto-zsh
   ];
 
   home.packages = [
+    pkgs.systemctl-tui
+
     pkgs.lazydocker
     pkgs.ripgrep
     pkgs.just
