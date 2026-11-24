@@ -1,5 +1,9 @@
-{ config, pkgs, ... }:
+{ config
+, pkgs, flakeSelf, ... }:
 {
+  _imports = [
+    flakeSelf.homeProfiles.mpd
+  ];
   enable = true;
 
   # wether to export MPD_HOST / PORT

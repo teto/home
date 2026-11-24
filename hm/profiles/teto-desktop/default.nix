@@ -133,6 +133,7 @@ in
       flakeSelf.inputs.nix-cache-beacon.packages.${stdenv.hostPlatform.system}.default
       flakeSelf.inputs.rikai-nvim.packages.${stdenv.hostPlatform.system}.kokoro # tts
 
+      pkgs.herdr  # rust tmux-like for llms
       pkgs.polkit_gnome
       kodi-teto
       codex # openai agent
@@ -150,6 +151,7 @@ in
       # ffs this needs the daemon ?!
       pkgs.avahi # for avahi-browse
 
+      # compare with nix-sweep 
       pkgs.gcan # replaces nix-stray-roots ! run "gcan tui"
 
       # for the noctalia OCR plugin

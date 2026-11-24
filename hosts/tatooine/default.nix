@@ -198,7 +198,10 @@ in
   # };
 
   services.flatpak.enable = true;
-  services.flatpak.packages = [ "com.remarkable.reMarkable" ];
+  services.flatpak.packages = [
+    # error: Nothing matches com.remarkable.reMarkable in remote flathub
+    # "com.remarkable.reMarkable" 
+  ];
 
   # apparently deprecated / replaced by https://github.com/OHF-Voice/linux-voice-assistant
   # which is not packaged (yet)

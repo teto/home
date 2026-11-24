@@ -166,16 +166,16 @@ in
           myImagemagick = pkgs.imagemagick.override { ghostscriptSupport = true; };
           # emmylua-ls = flakeSelf.inputs.emmylua.packages.${system}.emmylua_ls; # lua LSP written in rust
           # emmylua-check = flakeSelf.inputs.emmylua.packages.${system}.emmylua_check # lua LSP written in rust
-          inherit (pkgs)
-            emmylua-ls
-            emmylua-check
-            ;
+          # inherit (pkgs)
+          #   emmylua-ls
+          #   emmylua-check
+          #   ;
 
         in
         with pkgs;
         [
-          emmylua-ls
-          emmylua-check
+          # emmylua-ls
+          # emmylua-check
 
           # does noctalia need this ?
           # pkgs.brightnessctl # attempt to draw a bigger cursor pointer in sway
@@ -187,6 +187,7 @@ in
           pkgs.acpi # for acpi -V
           pkgs.ani-cli # to watch anime
 
+          pkgs.lrcget # to download lyrics
           pkgs.qimgv # qt image viewer
           pkgs.ristretto # gtk image viewer
 
@@ -206,12 +207,12 @@ in
 
           # borken cos of pymupdf
           # pkgs.kcc # to convert ebooks to remarkable format
-          # pkgs.ncmpcpp # outdated/ replaced by rmpc
 
           pkgs.libva-utils
 
           # take the version from stable ?
           pkgs.qutebrowser # broken keyboard driven fantastic browser
+          # use luciole ?
           pkgs.nautilus # demande webkit/todo replace by nemo ?
           # mcomix # manga reader
           # pkgs.popcorntime
