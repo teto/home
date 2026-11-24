@@ -1,7 +1,7 @@
 {
   services.open-webui = {
     # broken
-    enable = true;
+    enable = false;
   };
 }
 
