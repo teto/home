@@ -19,26 +19,28 @@ let
     else
       lib.warn "Using noop 'mkRemoteBuilderDesc' switch to 'scratch' branch" (_a: _b: "PLACEHOLDER");
 
-  builder_neotokyo = mkRemoteBuilderDesc "3.0" (
-    lib.nixosConfToBuilderAttr {
-      sshKey = "${secretsFolder}/ssh/id_rsa";
-      # I might need to set it ?
-      # can
-      # it's a base64 version of it
-      publicHostKey = builtins.readFile ../../../../hosts/neotokyo/host_key.pub;
-    } flakeSelf.nixosConfigurations.neotokyo
-  );
-
-  # public host key of the remote machine.  If omitted, SSH uses its regular known_hosts file.
-  builder_jedha = mkRemoteBuilderDesc "3.0" (
-    lib.nixosConfToBuilderAttr {
-      sshKey = "${secretsFolder}/ssh/id_rsa";
-      # I might need to set it ?
-      publicHostKey = null;
-      # favor jedha
+  # per-host overrides passed to nixosConfToBuilderAttr
+  builderOverrides = {
+    # favor jedha
+    jedha = {
       speedFactor = 2;
       maxJobs = 8;
-    } flakeSelf.nixosConfigurations.jedha
+    };
+  };
+
+  # TETOS_BUILDER_<HOSTNAME> for every nixos host with tetos.remoteBuilder enabled
+  remoteBuilderVars = lib.mapAttrs' (
+    name: nixosConf:
+    lib.nameValuePair "TETOS_BUILDER_${lib.toUpper (lib.replaceStrings [ "-" ] [ "_" ] name)}" (
+      mkRemoteBuilderDesc "3.0" (
+        lib.nixosConfToBuilderAttr (builderOverrides.${name} or { }) nixosConf
+      )
+    )
+  ) (
+    lib.filterAttrs (
+      name: nixosConf:
+      !(lib.hasSuffix "-no-secrets" name) && (nixosConf.config.tetos.remoteBuilder or false)
+    ) flakeSelf.nixosConfigurations
   );
 
   # TODO fix
@@ -279,9 +281,6 @@ in
   }
   // lib.optionalAttrs osConfig.tetos.withSecrets {
 
-    # TODO generate those from programs.tetos.remoteBuilder
-    TETOS_BUILDER_NEOTOKYO = builder_neotokyo;
-    TETOS_BUILDER_JEDHA = builder_jedha;
     TETOS_BUILDER_NIXCOMMUNITY = builder_nixcommunity;
     inherit (secrets)
       TAVILY_API_KEY
@@ -289,7 +288,8 @@ in
       CONFIDENT_AI_API_KEY
       SOFYA_API_KEY
       ;
-  };
+  }
+  // lib.optionalAttrs osConfig.tetos.withSecrets remoteBuilderVars;
 
   # tetos.enableYubikey = true;
 
