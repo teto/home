@@ -5,6 +5,8 @@
   ...
 }:
 {
+  remoteBuilder = true;
+
   wireguard = {
     enable = withSecrets;
     # jedha
