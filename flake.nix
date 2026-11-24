@@ -522,7 +522,8 @@
                 rawLib.nameValuePair hostname (
                   let
                     # or ixeal-spark
-                    enableCuda = hostname == "jedha" || hostname == "wsl";
+                    # hostname est le nom du dossier dans hosts/
+                    enableCuda = hostname == "jedha" || hostname == "wsl" || hostname == "ixeal-p7" || hostname == "ixeal-spark";
                   in
                   pureLib.mkNixosSystem {
                     inherit lib;

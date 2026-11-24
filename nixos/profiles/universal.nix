@@ -24,6 +24,14 @@
 
   boot.tmp.cleanOnBoot = true; # to clean /tmp on reboot
 
+  nix.settings = {
+      preallocate-contents = true;
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+  };
+
   networking.modemmanager.enable = false;
 
   # todo move to package sets

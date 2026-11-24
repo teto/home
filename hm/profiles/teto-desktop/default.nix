@@ -278,6 +278,8 @@ in
     # MANROFFOPT = "-c";
   }
   // lib.optionalAttrs osConfig.tetos.withSecrets {
+
+    # TODO generate those from programs.tetos.remoteBuilder
     TETOS_BUILDER_NEOTOKYO = builder_neotokyo;
     TETOS_BUILDER_JEDHA = builder_jedha;
     TETOS_BUILDER_NIXCOMMUNITY = builder_nixcommunity;
