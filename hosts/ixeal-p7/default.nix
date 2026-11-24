@@ -18,12 +18,15 @@
     flakeSelf.nixosModules.default-hm
 
     flakeSelf.nixosProfiles.universal
-    flakeSelf.nixosProfiles.docling-serve
     flakeSelf.nixosProfiles.nix-daemon
     flakeSelf.nixosProfiles.teto
     flakeSelf.nixosModules.tetos # to generate ssh config
 
-    ../wsl/services/llamacpp.nix
+    ../wsl/nix.nix
+
+    # ./services/llamacpp.nix
+    # ./services/open-webui.nix
+    # flakeSelf.nixosProfiles.docling-serve
     ../wsl/services/openssh.nix
 
     ./hardware.nix
