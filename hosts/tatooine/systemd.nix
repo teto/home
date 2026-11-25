@@ -23,15 +23,16 @@
     };
   };
 
-  network.networks."20-enp1s0f0-pixiecore" = {
-    matchConfig.Name = "enp1s0f0";
-    address = [ "10.42.0.1/24" ];
-    networkConfig.DHCPServer = true;
-    dhcpServerConfig = {
-      PoolOffset = 100;
-      PoolSize = 100;
-    };
-  };
+  # when needed to run DHCP server for PXE / with pixiecore
+  # network.networks."20-enp1s0f0-pixiecore" = {
+  #   matchConfig.Name = "enp1s0f0";
+  #   address = [ "10.42.0.1/24" ];
+  #   networkConfig.DHCPServer = true;
+  #   dhcpServerConfig = {
+  #     PoolOffset = 100;
+  #     PoolSize = 100;
+  #   };
+  # };
 
     # networks =
       # lib.optionalAttrs withSecrets {
