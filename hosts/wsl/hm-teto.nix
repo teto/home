@@ -16,6 +16,10 @@
     flakeSelf.homeProfiles.tmux
   ];
 
+  programs.fzf = {
+    enableFzfGit = true;
+  };
+
   home.packages = [
     pkgs.systemctl-tui
 

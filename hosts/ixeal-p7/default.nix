@@ -24,8 +24,8 @@
 
     ../wsl/nix.nix
 
-    # ./services/llamacpp.nix
-    # ./services/open-webui.nix
+    ./services/llamacpp.nix
+    ../wsl/services/open-webui.nix
     # flakeSelf.nixosProfiles.docling-serve
     ../wsl/services/openssh.nix
 
