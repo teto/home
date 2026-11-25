@@ -46,6 +46,8 @@ let
       };
     }
     // lib.optionalAttrs isIxeal {
+      # -A => Enables forwarding of connections from an authentication agent such as ssh-agent(1).
+      sshOpts = [ "-A" ];
       remoteBuild = true;
       interactiveSudo = false;
     };

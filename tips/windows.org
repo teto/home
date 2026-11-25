@@ -29,6 +29,12 @@ Stop-Process -Id (Get-NetTCPConnection -LocalPort 12666).OwningProcess
 shutdown /s /t 0  :: stop now
 shutdown /r /t 0        :: reboot now
 
+
+via powershell:
+Stop-Computer            # add -Force to kill apps that are blocking it
+Restart-Computer
+Stop-Computer -ComputerName HOST -Credential DOMAIN\user   # remote machine
+
 * allow sshing from another computer
 
 

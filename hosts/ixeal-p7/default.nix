@@ -26,7 +26,7 @@
 
     ./services/llamacpp.nix
     ../wsl/services/open-webui.nix
-    # flakeSelf.nixosProfiles.docling-serve
+    flakeSelf.nixosProfiles.docling-serve
     ../wsl/services/openssh.nix
 
     ./hardware.nix
@@ -89,7 +89,7 @@
       btop-cuda # for jedha
       config.services.llama-cpp.package
 
-      # vllm # broken on arm
+      vllm 
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -158,11 +158,12 @@
   users.users."teto" = {
     isNormalUser = true;
     description = "ixeal";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    #  thunderbird
-    ];
+    extraGroups = [ "wheel" ];
   };
+
+  # to speed up deployments. Can be removed afterwards
+  security.sudo.wheelNeedsPassword = false;
+  security.pam.enableSSHAgentAuth = true;
 
   # Install firefox.
   programs.firefox.enable = false;

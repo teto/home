@@ -28,6 +28,7 @@
 
     ./services/llamacpp.nix
     ./services/openssh.nix
+    ./nix.nix
 
   ];
 

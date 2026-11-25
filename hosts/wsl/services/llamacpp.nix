@@ -6,7 +6,7 @@
   environment.etc."llama.cpp/config.ini.template".source = ./spark-presets.ini;
 
   services.llama-cpp = {
-    enable = false;
+    enable = true;
     openFirewall = true;
 
     # make sure we have the cuda version
