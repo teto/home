@@ -25,6 +25,9 @@
     ../wsl/nix.nix
 
     ./services/llamacpp.nix
+
+    # does it need an enable ? 
+    # ./services/vllm.nix
     ../wsl/services/open-webui.nix
     flakeSelf.nixosProfiles.docling-serve
     ../wsl/services/openssh.nix
@@ -88,8 +91,9 @@
       wget
       btop-cuda # for jedha
       config.services.llama-cpp.package
+      config.services.docling-serve.package
 
-      vllm 
+      # vllm  # le truc ne build jamais
     ];
 
   # Use the systemd-boot EFI boot loader.

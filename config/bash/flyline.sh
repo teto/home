@@ -7,6 +7,11 @@ flyline editor --show-inline-history false
 flyline editor --select-with-mouse false
 flyline history --backend flyline
 
+# Ctrl+y accepts the suggestion (vim-style): inline ghost-text suggestion,
+# or the selected entry when browsing the tab-completion menu (defined last -> higher priority)
+flyline key bind Ctrl+y inlineSuggestionAvailable+cursorAtEnd=inlineSuggestionAccept
+flyline key bind Ctrl+y tabCompletionAvailable=tabCompletionAcceptEntry
+
 # it flickers
 # flyline set-cursor --backend flyline --style "#33ccff" --effect fade --effect-easing in-out-sine --interpolate-easing out-elastic --interpolate 2
 
@@ -28,7 +33,9 @@ flyline create-prompt-widget last-command-duration --name FLYLINE_LAST_COMMAND_D
 # precmd_functions+=(set_ps1)
 # Now you can use this animation in your prompt. For example:
 PS1='\u@\h:\w MOUSE_MODE \n$ '
-PS2=">"
+# no continuation marker; an empty PS2 would make flyline fall back to its
+# default (line number + "∙"), so use an invisible escape instead
+PS2='\e[0m'
 # RPS1=" ${ANSI_YELLOW}\t${ANSI_RESET}"
 RPS1="..."
 # PS1_FILL="-"
@@ -36,7 +43,7 @@ RPS1="..."
 PROMPT_RULER="─"
 
 # PS1_FINAL="Started at ${ANSI_YELLOW}\D{%Y-%m-%d %H:%M:%S}> ${ANSI_RESET}"
-PS1_FINAL="Finished in FLYLINE_LAST_COMMAND_DUR"
+# PS1_FINAL="Finished in FLYLINE_LAST_COMMAND_DUR"
 # duration it took
 RPS1_FINAL="Finished in FLYLINE_LAST_COMMAND_DUR"
 PS1_FILL_FINAL=''

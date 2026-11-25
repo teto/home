@@ -41,6 +41,7 @@ in
       # flyline mouse --mode smart
       flyline editor --show-inline-history false
       flyline editor --select-with-mouse false
+      # better history than bash
       flyline history --backend flyline
       source ${../../config/bash/flyline.sh}
 
