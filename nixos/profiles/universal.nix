@@ -46,6 +46,7 @@
       fd # replaces 'find'
       ripgrep
       file
+      neovim
     ]);
 
   # TODO it appears in /etc/bashrc !

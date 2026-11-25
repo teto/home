@@ -25,6 +25,9 @@ Set-service sshd -StartupType Automatic
 
 Stop-Process -Id (Get-NetTCPConnection -LocalPort 12666).OwningProcess
 
+* stop windows
+shutdown /s /t 0  :: stop now
+shutdown /r /t 0        :: reboot now
 
 * allow sshing from another computer
 
@@ -36,10 +39,40 @@ New-NetFirewallRule -DisplayName "WSL SSH" -Direction Inbound -Protocol TCP -Loc
 New-NetFirewallHyperVRule -Name "WSL-SSH" -DisplayName "WSL SSH" -Direction Inbound `
   -VMCreatorId '{40E0AC32-46A5-438A-A0B2-2B479E8F2E90}' -Protocol TCP -LocalPorts 22
 
+otherwise netsh
+  policy can add firewall rules from the server side, and I couldn't fully check for those.
 
-I rarely use windows anymore and so sometimes q
+  To allow pings, either of these works from an admin PowerShell:
+
+  # Option 1: also apply your custom rule to the domain network
+  netsh advfirewall firewall set rule name="Réponse au ping IPv4" new profile=private,domain
+
+  # Option 2: turn on the built-in Windows ping rule
+  netsh advfirewall firewall set rule name="Diagnostics de réseau de base - Demande d'écho ICMP (ICMPv4-Entrant)" new
+  enable=yes
+
 retreive network config
+  Windows OpenSSH ignores ~\.ssh\authorized_keys for members of Administrators. It reads
+  C:\ProgramData\ssh\administrators_authorized_keys instead, and that file needs strict permissions:
+  icacls C:\ProgramData\ssh\administrators_authorized_keys /inheritance:r /grant "Administrators:F" /grant "SYSTEM:F"
 
+  What doesn't work over SSH
+
+  - Start-Process -Verb RunAs: there's no desktop to show a UAC prompt on.
+  - The Windows 11 sudo command: it also needs an interactive UAC prompt.
+
+  If the SSH user isn't an admin
+
+  - Scheduled task (most reliable): create a task that runs as SYSTEM or as an admin with highest privileges. Then start it    
+    from SSH:
+  schtasks /run /tn "MyAdminTask"
+  - PowerShell remoting to localhost with admin credentials:
+  Invoke-Command -ComputerName localhost -Credential (Get-Credential) -ScriptBlock { Restart-Service Spooler }
+    This needs WinRM enabled. Local admin accounts other than the built-in Administrator get a filtered token unless
+    LocalAccountTokenFilterPolicy=1. Domain admin accounts aren't affected.
+
+  The simplest setup is to SSH in as an admin account with its key in administrators_authorized_keys. Everything you run is    
+  then elevated.
 ipconfig
 
 * bcd = boot configuration data

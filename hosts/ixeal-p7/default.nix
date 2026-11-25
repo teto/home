@@ -167,6 +167,33 @@
   # Install firefox.
   programs.firefox.enable = false;
 
+
+  home-manager.users.teto = {
+    imports = [
+
+      ../wsl/hm-teto.nix
+    ];
+    home.stateVersion = "26.05";
+
+  };
+
+  # to test vllm
+  virtualisation.docker = {
+
+    enable = true;
+    enableOnBoot = true;
+
+    daemon.settings.features.cdi = true;
+
+    # listenOptions = [
+    # "0.0.0.0:80"
+    # ];
+    # logDriver =
+    # liveRestore
+  };
+
+
+
   # Allow unfree packages
   # nixpkgs.config.allowUnfree = true;
 
