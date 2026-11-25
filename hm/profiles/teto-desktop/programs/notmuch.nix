@@ -18,7 +18,7 @@
     # dont add "inbox" tag
     new.tags = [
       "unread"
-      "inbox" # do we need this ?
+      # "inbox" # do we need this ?
     ];
     # new.ignore =
   };
