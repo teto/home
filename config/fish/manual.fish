@@ -77,6 +77,16 @@ function bell_on_failure --on-event fish_postexec
 end
 
 # tide config
+# Export background job PIDs for the tide jobs item (see functions/_tide_item_jobs.fish).
+# The fish_prompt event fires before fish_prompt runs, so tide's async renderer inherits it.
+function _tide_export_job_pids --on-event fish_prompt
+    if jobs -q
+        set -gx _tide_job_pids (string join ' ' (jobs -p))
+    else
+        set -e _tide_job_pids
+    end
+end
+
 # set tide_cmd_duration_threshold 3000
 
 # Example: Custom functions

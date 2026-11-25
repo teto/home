@@ -167,7 +167,7 @@
 
   # to speed up deployments. Can be removed afterwards
   security.sudo.wheelNeedsPassword = false;
-  security.pam.enableSSHAgentAuth = true;
+  security.pam.sshAgentAuth.enable = true;
 
   # Install firefox.
   programs.firefox.enable = false;
