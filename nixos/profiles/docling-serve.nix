@@ -1,9 +1,35 @@
 { pkgs, lib, config, ... }:
+let 
+  DOCLING_SERVE_CONFIG_FILE = toString (pkgs.writeText "docling-serve.json" (builtins.toJSON {
+    default_vlm_preset = "local_llm";
+    # custom_vlm_presets.local_llm = {
+    #   model_spec = {
+    #     name = "Granite-Docling via vLLM";
+    #     default_repo_id = "ibm-granite/granite-docling-258M";
+    #     prompt = "Convert this page to docling.";
+    #     response_format = "doctags";   # or "markdown" for a generic VLM
+    #   };
+    #   engine_options = {
+    #     engine_type = "api";
+    #     url = "http://localhost:8000/v1/chat/completions";
+    #     params = { model = "ibm-granite/granite-docling-258M"; max_tokens = 4096; };
+    #     timeout = 120.0;
+    #     concurrency = 4;
+    #   };
+    #   scale = 2.0;
+    # };
+  }));
+
+in
 {
   environment.systemPackages = [
     pkgs.docling
     pkgs.docling-serve-with-ui
   ];
+
+
+  # Keep API keys out of this file. Authentication goes in engine_options.headers, and anything in writeText ends up in the world-readable Nix store. Put the preset in an EnvironmentFile instead (for example DOCLING_SERVE_CUSTOM_VLM_PRESETS='{...}' written by agenix or sops). Because environment variables override the config file, the rest of the settings can stay in Nix.
+  # 
 
   services.docling-serve = {
     enable = true;
@@ -15,6 +41,8 @@
       DOCLING_SERVE_ENABLE_UI = "True";
       # docling's AcceleratorOptions reads DOCLING_* env vars (auto|cpu|cuda|mps)
       # DOCLING_DEVICE = "cuda";
+      DOCLING_SERVE_ENABLE_REMOTE_SERVICES = "True";
+      inherit  DOCLING_SERVE_CONFIG_FILE;
     };
   };
 
