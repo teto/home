@@ -1,0 +1,9 @@
+schema_version = 1
+
+[browser]
+always_show_status_bar = true
+chooser_show_preview = true
+density = "comfortable"
+show_permanent_deletion = true
+sidebar_tree = true
+view_mode = "miller"

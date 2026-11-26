@@ -266,7 +266,7 @@ in
           # papis # library manager
           (lib.hiPrio pass-teto) # pass with extensions, override nova's
           pavucontrol
-          pkgs.networkmanagerapplet # should
+          # pkgs.networkmanagerapplet # should
           procs # Rust replacement for 'ps'
           qiv # image viewer doesnt work on wayland, needs adjustements ?
           qtpass
