@@ -142,6 +142,20 @@ in
         installation_mode = "force_installed";
         private_browsing = true;
       };
+      "move-tab-to-another-window@vandragt.com"= {
+        # default_area = "menupanel";
+        # install_url = install_url;
+        installation_mode = "force_installed";
+        private_browsing = false;
+      };
+
+      # bitwarden
+      "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
+        default_area = "menupanel";
+        # install_url = install_url;
+        installation_mode = "force_installed";
+        private_browsing = false;
+      };
 
       "browserpass@maximbaz.com" = {
         default_area = "menupanel";

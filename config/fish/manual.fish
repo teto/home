@@ -18,7 +18,7 @@ set -U __done_min_cmd_duration 2000  # default: 5000 ms
 # set -U __done_exclude '^git (?!pull|fetch)'  
 
 # TODO tide ignores those ?
-source ~/.config/bash/aliases.sh
+source "$XDG_CONFIG_HOME"/bash/aliases.sh
 
 # Enable vim mode
 # fish_vi_key_bindings

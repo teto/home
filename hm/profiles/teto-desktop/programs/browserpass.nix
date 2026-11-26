@@ -2,6 +2,8 @@
   enable = true;
   browsers = [
     "firefox"
-    "chromium"
+
+    # BUG: it ignores XDG_CONFIG_HOME and installs in ~/.config
+    # "chromium"
   ];
 }

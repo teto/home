@@ -129,7 +129,7 @@ harbor/telemetry_id
 # generated
 herdr-app/AGENTS.md
 herdr-app/*
-httpie/version_info.json
+httpie/
 # secrets !
 hub
 hylki/
