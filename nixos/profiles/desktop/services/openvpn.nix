@@ -54,7 +54,8 @@ lib.optionalAttrs withSecrets {
           ping 10
           ping-restart 60
           reneg-sec 28800
-          pull-filter ignore "dhcp-option DNS 192.168.1.61"
+          # c'est un redondant de 192.168.1.61
+          # pull-filter ignore "dhcp-option DNS 192.168.1.61"
           pull-filter ignore "route 192.168.1.0"
           # run update-systemd-resolved before the tun device goes away
           down-pre

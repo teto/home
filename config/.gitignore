@@ -2,8 +2,12 @@
 astromenace/
 terminfo/
 qcal/
+# noctalia generated
+qt5ct/
+qt6ct/
 Beyond-All-Reason
 Bitwarden*
+remmina/
 Code/
 Cursor/
 DeltaChat/
@@ -45,17 +49,18 @@ anime-downloader/
 # config/atuin/config.toml
 b2/
 bast/
-beekeeper-studio/*
+beekeeper-studio/
 Vampire_Survivors_Data/
 # generated ?
 btop/themes/noctalia.theme
 bullet
 gsmartcontrol/
-cabal/config
+cabal/
 cables_electron/
-cachix/*
+cachix/
 calcure
-cef_user_data/*
+QtProject.conf
+cef_user_data/
 # config/chess-tui/config.toml
 # config/chess-tui/skins.json
 chromium-flags.conf
@@ -166,8 +171,6 @@ libfm/libfm.conf
 libreoffice/*
 llmfit/filters.json
 localai.env
-luciole/.settings.toml.lock
-luciole/settings.toml
 lutris/
 maki/
 mangareaderrc
@@ -175,9 +178,6 @@ marktext/
 mc/hotlist.bak
 meli/config.toml
 memento.backup/
-memento/anki_connect.json
-memento/manual.conf
-memento/mpv.conf
 menus/
 meowpdf
 mimeapps.list

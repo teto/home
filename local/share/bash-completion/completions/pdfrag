@@ -1,0 +1,10 @@
+_pdfrag_completion() {
+    local IFS=$'
+'
+    COMPREPLY=( $( env COMP_WORDS="${COMP_WORDS[*]}" \
+                   COMP_CWORD=$COMP_CWORD \
+                   _PDFRAG_COMPLETE=complete_bash $1 ) )
+    return 0
+}
+
+complete -o default -F _pdfrag_completion pdfrag
