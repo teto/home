@@ -81,6 +81,35 @@ in
   # package = pkgs.swayfx;
   # package = pkgs.sway-unwrapped;
 
+  # sway with xdg-system-bell-v1 / `bindbell` support
+  # https://github.com/swaywm/sway/pull/9243
+  # PR is based on sway master which requires wlroots 0.21 (unreleased) => build wlroots master too
+  package =
+    let
+      wlroots-git = pkgs.wlroots_0_20.overrideAttrs (_old: {
+        version = "0.21.0-dev";
+        src = pkgs.fetchFromGitLab {
+          domain = "gitlab.freedesktop.org";
+          owner = "wlroots";
+          repo = "wlroots";
+          rev = "e80d121ff070bd7337efc02ddbd138a989b71ab8";
+          hash = "sha256-sjf/tOaPPgda7L4jAzGs0NW3IWjxM+HMVqfZbo33VPE=";
+        };
+      });
+      sway-bell =
+        (pkgs.sway-unwrapped.override { wlroots_0_20 = wlroots-git; }).overrideAttrs
+          (_old: {
+            version = "1.13-dev-pr9243";
+            src = pkgs.fetchFromGitHub {
+              owner = "WhyNotHugo";
+              repo = "sway";
+              rev = "c0b6ba0606cfddff89ecb9da0ab5b5be8e2a2898"; # branch "beep"
+              hash = "sha256-MiPUHzR5SpE6aoE4bTGZOri7Yov936fFT6xc2gUe9SY=";
+            };
+          });
+    in
+    pkgs.sway.override { sway-unwrapped = sway-bell; };
+
   config = {
 
     workspaceAutoBackAndForth = true;
