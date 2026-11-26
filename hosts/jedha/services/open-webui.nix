@@ -1,4 +1,6 @@
 {
   # broken
-  enable = false;
+  # testing with docling
+  enable = true;
+  port = 12345;
 }
