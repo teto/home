@@ -57,7 +57,6 @@ in
     ./systemd.nix
 
     ./programs/neovim.nix
-    # ./programs/noctalia.nix
     ./programs/noctalia-widgets.nix
     ./programs/zsh.nix
 
