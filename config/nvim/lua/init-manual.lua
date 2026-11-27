@@ -833,10 +833,31 @@ vim.api.nvim_set_hl(0, 'GitSignsChangeLn', {
 -- useless, I need to tweak the lua path ?
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/lual')
 vim.g.mcphub = {
-    config = vim.fn.expand('~/.config/mcphub/servers.json'), -- Absolute path to MCP Servers config file (will create if not exists)
+
+	-- server_url = 
+
+	-- TODO can reuse the nix generated one ?
+	-- Absolute path to MCP Servers config file (will create if not exists)
+    config = vim.fn.expand('~/.config/mcphub/servers.json'), 
     port = 37373, -- The port `mcp-hub` server listens to
     -- looks odd ?
     -- use_bundled_binary = true,  -- Use local `mcp-hub` binary
+	mcp_request_timeout = 60000, --Max time allowed for a MCP tool or resource to execute in milliseconds, set longer for long running tasks
+	workspace = {
+		enabled = true, -- Enable project-local configuration files
+		look_for = { ".mcphub/servers.json", ".vscode/mcp.json", ".cursor/mcp.json" }, -- Files to look for when detecting project boundaries (VS Code format supported)
+		reload_on_dir_changed = true, -- Automatically switch hubs on DirChanged event
+		port_range = { min = 40000, max = 41000 }, -- Port range for generating unique workspace ports
+		get_port = nil, -- Optional function returning custom port number. Called when generating ports to allow custom port assignment logic
+	},
+	auto_approve = false, -- Auto approve mcp tool calls
+	auto_toggle_mcp_servers = true, -- Let LLMs start and stop MCP servers automatically
+	extensions = {
+		avante = {
+			make_slash_commands = true, -- make /slash commands from MCP server prompts
+		}
+	},
+    
 
     -- we could point at the nix executable with:
     -- cmd = "node",

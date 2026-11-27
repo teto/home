@@ -10,6 +10,12 @@
       "env": {
         "GITHUB_PERSONAL_ACCESS_TOKEN": "${cmd: }"
       }
+    },
+    "playwright": {
+      "args": [
+        "@playwright/mcp@latest"
+      ],
+      "command": "npx"
     }
   }
 }

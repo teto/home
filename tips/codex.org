@@ -1,5 +1,13 @@
 codex --profile toto 
 to switch to one of the providers in "model_providers"
 
+codex plugin marketplace add teto/ai-plugins --ref teto/increase-tool-timeout
+codex plugin marketplace list
 
- codex plugin marketplace add teto/ai-plugins --ref teto/increase-tool-timeout
+
+# need to start it via hm ? or nvim ?
+codex mcp add mcphub --url localhost:3000
+
+❯ codex mcp list
+Name     Command                         Args  Env                                                       Cwd                                                    Status   Auth       
+mariadb  ./scripts/mariadb-mcp-launcher  -     MARIADB_RESTD_VERSION=*****, MARIADB_SHELL_VERSION=*****  /home/teto/.codex/plugins/cache/mariadb/dev/26.11.0/.  enabled  Unsupported

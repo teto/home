@@ -1,0 +1,17 @@
+{
+  "servers": {
+    "github": {
+      "url": "https://api.githubcopilot.com/mcp/"
+    },
+    "mariadb-shell": {
+      "command": "mariadb-shell"
+    },
+    "perplexity": {
+      "command": "npx", 
+      "args": ["-y", "server-perplexity-ask"],
+      "env": {
+        "API_KEY": "${env:PERPLEXITY_API_KEY}"
+      }
+    }
+  }
+}
