@@ -83,6 +83,8 @@
             "ec2-api-tools"
             "google-chrome"
             # "slack"
+
+            "saxonche" # required for docling
             "steam"
             "steam-original"
             "steam-runtime"

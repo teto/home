@@ -1,0 +1,63 @@
+{
+  "properties": {
+    "assertions": [],
+    "resources": [
+      {
+        "resource": "Microsoft.WinGet.DSC/WinGetPackage",
+        "id": "git",
+        "directives": {
+          "description": "Install Git for Windows"
+        },
+        "settings": {
+          "id": "Git.Git",
+          "source": "winget"
+        }
+      },
+      {
+        "resource": "Microsoft.WinGet.DSC/WinGetPackage",
+        "id": "btop",
+        "directives": {
+          "description": "Install btop4win"
+        },
+        "settings": {
+          "id": "aristocratos.btop4win",
+          "source": "winget"
+        }
+      },
+      {
+        "resource": "Microsoft.WinGet.DSC/WinGetPackage",
+        "id": "neovim",
+        "directives": {
+          "description": "Install Neovim"
+        },
+        "settings": {
+          "id": "Neovim.Neovim",
+          "source": "winget"
+        }
+      },
+      {
+        "resource": "Microsoft.WinGet.DSC/WinGetPackage",
+        "id": "firefox",
+        "directives": {
+          "description": "Install Firefox"
+        },
+        "settings": {
+          "id": "Mozilla.Firefox",
+          "source": "winget"
+        }
+      },
+      {
+        "resource": "Microsoft.WinGet.DSC/WinGetPackage",
+        "id": "powertoys",
+        "directives": {
+          "description": "Install Microsoft PowerToys"
+        },
+        "settings": {
+          "id": "Microsoft.PowerToys",
+          "source": "winget"
+        }
+      }
+    ],
+    "configurationVersion": "0.2.0"
+  }
+}

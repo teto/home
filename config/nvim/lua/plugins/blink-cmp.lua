@@ -22,6 +22,19 @@ local opts = {
     -- your own keymap.
     keymap = {
         preset = 'default',
+      ['<Up>'] = { 'select_prev', 'fallback' },
+      ['<Down>'] = { 'select_next', 'fallback' },
+
+      -- disable a keymap from the preset
+      -- ['<C-e>'] = false, -- or {}
+
+	  -- else it hijacks digraphs !!
+      ['<C-k>'] = false, -- or {}
+
+      -- show with a list of providers
+      ['<C-space>'] = { function(cmp) cmp.show({ providers = { 'snippets' } }) end },
+
+
     },
     cmdline = {
         -- disable in cmdline

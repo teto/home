@@ -21,13 +21,22 @@
 
     flakeSelf.nixosModules.default-hm
 
-    flakeSelf.nixosProfiles.nix-daemon
+    flakeSelf.nixosProfiles.universal
+    # flakeSelf.nixosProfiles.nix-daemon
     flakeSelf.nixosProfiles.teto
+    # flakeSelf.nixosProfiles.docling-serve
 
     ./services/llamacpp.nix
     ./services/openssh.nix
+    ./nix.nix
 
   ];
+
+  nix.settings = {
+    # we limit because of the VM status
+    max-jobs = 1;
+    cores = 4;
+  };
 
   networking.hostName = lib.mkDefault "wsl";
   networking.domain = null;
@@ -69,7 +78,6 @@
       };
     in
     [
-      claude-code
       git
       # pkgs.huggingface-cli # hf ...
       pkgs.claude-code

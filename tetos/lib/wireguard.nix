@@ -47,6 +47,11 @@ let
       id = 5;
       publicKey = "DbYbZFNLSxji4vfOS9Ep8u0ObIOVUR1R5SDOSzHOfwo";
     }
+    {
+      # smartphone
+      id = 6;
+      publicKey = "6LwkgvAZ9q4THWqqIeYg5MTpRfztgZ3HMgd4wcsXnA8=";
+    }
   ];
 
   # TODO collect from nixosConfigurations. wireguard module

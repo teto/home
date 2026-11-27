@@ -12,8 +12,10 @@
   # ideally set it to false ?
   settings.Resolve = {
     DNSSEC = "no"; # "allow-downgrade";
-    # conflicts with avahi
-    MulticastDNS = true;
+    # conflicts with avahi (which already provides mDNS via nss-mdns).
+    # When true, resolved also sends reverse lookups of LAN IPs over mDNS and
+    # waits ~7s for hosts that never answer (e.g. Windows boxes like dev-ia).
+    MulticastDNS = false;
     # DNS = "127.0.0.1:53"; # defer to adguardhome ? port
     # Domains=~.
     # if "yes" resolved exposes a stub listener at "127.0.0.53"

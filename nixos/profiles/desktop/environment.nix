@@ -14,6 +14,7 @@
     in
     [
       pkgs.noto-fonts-cjk-sans
+      pkgs.montray.ui
 
     ]
   # ++ lib.optional withSecrets resticWrapper
@@ -44,6 +45,9 @@
   # codex execpolicy check --pretty --rules ~/.codex/rules/default.rules -- gh pr view 7888
   # https://learn.chatgpt.com/docs/agent-configuration/rules
   etc."codex/rules".source = "/home/teto/perso/codex-rules";
+
+  # upstream example config for montray-server; point `source` at your own to customize
+  etc."montray-server.yml".source = "${pkgs.montray.server}/share/montray/montray-server.yml";
 
   etc."lemurs/wayland/sway-systemd" = {
     mode = "755";
@@ -80,10 +84,11 @@
   ## /etc/protocols: IP protocol numbers.
   # protocols.source = pkgs.iana-etc + "/etc/protocols";
   # nusrp            49001/tcp  # Nuance Unity Service Request Protocol
-  etc.services.text = lib.mkForce ''
-    piper   10200/tcp
-    hass    8123/tcp
-  '';
+  # TODO restore. Commented to fix whois
+  # etc.services.text = lib.mkBefore ''
+  #   piper   10200/tcp
+  #   hass    8123/tcp
+  # '';
 
   etc."security/limits.conf".text = ''
     #[domain]        [type]  [item]  [value]

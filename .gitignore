@@ -1,4 +1,6 @@
 # **
+# for now
+# config/**
 *.generated
 /.gp.md
 /.direnv

@@ -10,6 +10,7 @@ let
     luaPlugin
     ;
 
+  # ravitemer/mcphub.nvim
   pluginsMap = {
 
     filetypePlugins = [
@@ -59,6 +60,13 @@ let
     ];
 
     luaPlugins = with pkgs.vimPlugins; [
+
+      {
+
+        # it needs a binary
+        # ravitemer/mcphub.nvim
+        plugin = mcphub-nvim;
+      }
 
       # { plugin = modicator-nvim; }
       # testing my fork

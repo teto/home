@@ -3,6 +3,8 @@ sudo systemd-resolve --interface=eno1 --set-dns=1.1.1.1
 
 adguardhome
 
+PTR (short for "pointer") is the DNS record type for reverse lookups. It maps an IP address back to a hostname.
+
 * hickory-dns
 
 hickory-dns --config ./hickory-dns.toml --zonedir .

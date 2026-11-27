@@ -9,16 +9,21 @@
 
   imports = [
     flakeSelf.homeModules.neovim
-    flakeSelf.homeModules.neovim
 
     flakeSelf.homeProfiles.teto-aliases
     flakeSelf.homeProfiles.common
     flakeSelf.homeProfiles.neovim
     flakeSelf.homeProfiles.tmux
-    # flakeSelf.homeProfiles.teto-zsh
   ];
 
+  programs.fzf = {
+    enableFzfGit = true;
+  };
+
   home.packages = [
+    pkgs.systemctl-tui
+
+    pkgs.lazydocker
     pkgs.ripgrep
     pkgs.just
   ];

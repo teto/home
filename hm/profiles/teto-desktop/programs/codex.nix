@@ -2,38 +2,55 @@
   enable = false;
   enableMcpIntegration = true;
   settings = {
-    model_providers.llamacpp = {
-      name = "llama.cpp (dev-ia)";
-      base_url = "http://dev-ia:9931/v1";
-      wire_api = "responses";
-      requires_openai_auth = false;
-      supports_websockets = false;
+    model_providers= {
+      spark-llama = {
+        name = "llama.cpp (dev-ia)";
+        base_url = "http://dev-ia:9931/v1";
+        wire_api = "responses";
+        requires_openai_auth = false;
+        supports_websockets = false;
+      };
+      jedha-llama = {
+        name = "llama.cpp (jedha)";
+        base_url = "http://llama.jedha.home:9931/v1";
+        wire_api = "responses";
+        requires_openai_auth = false;
+        supports_websockets = false;
+      };
     };
 
   };
   # CODEX_HOME/AGENTS.md.
   # context = "";
 
+
+  skills = {
+    # fetch it from the web or put it there
+    mariadb-ai-plugins-fork = /home/teto/ixeal/ai-plugins ;
+
+  };
+
   profiles.llamacpp = {
     model = "local-model";
     model_provider = "llamacpp";
   };
 
-  hooks = {
-    PreToolUse = [
-      {
-        matcher = "^Bash$";
-        hooks = [
-          {
-            type = "command";
-            # notify
-            command = "/usr/local/bin/codex-pre-tool-use";
-            timeout = 30;
-            statusMessage = "Checking Bash command";
-          }
-
-        ];
-      }
-    ];
-  };
+  # to avboid prompt
+  # hooks = {
+  #   PreToolUse = [
+  #     {
+  #       matcher = "^Bash$";
+  #       hooks = [
+  #         {
+  #           type = "command";
+  #           # notify
+  #           command = "/usr/local/bin/codex-pre-tool-use";
+  #           timeout = 30;
+  #           statusMessage = "Checking Bash command";
+  #         }
+  #
+  #       ];
+  #     }
+  #   ];
+  # };
 }

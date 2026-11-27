@@ -8,6 +8,8 @@
 
   inputs = {
 
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
+
     nixbot.url = "github:Mic92/nixbot";
     nixbot.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -185,8 +187,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    noctalia-shell = {
-      url = "github:noctalia-dev/noctalia-shell";
+    noctalia = {
+      # url = "github:noctalia-dev/noctalia";
+      url = "github:teto/noctalia?ref=teto/copy-notif";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -520,7 +523,8 @@
                 rawLib.nameValuePair hostname (
                   let
                     # or ixeal-spark
-                    enableCuda = hostname == "jedha" || hostname == "wsl";
+                    # hostname est le nom du dossier dans hosts/
+                    enableCuda = hostname == "jedha" || hostname == "wsl" || hostname == "ixeal-p7" || hostname == "ixeal-spark";
                   in
                   pureLib.mkNixosSystem {
                     inherit lib;
@@ -597,6 +601,7 @@
                 ];
               };
 
+              
               # laptop
               ixeal-matthieu = nixosConfigs.wsl.extendModules {
 

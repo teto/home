@@ -10,6 +10,6 @@
   # nope !
   # audiocast.enable = false;
 
-  # let noctalia deal with it ?
-  network-manager-applet.enable = true;
+  # noctalia talks to networkmanager over dbus, it works better than the buggy applet
+  # network-manager-applet.enable = true;
 }

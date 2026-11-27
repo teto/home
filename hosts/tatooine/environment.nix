@@ -6,6 +6,8 @@
     pkgs.lm_sensors # to see CPU temperature (command 'sensors')
     pkgs.btop
 
+
+
     # pkgs.vllm
   ];
 

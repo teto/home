@@ -5,6 +5,7 @@
   pkgs,
   flakeSelf,
   withSecrets,
+  dotfilesPath,
   ...
 }:
 let
@@ -36,6 +37,8 @@ in
   # bash: set: -g : option non valable
   programs.direnv-instant.enable = false;
 
+  xdg.configHome = "${dotfilesPath}/config";
+
   imports = [
     flakeSelf.homeProfiles.teto-desktop
 
@@ -48,16 +51,13 @@ in
     flakeSelf.homeProfiles.wezterm
     # flakeSelf.homeModules.gnome-shell
 
-    flakeSelf.homeModules.neovim
-    flakeSelf.homeModules.nextcloud-client
-    flakeSelf.homeModules.llama-cpp
 
     ./calendars.nix
     ./sway.nix
     ./systemd.nix
 
     ./programs/neovim.nix
-    # ./programs/noctalia.nix
+    ./programs/noctalia-widgets.nix
     ./programs/zsh.nix
 
     ./services/llama-cpp.nix

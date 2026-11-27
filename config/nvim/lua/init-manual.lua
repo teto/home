@@ -833,10 +833,31 @@ vim.api.nvim_set_hl(0, 'GitSignsChangeLn', {
 -- useless, I need to tweak the lua path ?
 -- vim.opt.rtp:prepend(os.getenv('HOME') .. '/neovim/lual')
 vim.g.mcphub = {
-    config = vim.fn.expand('~/.config/mcphub/servers.json'), -- Absolute path to MCP Servers config file (will create if not exists)
+
+	-- server_url = 
+
+	-- TODO can reuse the nix generated one ?
+	-- Absolute path to MCP Servers config file (will create if not exists)
+    config = vim.fn.expand('~/.config/mcphub/servers.json'), 
     port = 37373, -- The port `mcp-hub` server listens to
     -- looks odd ?
     -- use_bundled_binary = true,  -- Use local `mcp-hub` binary
+	mcp_request_timeout = 60000, --Max time allowed for a MCP tool or resource to execute in milliseconds, set longer for long running tasks
+	workspace = {
+		enabled = true, -- Enable project-local configuration files
+		look_for = { ".mcphub/servers.json", ".vscode/mcp.json", ".cursor/mcp.json" }, -- Files to look for when detecting project boundaries (VS Code format supported)
+		reload_on_dir_changed = true, -- Automatically switch hubs on DirChanged event
+		port_range = { min = 40000, max = 41000 }, -- Port range for generating unique workspace ports
+		get_port = nil, -- Optional function returning custom port number. Called when generating ports to allow custom port assignment logic
+	},
+	auto_approve = false, -- Auto approve mcp tool calls
+	auto_toggle_mcp_servers = true, -- Let LLMs start and stop MCP servers automatically
+	extensions = {
+		avante = {
+			make_slash_commands = true, -- make /slash commands from MCP server prompts
+		}
+	},
+    
 
     -- we could point at the nix executable with:
     -- cmd = "node",
@@ -910,6 +931,8 @@ vim.g.tidal_sc_enable = 1
 vim.g.tidal_boot = nix_deps.tidal_boot .. 'BootTidal.hs'
 
 -- require("jj").setup({})
+
+local p7address = "192.168.6.184"
 
 vim.keymap.set('n', 'gF', function()
     local file = vim.fn.expand('<cfile>')
@@ -1041,14 +1064,28 @@ vim.g.avante = {
             -- ixeal-spark .ixeal.local
             endpoint = 'http://dev-ia:9931/v1',
             model = 'qwen3.6-dense',
-            -- model = 'deepseek/deepseek-v4-flash-0731',
             api_key_name = '', -- Local server without authentication
             -- use_response_api = false, -- use chat completions api-
         },
         rtx_spark_vllm = {
             __inherited_from = 'openai',
-            -- ixeal-spark .ixeal.local
             endpoint = 'http://dev-ia:8000/v1',
+            model = 'qwen3.6-dense',
+            -- model = 'deepseek/deepseek-v4-flash-0731',
+            api_key_name = '', -- Local server without authentication
+            -- use_response_api = false, -- use chat completions api-
+        },
+        p7_llama = {
+            __inherited_from = 'openai',
+            endpoint = 'http://'.. p7address .. ':9931/v1',
+            model = 'qwen3.6-dense',
+            -- model = 'deepseek/deepseek-v4-flash-0731',
+            api_key_name = '', -- Local server without authentication
+            -- use_response_api = false, -- use chat completions api-
+        },
+        p7_vllm = {
+            __inherited_from = 'openai',
+            endpoint = 'http://'.. p7address .. ':8000/v1',
             model = 'qwen3.6-dense',
             -- model = 'deepseek/deepseek-v4-flash-0731',
             api_key_name = '', -- Local server without authentication

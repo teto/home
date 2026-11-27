@@ -1,5 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, flakeSelf, ... }:
 {
+  # n'amime pas _imports
+  # _imports = [
+  #   flakeSelf.nixosProfiles.ixeal
+  # ];
+
   fonts.enableDefaultPackages = true;
 
   console = {

@@ -12,6 +12,7 @@
     addSubstituter = true;
     # timeout = 3.0; # seconds
 
+    # cache address to listen at
     # listenAddresses = lib.mkOption {
     #   type = lib.types.listOf lib.types.str;
     #   default = [ "[::]:5028" ];

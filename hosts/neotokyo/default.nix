@@ -96,6 +96,8 @@ in
     "tipc"
   ];
 
+  tetos.remoteBuilder = true;
+
   tetos.wireguard = {
     enable = true;
     id = 1;

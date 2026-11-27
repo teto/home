@@ -1,4 +1,5 @@
-{ config, ... }:
+{ 
+dotfilesPath, ... }:
 {
   # this triggers an haumea error
   # systemPackages = [ config.services.hickory-dns.package ];
@@ -13,6 +14,9 @@
     # TODO move it
     LIBVA_DRIVER_NAME = "nvidia";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+
+    # overriden by HM so we shall be careful ?
+     XDG_CONFIG_HOME = "${dotfilesPath}/config";
   };
 
   # TODO check how it interacts with less

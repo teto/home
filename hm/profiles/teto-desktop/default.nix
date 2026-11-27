@@ -19,26 +19,28 @@ let
     else
       lib.warn "Using noop 'mkRemoteBuilderDesc' switch to 'scratch' branch" (_a: _b: "PLACEHOLDER");
 
-  builder_neotokyo = mkRemoteBuilderDesc "3.0" (
-    lib.nixosConfToBuilderAttr {
-      sshKey = "${secretsFolder}/ssh/id_rsa";
-      # I might need to set it ?
-      # can
-      # it's a base64 version of it
-      publicHostKey = builtins.readFile ../../../../hosts/neotokyo/host_key.pub;
-    } flakeSelf.nixosConfigurations.neotokyo
-  );
-
-  # public host key of the remote machine.  If omitted, SSH uses its regular known_hosts file.
-  builder_jedha = mkRemoteBuilderDesc "3.0" (
-    lib.nixosConfToBuilderAttr {
-      sshKey = "${secretsFolder}/ssh/id_rsa";
-      # I might need to set it ?
-      publicHostKey = null;
-      # favor jedha
+  # per-host overrides passed to nixosConfToBuilderAttr
+  builderOverrides = {
+    # favor jedha
+    jedha = {
       speedFactor = 2;
       maxJobs = 8;
-    } flakeSelf.nixosConfigurations.jedha
+    };
+  };
+
+  # TETOS_BUILDER_<HOSTNAME> for every nixos host with tetos.remoteBuilder enabled
+  remoteBuilderVars = lib.mapAttrs' (
+    name: nixosConf:
+    lib.nameValuePair "TETOS_BUILDER_${lib.toUpper (lib.replaceStrings [ "-" ] [ "_" ] name)}" (
+      mkRemoteBuilderDesc "3.0" (
+        lib.nixosConfToBuilderAttr (builderOverrides.${name} or { }) nixosConf
+      )
+    )
+  ) (
+    lib.filterAttrs (
+      name: nixosConf:
+      !(lib.hasSuffix "-no-secrets" name) && (nixosConf.config.tetos.remoteBuilder or false)
+    ) flakeSelf.nixosConfigurations
   );
 
   # TODO fix
@@ -60,6 +62,7 @@ let
 in
 {
   imports = [
+
     flakeSelf.inputs.jj-gh.homeManagerModules.default
     flakeSelf.inputs.chroncal.homeModules.default
     flakeSelf.inputs.nix-index-database.homeModules.nix-index
@@ -69,8 +72,11 @@ in
     flakeSelf.homeModules.flyline
     flakeSelf.homeModules.fzf
     flakeSelf.homeModules.kitty
+    flakeSelf.homeModules.llama-cpp
     flakeSelf.homeModules.memento
     flakeSelf.homeModules.microsoft
+    flakeSelf.homeModules.neovim
+    flakeSelf.homeModules.nextcloud-client
     flakeSelf.homeModules.nixpkgs-monitor
     flakeSelf.homeModules.package-sets
     flakeSelf.homeModules.services-mujmap
@@ -125,6 +131,12 @@ in
     in
 
     [
+      flakeSelf.inputs.deploy-rs.packages.${stdenv.hostPlatform.system}.deploy-rs
+      flakeSelf.inputs.nix-cache-beacon.packages.${stdenv.hostPlatform.system}.default
+      flakeSelf.inputs.rikai-nvim.packages.${stdenv.hostPlatform.system}.kokoro # tts
+
+      pkgs.herdr  # rust tmux-like for llms
+      pkgs.polkit_gnome
       kodi-teto
       codex # openai agent
       codex-acp # originated from zed-industries, used in avante
@@ -141,6 +153,7 @@ in
       # ffs this needs the daemon ?!
       pkgs.avahi # for avahi-browse
 
+      # compare with nix-sweep 
       pkgs.gcan # replaces nix-stray-roots ! run "gcan tui"
 
       # for the noctalia OCR plugin
@@ -154,9 +167,7 @@ in
       pkgs.sshfs # to download
       pkgs.alsa-utils # for alsamixer
       pkgs.lm_sensors # for `sensors` executable
-      flakeSelf.inputs.deploy-rs.packages.${stdenv.hostPlatform.system}.deploy-rs
 
-      flakeSelf.inputs.rikai-nvim.packages.${stdenv.hostPlatform.system}.kokoro
       pciutils # for lspci
       timg
       ncurses.dev # for infocmp
@@ -194,7 +205,7 @@ in
 
       sonic-pi # for live music coding
       stow # tool to create symlinks
-      systemctl-tui
+      systemctl-tui-unstable
       timr-tui # rust clock
 
       # cups-pk-helper # to add printer through gnome control center
@@ -269,8 +280,7 @@ in
     # MANROFFOPT = "-c";
   }
   // lib.optionalAttrs osConfig.tetos.withSecrets {
-    TETOS_BUILDER_NEOTOKYO = builder_neotokyo;
-    TETOS_BUILDER_JEDHA = builder_jedha;
+
     TETOS_BUILDER_NIXCOMMUNITY = builder_nixcommunity;
     inherit (secrets)
       TAVILY_API_KEY
@@ -278,7 +288,8 @@ in
       CONFIDENT_AI_API_KEY
       SOFYA_API_KEY
       ;
-  };
+  }
+  // lib.optionalAttrs osConfig.tetos.withSecrets remoteBuilderVars;
 
   # tetos.enableYubikey = true;
 

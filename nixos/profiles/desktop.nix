@@ -6,9 +6,10 @@
 }:
 let
 
+  haumea = flakeSelf.inputs.haumea;
   autoloadedModule =
     { pkgs, ... }@args:
-    flakeSelf.inputs.haumea.lib.load {
+    haumea.lib.load {
       # name = "autoloaded";
       src = builtins.trace "${flakeSelf}/nixos/profiles/desktop" "${flakeSelf}/nixos/profiles/desktop";
       # TODO replace the traced path with lib.fileset.toSource once this loader
@@ -18,8 +19,8 @@ let
         inputs = flakeSelf.inputs;
       };
       transformer = [
-        flakeSelf.inputs.haumea.lib.transformers.liftDefault
-        (flakeSelf.inputs.haumea.lib.transformers.hoistLists "_imports" "imports")
+        haumea.lib.transformers.liftDefault
+        (haumea.lib.transformers.hoistLists "_imports" "imports")
       ];
     };
 in
@@ -39,6 +40,7 @@ in
     flakeSelf.inputs.nix-cache-beacon.nixosModules.nix-cache-beacon
     flakeSelf.nixosModules.nvd
     flakeSelf.nixosModules.tetos
+    flakeSelf.nixosProfiles.ixeal
 
     flakeSelf.nixosProfiles.pipewire
     # ./pipewire.nix

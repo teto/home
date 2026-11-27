@@ -21,6 +21,7 @@ in
       # };
 
       allowUpnp = lib.mkEnableOption "allowUpnp";
+      remoteBuilder = lib.mkEnableOption "Remote builder";
     };
   };
 
