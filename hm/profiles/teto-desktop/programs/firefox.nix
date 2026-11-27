@@ -9,6 +9,8 @@
   ...
 }:
 let
+
+  # TODO set browser.ipProtection.enabled to enable VPN
   ffLib = lib.firefox;
 
   nixFlakeIcon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";

@@ -86,6 +86,9 @@
       git
       # pkgs.huggingface-cli # hf ...
       pkgs.claude-code
+
+      # to be able to talk to the db
+      pkgs.mariadb-ai-plugins
       myNeovim
       systemctl-tui
       wget

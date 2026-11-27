@@ -1,6 +1,7 @@
 { writeShellScriptBin, msmtp }:
 
 # TODO complain loudly if incorrect number of arguments !
+# TODO we should add instructions on how to retreive / restore the snapshots
 writeShellScriptBin "notify-service-result" ''
 
   if [ $# -lt 2 ]; then 
@@ -9,6 +10,8 @@ writeShellScriptBin "notify-service-result" ''
   fi
 
   TO="$1"
+  # use different icon depending on success/failure
+  # ❌
   SUBJECT="$2"
 
   echo "Looking at monitor_unit=$MONITOR_UNIT"

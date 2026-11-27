@@ -208,6 +208,11 @@ rev = "v0.4.0"
 git = "lewis6991/satellite.nvim"
 rev = "v1.0.0"
 
+# installed via nix for now since it needs an executable
+# [plugins."mcphub.nvim"]
+# git = "ravitemer/mcphub.nvim"
+# rev = "v6.2.0"
+
 # [plugins."git-rebase-auto-diff.nvim"]
 # git = "yutkat/git-rebase-auto-diff.nvim"
 # rev = "6fd2f5ba63828e5c4fd59bb1b75ef7525a5ce39f"

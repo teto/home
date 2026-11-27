@@ -1,14 +1,15 @@
 {
   "mcpServers": {
-        "github-mcp-server": {
-            "command": "github-mcp-server stdio",
-            "args": [
-                "--secret", "${cmd: op read op://vault/secret}"
-            ],
-            "env": {
-                "GITHUB_PERSONAL_ACCESS_TOKEN": "${cmd: }",
-                "FALLBACK_VAR": null
-            }
-        }
+    "github-mcp-server": {
+      "args": [
+        "--secret",
+        "${cmd: op read op://vault/secret}"
+      ],
+      "command": "github-mcp-server stdio",
+      "disabled": false,
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${cmd: }"
+      }
+    }
   }
 }
