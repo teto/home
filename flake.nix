@@ -187,8 +187,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    noctalia-shell = {
-      url = "github:noctalia-dev/noctalia-shell";
+    noctalia = {
+      # url = "github:noctalia-dev/noctalia";
+      url = "github:teto/noctalia?ref=teto/copy-notif";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

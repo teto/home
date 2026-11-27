@@ -21,6 +21,13 @@ add
 
     };
 
+    # not sure that's the exact program
+    mariadb-shell = {
+
+      command = "${lib.getExe pkgs.mariadb-shell}";
+
+    };
+
     # everything = {
     #   command = "npx";
     #   args = [ "-y" "@modelcontextprotocol/server-everything" ];

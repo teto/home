@@ -2114,23 +2114,24 @@
         "type": "github"
       }
     },
-    "noctalia-shell": {
+    "noctalia": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1795054984,
-        "narHash": "sha256-HdIsS5cKWxdSlkKs9UwRZo9JL+JFQl8rHMXxo/cd/d0=",
-        "owner": "noctalia-dev",
-        "repo": "noctalia-shell",
-        "rev": "d456755d3bb09be68be67582c5766fb96cb4a1a8",
+        "lastModified": 1795779073,
+        "narHash": "sha256-fQKUkA1ZOmF7ylLDBiyylNB01puidSw325ZKT4xAnEo=",
+        "owner": "teto",
+        "repo": "noctalia",
+        "rev": "006c67f7eedad3df7be4cd64c4c02931b781edab",
         "type": "github"
       },
       "original": {
-        "owner": "noctalia-dev",
-        "repo": "noctalia-shell",
+        "owner": "teto",
+        "ref": "teto/copy-notif",
+        "repo": "noctalia",
         "type": "github"
       }
     },
@@ -2374,7 +2375,7 @@
         "nixos-unstable": "nixos-unstable",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_6",
-        "noctalia-shell": "noctalia-shell",
+        "noctalia": "noctalia",
         "nur": "nur",
         "pimsync-src": "pimsync-src",
         "rikai-nvim": "rikai-nvim",

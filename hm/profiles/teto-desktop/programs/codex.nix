@@ -23,6 +23,13 @@
   # CODEX_HOME/AGENTS.md.
   # context = "";
 
+
+  skills = {
+    # fetch it from the web or put it there
+    mariadb-ai-plugins-fork = /home/teto/ixeal/ai-plugins ;
+
+  };
+
   profiles.llamacpp = {
     model = "local-model";
     model_provider = "llamacpp";
